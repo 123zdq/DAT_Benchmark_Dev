@@ -129,11 +129,11 @@ class BenchEnv_Multi():
         
         ## Specify the File Path of each system path
         ## To do: CHANGE ABSOLUTE PATH TO RELATIVE PATH
-        self.action_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_AlgAction.txt"
-        self.reward_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_Ctrl2Global.txt"
-        self.img_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_VideoFrame.jpeg"
-        self.pointcloud_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_PointCloud.txt"
-        self.rewardparam_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_RewardParams.txt"
+        self.action_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_AlgAction.txt"
+        self.reward_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_Ctrl2Global.txt"
+        self.img_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_VideoFrame.jpeg"
+        self.pointcloud_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_PointCloud.txt"
+        self.rewardparam_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_RewardParams.txt"
         
         """
             Use Path above to create corresponding socket
