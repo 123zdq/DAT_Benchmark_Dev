@@ -1,0 +1,24 @@
+{
+  "Benchmark":{
+    "Need_render":0,
+    "Action_dim":7,
+    "State_size":84,
+    "State_channel":3,
+    "Norm_Type":1,
+    "Forward_Speed":20,
+    "Backward_Speed":-20,
+    "Left_Speed":20,
+    "Right_Speed":-20,
+    "CW_omega":1,
+    "CCW_omega":-1,
+    "Control_Frequence":10
+  },
+  "LunarLander":{
+    "Need_render":1,
+    "Action_dim":4,
+    "State_size":84,
+    "State_channel":3,
+    "Norm_Type":1
+  }
+}
+

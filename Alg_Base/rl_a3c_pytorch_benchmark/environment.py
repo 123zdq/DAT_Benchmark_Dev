@@ -1,0 +1,324 @@
+from __future__ import division
+import gym
+from functools import partial
+import cv2
+import numpy as np
+from receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams
+from sendSocket import SendActionSocket
+import time
+import threading
+import os
+import logging
+
+BASE_PORT = 6000
+
+"""
+    process_frame:
+        If choose to run LunarLander-v2 Env,the function will be run outside step()/reset()
+        If choose to run Benchmark Env,the function will be run inside step()/reset()
+    Input:
+        env: env class
+        state: state to be process
+        conf: dict read from config.json
+    Output:
+        state_new: state after process
+"""
+def process_frame(state,conf,env=None):
+    if conf["Need_render"]:
+        state = env.render(mode = "rgb_array")
+    state_new = cv2.resize(state, (conf["State_size"], conf["State_size"]))
+    state_new = state_new.reshape((conf["State_channel"],conf["State_size"],conf["State_size"]))
+    if conf["Norm_Type"] == 0:
+        state_new = state_new/255.0
+    elif conf["Norm_Type"] == 1:
+        state_new = (state_new-128.0)/128.0
+    return state_new
+
+"""
+    Identity:
+        To make output identical within general_env function
+    Input:
+        state
+    Output:
+        state
+"""
+def Identity(state,env):
+    return state
+
+"""
+    general_env:
+    Input:
+        env_id(Str): Name of the desire env
+        env_conf(Dict): dict get from config.json
+        arg_worker(Int): Number of Process the User Choose
+        process_idx(Int): Process Index of the Current Env
+        Other_State(Bool): Whether use other_state or not(default=True)
+        CloudPoint(Bool): Whether use cloudpoint or not(default=True)
+        RewardParams(Bool): Whether use reward params or not(default=True)
+    Output:
+        env(BenchEnv_Multi): initialized env
+        process_func(Function): partial the process the state frame
+"""
+def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPoint=False,RewardParams=False):
+    if env_id not in ["LunarLander-v2","Benchmark"]:
+        print(env_id," is not valid!")
+        raise NameError
+    elif env_id == "LunarLander-v2":
+        env = gym.make(env_id)
+        process_func = partial(process_frame,conf=env_conf)
+        return env,process_func
+    elif env_id == "Benchmark":
+        process_state = partial(process_frame,conf=env_conf)
+        env = BenchEnv_Multi(Action_dim=env_conf["Action_dim"],process_state=process_state,arg_worker=arg_worker,\
+                             process_idx=process_idx,Other_State=Other_State,CloudPoint=CloudPoint,RewardParams=RewardParams,\
+                             action_list=[env_conf["Forward_Speed"],env_conf["Backward_Speed"],env_conf["Left_Speed"],\
+                                          env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
+                            Control_Frequence = env_conf["Control_Frequence"])
+        process_func = Identity
+        return env,process_func
+
+class BenchEnv_Multi():
+    """
+        __init__: 
+            Initialize whole Multi_Process Environment
+        Input:
+            Action_dim(Int): Dimension of Action
+            action_list(List): A list that set specific parameter of each action
+            process_state(Function): A Function that process the raw image(e.g:resize)
+            arg_worker(Int): Number of Process
+            process_idx(Int): Index of Current Process
+            Other_State(Bool): Whether use addition state(default=False)
+            CloudPoint(Bool): Whether use cloudpoint(default=False)
+            RewardParams(Bool): Whether use Reward Parameter(default=False)
+            Control_Frequence(Int): Webots Operating Frequency deciding the skip frame(Default=500:No frame skip)
+        Output:
+            None
+    """
+    def __init__(self,Action_dim,action_list,process_state,arg_worker,\
+        process_idx,Other_State=False,CloudPoint=False,RewardParams=False,\
+        Control_Frequence = 500) -> None:
+        self.Action_dim = Action_dim
+        self.process_state = process_state
+        self.num_process = arg_worker
+        self.process_id = process_idx
+        self.port_list = []
+        
+        ## Action_list:[Forward,Backward,Left,Right,CW,CCW]
+        self.Forward = action_list[0]
+        self.Backward = action_list[1]
+        self.Left = action_list[2]
+        self.Right = action_list[3]
+        self.CW = action_list[4]
+        self.CCW = action_list[5]
+        
+        ## Flag decide whether open done detection
+        self.done_flag = True
+
+        """ 
+            Choose Corresponding Port according to process_idx
+            self.port_list: 2D List(Shape:[5,]) contains 5 socket for corresponding port and for all Process
+                Socket 1: Webots Send Image to Client
+                Socket 2: Webots Send State Machine Flag to Client
+                Socket 3: Webots Send Env State , reward and done to Client
+                Socket 4: Client Send Control to Webots(Action or Reset)
+                Socket 5: Webots Send CloudPoint to Client
+                Socket 6: Webots Send Params for Customize Reward
+        """
+        for i in range(6):
+            self.port_list.append(BASE_PORT+6*process_idx+i)
+        
+        ## Specify the File Path of each system path
+        ## To do: CHANGE ABSOLUTE PATH TO RELATIVE PATH
+        self.action_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_AlgAction.txt"
+        self.reward_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_Ctrl2Global.txt"
+        self.img_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_VideoFrame.jpeg"
+        self.pointcloud_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_PointCloud.txt"
+        self.rewardparam_path = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/" + "DRONE" + str(process_idx) + "_RewardParams.txt"
+        
+        """
+            Use Path above to create corresponding socket
+                self.send_socket:
+                self.recv_rewarddone_socket:
+                self.recv_image_socket:
+                self.recv_state_mechine:
+                self.recv_reward_params:
+        """ 
+        self.send_socket=SendActionSocket(ip="127.0.0.1",port_action=self.port_list[3],port_control = self.port_list[3],action_path=self.action_path)
+        self.recv_rewarddone_socket=RecvRewardDoneSocketPort(22,id=self.port_list[2],reward_path=self.reward_path)
+        self.recv_image_socket=RecvImgSocketPort(320*240*3,id=self.port_list[0],img_path=self.img_path)
+        self.recv_state_mechine = RecvStateMachineSocketPort(id=self.port_list[1])
+        self.recv_point_cloud = RecvPointCloud(id=self.port_list[4],pointcloud_path=self.pointcloud_path)
+        self.recv_reward_params = RecvRewardParams(id=self.port_list[5],rewardparam_path=self.rewardparam_path)
+        
+        # Inform Env of Num worker
+        self.send_socket.send_signal(bytes(str(self.num_process)+"\n",'utf-8'),process=True) 
+        # Information Flag Set by User
+        self.Other_State=Other_State
+        self.CloudPoint=CloudPoint
+        self.RewardParams=RewardParams
+        self.SuppleInfo = []
+        
+        # Use to resend the reset signal
+        self.Control_Frequence = int(Control_Frequence)
+        self.Resend_Internal = 10000/self.Control_Frequence
+        self.last_done_flag = 0
+        
+        # Use to set done flag
+        self.Set_Done_Step = 10000/self.Control_Frequence
+
+        # Logging
+        self.log_path = "./logs/Agent"+str(self.process_id)+".log"
+        if os.path.exists(self.log_path):
+            os.unlink(self.log_path)
+        logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
+                            level=logging.INFO,
+                            filename=self.log_path)
+        # reset
+        self.reset_time = 0
+
+    """
+        step: 
+            1. Send an action to server through socket
+            2. Receive State,reward,done from server through socket
+        Input:
+            action: Action Chosen by Agent and send to server through socket
+                action = 0: Go forward at V = action_list[0]
+                action = 1: Go backward at V = action_list[1]
+                action = 2: Go leftward at V = action_list[2]
+                action = 3: Go rightward at V = action_list[3]
+                action = 4: Turn Clockwise at w = action_list[4]
+                action = 5: Turn CounterClockwise as w = action_list[5]
+                action = 6: Stop Tracking
+        Output:
+            State: Next state received from server through socket
+            Reward: Reward received from server through socket
+            done: Whether the env is done receive from server through socket
+            self.SuppleInfo: Other Sensor data/Reward Params for User to Customize their own State/Reward
+    """
+    def step(self,action):
+        logging.info('Already Enter step Function')
+
+        ## If Exist Image when entering step function,DELETE IMAGE!!!
+        while os.path.exists(self.img_path):
+            logging.info('Unlink existing image first in step')
+            time.sleep(0.001)
+            os.unlink(self.img_path)
+
+        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
+        self.SuppleInfo = []
+
+        ## Convert action to action_list
+        if action == 0:
+            self.action = [self.Forward,0,0,0]
+        elif action == 1:
+            self.action = [self.Backward,0,0,0]
+        elif action == 2:
+            self.action = [0,self.Left,0,0]
+        elif action == 3:
+            self.action = [0,self.Right,0,0]
+        elif action == 4:
+            self.action = [0,0,0,self.CW]
+        elif action == 5:
+            self.action = [0,0,0,self.CCW]
+        elif action == 6:
+            self.action = [0,0,0,0]
+        
+        ## Send Action List Converted Above
+        logging.info('Begin to send action: ' + str(self.action))
+        self.send_socket.send_action(self.action)
+        logging.info('Finish sending action and begin to read Reward/Done/Step')
+
+        ## Read Reward,Done,Current step(Use to Manage Done) and Other_state
+        reward,done,step_curr,other_state = self.recv_rewarddone_socket.read()
+        logging.info('Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
+
+        ## Read Other_State/RewardParams/CloudPoint According to flag
+        if self.Other_State:
+            logging.info('Start Getting other_state')
+            self.SuppleInfo.append(other_state)
+            logging.info('Get other_state:  '+str(other_state))
+        if self.RewardParams:
+            logging.info('Start Getting reward_params')
+            reward_params = self.recv_reward_params.read()
+            logging.info('Get Reward Params:  '+str(reward_params))
+            self.SuppleInfo.append(reward_params)
+        if self.CloudPoint:
+            logging.info('Start Getting point_cloud')
+            point_cloud = self.recv_point_cloud.read()
+            logging.info('Get point_cloud:  '+str(point_cloud))
+            self.SuppleInfo.append(point_cloud)
+
+        """
+            Done Management:
+                1. Open done detection in the early stage of episode
+                2. If receive first done, close done detection to avoid re-detection
+                3. If Webots do not receive done flag, open done detection again 
+        """
+        if int(step_curr) <= self.Set_Done_Step:
+            logging.info('Open Done Flag')
+            self.done_flag = True
+            self.last_done_flag = 0
+        if done:
+            if self.done_flag:
+                self.done_flag = False
+                self.last_done_flag = step_curr
+                logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
+            else:
+                if step_curr - self.last_done_flag >= self.Resend_Internal:
+                    done=True
+                    self.last_done_flag = step_curr
+                else:
+                    done = False
+                logging.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
+        
+        ## Receive Image and Process Image
+        logging.info('Begin to receive image')
+        image = self.recv_image_socket.receive(self.reward_path)
+        logging.info('Finish receiving image')
+        image = self.process_state(image)
+        return image,reward,done,self.SuppleInfo
+
+    """
+        Reset: Receive first State from server through socket
+        Input:
+            None
+        Output:
+            State: First state received from server through socket
+    """
+    def reset(self): 
+        ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!
+        if os.path.exists(self.reward_path):
+            time.sleep(0.001)
+            os.unlink(self.reward_path)
+        
+        ## Send Special Action to inform Webots of reset stage
+        logging.info('Begin to send reset [0,0,0,0,1]')
+        self.send_socket.send_reset_control(self.process_id)
+        logging.info('Finish sending reset [0,0,0,0,1]')
+
+        ## Waiting For Action to be read
+        if self.action_path is not None:
+            while not self.send_socket.judge_empty():
+                logging.info('Action File not empty')
+                if os.path.exists(self.reward_path):
+                    logging.info('Deleting reward file in reset')
+                    os.unlink(self.reward_path)
+
+        ## Begin to read image
+        logging.info('Begin to receive image in reset')
+        if self.reset_time == 0:
+            image = self.recv_image_socket.receive(self.reward_path,reset=True,first_reset=True)
+        else:
+            image = self.recv_image_socket.receive(self.reward_path,reset=True)
+        logging.info('Finish receiving image in reset')
+        if self.reset_time != 0:
+            ## Avoid image to be empty
+            while len(image.shape) == 1:
+                logging.info('Waiting for image again')
+                image = self.recv_image_socket.receive(self.reward_path,reset=True)
+                logging.info('Finish receiving img again')
+        if os.path.exists(self.action_path):
+            os.unlink(self.action_path)
+        image = self.process_state(image)
+        self.reset_time += 1
+        return image

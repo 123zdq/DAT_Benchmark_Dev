@@ -1,0 +1,133 @@
+'''
+Author: lu 2231625449@qq.com
+Date: 2024-04-10 21:18:38
+LastEditors: lu 2231625449@qq.com
+LastEditTime: 2024-05-23 17:24:33
+FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/global_receiver.py
+Description: 
+
+Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+'''
+"""global_receiver controller."""
+
+# You may need to import some classes of the controller module. Ex:
+#  from controller import Robot, Motor, DistanceSensor
+from controller import Robot
+from controller import Receiver, Emitter
+from controller import Supervisor
+import struct
+import receiveSocket
+import randomorder
+import drone_manager
+import MultiPortRecv
+import time
+import json
+import random
+import os
+
+# create the Robot instance.
+robot = Supervisor()
+run_mode = robot.getCustomData()
+
+# get complete path of world file
+world_path = robot.getWorldPath()
+
+# read json config file
+with open('../../config/env_config.json', 'r') as file:
+    configData = json.load(file)
+    file.close()
+    
+# set config data to sumo interface
+SUMO_Interface = robot.getFromDef("SUMO_INTERFACE")
+SUMO_Interface.getField("maxVehicles").setSFInt32(configData["Sumo_Params"]["max_sumo_car"])
+randomSeed = random.randint(1, 100)
+SUMO_Interface.getField("seed").setSFInt32(randomSeed)
+
+# get the time step of the current world.
+timestep = int(robot.getBasicTimeStep())
+# emitter node
+emitter = robot.getDevice("emitter")
+
+# the global init state is one
+global_state = 1
+global_init = False
+
+# seperate different simulation modes
+FollowPort = None
+if configData["Simulation_Mode"] == "demo":
+    drone_manager.droneManager(robot, timestep, 0, [], configData)
+    data = [0.] * 6
+    data[4] = -1 # inited to -1
+    data[5] = -1
+    # FollowPort = receiveSerial.SerialPort(6,data)
+    FollowPort = receiveSocket.SocketPort(6,data,7790)
+    getFromPort = [0.] * FollowPort.data_size
+    getFromPortStr = ["0"] * FollowPort.data_size
+    getFromPort[4] = -1
+    getFromPort[5] = -1
+elif configData["Simulation_Mode"] == "train":
+    os.system("rm -rf ../../Files2Alg/*")
+    # multiple communications
+    multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"])
+    multiCom.main()
+    # activate map random init
+    file_path = world_path[:-4] + '_net'
+    if configData["Sumo_Random_Mode"] == 1:
+        randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*2), configData["Sumo_Params"])
+    elif configData["Sumo_Random_Mode"] == 2:
+        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*2), configData["Sumo_Params"])
+    # according to the number of process ,establish multiple objects
+    droneM = []
+    # sumo shared storage section
+    sumoList = []
+    sumoDictionary = {}
+    sumoGetCarFlag = [False]*multiCom.Number_process
+    for i in range(multiCom.Number_process):
+        droneM.append(drone_manager.droneManager(robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag))
+    
+
+# Main loop:
+# - perform simulation steps until Webots is stopping the controller
+if configData["Simulation_Mode"] == "demo":
+    while robot.step(timestep) != -1:
+        getFromPort, getFromPortStr = FollowPort.read()
+        for i in range(FollowPort.data_size):
+            if getFromPort[i] == None:
+                if i < 4:
+                    getFromPort[i] = 0
+                else:
+                    getFromPort[i] = -1
+        message = struct.pack("ffffff",getFromPort[0],getFromPort[1],getFromPort[2],getFromPort[3],getFromPort[4],getFromPort[5])
+        emitter.setChannel(1)
+        emitter.send(message)
+        pass
+elif configData["Simulation_Mode"] == "train":
+    while True:
+        if global_init == False:
+            global_init = True
+            init_count = 0
+            # firstly run 310 steps for sumo to prepare for the cars
+            while init_count < (310 + 4*multiCom.Number_process):
+                init_count = init_count + 1
+                while robot.step(timestep) == -1: # step until simulation is running
+                    pass 
+            for drone in droneM:
+                drone.loop.start()
+        
+        # if step count larger than 0 then run a real step
+        run_step = False
+        for i in range(multiCom.Number_process):
+            if multiCom.is_step[i] > 0:
+                run_step = True
+            
+        if run_step == True:
+            while robot.step(timestep) == -1: # step until simulation is running
+                pass
+            for drone in droneM:
+                drone.runMultiState(1)
+
+                
+        
+
+                
+# Enter here exit cleanup code.
