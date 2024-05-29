@@ -49,10 +49,10 @@ class MultiProcessRecv():
         self.tar_ip = tar_ip
         self.ctrl_freq = ctrl_freq
         
-        command = 'ifconfig enp108s0 192.168.1.1 netmask 255.255.255.0'
-        sudo_password = '1210'
-        sudo_command = f'echo {sudo_password} | sudo -S {command}'
-        os.system(sudo_command)
+        # command = 'ifconfig enp108s0 192.168.1.1 netmask 255.255.255.0'
+        # sudo_password = '1210'
+        # sudo_command = f'echo {sudo_password} | sudo -S {command}'
+        # os.system(sudo_command)
         
         self.socketPort = []
         
@@ -85,7 +85,7 @@ class MultiProcessRecv():
         self.makeRewardInit = False
         
         self.savedir = []
-        base_dir = "/home/lu/Git_Project/github/webots_autodriving_drone/traffic_project_bridge/Files2Alg/"
+        base_dir = "../..//Files2Alg/"
         for i in range(MultiProcessRecv.Number_process):
             id_path = base_dir+"recv_action"+str(i)+".txt"
             self.savedir.append(id_path)
