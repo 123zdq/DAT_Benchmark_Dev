@@ -62,6 +62,9 @@ PROTO M100 [
     supervisor IS supervisor
     customData IS customData
     synchronization IS synchronization
+    boundingObject Box {
+      size 0.806 0.806 0.366
+    }
     children [
       Group {
         children IS bodySlot
@@ -183,6 +186,14 @@ PROTO M100 [
                       }
                     ]
                     name "camera roll"
+                    boundingObject Pose {
+                      translation -0.00915058 -1.86265e-08 -0.000983764
+                      children [
+                        Box {
+                          size 0.0236511 0.0205141 0.0225186
+                        }
+                      ]
+                    }
                     physics Physics {
                       density -1
                       mass 0.0333
@@ -191,6 +202,14 @@ PROTO M100 [
                 }
               ]
               name "camera pitch"
+              boundingObject Pose {
+                translation -0.00248347 0.00776876 0.00183829
+                children [
+                  Box {
+                    size 0.0239878 0.0349393 0.0314891
+                  }
+                ]
+              }
               physics Physics {
                 density -1
                 mass 0.0333
@@ -199,6 +218,14 @@ PROTO M100 [
           }
         ]
         name "camera yaw"
+        boundingObject Pose {
+          translation -1.86265e-09 -0.00304481 -0.0140589
+          children [
+            Box {
+              size 0.0208626 0.0260333 0.0307844
+            }
+          ]
+        }
         physics Physics {
           density -1
           mass 0.0333

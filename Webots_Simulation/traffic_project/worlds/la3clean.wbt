@@ -49,8 +49,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.2563570011911693 -0.5996461758152272 0.7580933661300857 5.256248354326932
-  position -328.0655883996328 351.8643392014858 367.6216970185012
+  orientation -0.17872733078915248 -0.7335215141584621 0.6557459336478283 5.571687418281249
+  position -39.48193453905583 46.31535732897828 29.867282005597428
   near 3
 }
 TexturedBackground {
@@ -896,33 +896,14 @@ BmwX5 {
     }
   ]
 }
-DEF ORIGIN ToyotaPriusSimple {
-  translation 0 15.81 0.4
-  name "vehicle(1)"
-}
-LincolnMKZSimple {
-  translation 0 35.49 0.4
-  name "vehicle(2)"
-}
-DEF ORIGIN1 MercedesBenzSprinterSimple {
-  translation 0 19.98 0.4
-}
-TeslaModel3Simple {
-  translation 0 24.24 0.4
-  name "vehicle(3)"
-}
-RangeRoverSportSVRSimple {
+DEF ORIGIN RangeRoverSportSVRSimple {
   translation 0 28.01 0.4
-  name "vehicle(4)"
-}
-CitroenCZeroSimple {
-  translation 0 31.83 0.4
-  name "vehicle(5)"
+  name "v1"
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 60
-  seed 64
+  maxVehicles 150
+  seed 100
   children [
     Solid {
       translation 196.99 223.18 0

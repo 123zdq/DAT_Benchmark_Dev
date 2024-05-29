@@ -2,8 +2,8 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-05-23 17:24:33
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/global_receiver.py
+LastEditTime: 2024-05-29 23:05:16
+FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -55,7 +55,7 @@ global_init = False
 # seperate different simulation modes
 FollowPort = None
 if configData["Simulation_Mode"] == "demo":
-    drone_manager.droneManager(robot, timestep, 0, [], configData)
+    drone_manager.droneManager(robot, timestep, 0, [], configData, [], {}, [False])
     data = [0.] * 6
     data[4] = -1 # inited to -1
     data[5] = -1

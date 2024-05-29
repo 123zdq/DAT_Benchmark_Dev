@@ -166,7 +166,7 @@ int main(int argc, char **argv) {
   TrackingCtrl trackCtrl(timeStep);
   double action[5] = {0}; // 强化学习action参数buff
   double step_count = 0;
-  rewardGenerator rewardG(robot);
+  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange);
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -239,10 +239,10 @@ int main(int argc, char **argv) {
       while (key > 0) {
         switch (key) {
           case keyboard->UP:
-            fly_cmd.axes[3] = 10;
+            fly_cmd.axes[3] = 5;
             break;
           case keyboard->DOWN:
-            fly_cmd.axes[3] = -10;
+            fly_cmd.axes[3] = -5;
             break;
           case keyboard->RIGHT:
             fly_cmd.axes[0] = -60;
@@ -251,10 +251,10 @@ int main(int argc, char **argv) {
             fly_cmd.axes[0] = 60;
             break;
           case (keyboard->SHIFT + keyboard->RIGHT):
-            fly_cmd.axes[2] = -10;
+            fly_cmd.axes[2] = -5;
             break;
           case (keyboard->SHIFT + keyboard->LEFT):
-            fly_cmd.axes[2] = 10;
+            fly_cmd.axes[2] = 5;
             break;
           case (keyboard->SHIFT + keyboard->UP):
             fly_cmd.axes[1] = 0.007;
@@ -352,7 +352,7 @@ int main(int argc, char **argv) {
 
     rewardG.locateCamera(camera->getWidth(),camera->getHeight(),camera->getFov());
     if (config.get()->simulationMode == string("demo")){
-      rewardG.setTrackingCar("ORIGIN1");
+      rewardG.setTrackingCar("ORIGIN");
     }
     else if(config.get()->simulationMode == string("train")){
       rewardG.updateTrackingCar();
@@ -432,7 +432,7 @@ int main(int argc, char **argv) {
       }
     }
     else if(config.get()->simulationMode == string("demo")){
-      
+      std::cout<<"  reward: "<<state.reward<<std::endl;
     }
 
     // 摄像头视频流抓取,并且发送到全局通信节点

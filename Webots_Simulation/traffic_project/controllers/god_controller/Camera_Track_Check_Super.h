@@ -20,8 +20,9 @@ public:
                                           const double fov_horizon = 0.785398,
                                           const Vector2d image_size_hw = Vector2d(240, 320));
     Vector3d Location_of_World_Calculate(const Vector3d location_of_camera, const Matrix<double, 3, 4> T_camera_of_land, const Matrix<double, 3, 4> T_land_of_world);
-    double Get_Location_Reward(const Vector3d tracking_location, const Vector3d follow_location, const Vector3d target_real_world_location, const double range);
+    double Get_Location_Reward(const Vector3d tracking_location, const Vector3d follow_location, const Vector3d target_real_world_location, const double range, const double scale);
     double Get_Location_Reward(const Vector3d follow_location, const Vector3d target_real_world_location, const double range);
+    double Get_Location_Reward(const Vector3d follow_location, const Vector3d target_real_world_location, const double range, const double scale);
     double cameraF;
 };
 
@@ -100,7 +101,7 @@ inline Vector3d camera2real::Location_of_World_Calculate(const Vector3d location
  */
 inline double camera2real::hyperbolic_tangent_func(double input, double scale)
 {
-    double real_input = input * scale;
+    double real_input = pow(input,3) * scale;
     double k1 = std::exp(real_input);
     double k2 = std::exp(-real_input);
     double out = double((k1 - k2) / (k1 + k2));
@@ -115,21 +116,22 @@ inline double camera2real::hyperbolic_tangent_func(double input, double scale)
  * @param follow_location: Coordinates of the projection point of the desired tracking point
  * @param target_real_world_location: Tracking the true coordinates of the target
  * @param range: Acceptable target range
+ * @param scale: Distance decrease scale
  * @return double 
  */
-inline double camera2real::Get_Location_Reward(const Vector3d tracking_location, const Vector3d follow_location, const Vector3d target_real_world_location, const double range)
+inline double camera2real::Get_Location_Reward(const Vector3d tracking_location, const Vector3d follow_location, const Vector3d target_real_world_location, const double range, const double scale)
 {
     double tracking_dis = (tracking_location - target_real_world_location).norm();
     // double follow_dis = (follow_location - target_real_world_location).norm();
     double follow_dis = (follow_location - tracking_location).norm();
-    double reward = double(tracking_dis < range) - hyperbolic_tangent_func(follow_dis,0.2);
-    if(reward < 0){
+    double reward = double(tracking_dis < range) - hyperbolic_tangent_func(follow_dis,scale);
+    if(reward < 0 || std::isnan(reward) || std::isinf(reward)){
         reward = 0;
     }
     return reward;
 }
 /**
- * @description: ALG version
+ * @description: ALG version1
  * @param {Vector3d} follow_location
  * @param {Vector3d} target_real_world_location
  * @param range Acceptable target range
@@ -139,5 +141,23 @@ inline double camera2real::Get_Location_Reward(const Vector3d follow_location, c
 {
     double tracking_dis = (follow_location - target_real_world_location).norm();
     return double(tracking_dis < range);
+}
+
+/**
+ * @description: ALG version2
+ * @param {Vector3d} follow_location
+ * @param {Vector3d} target_real_world_location
+ * @param range Acceptable target range
+ * @param scale Distance decrease scale
+ * @return {*}
+ */
+inline double camera2real::Get_Location_Reward(const Vector3d follow_location, const Vector3d target_real_world_location, const double range, const double scale)
+{
+    double tracking_dis = (follow_location - target_real_world_location).norm();
+    double reward =  double(tracking_dis < range) - hyperbolic_tangent_func(tracking_dis,scale);
+    if(reward < 0 || std::isnan(reward) || std::isinf(reward)){
+        reward = 0;
+    }
+    return reward;
 }
 

@@ -195,7 +195,7 @@ if __name__ == '__main__':
         shared_model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "ADVOT":
         shared_model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
-    if args.load:
+    if args.load and os.path.exists(args.load_model_dir):
         saved_state = torch.load(
             f"{args.load_model_dir}{args.env}.dat",
             map_location=lambda storage, loc: storage,
