@@ -1,6 +1,7 @@
 *~
 .DS_Store
-logs/*
-runs/Benchmark_training/*
-trained_models/*
+logs/*.log
+runs/Benchmark_training/*.0
+runs/Benchmark_training/*.1
+trained_models/*.dat
 __pycache__/
