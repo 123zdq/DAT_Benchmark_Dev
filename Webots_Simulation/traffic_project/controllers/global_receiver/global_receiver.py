@@ -66,7 +66,8 @@ if configData["Simulation_Mode"] == "demo":
     getFromPort[4] = -1
     getFromPort[5] = -1
 elif configData["Simulation_Mode"] == "train":
-    os.system("rm -rf ../../Files2Alg/*")
+    os.system("rm -rf ../../Files2Alg/*.txt")
+    os.system("rm -rf ../../Files2Alg/*.jpeg")
     # multiple communications
     multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"])
     multiCom.main()
