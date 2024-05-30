@@ -225,8 +225,8 @@ inline double rewardGenerator::getReward(string _run_mode, double trackWidth, do
       reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
     }
     else if(_run_mode == string("train")){
-      // reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, 6); 
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, 6); 
+      // reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
     }
     return reward;
 }

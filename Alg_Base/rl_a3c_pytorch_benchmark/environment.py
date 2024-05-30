@@ -176,6 +176,7 @@ class BenchEnv_Multi():
         # reset
         self.reset_time = 0
 
+
     """
         step: 
             1. Send an action to server through socket
@@ -262,6 +263,10 @@ class BenchEnv_Multi():
             if self.done_flag:
                 self.done_flag = False
                 self.last_done_flag = step_curr
+                if reward == 0.0:
+                    reward -= 20
+                elif reward == 1.0:
+                    reward += 20
                 logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:
                 if step_curr - self.last_done_flag >= self.Resend_Internal:
