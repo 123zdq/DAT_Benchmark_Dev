@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-05-30 00:43:32
+ * @LastEditTime: 2024-05-31 00:22:35
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description: 
  * 
@@ -225,7 +225,7 @@ inline double rewardGenerator::getReward(string _run_mode, double trackWidth, do
       reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
     }
     else if(_run_mode == string("train")){
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, 6); 
+      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange); 
       // reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
     }
     return reward;
