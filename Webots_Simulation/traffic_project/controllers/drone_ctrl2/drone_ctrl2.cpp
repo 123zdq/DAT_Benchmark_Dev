@@ -417,7 +417,7 @@ int main(int argc, char **argv) {
         state.done = 1;
       }
       
-      std::cout<< "id: " << droneDef <<"  done: "<<state.done<<"  reward: "<<state.reward<< "  count: "<< step_count <<std::endl;
+      std::cout<< "id: " << droneDef <<"  done: "<<state.done<<"  reward: "<<state.reward<< "  count: "<< step_count << "  time:" << t <<std::endl;
       // 发送state,reward,done
       state.t = step_count;
       double state_list[22] = {};
