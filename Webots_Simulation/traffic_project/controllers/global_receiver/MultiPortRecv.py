@@ -2,8 +2,8 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-05-23 11:21:25
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/MultiPortRecv.py
+LastEditTime: 2024-05-31 16:17:15
+FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -295,7 +295,8 @@ class MultiProcessRecv():
                             print("os_error")
                 time.sleep(0.001)
             
-            shutil.copyfile(gfilePath, sfilePath)
+            # shutil.copyfile(gfilePath, sfilePath)
+            os.system("cp -f " + gfilePath + " " + sfilePath)
             # with open(cfilePath,"w") as f:
             #     f.write(str(1))
             #     f.close()
