@@ -295,8 +295,8 @@ class MultiProcessRecv():
                             print("os_error")
                 time.sleep(0.001)
             
-            # shutil.copyfile(gfilePath, sfilePath)
-            os.system("cp -f " + gfilePath + " " + sfilePath)
+            shutil.copyfile(gfilePath, sfilePath)
+            # os.system("cp -f " + gfilePath + " " + sfilePath)
             # with open(cfilePath,"w") as f:
             #     f.write(str(1))
             #     f.close()
