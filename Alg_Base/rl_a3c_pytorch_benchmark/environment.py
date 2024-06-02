@@ -249,32 +249,39 @@ class BenchEnv_Multi():
             logging.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
 
-        """
-            Done Management:
-                1. Open done detection in the early stage of episode
-                2. If receive first done, close done detection to avoid re-detection
-                3. If Webots do not receive done flag, open done detection again 
-        """
-        if int(step_curr) <= self.Set_Done_Step:
-            logging.info('Open Done Flag')
-            self.done_flag = True
-            self.last_done_flag = 0
+        # """
+        #     Done Management:
+        #         1. Open done detection in the early stage of episode
+        #         2. If receive first done, close done detection to avoid re-detection
+        #         3. If Webots do not receive done flag, open done detection again 
+        # """
+        # if int(step_curr) <= self.Set_Done_Step:
+        #     logging.info('Open Done Flag')
+        #     self.done_flag = True
+        #     self.last_done_flag = 0
+        # if done:
+        #     if self.done_flag:
+        #         self.done_flag = False
+        #         self.last_done_flag = step_curr
+        #         if reward == 0.0:
+        #             reward -= 20
+        #         elif reward == 1.0:
+        #             reward += 20
+        #         logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
+        #     else:
+        #         if step_curr - self.last_done_flag >= self.Resend_Internal:
+        #             done=True
+        #             self.last_done_flag = step_curr
+        #         else:
+        #             done = False
+        #         logging.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
+        
         if done:
-            if self.done_flag:
-                self.done_flag = False
-                self.last_done_flag = step_curr
-                if reward == 0.0:
-                    reward -= 20
-                elif reward == 1.0:
-                    reward += 20
-                logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
-            else:
-                if step_curr - self.last_done_flag >= self.Resend_Internal:
-                    done=True
-                    self.last_done_flag = step_curr
-                else:
-                    done = False
-                logging.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
+            if reward == 0.0:
+                reward -= 20
+            elif reward == 1.0:
+                reward += 20
+        
         
         ## Receive Image and Process Image
         logging.info('Begin to receive image')
