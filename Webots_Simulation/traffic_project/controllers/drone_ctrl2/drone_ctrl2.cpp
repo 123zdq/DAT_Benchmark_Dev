@@ -396,7 +396,6 @@ int main(int argc, char **argv) {
     }
     gcmdCb(gCtrl.gbl2ctrl,camera_roll_motor,camera_pitch_motor,camera_yaw_motor);
     
-    static int doneCount = 0;
     static int countMax = int(1000/2/config.get()->controlFreq);
     if(countMax < 1){
       countMax = 1;
@@ -404,18 +403,18 @@ int main(int argc, char **argv) {
     if(config.get()->simulationMode == string("train")){
       // 根据追踪车辆情况更新done状态
       // 根据训练执行步长更新done状态
-      if(state.done == 0){
+      // if(state.done == 0){
         state.done = (pCtrl.done) | ((rewardG.isTrackingCarDisp == 2) ? 1 : 0);
-      if(step_count >= config.get()->trainTotalStep){
-        state.done = 1;
-      }
-      if(step_count < 10){
-        state.done = 0;
-      }
-      }
-      else{
-        state.done = 1;
-      }
+        if(step_count >= config.get()->trainTotalStep){
+          state.done = 1;
+        }
+        if(step_count < 100){
+          state.done = 0;
+        }
+      // }
+      // else{
+      //   state.done = 1;
+      // }
       
       std::cout<< "id: " << droneDef <<"  done: "<<state.done<<"  reward: "<<state.reward<< "  count: "<< step_count << "  time:" << t <<std::endl;
       // 发送state,reward,done

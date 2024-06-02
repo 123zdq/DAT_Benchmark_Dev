@@ -58,7 +58,7 @@ class RecvRewardDoneSocketPort:
             Curr_step: Current Step
             Other_state: Supple State
     '''    
-    def read(self):
+    def read(self,imgPath):
         if self.reward_path is None:
             self.s,_=self.udp_socket.recvfrom(1024)
             if self.s != b'':
@@ -74,6 +74,8 @@ class RecvRewardDoneSocketPort:
                         self.sdata[i] = self.slist[i]
         else:
             while not os.path.exists(self.reward_path):
+                # if os.path.exists(imgPath):
+                #     os.unlink(imgPath)
                 time.sleep(0.001)
             while os.path.getsize(self.reward_path) == 0:
                 time.sleep(0.001)

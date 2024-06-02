@@ -2,8 +2,8 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-05-23 09:41:30
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/drone_manager.py
+LastEditTime: 2024-06-02 17:37:20
+FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -159,6 +159,7 @@ class droneManager:
     return {*}
     '''
     def reset(self):
+        print("\nid:   ",self.id,"    reset: rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
         self.drone.restartController()
         
     '''
@@ -193,29 +194,30 @@ class droneManager:
                     self.step_count = 0
                     if self.init():
                         self.logger.info("drone finish sumo init")
-                        self.returnOnlyImage()
+                        # self.returnOnlyImage()
+                        self.returnState()
                         self.machine_state = 2 # init come to an end and transfer to steps
                 elif self.machine_state == 2:
                     self.sumoGod.ResetSumoDictionary()
-                    if self.recCtrlPort.is_reset[self.id] == True:
+                    if self.recCtrlPort.is_reset[self.id] == True and self.step_count > 100:
                         self.logger.info("begin to reset")
                         self.reset()
                         self.logger.info("finish reset")
                         self.sumoGod.delectDefList()
                         self.recCtrlPort.is_reset[self.id] = False
                         self.machine_state = 1 # remember to reset
-                        continue
-                    self.actionActivateFile(self.step_count)
-                    if self.recCtrlPort.is_step[self.id] == 1:
-                        self.logger.info("return states reward done")
-                        self.returnState()
-                    # reset step counts that have been actuated
-                    self.recCtrlPort.is_step[self.id] = self.recCtrlPort.is_step[self.id] - 1
-                    if self.recCtrlPort.is_step[self.id] < 0:
-                        self.recCtrlPort.is_step[self.id] = 0
-                    # complete a step count add one
-                    self.step_count = self.step_count + 1
-                    self.multi_state = 0
+                    else:
+                        self.actionActivateFile(self.step_count)
+                        if self.recCtrlPort.is_step[self.id] == 1:
+                            self.logger.info("return states reward done")
+                            self.returnState()
+                        # reset step counts that have been actuated
+                        self.recCtrlPort.is_step[self.id] = self.recCtrlPort.is_step[self.id] - 1
+                        if self.recCtrlPort.is_step[self.id] < 0:
+                            self.recCtrlPort.is_step[self.id] = 0
+                        # complete a step count add one
+                        self.step_count = self.step_count + 1
+                        self.multi_state = 0
             
     '''
     description: An external interface to start loops

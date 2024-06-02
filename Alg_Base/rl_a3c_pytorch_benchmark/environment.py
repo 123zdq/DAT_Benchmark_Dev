@@ -230,7 +230,7 @@ class BenchEnv_Multi():
         logging.info('Finish sending action and begin to read Reward/Done/Step')
 
         ## Read Reward,Done,Current step(Use to Manage Done) and Other_state
-        reward,done,step_curr,other_state = self.recv_rewarddone_socket.read()
+        reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
         logging.info('Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
 
         ## Read Other_State/RewardParams/CloudPoint According to flag
@@ -249,38 +249,38 @@ class BenchEnv_Multi():
             logging.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
 
-        # """
-        #     Done Management:
-        #         1. Open done detection in the early stage of episode
-        #         2. If receive first done, close done detection to avoid re-detection
-        #         3. If Webots do not receive done flag, open done detection again 
-        # """
-        # if int(step_curr) <= self.Set_Done_Step:
-        #     logging.info('Open Done Flag')
-        #     self.done_flag = True
-        #     self.last_done_flag = 0
-        # if done:
-        #     if self.done_flag:
-        #         self.done_flag = False
-        #         self.last_done_flag = step_curr
-        #         if reward == 0.0:
-        #             reward -= 20
-        #         elif reward == 1.0:
-        #             reward += 20
-        #         logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
-        #     else:
-        #         if step_curr - self.last_done_flag >= self.Resend_Internal:
-        #             done=True
-        #             self.last_done_flag = step_curr
-        #         else:
-        #             done = False
-        #         logging.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
-        
+        """
+            Done Management:
+                1. Open done detection in the early stage of episode
+                2. If receive first done, close done detection to avoid re-detection
+                3. If Webots do not receive done flag, open done detection again 
+        """
+        if int(step_curr) <= self.Set_Done_Step:
+            logging.info('Open Done Flag')
+            self.done_flag = True
+            self.last_done_flag = 0
         if done:
-            if reward == 0.0:
-                reward -= 20
-            elif reward == 1.0:
-                reward += 20
+            if self.done_flag:
+                self.done_flag = False
+                self.last_done_flag = step_curr
+                if reward == 0.0:
+                    reward -= 20
+                elif reward == 1.0:
+                    reward += 20
+                logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
+            else:
+                if step_curr - self.last_done_flag >= self.Resend_Internal:
+                    done=True
+                    self.last_done_flag = step_curr
+                else:
+                    done = False
+                logging.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
+        
+        # if done:
+        #     if reward == 0.0:
+        #         reward -= 20
+        #     elif reward == 1.0:
+        #         reward += 20
         
         
         ## Receive Image and Process Image
@@ -316,6 +316,10 @@ class BenchEnv_Multi():
                     logging.info('Deleting reward file in reset')
                     os.unlink(self.reward_path)
 
+        ## Read Reward,Done,Current step and Other_state abandoned
+        reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
+        logging.info('In reset: Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
+        
         ## Begin to read image
         logging.info('Begin to receive image in reset')
         if self.reset_time == 0:
