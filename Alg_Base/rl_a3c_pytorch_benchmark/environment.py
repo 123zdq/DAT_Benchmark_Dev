@@ -3,7 +3,7 @@ import gym
 from functools import partial
 import cv2
 import numpy as np
-from receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams
+from receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams,is_file_in_use
 from sendSocket import SendActionSocket
 import time
 import threading
@@ -169,6 +169,8 @@ class BenchEnv_Multi():
         # Logging
         self.log_path = "./logs/Agent"+str(self.process_id)+".log"
         if os.path.exists(self.log_path):
+            while is_file_in_use(self.log_path):
+                pass
             os.unlink(self.log_path)
         logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
                             level=logging.INFO,
@@ -203,6 +205,8 @@ class BenchEnv_Multi():
         while os.path.exists(self.img_path):
             logging.info('Unlink existing image first in step')
             time.sleep(0.001)
+            while is_file_in_use(self.img_path):
+                pass
             os.unlink(self.img_path)
 
         ## SuppleInfo Include Other_State/RewardParams/CloudPoint
@@ -301,6 +305,8 @@ class BenchEnv_Multi():
         ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!
         if os.path.exists(self.reward_path):
             time.sleep(0.001)
+            while is_file_in_use(self.reward_path):
+                pass
             os.unlink(self.reward_path)
         
         ## Send Special Action to inform Webots of reset stage
@@ -314,6 +320,8 @@ class BenchEnv_Multi():
                 logging.info('Action File not empty')
                 if os.path.exists(self.reward_path):
                     logging.info('Deleting reward file in reset')
+                    while is_file_in_use(self.reward_path):
+                        pass
                     os.unlink(self.reward_path)
 
         ## Read Reward,Done,Current step and Other_state abandoned
@@ -334,6 +342,8 @@ class BenchEnv_Multi():
                 image = self.recv_image_socket.receive(self.reward_path,reset=True)
                 logging.info('Finish receiving img again')
         if os.path.exists(self.action_path):
+            while is_file_in_use(self.action_path):
+                pass
             os.unlink(self.action_path)
         image = self.process_state(image)
         self.reset_time += 1

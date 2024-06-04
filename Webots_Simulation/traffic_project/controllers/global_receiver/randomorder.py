@@ -78,7 +78,7 @@ def groupAndSetDepart(root, totalNum:int, numPerGroup:int, intervalBetweenGroup:
         if(count>=numlist[index]):
             index=index+1
             
-def random_by_os(folder_path, _configData):
+def random_by_os(folder_path, _sys, _configData):
     net_path = folder_path + '/sumo.net.xml'
     trip_path = folder_path + '/sumo.trip.xml'
     rou_path = folder_path + '/sumo.rou.xml'
@@ -87,10 +87,18 @@ def random_by_os(folder_path, _configData):
     rouN = str(_configData["route_num"])
     randS = str(random.randint(1, 100))
     # 使用从系统获取的python路径
-    os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
+    if _sys == "Linux":
+        os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
+    elif _sys == "Windows":
+        os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')       
     # 使用webots建立的python软链接
     # os.system('python3.11 $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
-    os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+    if _sys == "Linux":
+        os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+    elif _sys == "Windows":
+        os.system('%SUMO_HOME%/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+
+
 
 # 插入对车辆速度的描述
 def add_speed_constrain(root, max_speed):
@@ -119,8 +127,8 @@ def sumo_rou_random(folder_path, _numPerGroup, _configData):
     
     write_xml(tree, folder_path + '/sumo.rou.xml')
     
-def sumo_rou_random_os(folder_path, _numPerGroup, _configData):
-    random_by_os(folder_path, _configData)
+def sumo_rou_random_os(folder_path, _numPerGroup, _sys, _configData):
+    random_by_os(folder_path, _sys, _configData)
     
     tree, root = read_xml(folder_path + '/sumo.rou.xml')
     add_speed_constrain(root=root, max_speed=_configData["max_car_speed"])

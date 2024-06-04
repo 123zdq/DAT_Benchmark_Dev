@@ -20,6 +20,13 @@ import time
 from copy import deepcopy
 import logging
 
+def is_file_in_use(file_path):
+    try:
+        os.rename(file_path, file_path)
+    except OSError:
+        return True
+    else:
+        return False
 
 '''
 description: set up a logger for debug
@@ -30,6 +37,10 @@ return {*}
 '''
 def setup_logger(logger_name, log_file, level=logging.INFO):
     if os.path.exists(log_file):
+        # with open(log_file,"r") as f:
+        #     f.close()
+        while is_file_in_use(log_file):
+            pass
         os.unlink(log_file)
     l = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s : %(message)s')
@@ -181,6 +192,8 @@ class MultiProcessRecv():
                     self.logger_list[idx].info("Finish writing action")
                     
             if action_path is not None:
+                while is_file_in_use(action_path):
+                    pass
                 os.unlink(action_path)
 
     """if self.queuelist[idx].full()or corresponding process
@@ -227,6 +240,8 @@ class MultiProcessRecv():
                 self.is_step[getqueue] = self.is_step[getqueue] + int(1000/2/self.ctrl_freq)
                 self.is_reset[getqueue] = self.Action_list[getqueue][4]
                 self.logger_list[getqueue].info("Unlink the file: " + str(self.savedir[getqueue]))
+                while is_file_in_use(self.savedir[getqueue]):
+                    pass
                 os.unlink(self.savedir[getqueue])
                 
                 self.readAction_list = deepcopy(self.Action_list)

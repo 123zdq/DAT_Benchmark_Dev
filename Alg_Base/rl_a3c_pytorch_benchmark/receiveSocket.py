@@ -6,6 +6,14 @@ import time
 from copy import deepcopy
 import math
 
+def is_file_in_use(file_path):
+    try:
+        os.rename(file_path, file_path)
+    except OSError:
+        return True
+    else:
+        return False
+
 """
     RecvRewardDoneSocketPort
         1. The class use for receiving reward/done/current step/other state
@@ -79,6 +87,8 @@ class RecvRewardDoneSocketPort:
                 time.sleep(0.001)
             while os.path.getsize(self.reward_path) == 0:
                 time.sleep(0.001)
+                while is_file_in_use(self.reward_path):
+                    pass
                 os.unlink(self.reward_path)
                 return self.data_last[-2],self.data_last[-1], self.data_last[0],self.data_last[1:-2]
             with open(self.reward_path,'rb') as file:
@@ -96,6 +106,8 @@ class RecvRewardDoneSocketPort:
                         self.data[i] = float(self.slist[i])
                         self.sdata[i] = self.slist[i]
         self.data_last = deepcopy(self.data)
+        while is_file_in_use(self.reward_path):
+            pass
         os.unlink(self.reward_path)
         return self.data[-2],self.data[-1], self.data[0],self.data[1:-2]
 
@@ -152,6 +164,8 @@ class RecvImgSocketPort:
     """
     def receive(self,reward_path,reset=False,first_reset=False):
         while os.path.exists(reward_path):
+            while is_file_in_use(reward_path):
+                pass
             os.unlink(reward_path)
             time.sleep(0.01)
         if self.img_path is None:
@@ -176,6 +190,8 @@ class RecvImgSocketPort:
                 time.sleep(0.001)
             while os.path.getsize(self.img_path) == 0:
                 time.sleep(0.001)
+                while is_file_in_use(self.img_path):
+                    pass
                 os.unlink(self.img_path)
                 if self.img_last is not None:
                     return self.img_last
@@ -185,6 +201,8 @@ class RecvImgSocketPort:
             self.img_last = deepcopy(imageRead)
             while os.path.exists(self.img_path):
                 time.sleep(0.001)
+                while is_file_in_use(self.img_path):
+                    pass
                 os.unlink(self.img_path)
             return imageRead
 
@@ -298,6 +316,8 @@ class RecvPointCloud:
                 time.sleep(0.001)
             while os.path.getsize(self.pointcloud_path) == 0:
                 time.sleep(0.001)
+                while is_file_in_use(self.pointcloud_path):
+                    pass
                 os.unlink(self.pointcloud_path)
                 return self.data_last
             with open(self.pointcloud_path,'rb') as file:
@@ -321,6 +341,8 @@ class RecvPointCloud:
                     except IndexError:
                         break
         self.data_last = deepcopy(self.data)
+        while is_file_in_use(self.pointcloud_path):
+            pass
         os.unlink(self.pointcloud_path)
         return self.data
 
@@ -381,6 +403,8 @@ class RecvRewardParams:
                 time.sleep(0.001)
             while os.path.getsize(self.rewardparam_path) == 0:
                 time.sleep(0.001)
+                while is_file_in_use(self.rewardparam_path):
+                    pass
                 os.unlink(self.rewardparam_path)
                 return self.data_last
             with open(self.rewardparam_path,'rb') as file:
@@ -401,5 +425,7 @@ class RecvRewardParams:
                         self.data[i] = self.slist[i]
                     self.sdata[i] = self.slist[i]
         self.data_last = deepcopy(self.data)
+        while is_file_in_use(self.rewardparam_path):
+            pass
         os.unlink(self.rewardparam_path)
         return self.data

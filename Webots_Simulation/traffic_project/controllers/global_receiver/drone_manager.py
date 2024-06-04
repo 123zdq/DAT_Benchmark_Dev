@@ -69,8 +69,8 @@ class droneManager:
         # multiprocess actuate flag
         self.multi_state = 0
         # Logging
-        MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
-        self.logger = logging.getLogger("drone"+str(id))
+        # MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
+        # self.logger = logging.getLogger("drone"+str(id))
         # establish drone manager threading
         self.loop = threading.Thread(target=self.mainLoop)
         
@@ -193,23 +193,23 @@ class droneManager:
                     self.recCtrlPort.is_step[self.id] = 0
                     self.step_count = 0
                     if self.init():
-                        self.logger.info("drone finish sumo init")
+                        # self.logger.info("drone finish sumo init")
                         # self.returnOnlyImage()
                         self.returnState()
                         self.machine_state = 2 # init come to an end and transfer to steps
                 elif self.machine_state == 2:
                     self.sumoGod.ResetSumoDictionary()
                     if self.recCtrlPort.is_reset[self.id] == True and self.step_count > 100:
-                        self.logger.info("begin to reset")
+                        # self.logger.info("begin to reset")
                         self.reset()
-                        self.logger.info("finish reset")
+                        # self.logger.info("finish reset")
                         self.sumoGod.delectDefList()
                         self.recCtrlPort.is_reset[self.id] = False
                         self.machine_state = 1 # remember to reset
                     else:
                         self.actionActivateFile(self.step_count)
                         if self.recCtrlPort.is_step[self.id] == 1:
-                            self.logger.info("return states reward done")
+                            # self.logger.info("return states reward done")
                             self.returnState()
                         # reset step counts that have been actuated
                         self.recCtrlPort.is_step[self.id] = self.recCtrlPort.is_step[self.id] - 1

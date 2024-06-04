@@ -24,6 +24,10 @@ import time
 import json
 import random
 import os
+import platform
+
+# check running system
+System = platform.system()
 
 # create the Robot instance.
 robot = Supervisor()
@@ -66,8 +70,12 @@ if configData["Simulation_Mode"] == "demo":
     getFromPort[4] = -1
     getFromPort[5] = -1
 elif configData["Simulation_Mode"] == "train":
-    os.system("rm -rf ../../Files2Alg/*.txt")
-    os.system("rm -rf ../../Files2Alg/*.jpeg")
+    if System == "Linux":
+        os.system("rm -rf ../../Files2Alg/*.txt")
+        os.system("rm -rf ../../Files2Alg/*.jpeg")
+    elif System == "Windows":
+        os.system("del /s /q /f ../../Files2Alg/*.txt")
+        os.system("del /s /q /f ../../Files2Alg/*.jpeg")
     # multiple communications
     multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"])
     multiCom.main()
@@ -76,7 +84,7 @@ elif configData["Simulation_Mode"] == "train":
     if configData["Sumo_Random_Mode"] == 1:
         randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*2), configData["Sumo_Params"])
     elif configData["Sumo_Random_Mode"] == 2:
-        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*2), configData["Sumo_Params"])
+        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*2), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section

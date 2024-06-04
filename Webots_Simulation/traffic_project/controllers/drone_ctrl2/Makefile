@@ -69,5 +69,8 @@
 null :=
 space := $(null) $(null)
 WEBOTS_HOME_PATH?=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
+ifeq ($(OS),Windows_NT)
+	INCLUDE += -I D:/cppLibrary/include/Eigen3/include/eigen3
+	INCLUDE += -I D:/cppLibrary/include/nlohmann_json/include
+endif
 include $(WEBOTS_HOME_PATH)/resources/Makefile.include
-
