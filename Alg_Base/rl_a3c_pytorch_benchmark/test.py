@@ -91,7 +91,7 @@ def test(args, shared_model, env_conf):
                         with torch.cuda.device(gpu_id):
                             state_to_save = player.model.state_dict()
                             torch.save(
-                                state_to_save, f"{args.save_model_dir}{args.env}.dat"
+                                state_to_save, f"{args.save_model_dir}{args.env}_"+str(num_tests)+".dat"
                             )
                     else:
                         state_to_save = player.model.state_dict()

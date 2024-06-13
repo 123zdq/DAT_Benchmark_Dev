@@ -27,7 +27,7 @@ parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=8,
+    default=16,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(
@@ -119,7 +119,7 @@ parser.add_argument(
     "--save-max",
     # action="store_true",
     help="Save model on every test run high score matched or bested",
-    default=True
+    default=False
 )
 parser.add_argument(
     "-o",
@@ -129,11 +129,19 @@ parser.add_argument(
     help="optimizer choice of Adam or RMSprop",
 )
 parser.add_argument(
-    "-lmd",
+    "-lmi",
     "--load-model-dir",
     default="trained_models/",
     help="folder to load trained models from",
 )
+
+parser.add_argument(
+    "-lmd",
+    "--load-model-idx",
+    default=-1,
+    help="idx of the trained model to load( Default=-1:load the last file weight in last training)",
+)
+
 parser.add_argument(
     "-smd",
     "--save-model-dir",
@@ -195,9 +203,15 @@ if __name__ == '__main__':
         shared_model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "ADVOT":
         shared_model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
-    if args.load and os.path.exists(args.load_model_dir + "Benchmark.dat"):
+    if args.load and os.path.exists(args.load_model_dir + "Benchmark_1.dat"):
+        if args.load_model_idx == -1:
+            num_file = len(os.listdir(args.load_model_dir))
+            model_idx = num_file - 1 # except a markdown file
+        else:
+            model_idx = args.load_model_idx
+        print("Loading Model: "+f"{args.load_model_dir}{args.env}_"+str(model_idx)+".dat")
         saved_state = torch.load(
-            f"{args.load_model_dir}{args.env}.dat",
+            f"{args.load_model_dir}{args.env}_"+str(model_idx)+".dat",
             map_location=lambda storage, loc: storage,
         )
         shared_model.load_state_dict(saved_state)
