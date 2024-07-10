@@ -16,7 +16,7 @@ import time
 #undo_logger_setup()"
 parser = argparse.ArgumentParser(description="A3C")
 """
-    我们需要配置的参数：
+    Argument that we need to config：
         --workers
         --gpu-ids
         --hidden-size
@@ -169,7 +169,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "-evc", "--env-config",
-    default="config.json",
+    default="./pretrain_DM/config.json",
     help="environment to crop and resize info (default: config.json)")
 parser.add_argument(
     "-dss",

@@ -1,0 +1,20 @@
+{
+    "Head_only":{
+      "State_Buffer":10,
+      "Action_Buffer":10,
+      "Model_Type":"resnet18",
+      "State_size":84,
+      "State_channel":3,
+      "Backbone":["Conv1","Bn1","Layer1","Layer2"],
+      "Action_dim":7
+    },
+    "Head_backbone":{
+      "State_Buffer":10,
+      "Action_Buffer":10,
+      "Model_Type":"Self_train",
+      "State_size":84,
+      "State_channel":3,
+      "Backbone":["Conv1","Bn1","Layer1","Layer2"],
+      "Action_dim":7
+    }
+}
