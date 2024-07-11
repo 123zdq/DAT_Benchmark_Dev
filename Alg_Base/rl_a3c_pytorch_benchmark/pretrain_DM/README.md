@@ -13,9 +13,18 @@
        * "Head_only": Train Dynamics Model Head Only
        * "Head_backbone": Train Dynamics Model Head and Backbone simultaneously
      * **State_Buffer:** Number of Frame use as Input
+     * **Batch_size:** Batch size
      * **Action_Buffer:** Number of Action use as Input
+     * **Evolution_step:** Number of Step the Evolution Block need to Evolute 
      * **Model_Type:** Pretrained Model Type
        * "resnet18": 'https://download.pytorch.org/models/resnet18-5c106cde.pth',
        * "resnet34": 'https://download.pytorch.org/models/resnet34-333f7ec4.pth',
+     * **Hidden_dim** dimension of fully connected layer(list of 2 -- 3 layer FCN)
      * **State_size:** Input image size
      * **State_channel:** use Grayscale or RGB image as state 
+     * **Backbone:** Specify Network Backbone(Block to use in training)
+     * **Action_dim:** Dimension of action
+     * **Number_Action:** Number of action
+       * Default:1 Only predict 1 possible future action
+       * >1: Predict more than one possible action(get final action by weighted sum of confidence)
+     * **Confidence:** Whether need to predict confidence of Results(Default:False)

@@ -1,20 +1,32 @@
 {
     "Head_only":{
       "State_Buffer":10,
+      "Batch_size":256,
+      "TrainSplit":0.8,
       "Action_Buffer":10,
+      "Evolution_step":10,
       "Model_Type":"resnet18",
+      "Hidden_dim":[2048,256],
       "State_size":84,
       "State_channel":3,
       "Backbone":["Conv1","Bn1","Layer1","Layer2"],
-      "Action_dim":7
+      "Action_dim":7,
+      "Number_Action":1,
+      "Confidence":false
     },
     "Head_backbone":{
       "State_Buffer":10,
+      "Batch_size":256,
+      "TrainSplit":0.8,
       "Action_Buffer":10,
+      "Evolution_step":10,
       "Model_Type":"Self_train",
+      "Hidden_dim":[1024,256],
       "State_size":84,
       "State_channel":3,
       "Backbone":["Conv1","Bn1","Layer1","Layer2"],
-      "Action_dim":7
+      "Action_dim":7,
+      "Number_Action":1,
+      "Confidence":false
     }
 }

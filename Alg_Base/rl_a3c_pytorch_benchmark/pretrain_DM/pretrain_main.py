@@ -4,7 +4,7 @@ import torch
 from pretrain_model import load_model
 
 
-parser = argparse.ArgumentParser(description="DynamicModel")
+parser = argparse.ArgumentParser(description="DynamicsModel")
 """
     Argument that we need to config：
         --TrainMode
@@ -35,9 +35,17 @@ parser.add_argument(
     "-s", "--seed", type=int, default=1, help="random seed (default: 1)"
 )
 
+parser.add_argument(
+    "-tl",
+    "--tensorboard-logger",
+    default=True,
+    help="Creates tensorboard logger to view model weights and biases, and monitor test agent reward progress",
+)
+
 if __name__ == "__main__":
     args = parser.parse_args()
     torch.manual_seed(args.seed)
     cfg = read_config(args.env_config)
     cfg_dict = cfg[args.TrainMode]
     model,params_opt = load_model(cfg_dict)
+    
