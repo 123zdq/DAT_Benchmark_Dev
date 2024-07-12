@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-12 16:06:22
+LastEditTime: 2024-07-12 23:38:16
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -97,13 +97,12 @@ elif configData["Simulation_Mode"] == "train":
 elif configData["Simulation_Mode"] == "video":
     # create directories to contain frames
     for i in range(configData["Out_Video"]["channels"]):
-        if not os.path.exists("../../droneVideos/DRONE"+str(i)):
-            os.mkdir("../../droneVideos/DRONE"+str(i))
-        else:
-            if System == "Linux":
-                os.system("rm -rf ../../droneVideos/DRONE" + str(i) + "/*.jpeg")
-            elif System == "Windows":
-                os.system("del /s /q /f ../../droneVideos/DRONE" + str(i) + "/*.jpeg")
+        if System == "Linux":
+            os.system("rm -rf ../../droneVideos/DRONE" + str(i))
+        elif System == "Windows":
+            os.system("del /s /q /f ../../droneVideos/DRONE" + str(i))
+        os.mkdir("../../droneVideos/DRONE"+str(i))    
+        
     # activate map random init
     file_path = world_path[:-4] + '_net'
     if configData["Sumo_Random_Mode"] == 1:
