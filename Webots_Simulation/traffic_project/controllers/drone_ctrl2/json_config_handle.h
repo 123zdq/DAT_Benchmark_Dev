@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-05-30 00:43:12
+ * @LastEditTime: 2024-07-12 11:53:32
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -45,6 +45,12 @@ typedef struct _configData_s{
         double rewardRange = 7;
     };
     _rewardConfig rewardConfig;
+    struct _outVideo{
+        double fps = 30;
+        double startTime = 0;
+        double totalTime = 5;
+    };
+    _outVideo video;
 }configData_s;
 
 class configHandle{
@@ -87,6 +93,9 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.doneRange.distanceError = config.at("Done_Range").at("distance_error");
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
     configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
+    configData.video.fps = config.at("Out_Video").at("fps");
+    configData.video.startTime = config.at("Out_Video").at("start_time");
+    configData.video.totalTime = config.at("Out_Video").at("total_time");
     std::cout<< " \n \n"<<std::endl;
     std::cout<< "    Environment config successful!\n \n"<<std::endl;
     std::cout<< "    Simulation_Mode:     " << configData.simulationMode << std::endl;
@@ -105,6 +114,10 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     std::cout<< "    Reward_Config: {\n"
                 << "        distance_scale:  " << configData.rewardConfig.distanceScale << "\n"
                 << "        reward_range:    " << configData.rewardConfig.rewardRange << std::endl;
+    std::cout<< "    Out_Video: {\n}"
+                << "        fps:             " << configData.video.fps << "\n"
+                << "        start_time:      " << configData.video.startTime << "\n"
+                << "        total_time:      " << configData.video.totalTime << std::endl;
     std::cout<< "    }\n \n \n"<<std::endl;
 }
 

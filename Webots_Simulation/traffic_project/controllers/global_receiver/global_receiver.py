@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-05-29 23:05:16
+LastEditTime: 2024-07-12 16:06:22
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -25,6 +25,7 @@ import json
 import random
 import os
 import platform
+import transforms3d as tfs
 
 # check running system
 System = platform.system()
@@ -93,6 +94,30 @@ elif configData["Simulation_Mode"] == "train":
     sumoGetCarFlag = [False]*multiCom.Number_process
     for i in range(multiCom.Number_process):
         droneM.append(drone_manager.droneManager(robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag))
+elif configData["Simulation_Mode"] == "video":
+    # create directories to contain frames
+    for i in range(configData["Out_Video"]["channels"]):
+        if not os.path.exists("../../droneVideos/DRONE"+str(i)):
+            os.mkdir("../../droneVideos/DRONE"+str(i))
+        else:
+            if System == "Linux":
+                os.system("rm -rf ../../droneVideos/DRONE" + str(i) + "/*.jpeg")
+            elif System == "Windows":
+                os.system("del /s /q /f ../../droneVideos/DRONE" + str(i) + "/*.jpeg")
+    # activate map random init
+    file_path = world_path[:-4] + '_net'
+    if configData["Sumo_Random_Mode"] == 1:
+        randomorder.sumo_rou_random(file_path, int(configData["Out_Video"]["channels"]*2), configData["Sumo_Params"])
+    elif configData["Sumo_Random_Mode"] == 2:
+        randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
+    # according to the number of process ,establish multiple objects
+    droneM = []
+    # sumo shared storage section
+    sumoList = []
+    sumoDictionary = {}
+    sumoGetCarFlag = [False]*configData["Out_Video"]["channels"]
+    for i in range(configData["Out_Video"]["channels"]):
+        droneM.append(drone_manager.droneManager(robot, timestep, i, None, configData, sumoList, sumoDictionary, sumoGetCarFlag))
     
 
 # Main loop:
@@ -128,6 +153,29 @@ elif configData["Simulation_Mode"] == "train":
         for i in range(multiCom.Number_process):
             if multiCom.is_step[i] > 0:
                 run_step = True
+            
+        if run_step == True:
+            while robot.step(timestep) == -1: # step until simulation is running
+                pass
+            for drone in droneM:
+                drone.runMultiState(1)
+elif configData["Simulation_Mode"] == "video":
+    while True:
+        if global_init == False:
+            global_init = True
+            init_count = 0
+            # firstly run 310 steps for sumo to prepare for the cars
+            while init_count < (310 + 4*configData["Out_Video"]["channels"]):
+                init_count = init_count + 1
+                while robot.step(timestep) == -1: # step until simulation is running
+                    pass 
+            for drone in droneM:
+                drone.videoloop.start()
+        
+        # if step count larger than 0 then run a real step
+        run_step = False
+        for i in range(configData["Out_Video"]["channels"]):
+            run_step = True
             
         if run_step == True:
             while robot.step(timestep) == -1: # step until simulation is running

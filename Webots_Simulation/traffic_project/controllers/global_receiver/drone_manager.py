@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-06-02 17:37:20
+LastEditTime: 2024-07-12 22:55:05
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -18,9 +18,9 @@ import struct
 import SUMOGod
 import threading
 import time
-import logging
+import random
 import os
-import MultiPortRecv
+import platform
 
 
 class droneManager:
@@ -73,6 +73,7 @@ class droneManager:
         # self.logger = logging.getLogger("drone"+str(id))
         # establish drone manager threading
         self.loop = threading.Thread(target=self.mainLoop)
+        self.videoloop = threading.Thread(target=self.mainLoopForVideo)
         
     '''
     description: update action data from multiple ALG
@@ -151,7 +152,16 @@ class droneManager:
     return {*}
     '''
     def init(self):
-        return self.sumoGod.SingleProcessRandomInit(self.supervisor, self.timeStep, self.drone, [-2/3*self.configData["Drone_Init_Height"], 0, self.configData["Drone_Init_Height"]])
+        if self.configData["Drone_Random_Config"]["height_random"] == False:
+            transScale = self.configData["Drone_Random_Config"]["height_fixed"]
+        else:
+            transScale = random.uniform(self.configData["Drone_Random_Config"]["height_random_min"],self.configData["Drone_Random_Config"]["height_random_max"])
+        transVector = [-2/3*transScale, 0, transScale]
+        if self.configData["Drone_Random_Config"]["direction_random"] == False:
+            rotateAngle = 0
+        else:
+            rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
+        return self.sumoGod.SingleProcessRandomInit(self.supervisor, self.timeStep, self.drone, transVector, rotateAngle)
         
     '''
     description: reset car controller
@@ -215,6 +225,60 @@ class droneManager:
                         self.recCtrlPort.is_step[self.id] = self.recCtrlPort.is_step[self.id] - 1
                         if self.recCtrlPort.is_step[self.id] < 0:
                             self.recCtrlPort.is_step[self.id] = 0
+                        # complete a step count add one
+                        self.step_count = self.step_count + 1
+                        self.multi_state = 0
+                        
+    def mainLoopForVideo(self):
+        self.initTime = time.time()
+        self.lastTime = self.initTime
+        is_step = [0]*self.configData["Out_Video"]["channels"] # Whether Trigger a step
+        is_reset = [False]*self.configData["Out_Video"]["channels"] # Whether Trigger a reset
+        episode = 0
+        while True:
+            self.initTime = time.time()
+
+            if self.multi_state == 1:
+                if self.machine_state == 1:
+                    is_reset[self.id] = False
+                    is_step[self.id] = 1
+                    self.step_count = 0
+                    System = platform.system()
+                    if not os.path.exists("../../droneVideos/DRONE"+str(self.id)+"/episode"+str(episode)):
+                        os.mkdir("../../droneVideos/DRONE"+str(self.id)+"/episode"+str(episode))
+                    else:
+                        if System == "Linux":
+                            os.system("rm -rf ../../droneVideos/DRONE" + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
+                        elif System == "Windows":
+                            os.system("del /s /q /f ../../droneVideos/DRONE" + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
+                    episode = episode + 1
+                    if self.init():
+                        # self.logger.info("drone finish sumo init")
+                        with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
+                            data = f.readline()
+                            f.close()
+                        is_reset[self.id] = int(data.rstrip().split(',')[-1]) # 去除最后换行符,并按照逗号分割，读取最后一个reset参数
+                        self.machine_state = 2 # init come to an end and transfer to steps
+                elif self.machine_state == 2:
+                    self.sumoGod.ResetSumoDictionary()
+                    if is_reset[self.id] == True and self.step_count > 100:
+                        # self.logger.info("begin to reset")
+                        self.reset()
+                        # self.logger.info("finish reset")
+                        self.sumoGod.delectDefList()
+                        is_reset[self.id] = False
+                        self.machine_state = 1 # remember to reset
+                    else:
+                        self.sumoGod.MoveDroneToCar(self.sumoGod.currentUseCarNode, self.drone, self.sumoGod.transVector, self.sumoGod.rotateAngle, False)
+                        if is_step[self.id] == 1:
+                            # self.logger.info("return states reward done")
+                            with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
+                                data = f.readline()
+                                f.close()
+                        if len(data)>10:
+                            is_reset[self.id] = int(data.rstrip().split(',')[-1]) # 去除最后换行符,并按照逗号分割，读取最后一个reset参数
+                        # reset step counts that have been actuated
+                        is_step[self.id] = 1
                         # complete a step count add one
                         self.step_count = self.step_count + 1
                         self.multi_state = 0

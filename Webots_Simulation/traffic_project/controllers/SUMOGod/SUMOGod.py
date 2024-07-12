@@ -2,8 +2,8 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-28 14:45:03
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-05-23 01:46:33
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/SUMOGod/SUMOGod.py
+LastEditTime: 2024-07-12 16:22:50
+FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/SUMOGod/SUMOGod.py
 Description: 
 
 Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -13,6 +13,7 @@ Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
 from controller import Supervisor
 from controller import Node
 import random
+import transforms3d as tfs
 import numpy as np
 import queue
 
@@ -33,6 +34,9 @@ class getSumoCarNode:
         self.sumoDictionary = _sumoDictionary
         self.sumoGetFlag = _sumoGetFlag
         self.carName = None
+        self.currentUseCarNode = None
+        self.transVector = None
+        self.rotateAngle = None
 
     '''
     description: collect all sumo cars from root tree
@@ -224,21 +228,23 @@ class getSumoCarNode:
     param {*} transVector
     return {*}
     '''
-    def MoveDroneToCar(self, carNode:Node, droneNode:Node, transVector):
+    def MoveDroneToCar(self, carNode:Node, droneNode:Node, transVector, rotateAngle, isReset:bool):
         '''move a drone to a car while the car is in the map
             return True or False'''
         carOr = carNode.getOrientation() # 获取车辆相对于世界坐标系的旋转矩阵
         carTr = carNode.getPosition() # 获取相对位置
         if carTr[0] < 5000:
-            carOrV = carNode.getField('rotation').getSFRotation()
+            carOrV = carNode.getField('rotation').getSFRotation() # 四维向量，旋转轴3维，旋转角1维
             carTrV = carNode.getField('translation').getSFVec3f()
-            carOr = np.reshape(carOr,(3,3))
+            carOr = np.dot(np.reshape(carOr,(3,3)),tfs.euler.euler2mat(0,0,rotateAngle,"sxyz"))
             carTr = np.reshape(carTr,(3,1))
             droneTrSet = carTr + np.dot(carOr,np.array(transVector).reshape((3,1)))
+            carOrV[3] = carOrV[3] + carOrV[2] * rotateAngle
             droneNode.getField('translation').setSFVec3f(list(droneTrSet))
             droneNode.getField('rotation').setSFRotation(carOrV)
-            droneNode.resetPhysics()
-            droneNode.restartController()
+            if isReset == True:
+                droneNode.resetPhysics()
+                droneNode.restartController()
             return True
         else:
             return False
@@ -252,7 +258,9 @@ class getSumoCarNode:
     param {*} transVector
     return {*} true or false
     '''
-    def SingleProcessRandomInitBlock(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector):
+    def SingleProcessRandomInitBlock(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle):
+        self.transVector = transVector
+        self.rotateAngle = rotateAngle
         is_car_get = False
         while supervisor.step(timeStep) != -1:
             # 收集所有车辆信息
@@ -278,12 +286,13 @@ class getSumoCarNode:
                     is_car_get = True
                     # 得到该车辆的数据
                     carNode,carDef,self.carName,carTypeName,translation,rotation = self.GetCarInfoByName(cardictionary, Name_list[availableList[randomChoice]])
+                    self.currentUseCarNode = carNode
                     # 把此次得到的车辆DEF装进列表
                     self.usedSumoDefList.append(self.carName)
                 
             
             if is_car_get == True:
-                if self.MoveDroneToCar(carNode, droneNode, transVector) == True:
+                if self.MoveDroneToCar(carNode, droneNode, transVector, rotateAngle, True) == True:
                     with open("../../cache/" + droneNode.getDef() + "_Car.txt", "w") as f:
                         f.write(carDef + "\n" + carTypeName)
                     return True
@@ -297,10 +306,12 @@ class getSumoCarNode:
     param {*} transVector
     return {*} true or false
     '''
-    def SingleProcessRandomInit(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector):
+    def SingleProcessRandomInit(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle):
         '''no block version: single process random simulation init
             running until move a drone to a random car while the car is in the map
                 return True or False'''
+        self.transVector = transVector
+        self.rotateAngle = rotateAngle
         is_car_get = False
         is_dict_get = False
         for i in range(len(self.sumoGetFlag)):
@@ -331,13 +342,14 @@ class getSumoCarNode:
                 is_car_get = True
                 # 得到该车辆的数据
                 carNode,carDef,self.carName,carTypeName,translation,rotation = self.GetCarInfoByName(self.sumoDictionary, Name_list[availableList[randomChoice]])
+                self.currentUseCarNode = carNode
                 # 把此次得到的车辆DEF装进列表
                 self.usedSumoDefList.append(self.carName)
 
         if is_car_get == True:
             with open("../../cache/" + droneNode.getDef() + "_Car.txt", "w") as f:
                 f.write(carDef + "\n" + carTypeName)
-            return self.MoveDroneToCar(carNode, droneNode, transVector)
+            return self.MoveDroneToCar(carNode, droneNode, transVector, rotateAngle, True)
         else:
             with open("../../cache/" + droneNode.getDef() + "_Car.txt", "w") as f:
                 f.write("error" + "\n" + "error")
