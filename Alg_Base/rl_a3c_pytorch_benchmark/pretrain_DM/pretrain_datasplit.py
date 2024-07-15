@@ -27,9 +27,12 @@ class DynamicsDataSplit():
         self.base_dir = DYNAMICS_DATAPATH+"Batch{Batch_size}State{State_Buffer}".format(Batch_size=self.bs,State_Buffer=self.statebuf)
         self.train_dir = self.base_dir+"/train/"
         self.test_dir = self.base_dir+"/test/"
-        os.makedirs(self.base_dir)
-        os.makedirs(self.train_dir)
-        os.makedirs(self.test_dir)
+        if not os.path.exists(self.base_dir):
+            os.makedirs(self.base_dir)
+        if not os.path.exists(self.train_dir):
+            os.makedirs(self.train_dir)
+        if not os.path.exists(self.test_dir):
+            os.makedirs(self.test_dir)
 
     def Acquire_datavolume(self):
         datavolume = 0

@@ -83,9 +83,9 @@ elif configData["Simulation_Mode"] == "train":
     # activate map random init
     file_path = world_path[:-4] + '_net'
     if configData["Sumo_Random_Mode"] == 1:
-        randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*2), configData["Sumo_Params"])
+        randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*3), configData["Sumo_Params"])
     elif configData["Sumo_Random_Mode"] == 2:
-        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*2), System, configData["Sumo_Params"])
+        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section
@@ -140,7 +140,7 @@ elif configData["Simulation_Mode"] == "train":
             global_init = True
             init_count = 0
             # firstly run 310 steps for sumo to prepare for the cars
-            while init_count < (310 + 4*multiCom.Number_process):
+            while init_count < (310 + 6*multiCom.Number_process):
                 init_count = init_count + 1
                 while robot.step(timestep) == -1: # step until simulation is running
                     pass 

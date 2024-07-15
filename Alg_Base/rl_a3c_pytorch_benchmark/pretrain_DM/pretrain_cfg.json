@@ -1,6 +1,6 @@
 {
     "Head_only":{
-      "State_Buffer":10,
+      "State_Buffer":1,
       "Batch_size":256,
       "TrainSplit":0.8,
       "Action_Buffer":10,

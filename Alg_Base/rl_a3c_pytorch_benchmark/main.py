@@ -17,24 +17,28 @@ import time
 parser = argparse.ArgumentParser(description="A3C")
 """
     Argument that we need to config：
+        --load
         --workers
         --gpu-ids
         --hidden-size
         --env
         --model_type
 """
+
+parser.add_argument("-ld", "--load", help="load a trained model",default=True)
+
 parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=16,
+    default=32,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(
     "-gp",
     "--gpu-ids",
     type=int,
-    default=[0],
+    default=[-1],
     nargs="+",
     help="GPUs to use [-1 CPU only] (default: -1)",
 )
@@ -113,7 +117,7 @@ parser.add_argument(
     default=True,
     help="use an optimizer with shared statistics.",
 )
-parser.add_argument("-ld", "--load", help="load a trained model",default=False)
+
 parser.add_argument(
     "-sm",
     "--save-max",
