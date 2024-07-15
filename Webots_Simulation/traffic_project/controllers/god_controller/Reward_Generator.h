@@ -2,13 +2,13 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-05-31 00:22:35
+ * @LastEditTime: 2024-07-15 14:59:30
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
+ * @Description:
+ *
+ * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
  */
-# pragma once
+#pragma once
 #include <webots/Robot.hpp>
 #include <webots/Supervisor.hpp>
 #include <iostream>
@@ -23,36 +23,38 @@
 using namespace webots;
 using namespace std;
 
-class rewardGenerator{
+class rewardGenerator
+{
 public:
-    rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange);
-    ~rewardGenerator(){};
-    void locateCamera(double _width, double _height, double _fov);
-    void updateTrackingCar();
-    void setTrackingCar(string _carDef);
-    double getReward(string _run_mode, double trackWidth=-1, double trackHeight=-1);
-    uint8_t isTrackingCarDisp = 0; // 标志初始态
-    usrPublic::rewardData makeReward = {};
+  rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange);
+  ~rewardGenerator(){};
+  void locateCamera(double _width, double _height, double _fov);
+  void updateTrackingCar();
+  void setTrackingCar(string _carDef);
+  double getReward(string _run_mode, string _reward_mode, double trackWidth = -1, double trackHeight = -1);
+  uint8_t isTrackingCarDisp = 0; // 标志初始态
+  usrPublic::rewardData makeReward = {};
+
 private:
-    camera2real Camera2real;
-    string droneDef;
-    Supervisor *supervisor;
-    Node *trackingCar;
-    Node *land_node;
-    Node *camera_slot_node;
+  camera2real Camera2real;
+  string droneDef;
+  Supervisor *supervisor;
+  Node *trackingCar;
+  Node *land_node;
+  Node *camera_slot_node;
 
-    Vector3d cameraMid;
-    Vector3d cameraLH;
-    Vector3d cameraLL;
-    Vector3d cameraRH;
-    Vector3d cameraRL;
+  Vector3d cameraMid;
+  Vector3d cameraLH;
+  Vector3d cameraLL;
+  Vector3d cameraRH;
+  Vector3d cameraRL;
 
-    Matrix<double,3,4> T_land_of_camera_M;
-    Matrix<double,3,4> T_camera_of_land_M;
-    Matrix<double,3,4> T_land_of_world_M;
+  Matrix<double, 3, 4> T_land_of_camera_M;
+  Matrix<double, 3, 4> T_camera_of_land_M;
+  Matrix<double, 3, 4> T_land_of_world_M;
 
-    double distanceScale = 0.05;
-    double rewardRange = 7;
+  double distanceScale = 0.05;
+  double rewardRange = 7;
 };
 
 /**
@@ -60,40 +62,41 @@ private:
  * @param {Supervisor} *_supervisor
  * @return {*}
  */
-inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange){
-    supervisor = _supervisor;
-    
-    droneDef = supervisor->getSelf()->getDef();
-    camera_slot_node = supervisor->getFromDef(droneDef)->getFromProtoDef("CAMERA_SLOT");
-    land_node = supervisor->getFromDef("land");
-    trackingCar = supervisor->getFromDef("ORIGIN");
+inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange)
+{
+  supervisor = _supervisor;
 
-    makeReward.Toyota.x = 4.2;
-    makeReward.Toyota.y = 1.8;
-    makeReward.Toyota.z = 1.4;
+  droneDef = supervisor->getSelf()->getDef();
+  camera_slot_node = supervisor->getFromDef(droneDef)->getFromProtoDef("CAMERA_SLOT");
+  land_node = supervisor->getFromDef("land");
+  trackingCar = supervisor->getFromDef("ORIGIN");
 
-    makeReward.Lincoln.x = 4.9;
-    makeReward.Lincoln.y = 1.8;
-    makeReward.Lincoln.z = 1.3;
+  makeReward.Toyota.x = 4.2;
+  makeReward.Toyota.y = 1.8;
+  makeReward.Toyota.z = 1.4;
 
-    makeReward.Tesla.x = 4.5;
-    makeReward.Tesla.y = 1.8;
-    makeReward.Tesla.z = 1.4;
+  makeReward.Lincoln.x = 4.9;
+  makeReward.Lincoln.y = 1.8;
+  makeReward.Lincoln.z = 1.3;
 
-    makeReward.Rover.x = 4.5;
-    makeReward.Rover.y = 1.8;
-    makeReward.Rover.z = 1.55;
+  makeReward.Tesla.x = 4.5;
+  makeReward.Tesla.y = 1.8;
+  makeReward.Tesla.z = 1.4;
 
-    makeReward.BMW.x = 4.5;
-    makeReward.BMW.y = 1.8;
-    makeReward.BMW.z = 1.6;
+  makeReward.Rover.x = 4.5;
+  makeReward.Rover.y = 1.8;
+  makeReward.Rover.z = 1.55;
 
-    makeReward.Citroen.x = 3.3;
-    makeReward.Citroen.y = 1.4;
-    makeReward.Citroen.z = 1.5;
+  makeReward.BMW.x = 4.5;
+  makeReward.BMW.y = 1.8;
+  makeReward.BMW.z = 1.6;
 
-    distanceScale = _distanceScale;
-    rewardRange = _rewardRange;
+  makeReward.Citroen.x = 3.3;
+  makeReward.Citroen.y = 1.4;
+  makeReward.Citroen.z = 1.5;
+
+  distanceScale = _distanceScale;
+  rewardRange = _rewardRange;
 }
 
 /**
@@ -103,75 +106,83 @@ inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanc
  * @param {double} _fov
  * @return {*}
  */
-inline void rewardGenerator::locateCamera(double _width, double _height, double _fov){
-    makeReward.cameraWidth = _width;
-    makeReward.cameraHeight = _height;
-    makeReward.cameraFov = _fov;
-    
-    const double *T_land_of_camera = land_node->getPose(camera_slot_node);
-    for (int i = 0; i < 12;i++)
-    {
-      T_land_of_camera_M(i/4,i%4) = T_land_of_camera[i];
-    }
+inline void rewardGenerator::locateCamera(double _width, double _height, double _fov)
+{
+  makeReward.cameraWidth = _width;
+  makeReward.cameraHeight = _height;
+  makeReward.cameraFov = _fov;
 
-    const double *T_camera_of_land = camera_slot_node->getPose(land_node);
-    memcpy(&makeReward.T_ct, T_camera_of_land, sizeof(makeReward.T_ct));
-    for (int i = 0; i < 12;i++)
-    {
-      T_camera_of_land_M(i/4,i%4) = T_camera_of_land[i];
-    }
+  const double *T_land_of_camera = land_node->getPose(camera_slot_node);
+  for (int i = 0; i < 12; i++)
+  {
+    T_land_of_camera_M(i / 4, i % 4) = T_land_of_camera[i];
+  }
 
-    const double *T_land_of_world = land_node->getPose(supervisor->getRoot());
-    for (int i = 0; i < 12;i++)
-    {
-      T_land_of_world_M(i/4,i%4) = T_land_of_world[i];
-    }
-    cameraMid = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width * 0.5, _height * 0.5), T_land_of_camera_M, _fov, Vector2d(_height,_width)), T_camera_of_land_M,T_land_of_world_M);
-    cameraLH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, 0), T_land_of_camera_M, _fov, Vector2d(_height,_width)), T_camera_of_land_M,T_land_of_world_M);
-    cameraLL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, 0), T_land_of_camera_M, _fov, Vector2d(_height,_width)), T_camera_of_land_M,T_land_of_world_M);
-    cameraRH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, _height), T_land_of_camera_M, _fov, Vector2d(_height,_width)), T_camera_of_land_M,T_land_of_world_M);
-    cameraRL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, _height), T_land_of_camera_M, _fov, Vector2d(_height,_width)), T_camera_of_land_M,T_land_of_world_M);
+  const double *T_camera_of_land = camera_slot_node->getPose(land_node);
+  memcpy(&makeReward.T_ct, T_camera_of_land, sizeof(makeReward.T_ct));
+  for (int i = 0; i < 12; i++)
+  {
+    T_camera_of_land_M(i / 4, i % 4) = T_camera_of_land[i];
+  }
 
-    makeReward.cameraF = Camera2real.cameraF;
+  const double *T_land_of_world = land_node->getPose(supervisor->getRoot());
+  for (int i = 0; i < 12; i++)
+  {
+    T_land_of_world_M(i / 4, i % 4) = T_land_of_world[i];
+  }
+  cameraMid = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width * 0.5, _height * 0.5), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+  cameraLH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, 0), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+  cameraLL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, 0), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+  cameraRH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+  cameraRL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+
+  makeReward.cameraF = Camera2real.cameraF;
 }
 
 /**
  * @description: update target car from file
  * @return {*}
  */
-inline void rewardGenerator::updateTrackingCar(){
-    static string carName;
-    string carData[2];
-    // update target car node
-    Txt_Input(string("../../cache/" + droneDef + "_Car.txt"),carData,2);
-    makeReward.carTypename = carData[1];
-    if(carData[0] != string("error")){
-      Node* n = supervisor->getFromDef(carData[0]);
-      if(n != NULL){
-        trackingCar = n;
-        if(isTrackingCarDisp == 0){
-          carName = trackingCar->getField(string("name"))->getSFString();
-        }
-        isTrackingCarDisp = 1; // flag actuate
-        if(isTrackingCarDisp == 1){
-          string newName = trackingCar->getField(string("name"))->getSFString();
-          // std::cout<<"newName: "<<newName<<std::endl;
-          if(newName!=carName){
-            carName = newName;
-            // std::cout<<"15161683148135111111111111111111111111111111111111111111111111111181"<<std::endl;
-            isTrackingCarDisp = 2; // flag finish
-          }
-        }
-        else{
-          isTrackingCarDisp = 0; // return init
+inline void rewardGenerator::updateTrackingCar()
+{
+  static string carName;
+  string carData[2];
+  // update target car node
+  Txt_Input(string("../../cache/" + droneDef + "_Car.txt"), carData, 2);
+  makeReward.carTypename = carData[1];
+  if (carData[0] != string("error"))
+  {
+    Node *n = supervisor->getFromDef(carData[0]);
+    if (n != NULL)
+    {
+      trackingCar = n;
+      if (isTrackingCarDisp == 0)
+      {
+        carName = trackingCar->getField(string("name"))->getSFString();
+      }
+      isTrackingCarDisp = 1; // flag actuate
+      if (isTrackingCarDisp == 1)
+      {
+        string newName = trackingCar->getField(string("name"))->getSFString();
+        // std::cout<<"newName: "<<newName<<std::endl;
+        if (newName != carName)
+        {
+          carName = newName;
+          // std::cout<<"15161683148135111111111111111111111111111111111111111111111111111181"<<std::endl;
+          isTrackingCarDisp = 2; // flag finish
         }
       }
-      else{
-        trackingCar = supervisor->getFromDef("ORIGIN");
-        makeReward.carTypename = string("ToyotaPriusSimple");
+      else
+      {
+        isTrackingCarDisp = 0; // return init
       }
-      
     }
+    else
+    {
+      trackingCar = supervisor->getFromDef("ORIGIN");
+      makeReward.carTypename = string("ToyotaPriusSimple");
+    }
+  }
 }
 
 /**
@@ -179,8 +190,9 @@ inline void rewardGenerator::updateTrackingCar(){
  * @param {string} _carDef
  * @return {*}
  */
-inline void rewardGenerator::setTrackingCar(string _carDef){
-    trackingCar = supervisor->getFromDef(_carDef);
+inline void rewardGenerator::setTrackingCar(string _carDef)
+{
+  trackingCar = supervisor->getFromDef(_carDef);
 }
 
 /**
@@ -190,43 +202,53 @@ inline void rewardGenerator::setTrackingCar(string _carDef){
  * @param {double} trackHeight
  * @return {*}
  */
-inline double rewardGenerator::getReward(string _run_mode, double trackWidth, double trackHeight){
-    // 获取被指定跟踪车辆在世界中的坐标
-    const double *T_car_of_land = trackingCar->getPose(land_node);
-    double T_car_of_land_temp[16];
-    memcpy(T_car_of_land_temp, T_car_of_land, sizeof(T_car_of_land_temp));
-    Vector3d V_car_comp(1,0,0);
-    Matrix3d M_car_of_land;
-    Vector3d V_car_of_land;
-    for(int i = 0;i < 3;i++){
-      V_car_of_land(i) = T_car_of_land[3 + i*4];
-      for(int j = 0;j < 3;j++){
-        M_car_of_land(i,j) = T_car_of_land[j + i*4];
-      }
+inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, double trackWidth, double trackHeight)
+{
+  // 获取被指定跟踪车辆在世界中的坐标
+  const double *T_car_of_land = trackingCar->getPose(land_node);
+  double T_car_of_land_temp[16];
+  memcpy(T_car_of_land_temp, T_car_of_land, sizeof(T_car_of_land_temp));
+  Vector3d V_car_comp(1, 0, 0);
+  Matrix3d M_car_of_land;
+  Vector3d V_car_of_land;
+  for (int i = 0; i < 3; i++)
+  {
+    V_car_of_land(i) = T_car_of_land[3 + i * 4];
+    for (int j = 0; j < 3; j++)
+    {
+      M_car_of_land(i, j) = T_car_of_land[j + i * 4];
     }
-    V_car_of_land = V_car_of_land + M_car_of_land * V_car_comp;
-    for(int i = 0;i < 3;i++){
-      T_car_of_land_temp[3 + i*4] = V_car_of_land(i);
-    }
-    memcpy(&makeReward.T_tw, T_car_of_land_temp, sizeof(makeReward.T_tw));
+  }
+  V_car_of_land = V_car_of_land + M_car_of_land * V_car_comp;
+  for (int i = 0; i < 3; i++)
+  {
+    T_car_of_land_temp[3 + i * 4] = V_car_of_land(i);
+  }
+  memcpy(&makeReward.T_tw, T_car_of_land_temp, sizeof(makeReward.T_tw));
 
-    double reward = 0;
-    if(_run_mode == string("demo")){
-      // if(trackWidth < 0 || trackHeight < 0){
-      //   reward = 0;
-      //   // std::cout<<"is_tracking1: "<< reward <<std::endl;
-      // }
-      // else{
-      //   // 目标tracking的坐标
-      //   Vector3d locationTar = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(trackWidth, trackHeight), T_land_of_camera_M, makeReward.cameraFov, Vector2d(makeReward.cameraHeight,makeReward.cameraWidth)), T_camera_of_land_M,T_land_of_world_M);
-      //   reward = Camera2real.Get_Location_Reward(locationTar, cameraMid, V_car_of_land, rewardRange, distanceScale);
-      //   // std::cout<<"is_tracking2: "<< reward <<std::endl;
-      // }
+  double reward = 0;
+  if (_run_mode == string("demo"))
+  {
+    // if(trackWidth < 0 || trackHeight < 0){
+    //   reward = 0;
+    //   // std::cout<<"is_tracking1: "<< reward <<std::endl;
+    // }
+    // else{
+    //   // 目标tracking的坐标
+    //   Vector3d locationTar = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(trackWidth, trackHeight), T_land_of_camera_M, makeReward.cameraFov, Vector2d(makeReward.cameraHeight,makeReward.cameraWidth)), T_camera_of_land_M,T_land_of_world_M);
+    //   reward = Camera2real.Get_Location_Reward(locationTar, cameraMid, V_car_of_land, rewardRange, distanceScale);
+    //   // std::cout<<"is_tracking2: "<< reward <<std::endl;
+    // }
+    reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+  }
+  else if (_run_mode == string("train"))
+  {
+    if(_reward_mode == string("discrete")){
+      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
+    }
+    else if(_reward_mode == string("continuous")){
       reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
     }
-    else if(_run_mode == string("train")){
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange); 
-      // reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
-    }
-    return reward;
+  }
+  return reward;
 }

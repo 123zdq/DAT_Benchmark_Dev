@@ -113,7 +113,7 @@ parser.add_argument(
     default=True,
     help="use an optimizer with shared statistics.",
 )
-parser.add_argument("-ld", "--load", help="load a trained model",default=True)
+parser.add_argument("-ld", "--load", help="load a trained model",default=False)
 parser.add_argument(
     "-sm",
     "--save-max",
@@ -169,7 +169,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "-evc", "--env-config",
-    default="./pretrain_DM/config.json",
+    default="./config.json",
     help="environment to crop and resize info (default: config.json)")
 parser.add_argument(
     "-dss",

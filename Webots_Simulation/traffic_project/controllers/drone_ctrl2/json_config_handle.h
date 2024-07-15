@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-12 11:53:32
+ * @LastEditTime: 2024-07-15 15:02:39
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -41,6 +41,7 @@ typedef struct _configData_s{
     };
     _doneRange doneRange;
     struct _rewardConfig{
+        std::string rewardMode = "discrete";
         double distanceScale = 0.05;
         double rewardRange = 7;
     };
@@ -91,6 +92,7 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.doneRange.roll = config.at("Done_Range").at("roll");
     configData.doneRange.pitch = config.at("Done_Range").at("pitch");
     configData.doneRange.distanceError = config.at("Done_Range").at("distance_error");
+    configData.rewardConfig.rewardMode = config.at("Reward_Config").at("reward_mode");
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
     configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
     configData.video.fps = config.at("Out_Video").at("fps");
@@ -112,6 +114,7 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
                 << "        pitch:           " << configData.doneRange.pitch << "\n"
                 << "        distance_error:  " << configData.doneRange.distanceError << std::endl;
     std::cout<< "    Reward_Config: {\n"
+                << "        reward_mode:     " << configData.rewardConfig.rewardMode << "\n"
                 << "        distance_scale:  " << configData.rewardConfig.distanceScale << "\n"
                 << "        reward_range:    " << configData.rewardConfig.rewardRange << std::endl;
     std::cout<< "    Out_Video: {\n}"

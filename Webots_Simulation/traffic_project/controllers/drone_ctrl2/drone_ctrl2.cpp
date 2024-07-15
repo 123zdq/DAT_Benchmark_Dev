@@ -387,7 +387,7 @@ int main(int argc, char **argv)
     {
       rewardG.updateTrackingCar();
     }
-    state.reward = rewardG.getReward(config.get()->simulationMode, error[4], error[5]);
+    state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, error[4], error[5]);
 
     if (config.get()->simulationMode == string("demo"))
     {
