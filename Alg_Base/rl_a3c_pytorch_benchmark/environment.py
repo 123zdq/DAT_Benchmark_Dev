@@ -59,7 +59,7 @@ def Identity(state,env):
         env(BenchEnv_Multi): initialized env
         process_func(Function): partial the process the state frame
 """
-def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPoint=False,RewardParams=False):
+def general_env(env_id,env_conf,arg_worker,process_idx):
     if env_id not in ["LunarLander-v2","Benchmark"]:
         print(env_id," is not valid!")
         raise NameError
@@ -68,6 +68,9 @@ def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPo
         process_func = partial(process_frame,conf=env_conf)
         return env,process_func
     elif env_id == "Benchmark":
+        Other_State = env_conf["Other_State"]
+        CloudPoint = env_conf["CloudPoint"]
+        RewardParams = env_conf["RewardParams"]
         process_state = partial(process_frame,conf=env_conf)
         env = BenchEnv_Multi(Action_dim=env_conf["Action_dim"],process_state=process_state,arg_worker=arg_worker,\
                              process_idx=process_idx,Other_State=Other_State,CloudPoint=CloudPoint,RewardParams=RewardParams,\
@@ -95,7 +98,7 @@ class BenchEnv_Multi():
             None
     """
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
-        process_idx,Other_State=False,CloudPoint=False,RewardParams=False,\
+        process_idx,Other_State,CloudPoint,RewardParams,\
         Control_Frequence = 500) -> None:
         self.Action_dim = Action_dim
         self.process_state = process_state
@@ -323,7 +326,6 @@ class BenchEnv_Multi():
                     while is_file_in_use(self.reward_path):
                         pass
                     os.unlink(self.reward_path)
-
         ## Read Reward,Done,Current step and Other_state abandoned
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
         logging.info('In reset: Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
@@ -346,5 +348,23 @@ class BenchEnv_Multi():
                 pass
             os.unlink(self.action_path)
         image = self.process_state(image)
+
+        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
+        self.SuppleInfo = []
+        if self.Other_State:
+            logging.info('Start Getting other_state')
+            self.SuppleInfo.append(other_state)
+            logging.info('Get other_state:  '+str(other_state))
+        if self.RewardParams:
+            logging.info('Start Getting reward_params')
+            reward_params = self.recv_reward_params.read()
+            logging.info('Get Reward Params:  '+str(reward_params))
+            self.SuppleInfo.append(reward_params)
+        if self.CloudPoint:
+            logging.info('Start Getting point_cloud')
+            point_cloud = self.recv_point_cloud.read()
+            logging.info('Get point_cloud:  '+str(point_cloud))
+            self.SuppleInfo.append(point_cloud)
+
         self.reset_time += 1
-        return image
+        return image,self.SuppleInfo

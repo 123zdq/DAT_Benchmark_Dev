@@ -11,6 +11,8 @@ class Agent(object):
         self.model = model
         self.env = env
         self.state = state
+        self.privilege_state = None
+        self.previlege_state_dict = None
         self.hx = None
         self.cx = None
         self.eps_len = 0
@@ -28,7 +30,7 @@ class Agent(object):
 
     def action_train(self):
         value, logit, self.hx, self.cx = self.model(
-            self.state.unsqueeze(0), self.hx, self.cx
+            self.state.unsqueeze(0), self.hx, self.cx,self.previlege_state_dict
         )
         prob = F.softmax(logit, dim=1)
         log_prob = F.log_softmax(logit, dim=1)
@@ -37,6 +39,20 @@ class Agent(object):
         action = prob.multinomial(1).data
         log_prob = log_prob.gather(1, action)
         state, self.reward, self.done, self.info = self.env.step(action.item())
+
+        ###### !!!!!!!!!!!! Only for test
+        if len(self.info) != 0:
+            self.privilege_state = int(self.info[-1])
+            self.previlege_state_dict = {}
+            self.previlege_state_dict["previlege_state_dim"] = 4
+            if self.privilege_state == 0: ## Stop
+                self.previlege_state_dict["previlege_state"] = [1,0,0,0]
+            elif self.privilege_state == 1: ## Forward
+                self.previlege_state_dict["previlege_state"] = [0,1,0,0]
+            elif self.privilege_state == 2: ## CCW
+                self.previlege_state_dict["previlege_state"] = [0,0,1,0]
+            elif self.privilege_state == 3: ## CW
+                self.previlege_state_dict["previlege_state"] = [0,0,0,1]
         
         state = self.process_func(state = state,env=self.env)
         if self.gpu_id >= 0:

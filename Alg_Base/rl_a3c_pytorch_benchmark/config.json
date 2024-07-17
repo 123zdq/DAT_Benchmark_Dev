@@ -11,7 +11,10 @@
     "Right_Speed":-20,
     "CW_omega":1,
     "CCW_omega":-1,
-    "Control_Frequence":10
+    "Control_Frequence":10,
+    "Other_State":false,
+    "CloudPoint":false,
+    "RewardParams":true
   },
   "LunarLander":{
     "Need_render":1,

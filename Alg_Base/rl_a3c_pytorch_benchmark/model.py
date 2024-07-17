@@ -6,7 +6,7 @@ from utils import norm_col_init, weights_init
 
 
 class A3Clstm(torch.nn.Module):
-    def __init__(self, num_inputs, action_dim, args):
+    def __init__(self, num_inputs, action_dim, args,previlege_state_dict=None):
         super(A3Clstm, self).__init__()
         self.hidden_size = args.hidden_size
         self.conv1 = nn.Conv2d(num_inputs, 32, 5, stride=1, padding=2)
@@ -14,10 +14,16 @@ class A3Clstm(torch.nn.Module):
         self.conv3 = nn.Conv2d(32, 64, 4, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
 
+        if previlege_state_dict is None:
+            self.extra_fcn_dim = 0
+        else:
+            self.extra_fcn_dim = previlege_state_dict["previlege_state_dim"]
+            self.extra_state = previlege_state_dict["previlege_state"]
+
         self.lstm = nn.LSTMCell(1024, self.hidden_size)
         num_outputs = action_dim
-        self.critic_linear = nn.Linear(self.hidden_size, 1)
-        self.actor_linear = nn.Linear(self.hidden_size, num_outputs)
+        self.critic_linear = nn.Linear(self.hidden_size+self.extra_fcn_dim, 1)
+        self.actor_linear = nn.Linear(self.hidden_size+self.extra_fcn_dim, num_outputs)
 
         relu_gain = nn.init.calculate_gain("relu")
         self.conv1.weight.data.mul_(relu_gain)
@@ -63,8 +69,8 @@ class A3Clstm(torch.nn.Module):
 
         hx, cx = self.lstm(x, (hx, cx))
 
-        x = hx
-
+        x = torch.cat((hx,self.extra_state),dim=1)
+        # print("shape of x is:",x.shape) # (1,256)
         return self.critic_linear(x), self.actor_linear(x), hx, cx
 
 class A3ClstmE2E(torch.nn.Module):
@@ -77,6 +83,7 @@ class A3ClstmE2E(torch.nn.Module):
         self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
 
         self.lstm = nn.LSTMCell(1024, self.hidden_size)
+        
         num_outputs = action_dim
         self.critic_linear = nn.Linear(self.hidden_size, 1)
         self.actor_linear = nn.Linear(self.hidden_size, num_outputs)
@@ -94,7 +101,7 @@ class A3ClstmE2E(torch.nn.Module):
         hx, cx = self.lstm(x, (hx, cx))
 
         x = hx
-
+        
         return self.critic_linear(x), self.actor_linear(x), hx, cx
 
     """
