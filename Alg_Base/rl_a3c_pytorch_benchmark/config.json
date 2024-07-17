@@ -14,7 +14,7 @@
     "Control_Frequence":10,
     "Other_State":false,
     "CloudPoint":false,
-    "RewardParams":true
+    "RewardParams":false
   },
   "LunarLander":{
     "Need_render":1,

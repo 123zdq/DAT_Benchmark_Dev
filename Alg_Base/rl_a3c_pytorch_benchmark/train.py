@@ -52,6 +52,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
     
     ###### !!!!!!!!!!!! Only for test
     if len(supplement_state) != 0:
+        
         player.privilege_state = int(supplement_state[-1])
         player.previlege_state_dict = {}
         player.previlege_state_dict["previlege_state_dim"] = 4

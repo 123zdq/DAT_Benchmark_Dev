@@ -6,7 +6,7 @@ from utils import norm_col_init, weights_init
 
 
 class A3Clstm(torch.nn.Module):
-    def __init__(self, num_inputs, action_dim, args,previlege_state_dict=None):
+    def __init__(self, num_inputs, action_dim, args):
         super(A3Clstm, self).__init__()
         self.hidden_size = args.hidden_size
         self.conv1 = nn.Conv2d(num_inputs, 32, 5, stride=1, padding=2)
@@ -14,11 +14,11 @@ class A3Clstm(torch.nn.Module):
         self.conv3 = nn.Conv2d(32, 64, 4, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
 
-        if previlege_state_dict is None:
+        self.previlege_state = args.previlege_state
+        if not self.previlege_state:
             self.extra_fcn_dim = 0
         else:
-            self.extra_fcn_dim = previlege_state_dict["previlege_state_dim"]
-            self.extra_state = previlege_state_dict["previlege_state"]
+            self.extra_fcn_dim = args.previlege_state_dim
 
         self.lstm = nn.LSTMCell(1024, self.hidden_size)
         num_outputs = action_dim
@@ -59,7 +59,7 @@ class A3Clstm(torch.nn.Module):
 
         self.train()
 
-    def forward(self, inputs, hx, cx):
+    def forward(self, inputs, hx, cx,previlege_state_dict=None):
         x = F.relu(F.max_pool2d(self.conv1(inputs), 2, 2))
         x = F.relu(F.max_pool2d(self.conv2(x), 2, 2))
         x = F.relu(F.max_pool2d(self.conv3(x), 2, 2))
@@ -68,8 +68,11 @@ class A3Clstm(torch.nn.Module):
         x = x.view(x.size(0), -1)
 
         hx, cx = self.lstm(x, (hx, cx))
-
-        x = torch.cat((hx,self.extra_state),dim=1)
+        if self.previlege_state:
+            x = torch.cat((hx,previlege_state_dict),dim=1)
+            print(x.shape)
+        else:
+            x = hx
         # print("shape of x is:",x.shape) # (1,256)
         return self.critic_linear(x), self.actor_linear(x), hx, cx
 

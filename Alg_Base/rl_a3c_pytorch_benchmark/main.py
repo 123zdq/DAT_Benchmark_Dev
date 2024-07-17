@@ -25,13 +25,17 @@ parser = argparse.ArgumentParser(description="A3C")
         --model_type
 """
 
-parser.add_argument("-ld", "--load", help="load a trained model",default=True)
+parser.add_argument("-ps", "--previlege_state", help="previlege state",default=False)
+parser.add_argument("-psd", "--previlege_state_dim", help="previlege state dimension",default=4)
+
+
+parser.add_argument("-ld", "--load", help="load a trained model",default=False)
 
 parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=32,
+    default=16,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(
@@ -232,10 +236,10 @@ if __name__ == '__main__':
         optimizer = None
 
     processes = []
-    p = mp.Process(target=test, args=(args, shared_model, env_conf))
-    p.start()
-    processes.append(p)
-    time.sleep(0.001)
+    # p = mp.Process(target=test, args=(args, shared_model, env_conf))
+    # p.start()
+    # processes.append(p)
+    # time.sleep(0.001)
     for rank in range(0, args.workers):
         p = mp.Process(
             target=train, args=(rank, args, shared_model, optimizer, env_conf))

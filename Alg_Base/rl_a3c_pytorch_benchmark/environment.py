@@ -105,7 +105,6 @@ class BenchEnv_Multi():
         self.num_process = arg_worker
         self.process_id = process_idx
         self.port_list = []
-        
         ## Action_list:[Forward,Backward,Left,Right,CW,CCW]
         self.Forward = action_list[0]
         self.Backward = action_list[1]
@@ -330,6 +329,26 @@ class BenchEnv_Multi():
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
         logging.info('In reset: Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
         
+        
+        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
+        print("111111111111111111111111",self.RewardParams)
+        self.SuppleInfo = []
+        if self.Other_State:
+            logging.info('Start Getting other_state')
+            self.SuppleInfo.append(other_state)
+            logging.info('Get other_state:  '+str(other_state))
+        if self.RewardParams:
+            logging.info('Start Getting reward_params')
+            reward_params = self.recv_reward_params.read()
+            logging.info('Get Reward Params:  '+str(reward_params))
+            self.SuppleInfo.append(reward_params)
+        if self.CloudPoint:
+            logging.info('Start Getting point_cloud')
+            point_cloud = self.recv_point_cloud.read()
+            logging.info('Get point_cloud:  '+str(point_cloud))
+            self.SuppleInfo.append(point_cloud)
+
+
         ## Begin to read image
         logging.info('Begin to receive image in reset')
         if self.reset_time == 0:
@@ -349,22 +368,6 @@ class BenchEnv_Multi():
             os.unlink(self.action_path)
         image = self.process_state(image)
 
-        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
-        self.SuppleInfo = []
-        if self.Other_State:
-            logging.info('Start Getting other_state')
-            self.SuppleInfo.append(other_state)
-            logging.info('Get other_state:  '+str(other_state))
-        if self.RewardParams:
-            logging.info('Start Getting reward_params')
-            reward_params = self.recv_reward_params.read()
-            logging.info('Get Reward Params:  '+str(reward_params))
-            self.SuppleInfo.append(reward_params)
-        if self.CloudPoint:
-            logging.info('Start Getting point_cloud')
-            point_cloud = self.recv_point_cloud.read()
-            logging.info('Get point_cloud:  '+str(point_cloud))
-            self.SuppleInfo.append(point_cloud)
 
         self.reset_time += 1
         return image,self.SuppleInfo
