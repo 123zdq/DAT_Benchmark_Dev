@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-15 14:59:30
+ * @LastEditTime: 2024-07-17 10:59:13
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -32,6 +32,7 @@ public:
   void updateTrackingCar();
   void setTrackingCar(string _carDef);
   double getReward(string _run_mode, string _reward_mode, double trackWidth = -1, double trackHeight = -1);
+  void checkCarDirection(double stop_threshold, double turn_threshold);
   uint8_t isTrackingCarDisp = 0; // 标志初始态
   usrPublic::rewardData makeReward = {};
 
@@ -39,7 +40,7 @@ private:
   camera2real Camera2real;
   string droneDef;
   Supervisor *supervisor;
-  Node *trackingCar;
+  Node *trackingCar = nullptr;
   Node *land_node;
   Node *camera_slot_node;
 
@@ -55,6 +56,8 @@ private:
 
   double distanceScale = 0.05;
   double rewardRange = 7;
+
+  std::vector<Eigen::Vector3d> pointContain;
 };
 
 /**
@@ -97,6 +100,11 @@ inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanc
 
   distanceScale = _distanceScale;
   rewardRange = _rewardRange;
+
+  // // 对于车辆状态识别，先初始化长度为3的队列
+  pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
+  pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
+  pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
 }
 
 /**
@@ -168,7 +176,6 @@ inline void rewardGenerator::updateTrackingCar()
         if (newName != carName)
         {
           carName = newName;
-          // std::cout<<"15161683148135111111111111111111111111111111111111111111111111111181"<<std::endl;
           isTrackingCarDisp = 2; // flag finish
         }
       }
@@ -181,6 +188,61 @@ inline void rewardGenerator::updateTrackingCar()
     {
       trackingCar = supervisor->getFromDef("ORIGIN");
       makeReward.carTypename = string("ToyotaPriusSimple");
+    }
+  }
+  if (trackingCar != nullptr)
+  {
+    checkCarDirection(0.001, 0.0001);
+  }
+}
+
+inline void rewardGenerator::checkCarDirection(double stop_threshold, double turn_threshold)
+{
+  static Eigen::Vector4d lastRotation = Eigen::Vector4d::Zero();
+  static Eigen::Vector3d lastTransform = Eigen::Vector3d::Zero();
+  const double *tr = trackingCar->getField("translation")->getSFVec3f();
+  const double *ro = trackingCar->getField("rotation")->getSFRotation();
+  Eigen::Vector3d p(tr[0], tr[1], tr[2]);
+  Eigen::Vector4d r(ro[0], ro[1], ro[2], ro[3]);
+  // // 填入新的值
+  // pointContain.emplace(pointContain.begin(), p);
+  // // 丢掉旧的
+  // pointContain.pop_back();
+  // // 获取两次的夹角
+  // double alpha = atan2(pointContain[0](1) - pointContain[1](1), pointContain[0](0) - pointContain[1](0));
+  // double beta = atan2(pointContain[1](1) - pointContain[2](1), pointContain[1](0) - pointContain[2](0));
+  // double err = alpha-beta;
+  double err = -(r(3) - lastRotation(3));
+  lastRotation = r;
+  // 处理正负周期的问题
+  if (err > M_PI)
+  {
+    err = err - 2 * M_PI;
+  }
+  else if (err < -M_PI)
+  {
+    err = 2 * M_PI + err;
+  }
+  // double dist = sqrt(pow(pointContain[0](1) - pointContain[1](1), 2) + pow(pointContain[0](0) - pointContain[1](0), 2));
+  double dist = sqrt(pow(p(1) - lastTransform(1), 2) + pow(p(0) - lastTransform(0), 2));
+  lastTransform = p;
+  if (err > abs(turn_threshold))
+  {
+    makeReward.carDir = 2; // 左转
+  }
+  else if (err < -abs(turn_threshold))
+  {
+    makeReward.carDir = 3; // 右转
+  }
+  else
+  {
+    if (dist < abs(stop_threshold))
+    {
+      makeReward.carDir = 0; // 停车
+    }
+    else
+    {
+      makeReward.carDir = 1; // 直走
     }
   }
 }
@@ -243,10 +305,12 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   }
   else if (_run_mode == string("train"))
   {
-    if(_reward_mode == string("discrete")){
+    if (_reward_mode == string("discrete"))
+    {
       reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
     }
-    else if(_reward_mode == string("continuous")){
+    else if (_reward_mode == string("continuous"))
+    {
       reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
     }
   }
