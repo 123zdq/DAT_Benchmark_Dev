@@ -33,10 +33,10 @@
 #include <webots/Lidar.hpp>
 #include "json_config_handle.h"
 #include <sstream>
-#include "../god_controller/Reward_Generator.h"
 // #define BOOST_NO_CXX11_SCOPED_ENUMS
 // #include <boost/filesystem.hpp>
 // #undef BOOST_NO_CXX11_SCOPED_ENUMS
+
 
 // All the webots classes are defined in the "webots" namespace
 using namespace webots;
@@ -336,7 +336,7 @@ int main(int argc, char **argv)
       // std::cout<<fly_cmd.axes[3]<<", "<<fly_cmd.axes[2]<<", "<<fly_cmd.axes[1]<<", "<<fly_cmd.axes[0]<<std::endl;
     }
 
-    if (config.get()->simulationMode == string("video"))
+    if(config.get()->simulationMode == string("video"))
     {
       drone_fly = true;
       gimbal_cmd.y = 1.;
@@ -453,18 +453,18 @@ int main(int argc, char **argv)
       // else{
       //   state.done = 1;(
       // }
-      if (config.get()->simulationMode == string("video"))
+      if(config.get()->simulationMode == string("video"))
       {
-        if (state.done == 1 && t > 0.7)
-        {
+        if(state.done == 1 && t>0.7){
           alreadyDone = true;
         }
-        if (alreadyDone == true)
-        {
+        if(alreadyDone == true){
           state.done = 1;
         }
       }
-      std::cout << "id: " << droneDef << "  done: " << state.done << "  reward: " << state.reward << "  count: " << step_count << "  time:" << t << "    carDir:"<<  rewardG.makeReward.carDir << std::endl;
+      
+
+      std::cout << "id: " << droneDef << "  done: " << state.done << "  reward: " << state.reward << "  count: " << step_count << "  time:" << t << std::endl;
       // 发送state,reward,done
       state.t = step_count;
       double state_list[22] = {};
@@ -473,10 +473,10 @@ int main(int argc, char **argv)
       Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
       if (config.get()->customizedReward)
       {
-        double makeReward_list[58] = {};
+        double makeReward_list[57] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
-        Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 58, rewardG.makeReward.carTypename);
+        Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 57, rewardG.makeReward.carTypename);
       }
     }
     else if (config.get()->simulationMode == string("demo"))
@@ -523,18 +523,15 @@ int main(int argc, char **argv)
       static uint32_t videoCount = 0;
       static string foldername = "../../droneVideos/" + droneDef;
       static int32_t episode = -1;
-      if (episode == -1)
-      {
-        while (std::filesystem::exists(foldername + "/episode" + std::to_string(episode + 1)))
-        {
-          episode++;
+      if(episode == -1){
+        while(std::filesystem::exists(foldername + "/episode" + std::to_string(episode + 1))){
+          episode ++;
         }
       }
       // static boost::filesystem::path fn(foldername);
       if (t >= config.get()->video.startTime && t <= (config.get()->video.startTime + config.get()->video.totalTime))
       {
-        if (videoCount == 0)
-        {
+        if(videoCount == 0){
           // // 使用boost实现跨平台创建目录
           // if (!boost::filesystem::is_directory(fn))
           // {
@@ -553,16 +550,15 @@ int main(int argc, char **argv)
           // std::cout << "clear directory: " << foldername << std::endl;
           std::ostringstream oss;
           oss << std::setw(6) << std::setfill('0') << videoCount; // 设置宽度为6，填充字符为'0'
-          std::string formatted = oss.str();                      // 将输出流转换为字符串
+          std::string formatted = oss.str(); // 将输出流转换为字符串
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           videoCount++;
         }
-        else if ((t - last_frame_t) >= (1. / static_cast<double>(config.get()->video.fps)))
-        {
+        else if((t-last_frame_t)>=(1./static_cast<double>(config.get()->video.fps))){
           std::ostringstream oss;
           oss << std::setw(6) << std::setfill('0') << videoCount; // 设置宽度为6，填充字符为'0'
-          std::string formatted = oss.str();                      // 将输出流转换为字符串
+          std::string formatted = oss.str(); // 将输出流转换为字符串
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           videoCount++;
@@ -571,8 +567,7 @@ int main(int argc, char **argv)
       }
     }
     else
-    {
-    }
+    {}
   };
 
   // Enter here exit cleanup code.
