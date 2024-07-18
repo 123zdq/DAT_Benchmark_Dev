@@ -46,9 +46,9 @@ def train(rank, args, shared_model, optimizer, env_conf):
         player.model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "ADVOT":
         player.model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
-    # print(12121221212121112121221212121222222222)
-    # print(player.env)
-    player.state = player.env.reset()
+
+
+    player.state,player.suppleinfo = player.env.reset()
     player.state = process_func(state = player.state,env=player.env)
     if gpu_id >= 0:
         with torch.cuda.device(gpu_id):
@@ -85,7 +85,10 @@ def train(rank, args, shared_model, optimizer, env_conf):
                     break
             if player.done:
                 player.eps_len = 0
-                state = player.env.reset()
+                state,player.suppleinfo = player.env.reset()
+                if args.train_mode == "privilege":
+                    player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
+                    print(player.privilegeinfo)
                 state = process_func(state = state,env=player.env)
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):

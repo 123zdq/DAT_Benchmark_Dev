@@ -4,13 +4,15 @@ os.environ["OMP_NUM_THREADS"] = "1"
 import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
-
+import numpy as np
 
 class Agent(object):
     def __init__(self, model, env, args, state,process_func):
         self.model = model
         self.env = env
         self.state = state
+        self.suppleinfo = []
+        self.privilegeinfo = None
         self.hx = None
         self.cx = None
         self.eps_len = 0
@@ -27,6 +29,10 @@ class Agent(object):
         self.process_func = process_func
 
     def action_train(self):
+        if self.args.train_mode == "privilege":
+            self.privilegeinfo = self.int2one_hot(int(self.suppleinfo[0][-1]),self.args.previlege_dim)
+            print(self.privilegeinfo)
+            
         value, logit, self.hx, self.cx = self.model(
             self.state.unsqueeze(0), self.hx, self.cx
         )
@@ -68,6 +74,9 @@ class Agent(object):
             prob = F.softmax(logit, dim=1)
             action = prob.cpu().numpy().argmax()
         state, self.reward, self.done, self.info = self.env.step(action)
+        if self.args.train_mode == "privilege":
+            self.privilegeinfo = self.int2one_hot(int(self.suppleinfo[0][-1]),self.args.previlege_dim)
+            print(self.privilegeinfo)
         state = self.process_func(env=self.env,state = state)
         if self.gpu_id >= 0:
             with torch.cuda.device(self.gpu_id):
@@ -84,3 +93,8 @@ class Agent(object):
         self.rewards = []
         self.entropies = []
         return self
+
+    def int2one_hot(self,idx:int,num_class:int)->np.ndarray:
+        zero_arr = np.zeros((num_class))
+        zero_arr[idx] = 1 # idx range from 0 to num_class-1
+        return zero_arr

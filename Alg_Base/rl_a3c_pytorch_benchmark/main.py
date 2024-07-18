@@ -17,6 +17,7 @@ import time
 parser = argparse.ArgumentParser(description="A3C")
 """
     Argument that we need to config：
+        --train_mode
         --load
         --workers
         --gpu-ids
@@ -25,13 +26,30 @@ parser = argparse.ArgumentParser(description="A3C")
         --model_type
 """
 
+parser.add_argument(
+    "-tm",
+    "--train-mode",
+    type=str,
+    help="config training setting",
+    default="privilege"
+)
+
+parser.add_argument(
+    "-pd",
+    "--previlege-dim",
+    type=int,
+    help="config privilege",
+    default=4
+)
+
+
 parser.add_argument("-ld", "--load", help="load a trained model",default=False)
 
 parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=32,
+    default=16,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(

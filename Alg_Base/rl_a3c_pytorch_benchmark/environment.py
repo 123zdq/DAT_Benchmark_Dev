@@ -59,7 +59,7 @@ def Identity(state,env):
         env(BenchEnv_Multi): initialized env
         process_func(Function): partial the process the state frame
 """
-def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPoint=False,RewardParams=True):
+def general_env(env_id,env_conf,arg_worker,process_idx):
     if env_id not in ["LunarLander-v2","Benchmark"]:
         print(env_id," is not valid!")
         raise NameError
@@ -68,6 +68,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPo
         process_func = partial(process_frame,conf=env_conf)
         return env,process_func
     elif env_id == "Benchmark":
+        Other_State,CloudPoint,RewardParams = env_conf["Other_State"],env_conf["CloudPoint"],env_conf["RewardParams"]
         process_state = partial(process_frame,conf=env_conf)
         env = BenchEnv_Multi(Action_dim=env_conf["Action_dim"],process_state=process_state,arg_worker=arg_worker,\
                              process_idx=process_idx,Other_State=Other_State,CloudPoint=CloudPoint,RewardParams=RewardParams,\
@@ -366,4 +367,4 @@ class BenchEnv_Multi():
             os.unlink(self.action_path)
         image = self.process_state(image)
         self.reset_time += 1
-        return image
+        return image,self.SuppleInfo
