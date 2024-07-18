@@ -31,10 +31,9 @@ class Agent(object):
     def action_train(self):
         if self.args.train_mode == "privilege":
             self.privilegeinfo = self.int2one_hot(int(self.suppleinfo[0][-1]),self.args.previlege_dim)
-            print(self.privilegeinfo)
             
         value, logit, self.hx, self.cx = self.model(
-            self.state.unsqueeze(0), self.hx, self.cx
+            self.state.unsqueeze(0), self.hx, self.cx,self.privilegeinfo
         )
         prob = F.softmax(logit, dim=1)
         log_prob = F.log_softmax(logit, dim=1)
@@ -69,14 +68,13 @@ class Agent(object):
                     self.hx = torch.zeros(1, self.hidden_size)
 
             value, logit, self.hx, self.cx = self.model(
-                self.state.unsqueeze(0), self.hx, self.cx
+                self.state.unsqueeze(0), self.hx, self.cx,self.privilegeinfo
             )
             prob = F.softmax(logit, dim=1)
             action = prob.cpu().numpy().argmax()
         state, self.reward, self.done, self.info = self.env.step(action)
         if self.args.train_mode == "privilege":
             self.privilegeinfo = self.int2one_hot(int(self.suppleinfo[0][-1]),self.args.previlege_dim)
-            print(self.privilegeinfo)
         state = self.process_func(env=self.env,state = state)
         if self.gpu_id >= 0:
             with torch.cuda.device(self.gpu_id):
@@ -94,7 +92,10 @@ class Agent(object):
         self.entropies = []
         return self
 
-    def int2one_hot(self,idx:int,num_class:int)->np.ndarray:
+    def int2one_hot(self,idx:int,num_class:int)->torch.Tensor:
         zero_arr = np.zeros((num_class))
         zero_arr[idx] = 1 # idx range from 0 to num_class-1
-        return zero_arr
+        zero_tensor = torch.Tensor(zero_arr)
+        zero_tensor = torch.unsqueeze(zero_tensor,0)
+        # print(zero_tensor.shape)
+        return zero_tensor

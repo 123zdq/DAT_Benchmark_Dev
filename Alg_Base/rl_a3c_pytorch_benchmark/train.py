@@ -49,6 +49,8 @@ def train(rank, args, shared_model, optimizer, env_conf):
 
 
     player.state,player.suppleinfo = player.env.reset()
+    if args.train_mode == "privilege":
+        player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
     player.state = process_func(state = player.state,env=player.env)
     if gpu_id >= 0:
         with torch.cuda.device(gpu_id):
@@ -88,7 +90,6 @@ def train(rank, args, shared_model, optimizer, env_conf):
                 state,player.suppleinfo = player.env.reset()
                 if args.train_mode == "privilege":
                     player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
-                    print(player.privilegeinfo)
                 state = process_func(state = state,env=player.env)
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):
@@ -106,7 +107,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
             if not player.done:
                 state = player.state
                 value, _, _, _ = player.model(
-                    state.unsqueeze(0), player.hx, player.cx
+                    state.unsqueeze(0), player.hx, player.cx,player.privilegeinfo
                 )
                 # print("The value we receive is:",value)
                 R = value.detach()

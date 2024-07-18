@@ -14,10 +14,14 @@ class A3Clstm(torch.nn.Module):
         self.conv3 = nn.Conv2d(32, 64, 4, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
 
+        if args.train_mode == "privilege":
+            self.privilege_dim = 4
+        else:
+            self.privilege_dim = 0
         self.lstm = nn.LSTMCell(1024, self.hidden_size)
         num_outputs = action_dim
-        self.critic_linear = nn.Linear(self.hidden_size, 1)
-        self.actor_linear = nn.Linear(self.hidden_size, num_outputs)
+        self.critic_linear = nn.Linear(self.hidden_size+self.privilege_dim, 1)
+        self.actor_linear = nn.Linear(self.hidden_size+self.privilege_dim, num_outputs)
 
         relu_gain = nn.init.calculate_gain("relu")
         self.conv1.weight.data.mul_(relu_gain)
@@ -53,7 +57,7 @@ class A3Clstm(torch.nn.Module):
 
         self.train()
 
-    def forward(self, inputs, hx, cx):
+    def forward(self, inputs, hx, cx,privilege_info=None):
         x = F.relu(F.max_pool2d(self.conv1(inputs), 2, 2))
         x = F.relu(F.max_pool2d(self.conv2(x), 2, 2))
         x = F.relu(F.max_pool2d(self.conv3(x), 2, 2))
@@ -62,8 +66,15 @@ class A3Clstm(torch.nn.Module):
         x = x.view(x.size(0), -1)
 
         hx, cx = self.lstm(x, (hx, cx))
-
-        x = hx
+        if privilege_info is not None:
+            if not isinstance(privilege_info,torch.Tensor):
+                raise TypeError("privilege_info should be Tensor")
+            else:
+                x = torch.concat((hx,privilege_info),dim=1)
+                print(x.shape)
+        else:
+            x = hx
+        
 
         return self.critic_linear(x), self.actor_linear(x), hx, cx
 
@@ -76,25 +87,37 @@ class A3ClstmE2E(torch.nn.Module):
         self.conv3 = nn.Conv2d(32, 64, 4, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, 3, stride=1, padding=1)
 
+        if args.train_mode == "privilege":
+            self.privilege_dim = 4
+        else:
+            self.privilege_dim = 0
+        
         self.lstm = nn.LSTMCell(1024, self.hidden_size)
         num_outputs = action_dim
-        self.critic_linear = nn.Linear(self.hidden_size, 1)
-        self.actor_linear = nn.Linear(self.hidden_size, num_outputs)
+        self.critic_linear = nn.Linear(self.hidden_size+self.privilege_dim, 1)
+        self.actor_linear = nn.Linear(self.hidden_size+self.privilege_dim, num_outputs)
         layers = [self.conv1,self.conv2,self.conv3,self.conv4]
         self.init_params(layers)
         self.train()
 
-    def forward(self, inputs, hx, cx):
+    def forward(self, inputs, hx, cx,privilege_info=None):
+        print(privilege_info)
         x = F.relu(F.max_pool2d(self.conv1(inputs), 2, 2))
         x = F.relu(F.max_pool2d(self.conv2(x), 2, 2))
         x = F.relu(F.max_pool2d(self.conv3(x), 2, 2))
         x = F.relu(F.max_pool2d(self.conv4(x), 2, 2))
 
         x = x.view(x.size(0), -1)
+        
         hx, cx = self.lstm(x, (hx, cx))
-
-        x = hx
-
+        if privilege_info is not None:
+            if privilege_info is not isinstance(torch.Tensor):
+                raise TypeError("privilege_info should be Tensor")
+            else:
+                x = torch.concat((hx,privilege_info),dim=1)
+        else:
+            x = hx
+        print(x.shape)
         return self.critic_linear(x), self.actor_linear(x), hx, cx
 
     """
