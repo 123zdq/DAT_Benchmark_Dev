@@ -59,7 +59,7 @@ def Identity(state,env):
         env(BenchEnv_Multi): initialized env
         process_func(Function): partial the process the state frame
 """
-def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPoint=False,RewardParams=False):
+def general_env(env_id,env_conf,arg_worker,process_idx,Other_State=False,CloudPoint=False,RewardParams=True):
     if env_id not in ["LunarLander-v2","Benchmark"]:
         print(env_id," is not valid!")
         raise NameError
@@ -95,7 +95,7 @@ class BenchEnv_Multi():
             None
     """
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
-        process_idx,Other_State=False,CloudPoint=False,RewardParams=False,\
+        process_idx,Other_State,CloudPoint,RewardParams,\
         Control_Frequence = 500) -> None:
         self.Action_dim = Action_dim
         self.process_state = process_state
@@ -309,6 +309,9 @@ class BenchEnv_Multi():
                 pass
             os.unlink(self.reward_path)
         
+        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
+        self.SuppleInfo = []
+
         ## Send Special Action to inform Webots of reset stage
         logging.info('Begin to send reset [0,0,0,0,1]')
         self.send_socket.send_reset_control(self.process_id)
@@ -328,6 +331,22 @@ class BenchEnv_Multi():
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
         logging.info('In reset: Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
         
+        ## Read Other_State/RewardParams/CloudPoint According to flag
+        if self.Other_State:
+            logging.info('Start Getting other_state')
+            self.SuppleInfo.append(other_state)
+            logging.info('Get other_state:  '+str(other_state))
+        if self.RewardParams:
+            logging.info('Start Getting reward_params')
+            reward_params = self.recv_reward_params.read()
+            logging.info('Get Reward Params:  '+str(reward_params))
+            self.SuppleInfo.append(reward_params)
+        if self.CloudPoint:
+            logging.info('Start Getting point_cloud')
+            point_cloud = self.recv_point_cloud.read()
+            logging.info('Get point_cloud:  '+str(point_cloud))
+            self.SuppleInfo.append(point_cloud)
+
         ## Begin to read image
         logging.info('Begin to receive image in reset')
         if self.reset_time == 0:
