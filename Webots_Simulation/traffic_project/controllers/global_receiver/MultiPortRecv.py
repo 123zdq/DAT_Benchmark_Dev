@@ -55,7 +55,7 @@ BASE_PORT = 6000
 class MultiProcessRecv():
     Number_process = 0
     
-    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float) -> None:
+    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float,ProcessPort=7787) -> None:
         
         self.tar_ip = tar_ip
         self.ctrl_freq = ctrl_freq
@@ -68,7 +68,7 @@ class MultiProcessRecv():
         self.socketPort = []
         
         self.max_data_size = max_data_size
-        MultiProcessRecv.Number_process = self.get_NumProcess()
+        MultiProcessRecv.Number_process = self.get_NumProcess(ProcessPort)
         self.s = [b'']*MultiProcessRecv.Number_process
         self.s_last = [b'']*MultiProcessRecv.Number_process
         self.data = [[0]*self.max_data_size]*MultiProcessRecv.Number_process
@@ -86,7 +86,7 @@ class MultiProcessRecv():
         self.rgetqueue = [[0]*self.max_data_size]*MultiProcessRecv.Number_process
         self.Action_list = [[0]*self.max_data_size]*MultiProcessRecv.Number_process
         self.readAction_list = self.Action_list
-        self.Create_Process()
+        # self.Create_Process()
         self.Receive_queue()
         
         self.actionCount = 0

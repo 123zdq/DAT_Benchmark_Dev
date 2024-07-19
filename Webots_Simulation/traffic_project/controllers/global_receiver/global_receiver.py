@@ -78,7 +78,7 @@ elif configData["Simulation_Mode"] == "train":
         os.system("del /s /q /f ../../Files2Alg/*.txt")
         os.system("del /s /q /f ../../Files2Alg/*.jpeg")
     # multiple communications
-    multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"])
+    multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"],configData["Get_Agent_Num_Port"])
     multiCom.main()
     # activate map random init
     file_path = world_path[:-4] + '_net'
