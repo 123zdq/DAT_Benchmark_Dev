@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-05-31 16:17:15
+LastEditTime: 2024-07-19 22:08:15
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -55,7 +55,7 @@ BASE_PORT = 6000
 class MultiProcessRecv():
     Number_process = 0
     
-    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float) -> None:
+    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float,process_port=7787) -> None:
         
         self.tar_ip = tar_ip
         self.ctrl_freq = ctrl_freq
@@ -68,7 +68,7 @@ class MultiProcessRecv():
         self.socketPort = []
         
         self.max_data_size = max_data_size
-        MultiProcessRecv.Number_process = self.get_NumProcess()
+        MultiProcessRecv.Number_process = self.get_NumProcess(process_port)
         self.s = [b'']*MultiProcessRecv.Number_process
         self.s_last = [b'']*MultiProcessRecv.Number_process
         self.data = [[0]*self.max_data_size]*MultiProcessRecv.Number_process
@@ -135,14 +135,14 @@ class MultiProcessRecv():
         for i in range(MultiProcessRecv.Number_process):
             setup_logger("drone"+str(i),"../../logs/Agent"+str(i)+".log")
             self.logger_list.append(logging.getLogger("drone"+str(i)))
-            Curr_Process = []
-            for port in range(6):
-                self.socketPort.append(BASE_PORT + i*6 + port)
-                udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-                if port == 3:
-                    udp_socket.bind(('',self.socketPort[i*6 + port]))
-                Curr_Process.append(udp_socket)
-            self.ProcessSocket_list.append(Curr_Process)
+            # Curr_Process = []
+            # for port in range(6):
+            #     self.socketPort.append(BASE_PORT + i*6 + port)
+            #     udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+            #     if port == 3:
+            #         udp_socket.bind(('',self.socketPort[i*6 + port]))
+            #     Curr_Process.append(udp_socket)
+            # self.ProcessSocket_list.append(Curr_Process)
 
     """
         Receive_queue(self,NumProcess): Init the queue list for multi-process

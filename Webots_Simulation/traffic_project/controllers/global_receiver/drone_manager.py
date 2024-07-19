@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-12 22:55:05
+LastEditTime: 2024-07-19 21:59:48
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -194,7 +194,7 @@ class droneManager:
         self.lastTime = self.initTime
         while True:
             self.initTime = time.time()
-            self.updateMachineState()
+            # self.updateMachineState()
             self.actionUpdate()
             
             if self.multi_state == 1:

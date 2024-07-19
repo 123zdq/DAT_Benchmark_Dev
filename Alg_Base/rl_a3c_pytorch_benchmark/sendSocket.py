@@ -16,7 +16,7 @@ class SendActionSocket():
             port_process: port for sending num_process socket
             action_path: path for action file(in file mode)
     """
-    def __init__(self,ip='192.168.1.1',port_action=7788,port_control = 7788,port_process = 7787,action_path=None):
+    def __init__(self,ip='192.168.1.1',port_action=7788,port_control = 7788,port_process = 7789,action_path=None):
         self.udp_sendactionsocket = socket(AF_INET,SOCK_DGRAM)
         self.udp_sendconsocket = socket(AF_INET,SOCK_DGRAM)
         self.Target_addr_action = (ip,port_action)

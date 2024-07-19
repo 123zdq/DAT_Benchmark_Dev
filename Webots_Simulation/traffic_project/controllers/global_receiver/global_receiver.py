@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-12 23:38:16
+LastEditTime: 2024-07-19 22:01:37
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -78,7 +78,7 @@ elif configData["Simulation_Mode"] == "train":
         os.system("del /s /q /f ../../Files2Alg/*.txt")
         os.system("del /s /q /f ../../Files2Alg/*.jpeg")
     # multiple communications
-    multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"])
+    multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"],configData["Config_Agen_Num_Port"])
     multiCom.main()
     # activate map random init
     file_path = world_path[:-4] + '_net'
