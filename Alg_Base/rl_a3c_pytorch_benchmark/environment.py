@@ -260,7 +260,7 @@ class BenchEnv_Multi():
                 3. If Webots do not receive done flag, open done detection again 
         """
         if int(step_curr) <= self.Set_Done_Step:
-            logging.info('Open Done Flag')
+            logging.info('Open Done Flag --step_curr: '+str(step_curr)+" --self.Set_Done_Step: "+str(self.Set_Done_Step))
             self.done_flag = True
             self.last_done_flag = 0
         if done:
@@ -268,8 +268,10 @@ class BenchEnv_Multi():
                 self.done_flag = False
                 self.last_done_flag = step_curr
                 if reward == 0.0:
+                    logging.info("----- Failed Episode:Score-20 ----- >-< ")
                     reward -= 20
                 else:
+                    logging.info("----- Success Episode:Score+20 ----- >v< ")
                     reward += 20
                 logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:

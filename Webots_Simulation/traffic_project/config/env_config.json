@@ -1,6 +1,6 @@
 {
         "Simulation_Mode": "train",
-        "Get_Agent_Num_Port": 7789,
+        "Get_Agent_Num_Port": 7767,
         "Train_Total_Steps": 500,
         "Control_Frequence": 50,
         "Customized_Rewards": true,
