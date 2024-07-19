@@ -30,7 +30,10 @@ class Agent(object):
 
     def action_train(self):
         if self.args.train_mode == "privilege":
-            self.privilegeinfo = self.int2one_hot(int(self.suppleinfo[0][-1]),self.args.previlege_dim)
+            if self.info == None:
+                pass
+            else:
+                self.privilegeinfo = self.int2one_hot(int(self.info[0][-1]),self.args.previlege_dim)
             
         value, logit, self.hx, self.cx = self.model(
             self.state.unsqueeze(0), self.hx, self.cx,self.privilegeinfo
@@ -74,7 +77,7 @@ class Agent(object):
             action = prob.cpu().numpy().argmax()
         state, self.reward, self.done, self.info = self.env.step(action)
         if self.args.train_mode == "privilege":
-            self.privilegeinfo = self.int2one_hot(int(self.suppleinfo[0][-1]),self.args.previlege_dim)
+            self.privilegeinfo = self.int2one_hot(int(self.info[0][-1]),self.args.previlege_dim)
         state = self.process_func(env=self.env,state = state)
         if self.gpu_id >= 0:
             with torch.cuda.device(self.gpu_id):

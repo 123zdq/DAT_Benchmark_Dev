@@ -90,6 +90,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
                 state,player.suppleinfo = player.env.reset()
                 if args.train_mode == "privilege":
                     player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
+                    player.info = None
                 state = process_func(state = state,env=player.env)
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):

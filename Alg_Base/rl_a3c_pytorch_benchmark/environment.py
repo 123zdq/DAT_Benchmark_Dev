@@ -270,7 +270,7 @@ class BenchEnv_Multi():
                 self.last_done_flag = step_curr
                 if reward == 0.0:
                     reward -= 20
-                elif reward == 1.0:
+                else:
                     reward += 20
                 logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:

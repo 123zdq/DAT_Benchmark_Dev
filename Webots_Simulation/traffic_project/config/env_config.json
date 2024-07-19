@@ -14,7 +14,7 @@
                 "distance_error": 20
         },
         "Reward_Config": {
-                "reward_mode": "continuous",
+                "reward_mode": "discrete",
                 "distance_scale": 0.01,
                 "reward_range": 7
         },
