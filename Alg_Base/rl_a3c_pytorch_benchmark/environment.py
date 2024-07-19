@@ -68,9 +68,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
         process_func = partial(process_frame,conf=env_conf)
         return env,process_func
     elif env_id == "Benchmark":
-        Other_State = env_conf["Other_State"]
-        CloudPoint = env_conf["CloudPoint"]
-        RewardParams = env_conf["RewardParams"]
+        Other_State,CloudPoint,RewardParams = env_conf["Other_State"],env_conf["CloudPoint"],env_conf["RewardParams"]
         process_state = partial(process_frame,conf=env_conf)
         env = BenchEnv_Multi(Action_dim=env_conf["Action_dim"],process_state=process_state,arg_worker=arg_worker,\
                              process_idx=process_idx,Other_State=Other_State,CloudPoint=CloudPoint,RewardParams=RewardParams,\
@@ -271,7 +269,7 @@ class BenchEnv_Multi():
                 self.last_done_flag = step_curr
                 if reward == 0.0:
                     reward -= 20
-                elif reward == 1.0:
+                else:
                     reward += 20
                 logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:
@@ -311,6 +309,9 @@ class BenchEnv_Multi():
                 pass
             os.unlink(self.reward_path)
         
+        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
+        self.SuppleInfo = []
+
         ## Send Special Action to inform Webots of reset stage
         logging.info('Begin to send reset [0,0,0,0,1]')
         self.send_socket.send_reset_control(self.process_id)
@@ -329,10 +330,7 @@ class BenchEnv_Multi():
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
         logging.info('In reset: Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
         
-        
-        ## SuppleInfo Include Other_State/RewardParams/CloudPoint
-        print("111111111111111111111111",self.RewardParams)
-        self.SuppleInfo = []
+        ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
             logging.info('Start Getting other_state')
             self.SuppleInfo.append(other_state)
@@ -347,7 +345,6 @@ class BenchEnv_Multi():
             point_cloud = self.recv_point_cloud.read()
             logging.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
-
 
         ## Begin to read image
         logging.info('Begin to receive image in reset')

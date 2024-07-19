@@ -46,24 +46,10 @@ def train(rank, args, shared_model, optimizer, env_conf):
         player.model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "ADVOT":
         player.model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
-    # print(player.env)
-    player.state,supplement_state = player.env.reset()
+
+    player.state = player.env.reset()
     player.state = process_func(state = player.state,env=player.env)
-    
-    ###### !!!!!!!!!!!! Only for test
-    if len(supplement_state) != 0:
-        
-        player.privilege_state = int(supplement_state[-1])
-        player.previlege_state_dict = {}
-        player.previlege_state_dict["previlege_state_dim"] = 4
-        if player.privilege_state == 0: ## Stop
-            player.previlege_state_dict["previlege_state"] = [1,0,0,0]
-        elif player.privilege_state == 1: ## Forward
-            player.previlege_state_dict["previlege_state"] = [0,1,0,0]
-        elif player.privilege_state == 2: ## CCW
-            player.previlege_state_dict["previlege_state"] = [0,0,1,0]
-        elif player.privilege_state == 3: ## CW
-            player.previlege_state_dict["previlege_state"] = [0,0,0,1]
+
     if gpu_id >= 0:
         with torch.cuda.device(gpu_id):
             player.state = torch.from_numpy(player.state).float().cuda()
@@ -99,7 +85,10 @@ def train(rank, args, shared_model, optimizer, env_conf):
                     break
             if player.done:
                 player.eps_len = 0
-                state = player.env.reset()
+                state,player.suppleinfo = player.env.reset()
+                if args.train_mode == "privilege":
+                    player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
+                    player.info = None
                 state = process_func(state = state,env=player.env)
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):
@@ -117,7 +106,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
             if not player.done:
                 state = player.state
                 value, _, _, _ = player.model(
-                    state.unsqueeze(0), player.hx, player.cx
+                    state.unsqueeze(0), player.hx, player.cx,player.privilegeinfo
                 )
                 # print("The value we receive is:",value)
                 R = value.detach()

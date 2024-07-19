@@ -4,15 +4,15 @@ os.environ["OMP_NUM_THREADS"] = "1"
 import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
-
+import numpy as np
 
 class Agent(object):
     def __init__(self, model, env, args, state,process_func):
         self.model = model
         self.env = env
         self.state = state
-        self.privilege_state = None
-        self.previlege_state_dict = None
+        self.suppleinfo = []
+        self.privilegeinfo = None
         self.hx = None
         self.cx = None
         self.eps_len = 0
@@ -29,8 +29,14 @@ class Agent(object):
         self.process_func = process_func
 
     def action_train(self):
+        if self.args.train_mode == "privilege":
+            if self.info == None:
+                pass
+            else:
+                self.privilegeinfo = self.int2one_hot(int(self.info[0][-1]),self.args.previlege_dim)
+            
         value, logit, self.hx, self.cx = self.model(
-            self.state.unsqueeze(0), self.hx, self.cx,self.previlege_state_dict
+            self.state.unsqueeze(0), self.hx, self.cx,self.privilegeinfo
         )
         prob = F.softmax(logit, dim=1)
         log_prob = F.log_softmax(logit, dim=1)
@@ -39,20 +45,6 @@ class Agent(object):
         action = prob.multinomial(1).data
         log_prob = log_prob.gather(1, action)
         state, self.reward, self.done, self.info = self.env.step(action.item())
-
-        ###### !!!!!!!!!!!! Only for test
-        if len(self.info) != 0:
-            self.privilege_state = int(self.info[-1])
-            self.previlege_state_dict = {}
-            self.previlege_state_dict["previlege_state_dim"] = 4
-            if self.privilege_state == 0: ## Stop
-                self.previlege_state_dict["previlege_state"] = [1,0,0,0]
-            elif self.privilege_state == 1: ## Forward
-                self.previlege_state_dict["previlege_state"] = [0,1,0,0]
-            elif self.privilege_state == 2: ## CCW
-                self.previlege_state_dict["previlege_state"] = [0,0,1,0]
-            elif self.privilege_state == 3: ## CW
-                self.previlege_state_dict["previlege_state"] = [0,0,0,1]
         
         state = self.process_func(state = state,env=self.env)
         if self.gpu_id >= 0:
@@ -79,11 +71,13 @@ class Agent(object):
                     self.hx = torch.zeros(1, self.hidden_size)
 
             value, logit, self.hx, self.cx = self.model(
-                self.state.unsqueeze(0), self.hx, self.cx
+                self.state.unsqueeze(0), self.hx, self.cx,self.privilegeinfo
             )
             prob = F.softmax(logit, dim=1)
             action = prob.cpu().numpy().argmax()
         state, self.reward, self.done, self.info = self.env.step(action)
+        if self.args.train_mode == "privilege":
+            self.privilegeinfo = self.int2one_hot(int(self.info[0][-1]),self.args.previlege_dim)
         state = self.process_func(env=self.env,state = state)
         if self.gpu_id >= 0:
             with torch.cuda.device(self.gpu_id):
@@ -100,3 +94,11 @@ class Agent(object):
         self.rewards = []
         self.entropies = []
         return self
+
+    def int2one_hot(self,idx:int,num_class:int)->torch.Tensor:
+        zero_arr = np.zeros((num_class))
+        zero_arr[idx] = 1 # idx range from 0 to num_class-1
+        zero_tensor = torch.Tensor(zero_arr)
+        zero_tensor = torch.unsqueeze(zero_tensor,0)
+        # print(zero_tensor.shape)
+        return zero_tensor

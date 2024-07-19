@@ -45,12 +45,14 @@ def test(args, shared_model, env_conf):
         
     if args.tensorboard_logger:
         from torch.utils.tensorboard import SummaryWriter
-        dummy_input = (torch.zeros(1, 3, 80, 80), torch.zeros(1, args.hidden_size), torch.zeros(1, args.hidden_size),  )
+        # dummy_input = (torch.zeros(1, 3, 80, 80), torch.zeros(1, args.hidden_size), torch.zeros(1, args.hidden_size),  )
         writer = SummaryWriter(f"runs/{args.env}_training")
-        writer.add_graph(player.model, dummy_input, False)
+        # writer.add_graph(player.model, dummy_input, False)
         writer.close()
 
-    player.state = player.env.reset()
+    player.state,player.suppleinfo = player.env.reset()
+    if args.train_mode == "privilege":
+        player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
     player.state = process_func(state=player.state,env = player.env)
     if gpu_id >= 0:
         with torch.cuda.device(gpu_id):
@@ -101,7 +103,9 @@ def test(args, shared_model, env_conf):
 
                 reward_sum = 0
                 player.eps_len = 0
-                state = player.env.reset()
+                state,player.suppleinfo = player.env.reset()
+                if args.train_mode == "privilege":
+                    player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
                 state = process_func(state = state,env=player.env)
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):
