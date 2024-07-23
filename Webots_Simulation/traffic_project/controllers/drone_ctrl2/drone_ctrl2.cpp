@@ -377,18 +377,19 @@ int main(int argc, char **argv)
       }
     }
     // std::cout<< "positionx: "<< error[4] << " " << "positiony: " << error[5] << std::endl;
-
     rewardG.locateCamera(camera->getWidth(), camera->getHeight(), camera->getFov());
     if (config.get()->simulationMode == string("demo"))
     {
+      
       rewardG.setTrackingCar("ORIGIN");
     }
     else if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       rewardG.updateTrackingCar();
     }
+    
     state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, error[4], error[5]);
-
+    
     if (config.get()->simulationMode == string("demo"))
     {
       usrPublic::vector4 trackin = {};
@@ -413,6 +414,7 @@ int main(int argc, char **argv)
         fly_cmd.axes[2] = trackCtrl.track2joy.y; // int image_width = camera->getWidth();
       }
     }
+    
 
     // 无人机控制
     jCtrl.joyCb(fly_cmd);
@@ -428,6 +430,8 @@ int main(int argc, char **argv)
       cmdCb(aCtrl.att2ctrl, motor1, motor2, motor3, motor4);
     }
     gcmdCb(gCtrl.gbl2ctrl, camera_roll_motor, camera_pitch_motor, camera_yaw_motor);
+
+    
 
     static int countMax = int(1000 / 2 / config.get()->controlFreq);
     if (countMax < 1)
@@ -483,6 +487,7 @@ int main(int argc, char **argv)
     {
       std::cout << "  reward: " << state.reward << std::endl;
     }
+    
 
     // 摄像头视频流抓取,并且发送到全局通信节点
     if (config.get()->simulationMode == string("demo"))

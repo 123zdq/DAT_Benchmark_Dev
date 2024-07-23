@@ -71,7 +71,7 @@ class A3Clstm(torch.nn.Module):
                 raise TypeError("privilege_info should be Tensor")
             else:
                 x = torch.concat((hx,privilege_info),dim=1)
-                print(x.shape)
+                # print(x.shape)
         else:
             x = hx
         
