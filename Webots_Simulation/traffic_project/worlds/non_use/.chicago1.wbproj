@@ -5,5 +5,5 @@ sceneTreePerspectives: 000000ff00000001000000030000001c000000c0000000fa010000000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 0 "controllers/drone_ctrl2/drone_ctrl2.cpp"
+textFiles: 0 "../controllers/drone_ctrl2/drone_ctrl2.cpp"
 consoles: Console:All:All

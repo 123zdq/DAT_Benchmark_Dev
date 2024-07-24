@@ -1,6 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <osm version='0.6' generator='JOSM'>
   <bounds minlat='41.7511' minlon='-87.5671' maxlat='41.767' maxlon='-87.5361' origin='CGImap 0.9.3 (2298766 spike-08.openstreetmap.org)' />
+  <node id='-25364' action='modify' visible='true' lat='41.76680909743' lon='-87.5585341528' />
+  <node id='-25365' action='modify' visible='true' lat='41.77573747675' lon='-87.56385732901' />
+  <node id='-25366' action='modify' visible='true' lat='41.77639628179' lon='-87.51633453173' />
+  <node id='-25367' action='modify' visible='true' lat='41.74446601871' lon='-87.51676490978' />
+  <node id='-25368' action='modify' visible='true' lat='41.74422518246' lon='-87.53255298876' />
+  <node id='-25369' action='modify' visible='true' lat='41.7514329189' lon='-87.53896327728' />
+  <node id='-25370' action='modify' visible='true' lat='41.76676688557' lon='-87.53903126568' />
   <node id='153536415' timestamp='2023-08-22T03:04:51Z' uid='11303102' user='watmildon' visible='true' version='8' changeset='140206868' lat='41.7574616' lon='-87.5588174'>
     <tag k='ele' v='179' />
     <tag k='gnis:Class' v='Populated Place' />
@@ -36292,6 +36299,18 @@
     <tag k='source' v='https://metra.com/train-lines/stations/79th-street-cheltenham' />
     <tag k='vending' v='public_transport_tickets' />
   </node>
+  <way id='-3411' action='modify' visible='true'>
+    <nd ref='-25364' />
+    <nd ref='-25365' />
+    <nd ref='-25366' />
+    <nd ref='-25367' />
+    <nd ref='-25368' />
+    <nd ref='-25369' />
+    <nd ref='-25370' />
+    <nd ref='-25364' />
+    <tag k='natural' v='water' />
+    <tag k='water' v='lake' />
+  </way>
   <way id='23449868' action='modify' timestamp='2024-05-21T16:32:52Z' uid='13257641' user='ion_chi' visible='true' version='20' changeset='151637298'>
     <nd ref='2213309087' />
     <nd ref='11922746566' />
