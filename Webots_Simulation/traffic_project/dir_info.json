@@ -1,18 +1,14 @@
 {
     "DRONE3": {
-        "episode1": 109,
-        "episode0": 0
+        "episode0": 5
     },
     "DRONE0": {
-        "episode1": 109,
-        "episode0": 0
+        "episode0": 5
     },
     "DRONE2": {
-        "episode1": 6,
-        "episode0": 0
+        "episode0": 5
     },
     "DRONE1": {
-        "episode1": 109,
-        "episode0": 0
+        "episode0": 5
     }
 }

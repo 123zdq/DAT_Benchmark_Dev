@@ -29,7 +29,7 @@ if __name__ == '__main__':
         child_dir = os.path.basename(k)
         if parent_dir not in json_data:
             json_data[parent_dir] = {}
-        json_data[parent_dir][child_dir] = sum(v)
+        json_data[parent_dir][child_dir] = sum(v) - 1
 
     # 将数据写入json文件
     with open('dir_info.json', 'w') as f:

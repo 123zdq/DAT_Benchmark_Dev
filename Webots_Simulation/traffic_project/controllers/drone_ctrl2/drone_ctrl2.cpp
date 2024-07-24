@@ -561,6 +561,8 @@ int main(int argc, char **argv)
           std::string formatted = oss.str();                      // 将输出流转换为字符串
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
+          string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";
+          config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir);
           videoCount++;
         }
         else if ((t - last_frame_t) >= (1. / static_cast<double>(config.get()->video.fps)))
@@ -570,6 +572,8 @@ int main(int argc, char **argv)
           std::string formatted = oss.str();                      // 将输出流转换为字符串
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
+          string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";
+          config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir);
           videoCount++;
           last_frame_t = t;
         }

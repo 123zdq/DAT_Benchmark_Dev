@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-23 17:00:41
+LastEditTime: 2024-07-24 10:37:56
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -140,7 +140,7 @@ elif configData["Simulation_Mode"] == "train":
             global_init = True
             init_count = 0
             # firstly run 310 steps for sumo to prepare for the cars
-            while init_count < (3100 + 6*multiCom.Number_process):
+            while init_count < (310 + 6*multiCom.Number_process):
                 init_count = init_count + 1
                 while robot.step(timestep) == -1: # step until simulation is running
                     pass 

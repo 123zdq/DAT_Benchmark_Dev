@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-15 15:02:39
+ * @LastEditTime: 2024-07-24 10:56:08
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -59,6 +59,9 @@ public:
     configHandle(std::string _filepath);
     ~configHandle(){}
     const configData_s *get(){ return &configData; }
+    nlohmann::json read_json_file(const std::string& file_path);
+    void write_json_file(const std::string& file_path, const nlohmann::json& json_obj);;
+    void writeJsonIncrement(std::string& _filepath, std::string _mark, int _value);
 private:
     std::string filepath;//json file path and name
     configData_s configData;//json file parse data
@@ -122,6 +125,41 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
                 << "        start_time:      " << configData.video.startTime << "\n"
                 << "        total_time:      " << configData.video.totalTime << std::endl;
     std::cout<< "    }\n \n \n"<<std::endl;
+}
+
+// 读取JSON文件
+nlohmann::json configHandle::read_json_file(const std::string& file_path) {
+    std::ifstream file(file_path);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << file_path << std::endl;
+        return nlohmann::json();
+    }
+
+    nlohmann::json json_obj;
+    file >> json_obj;
+    file.close();
+
+    return json_obj;
+}
+
+// 写入JSON文件
+void configHandle::write_json_file(const std::string& file_path, const nlohmann::json& json_obj) {
+    std::ofstream file(file_path);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << file_path << std::endl;
+        return;
+    }
+
+    file << json_obj.dump(4); // 使用4个空格缩进格式化输出
+    file.close();
+}
+
+
+void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark, int _value)
+{
+    json object = read_json_file(_filepath);
+    object[_mark] = _value;
+    write_json_file(_filepath, object);
 }
 
 
