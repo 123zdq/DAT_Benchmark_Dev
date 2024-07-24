@@ -31,7 +31,7 @@
         "Socket_Ip": "127.0.0.1",
         "Out_Video": {
                 "channels": 4,
-                "fps": 30.0,
+                "fps": 50.0,
                 "start_time": 1.0,
                 "total_time": 50.0
         },
@@ -40,7 +40,7 @@
                 "height_fixed": 15.0,
                 "height_random_max": 20.0,
                 "height_random_min": 13.0,
-                "direction_random": true,
+                "direction_random": false,
                 "direction_random_max": 3.14,
                 "direction_random_min": -3.14
         }

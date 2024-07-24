@@ -89,8 +89,8 @@ class RecvRewardDoneSocketPort:
                 time.sleep(0.001)
                 while is_file_in_use(self.reward_path):
                     pass
-                os.unlink(self.reward_path)
-                return self.data_last[-2],self.data_last[-1], self.data_last[0],self.data_last[1:-2]
+                # os.unlink(self.reward_path)
+                # return self.data_last[-2],self.data_last[-1], self.data_last[0],self.data_last[1:-2]
             with open(self.reward_path,'rb') as file:
                 self.s = file.read()
                 file.close()
@@ -108,7 +108,8 @@ class RecvRewardDoneSocketPort:
         self.data_last = deepcopy(self.data)
         while is_file_in_use(self.reward_path):
             pass
-        os.unlink(self.reward_path)
+        while os.path.exists(self.reward_path):
+            os.unlink(self.reward_path)
         return self.data[-2],self.data[-1], self.data[0],self.data[1:-2]
 
 """

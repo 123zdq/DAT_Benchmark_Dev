@@ -200,8 +200,10 @@ class BenchEnv_Multi():
             self.SuppleInfo: Other Sensor data/Reward Params for User to Customize their own State/Reward
     """
     def step(self,action):
-        logging.info('Already Enter step Function')
-
+        logging.info("\n")
+        logging.info('<----- Step Function ----->')
+        
+        
         ## If Exist Image when entering step function,DELETE IMAGE!!!
         while os.path.exists(self.img_path):
             logging.info('Unlink existing image first in step')
@@ -236,7 +238,7 @@ class BenchEnv_Multi():
 
         ## Read Reward,Done,Current step(Use to Manage Done) and Other_state
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
-        logging.info('Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
+        logging.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
@@ -260,8 +262,8 @@ class BenchEnv_Multi():
                 2. If receive first done, close done detection to avoid re-detection
                 3. If Webots do not receive done flag, open done detection again 
         """
-        if int(step_curr) <= self.Set_Done_Step:
-            logging.info('Open Done Flag')
+        if int(step_curr) <= self.Set_Done_Step and self.done_flag == False:
+            logging.info('Step_curr:{} self.Set_Done_Step:{} Open Done Flag'.format(step_curr,self.Set_Done_Step))
             self.done_flag = True
             self.last_done_flag = 0
         if done:
@@ -269,8 +271,10 @@ class BenchEnv_Multi():
                 self.done_flag = False
                 self.last_done_flag = step_curr
                 if reward == 0.0:
+                    logging.info('<--Failure Situation--> Reward -= 20')
                     reward -= 20
                 else:
+                    logging.info('<--Success Situation--> Reward += 20')
                     reward += 20
                 logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:
@@ -303,6 +307,8 @@ class BenchEnv_Multi():
             State: First state received from server through socket
     """
     def reset(self): 
+        logging.info("\n")
+        logging.info('<----- !!!!!Reset Function!!!!! ----->')
         ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!
         if os.path.exists(self.reward_path):
             time.sleep(0.001)
@@ -330,7 +336,7 @@ class BenchEnv_Multi():
 
         ## Read Reward,Done,Current step and Other_state abandoned
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
-        logging.info('In reset: Curr_reward:'+str(reward)+'Curr_done:'+str(done)+'Curr_step'+str(step_curr))
+        logging.info('In reset: Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
         
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
