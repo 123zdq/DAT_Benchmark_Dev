@@ -24,7 +24,7 @@
                 "max_sumo_car": 150,
                 "car_import_interval": 60.0,
                 "max_car_speed": 15,
-                "max_rou_distance": 500,
+                "max_rou_distance": 5000,
                 "min_rou_distance": 20,
                 "route_num": 5000
         },

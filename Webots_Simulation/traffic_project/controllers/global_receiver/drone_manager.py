@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-24 13:40:21
+LastEditTime: 2024-07-24 17:15:56
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -23,6 +23,7 @@ import os
 import platform
 import logging
 import MultiPortRecv
+import socket
 
 
 class droneManager:
@@ -241,8 +242,12 @@ class droneManager:
         is_step = [0]*self.configData["Out_Video"]["channels"] # Whether Trigger a step
         is_reset = [False]*self.configData["Out_Video"]["channels"] # Whether Trigger a reset
         episode = 0
+        udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         while True:
             self.initTime = time.time()
+            sendAddress = (self.configData["Socket_Ip"],self.configData["Config_Agen_Num_Port"])
+            data = bytes(str(0) + "\n", 'utf-8')
+            udp_socket.sendto(data, sendAddress)
 
             if self.multi_state == 1:
                 if self.machine_state == 1:
