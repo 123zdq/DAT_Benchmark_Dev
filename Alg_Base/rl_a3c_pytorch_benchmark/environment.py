@@ -74,7 +74,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                              process_idx=process_idx,Other_State=Other_State,CloudPoint=CloudPoint,RewardParams=RewardParams,\
                              action_list=[env_conf["Forward_Speed"],env_conf["Backward_Speed"],env_conf["Left_Speed"],\
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
-                            Control_Frequence = env_conf["Control_Frequence"])
+                             port_process=env_conf["port_process"],Control_Frequence = env_conf["Control_Frequence"])
         process_func = Identity
         return env,process_func
 
@@ -97,7 +97,7 @@ class BenchEnv_Multi():
     """
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
-        Control_Frequence = 500) -> None:
+        port_process,Control_Frequence = 500) -> None:
         self.Action_dim = Action_dim
         self.process_state = process_state
         self.num_process = arg_worker
@@ -136,6 +136,7 @@ class BenchEnv_Multi():
         self.pointcloud_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_PointCloud.txt"
         self.rewardparam_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_RewardParams.txt"
         
+        self.port_process = port_process
         """
             Use Path above to create corresponding socket
                 self.send_socket:
@@ -144,7 +145,7 @@ class BenchEnv_Multi():
                 self.recv_state_mechine:
                 self.recv_reward_params:
         """ 
-        self.send_socket=SendActionSocket(ip="127.0.0.1",port_action=self.port_list[3],port_control = self.port_list[3],action_path=self.action_path)
+        self.send_socket=SendActionSocket(ip="127.0.0.1",port_action=self.port_list[3],port_control = self.port_list[3],port_process=self.port_process,action_path=self.action_path)
         self.recv_rewarddone_socket=RecvRewardDoneSocketPort(22,id=self.port_list[2],reward_path=self.reward_path)
         self.recv_image_socket=RecvImgSocketPort(320*240*3,id=self.port_list[0],img_path=self.img_path)
         self.recv_state_mechine = RecvStateMachineSocketPort(id=self.port_list[1])
