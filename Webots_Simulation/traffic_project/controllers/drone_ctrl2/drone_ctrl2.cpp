@@ -433,7 +433,7 @@ int main(int argc, char **argv)
 
     
 
-    static int countMax = int(1000 / 2 / config.get()->controlFreq);
+    static int countMax = int(1000. / 2. / config.get()->controlFreq);
     if (countMax < 1)
     {
       countMax = 1;

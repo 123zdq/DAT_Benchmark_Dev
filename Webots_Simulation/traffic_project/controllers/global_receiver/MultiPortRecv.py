@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-19 22:08:15
+LastEditTime: 2024-07-24 13:42:47
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -68,6 +68,7 @@ class MultiProcessRecv():
         self.socketPort = []
         
         self.max_data_size = max_data_size
+        self.process_port = process_port
         MultiProcessRecv.Number_process = self.get_NumProcess(process_port)
         self.s = [b'']*MultiProcessRecv.Number_process
         self.s_last = [b'']*MultiProcessRecv.Number_process
@@ -115,6 +116,7 @@ class MultiProcessRecv():
         udp_socket.bind(('',Processport))
         Numprocess_bytes = udp_socket.recvfrom(256)[0]
         Number_process = int(Numprocess_bytes)
+        udp_socket.close()
         return Number_process + 1
 
     """
@@ -237,7 +239,7 @@ class MultiProcessRecv():
                 self.logger_list[getqueue].info("IDX:  "+str(getqueue)+"  real get actions: " + str(rgetqueue))
                 self.Action_list[getqueue] = rgetqueue
                 lastrgetqueue = rgetqueue
-                self.is_step[getqueue] = self.is_step[getqueue] + int(1000/2/self.ctrl_freq)
+                self.is_step[getqueue] = self.is_step[getqueue] + int(1000./2./self.ctrl_freq)
                 self.is_reset[getqueue] = self.Action_list[getqueue][4]
                 self.logger_list[getqueue].info("Unlink the file: " + str(self.savedir[getqueue]))
                 while is_file_in_use(self.savedir[getqueue]):
@@ -347,6 +349,7 @@ class MultiProcessRecv():
                     f.close()
                 self.stateInit = True
     
+
     """
         sendMachine(self, state:float, idx:int): Webots Send State Machine Flag to Client
         Input:
@@ -364,6 +367,12 @@ class MultiProcessRecv():
             with open(filePath, "wb") as f:
                 f.write(bytes(str(state) + "\n", 'utf-8'))
                 f.close()
+                
+    def keepSocketRunning(self):
+        udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        sendAddress = (self.tar_ip,self.process_port)
+        data = bytes(str(0) + "\n", 'utf-8')
+        udp_socket.sendto(data, sendAddress)
         
     """
         sendPointCloud(self, pointCloud:str, idx:int): Webots Send Radar Cloud Point Data to Client

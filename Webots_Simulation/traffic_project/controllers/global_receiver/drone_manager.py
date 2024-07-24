@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-19 21:59:48
+LastEditTime: 2024-07-24 13:40:21
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -21,6 +21,8 @@ import time
 import random
 import os
 import platform
+import logging
+import MultiPortRecv
 
 
 class droneManager:
@@ -60,6 +62,9 @@ class droneManager:
         droneTrV[0] = droneTrV[0] + 1 * id
         droneTrV[1] = droneTrV[1] + 1 * id
         self.drone.getField('translation').setSFVec3f(droneTrV)
+        # Logging
+        MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
+        self.logger = logging.getLogger("drone"+str(id))
         # init communications
         self.getFromActionPort = [0.] * 5
         # init action files
@@ -68,9 +73,6 @@ class droneManager:
         self.machine_state = 1
         # multiprocess actuate flag
         self.multi_state = 0
-        # Logging
-        # MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
-        # self.logger = logging.getLogger("drone"+str(id))
         # establish drone manager threading
         self.loop = threading.Thread(target=self.mainLoop)
         self.videoloop = threading.Thread(target=self.mainLoopForVideo)
@@ -94,6 +96,7 @@ class droneManager:
         action_message = struct.pack("fffff",self.getFromActionPort[0],self.getFromActionPort[1],self.getFromActionPort[2],self.getFromActionPort[3],step_count)
         emitter.send(action_message) 
         
+        
     '''
     description: use file io to set action to drone controller
     param {*} self
@@ -106,12 +109,14 @@ class droneManager:
             f.write(actionStr)
             f.close()
         
+        
     '''
     description: return state reward done / reward params / point cloud / image to ALG
     param {*} self
     return {*}
     '''
-    def returnState(self):
+    def returnState(self, step_count):
+        self.logger.info(str(step_count))
         # send state reward and done
         with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
             data = f.readline()
@@ -195,6 +200,7 @@ class droneManager:
         while True:
             self.initTime = time.time()
             # self.updateMachineState()
+            self.recCtrlPort.keepSocketRunning()
             self.actionUpdate()
             
             if self.multi_state == 1:
@@ -205,7 +211,7 @@ class droneManager:
                     if self.init():
                         # self.logger.info("drone finish sumo init")
                         # self.returnOnlyImage()
-                        self.returnState()
+                        self.returnState(self.step_count)
                         self.machine_state = 2 # init come to an end and transfer to steps
                 elif self.machine_state == 2:
                     self.sumoGod.ResetSumoDictionary()
@@ -220,7 +226,7 @@ class droneManager:
                         self.actionActivateFile(self.step_count)
                         if self.recCtrlPort.is_step[self.id] == 1:
                             # self.logger.info("return states reward done")
-                            self.returnState()
+                            self.returnState(self.step_count)
                         # reset step counts that have been actuated
                         self.recCtrlPort.is_step[self.id] = self.recCtrlPort.is_step[self.id] - 1
                         if self.recCtrlPort.is_step[self.id] < 0:
