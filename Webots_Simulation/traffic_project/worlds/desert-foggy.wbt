@@ -1,0 +1,4815 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/Road.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/Crossroad.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/CrossRoadsTrafficLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/GenericTrafficLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/buildings/protos/SimpleBuilding.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/StreetLight.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/bmw/BmwX5Simple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/toyota/ToyotaPriusSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/lincoln/LincolnMKZSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/mercedes_benz/MercedesBenzSprinterSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/tesla/TeslaModel3Simple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/range_rover/RangeRoverSportSVRSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/citroen/CitroenCZeroSimple.proto"
+IMPORTABLE EXTERNPROTO "../protos/M100.proto"
+IMPORTABLE EXTERNPROTO "../protos/trajectary.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/protos/SumoInterface.proto"
+
+WorldInfo {
+  info [
+    "World generated using the Open Street Map to Webots importer"
+    "Author: David Mansolino <david.mansolino@epfl.ch>"
+  ]
+  basicTimeStep 2
+  FPS 30
+  defaultDamping Damping {
+  }
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        30
+      ]
+      bounce 0
+      bounceVelocity 0
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.15200815100620457 0.04079350983653502 -0.9875370431446567 2.5100908610003883
+  position -1983.8671381232125 -1051.6670834643808 353.51629446950284
+  near 3
+}
+TexturedBackground {
+  texture "mars"
+}
+TexturedBackgroundLight {
+  texture "noon_sunny_garden"
+}
+DEF land Floor {
+  translation -1000 -1000 -0.02
+  size 17000 12000
+  appearance PBRAppearance {
+    baseColor 0.64 0.44 0.12
+    baseColorMap ImageTexture {
+      url [
+        ""
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Fog {
+  visibilityRange 50
+}
+Crossroad {
+  translation 2921.711608 1566.48606 0.01
+  name "crossroad(1)"
+  id "-58679"
+  shape []
+  connectedRoadIDs [
+    "-6050"
+    "-6468"
+  ]
+}
+Crossroad {
+  translation 2090.669509 -5898.701213 0.01
+  name "crossroad(2)"
+  id "-58682"
+  shape []
+  connectedRoadIDs [
+    "-6051"
+    "-6584"
+  ]
+}
+Crossroad {
+  translation -6258.185944 -5303.94451 0.01
+  name "crossroad(3)"
+  id "-58685"
+  shape []
+  connectedRoadIDs [
+    "-6052"
+    "-7133"
+  ]
+}
+Crossroad {
+  translation -3977.105887 2287.343047 0.01
+  name "crossroad(4)"
+  id "-58738"
+  shape [
+    8.555149 4.603376 0
+    8.499403 -0.100725 0
+    8.448359 -4.407914 0
+    4.976231 -8.560269 0
+    -0.101896 -8.499389 0
+    -8.550447 -4.206464 0
+    -8.443658 4.804819 0
+    0.101896 8.499389 0
+    5.180022 8.43851 0
+    8.555149 4.603376 0
+  ]
+  connectedRoadIDs [
+    "-6546_1"
+    "-6546_2"
+    "-6559"
+  ]
+}
+Crossroad {
+  translation -1875.929827 -5802.482006 0.01
+  name "crossroad(5)"
+  id "-58754"
+  shape [
+    8.507445 -1.477704 0
+    0.042618 -8.499893 0
+    -1.257829 -8.506413 0
+    -8.492346 -1.562144 0
+    -8.506373 1.261756 0
+    -1.343064 8.493373 0
+    -0.042618 8.499893 0
+    8.493417 1.346209 0
+    8.499895 0.04222 0
+    8.507445 -1.477704 0
+  ]
+  connectedRoadIDs [
+    "-6598_1"
+    "-6598_2"
+    "-6612"
+  ]
+}
+Crossroad {
+  translation 2926.287757 -858.407382 0.01
+  name "crossroad(6)"
+  id "-58861"
+  shape [
+    10.531254 7.832157 0
+    9.426467 -9.131906 0
+    -10.531253 -7.832158 0
+    -9.426468 9.131905 0
+    -7.839507 10.525784 0
+    9.125324 9.43284 0
+    10.531254 7.832157 0
+  ]
+  connectedRoadIDs [
+    "-6471"
+    "-6486"
+    "-6501"
+  ]
+}
+Crossroad {
+  translation -5177.041804 2265.026715 0.01
+  name "crossroad(7)"
+  id "-58884"
+  shape []
+  connectedRoadIDs [
+    "-6053"
+    "-6530"
+  ]
+}
+Crossroad {
+  translation -6268.137835 -2649.048086 0.01
+  name "crossroad(8)"
+  id "-58925"
+  shape [
+    10.109402 -8.369587 0
+    8.627714 -9.890023 0
+    -8.370885 -10.108328 0
+    -9.888916 -8.628983 0
+    -10.109402 8.369587 0
+    9.888915 8.628983 0
+    10.109402 -8.369587 0
+  ]
+  connectedRoadIDs [
+    "-6637"
+    "-6666_1"
+    "-6666_2"
+  ]
+}
+Crossroad {
+  translation 2925.221596 -842.036394 0.01
+  name "crossroad(9)"
+  id "-58949"
+  shape []
+  connectedRoadIDs [
+    "-6468"
+    "-6471"
+  ]
+}
+Crossroad {
+  translation 2927.169971 -871.953826 0.01
+  name "crossroad(10)"
+  id "-58950"
+  shape []
+  connectedRoadIDs [
+    "-6486"
+    "-7052"
+  ]
+}
+Crossroad {
+  translation 2910.826237 -859.403477 0.01
+  name "crossroad(11)"
+  id "-58951"
+  shape []
+  connectedRoadIDs [
+    "-6501"
+    "-7031"
+  ]
+}
+Crossroad {
+  translation -3981.809985 2287.287302 0.01
+  name "crossroad(12)"
+  id "-58966"
+  shape []
+  connectedRoadIDs [
+    "-6530"
+    "-6546_1"
+  ]
+}
+Crossroad {
+  translation -3972.798699 2287.394091 0.01
+  name "crossroad(13)"
+  id "-58967"
+  shape []
+  connectedRoadIDs [
+    "-6546_2"
+    "-7016"
+  ]
+}
+Crossroad {
+  translation -3977.045008 2282.26492 0.01
+  name "crossroad(14)"
+  id "-58968"
+  shape []
+  connectedRoadIDs [
+    "-6559"
+    "-7148"
+  ]
+}
+Crossroad {
+  translation -1874.409903 -5802.489556 0.01
+  name "crossroad(15)"
+  id "-58981"
+  shape []
+  connectedRoadIDs [
+    "-6598_1"
+    "-7098"
+  ]
+}
+Crossroad {
+  translation -1877.233809 -5802.475528 0.01
+  name "crossroad(16)"
+  id "-58982"
+  shape []
+  connectedRoadIDs [
+    "-6598_2"
+    "-7066"
+  ]
+}
+Crossroad {
+  translation -1875.923307 -5801.181559 0.01
+  name "crossroad(17)"
+  id "-58983"
+  shape []
+  connectedRoadIDs [
+    "-6612"
+    "-7127"
+  ]
+}
+Crossroad {
+  translation -6239.209916 -2649.419593 0.01
+  name "crossroad(18)"
+  id "-59000"
+  shape []
+  connectedRoadIDs [
+    "-6637"
+    "-7179"
+  ]
+}
+Crossroad {
+  translation -6268.39536 -2668.902169 0.01
+  name "crossroad(19)"
+  id "-59001"
+  shape []
+  connectedRoadIDs [
+    "-6652"
+    "-6666_1"
+  ]
+}
+Crossroad {
+  translation -6267.796626 -2622.742405 0.01
+  name "crossroad(20)"
+  id "-59002"
+  shape []
+  connectedRoadIDs [
+    "-6666_2"
+    "-7079"
+  ]
+}
+Crossroad {
+  translation -2767.692163 -2202.896779 0.01
+  name "crossroad(21)"
+  id "-59045"
+  shape []
+  connectedRoadIDs [
+    "-6427_2"
+    "-7115"
+  ]
+}
+Crossroad {
+  translation -2417.428043 -1734.061484 0.01
+  name "crossroad(22)"
+  id "-59046"
+  shape []
+  connectedRoadIDs [
+    "-6370"
+    "-6390_2"
+  ]
+}
+Crossroad {
+  translation -2860.306863 -1880.83358 0.01
+  name "crossroad(23)"
+  id "-59059"
+  shape [
+    11.95964 5.405276 0
+    7.261405 -10.932612 0
+    4.922668 -12.166238 0
+    -11.21426 -6.818384 0
+    -12.094374 -5.096678 0
+    -6.978543 11.115302 0
+    -5.133911 12.078616 0
+    11.093751 7.012752 0
+    11.95964 5.405276 0
+  ]
+  connectedRoadIDs [
+    "-6390_1"
+    "-6390_2"
+    "-6427_1"
+    "-6427_2"
+  ]
+}
+Crossroad {
+  translation 363.747644 2300.024562 0.01
+  name "crossroad(24)"
+  id "-59538"
+  shape []
+  connectedRoadIDs [
+    "-6050"
+    "-7167"
+  ]
+}
+Crossroad {
+  translation 852.685735 -911.783513 0.01
+  name "crossroad(25)"
+  id "-59539"
+  shape []
+  connectedRoadIDs [
+    "-6370"
+    "-7031"
+  ]
+}
+Crossroad {
+  translation 2949.315813 -3535.788149 0.01
+  name "crossroad(26)"
+  id "-59548"
+  shape []
+  connectedRoadIDs [
+    "-6051"
+    "-7052"
+  ]
+}
+Crossroad {
+  translation -4090.022991 -5834.604261 0.01
+  name "crossroad(27)"
+  id "-59550"
+  shape []
+  connectedRoadIDs [
+    "-6052"
+    "-7066"
+  ]
+}
+Crossroad {
+  translation -6233.526829 -905.091837 0.01
+  name "crossroad(28)"
+  id "-59551"
+  shape []
+  connectedRoadIDs [
+    "-7079"
+    "-7092"
+  ]
+}
+Crossroad {
+  translation -6192.461997 1153.36083 0.01
+  name "crossroad(29)"
+  id "-59552"
+  shape []
+  connectedRoadIDs [
+    "-6053"
+    "-7092"
+  ]
+}
+Crossroad {
+  translation -423.297792 -5837.843229 0.01
+  name "crossroad(30)"
+  id "-59553"
+  shape []
+  connectedRoadIDs [
+    "-7098"
+    "-7103"
+  ]
+}
+Crossroad {
+  translation 1003.855831 -5872.452401 0.01
+  name "crossroad(31)"
+  id "-59554"
+  shape []
+  connectedRoadIDs [
+    "-6584"
+    "-7103"
+  ]
+}
+Crossroad {
+  translation -2159.773789 -3124.078089 0.01
+  name "crossroad(32)"
+  id "-59555"
+  shape []
+  connectedRoadIDs [
+    "-6110"
+    "-7115"
+  ]
+}
+Crossroad {
+  translation -1712.500305 -4622.972871 0.01
+  name "crossroad(33)"
+  id "-59556"
+  shape []
+  connectedRoadIDs [
+    "-6110"
+    "-7127"
+  ]
+}
+Crossroad {
+  translation -6265.518028 -4032.654109 0.01
+  name "crossroad(34)"
+  id "-59558"
+  shape []
+  connectedRoadIDs [
+    "-6652"
+    "-7133"
+  ]
+}
+Crossroad {
+  translation -3750.721433 1222.379835 0.01
+  name "crossroad(35)"
+  id "-59559"
+  shape []
+  connectedRoadIDs [
+    "-7148"
+    "-7161"
+  ]
+}
+Crossroad {
+  translation -2646.56131 -452.756383 0.01
+  name "crossroad(36)"
+  id "-59560"
+  shape []
+  connectedRoadIDs [
+    "-6427_1"
+    "-7161"
+  ]
+}
+Crossroad {
+  translation -1813.635671 2293.498292 0.01
+  name "crossroad(37)"
+  id "-59561"
+  shape []
+  connectedRoadIDs [
+    "-7016"
+    "-7167"
+  ]
+}
+Crossroad {
+  translation -4349.101637 -2122.921067 0.01
+  name "crossroad(38)"
+  id "-59562"
+  shape []
+  connectedRoadIDs [
+    "-6390_1"
+    "-7179"
+  ]
+}
+Road {
+  translation 363.747644 2300.024562 0.01
+  name "way"
+  id "-6050"
+  startJunction "-59538"
+  endJunction "-58679"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    61.649142 0.190197 0
+    1809.231532 11.757915 0
+    1939.818617 -6.279225 0
+    2083.524763 -47.997292 0
+    2201.762163 -115.84412 0
+    2307.672316 -208.192035 0
+    2420.964179 -331.584278 0
+    2481.699435 -442.704198 0
+    2537.497925 -581.597818 0
+    2555.539231 -658.393777 0
+    2557.963964 -733.538502 0
+  ]
+  startingAngle [
+    -0.002997
+  ]
+  endingAngle [
+    1.539178
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2949.315813 -3535.788149 0.01
+  name "way(1)"
+  id "-6051"
+  startJunction "-59548"
+  endJunction "-58682"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    22.525791 -1787.825014 0
+    2.769458 -1918.607434 0
+    -56.445297 -2050.182151 0
+    -137.013118 -2141.698692 0
+    -241.418309 -2244.649838 0
+    -360.606288 -2318.169351 0
+    -493.754048 -2360.62186 0
+    -669.618104 -2358.099323 0
+    -858.646304 -2362.913065 0
+  ]
+  startingAngle [
+    1.558199
+  ]
+  endingAngle [
+    -3.117445
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -4090.022991 -5834.604261 0.01
+  name "way(2)"
+  id "-6052"
+  startJunction "-59550"
+  endJunction "-58685"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1353.529772 -19.463803 0
+    -1533.479496 -7.849382 0
+    -1683.816698 42.166233 0
+    -1780.730342 97.849178 0
+    -1872.711562 154.344812 0
+    -1999.163474 251.746081 0
+    -2119.032262 355.679751 0
+    -2157.569588 435.822656 0
+    -2168.162953 530.659751 0
+  ]
+  startingAngle [
+    -3.156111
+  ]
+  endingAngle [
+    -1.576564
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6192.461997 1153.36083 0.01
+  name "way(3)"
+  id "-6053"
+  startJunction "-59552"
+  endJunction "-58884"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    7.32798 367.354811 0
+    39.541464 525.78995 0
+    139.915211 689.064305 0
+    287.098329 850.654316 0
+    462.974301 965.651894 0
+    654.416302 1046.326076 0
+    821.187969 1097.619999 0
+    1001.878612 1110.969748 0
+    1015.420193 1111.665886 0
+  ]
+  startingAngle [
+    -1.550851
+  ]
+  endingAngle [
+    -0.051362
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2159.773789 -3124.078089 0.01
+  name "way(4)"
+  id "-6110"
+  startJunction "-59555"
+  endJunction "-59556"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    213.45141 -184.221864 0
+    560.991706 -600.146162 0
+    454.366636 -1023.389953 0
+    535.672544 -1306.585028 0
+    447.273484 -1498.894782 0
+  ]
+  startingAngle [
+    0.712055
+  ]
+  endingAngle [
+    -4.281522
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2417.428043 -1734.061484 0.01
+  name "way(5)"
+  id "-6370"
+  startJunction "-59046"
+  endJunction "-59539"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    21.022392 15.857919 0
+    343.268241 290.163903 0
+    869.203418 525.105905 0
+    1618.56255 759.918241 0
+    2847.540799 831.08236 0
+    3270.113778 822.277971 0
+  ]
+  startingAngle [
+    -0.64627
+  ]
+  endingAngle [
+    0.020832
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2921.711608 1566.48606 0.01
+  name "way(6)"
+  id "-6468"
+  startJunction "-58679"
+  endJunction "-58949"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    29.250254 -924.804673 0
+    78.437283 -1182.983922 0
+    7.381341 -1391.979869 0
+    6.045182 -1795.807504 0
+    3.509989 -2408.522454 0
+  ]
+  startingAngle [
+    1.539178
+  ]
+  endingAngle [
+    -4.708251
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2925.221596 -842.036394 0.01
+  name "way(7)"
+  id "-6471"
+  startJunction "-58949"
+  endJunction "-58861"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.416287 -6.392127 0
+  ]
+  startingAngle [
+    -4.708251
+  ]
+  endingAngle [
+    1.505763
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2926.937632 -868.386243 0.01
+  name "way(8)"
+  id "-6486"
+  startJunction "-58861"
+  endJunction "-58950"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.232339 -3.567583 0
+  ]
+  startingAngle [
+    1.505763
+  ]
+  endingAngle [
+    1.455564
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2910.826237 -859.403477 0.01
+  name "way(9)"
+  id "-6501"
+  startJunction "-58951"
+  endJunction "-58861"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    5.482208 0.353186 0
+  ]
+  startingAngle [
+    -0.064335
+  ]
+  endingAngle [
+    -0.064335
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -5177.041804 2265.026715 0.01
+  name "way(10)"
+  id "-6530"
+  startJunction "-58884"
+  endJunction "-58966"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1195.231819 22.260586 0
+  ]
+  startingAngle [
+    -0.051362
+  ]
+  endingAngle [
+    -0.01185
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2090.669509 -5898.701213 0.01
+  name "way(11)"
+  id "-6584"
+  startJunction "-58682"
+  endJunction "-59554"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1086.813678 26.248812 0
+  ]
+  startingAngle [
+    -3.117445
+  ]
+  endingAngle [
+    -3.117445
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6258.138659 -2649.1765 0.01
+  name "way(12)"
+  id "-6637"
+  startJunction "-58925"
+  endJunction "-59000"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    18.928744 -0.243092 0
+  ]
+  startingAngle [
+    0.012842
+  ]
+  endingAngle [
+    0.012842
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6265.518028 -4032.654109 0.01
+  name "way(13)"
+  id "-6652"
+  startJunction "-59558"
+  endJunction "-59001"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -6.778318 1175.494139 0
+    -2.877332 1363.75194 0
+  ]
+  startingAngle [
+    -1.576563
+  ]
+  endingAngle [
+    -1.557826
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3972.798699 2287.394091 0.01
+  name "way(14)"
+  id "-7016"
+  startJunction "-58967"
+  endJunction "-59561"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2159.163028 6.104201 0
+  ]
+  startingAngle [
+    -0.01185
+  ]
+  endingAngle [
+    -0.002997
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 852.685735 -911.783513 0.01
+  name "way(15)"
+  id "-7031"
+  startJunction "-59539"
+  endJunction "-58951"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    221.459381 -4.608555 0
+    806.343481 -24.498737 0
+    1207.231386 -11.602225 0
+    1719.847075 20.873133 0
+    2058.140502 52.380036 0
+  ]
+  startingAngle [
+    0.020832
+  ]
+  endingAngle [
+    -0.064335
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2927.169971 -871.953826 0.01
+  name "way(16)"
+  id "-7052"
+  startJunction "-58950"
+  endJunction "-59548"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    65.765968 -568.195754 0
+    12.70993 -1914.839893 0
+    22.145842 -2663.834323 0
+  ]
+  startingAngle [
+    1.455564
+  ]
+  endingAngle [
+    1.558199
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1877.233809 -5802.475528 0.01
+  name "way(17)"
+  id "-7066"
+  startJunction "-58982"
+  endJunction "-59550"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2212.789181 -32.128733 0
+  ]
+  startingAngle [
+    -3.156111
+  ]
+  endingAngle [
+    -3.156111
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6267.796626 -2622.742405 0.01
+  name "way(18)"
+  id "-7079"
+  startJunction "-59002"
+  endJunction "-59551"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    34.269797 1717.650568 0
+  ]
+  startingAngle [
+    -1.557826
+  ]
+  endingAngle [
+    -1.55085
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6233.526829 -905.091837 0.01
+  name "way(19)"
+  id "-7092"
+  startJunction "-59551"
+  endJunction "-59552"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    41.064831 2058.452667 0
+  ]
+  startingAngle [
+    -1.55085
+  ]
+  endingAngle [
+    -1.550851
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -423.297792 -5837.843229 0.01
+  name "way(20)"
+  id "-7098"
+  startJunction "-59553"
+  endJunction "-58981"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1451.112111 35.353673 0
+  ]
+  startingAngle [
+    -3.117347
+  ]
+  endingAngle [
+    -3.136626
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1003.855831 -5872.452401 0.01
+  name "way(21)"
+  id "-7103"
+  startJunction "-59554"
+  endJunction "-59553"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1427.153623 34.609172 0
+  ]
+  startingAngle [
+    -3.117445
+  ]
+  endingAngle [
+    -3.117347
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2767.692163 -2202.896779 0.01
+  name "way(22)"
+  id "-7115"
+  startJunction "-59045"
+  endJunction "-59555"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    64.763488 -218.154288 0
+    151.141526 -526.933351 0
+    607.918374 -921.18131 0
+  ]
+  startingAngle [
+    1.290785
+  ]
+  endingAngle [
+    0.712055
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1712.500305 -4622.972871 0.01
+  name "way(23)"
+  id "-7127"
+  startJunction "-59556"
+  endJunction "-58983"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -221.997263 -482.933544 0
+    -162.492954 -690.206196 0
+    -163.423002 -1178.208688 0
+  ]
+  startingAngle [
+    -4.281522
+  ]
+  endingAngle [
+    -4.707375
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6258.185944 -5303.94451 0.01
+  name "way(24)"
+  id "-7133"
+  startJunction "-58685"
+  endJunction "-59558"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -7.332084 1271.290401 0
+  ]
+  startingAngle [
+    -1.576564
+  ]
+  endingAngle [
+    -1.576563
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3977.045008 2282.26492 0.01
+  name "way(25)"
+  id "-7148"
+  startJunction "-58968"
+  endJunction "-59559"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    5.695046 -424.317364 0
+    163.155148 -839.724071 0
+    226.323574 -1059.885086 0
+  ]
+  startingAngle [
+    1.558808
+  ]
+  endingAngle [
+    1.291376
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3750.721433 1222.379835 0.01
+  name "way(26)"
+  id "-7161"
+  startJunction "-59559"
+  endJunction "-59560"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    121.092812 -422.033168 0
+    710.087613 -822.727298 0
+    849.360565 -1308.017832 0
+    1104.160123 -1675.136218 0
+  ]
+  startingAngle [
+    1.291376
+  ]
+  endingAngle [
+    0.964059
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1813.635671 2293.498292 0.01
+  name "way(27)"
+  id "-7167"
+  startJunction "-59561"
+  endJunction "-59538"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2177.383315 6.52627 0
+  ]
+  startingAngle [
+    -0.002997
+  ]
+  endingAngle [
+    -0.002997
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6239.209916 -2649.419593 0.01
+  name "way(28)"
+  id "-7179"
+  startJunction "-59000"
+  endJunction "-59562"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    286.231798 -0.362285 0
+    674.036585 12.310433 0
+    1121.246706 279.895117 0
+    1890.108278 526.498525 0
+  ]
+  startingAngle [
+    0.012842
+  ]
+  endingAngle [
+    -0.310408
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -4349.101637 -2122.921067 0.01
+  name "way(29)"
+  id "-6390_1"
+  startJunction "-59562"
+  endJunction "-59059"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    125.274419 40.18515 0
+    710.267183 91.959466 0
+    1052.027127 85.12907 0
+    1464.594628 234.532816 0
+    1479.249091 239.107568 0
+  ]
+  startingAngle [
+    -0.310408
+  ]
+  endingAngle [
+    -0.302588
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2850.814552 -1877.687784 0.01
+  name "way(30)"
+  id "-6390_2"
+  startJunction "-59059"
+  endJunction "-59046"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    433.386509 143.6263 0
+  ]
+  startingAngle [
+    -0.320014
+  ]
+  endingAngle [
+    -0.64627
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2646.56131 -452.756383 0.01
+  name "way(31)"
+  id "-6427_1"
+  startJunction "-59560"
+  endJunction "-59059"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    87.498105 -126.064705 0
+    -48.809463 -550.478237 0
+    -334.785999 -1006.026156 0
+    -222.804124 -1399.370738 0
+    -216.754865 -1418.540738 0
+  ]
+  startingAngle [
+    0.964059
+  ]
+  endingAngle [
+    1.265127
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2857.543195 -1890.444102 0.01
+  name "way(32)"
+  id "-6427_2"
+  startJunction "-59059"
+  endJunction "-59045"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    89.851032 -312.452676 0
+  ]
+  startingAngle [
+    1.290785
+  ]
+  endingAngle [
+    1.290785
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6268.39536 -2668.902169 0.01
+  name "way(33)"
+  id "-6666_1"
+  startJunction "-59001"
+  endJunction "-58925"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.127827 9.854924 0
+  ]
+  startingAngle [
+    -1.557826
+  ]
+  endingAngle [
+    -1.557826
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -6268.008136 -2639.048927 0.01
+  name "way(34)"
+  id "-6666_2"
+  startJunction "-58925"
+  endJunction "-59002"
+  width 17
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.21151 16.306522 0
+  ]
+  startingAngle [
+    -1.557826
+  ]
+  endingAngle [
+    -1.557826
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Solid {
+  translation 2162.98 4409.3 -426.302
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand"
+}
+Solid {
+  translation 2292.24 4456.29 -426.302
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(70)"
+}
+Solid {
+  translation -857.725 4293.16 -452.42
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(1)"
+}
+Solid {
+  translation 677.277 2628.4 -656.42
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(52)"
+}
+Solid {
+  translation 1044.49 1933.87 -656.42
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(53)"
+}
+Solid {
+  translation 479.998 915.406 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(54)"
+}
+Solid {
+  translation 5455.23 3560.7 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(60)"
+}
+Solid {
+  translation 5455.23 3560.7 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(69)"
+}
+Solid {
+  translation 5316.64 3726.84 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(68)"
+}
+Solid {
+  translation 5387.66 3177.02 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(67)"
+}
+Solid {
+  translation 5439.19 2797.41 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(66)"
+}
+Solid {
+  translation 5416.39 2380.99 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(65)"
+}
+Solid {
+  translation 4577.38 1611.12 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(64)"
+}
+Solid {
+  translation 4843.37 1666.08 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(63)"
+}
+Solid {
+  translation 5076.41 1668.83 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(62)"
+}
+Solid {
+  translation 5385.23 1727.59 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(61)"
+}
+Solid {
+  translation 6246.36 1356.03 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(78)"
+}
+Solid {
+  translation 6150.46 1811.06 -923.372
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(79)"
+}
+Solid {
+  translation 5314.45 596.491 -849.371
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(72)"
+}
+Solid {
+  translation 5323.04 526.75 -849.371
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(75)"
+}
+Solid {
+  translation 4845.45 565.221 -849.371
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(73)"
+}
+Solid {
+  translation 5119.48 509.63 -849.371
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(76)"
+}
+Solid {
+  translation 5119.48 509.63 -849.371
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(74)"
+}
+Solid {
+  translation -123.545 -576.495 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(55)"
+}
+Solid {
+  translation 442.753 -107.853 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(109)"
+}
+Solid {
+  translation -183.293 -287.419 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(111)"
+}
+Solid {
+  translation -280.991 -325.165 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(105)"
+}
+Solid {
+  translation -1221.09 -394.86 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(104)"
+}
+Solid {
+  translation -985.255 -378.416 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(108)"
+}
+Solid {
+  translation -806.848 -401.241 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(107)"
+}
+Solid {
+  translation -570.491 -378.545 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(106)"
+}
+Solid {
+  translation 301.516 721.724 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(103)"
+}
+Solid {
+  translation 704.348 1042.94 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(56)"
+}
+Solid {
+  translation 1661.94 1476.25 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(57)"
+}
+Solid {
+  translation 1661.94 1476.25 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(59)"
+}
+Solid {
+  translation 1347.48 1340.42 -928.939
+  rotation 0 0 -1 -2.9780053071795862
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(58)"
+}
+Solid {
+  translation -2225.19 4894.61 -697.639
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(5)"
+}
+Solid {
+  translation -2201.25 7206.9 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(7)"
+}
+Solid {
+  translation -2201.25 7206.9 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(12)"
+}
+Solid {
+  translation -7279.74 7266.55 -66.896
+  rotation 0 0 -1 2.3889
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(11)"
+}
+Solid {
+  translation -10745.5 3011.54 -66.896
+  rotation 0 0 -1 1.66895
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(17)"
+}
+Solid {
+  translation -9587.16 2213.52 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(16)"
+}
+Solid {
+  translation -530.827 -4701.48 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(15)"
+}
+Solid {
+  translation 1929.92 -4688.18 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(31)"
+}
+Solid {
+  translation 470.531 -6047.4 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(32)"
+}
+Solid {
+  translation 470.531 -6047.4 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(34)"
+}
+Solid {
+  translation 4623.8 696.015 -201.778
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(33)"
+}
+Solid {
+  translation -893.724 -400.393 -192.587
+  rotation 0 0 -1 1.91111
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(38)"
+}
+Solid {
+  translation 4672.41 3031.52 -81.4366
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(39)"
+}
+Solid {
+  translation 4105.29 5835.84 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(42)"
+}
+Solid {
+  translation 2423.62 6144.41 -66.896
+  rotation 0 0 -1 1.82603
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(44)"
+}
+Solid {
+  translation 4553.42 4980.88 -270.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(43)"
+}
+Solid {
+  translation 4760.94 194.407 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(40)"
+}
+Solid {
+  translation 4760.94 194.407 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(41)"
+}
+Solid {
+  translation 4633.37 -616.75 -69.1351
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(37)"
+}
+Solid {
+  translation 4882.67 -1808.39 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(36)"
+}
+Solid {
+  translation 4342.81 -3659.81 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(35)"
+}
+Solid {
+  translation -2924.82 -4715.03 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(30)"
+}
+Solid {
+  translation -5272.74 -4763.19 -66.896
+  rotation 0 0 -1 2.21218
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(29)"
+}
+Solid {
+  translation -8980.83 -4994.79 -66.896
+  rotation 0 0 -1 1.82603
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(28)"
+}
+Solid {
+  translation -10561.7 -2424.25 -66.896
+  rotation 0 0 -1 1.82603
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(27)"
+}
+Solid {
+  translation -10516.8 -363.821 -66.896
+  rotation 0 0 -1 1.82603
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(26)"
+}
+Solid {
+  translation -6523.14 -460.545 -474.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(25)"
+}
+Solid {
+  translation -6508.8 -676.433 -474.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(24)"
+}
+Solid {
+  translation -5076.34 -867.04 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(23)"
+}
+Solid {
+  translation -5076.34 -867.04 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(102)"
+}
+Solid {
+  translation -6335.74 -1085.22 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(101)"
+}
+Solid {
+  translation -5695.29 -743.58 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(100)"
+}
+Solid {
+  translation 225.295 -1713.81 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(22)"
+}
+Solid {
+  translation -232.089 -1594.6 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(83)"
+}
+Solid {
+  translation -2192.97 -1726.13 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(82)"
+}
+Solid {
+  translation -1972.78 -1576.91 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(81)"
+}
+Solid {
+  translation -3059.71 902.331 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(80)"
+}
+Solid {
+  translation -2903.43 895.146 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(110)"
+}
+Solid {
+  translation -1392.3 795.852 -406.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(21)"
+}
+Solid {
+  translation -2011.2 793.93 -406.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(20)"
+}
+Solid {
+  translation -1725.59 -820.312 -71.3248
+  rotation 0 0 -1 1.58386
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(19)"
+}
+Solid {
+  translation -1670.25 -982.86 -118.217
+  rotation 0 0 -1 1.58386
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(77)"
+}
+Solid {
+  translation -1699.2 -845.699 -104.847
+  rotation 0 0 -1 1.58386
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(71)"
+}
+Solid {
+  translation -6304.96 3764.89 -610.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(18)"
+}
+Solid {
+  translation -6329.46 3056.23 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(50)"
+}
+Solid {
+  translation -6440.35 4238.78 -474.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(49)"
+}
+Solid {
+  translation -6994.68 4040.27 -474.896
+  rotation 0 0 -1 1.85875
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(51)"
+}
+Solid {
+  translation -7321.82 849.775 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(48)"
+}
+Solid {
+  translation -7389.89 751.704 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(89)"
+}
+Solid {
+  translation -4830.03 1445.02 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(90)"
+}
+Solid {
+  translation -5006.5 1393.82 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(92)"
+}
+Solid {
+  translation -5006.5 1393.82 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(95)"
+}
+Solid {
+  translation -5344.15 1373.82 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(94)"
+}
+Solid {
+  translation -4770.79 2041.61 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(96)"
+}
+Solid {
+  translation -4853.4 1768.48 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(97)"
+}
+Solid {
+  translation -4813.29 1910.62 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(98)"
+}
+Solid {
+  translation -4966.41 1450.35 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(93)"
+}
+Solid {
+  translation -7606.58 753.953 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(91)"
+}
+Solid {
+  translation -7536.04 864.423 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(88)"
+}
+Solid {
+  translation -7565 975.435 -968.847
+  rotation 0 0 -1 1.89148
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(87)"
+}
+Solid {
+  translation -6994.38 1419.62 -833.335
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(86)"
+}
+Solid {
+  translation -6702.55 1964.58 -553.827
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(85)"
+}
+Solid {
+  translation -6092.18 2725.96 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(84)"
+}
+Solid {
+  translation -6257.78 2773.85 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(99)"
+}
+Solid {
+  translation -4410.49 7048.81 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(14)"
+}
+Solid {
+  translation -8191.26 6868.35 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(13)"
+}
+Solid {
+  translation -7075.01 6994.46 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(47)"
+}
+Solid {
+  translation -6545.91 7081.89 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(46)"
+}
+Solid {
+  translation -5170.14 7047.83 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(45)"
+}
+Solid {
+  translation -1066.29 7079.27 -270.896
+  rotation 0 0 -1 1.96347
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(10)"
+}
+Solid {
+  translation -2586.93 5156.36 -833.271
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(9)"
+}
+Solid {
+  translation -2178.1 4885.51 -660.274
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(8)"
+}
+Solid {
+  translation -1808.94 4745.31 -571.96
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(6)"
+}
+Solid {
+  translation 373.91 4397.69 -452.42
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(4)"
+}
+Solid {
+  translation 33.5464 4363.86 -321.271
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(3)"
+}
+Solid {
+  translation 1235.62 4338.67 -321.271
+  rotation 0 0 -1 2.58524
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.700008 0.475196 0.0209964
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/sand.stl"
+        ]
+        ccw FALSE
+      }
+    }
+  ]
+  name "sand(2)"
+}
+CrossRoadsTrafficLight {
+  translation -2860.84 -1880.16 -3.19744e-13
+  rotation 0 0 1 0.287979
+}
+GenericTrafficLight {
+  translation -1883.49 -5809.73 -1.42109e-14
+  rotation 0 0 1 3.0696
+}
+GenericTrafficLight {
+  translation -1867.76 -5796 0
+  rotation 0 0 1 -0.04581530717958593
+  name "generic traffic light(1)"
+}
+GenericTrafficLight {
+  translation -1882.52 -5794.36 -2.13163e-14
+  rotation 0 0 1 1.56425
+  name "generic traffic light(2)"
+}
+GenericTrafficLight {
+  translation 2916.04 -866.14 0
+  rotation 0 0 1 -3.121955307179586
+  name "generic traffic light(3)"
+}
+GenericTrafficLight {
+  translation 2918.51 -848.423 3.55271e-15
+  rotation 0 0 1 1.56425
+  name "generic traffic light(4)"
+}
+GenericTrafficLight {
+  translation 2934.11 -868.266 0
+  rotation 0 0 1 -1.4791653071795858
+  name "generic traffic light(5)"
+}
+GenericTrafficLight {
+  translation -3985.23 2280.21 3.10862e-13
+  rotation 0 0 -1 -3.1285053071795863
+  name "generic traffic light(6)"
+}
+GenericTrafficLight {
+  translation -3969.12 2294.48 -7.10543e-15
+  rotation 0 0 1 1.23383e-06
+  name "generic traffic light(7)"
+}
+GenericTrafficLight {
+  translation -3970.29 2278.92 0
+  rotation 0 0 -1 1.57734
+  name "generic traffic light(8)"
+}
+GenericTrafficLight {
+  translation -6261.56 -2660.52 0
+  rotation 0 0 -1 1.57734
+  name "generic traffic light(9)"
+}
+GenericTrafficLight {
+  translation -6257.64 -2641.95 -3.55271e-15
+  rotation 0 0 -1 0.0589036
+  name "generic traffic light(10)"
+}
+GenericTrafficLight {
+  translation -6275.24 -2638.62 -4.9738e-14
+  rotation 0 0 1 1.57734
+  name "generic traffic light(11)"
+}
+SimpleBuilding {
+  translation 3014.66 -1135.97 2.27375e-13
+  rotation 0 0 -1 1.47262
+  name "building(10)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 3005.4 -1045.71 4.54749e-13
+  rotation 0 0 -1 1.47262
+  name "building(1)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 2856.66 -767.159 7.12816e-11
+  rotation 0 0 -1 1.47262
+  name "building(5)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 2733.84 -964.795 -5.11595e-12
+  rotation 0 0 -1 1.47262
+  name "building(8)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -4088.11 2177.29 -5.79807e-12
+  rotation 0 0 -1 1.47262
+  name "building(9)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -2003.97 -5664.88 4.99995e-10
+  rotation 0 0 -1 1.47262
+  name "building(11)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -2161.15 -5935.34 4.99995e-10
+  rotation 0 0 -1 1.47262
+  name "building(18)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -1744.17 -5514.23 4.99995e-10
+  rotation 0 0 -1 1.47262
+  name "building(19)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -4056.7 2025.83 -5.68438e-12
+  rotation 0 0 -1 1.47262
+  name "building(17)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -6152.34 -2794.87 -2.47838e-11
+  rotation 0 0 -1 1.47262
+  name "building(12)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -6163.03 -2935.19 -2.29648e-11
+  rotation 0 0 -1 1.47262
+  name "building(14)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -6362.74 -2822.92 -2.25101e-11
+  rotation 0 0 -1 1.47262
+  name "building(15)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -6362.26 -2471.18 -2.16006e-11
+  rotation 0 0 -1 1.47262
+  name "building(16)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation -3853.32 2128.08 -6.59387e-12
+  rotation 0 0 -1 1.47262
+  name "building(13)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 2998.95 -821.658 3.41062e-13
+  rotation 0 0 -1 1.47262
+  name "building(7)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 3002.18 -956.137 3.41062e-13
+  rotation 0 0 -1 1.47262
+  name "building(2)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 2859.41 -971.445 4.54749e-13
+  rotation 0 0 -1 1.47262
+  name "building(3)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 2872.78 -1069.08 1.64911e-18
+  rotation 0 0 -1 1.47262
+  name "building(4)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+SimpleBuilding {
+  translation 2895.45 -1166.92 1.64911e-18
+  rotation 0 0 -1 1.47262
+  name "building(6)"
+  floorHeight 5
+  floorNumber 9
+  corners [
+    30 30
+    30 -30
+    -30 -30
+    -30 30
+  ]
+}
+StreetLight {
+  translation 2919.96 -12.4506 -8.52656e-14
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2918.87 -79.6943 -1.03029e-13
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(1)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2919.14 -137.852 -5.43566e-13
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(2)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2918.96 -185.663 -5.47118e-13
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(3)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.45 -242.354 -1.13687e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(4)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.24 -606.402 -2.81731e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(5)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2819.9 1884.4 -2.78889e-12
+  rotation 0 0 1 0.45815
+  scale 1.1
+  name "street light(13)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2735.49 2006.47 -2.81731e-12
+  rotation 0 0 1 0.719949
+  scale 1.1
+  name "street light(18)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6277.62 -2648.84 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(20)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6279.93 -2698.47 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(26)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6283.16 -2976.96 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(27)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6282.67 -3017.58 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(34)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6284.1 -3059.53 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(35)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6282.76 -2933.88 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(33)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6281.96 -2893.56 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(32)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6282.67 -2849.8 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(31)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6281.87 -2808.41 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(30)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6281.17 -2776.63 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(29)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6281.11 -2736.93 -2.84573e-12
+  rotation 0 0 -1 0.0327232
+  scale 1.1
+  name "street light(28)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6255.69 -2660.38 -2.84573e-12
+  rotation 0 0 -1 -2.722715307179586
+  scale 1.1
+  name "street light(25)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -6254.93 -2638.25 -2.84573e-12
+  rotation 0 0 1 -2.624535307179586
+  scale 1.1
+  name "street light(24)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2790.93 -1868.83 -2.77467e-12
+  rotation 0 0 1 1.83915
+  scale 1.1
+  name "street light(21)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2824.55 -1880.13 -2.70362e-12
+  rotation 0 0 1 1.83915
+  scale 1.1
+  name "street light(37)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2850.01 -1863.95 -2.85994e-12
+  rotation 0 0 -1 1.32208
+  scale 1.1
+  name "street light(36)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2817.52 -1855.97 -2.85994e-12
+  rotation 0 0 -1 1.24354
+  scale 1.1
+  name "street light(38)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2920.45 -1888.45 -2.85994e-12
+  rotation 0 0 -1 1.23045
+  scale 1.1
+  name "street light(23)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2878.79 -1873.56 -2.85994e-12
+  rotation 0 0 -1 1.32208
+  scale 1.1
+  name "street light(40)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2912.16 -1909.93 -2.80309e-12
+  rotation 0 0 1 1.87187
+  scale 1.1
+  name "street light(22)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2826.15 -1956.12 -2.85994e-12
+  rotation 0 0 1 -2.853605307179586
+  scale 1.1
+  name "street light(39)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2874.82 -1792.19 -2.9452e-12
+  rotation 0 0 1 -2.853605307179586
+  scale 1.1
+  name "street light(42)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2861.34 -1837.8 -2.88836e-12
+  rotation 0 0 1 -2.853605307179586
+  scale 1.1
+  name "street light(44)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2837.74 -1913.94 -2.85994e-12
+  rotation 0 0 1 -2.853605307179586
+  scale 1.1
+  name "street light(43)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation -2871.77 -1896.1 -2.87415e-12
+  rotation 0 0 1 1.8326
+  scale 1.1
+  name "street light(41)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2790.33 1938.03 -2.78889e-12
+  rotation 0 0 1 0.490875
+  scale 1.1
+  name "street light(19)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2848.62 1823.02 -2.78889e-12
+  rotation 0 0 1 0.359975
+  scale 1.1
+  name "street light(17)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2870.06 1771.63 -2.78889e-12
+  rotation 0 0 1 0.359975
+  scale 1.1
+  name "street light(16)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2891.02 1719.83 -2.78889e-12
+  rotation 0 0 1 0.294525
+  scale 1.1
+  name "street light(15)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2904.07 1664.96 -2.81731e-12
+  rotation 0 0 1 0.18326
+  scale 1.1
+  name "street light(14)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.44 -555.532 -2.78889e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(12)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.27 -510.508 -2.78889e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(11)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2916.85 -466.437 -2.78889e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(10)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.98 -422.936 -2.76047e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(9)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2918.29 -384.003 -2.8031e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(8)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.57 -339.217 -2.81731e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(7)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+StreetLight {
+  translation 2917.8 -291.108 -2.79599e-12
+  rotation 0 0 -1 0.0392699
+  scale 1.1
+  name "street light(6)"
+  beamWidth 1.2
+  direction 0.5 0 -1
+  radius 2000
+  castShadows TRUE
+}
+DEF ORIGIN BmwX5Simple {
+  translation 0 157.19 0.4
+}
+DEF SUMO_INTERFACE SumoInterface {
+  gui FALSE
+  maxVehicles 150
+  seed 95
+}
+Robot {
+  children [
+    Receiver {
+      name "receiverState"
+      channel 12
+    }
+    Emitter {
+      type "serial"
+      channel 1
+    }
+  ]
+  name "global_receiver"
+  controller "global_receiver"
+  customData "local"
+  supervisor TRUE
+}

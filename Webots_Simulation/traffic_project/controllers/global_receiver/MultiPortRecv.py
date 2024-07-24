@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-24 13:42:47
+LastEditTime: 2024-07-24 17:19:22
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -66,6 +66,7 @@ class MultiProcessRecv():
         # os.system(sudo_command)
         
         self.socketPort = []
+        self.udp_socket = None
         
         self.max_data_size = max_data_size
         self.process_port = process_port
@@ -112,11 +113,12 @@ class MultiProcessRecv():
             Number_process: Number of Process
     """
     def get_NumProcess(self,Processport=7787):
-        udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-        udp_socket.bind(('',Processport))
-        Numprocess_bytes = udp_socket.recvfrom(256)[0]
+        self.udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+        self.udp_socket.bind(('',Processport))
+        Numprocess_bytes = self.udp_socket.recvfrom(256)[0]
         Number_process = int(Numprocess_bytes)
-        udp_socket.close()
+        # self.udp_socket.close()
+        # self.udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         return Number_process + 1
 
     """
@@ -369,10 +371,10 @@ class MultiProcessRecv():
                 f.close()
                 
     def keepSocketRunning(self):
-        udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         sendAddress = (self.tar_ip,self.process_port)
         data = bytes(str(0) + "\n", 'utf-8')
-        udp_socket.sendto(data, sendAddress)
+        self.udp_socket.sendto(data, sendAddress)
+        
         
     """
         sendPointCloud(self, pointCloud:str, idx:int): Webots Send Radar Cloud Point Data to Client

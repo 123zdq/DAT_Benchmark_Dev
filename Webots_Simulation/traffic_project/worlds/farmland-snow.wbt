@@ -1,0 +1,5390 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/Road.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/Crossroad.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/Pole.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/lights/protos/CeilingSpotLight.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/bmw/BmwX5Simple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/toyota/ToyotaPriusSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/lincoln/LincolnMKZSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/mercedes_benz/MercedesBenzSprinterSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/tesla/TeslaModel3Simple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/range_rover/RangeRoverSportSVRSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/citroen/CitroenCZeroSimple.proto"
+IMPORTABLE EXTERNPROTO "../protos/M100.proto"
+IMPORTABLE EXTERNPROTO "../protos/trajectary.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/protos/SumoInterface.proto"
+
+WorldInfo {
+  info [
+    "World generated using the Open Street Map to Webots importer"
+    "Author: David Mansolino <david.mansolino@epfl.ch>"
+  ]
+  basicTimeStep 2
+  FPS 30
+  defaultDamping Damping {
+  }
+  contactProperties [
+    ContactProperties {
+      coulombFriction [
+        30
+      ]
+      bounce 0
+      bounceVelocity 0
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.17226691939305935 -0.4145991835149792 -0.8935500128764688 5.412640915623675
+  position -4578.420322308786 -3930.6255429223775 1367.7518489414479
+  near 3
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+DEF land Floor {
+  translation 0 0 -0.01
+  size 20475 18910
+  appearance PBRAppearance {
+    baseColor 0.603922 0.6 0.588235
+    baseColorMap ImageTexture {
+      url [
+        ""
+      ]
+    }
+    roughness 1
+    metalness 0
+  }
+}
+Crossroad {
+  translation -3210.33699 -2809.414427 0.01
+  name "way"
+  id "-59155"
+  shape [
+    6.018552 -6.984056 0
+    -5.981406 -7.015895 0
+    -6.98372 -6.018941 0
+    -7.016229 5.981015 0
+    1.030797 6.02282 0
+    6.005628 1.352789 0
+    6.018552 -6.984056 0
+  ]
+  connectedRoadIDs [
+    "-6961"
+    "-6962"
+    "-7021"
+    "-7109"
+  ]
+}
+Crossroad {
+  translation 3167.680643 -2824.971687 0.01
+  name "way(1)"
+  id "-59174"
+  shape [
+    6.062134 -6.263798 0
+    -5.937281 -6.382267 0
+    -6.986727 -6.015451 0
+    -7.013239 5.98452 0
+    -6.015414 6.986615 0
+    5.984556 7.013351 0
+    6.062134 -6.263798 0
+  ]
+  connectedRoadIDs [
+    "-6923"
+    "-6966"
+    "-6967"
+    "-6987"
+  ]
+}
+Crossroad {
+  translation -1260.52203 1945.695316 0.01
+  name "way(2)"
+  id "-59198"
+  shape [
+    7.015322 -5.982078 0
+    6.017311 -6.985125 0
+    -5.982652 -7.014832 0
+    -6.984632 -6.017883 0
+    -7.015323 5.982077 0
+    -6.01791 6.984609 0
+    5.982051 7.015345 0
+    6.984632 6.017883 0
+    7.015322 -5.982078 0
+  ]
+  connectedRoadIDs [
+    "-6887_1"
+    "-6887_2"
+    "-7205_1"
+    "-7205_2"
+  ]
+}
+Crossroad {
+  translation 1020.579005 1940.111066 0.01
+  name "way(3)"
+  id "-59199"
+  shape [
+    7.014251 -5.983333 0
+    6.016242 -6.986045 0
+    -5.983725 -7.013917 0
+    -6.985709 -6.016633 0
+    -7.014251 5.983333 0
+    -6.016686 6.985663 0
+    5.98328 7.014297 0
+    6.985709 6.016633 0
+    7.014251 -5.983333 0
+  ]
+  connectedRoadIDs [
+    "-7181_1"
+    "-7181_2"
+    "-7235_1"
+    "-7235_2"
+  ]
+}
+Crossroad {
+  translation -1264.365416 442.914628 0.01
+  name "way(4)"
+  id "-59200"
+  shape [
+    7.015322 -5.982078 0
+    6.054487 -6.952926 0
+    -5.945147 -7.046647 0
+    -6.984632 -6.017883 0
+    -7.015322 5.982078 0
+    -6.055025 6.952458 0
+    5.944602 7.047106 0
+    6.984632 6.017882 0
+    7.015322 -5.982078 0
+  ]
+  connectedRoadIDs [
+    "-6893_1"
+    "-6893_2"
+    "-7212_1"
+    "-7212_2"
+  ]
+}
+Crossroad {
+  translation 1016.975724 425.198472 0.01
+  name "way(5)"
+  id "-59201"
+  shape [
+    7.014251 -5.983333 0
+    6.053301 -6.953959 0
+    -5.946349 -7.045632 0
+    -6.985709 -6.016633 0
+    -7.014251 5.983333 0
+    -6.053865 6.953468 0
+    5.945777 7.046115 0
+    6.985709 6.016633 0
+    7.014251 -5.983333 0
+  ]
+  connectedRoadIDs [
+    "-6852_1"
+    "-6852_2"
+    "-7161_1"
+    "-7161_2"
+  ]
+}
+Crossroad {
+  translation -1267.817832 -907.046019 0.01
+  name "way(6)"
+  id "-59202"
+  shape [
+    7.015321 -5.982079 0
+    6.017411 -6.985038 0
+    -5.982551 -7.014918 0
+    -6.984633 -6.017882 0
+    -7.015322 5.982079 0
+    -6.017951 6.984573 0
+    5.982009 7.01538 0
+    6.984633 6.017882 0
+    7.015321 -5.982079 0
+  ]
+  connectedRoadIDs [
+    "-6849_1"
+    "-6849_2"
+    "-6890_1"
+    "-6890_2"
+  ]
+}
+Crossroad {
+  translation 1013.793663 -912.63124 0.01
+  name "way(7)"
+  id "-59203"
+  shape [
+    7.014251 -5.983333 0
+    6.016186 -6.986094 0
+    -5.983782 -7.013869 0
+    -6.985709 -6.016633 0
+    -7.014251 5.983333 0
+    -6.016787 6.985576 0
+    5.983179 7.014383 0
+    6.985709 6.016633 0
+    7.014251 -5.983333 0
+  ]
+  connectedRoadIDs [
+    "-7135_1"
+    "-7135_2"
+    "-7243_1"
+    "-7243_2"
+  ]
+}
+Crossroad {
+  translation 2507.028426 3886.985578 0.01
+  name "way(8)"
+  id "-59237"
+  shape []
+  connectedRoadIDs [
+    "-6940_1"
+    "-7091"
+  ]
+}
+Crossroad {
+  translation 3182.450633 3860.453539 0.01
+  name "way(9)"
+  id "-59239"
+  shape [
+    7.013238 -5.984521 0
+    6.269958 -6.759263 0
+    -5.720807 -7.229963 0
+    -6.986728 -6.015449 0
+    -7.013237 5.984522 0
+    -6.270139 6.759094 0
+    5.720613 7.230117 0
+    6.986728 6.015449 0
+    7.013238 -5.984521 0
+  ]
+  connectedRoadIDs [
+    "-6926_1"
+    "-6926_2"
+    "-6940_1"
+    "-6940_2"
+  ]
+}
+Crossroad {
+  translation -1255.866257 3884.352395 0.01
+  name "way(10)"
+  id "-59240"
+  shape [
+    7.004971 -6.284702 0
+    5.995951 -7.003469 0
+    -6.004047 -6.996529 0
+    -5.996383 7.003099 0
+    6.003615 6.996899 0
+    6.974279 5.715259 0
+    7.004971 -6.284702 0
+  ]
+  connectedRoadIDs [
+    "-7078_1"
+    "-7078_2"
+    "-7197"
+  ]
+}
+Crossroad {
+  translation -3192.203286 3883.443446 0.01
+  name "way(11)"
+  id "-59241"
+  shape [
+    7.016233 -5.98101 0
+    6.009825 -7.002634 0
+    -5.990173 -6.997344 0
+    -5.999988 -0.012127 0
+    -5.999596 0.069617 0
+    -5.987722 1.092943 0
+    -1.876852 5.994937 0
+    6.983716 6.018946 0
+    7.016233 -5.98101 0
+  ]
+  connectedRoadIDs [
+    "-6908_1"
+    "-6908_2"
+    "-6935_1"
+    "-6935_2"
+  ]
+}
+Crossroad {
+  translation 1025.170465 3885.815874 0.01
+  name "way(12)"
+  id "-59261"
+  shape [
+    7.005362 5.993738 0
+    6.994632 -6.006257 0
+    5.994763 -7.004486 0
+    -6.005234 -6.99551 0
+    -5.995323 7.004006 0
+    6.004674 6.995991 0
+    7.005362 5.993738 0
+  ]
+  connectedRoadIDs [
+    "-7085_1"
+    "-7085_2"
+    "-7227_1"
+    "-7227_2"
+  ]
+}
+Crossroad {
+  translation 3180.449747 2954.731241 0.01
+  name "way(13)"
+  id "-59278"
+  shape []
+  connectedRoadIDs [
+    "-6926_1"
+    "-6993"
+  ]
+}
+Crossroad {
+  translation 3176.473972 1155.10129 0.01
+  name "way(14)"
+  id "-59279"
+  shape []
+  connectedRoadIDs [
+    "-6993"
+    "-6998"
+  ]
+}
+Crossroad {
+  translation 3173.289391 -286.351649 0.01
+  name "way(15)"
+  id "-59280"
+  shape []
+  connectedRoadIDs [
+    "-6998"
+    "-7005"
+  ]
+}
+Crossroad {
+  translation 3169.708446 -1907.165416 0.01
+  name "way(16)"
+  id "-59283"
+  shape []
+  connectedRoadIDs [
+    "-6987"
+    "-7005"
+  ]
+}
+Crossroad {
+  translation 2184.320925 -2822.780847 0.01
+  name "way(17)"
+  id "-59284"
+  shape []
+  connectedRoadIDs [
+    "-6923"
+    "-7011"
+  ]
+}
+Crossroad {
+  translation -26.436915 -2817.578903 0.01
+  name "way(18)"
+  id "-59285"
+  shape []
+  connectedRoadIDs [
+    "-7011"
+    "-7016"
+  ]
+}
+Crossroad {
+  translation -2298.557708 -2811.833642 0.01
+  name "way(19)"
+  id "-59286"
+  shape []
+  connectedRoadIDs [
+    "-7016"
+    "-7021"
+  ]
+}
+Crossroad {
+  translation -2157.368878 3883.886668 0.01
+  name "crossroad(1)"
+  id "-59351"
+  shape []
+  connectedRoadIDs [
+    "-6935_2"
+    "-7078_1"
+  ]
+}
+Crossroad {
+  translation -585.936095 3884.739828 0.01
+  name "crossroad(2)"
+  id "-59352"
+  shape []
+  connectedRoadIDs [
+    "-7078_2"
+    "-7085_1"
+  ]
+}
+Crossroad {
+  translation 1453.133517 3886.135976 0.01
+  name "crossroad(3)"
+  id "-59353"
+  shape []
+  connectedRoadIDs [
+    "-7085_2"
+    "-7091"
+  ]
+}
+Crossroad {
+  translation -3194.833724 2912.709562 0.01
+  name "crossroad(4)"
+  id "-59365"
+  shape []
+  connectedRoadIDs [
+    "-6908_2"
+    "-7114"
+  ]
+}
+Crossroad {
+  translation -3198.842076 1433.394337 0.01
+  name "crossroad(5)"
+  id "-59366"
+  shape []
+  connectedRoadIDs [
+    "-7114"
+    "-7120"
+  ]
+}
+Crossroad {
+  translation -3203.264026 -198.670175 0.01
+  name "crossroad(6)"
+  id "-59367"
+  shape []
+  connectedRoadIDs [
+    "-7120"
+    "-7126"
+  ]
+}
+Crossroad {
+  translation -3207.644898 -1815.68563 0.01
+  name "crossroad(7)"
+  id "-59368"
+  shape []
+  connectedRoadIDs [
+    "-7109"
+    "-7126"
+  ]
+}
+Crossroad {
+  translation -59.845375 -910.053882 0.01
+  name "crossroad(8)"
+  id "-59370"
+  shape []
+  connectedRoadIDs [
+    "-6890_2"
+    "-7135_1"
+  ]
+}
+Crossroad {
+  translation -2030.630277 -905.087683 0.01
+  name "crossroad(9)"
+  id "-59371"
+  shape []
+  connectedRoadIDs [
+    "-6890_1"
+    "-7140"
+  ]
+}
+Crossroad {
+  translation 2133.353057 -915.222594 0.01
+  name "crossroad(10)"
+  id "-59372"
+  shape []
+  connectedRoadIDs [
+    "-7135_2"
+    "-7147"
+  ]
+}
+Crossroad {
+  translation -2090.948842 449.434359 0.01
+  name "crossroad(11)"
+  id "-59373"
+  shape []
+  connectedRoadIDs [
+    "-6893_1"
+    "-7153"
+  ]
+}
+Crossroad {
+  translation -120.253973 433.978801 0.01
+  name "crossroad(12)"
+  id "-59374"
+  shape []
+  connectedRoadIDs [
+    "-6893_2"
+    "-7161_1"
+  ]
+}
+Crossroad {
+  translation 1949.787204 418.072146 0.01
+  name "crossroad(13)"
+  id "-59375"
+  shape []
+  connectedRoadIDs [
+    "-7161_2"
+    "-7167"
+  ]
+}
+Crossroad {
+  translation -1867.471808 1947.249942 0.01
+  name "crossroad(14)"
+  id "-59376"
+  shape []
+  connectedRoadIDs [
+    "-6887_1"
+    "-7173"
+  ]
+}
+Crossroad {
+  translation 317.540079 1941.788607 0.01
+  name "crossroad(15)"
+  id "-59377"
+  shape []
+  connectedRoadIDs [
+    "-6887_2"
+    "-7181_1"
+  ]
+}
+Crossroad {
+  translation 1935.187478 1937.986747 0.01
+  name "crossroad(16)"
+  id "-59378"
+  shape []
+  connectedRoadIDs [
+    "-7181_2"
+    "-7187"
+  ]
+}
+Crossroad {
+  translation -1258.462066 2751.125749 0.01
+  name "crossroad(17)"
+  id "-59380"
+  shape []
+  connectedRoadIDs [
+    "-7197"
+    "-7205_2"
+  ]
+}
+Crossroad {
+  translation -1262.011632 1363.261496 0.01
+  name "crossroad(18)"
+  id "-59381"
+  shape []
+  connectedRoadIDs [
+    "-7205_1"
+    "-7212_2"
+  ]
+}
+Crossroad {
+  translation -1265.366365 51.529517 0.01
+  name "crossroad(19)"
+  id "-59382"
+  shape []
+  connectedRoadIDs [
+    "-6849_2"
+    "-7212_1"
+  ]
+}
+Crossroad {
+  translation -1269.657703 -1626.490161 0.01
+  name "crossroad(20)"
+  id "-59383"
+  shape []
+  connectedRoadIDs [
+    "-6849_1"
+    "-7217"
+  ]
+}
+Crossroad {
+  translation 1022.250909 2643.019114 0.01
+  name "crossroad(21)"
+  id "-59384"
+  shape []
+  connectedRoadIDs [
+    "-7227_2"
+    "-7235_1"
+  ]
+}
+Crossroad {
+  translation 1018.532583 1079.743598 0.01
+  name "crossroad(22)"
+  id "-59385"
+  shape []
+  connectedRoadIDs [
+    "-6852_1"
+    "-7235_2"
+  ]
+}
+Crossroad {
+  translation 1014.940888 -430.303945 0.01
+  name "crossroad(23)"
+  id "-59386"
+  shape []
+  connectedRoadIDs [
+    "-6852_2"
+    "-7243_1"
+  ]
+}
+Crossroad {
+  translation 1011.820446 -1742.232513 0.01
+  name "crossroad(24)"
+  id "-59387"
+  shape []
+  connectedRoadIDs [
+    "-7243_2"
+    "-7249"
+  ]
+}
+Road {
+  translation 3160.68066 -2824.956258 0.01
+  name "way"
+  id "-6923"
+  startJunction "-59174"
+  endJunction "-59284"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -976.359735 2.17541 0
+  ]
+  startingAngle [
+    -3.139365
+  ]
+  endingAngle [
+    -3.139365
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3167.696109 -2817.971704 0.01
+  name "way(1)"
+  id "-6987"
+  startJunction "-59174"
+  endJunction "-59283"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2.012338 910.806288 0
+  ]
+  startingAngle [
+    -1.568587
+  ]
+  endingAngle [
+    -1.568587
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3176.473972 1155.10129 0.01
+  name "way(2)"
+  id "-6993"
+  startJunction "-59279"
+  endJunction "-59278"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    3.975775 1799.629951 0
+  ]
+  startingAngle [
+    -1.568587
+  ]
+  endingAngle [
+    -1.568587
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3173.289391 -286.351649 0.01
+  name "way(3)"
+  id "-6998"
+  startJunction "-59280"
+  endJunction "-59279"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    3.184581 1441.452939 0
+  ]
+  startingAngle [
+    -1.568587
+  ]
+  endingAngle [
+    -1.568587
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3169.708446 -1907.165416 0.01
+  name "way(4)"
+  id "-7005"
+  startJunction "-59283"
+  endJunction "-59280"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    3.580945 1620.813768 0
+  ]
+  startingAngle [
+    -1.568587
+  ]
+  endingAngle [
+    -1.568587
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2184.320925 -2822.780847 0.01
+  name "way(5)"
+  id "-7011"
+  startJunction "-59284"
+  endJunction "-59285"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2210.75784 5.201944 0
+  ]
+  startingAngle [
+    -3.139365
+  ]
+  endingAngle [
+    -3.139064
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -26.436915 -2817.578903 0.01
+  name "way(6)"
+  id "-7016"
+  startJunction "-59285"
+  endJunction "-59286"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2272.120793 5.745261 0
+  ]
+  startingAngle [
+    -3.139064
+  ]
+  endingAngle [
+    -3.139064
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2298.557708 -2811.833642 0.01
+  name "way(7)"
+  id "-7021"
+  startJunction "-59286"
+  endJunction "-59155"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -904.779306 2.400642 0
+  ]
+  startingAngle [
+    -3.139064
+  ]
+  endingAngle [
+    -3.138939
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1453.133517 3886.135976 0.01
+  name "way(8)"
+  id "-7091"
+  startJunction "-59353"
+  endJunction "-59237"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1053.894908 0.849603 0
+  ]
+  startingAngle [
+    -0.000748
+  ]
+  endingAngle [
+    0.039262
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3207.644898 -1815.68563 0.01
+  name "way(9)"
+  id "-7109"
+  startJunction "-59368"
+  endJunction "-59155"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2.673129 -986.728823 0
+  ]
+  startingAngle [
+    -4.70968
+  ]
+  endingAngle [
+    -4.70968
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3194.833724 2912.709562 0.01
+  name "way(10)"
+  id "-7114"
+  startJunction "-59365"
+  endJunction "-59366"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -4.008352 -1479.315224 0
+  ]
+  startingAngle [
+    -4.709679
+  ]
+  endingAngle [
+    -4.709679
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3198.842076 1433.394337 0.01
+  name "way(11)"
+  id "-7120"
+  startJunction "-59366"
+  endJunction "-59367"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -4.42195 -1632.064512 0
+  ]
+  startingAngle [
+    -4.709679
+  ]
+  endingAngle [
+    -4.70968
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3203.264026 -198.670175 0.01
+  name "way(12)"
+  id "-7126"
+  startJunction "-59367"
+  endJunction "-59368"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -4.380872 -1617.015455 0
+  ]
+  startingAngle [
+    -4.70968
+  ]
+  endingAngle [
+    -4.70968
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3205.169502 -901.98315 0.01
+  name "way(13)"
+  id "-7140"
+  endJunction "-59371"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1174.539226 -3.104533 0
+  ]
+  endingAngle [
+    0.002643
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2133.353057 -915.222594 0.01
+  name "way(14)"
+  id "-7147"
+  startJunction "-59372"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1038.541834 -2.315981 0
+  ]
+  startingAngle [
+    0.002315
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3201.484114 458.278149 0.01
+  name "way(15)"
+  id "-7153"
+  endJunction "-59373"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1110.535272 -8.84379 0
+  ]
+  endingAngle [
+    0.007887
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1949.787204 418.072146 0.01
+  name "way(16)"
+  id "-7167"
+  startJunction "-59375"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1225.038024 -9.255155 0
+  ]
+  startingAngle [
+    0.007639
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3197.440258 1950.757574 0.01
+  name "way(17)"
+  id "-7173"
+  endJunction "-59376"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1329.96845 -3.507631 0
+  ]
+  endingAngle [
+    0.002561
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1935.187478 1937.986747 0.01
+  name "way(18)"
+  id "-7187"
+  startJunction "-59378"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1243.009929 -2.781843 0
+  ]
+  startingAngle [
+    0.002323
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1258.462066 2751.125749 0.01
+  name "way(19)"
+  id "-7197"
+  startJunction "-59380"
+  endJunction "-59240"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2.88053 1126.23702 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1272.695725 -2814.4777 0.01
+  name "way(20)"
+  id "-7217"
+  endJunction "-59383"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    3.038022 1187.987539 0
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1011.820446 -1742.232513 0.01
+  name "way(21)"
+  id "-7249"
+  startJunction "-59387"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2.563622 -1077.831058 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1269.657703 -1626.490161 0.01
+  name "way(22)"
+  id "-6849_1"
+  startJunction "-59383"
+  endJunction "-59202"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1.821969 712.444165 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1267.799931 -900.046042 0.01
+  name "way(23)"
+  id "-6849_2"
+  startJunction "-59202"
+  endJunction "-59382"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2.433566 951.575559 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2030.630277 -905.087683 0.01
+  name "way(24)"
+  id "-6890_1"
+  startJunction "-59371"
+  endJunction "-59202"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    755.812467 -1.940365 0
+  ]
+  startingAngle [
+    0.002643
+  ]
+  endingAngle [
+    0.002567
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1260.817854 -907.063449 0.01
+  name "way(25)"
+  id "-6890_2"
+  startJunction "-59202"
+  endJunction "-59370"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1200.972479 -2.990433 0
+  ]
+  startingAngle [
+    0.00249
+  ]
+  endingAngle [
+    0.002401
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1018.532583 1079.743598 0.01
+  name "way(26)"
+  id "-6852_1"
+  startJunction "-59385"
+  endJunction "-59201"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1.540209 -647.545146 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1016.959075 418.198492 0.01
+  name "way(27)"
+  id "-6852_2"
+  startJunction "-59201"
+  endJunction "-59386"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2.018187 -848.502436 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -120.253973 433.978801 0.01
+  name "way(28)"
+  id "-7161_1"
+  startJunction "-59374"
+  endJunction "-59201"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1130.229906 -8.726285 0
+  ]
+  startingAngle [
+    0.007721
+  ]
+  endingAngle [
+    0.007721
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1023.97552 425.144996 0.01
+  name "way(29)"
+  id "-7161_2"
+  startJunction "-59201"
+  endJunction "-59375"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    925.811683 -7.07285 0
+  ]
+  startingAngle [
+    0.007639
+  ]
+  endingAngle [
+    0.007639
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1867.471808 1947.249942 0.01
+  name "way(30)"
+  id "-6887_1"
+  startJunction "-59376"
+  endJunction "-59198"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    599.949802 -1.536697 0
+  ]
+  startingAngle [
+    0.002561
+  ]
+  endingAngle [
+    0.002561
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1253.522051 1945.677987 0.01
+  name "way(31)"
+  id "-6887_2"
+  startJunction "-59198"
+  endJunction "-59377"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1571.06213 -3.88938 0
+  ]
+  startingAngle [
+    0.002476
+  ]
+  endingAngle [
+    0.002386
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1262.011632 1363.261496 0.01
+  name "way(32)"
+  id "-7205_1"
+  startJunction "-59381"
+  endJunction "-59198"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1.4717 575.433843 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1260.504126 1952.695293 0.01
+  name "way(33)"
+  id "-7205_2"
+  startJunction "-59198"
+  endJunction "-59380"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2.042061 798.430456 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2090.948842 449.434359 0.01
+  name "way(34)"
+  id "-6893_1"
+  startJunction "-59373"
+  endJunction "-59200"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    819.583644 -6.46452 0
+  ]
+  startingAngle [
+    0.007887
+  ]
+  endingAngle [
+    0.007887
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1257.36563 442.859957 0.01
+  name "way(35)"
+  id "-6893_2"
+  startJunction "-59200"
+  endJunction "-59374"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1137.111657 -8.881156 0
+  ]
+  startingAngle [
+    0.00781
+  ]
+  endingAngle [
+    0.007721
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1265.366365 51.529517 0.01
+  name "way(36)"
+  id "-7212_1"
+  startJunction "-59382"
+  endJunction "-59200"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.983046 384.385133 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1264.347514 449.914605 0.01
+  name "way(37)"
+  id "-7212_2"
+  startJunction "-59200"
+  endJunction "-59381"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2.335882 913.346891 0
+  ]
+  startingAngle [
+    -1.568239
+  ]
+  endingAngle [
+    -1.568239
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3192.222254 3876.443472 0.01
+  name "way(38)"
+  id "-6908_2"
+  startJunction "-59241"
+  endJunction "-59365"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2.61147 -963.73391 0
+  ]
+  startingAngle [
+    -4.709679
+  ]
+  endingAngle [
+    -4.709679
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -3185.203297 3883.43362 0.01
+  name "way(39)"
+  id "-6935_2"
+  startJunction "-59241"
+  endJunction "-59351"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1027.834418 0.453048 0
+  ]
+  startingAngle [
+    -0.000441
+  ]
+  endingAngle [
+    -0.000517
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3180.449747 2954.731241 0.01
+  name "way(40)"
+  id "-6926_1"
+  startJunction "-59278"
+  endJunction "-59239"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1.985421 898.722315 0
+  ]
+  startingAngle [
+    -1.568587
+  ]
+  endingAngle [
+    -1.568587
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3182.466096 3867.453522 0.01
+  name "way(41)"
+  id "-6926_2"
+  startJunction "-59239"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.00508 2.299723 0
+  ]
+  startingAngle [
+    -1.568587
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 2507.028426 3886.985578 0.01
+  name "way(42)"
+  id "-6940_1"
+  startJunction "-59237"
+  endJunction "-59239"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    668.427601 -26.257276 0
+  ]
+  startingAngle [
+    0.039262
+  ]
+  endingAngle [
+    0.039262
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 3189.445245 3860.178964 0.01
+  name "way(43)"
+  id "-6940_2"
+  startJunction "-59239"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    2.438066 -0.095707 0
+  ]
+  startingAngle [
+    0.039235
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -2157.368878 3883.886668 0.01
+  name "way(44)"
+  id "-7078_1"
+  startJunction "-59351"
+  endJunction "-59240"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    894.502622 0.46211 0
+  ]
+  startingAngle [
+    -0.000517
+  ]
+  endingAngle [
+    -0.000517
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -1248.866258 3884.356443 0.01
+  name "way(45)"
+  id "-7078_2"
+  startJunction "-59240"
+  endJunction "-59352"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    662.930163 0.383385 0
+  ]
+  startingAngle [
+    -0.000578
+  ]
+  endingAngle [
+    -0.000578
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -585.936095 3884.739828 0.01
+  name "way(46)"
+  id "-7085_1"
+  startJunction "-59352"
+  endJunction "-59261"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1604.106562 1.071371 0
+  ]
+  startingAngle [
+    -0.000578
+  ]
+  endingAngle [
+    -0.000668
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1032.170463 3885.82111 0.01
+  name "way(47)"
+  id "-7085_2"
+  startJunction "-59261"
+  endJunction "-59353"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    420.963054 0.314866 0
+  ]
+  startingAngle [
+    -0.000748
+  ]
+  endingAngle [
+    -0.000748
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1025.176724 3878.815877 0.01
+  name "way(48)"
+  id "-7227_2"
+  startJunction "-59261"
+  endJunction "-59384"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.003717 -4.157267 0
+    -2.925816 -1235.796763 0
+  ]
+  startingAngle [
+    1.569902
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -59.845375 -910.053882 0.01
+  name "way(49)"
+  id "-7135_1"
+  startJunction "-59370"
+  endJunction "-59203"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1066.639058 -2.560554 0
+  ]
+  startingAngle [
+    0.002401
+  ]
+  endingAngle [
+    0.002401
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1020.793644 -912.647443 0.01
+  name "way(50)"
+  id "-7135_2"
+  startJunction "-59203"
+  endJunction "-59372"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    1112.559412 -2.575151 0
+  ]
+  startingAngle [
+    0.002315
+  ]
+  endingAngle [
+    0.002315
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1014.940888 -430.303945 0.01
+  name "way(51)"
+  id "-7243_1"
+  startJunction "-59386"
+  endJunction "-59203"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1.130576 -475.327315 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1013.777013 -919.63122 0.01
+  name "way(52)"
+  id "-7243_2"
+  startJunction "-59203"
+  endJunction "-59387"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1.956567 -822.601292 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 317.540079 1941.788607 0.01
+  name "way(53)"
+  id "-7181_1"
+  startJunction "-59377"
+  endJunction "-59199"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    696.038946 -1.660838 0
+  ]
+  startingAngle [
+    0.002386
+  ]
+  endingAngle [
+    0.002386
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1027.578986 1940.094807 0.01
+  name "way(54)"
+  id "-7181_2"
+  startJunction "-59199"
+  endJunction "-59378"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    907.608493 -2.10806 0
+  ]
+  startingAngle [
+    0.002323
+  ]
+  endingAngle [
+    0.002323
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1022.250909 2643.019114 0.01
+  name "way(55)"
+  id "-7235_1"
+  startJunction "-59384"
+  endJunction "-59199"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1.655254 -695.908068 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 1020.562355 1933.111085 0.01
+  name "way(56)"
+  id "-7235_2"
+  startJunction "-59199"
+  endJunction "-59385"
+  width 12
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -2.029772 -853.367487 0
+  ]
+  startingAngle [
+    -4.71001
+  ]
+  endingAngle [
+    -4.71001
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Solid {
+  translation -3162.8 2055.25 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(58)"
+}
+Solid {
+  translation -1205.71 40.5334 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(7)"
+}
+Solid {
+  translation -2218.58 -858.192 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(8)"
+}
+Solid {
+  translation 290.793 -1867.43 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(9)"
+}
+Solid {
+  translation -330.664 -1881.59 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(78)"
+}
+Solid {
+  translation 1948.48 -1856.79 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(11)"
+}
+Solid {
+  translation 2358.77 -1852.49 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(106)"
+}
+Solid {
+  translation 1949.73 -1560.35 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(12)"
+}
+Solid {
+  translation 4106 -974.434 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(13)"
+}
+Solid {
+  translation 4104.1 -2142.37 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(15)"
+}
+Solid {
+  translation 4109.85 4092.18 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(16)"
+}
+Solid {
+  translation 2388.28 4863.08 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(19)"
+}
+Solid {
+  translation 1900.94 4902.28 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(90)"
+}
+Solid {
+  translation -1390.27 4918.21 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(20)"
+}
+Solid {
+  translation -3010.6 4920.45 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(22)"
+}
+Solid {
+  translation -3624.66 4025.89 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(23)"
+}
+Solid {
+  translation -1229.32 -1602.94 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(24)"
+}
+Solid {
+  translation -1857.85 -1871.86 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(74)"
+}
+Solid {
+  translation -1532.06 -2732.99 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(75)"
+}
+Solid {
+  translation -737.042 -2741.67 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(77)"
+}
+Solid {
+  translation -2330.79 -2740.97 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(76)"
+}
+Solid {
+  translation -1184.69 521.575 -49.5263
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(27)"
+}
+Solid {
+  translation -2019.06 481.283 -49.5263
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(29)"
+}
+Solid {
+  translation 454.205 507.445 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(28)"
+}
+Solid {
+  translation 2495.38 -871.842 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(31)"
+}
+Solid {
+  translation 1943 -864.641 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(108)"
+}
+Solid {
+  translation 3232.37 -1344.65 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(107)"
+}
+Solid {
+  translation 3250.78 1362.17 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(32)"
+}
+Solid {
+  translation 1932.77 15.7489 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(33)"
+}
+Solid {
+  translation 2399.95 379.835 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(110)"
+}
+Solid {
+  translation -1822.57 1380.83 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(34)"
+}
+Solid {
+  translation -2263.77 1379.08 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(54)"
+}
+Solid {
+  translation -327.03 503.337 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(55)"
+}
+Solid {
+  translation 343.255 16.4315 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(56)"
+}
+Solid {
+  translation 611.552 20.7967 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(60)"
+}
+Solid {
+  translation 246.105 -2771.94 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(61)"
+}
+Solid {
+  translation 1069.94 -1873.34 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(62)"
+}
+Solid {
+  translation 1073.5 12.3469 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(59)"
+}
+Solid {
+  translation 1083.7 494.905 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(57)"
+}
+Solid {
+  translation 1095.42 3856.86 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(66)"
+}
+Solid {
+  translation 211.494 3944.93 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(91)"
+}
+Solid {
+  translation -262.876 3954.02 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(92)"
+}
+Solid {
+  translation -497.666 4823.39 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(93)"
+}
+Solid {
+  translation 335.888 1998.47 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(67)"
+}
+Solid {
+  translation 302.202 2906.35 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(68)"
+}
+Solid {
+  translation -1199.73 1379.16 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.76257 0.846662 0.491066
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(53)"
+}
+Solid {
+  translation -1175.36 2033.38 -49.5
+  rotation 0 0 -1 -3.1350853071795863
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(52)"
+}
+Solid {
+  translation 1056.18 1985.2 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(35)"
+}
+Solid {
+  translation -323.956 14.1625 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(30)"
+}
+Solid {
+  translation -3207.75 325.369 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(96)"
+}
+Solid {
+  translation -2144.05 2892.06 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(99)"
+}
+Solid {
+  translation -2260.08 2908.5 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(102)"
+}
+Solid {
+  translation -3117.59 3681.05 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(101)"
+}
+Solid {
+  translation -3137.39 1046.34 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(100)"
+}
+Solid {
+  translation -3150.02 -1973.49 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(98)"
+}
+Solid {
+  translation -3133.86 -1453.77 -49.5
+  rotation 0 0 -1 3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.670588 0.666667 0.654902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(97)"
+}
+Solid {
+  translation -3137.83 -592.652 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(26)"
+}
+Solid {
+  translation -3728.04 1011.97 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(25)"
+}
+Solid {
+  translation 711.55 4906.95 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(21)"
+}
+Solid {
+  translation 4118.6 2368.07 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(18)"
+}
+Solid {
+  translation 4113.62 529.524 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(17)"
+}
+Solid {
+  translation 3236.95 -864.21 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(14)"
+}
+Solid {
+  translation 1962.63 492.591 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(64)"
+}
+Solid {
+  translation 1968.9 28.8774 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(109)"
+}
+Solid {
+  translation 3286.85 -2781.21 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(65)"
+}
+Solid {
+  translation -323.821 -857.036 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(10)"
+}
+Solid {
+  translation -325.559 -1380.27 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(80)"
+}
+Solid {
+  translation 309.297 -1380.87 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(82)"
+}
+Solid {
+  translation 1056.81 -1468.07 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(81)"
+}
+Solid {
+  translation -2259.72 1994.92 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(6)"
+}
+Solid {
+  translation -1250.05 2911.56 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(5)"
+}
+Solid {
+  translation -2221.19 3246.76 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(36)"
+}
+Solid {
+  translation -310.379 1364.21 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(38)"
+}
+Solid {
+  translation 1045.8 -855.935 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(40)"
+}
+Solid {
+  translation 453.75 -842.784 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(79)"
+}
+Solid {
+  translation 1058.65 1382.63 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(42)"
+}
+Solid {
+  translation 1994.1 2880.55 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(43)"
+}
+Solid {
+  translation 3238.64 2866.99 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(44)"
+}
+Solid {
+  translation 3253.98 20.8041 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(45)"
+}
+Solid {
+  translation 3220.32 461.19 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(105)"
+}
+Solid {
+  translation 3250.77 -1874.38 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(46)"
+}
+Solid {
+  translation 1239.85 -2775.19 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(47)"
+}
+Solid {
+  translation 2430.79 -2765.01 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(63)"
+}
+Solid {
+  translation -3094.19 -2761.18 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(48)"
+}
+Solid {
+  translation -2254.79 39.4177 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(49)"
+}
+Solid {
+  translation -1246.99 -859.667 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(51)"
+}
+Solid {
+  translation -2269.33 -1850.32 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(50)"
+}
+Solid {
+  translation -319.781 2870.81 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(39)"
+}
+Solid {
+  translation -1502.43 3757.29 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(37)"
+}
+Solid {
+  translation -1261.35 3921.32 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(94)"
+}
+Solid {
+  translation -2213.97 3884.9 -49.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.803922 0.670588 0.560784
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(95)"
+}
+Solid {
+  translation -329.17 2015.17 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(4)"
+}
+Solid {
+  translation 405.856 1366.34 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(41)"
+}
+Solid {
+  translation 3138.6 3856.52 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(3)"
+}
+Solid {
+  translation 3516.55 4821.41 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(89)"
+}
+Solid {
+  translation 3225.89 1997.57 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(70)"
+}
+Solid {
+  translation 4117.81 1529.04 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(86)"
+}
+Solid {
+  translation 4123.69 3193.22 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(88)"
+}
+Solid {
+  translation 4110.81 -184.055 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(87)"
+}
+Solid {
+  translation 2729.36 2002.07 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(83)"
+}
+Solid {
+  translation -3156.12 2908.63 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(71)"
+}
+Solid {
+  translation -2312.26 4861.89 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(111)"
+}
+Solid {
+  translation -3131.43 4424.2 -49.2317
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(112)"
+}
+Solid {
+  translation 1088.45 2906.38 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(69)"
+}
+Solid {
+  translation -2246.51 522.573 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(72)"
+}
+Solid {
+  translation -1238.4 -1882.89 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.970588 0.966667 0.954902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(73)"
+}
+Solid {
+  translation 2512.02 2891.31 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(2)"
+}
+Solid {
+  translation 2450 3373.05 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(104)"
+}
+Solid {
+  translation 1967.11 3943 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(103)"
+}
+Solid {
+  translation 1997.36 1359.08 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(1)"
+}
+Solid {
+  translation 2560.82 1351.56 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(85)"
+}
+Solid {
+  translation 1960.85 1974.67 -48.5
+  rotation 0 0 1 -3.141555307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.870588 0.866667 0.854902
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/farm.stl"
+        ]
+      }
+    }
+  ]
+  name "farm(84)"
+}
+Pole {
+  translation -1268.38 446.519 -5.32908e-15
+  rotation 0 0 1 2.39546
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1268.67 438.879 -1.24345e-14
+  rotation 0 0 1 -2.343105307179586
+  name "pole(1)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1260.08 447.074 -8.88179e-15
+  rotation 0 0 1 0.674134
+  name "pole(2)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1260.37 438.809 -8.88179e-15
+  rotation 0 0 -1 0.831212
+  name "pole(3)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1261.15 -914.107 -8.88179e-15
+  rotation 0 0 -1 0.831212
+  name "pole(4)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1261.75 -900.723 -8.88179e-15
+  rotation 0 0 1 0.739584
+  name "pole(5)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1275.84 -913.363 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(6)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1273.12 -900.952 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(7)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1267.12 1951.96 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(8)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1265.92 1938.77 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(9)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1255.6 1939.4 -8.88179e-15
+  rotation 0 0 1 -0.831215307179586
+  name "pole(10)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1254.63 1951.09 -8.88179e-15
+  rotation 0 0 -1 -0.7395853071795866
+  name "pole(11)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3184.52 3875.91 -8.88179e-15
+  rotation 0 0 1 -0.569415307179586
+  name "pole(12)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3198.81 3874.57 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(13)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3185.08 3890.23 -8.88179e-15
+  rotation 0 0 -1 -0.7395853071795866
+  name "pole(14)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3197.67 3890.36 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(15)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1261.51 3877.21 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(16)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1251.1 3879.63 -8.88179e-15
+  rotation 0 0 -1 0.56941
+  name "pole(17)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1260.47 3891.8 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(18)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1244.98 3892.3 -8.88179e-15
+  rotation 0 0 1 0.739587
+  name "pole(19)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3191.33 1946.18 -8.88179e-15
+  rotation 0 0 1 -0.569415307179586
+  name "pole(20)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3201.58 1945.23 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(21)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3192.36 1956.15 -8.88179e-15
+  rotation 0 0 -1 -0.7395853071795866
+  name "pole(22)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3201.59 1955.65 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(23)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3196.94 452.722 -8.88179e-15
+  rotation 0 0 1 -0.569415307179586
+  name "pole(24)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3206.42 451.161 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(25)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3196.18 463.373 -8.88179e-15
+  rotation 0 0 -1 -0.7395853071795866
+  name "pole(26)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3206.02 464.473 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(27)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3212.89 -890.842 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(28)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3200.92 -897.213 -8.88179e-15
+  rotation 0 0 -1 -1.0013853071795866
+  name "pole(29)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3200.77 -907.379 -8.88179e-15
+  rotation 0 0 1 -0.831215307179586
+  name "pole(30)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3210.52 -908.8 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(31)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3219.26 -2799.39 -8.88179e-15
+  rotation 0 0 1 2.31038
+  name "pole(32)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3215.45 -2815.15 -8.88179e-15
+  rotation 0 0 1 -2.402005307179586
+  name "pole(33)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3205.78 -2815.93 -8.88179e-15
+  rotation 0 0 -1 0.831209
+  name "pole(34)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -3204.37 -2801.74 -8.88179e-15
+  rotation 0 0 1 1.00139
+  name "pole(35)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1276.88 -2810.14 -8.88179e-15
+  rotation 0 0 1 2.31039
+  name "pole(36)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1268.3 -2809.21 -8.88179e-15
+  rotation 0 0 -1 -0.7395953071795862
+  name "pole(37)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1277.03 -2820.35 -8.88179e-15
+  rotation 0 0 1 -2.401995307179586
+  name "pole(38)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+Pole {
+  translation -1268.5 -2819.47 -8.88179e-15
+  rotation 0 0 1 -0.8312053071795864
+  name "pole(39)"
+  slot [
+    CeilingSpotLight {
+      rotation 0 1 0 -1.85
+      spotLightIntensity 800
+      spotLightRadius 100000
+      spotLightCastShadows TRUE
+    }
+  ]
+}
+DEF ORIGIN BmwX5Simple {
+  translation 0 157.19 0.4
+}
+DEF SUMO_INTERFACE SumoInterface {
+  gui FALSE
+  maxVehicles 150
+  seed 95
+}
+Robot {
+  children [
+    Receiver {
+      name "receiverState"
+      channel 12
+    }
+    Emitter {
+      type "serial"
+      channel 1
+    }
+  ]
+  name "global_receiver"
+  controller "global_receiver"
+  customData "local"
+  supervisor TRUE
+}
