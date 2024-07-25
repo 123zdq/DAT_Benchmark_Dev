@@ -23,6 +23,7 @@ import os
 import platform
 import logging
 import MultiPortRecv
+import socket
 
 
 class droneManager:
@@ -253,8 +254,12 @@ class droneManager:
         is_step = [0]*self.configData["Out_Video"]["channels"] # Whether Trigger a step
         is_reset = [False]*self.configData["Out_Video"]["channels"] # Whether Trigger a reset
         episode = 0
+        udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         while True:
             self.initTime = time.time()
+            sendAddress = (self.configData["Socket_Ip"],self.configData["Config_Agen_Num_Port"])
+            data = bytes(str(0) + "\n", 'utf-8')
+            udp_socket.sendto(data, sendAddress)
 
             if self.multi_state == 1:
                 if self.machine_state == 1:
