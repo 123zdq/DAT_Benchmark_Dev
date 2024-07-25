@@ -60,6 +60,15 @@ parser.add_argument(
     nargs="+",
     help="GPUs to use [-1 CPU only] (default: -1)",
 )
+
+parser.add_argument(
+    "-epi",
+    "--epsilon",
+    type=float,
+    default=0.9,
+    help="Epsilon Param for epsilon greedy policy",
+)
+
 parser.add_argument(
     "-hs",
     "--hidden-size",

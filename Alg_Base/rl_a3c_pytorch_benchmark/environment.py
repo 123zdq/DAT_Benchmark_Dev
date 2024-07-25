@@ -185,14 +185,6 @@ class BenchEnv_Multi():
         self.Set_Done_Step = 10000/self.Control_Frequence
 
         # Logging
-        # self.log_path = "./logs/Agent"+str(self.process_id)+".log"
-        # if os.path.exists(self.log_path):
-        #     while is_file_in_use(self.log_path):
-        #         pass
-        #     os.unlink(self.log_path)
-        # self.logger.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
-        #                     level=self.logger.INFO,
-        #                     filename=self.log_path)
         self.logger = create_logger(self.process_id)
 
         # reset

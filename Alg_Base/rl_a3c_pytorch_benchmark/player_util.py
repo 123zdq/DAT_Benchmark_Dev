@@ -5,6 +5,7 @@ import torch
 import torch.nn.functional as F
 from torch.autograd import Variable
 import numpy as np
+import random
 
 class Agent(object):
     def __init__(self, model, env, args, state,process_func):
@@ -27,6 +28,7 @@ class Agent(object):
         self.gpu_id = -1
         self.hidden_size = args.hidden_size
         self.process_func = process_func
+        self.epsilon = args.epsilon
 
     def action_train(self):
         if self.args.train_mode == "privilege":
@@ -43,6 +45,13 @@ class Agent(object):
         entropy = -(log_prob * prob).sum(1)
         self.entropies.append(entropy)
         action = prob.multinomial(1).data
+        ## epsilon greedy
+        ran = random.random()
+        if ran < self.epsilon:
+            pass
+        else:
+            rand_action = random.randint(0,6)
+            action = torch.tensor([[rand_action]])
         log_prob = log_prob.gather(1, action)
         state, self.reward, self.done, self.info = self.env.step(action.item())
         
