@@ -74,7 +74,8 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                              process_idx=process_idx,Other_State=Other_State,CloudPoint=CloudPoint,RewardParams=RewardParams,\
                              action_list=[env_conf["Forward_Speed"],env_conf["Backward_Speed"],env_conf["Left_Speed"],\
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
-                             port_process=env_conf["port_process"],Control_Frequence = env_conf["Control_Frequence"])
+                             port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
+                             Control_Frequence = env_conf["Control_Frequence"])
         process_func = Identity
         return env,process_func
 
@@ -97,7 +98,7 @@ class BenchEnv_Multi():
     """
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
-        port_process,Control_Frequence = 500) -> None:
+        port_process,end_reward,end_reward_list,Control_Frequence = 500) -> None:
         self.Action_dim = Action_dim
         self.process_state = process_state
         self.num_process = arg_worker
@@ -180,6 +181,9 @@ class BenchEnv_Multi():
         # reset
         self.reset_time = 0
 
+        # end reward config
+        self.end_reward = end_reward
+        self.end_reward_list = end_reward_list
 
     """
         step: 
@@ -271,13 +275,14 @@ class BenchEnv_Multi():
             if self.done_flag:
                 self.done_flag = False
                 self.last_done_flag = step_curr
-                if reward == 0.0:
-                    logging.info('<--Failure Situation--> Reward -= 20')
-                    reward -= 20
-                else:
-                    logging.info('<--Success Situation--> Reward += 20')
-                    reward += 20
-                logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
+                if self.end_reward:
+                    if reward == 0.0:
+                        logging.info('<--Failure Situation--> Reward += {}'.format(self.end_reward_list[0]))
+                        reward += self.end_reward_list[0]
+                    else:
+                        logging.info('<--Success Situation--> Reward += {}'.format(self.end_reward_list[1]))
+                        reward += self.end_reward_list[1]
+                    logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:
                 if step_curr - self.last_done_flag >= self.Resend_Internal:
                     done=True
