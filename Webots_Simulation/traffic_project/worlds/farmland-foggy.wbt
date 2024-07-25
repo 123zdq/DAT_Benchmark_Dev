@@ -50,7 +50,7 @@ Fog {
   visibilityRange 50
 }
 DEF land Floor {
-  translation 0 0 -0.01
+  translation 0 0 -0.1
   size 20475 18910
   appearance PBRAppearance {
     baseColor 0.44 0.27 0.08

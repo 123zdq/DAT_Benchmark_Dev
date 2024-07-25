@@ -47,7 +47,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 DEF land Floor {
-  translation 0 0 -0.01
+  translation 0 0 -0.1
   size 20475 18910
   appearance PBRAppearance {
     baseColor 0.603922 0.6 0.588235

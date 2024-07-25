@@ -55,7 +55,7 @@ TexturedBackgroundLight {
   luminosity 0.4
 }
 DEF land Floor {
-  translation -1000 -1000 -0.02
+  translation -1000 -1000 -0.1
   size 17000 12000
   appearance PBRAppearance {
     baseColor 0.64 0.44 0.12

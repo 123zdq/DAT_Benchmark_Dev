@@ -15,12 +15,14 @@
   <node id='-26394' action='modify' visible='true' lat='40.76682889408' lon='-73.97114482435' />
   <node id='-26395' action='modify' visible='true' lat='40.76679499168' lon='-73.97116902151' />
   <node id='-26397' action='modify' visible='true' lat='40.76293458791' lon='-73.9676772335' />
+  <node id='-26775' action='modify' visible='true' lat='40.76438073383' lon='-73.97308628906' />
+  <node id='-26789' action='modify' visible='true' lat='40.7637606623' lon='-73.97357018446' />
   <node id='42423674' timestamp='2019-10-21T18:18:14Z' uid='38533' user='LucasLarson' visible='true' version='7' changeset='76013183' lat='40.766876' lon='-73.979076'>
     <tag k='crossing' v='traffic_signals' />
     <tag k='highway' v='traffic_signals' />
     <tag k='kerb' v='lowered' />
   </node>
-  <node id='42427762' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='11' changeset='144161805' lat='40.7636536' lon='-73.9734832'>
+  <node id='42427762' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='11' changeset='144161805' lat='40.76365018048' lon='-73.97348524107'>
     <tag k='highway' v='traffic_signals' />
     <tag k='traffic_signals' v='signal' />
     <tag k='traffic_signals:direction' v='forward' />
@@ -76,7 +78,7 @@
   <node id='42430390' timestamp='2022-10-23T23:43:16Z' uid='2591427' user='snake21' visible='true' version='7' changeset='127976146' lat='40.7650041' lon='-73.9767052'>
     <tag k='highway' v='traffic_signals' />
   </node>
-  <node id='42430394' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='9' changeset='89713587' lat='40.7656797' lon='-73.976244'>
+  <node id='42430394' action='modify' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='9' changeset='89713587' lat='40.76566666904' lon='-73.97621819225'>
     <tag k='crossing' v='traffic_signals' />
     <tag k='highway' v='traffic_signals' />
     <tag k='kerb' v='lowered' />
@@ -192,7 +194,7 @@
     <tag k='highway' v='traffic_signals' />
     <tag k='traffic_signals:direction' v='forward' />
   </node>
-  <node id='42440313' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='8' changeset='148618498' lat='40.764158' lon='-73.9729368' />
+  <node id='42440313' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='8' changeset='148618498' lat='40.76415908594' lon='-73.97294181817' />
   <node id='42440452' action='delete' timestamp='2021-12-21T16:16:27Z' uid='12907679' user='Zachary W' visible='true' version='10' changeset='115217043' lat='40.7591757' lon='-73.9767414'>
     <tag k='highway' v='traffic_signals' />
   </node>
@@ -312,7 +314,7 @@
   <node id='73787722' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='4' changeset='123996266' lat='40.7664953' lon='-73.976907' />
   <node id='73787723' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='3' changeset='123996266' lat='40.7663303' lon='-73.9767136' />
   <node id='73787724' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='3' changeset='123996266' lat='40.7660963' lon='-73.9763084' />
-  <node id='73787726' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='3' changeset='123996266' lat='40.7659205' lon='-73.9761879' />
+  <node id='73787726' action='modify' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='3' changeset='123996266' lat='40.76591615636' lon='-73.97615492342' />
   <node id='100524007' action='delete' timestamp='2019-12-31T01:06:04Z' uid='119881' user='clay_c' visible='true' version='6' changeset='79035778' lat='40.787307' lon='-73.9520311' />
   <node id='243769941' timestamp='2013-03-23T17:11:33Z' uid='53073' user='Aaron Lidman' visible='true' version='2' changeset='15468871' lat='40.7656918' lon='-73.9737489' />
   <node id='243769942' timestamp='2013-03-23T17:11:33Z' uid='53073' user='Aaron Lidman' visible='true' version='2' changeset='15468871' lat='40.7658286' lon='-73.9737434' />
@@ -1004,7 +1006,7 @@
   <node id='1283225248' timestamp='2016-06-27T19:12:38Z' uid='4124310' user='mikercpc' visible='true' version='2' changeset='40328502' lat='40.7662662' lon='-73.9768108' />
   <node id='1283225253' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='5' changeset='89713587' lat='40.7660318' lon='-73.9767109' />
   <node id='1283225257' timestamp='2011-05-13T20:23:24Z' uid='153669' user='dchiles' visible='true' version='1' changeset='8135142' lat='40.7660486' lon='-73.9736269' />
-  <node id='1283225261' timestamp='2019-08-28T05:09:21Z' uid='10183030' user='MapSpot' visible='true' version='4' changeset='73821439' lat='40.7658146' lon='-73.9761987'>
+  <node id='1283225261' action='modify' timestamp='2019-08-28T05:09:21Z' uid='10183030' user='MapSpot' visible='true' version='4' changeset='73821439' lat='40.76578352481' lon='-73.97613945272'>
     <tag k='crossing' v='marked' />
     <tag k='highway' v='crossing' />
   </node>
@@ -1954,10 +1956,10 @@
   <node id='2216963372' timestamp='2013-03-23T17:11:10Z' uid='53073' user='Aaron Lidman' visible='true' version='1' changeset='15468871' lat='40.7658296' lon='-73.975556' />
   <node id='2216963373' timestamp='2013-03-23T17:11:10Z' uid='53073' user='Aaron Lidman' visible='true' version='1' changeset='15468871' lat='40.7658987' lon='-73.9747726' />
   <node id='2216963374' timestamp='2013-03-23T17:11:10Z' uid='53073' user='Aaron Lidman' visible='true' version='1' changeset='15468871' lat='40.7659087' lon='-73.9756208' />
-  <node id='2216963375' timestamp='2024-07-19T19:44:55Z' uid='4082127' user='mbeyerle' visible='true' version='2' changeset='154156897' lat='40.7658595' lon='-73.976082' />
+  <node id='2216963375' action='modify' timestamp='2024-07-19T19:44:55Z' uid='4082127' user='mbeyerle' visible='true' version='2' changeset='154156897' lat='40.76586710137' lon='-73.97604758966' />
   <node id='2216963376' timestamp='2013-03-23T17:11:10Z' uid='53073' user='Aaron Lidman' visible='true' version='1' changeset='15468871' lat='40.7659543' lon='-73.9743025' />
   <node id='2216963377' timestamp='2013-03-23T17:11:10Z' uid='53073' user='Aaron Lidman' visible='true' version='1' changeset='15468871' lat='40.7659692' lon='-73.9749488' />
-  <node id='2216963378' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='2' changeset='123996266' lat='40.7659567' lon='-73.9761914' />
+  <node id='2216963378' action='modify' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='2' changeset='123996266' lat='40.76595710722' lon='-73.9761765247' />
   <node id='2216963379' timestamp='2024-07-19T19:44:55Z' uid='4082127' user='mbeyerle' visible='true' version='2' changeset='154156897' lat='40.7659575' lon='-73.976092' />
   <node id='2216963380' timestamp='2013-03-23T17:11:11Z' uid='53073' user='Aaron Lidman' visible='true' version='1' changeset='15468871' lat='40.7659934' lon='-73.9742963' />
   <node id='2216963381' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='2' changeset='123996266' lat='40.766019' lon='-73.9762218' />
@@ -9177,7 +9179,7 @@
     <tag k='highway' v='crossing' />
     <tag k='tactile_paving' v='yes' />
   </node>
-  <node id='3377461262' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='13' changeset='144161805' lat='40.7643233' lon='-73.9731384'>
+  <node id='3377461262' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='13' changeset='144161805' lat='40.76432004219' lon='-73.9731305143'>
     <tag k='button_operated' v='no' />
     <tag k='crossing' v='traffic_signals' />
     <tag k='crossing:markings' v='zebra' />
@@ -9358,8 +9360,8 @@
     <tag k='website' v='https://www.fikanyc.com/' />
   </node>
   <node id='3809555550' timestamp='2022-07-24T05:15:23Z' uid='2591427' user='snake21' visible='true' version='2' changeset='123996266' lat='40.7652372' lon='-73.9729748' />
-  <node id='3809555553' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='3' changeset='89713587' lat='40.7657687' lon='-73.9760902' />
-  <node id='3809555554' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='2' changeset='89713587' lat='40.7658017' lon='-73.9760852' />
+  <node id='3809555553' action='modify' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='3' changeset='89713587' lat='40.76572852125' lon='-73.97601134297' />
+  <node id='3809555554' action='modify' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='2' changeset='89713587' lat='40.76581690276' lon='-73.97603501826' />
   <node id='3835810353' timestamp='2015-11-14T14:40:14Z' uid='336460' user='robgeb' visible='true' version='1' changeset='35307437' lat='40.7608677' lon='-73.9676786' />
   <node id='3859590413' timestamp='2020-06-24T18:10:40Z' uid='119881' user='clay_c' visible='true' version='4' changeset='87099174' lat='40.7607921' lon='-73.9766181'>
     <tag k='railway' v='switch' />
@@ -9615,7 +9617,7 @@
     <tag k='highway' v='crossing' />
     <tag k='tactile_paving' v='yes' />
   </node>
-  <node id='3976008172' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='6' changeset='148618498' lat='40.7636003' lon='-73.9733503'>
+  <node id='3976008172' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='6' changeset='148618498' lat='40.76359487026' lon='-73.97335316753'>
     <tag k='crossing' v='traffic_signals' />
     <tag k='highway' v='crossing' />
   </node>
@@ -9637,7 +9639,7 @@
     <tag k='traffic_signals:sound' v='no' />
     <tag k='traffic_signals:vibration' v='no' />
   </node>
-  <node id='3976008178' timestamp='2023-03-11T21:59:33Z' uid='2456367' user='hdevine825' visible='true' version='9' changeset='133568746' lat='40.7643758' lon='-73.9729545'>
+  <node id='3976008178' action='modify' timestamp='2023-03-11T21:59:33Z' uid='2456367' user='hdevine825' visible='true' version='9' changeset='133568746' lat='40.76433833524' lon='-73.9729824584'>
     <tag k='button_operated' v='no' />
     <tag k='crossing' v='traffic_signals' />
     <tag k='highway' v='crossing' />
@@ -11073,7 +11075,7 @@
     <tag k='shop' v='nutrition_supplements' />
     <tag k='website' v='https://www.gnc.com/store-details?StoreID=2926' />
   </node>
-  <node id='6188803959' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='8' changeset='148618498' lat='40.7637292' lon='-73.9734296'>
+  <node id='6188803959' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='8' changeset='148618498' lat='40.76370748109' lon='-73.97344537141'>
     <tag k='button_operated' v='no' />
     <tag k='crossing' v='traffic_signals' />
     <tag k='crossing:island' v='no' />
@@ -12169,7 +12171,7 @@
     <tag k='highway' v='crossing' />
     <tag k='tactile_paving' v='incorrect' />
   </node>
-  <node id='6751794456' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='2' changeset='89713587' lat='40.7658669' lon='-73.9763274' />
+  <node id='6751794456' action='modify' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='2' changeset='89713587' lat='40.765840382' lon='-73.97626936586' />
   <node id='6794278635' action='delete' timestamp='2019-09-14T03:19:28Z' uid='38533' user='LucasLarson' visible='true' version='1' changeset='74460635' lat='40.7581976' lon='-73.9585153' />
   <node id='6794406099' timestamp='2020-01-10T01:12:25Z' uid='6457180' user='promiseofbirth' visible='true' version='3' changeset='79397396' lat='40.7865399' lon='-73.9682398' />
   <node id='6794406110' timestamp='2019-11-19T23:18:14Z' uid='38533' user='LucasLarson' visible='true' version='2' changeset='77294842' lat='40.7774861' lon='-73.9748348' />
@@ -13857,11 +13859,11 @@
     <tag k='backrest' v='yes' />
   </node>
   <node id='7830685370' timestamp='2020-08-20T22:22:47Z' uid='6457180' user='promiseofbirth' visible='true' version='1' changeset='89713587' lat='40.7657302' lon='-73.9758238' />
-  <node id='7830685371' timestamp='2023-02-11T01:12:38Z' uid='384667' user='MxxCon' visible='true' version='2' changeset='132387572' lat='40.765735' lon='-73.9763749'>
+  <node id='7830685371' action='modify' timestamp='2023-02-11T01:12:38Z' uid='384667' user='MxxCon' visible='true' version='2' changeset='132387572' lat='40.76572616296' lon='-73.97635059654'>
     <tag k='crossing' v='traffic_signals' />
     <tag k='highway' v='crossing' />
   </node>
-  <node id='7830685375' timestamp='2023-02-11T01:12:38Z' uid='384667' user='MxxCon' visible='true' version='2' changeset='132387572' lat='40.7656295' lon='-73.9761245'>
+  <node id='7830685375' action='modify' timestamp='2023-02-11T01:12:38Z' uid='384667' user='MxxCon' visible='true' version='2' changeset='132387572' lat='40.76561522101' lon='-73.97608743671'>
     <tag k='crossing' v='traffic_signals' />
     <tag k='highway' v='crossing' />
   </node>
@@ -16011,12 +16013,7 @@
   <node id='10173346252' timestamp='2022-11-10T11:23:58Z' uid='13911391' user='kollikee' visible='true' version='1' changeset='128728618' lat='40.7650005' lon='-73.9765302' />
   <node id='10173346253' timestamp='2023-02-11T01:12:38Z' uid='384667' user='MxxCon' visible='true' version='2' changeset='132387572' lat='40.7640006' lon='-73.9742173' />
   <node id='10173346254' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='3' changeset='144161805' lat='40.7639787' lon='-73.9740994' />
-  <node id='10173346255' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805' lat='40.763744' lon='-73.9735839'>
-    <tag k='barrier' v='kerb' />
-    <tag k='kerb' v='flush' />
-    <tag k='tactile_paving' v='no' />
-    <tag k='wheelchair' v='yes' />
-  </node>
+  <node id='10173346255' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805' lat='40.763744' lon='-73.9735839' />
   <node id='10215134487' timestamp='2022-11-24T17:01:18Z' uid='6641970' user='CurlingMan13' visible='true' version='1' changeset='129336419' lat='40.7620542' lon='-73.978534'>
     <tag k='name' v='Knoll Home Design Shop' />
     <tag k='shop' v='furniture' />
@@ -16622,18 +16619,8 @@
     <tag k='kerb' v='lowered' />
   </node>
   <node id='11303266596' timestamp='2023-10-31T20:34:23Z' uid='17310220' user='VLD273' visible='true' version='1' changeset='143441819' lat='40.7631137' lon='-73.9739881' />
-  <node id='11303266597' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805' lat='40.7636214' lon='-73.9736115'>
-    <tag k='barrier' v='kerb' />
-    <tag k='kerb' v='lowered' />
-    <tag k='tactile_paving' v='yes' />
-    <tag k='wheelchair' v='yes' />
-  </node>
-  <node id='11303266598' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805' lat='40.7636637' lon='-73.9736415'>
-    <tag k='barrier' v='kerb' />
-    <tag k='kerb' v='lowered' />
-    <tag k='tactile_paving' v='yes' />
-    <tag k='wheelchair' v='yes' />
-  </node>
+  <node id='11303266597' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805' lat='40.7636214' lon='-73.9736115' />
+  <node id='11303266598' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805' lat='40.7636637' lon='-73.9736415' />
   <node id='11303300334' timestamp='2023-10-31T21:03:20Z' uid='17310220' user='VLD273' visible='true' version='1' changeset='143442741' lat='40.7612699' lon='-73.9776616' />
   <node id='11303300335' timestamp='2023-10-31T21:03:20Z' uid='17310220' user='VLD273' visible='true' version='1' changeset='143442741' lat='40.7611592' lon='-73.9777471' />
   <node id='11303300336' timestamp='2023-10-31T21:03:20Z' uid='17310220' user='VLD273' visible='true' version='1' changeset='143442741' lat='40.7618847' lon='-73.9791178' />
@@ -16710,13 +16697,13 @@
   <node id='11359523971' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7643657' lon='-73.9731034' />
   <node id='11359523972' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7643622' lon='-73.9730906' />
   <node id='11359523973' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7643625' lon='-73.9730811' />
-  <node id='11359523974' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7644389' lon='-73.97302'>
+  <node id='11359523974' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7644389' lon='-73.97302'>
     <tag k='barrier' v='kerb' />
     <tag k='kerb' v='lowered' />
     <tag k='tactile_paving' v='yes' />
     <tag k='wheelchair' v='yes' />
   </node>
-  <node id='11359523975' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7644351' lon='-73.9730669'>
+  <node id='11359523975' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7644351' lon='-73.9730669'>
     <tag k='barrier' v='kerb' />
     <tag k='kerb' v='lowered' />
     <tag k='tactile_paving' v='yes' />
@@ -17282,7 +17269,7 @@
   <node id='11359524212' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.764432' lon='-73.9730513' />
   <node id='11359524213' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.764432' lon='-73.9730389' />
   <node id='11359524214' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.764435' lon='-73.9730287' />
-  <node id='11359524215' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7643702' lon='-73.9731141'>
+  <node id='11359524215' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7643702' lon='-73.9731141'>
     <tag k='barrier' v='kerb' />
     <tag k='kerb' v='flush' />
     <tag k='tactile_paving' v='no' />
@@ -17499,12 +17486,7 @@
     <tag k='tactile_paving' v='no' />
     <tag k='wheelchair' v='yes' />
   </node>
-  <node id='11359524332' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637817' lon='-73.9735016'>
-    <tag k='barrier' v='kerb' />
-    <tag k='kerb' v='flush' />
-    <tag k='tactile_paving' v='no' />
-    <tag k='wheelchair' v='yes' />
-  </node>
+  <node id='11359524332' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637817' lon='-73.9735016' />
   <node id='11359524333' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7640207' lon='-73.9738479' />
   <node id='11359524334' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7638886' lon='-73.9735524' />
   <node id='11359524335' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7639421' lon='-73.9734376' />
@@ -17721,8 +17703,8 @@
     <tag k='highway' v='street_lamp' />
   </node>
   <node id='11359524401' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7636526' lon='-73.9736496' />
-  <node id='11359524402' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637806' lon='-73.9735577' />
-  <node id='11359524403' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.763807' lon='-73.9735389' />
+  <node id='11359524402' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637806' lon='-73.9735577' />
+  <node id='11359524403' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.76380971486' lon='-73.973526713' />
   <node id='11359524404' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637782' lon='-73.97351' />
   <node id='11359524405' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637755' lon='-73.9735269' />
   <node id='11359524406' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805' lat='40.7637768' lon='-73.9735454' />
@@ -17849,7 +17831,7 @@
     <tag k='phone' v='+1-800-725-6669' />
     <tag k='website' v='https://thelocalagency.com/' />
   </node>
-  <node id='11729281540' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7641759' lon='-73.9729231'>
+  <node id='11729281540' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.76417807188' lon='-73.97292883506'>
     <tag k='barrier' v='kerb' />
     <tag k='kerb' v='lowered' />
     <tag k='tactile_paving' v='yes' />
@@ -17867,18 +17849,8 @@
   <node id='11729281543' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7636793' lon='-73.9733339'>
     <tag k='highway' v='street_lamp' />
   </node>
-  <node id='11729281544' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7636681' lon='-73.9733458'>
-    <tag k='barrier' v='kerb' />
-    <tag k='kerb' v='lowered' />
-    <tag k='tactile_paving' v='yes' />
-    <tag k='wheelchair' v='yes' />
-  </node>
-  <node id='11729281545' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7636352' lon='-73.9733237'>
-    <tag k='barrier' v='kerb' />
-    <tag k='kerb' v='lowered' />
-    <tag k='tactile_paving' v='yes' />
-    <tag k='wheelchair' v='yes' />
-  </node>
+  <node id='11729281544' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7636681' lon='-73.9733458' />
+  <node id='11729281545' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7636352' lon='-73.9733237' />
   <node id='11729281546' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='148618498' lat='40.7637084' lon='-73.9733126'>
     <tag k='amenity' v='waste_basket' />
   </node>
@@ -18709,7 +18681,7 @@
     <nd ref='-26394' />
     <tag k='hgv' v='no' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='3' />
+    <tag k='lanes' v='4' />
     <tag k='lit' v='yes' />
     <tag k='maxspeed' v='25 mph' />
     <tag k='name' v='5th Avenue' />
@@ -18828,7 +18800,7 @@
     <tag k='oneway' v='yes' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='5670253' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='28' changeset='144161805'>
+  <way id='5670253' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='28' changeset='144161805'>
     <nd ref='42430394' />
     <nd ref='7830685375' />
     <nd ref='11359523994' />
@@ -18857,11 +18829,10 @@
     <tag k='tiger:name_type_1' v='St' />
     <tag k='tiger:zip_right' v='10019' />
     <tag k='tiger:zip_right_1' v='10019' />
-    <tag k='width' v='20' />
     <tag k='wikidata' v='Q245364' />
     <tag k='wikipedia' v='en:59th Street (Manhattan)' />
   </way>
-  <way id='5670873' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='19' changeset='144161805'>
+  <way id='5670873' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='19' changeset='144161805'>
     <nd ref='9433097821' />
     <nd ref='6751794455' />
     <nd ref='11359524023' />
@@ -18869,7 +18840,7 @@
     <nd ref='4347534767' />
     <tag k='hgv' v='destination' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='3' />
+    <tag k='lanes' v='2' />
     <tag k='lit' v='yes' />
     <tag k='maxspeed' v='25 mph' />
     <tag k='name' v='Grand Army Plaza' />
@@ -18886,7 +18857,7 @@
     <tag k='tiger:reviewed' v='no' />
     <tag k='turn:lanes' v='left;through|right|right' />
   </way>
-  <way id='5670874' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='23' changeset='144161805'>
+  <way id='5670874' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='23' changeset='144161805'>
     <nd ref='4347534767' />
     <nd ref='11359523996' />
     <nd ref='3377461261' />
@@ -18908,7 +18879,6 @@
     <tag k='tiger:name_type' v='Plz' />
     <tag k='tiger:reviewed' v='no' />
     <tag k='turn:lanes' v='||right' />
-    <tag k='width' v='12' />
   </way>
   <way id='5671129' timestamp='2024-05-08T23:07:38Z' uid='314930' user='John Gilmore' visible='true' version='40' changeset='151078339'>
     <nd ref='42431544' />
@@ -19707,7 +19677,7 @@
     <tag k='wikidata' v='Q1501652' />
     <tag k='wikipedia' v='en:General Motors Building (Manhattan)' />
   </way>
-  <way id='109269750' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='28' changeset='144161805'>
+  <way id='109269750' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='28' changeset='144161805'>
     <nd ref='11359524044' />
     <nd ref='1251382431' />
     <nd ref='1251382467' />
@@ -19727,14 +19697,12 @@
     <nd ref='1251382374' />
     <nd ref='7176445484' />
     <nd ref='1251382353' />
-    <nd ref='11359523974' />
     <nd ref='11359481066' />
     <nd ref='11359523973' />
     <nd ref='11359523972' />
     <nd ref='11359523971' />
-    <nd ref='11359524215' />
   </way>
-  <way id='109269756' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='4' changeset='144161805'>
+  <way id='109269756' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='4' changeset='144161805'>
     <nd ref='11359524045' />
     <nd ref='3377461268' />
     <nd ref='3377461260' />
@@ -19758,7 +19726,6 @@
     <nd ref='5609547131' />
     <nd ref='3377461263' />
     <nd ref='3377461269' />
-    <nd ref='11359523975' />
     <tag k='crossing:markings' v='zebra' />
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
@@ -21746,7 +21713,7 @@
     <tag k='usage' v='main' />
     <tag k='voltage' v='700' />
   </way>
-  <way id='195743336' timestamp='2024-05-08T23:07:37Z' uid='314930' user='John Gilmore' visible='true' version='46' changeset='151078339'>
+  <way id='195743336' action='modify' timestamp='2024-05-08T23:07:37Z' uid='314930' user='John Gilmore' visible='true' version='46' changeset='151078339'>
     <nd ref='42432818' />
     <nd ref='9971383726' />
     <nd ref='10171655544' />
@@ -21759,7 +21726,7 @@
     <tag k='cycleway:right' v='no' />
     <tag k='hgv' v='no' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='5' />
+    <tag k='lanes' v='4' />
     <tag k='lanes:bus' v='2' />
     <tag k='name' v='5th Avenue' />
     <tag k='name:en' v='5th Avenue' />
@@ -21785,7 +21752,7 @@
     <nd ref='42436510' />
     <tag k='hgv' v='no' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='3' />
+    <tag k='lanes' v='4' />
     <tag k='lit' v='yes' />
     <tag k='maxspeed' v='25 mph' />
     <tag k='name' v='5th Avenue' />
@@ -21817,7 +21784,7 @@
     <tag k='highway' v='secondary' />
     <tag k='lanes' v='4' />
     <tag k='lanes:backward' v='2' />
-    <tag k='lanes:forward' v='3' />
+    <tag k='lanes:forward' v='2' />
     <tag k='lit' v='yes' />
     <tag k='name' v='Central Park South' />
     <tag k='name_1' v='West 59 Street' />
@@ -42112,14 +42079,13 @@
     <tag k='source' v='Bing' />
     <tag k='water' v='basin' />
   </way>
-  <way id='330748490' timestamp='2023-11-18T04:54:01Z' uid='11697944' user='kguenther24' visible='true' version='3' changeset='144161912'>
+  <way id='330748490' action='modify' timestamp='2023-11-18T04:54:01Z' uid='11697944' user='kguenther24' visible='true' version='3' changeset='144161912'>
     <nd ref='11359524044' />
     <nd ref='3377461268' />
     <nd ref='5609547124' />
     <nd ref='3377461265' />
     <nd ref='5609547123' />
     <nd ref='3377461269' />
-    <nd ref='11359523974' />
     <tag k='crossing:markings' v='zebra' />
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
@@ -42955,8 +42921,7 @@
     <tag k='highway' v='footway' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='436899178' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='7' changeset='148618498'>
-    <nd ref='11359524332' />
+  <way id='436899178' action='modify' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='7' changeset='148618498'>
     <nd ref='6188803959' />
     <nd ref='11729281544' />
     <tag k='crossing' v='traffic_signals' />
@@ -43178,10 +43143,11 @@
     <tag k='surface' v='asphalt' />
     <tag k='tactile_paving' v='no' />
   </way>
-  <way id='436899197' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='7' changeset='144161805'>
+  <way id='436899197' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='7' changeset='144161805'>
     <nd ref='11303266598' />
     <nd ref='3976008173' />
-    <nd ref='10173346255' />
+    <nd ref='-26789' />
+    <nd ref='6188803959' />
     <tag k='button_operated' v='no' />
     <tag k='crossing' v='traffic_signals' />
     <tag k='crossing:island' v='no' />
@@ -43201,8 +43167,9 @@
     <tag k='highway' v='footway' />
     <tag k='surface' v='paving_stones' />
   </way>
-  <way id='436899199' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='3' changeset='144161805'>
-    <nd ref='11359523974' />
+  <way id='436899199' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='3' changeset='144161805'>
+    <nd ref='3377461262' />
+    <nd ref='-26775' />
     <nd ref='3976008178' />
     <nd ref='4347534769' />
     <tag k='crossing' v='traffic_signals' />
@@ -43348,7 +43315,7 @@
     <nd ref='2792781459' />
     <tag k='hgv' v='destination' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='3' />
+    <tag k='lanes' v='4' />
     <tag k='maxspeed' v='25 mph' />
     <tag k='name' v='Madison Avenue' />
     <tag k='name:ru' v='Мэдисон-авеню' />
@@ -43367,10 +43334,7 @@
     <tag k='wikidata' v='Q109849' />
     <tag k='wikipedia' v='en:Madison Avenue' />
   </way>
-  <way id='458452178' timestamp='2022-11-10T09:46:01Z' uid='13911494' user='nmirzash' visible='true' version='2' changeset='128724288'>
-    <nd ref='4544486779' />
-    <nd ref='10173210343' />
-    <nd ref='4544486780' />
+  <way id='458452178' action='delete' timestamp='2022-11-10T09:46:01Z' uid='13911494' user='nmirzash' visible='true' version='2' changeset='128724288'>
     <tag k='highway' v='service' />
     <tag k='service' v='parking_aisle' />
   </way>
@@ -43966,7 +43930,7 @@
     <tag k='wikidata' v='Q2711129' />
     <tag k='wikipedia' v='en:57th Street (Manhattan)' />
   </way>
-  <way id='497258108' timestamp='2023-09-26T16:59:16Z' uid='298513' user='TheBestIdea' visible='true' version='33' changeset='141783898'>
+  <way id='497258108' action='modify' timestamp='2023-09-26T16:59:16Z' uid='298513' user='TheBestIdea' visible='true' version='33' changeset='141783898'>
     <nd ref='42430384' />
     <nd ref='10171655555' />
     <nd ref='10171655563' />
@@ -43977,7 +43941,7 @@
     <tag k='cycleway:left:oneway' v='yes' />
     <tag k='hgv' v='destination' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='3' />
+    <tag k='lanes' v='4' />
     <tag k='name' v='6th Avenue' />
     <tag k='name:en' v='6th Avenue' />
     <tag k='name:ru' v='6-я авеню' />
@@ -43992,7 +43956,6 @@
     <tag k='tiger:name_type_1' v='Ave' />
     <tag k='tiger:zip_left' v='10019' />
     <tag k='tiger:zip_right' v='10019' />
-    <tag k='width' v='18.5' />
     <tag k='wikidata' v='Q109873' />
     <tag k='wikipedia' v='en:Sixth Avenue' />
   </way>
@@ -47648,17 +47611,10 @@
     <tag k='highway' v='service' />
     <tag k='surface' v='concrete' />
   </way>
-  <way id='887788318' timestamp='2022-11-09T09:19:52Z' uid='13911494' user='nmirzash' visible='true' version='2' changeset='128676174'>
-    <nd ref='8254176967' />
-    <nd ref='10171007678' />
-    <nd ref='8254176968' />
+  <way id='887788318' action='delete' timestamp='2022-11-09T09:19:52Z' uid='13911494' user='nmirzash' visible='true' version='2' changeset='128676174'>
     <tag k='highway' v='service' />
   </way>
-  <way id='887788319' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='148618498'>
-    <nd ref='8254176969' />
-    <nd ref='11729293539' />
-    <nd ref='8254176971' />
-    <nd ref='8254176970' />
+  <way id='887788319' action='delete' timestamp='2024-03-14T01:38:43Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='148618498'>
     <tag k='highway' v='service' />
     <tag k='service' v='driveway' />
     <tag k='surface' v='paved' />
@@ -47799,35 +47755,26 @@
     <tag k='railway' v='platform' />
     <tag k='subway' v='yes' />
   </way>
-  <way id='910774297' timestamp='2023-03-05T14:34:50Z' uid='17561309' user='Lucas Brandt' visible='true' version='3' changeset='133327541'>
-    <nd ref='8457002448' />
-    <nd ref='10171655548' />
-    <nd ref='8457002449' />
+  <way id='910774297' action='delete' timestamp='2023-03-05T14:34:50Z' uid='17561309' user='Lucas Brandt' visible='true' version='3' changeset='133327541'>
     <tag k='highway' v='service' />
     <tag k='surface' v='concrete' />
   </way>
-  <way id='910774298' timestamp='2023-03-05T14:35:29Z' uid='17561309' user='Lucas Brandt' visible='true' version='3' changeset='133327541'>
-    <nd ref='8457002450' />
-    <nd ref='10171655547' />
-    <nd ref='8457002451' />
+  <way id='910774298' action='delete' timestamp='2023-03-05T14:35:29Z' uid='17561309' user='Lucas Brandt' visible='true' version='3' changeset='133327541'>
     <tag k='highway' v='service' />
     <tag k='surface' v='concrete' />
   </way>
-  <way id='910774299' timestamp='2023-03-05T14:34:33Z' uid='17561309' user='Lucas Brandt' visible='true' version='3' changeset='133327541'>
-    <nd ref='8457002452' />
-    <nd ref='10171655549' />
-    <nd ref='8457002453' />
+  <way id='910774299' action='delete' timestamp='2023-03-05T14:34:33Z' uid='17561309' user='Lucas Brandt' visible='true' version='3' changeset='133327541'>
     <tag k='highway' v='service' />
     <tag k='surface' v='concrete' />
   </way>
-  <way id='962626218' timestamp='2024-05-08T23:04:14Z' uid='314930' user='John Gilmore' visible='true' version='28' changeset='151078339'>
+  <way id='962626218' action='modify' timestamp='2024-05-08T23:04:14Z' uid='314930' user='John Gilmore' visible='true' version='28' changeset='151078339'>
     <nd ref='8904527314' />
     <nd ref='3976008178' />
     <nd ref='5706568771' />
     <tag k='cycleway:both' v='no' />
     <tag k='hgv' v='no' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='5' />
+    <tag k='lanes' v='4' />
     <tag k='lit' v='yes' />
     <tag k='maxspeed' v='25 mph' />
     <tag k='name' v='5th Avenue' />
@@ -47880,16 +47827,10 @@
     <tag k='wikidata' v='Q109849' />
     <tag k='wikipedia' v='en:Madison Avenue' />
   </way>
-  <way id='966448025' timestamp='2023-10-28T20:07:04Z' uid='1866129' user='Guthrie' visible='true' version='2' changeset='143281116'>
-    <nd ref='8941359203' />
-    <nd ref='11296226860' />
-    <nd ref='8941359204' />
+  <way id='966448025' action='delete' timestamp='2023-10-28T20:07:04Z' uid='1866129' user='Guthrie' visible='true' version='2' changeset='143281116'>
     <tag k='highway' v='service' />
   </way>
-  <way id='967458619' timestamp='2023-10-28T20:46:42Z' uid='1866129' user='Guthrie' visible='true' version='2' changeset='143283130'>
-    <nd ref='8835719642' />
-    <nd ref='11296256961' />
-    <nd ref='8950382042' />
+  <way id='967458619' action='delete' timestamp='2023-10-28T20:46:42Z' uid='1866129' user='Guthrie' visible='true' version='2' changeset='143283130'>
     <tag k='highway' v='service' />
   </way>
   <way id='988716842' timestamp='2023-08-21T08:42:07Z' uid='3199858' user='Mateusz Konieczny - bot account' visible='true' version='3' changeset='140168915'>
@@ -48151,10 +48092,7 @@
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
   </way>
-  <way id='1092319802' timestamp='2023-10-28T20:07:04Z' uid='1866129' user='Guthrie' visible='true' version='2' changeset='143281116'>
-    <nd ref='10003982623' />
-    <nd ref='11296226828' />
-    <nd ref='10003982624' />
+  <way id='1092319802' action='delete' timestamp='2023-10-28T20:07:04Z' uid='1866129' user='Guthrie' visible='true' version='2' changeset='143281116'>
     <tag k='highway' v='service' />
   </way>
   <way id='1106386258' timestamp='2022-10-23T16:59:03Z' uid='5156387' user='zhik' visible='true' version='1' changeset='127966369'>
@@ -48966,10 +48904,9 @@
     <tag k='tiger:zip_left' v='10022' />
     <tag k='tiger:zip_right' v='10022' />
   </way>
-  <way id='1138232001' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805'>
+  <way id='1138232001' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='2' changeset='144161805'>
     <nd ref='11359524253' />
     <nd ref='3377461262' />
-    <nd ref='11359524215' />
     <tag k='button_operated' v='no' />
     <tag k='crossing' v='traffic_signals' />
     <tag k='crossing:island' v='no' />
@@ -49399,14 +49336,14 @@
     <tag k='roof:material' v='concrete' />
     <tag k='roof:shape' v='flat' />
   </way>
-  <way id='1174928402' timestamp='2023-08-21T19:26:53Z' uid='19233464' user='secondaryhighway' visible='true' version='22' changeset='140197766'>
+  <way id='1174928402' action='modify' timestamp='2023-08-21T19:26:53Z' uid='19233464' user='secondaryhighway' visible='true' version='22' changeset='140197766'>
     <nd ref='42436510' />
     <nd ref='7797650089' />
     <nd ref='4347535692' />
     <nd ref='4347534783' />
     <tag k='hgv' v='no' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='3' />
+    <tag k='lanes' v='4' />
     <tag k='lit' v='yes' />
     <tag k='maxspeed' v='25 mph' />
     <tag k='name' v='5th Avenue' />
@@ -49425,15 +49362,15 @@
     <tag k='wikidata' v='Q109858' />
     <tag k='wikipedia' v='en:Fifth Avenue' />
   </way>
-  <way id='1205900284' timestamp='2023-09-07T14:41:01Z' uid='10183030' user='MapSpot' visible='true' version='1' changeset='140944660'>
+  <way id='1205900284' action='modify' timestamp='2023-09-07T14:41:01Z' uid='10183030' user='MapSpot' visible='true' version='1' changeset='140944660'>
     <nd ref='4207892896' />
     <nd ref='4796245038' />
     <tag k='alt_name' v='West 59th Street' />
     <tag k='hgv' v='local' />
     <tag k='highway' v='secondary' />
-    <tag k='lanes' v='5' />
+    <tag k='lanes' v='4' />
     <tag k='lanes:backward' v='2' />
-    <tag k='lanes:forward' v='3' />
+    <tag k='lanes:forward' v='2' />
     <tag k='lit' v='yes' />
     <tag k='name' v='Central Park South' />
     <tag k='name_1' v='West 59 Street' />
@@ -49483,7 +49420,7 @@
     <tag k='footway' v='crossing' />
     <tag k='highway' v='footway' />
   </way>
-  <way id='1211049195' timestamp='2023-09-26T16:59:16Z' uid='298513' user='TheBestIdea' visible='true' version='1' changeset='141783898'>
+  <way id='1211049195' action='modify' timestamp='2023-09-26T16:59:16Z' uid='298513' user='TheBestIdea' visible='true' version='1' changeset='141783898'>
     <nd ref='11220661302' />
     <nd ref='7830757191' />
     <nd ref='42430394' />
@@ -49507,7 +49444,6 @@
     <tag k='tiger:zip_left' v='10019' />
     <tag k='tiger:zip_right' v='10019' />
     <tag k='turn:lanes' v='left|left|right|right' />
-    <tag k='width' v='18.5' />
     <tag k='wikidata' v='Q109873' />
     <tag k='wikipedia' v='en:Sixth Avenue' />
   </way>
@@ -50322,7 +50258,7 @@
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
   </way>
-  <way id='1222356565' timestamp='2023-11-09T21:49:35Z' uid='4082127' user='mbeyerle' visible='true' version='1' changeset='143840406'>
+  <way id='1222356565' action='modify' timestamp='2023-11-09T21:49:35Z' uid='4082127' user='mbeyerle' visible='true' version='1' changeset='143840406'>
     <nd ref='42440951' />
     <nd ref='10610255910' />
     <nd ref='11336810277' />
@@ -50332,7 +50268,7 @@
     <tag k='cycleway:left:oneway' v='yes' />
     <tag k='cycleway:right' v='no' />
     <tag k='highway' v='residential' />
-    <tag k='lanes' v='1' />
+    <tag k='lanes' v='2' />
     <tag k='name' v='West 55th Street' />
     <tag k='name:ru' v='Западная 55-я стрит' />
     <tag k='oneway' v='yes' />
@@ -50349,6 +50285,7 @@
     <tag k='tiger:reviewed' v='no' />
     <tag k='tiger:zip_left' v='10019' />
     <tag k='tiger:zip_right' v='10019' />
+    <tag k='turn:lanes' v='through|right' />
     <tag k='width' v='9' />
     <tag k='wikidata' v='Q2817506' />
     <tag k='wikipedia' v='en:55th Street (Manhattan)' />
@@ -50433,7 +50370,7 @@
     <tag k='name' v='Central Park Outer Loop' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='1224928888' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
+  <way id='1224928888' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359524358' />
     <nd ref='11359524015' />
     <nd ref='11359524016' />
@@ -50449,12 +50386,10 @@
     <nd ref='11359524001' />
     <nd ref='11359524002' />
     <nd ref='11359524003' />
-    <nd ref='11359524332' />
     <nd ref='11359524004' />
     <nd ref='11359524005' />
     <nd ref='11359524006' />
     <nd ref='11359524007' />
-    <nd ref='10173346255' />
     <nd ref='11359524008' />
     <nd ref='11359524009' />
     <nd ref='11359524010' />
@@ -50686,23 +50621,20 @@
     <tag k='surface' v='asphalt' />
     <tag k='tactile_paving' v='no' />
   </way>
-  <way id='1224928912' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
+  <way id='1224928912' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359524044' />
     <nd ref='11359524208' />
     <nd ref='11359524209' />
     <nd ref='11359524210' />
     <nd ref='11359524045' />
     <nd ref='11359524211' />
-    <nd ref='11359523975' />
     <nd ref='11359524212' />
     <nd ref='11359524213' />
     <nd ref='11359524214' />
-    <nd ref='11359523974' />
     <nd ref='11359481066' />
     <nd ref='11359523973' />
     <nd ref='11359523972' />
     <nd ref='11359523971' />
-    <nd ref='11359524215' />
     <nd ref='11359524046' />
     <nd ref='11359481067' />
     <nd ref='11359523969' />
@@ -50715,16 +50647,13 @@
     <tag k='lit' v='yes' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='1224928913' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
-    <nd ref='11359524215' />
-    <nd ref='11359523975' />
+  <way id='1224928913' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <tag k='crossing:markings' v='zebra' />
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='1224928914' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
-    <nd ref='11359524215' />
+  <way id='1224928914' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359524046' />
     <nd ref='11359481067' />
     <nd ref='11359523969' />
@@ -50760,14 +50689,12 @@
     <tag k='lit' v='yes' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='1224928916' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
+  <way id='1224928916' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359524045' />
     <nd ref='11359524211' />
-    <nd ref='11359523975' />
     <nd ref='11359524212' />
     <nd ref='11359524213' />
     <nd ref='11359524214' />
-    <nd ref='11359523974' />
     <nd ref='1251382353' />
     <nd ref='11359524221' />
     <nd ref='11359524220' />
@@ -50967,9 +50894,10 @@
     <nd ref='11359524234' />
     <nd ref='11359524217' />
   </way>
-  <way id='1224928942' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
+  <way id='1224928942' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359524339' />
     <nd ref='11359524383' />
+    <nd ref='11359524404' />
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
     <tag k='surface' v='paving_stones' />
@@ -51038,40 +50966,31 @@
     <nd ref='11303266598' />
     <tag k='barrier' v='kerb' />
   </way>
-  <way id='1224928950' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
-    <nd ref='11359524402' />
-    <nd ref='11359524403' />
-    <nd ref='11359524383' />
+  <way id='1224928950' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
     <tag k='surface' v='paving_stones' />
   </way>
-  <way id='1224928951' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
-    <nd ref='10173346255' />
-    <nd ref='11359524402' />
+  <way id='1224928951' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
     <tag k='surface' v='asphalt' />
   </way>
-  <way id='1224928952' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
-    <nd ref='11359524332' />
-    <nd ref='11359524403' />
+  <way id='1224928952' action='delete' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <tag k='footway' v='sidewalk' />
     <tag k='highway' v='footway' />
     <tag k='surface' v='paving_stones' />
   </way>
-  <way id='1224928953' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
+  <way id='1224928953' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359523999' />
     <nd ref='11359524000' />
     <nd ref='11359524253' />
     <nd ref='11359524001' />
     <nd ref='11359524002' />
     <nd ref='11359524003' />
-    <nd ref='11359524332' />
     <nd ref='11359524404' />
     <nd ref='11359524405' />
     <nd ref='11359524406' />
-    <nd ref='11359524402' />
     <nd ref='11359524407' />
     <nd ref='11359524408' />
     <nd ref='11359524409' />
@@ -51193,13 +51112,11 @@
     <tag k='height' v='2' />
     <tag k='material' v='stone' />
   </way>
-  <way id='1224928960' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
-    <nd ref='11359524332' />
+  <way id='1224928960' action='modify' timestamp='2023-11-18T04:41:03Z' uid='11697944' user='kguenther24' visible='true' version='1' changeset='144161805'>
     <nd ref='11359524004' />
     <nd ref='11359524005' />
     <nd ref='11359524006' />
     <nd ref='11359524007' />
-    <nd ref='10173346255' />
     <nd ref='11359524008' />
     <nd ref='11359524009' />
     <nd ref='11359524010' />
@@ -51226,11 +51143,10 @@
     <nd ref='11359524409' />
     <nd ref='11359524408' />
     <nd ref='11359524407' />
-    <nd ref='11359524402' />
     <nd ref='11359524406' />
     <nd ref='11359524405' />
     <nd ref='11359524404' />
-    <nd ref='11359524332' />
+    <nd ref='11359524004' />
     <tag k='area' v='yes' />
     <tag k='highway' v='pedestrian' />
     <tag k='lit' v='yes' />
