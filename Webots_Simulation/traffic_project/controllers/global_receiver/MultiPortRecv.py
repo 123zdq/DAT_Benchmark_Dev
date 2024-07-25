@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-24 13:42:47
+LastEditTime: 2024-07-25 17:57:03
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -342,6 +342,16 @@ class MultiProcessRecv():
                     f.write(bytes(stateStr, 'utf-8'))
                     f.close()
                 while os.path.exists(filePath):
+                    try:
+                        while os.path.getsize(filePath) < 1:
+                            os.unlink(filePath)
+                            time.sleep(0.001)
+                            with open(filePath, "wb") as f:
+                                f.write(bytes(stateStr, 'utf-8'))
+                                f.close()
+                            time.sleep(0.001)
+                    except:
+                        pass
                     time.sleep(0.001)
             else:
                 with open(filePath, "wb") as f:
@@ -395,6 +405,16 @@ class MultiProcessRecv():
                     f.write(bytes(pointCloud, 'utf-8'))
                     f.close()
                 while os.path.exists(filePath):
+                    try:
+                        while os.path.getsize(filePath) < 1:
+                            os.unlink(filePath)
+                            time.sleep(0.001)
+                            with open(filePath, "wb") as f:
+                                f.write(bytes(pointCloud, 'utf-8'))
+                                f.close()
+                            time.sleep(0.001)
+                    except:
+                        pass
                     time.sleep(0.001)
             else:
                 with open(filePath, "wb") as f:
@@ -423,6 +443,16 @@ class MultiProcessRecv():
                     f.write(bytes(makeRewardData, 'utf-8'))
                     f.close()
                 while os.path.exists(filePath):
+                    try:
+                        while os.path.getsize(filePath) < 1:
+                            os.unlink(filePath)
+                            time.sleep(0.001)
+                            with open(filePath, "wb") as f:
+                                f.write(bytes(makeRewardData, 'utf-8'))
+                                f.close()
+                            time.sleep(0.001)
+                    except:
+                        pass
                     time.sleep(0.001)
             else:
                 with open(filePath, "wb") as f:

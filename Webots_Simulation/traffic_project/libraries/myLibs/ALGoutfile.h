@@ -2,8 +2,8 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-29 01:05:51
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-05-10 16:43:55
- * @FilePath: /webots_autodriving_drone/traffic_project_bridge/libraries/myLibs/ALGoutfile.h
+ * @LastEditTime: 2024-07-25 17:15:57
+ * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/libraries/myLibs/ALGoutfile.h
  * @Description: 
  * 
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -166,6 +166,33 @@ void Txt_Input(string name, double *buffer, int size){
     }
     // 关闭文件
     inputFile.close();
+}
+
+std::streampos get_file_size(std::string file_path) {
+    std::ifstream file(file_path, std::ios::binary | std::ios::ate);
+    if (!file.is_open()) {
+        std::cerr << "Failed to open file: " << file_path << std::endl;
+        return -1;
+    }
+    
+    std::streampos file_size = file.tellg(); // 获取文件的大小
+    file.close();
+    return file_size;
+}
+
+bool file_exists(std::string file_path) {
+    std::ifstream file(file_path);
+    return file.is_open();
+}
+
+bool delete_file(const std::string file_path) {
+    if (std::remove(file_path.c_str()) != 0) {
+        std::cerr << "Error deleting file: " << file_path << std::endl;
+        return false;
+    } else {
+        std::cout << "File successfully deleted: " << file_path << std::endl;
+        return true;
+    }
 }
 
 //C语言输出文件的方法////////////////////////////////////////////////////////////////////////////

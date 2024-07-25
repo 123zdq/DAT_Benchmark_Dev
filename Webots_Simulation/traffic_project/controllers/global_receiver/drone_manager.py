@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-24 13:40:21
+LastEditTime: 2024-07-25 17:56:01
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -121,17 +121,29 @@ class droneManager:
         with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
             data = f.readline()
             f.close()
+        while len(data) < 2:
+            with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
+                data = f.readline()
+                f.close()
         self.recCtrlPort.sendState(data,self.id,"../../Files2Alg/" + self.droneDef + "_Ctrl2Global.txt")
         # if config files defines,then send below data
         if self.configData["Customized_Rewards"]:
             with open("../../cache/" + self.droneDef + "_Ctrl2GlobalR.txt", "r") as f:
                 data = f.readline()
                 f.close()
+            while len(data) < 2:
+                with open("../../cache/" + self.droneDef + "_Ctrl2GlobalR.txt", "r") as f:
+                    data = f.readline()
+                    f.close()
             self.recCtrlPort.sendMakeReward(data,self.id,"../../Files2Alg/" + self.droneDef + "_RewardParams.txt")
         if self.configData["Lidar_Enable"]:
             with open("../../cache/" + self.droneDef + "_LidarCloud.txt", "r") as f:
                 data = f.readline()
                 f.close()
+            while len(data) < 2:
+                with open("../../cache/" + self.droneDef + "_LidarCloud.txt", "r") as f:
+                    data = f.readline()
+                    f.close()
             self.recCtrlPort.sendPointCloud(data,self.id,"../../Files2Alg/" + self.droneDef + "_PointCloud.txt")
         # send camera graphs
         self.recCtrlPort.sendImage("../../cache/" + self.droneDef + "_VideoFrame.jpeg",

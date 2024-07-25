@@ -100,10 +100,10 @@ class BenchEnv_Multi():
         port_process,end_reward,end_reward_list,scene,weather,\
         Control_Frequence = 500) -> None:
         ## Start The simulation end
-        if scene not in ["citystreet","downtown","lakeandfarmland","village",None]:
-            raise ValueError("scene: "+str(scene)+" is illegal!")
-        if weather not in ["day","night","foggy","snow",None]:
-            raise ValueError("weather: "+str(weather)+" is illegal!")
+        # if scene not in ["citystreet","downtown","lakeandfarmland","village",None]:
+        #     raise ValueError("scene: "+str(scene)+" is illegal!")
+        # if weather not in ["day","night","foggy","snow",None]:
+        #     raise ValueError("weather: "+str(weather)+" is illegal!")
         if process_idx == 0:
             self.scene = scene
             self.weather = weather
@@ -111,7 +111,8 @@ class BenchEnv_Multi():
                 self.scene = "citystreet"
             if self.weather == None:
                 self.weather = "day"
-            webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+"-"+self.weather+".wbt"
+            # webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+"-"+self.weather+".wbt"
+            webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+self.weather+".wbt"
             os.system("webots --no-rendering --batch --mode=fast "+webots_path+" &")
         time.sleep(20)
         self.Action_dim = Action_dim

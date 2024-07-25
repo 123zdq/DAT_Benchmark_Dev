@@ -475,12 +475,22 @@ int main(int argc, char **argv)
       memcpy(state_list, &state, sizeof(state));
       file_create("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::out);
       Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
+      while(get_file_size("../../cache/" + droneDef + "_Ctrl2Global.txt")<22)
+      {
+        delete_file("../../cache/" + droneDef + "_Ctrl2Global.txt");
+        Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
+      }
       if (config.get()->customizedReward)
       {
         double makeReward_list[58] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
         Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 58, rewardG.makeReward.carTypename);
+        while(get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt")<58)
+        {
+          delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, state_list, 58);
+        }
       }
     }
     else if (config.get()->simulationMode == string("demo"))
@@ -502,6 +512,11 @@ int main(int argc, char **argv)
           memcpy(cloudData, lidar_cloud, sizeof(LidarPoint) * lidar_number_of_points * lidar_number_of_layers);
           file_create("../../cache/" + droneDef + "_LidarCloud.txt", ios::out);
           Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
+          while(get_file_size("../../cache/" + droneDef + "_LidarCloud.txt")<(sizeof(cloudData) / sizeof(float)))
+          {
+            delete_file("../../cache/" + droneDef + "_LidarCloud.txt");
+            Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
+          }
         }
       }
     }
@@ -519,6 +534,11 @@ int main(int argc, char **argv)
           file_create("../../cache/" + droneDef + "_LidarCloud.txt", ios::out);
           // std::cout<<"point_cloud_size: "<<sizeof(cloudData)/sizeof(float)<<std::endl;
           Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
+          while(get_file_size("../../cache/" + droneDef + "_LidarCloud.txt")<(sizeof(cloudData) / sizeof(float)))
+          {
+            delete_file("../../cache/" + droneDef + "_LidarCloud.txt");
+            Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
+          }
         }
       }
     }
