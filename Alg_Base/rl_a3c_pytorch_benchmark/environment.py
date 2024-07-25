@@ -75,7 +75,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                              action_list=[env_conf["Forward_Speed"],env_conf["Backward_Speed"],env_conf["Left_Speed"],\
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
-                             Control_Frequence = env_conf["Control_Frequence"])
+                             scene=env_conf["scene"],weather=env_conf["weather"],Control_Frequence = env_conf["Control_Frequence"])
         process_func = Identity
         return env,process_func
 
@@ -98,10 +98,22 @@ class BenchEnv_Multi():
     """
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
-        port_process,end_reward,end_reward_list,Control_Frequence = 500) -> None:
+        port_process,end_reward,end_reward_list,scene,weather,\
+        Control_Frequence = 500) -> None:
         ## Start The simulation end
+        if scene not in ["citystreet","downtown","lakeandfarmland","village",None]:
+            raise ValueError("scene: "+str(scene)+" is illegal!")
+        if weather not in ["day","night","foggy","snow",None]:
+            raise ValueError("weather: "+str(weather)+" is illegal!")
         if process_idx == 0:
-            os.system("webots --no-rendering --batch --mode=fast ../../Webots_Simulation/traffic_project/worlds/cityStreet.wbt"+" &")
+            self.scene = scene
+            self.weather = weather
+            if self.scene == None:
+                self.scene = "citystreet"
+            if self.weather == None:
+                self.weather = "day"
+            webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+"-"+self.weather+".wbt"
+            os.system("webots --no-rendering --batch --mode=fast "+webots_path+" &")
         time.sleep(20)
         self.Action_dim = Action_dim
         self.process_state = process_state
