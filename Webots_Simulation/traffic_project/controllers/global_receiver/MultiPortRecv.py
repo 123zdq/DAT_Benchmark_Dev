@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-25 18:25:35
+LastEditTime: 2024-07-25 20:04:42
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -59,6 +59,7 @@ class MultiProcessRecv():
         
         self.tar_ip = tar_ip
         self.ctrl_freq = ctrl_freq
+        base_dir = "../../Files2Alg/"
         
         # command = 'ifconfig enp108s0 192.168.1.1 netmask 255.255.255.0'
         # sudo_password = '1210'
@@ -70,7 +71,7 @@ class MultiProcessRecv():
         
         self.max_data_size = max_data_size
         self.process_port = process_port
-        MultiProcessRecv.Number_process = self.get_NumProcess(process_port)
+        MultiProcessRecv.Number_process = self.get_NumProcess(base_dir+"start.txt",process_port)
         self.s = [b'']*MultiProcessRecv.Number_process
         self.s_last = [b'']*MultiProcessRecv.Number_process
         self.data = [[0]*self.max_data_size]*MultiProcessRecv.Number_process
@@ -98,7 +99,7 @@ class MultiProcessRecv():
         self.makeRewardInit = False
         
         self.savedir = []
-        base_dir = "../..//Files2Alg/"
+        
         for i in range(MultiProcessRecv.Number_process):
             id_path = base_dir+"recv_action"+str(i)+".txt"
             self.savedir.append(id_path)
@@ -112,13 +113,15 @@ class MultiProcessRecv():
         Output:
             Number_process: Number of Process
     """
-    def get_NumProcess(self,Processport=7787):
+    def get_NumProcess(self,filePath,Processport=7787):
+        with open(filePath, "wb") as f:
+                data = bytes(str(1) + "\n", 'utf-8')
+                f.write(bytes(str(data) + "\n", 'utf-8'))
+                f.close()
         self.udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         self.udp_socket.bind(('',Processport))
         Numprocess_bytes = self.udp_socket.recvfrom(256)[0]
         Number_process = int(Numprocess_bytes)
-        # self.udp_socket.close()
-        # self.udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         return Number_process + 1
 
     """

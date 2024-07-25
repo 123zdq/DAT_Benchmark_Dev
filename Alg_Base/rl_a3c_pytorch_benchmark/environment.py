@@ -11,6 +11,8 @@ from logger_cfg import create_logger
 
 BASE_PORT = 6000
 
+global_start_flag = False
+
 """
     process_frame:
         If choose to run LunarLander-v2 Env,the function will be run outside step()/reset()
@@ -74,7 +76,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                              action_list=[env_conf["Forward_Speed"],env_conf["Backward_Speed"],env_conf["Left_Speed"],\
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
-                             scene=env_conf["scene"],weather=env_conf["weather"],Control_Frequence = env_conf["Control_Frequence"])
+                             scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"])
         process_func = Identity
         return env,process_func
 
@@ -97,24 +99,9 @@ class BenchEnv_Multi():
     """
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
-        port_process,end_reward,end_reward_list,scene,weather,\
+        port_process,end_reward,end_reward_list,scene,weather,auto_start,\
         Control_Frequence = 500) -> None:
-        ## Start The simulation end
-        # if scene not in ["citystreet","downtown","lakeandfarmland","village",None]:
-        #     raise ValueError("scene: "+str(scene)+" is illegal!")
-        # if weather not in ["day","night","foggy","snow",None]:
-        #     raise ValueError("weather: "+str(weather)+" is illegal!")
-        if process_idx == 0:
-            self.scene = scene
-            self.weather = weather
-            if self.scene == None:
-                self.scene = "citystreet"
-            if self.weather == None:
-                self.weather = "day"
-            # webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+"-"+self.weather+".wbt"
-            webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+self.weather+".wbt"
-            os.system("webots --no-rendering --batch --mode=fast "+webots_path+" &")
-        time.sleep(20)
+        
         self.Action_dim = Action_dim
         self.process_state = process_state
         self.num_process = arg_worker
@@ -168,6 +155,31 @@ class BenchEnv_Multi():
         self.recv_state_mechine = RecvStateMachineSocketPort(id=self.port_list[1])
         self.recv_point_cloud = RecvPointCloud(id=self.port_list[4],pointcloud_path=self.pointcloud_path)
         self.recv_reward_params = RecvRewardParams(id=self.port_list[5],rewardparam_path=self.rewardparam_path)
+        
+        ## Start The simulation end
+        # global global_start_flag
+        
+        if process_idx == 0 and auto_start:
+            if scene not in ["citystreet","downtown","lake","village","desert","farmland",None]:
+                raise ValueError("scene: "+str(scene)+" is illegal!")
+            if weather not in ["day","night","foggy","snow",None]:
+                raise ValueError("weather: "+str(weather)+" is illegal!")
+            self.scene = scene
+            self.weather = weather
+            if self.scene == None:
+                self.scene = "citystreet"
+            if self.weather == None:
+                self.weather = "day"
+            webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+"-"+self.weather+".wbt"
+            os.system("webots --no-rendering --batch --mode=fast "+webots_path+" &")
+        #     if self.send_socket.judge_start():
+        #         time.sleep(1)
+        #         global_start_flag = True
+        # while not global_start_flag:
+        #     pass
+        if auto_start:
+            time.sleep(20)
+            
         
         # Inform Env of Num worker
         self.send_socket.send_signal(bytes(str(self.num_process)+"\n",'utf-8'),process=True) 

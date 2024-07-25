@@ -19,11 +19,21 @@ class SendActionSocket():
     def __init__(self,ip='192.168.1.1',port_action=7788,port_control = 7788,port_process = 7789,action_path=None):
         self.udp_sendactionsocket = socket(AF_INET,SOCK_DGRAM)
         self.udp_sendconsocket = socket(AF_INET,SOCK_DGRAM)
+        self.udp_recvstartsocket = socket(AF_INET,SOCK_DGRAM)
         self.Target_addr_action = (ip,port_action)
         self.Target_addr_control = (ip,port_control)
         self.Target_addr_process = (ip,port_process)
+        self.Recv_addr_process = ("",5000)
         self.action_path = action_path
 
+    def judge_start(self):
+        while not os.path.exists("../../Webots_Simulation/traffic_project/Files2Alg/start.txt"):
+            time.sleep(0.001)
+        while os.path.exists("../../Webots_Simulation/traffic_project/Files2Alg/start.txt"):    
+            os.unlink("../../Webots_Simulation/traffic_project/Files2Alg/start.txt")
+            time.sleep(0.001)
+        return True
+    
     """
         send_signal: send action through socket or file
             1. send signal in socket mode

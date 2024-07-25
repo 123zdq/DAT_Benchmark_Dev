@@ -319,8 +319,8 @@ class RecvPointCloud:
                 time.sleep(0.001)
                 while is_file_in_use(self.pointcloud_path):
                     pass
-                os.unlink(self.pointcloud_path)
-                return self.data_last
+                # os.unlink(self.pointcloud_path)
+                # return self.data_last
             with open(self.pointcloud_path,'rb') as file:
                 self.s = file.read()
                 file.close()
@@ -406,8 +406,8 @@ class RecvRewardParams:
                 time.sleep(0.001)
                 while is_file_in_use(self.rewardparam_path):
                     pass
-                os.unlink(self.rewardparam_path)
-                return self.data_last
+                # os.unlink(self.rewardparam_path)
+                # return self.data_last
             with open(self.rewardparam_path,'rb') as file:
                 self.s = file.read()
                 file.close()

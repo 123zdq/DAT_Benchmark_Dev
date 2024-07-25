@@ -15,8 +15,9 @@
     "port_process":7789,
     "end_reward":true,
     "end_reward_list":[-20,20],
-    "scene":"cityStreet",
-    "weather":"",
+    "scene":"farmland",
+    "weather":"day",
+    "auto_start":false,
     "Other_State":false,
     "CloudPoint":false,
     "RewardParams":true
