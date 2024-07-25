@@ -6,9 +6,8 @@ import numpy as np
 from receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams,is_file_in_use
 from sendSocket import SendActionSocket
 import time
-import threading
 import os
-import logging
+from logger_cfg import create_logger
 
 BASE_PORT = 6000
 
@@ -186,14 +185,16 @@ class BenchEnv_Multi():
         self.Set_Done_Step = 10000/self.Control_Frequence
 
         # Logging
-        self.log_path = "./logs/Agent"+str(self.process_id)+".log"
-        if os.path.exists(self.log_path):
-            while is_file_in_use(self.log_path):
-                pass
-            os.unlink(self.log_path)
-        logging.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
-                            level=logging.INFO,
-                            filename=self.log_path)
+        # self.log_path = "./logs/Agent"+str(self.process_id)+".log"
+        # if os.path.exists(self.log_path):
+        #     while is_file_in_use(self.log_path):
+        #         pass
+        #     os.unlink(self.log_path)
+        # self.logger.basicConfig(format='%(asctime)s - %(levelname)s: %(message)s',
+        #                     level=self.logger.INFO,
+        #                     filename=self.log_path)
+        self.logger = create_logger(self.process_id)
+
         # reset
         self.reset_time = 0
 
@@ -221,13 +222,13 @@ class BenchEnv_Multi():
             self.SuppleInfo: Other Sensor data/Reward Params for User to Customize their own State/Reward
     """
     def step(self,action):
-        logging.info("\n")
-        logging.info('<----- Step Function ----->')
+        self.logger.info("\n")
+        self.logger.info('<----- Step Function ----->')
         
         
         ## If Exist Image when entering step function,DELETE IMAGE!!!
         while os.path.exists(self.img_path):
-            logging.info('Unlink existing image first in step')
+            self.logger.info('Unlink existing image first in step')
             time.sleep(0.001)
             while is_file_in_use(self.img_path):
                 pass
@@ -253,30 +254,31 @@ class BenchEnv_Multi():
             self.action = [0,0,0,0]
         
         ## Send Action List Converted Above
-        logging.info('Begin to send action: ' + str(self.action))
+        self.logger.info('Begin to send action: ' + str(self.action))
         self.send_socket.send_action(self.action)
-        logging.info('Finish sending action and begin to read Reward/Done/Step')
+        self.logger.info('Finish sending action and begin to read Reward/Done/Step')
 
         ## Read Reward,Done,Current step(Use to Manage Done) and Other_state
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
-        logging.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
+        self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
-            logging.info('Start Getting other_state')
+            self.logger.info('Start Getting other_state')
             self.SuppleInfo.append(other_state)
-            logging.info('Get other_state:  '+str(other_state))
+            self.logger.info('Get other_state:  '+str(other_state))
         if self.RewardParams:
-            logging.info('Start Getting reward_params')
+            self.logger.info('Start Getting reward_params')
             reward_params = self.recv_reward_params.read()
-            logging.info('Get Reward Params:  '+str(reward_params))
+            self.logger.info('Get Reward Params:  '+str(reward_params))
             self.SuppleInfo.append(reward_params)
         if self.CloudPoint:
-            logging.info('Start Getting point_cloud')
+            self.logger.info('Start Getting point_cloud')
             point_cloud = self.recv_point_cloud.read()
-            logging.info('Get point_cloud:  '+str(point_cloud))
+            self.logger.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
 
+        self.logger.info('Get Direction of the car:  '+str(reward_params[-1]))
         """
             Done Management:
                 1. Open done detection in the early stage of episode
@@ -284,7 +286,7 @@ class BenchEnv_Multi():
                 3. If Webots do not receive done flag, open done detection again 
         """
         if int(step_curr) <= self.Set_Done_Step and self.done_flag == False:
-            logging.info('Step_curr:{} self.Set_Done_Step:{} Open Done Flag'.format(step_curr,self.Set_Done_Step))
+            self.logger.info('Step_curr:{} self.Set_Done_Step:{} Open Done Flag'.format(step_curr,self.Set_Done_Step))
             self.done_flag = True
             self.last_done_flag = 0
         if done:
@@ -293,31 +295,25 @@ class BenchEnv_Multi():
                 self.last_done_flag = step_curr
                 if self.end_reward:
                     if reward == 0.0:
-                        logging.info('<--Failure Situation--> Reward += {}'.format(self.end_reward_list[0]))
+                        self.logger.info('<--Failure Situation--> Reward += {}'.format(self.end_reward_list[0]))
                         reward += self.end_reward_list[0]
                     else:
-                        logging.info('<--Success Situation--> Reward += {}'.format(self.end_reward_list[1]))
+                        self.logger.info('<--Success Situation--> Reward += {}'.format(self.end_reward_list[1]))
                         reward += self.end_reward_list[1]
-                    logging.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
+                    self.logger.info("done_step: "+str(step_curr)+"   process_id:  "+str(self.process_id))
             else:
                 if step_curr - self.last_done_flag >= self.Resend_Internal:
                     done=True
                     self.last_done_flag = step_curr
                 else:
                     done = False
-                logging.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
-        
-        # if done:
-        #     if reward == 0.0:
-        #         reward -= 20
-        #     elif reward == 1.0:
-        #         reward += 20
+                self.logger.info("curr_step"+str(step_curr)+"   process_id:  "+str(self.process_id))
         
         
         ## Receive Image and Process Image
-        logging.info('Begin to receive image')
+        self.logger.info('Begin to receive image')
         image = self.recv_image_socket.receive(self.reward_path)
-        logging.info('Finish receiving image')
+        self.logger.info('Finish receiving image')
         image = self.process_state(image)
         return image,reward,done,self.SuppleInfo
 
@@ -329,8 +325,8 @@ class BenchEnv_Multi():
             State: First state received from server through socket
     """
     def reset(self): 
-        logging.info("\n")
-        logging.info('<----- !!!!!Reset Function!!!!! ----->')
+        self.logger.info("\n")
+        self.logger.info('<----- !!!!!Reset Function!!!!! ----->')
         ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!
         if os.path.exists(self.reward_path):
             time.sleep(0.001)
@@ -342,53 +338,53 @@ class BenchEnv_Multi():
         self.SuppleInfo = []
 
         ## Send Special Action to inform Webots of reset stage
-        logging.info('Begin to send reset [0,0,0,0,1]')
+        self.logger.info('Begin to send reset [0,0,0,0,1]')
         self.send_socket.send_reset_control(self.process_id)
-        logging.info('Finish sending reset [0,0,0,0,1]')
+        self.logger.info('Finish sending reset [0,0,0,0,1]')
 
         ## Waiting For Action to be read
         if self.action_path is not None:
             while not self.send_socket.judge_empty():
-                logging.info('Action File not empty')
+                self.logger.info('Action File not empty')
                 if os.path.exists(self.reward_path):
-                    logging.info('Deleting reward file in reset')
+                    self.logger.info('Deleting reward file in reset')
                     while is_file_in_use(self.reward_path):
                         pass
                     os.unlink(self.reward_path)
 
         ## Read Reward,Done,Current step and Other_state abandoned
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
-        logging.info('In reset: Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
+        self.logger.info('In reset: Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
         
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
-            logging.info('Start Getting other_state')
+            self.logger.info('Start Getting other_state')
             self.SuppleInfo.append(other_state)
-            logging.info('Get other_state:  '+str(other_state))
+            self.logger.info('Get other_state:  '+str(other_state))
         if self.RewardParams:
-            logging.info('Start Getting reward_params')
+            self.logger.info('Start Getting reward_params')
             reward_params = self.recv_reward_params.read()
-            logging.info('Get Reward Params:  '+str(reward_params))
+            self.logger.info('Get Reward Params:  '+str(reward_params))
             self.SuppleInfo.append(reward_params)
         if self.CloudPoint:
-            logging.info('Start Getting point_cloud')
+            self.logger.info('Start Getting point_cloud')
             point_cloud = self.recv_point_cloud.read()
-            logging.info('Get point_cloud:  '+str(point_cloud))
+            self.logger.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
 
         ## Begin to read image
-        logging.info('Begin to receive image in reset')
+        self.logger.info('Begin to receive image in reset')
         if self.reset_time == 0:
             image = self.recv_image_socket.receive(self.reward_path,reset=True,first_reset=True)
         else:
             image = self.recv_image_socket.receive(self.reward_path,reset=True)
-        logging.info('Finish receiving image in reset')
+        self.logger.info('Finish receiving image in reset')
         if self.reset_time != 0:
             ## Avoid image to be empty
             while len(image.shape) == 1:
-                logging.info('Waiting for image again')
+                self.logger.info('Waiting for image again')
                 image = self.recv_image_socket.receive(self.reward_path,reset=True)
-                logging.info('Finish receiving img again')
+                self.logger.info('Finish receiving img again')
         if os.path.exists(self.action_path):
             while is_file_in_use(self.action_path):
                 pass
