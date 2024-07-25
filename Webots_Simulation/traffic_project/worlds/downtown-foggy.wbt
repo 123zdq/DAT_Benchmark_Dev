@@ -43,11 +43,15 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.2642581207253411 0.2366802978381199 0.9349599361715827 1.7473567912067112
-  position 116.69544218826273 -1193.389229344799 703.6225604797294
+  orientation -0.26895770788424195 0.14882416732186582 0.9515845304494015 2.1722920624568767
+  position 924.2125044556085 -1578.7357881369915 1161.0642870031677
   near 3
 }
 TexturedBackground {
+  skybox FALSE
+  skyColor [
+    0.603922 0.6 0.588235
+  ]
 }
 TexturedBackgroundLight {
 }
@@ -65,7 +69,8 @@ DEF land Floor {
   }
 }
 Fog {
-  visibilityRange 50
+  fogType "EXPONENTIAL2"
+  visibilityRange 2000
 }
 Crossroad {
   translation 88.694928 -32.993243 0.01

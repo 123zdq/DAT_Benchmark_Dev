@@ -38,8 +38,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.1533978267076472 -0.3640405584682128 -0.918664018317645 5.423053348516529
-  position -3941.528486224149 -3432.924803321087 609.2518716735219
+  orientation 0.1681430533464268 -0.41045456417496395 -0.8962449243143756 5.425715272829207
+  position -3956.868344897905 -3403.193284844549 650.7661543815965
   near 3
 }
 TexturedBackground {
@@ -47,7 +47,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 Fog {
-  visibilityRange 50
+  visibilityRange 5000
 }
 DEF land Floor {
   translation 0 0 -0.1
