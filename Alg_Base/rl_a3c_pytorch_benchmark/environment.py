@@ -99,6 +99,10 @@ class BenchEnv_Multi():
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
         port_process,end_reward,end_reward_list,Control_Frequence = 500) -> None:
+        ## Start The simulation end
+        if process_idx == 0:
+            os.system("webots --no-rendering --batch --mode=fast ../../Webots_Simulation/traffic_project/worlds/cityStreet.wbt"+" &")
+        time.sleep(20)
         self.Action_dim = Action_dim
         self.process_state = process_state
         self.num_process = arg_worker
