@@ -1,5 +1,6 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "demo",
+        "Drone_Supervisor_Ctrl": true,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 500,
         "Control_Frequence": 50,
@@ -7,12 +8,12 @@
         "Lidar_Enable": false,
         "Done_Range": {
                 "max_height": 50,
-                "min_height": 1,
-                "velocity": 30,
+                "min_height": 2,
+                "velocity": 60,
                 "omiga": 6.283,
                 "roll": 1.22,
                 "pitch": 1.22,
-                "distance_error": 20
+                "distance_error": 30
         },
         "Reward_Config": {
                 "reward_mode": "discrete",

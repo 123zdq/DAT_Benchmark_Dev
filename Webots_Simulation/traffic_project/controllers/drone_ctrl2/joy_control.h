@@ -17,7 +17,11 @@ public:
   void setMode(uint8_t _mode){
     mode = _mode;
   }
-private:
+  void setInitialized(bool _init)
+  {
+    initialized = _init;
+  }
+public:
   Eigen::Vector3d cmd_pos_;
   Eigen::Vector3d cmd_vel_b_;
   Eigen::Vector3d current_vel_b_;
@@ -27,6 +31,7 @@ private:
   double state_period;
   SecondOrderButterworthLPF tarF[4];
   uint8_t mode = 1;
+  bool initialized = false;
 };
 
 JoyControl::JoyControl(double _state_period):state_period(_state_period)
@@ -62,8 +67,6 @@ void JoyControl::joyCb(usrPublic::Joy msg)
 
 void JoyControl::stateCb(usrPublic::Odometry msg)
 {
-  static bool initialized = false;
-
   Eigen::Quaterniond q(msg.orientation.w,
                        msg.orientation.x,
                        msg.orientation.y,
@@ -84,7 +87,7 @@ void JoyControl::stateCb(usrPublic::Odometry msg)
 
   if (!initialized)
   {
-    initialized = true;
+    // initialized = true;
     cmd_pos_(0) = msg.position.x;
     cmd_pos_(1) = msg.position.y;
     // if(mode == 1){

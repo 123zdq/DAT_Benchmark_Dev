@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-24 10:37:56
+LastEditTime: 2024-07-28 19:17:06
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -74,9 +74,13 @@ elif configData["Simulation_Mode"] == "train":
     if System == "Linux":
         os.system("rm -rf ../../Files2Alg/*.txt")
         os.system("rm -rf ../../Files2Alg/*.jpeg")
+        os.system("rm -rf ../../cache/*.txt")
+        os.system("rm -rf ../../cache/*.jpeg")
     elif System == "Windows":
         os.system("del /s /q /f ../../Files2Alg/*.txt")
         os.system("del /s /q /f ../../Files2Alg/*.jpeg")
+        os.system("del /s /q /f ../../cache/*.txt")
+        os.system("del /s /q /f ../../cache/*.jpeg")
     # multiple communications
     multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"],configData["Config_Agen_Num_Port"])
     multiCom.main()

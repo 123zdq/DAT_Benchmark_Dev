@@ -25,6 +25,7 @@ using namespace Eigen;
 
 typedef struct _configData_s{
     std::string simulationMode = "demo";
+    bool droneSupervisorCtrl = false;
     int trainTotalStep = 10000;
     bool customizedReward = false;
     double controlFreq = 10;
@@ -84,6 +85,7 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     }
 
     configData.simulationMode = config.at("Simulation_Mode");
+    configData.droneSupervisorCtrl = config.at("Drone_Supervisor_Ctrl");
     configData.trainTotalStep = config.at("Train_Total_Steps");
     configData.controlFreq = config.at("Control_Frequence");
     configData.customizedReward = config.at("Customized_Rewards");
@@ -103,11 +105,12 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.video.totalTime = config.at("Out_Video").at("total_time");
     std::cout<< " \n \n"<<std::endl;
     std::cout<< "    Environment config successful!\n \n"<<std::endl;
-    std::cout<< "    Simulation_Mode:     " << configData.simulationMode << std::endl;
-    std::cout<< "    Train_Total_Steps:   " << configData.trainTotalStep << std::endl;
-    std::cout<< "    Control_Frequence:   " << configData.controlFreq << std::endl;
-    std::cout<< "    Customized_Rewards:  " << configData.customizedReward << std::endl;
-    std::cout<< "    Lidar_Enable:        " << configData.lidarEnable << std::endl;
+    std::cout<< "    Simulation_Mode:       " << configData.simulationMode << std::endl;
+    std::cout<< "    Drone_Supervisor_Ctrl: " << configData.droneSupervisorCtrl << std::endl;
+    std::cout<< "    Train_Total_Steps:     " << configData.trainTotalStep << std::endl;
+    std::cout<< "    Control_Frequence:     " << configData.controlFreq << std::endl;
+    std::cout<< "    Customized_Rewards:    " << configData.customizedReward << std::endl;
+    std::cout<< "    Lidar_Enable:          " << configData.lidarEnable << std::endl;
     std::cout<< "    Done_Range: {\n"
                 << "        max_height:      " << configData.doneRange.maxHeight << "\n"
                 << "        min_height:      " << configData.doneRange.minHeight << "\n"

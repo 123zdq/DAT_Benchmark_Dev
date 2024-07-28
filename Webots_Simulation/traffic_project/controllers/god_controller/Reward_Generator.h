@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-17 10:59:13
+ * @LastEditTime: 2024-07-28 19:03:00
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -35,10 +35,11 @@ public:
   void checkCarDirection(double stop_threshold, double turn_threshold);
   uint8_t isTrackingCarDisp = 0; // 标志初始态
   usrPublic::rewardData makeReward = {};
+  string droneDef;
+  string carDef = "ORIGIN";
 
 private:
   camera2real Camera2real;
-  string droneDef;
   Supervisor *supervisor;
   Node *trackingCar = nullptr;
   Node *land_node;
@@ -183,11 +184,14 @@ inline void rewardGenerator::updateTrackingCar()
       {
         isTrackingCarDisp = 0; // return init
       }
+      carDef = string(carData[0]);
     }
     else
     {
       trackingCar = supervisor->getFromDef("ORIGIN");
       makeReward.carTypename = string("ToyotaPriusSimple");
+      carDef = string("ORIGIN");
+
     }
   }
   if (trackingCar != nullptr)

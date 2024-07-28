@@ -49,8 +49,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.3984456181930622 -0.589977346339128 0.7022590833512866 4.751450610866635
-  position -250.78847181075744 524.4604353845909 826.9491472138749
+  orientation -0.23363893435512875 -0.3862568066201667 0.8923107797695774 5.0917532619442385
+  position -12.702046234893439 30.264762773590853 15.17131360264307
   near 3
 }
 TexturedBackground {
@@ -69,6 +69,13 @@ DEF land Floor {
     roughness 1
     metalness 0
   }
+}
+DEF DRONE1 M100 {
+  translation 0 14.87 0.73
+  rotation 0 0 1 0.523599
+  controller "drone_ctrl2"
+  customData "online"
+  supervisor TRUE
 }
 Cypress {
   translation 0.547543 -199.827 0
@@ -903,7 +910,7 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 150
-  seed 100
+  seed 47
   children [
     Solid {
       translation 196.99 223.18 0

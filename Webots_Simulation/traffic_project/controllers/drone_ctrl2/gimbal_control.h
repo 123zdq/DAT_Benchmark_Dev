@@ -2,8 +2,8 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 18:40:33
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-04-29 13:23:55
- * @FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/drone_ctrl2/gimbal_control.h
+ * @LastEditTime: 2024-07-28 19:48:21
+ * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/gimbal_control.h
  * @Description: 
  * 
  * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
@@ -34,13 +34,13 @@ public:
     void stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal_state);// 更新基本状态
     void cmdCb(usrPublic::vector3 msg);// 进行控制解算，得到输出
     usrPublic::Joy gbl2ctrl = {};
+    double theta[3] = {0};
 private:
     PIDmethod gimbalPid[3];//顺序x-y-z
     SecondOrderButterworthLPF tarF[3];
     Eigen::Matrix3d rotation;// 此旋转矩阵表示为云台末端镜头的旋转矩阵
     Eigen::AngleAxisd rotation_comp;// 由机体倾斜带来的旋转由此矩阵进行补偿
     void GimbalIk();//此处默认已经更新了参数
-    double theta[3] = {0};
     Eigen::MatrixXd angle_constrain = Eigen::MatrixXd::Identity(3, 2);
 };
 

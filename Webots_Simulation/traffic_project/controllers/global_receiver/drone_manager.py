@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-25 20:14:09
+LastEditTime: 2024-07-28 19:21:20
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -197,8 +197,8 @@ class droneManager:
     param {*} self
     return {*}
     '''
-    def updateMachineState(self):
-        self.recCtrlPort.sendMachine(self.machine_state,self.id)
+    def updateMachineState(self,filePath:str=None):
+        self.recCtrlPort.sendMachine(self.machine_state,self.id,filePath)
         
     '''
     description: 1.Drone manager mainLoop, which manage the state machine.
@@ -214,7 +214,7 @@ class droneManager:
         self.lastTime = self.initTime
         while True:
             self.initTime = time.time()
-            # self.updateMachineState()
+            self.updateMachineState("../../cache/" + self.droneDef + "_MachineState.txt")
             self.recCtrlPort.keepSocketRunning()
             self.actionUpdate()
             

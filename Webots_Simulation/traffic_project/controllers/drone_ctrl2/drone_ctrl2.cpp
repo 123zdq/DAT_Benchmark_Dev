@@ -330,7 +330,7 @@ int main(int argc, char **argv)
         fly_cmd.axes[3] = action[0];
         fly_cmd.axes[2] = action[1];
         fly_cmd.axes[1] = action[2];
-        fly_cmd.axes[0] = action[3] / 3.1415926 * 180.;
+        fly_cmd.axes[0] = action[3] / M_PI * 180.;
         step_count = action[4];
       }
       // std::cout<<fly_cmd.axes[3]<<", "<<fly_cmd.axes[2]<<", "<<fly_cmd.axes[1]<<", "<<fly_cmd.axes[0]<<std::endl;
@@ -380,16 +380,16 @@ int main(int argc, char **argv)
     rewardG.locateCamera(camera->getWidth(), camera->getHeight(), camera->getFov());
     if (config.get()->simulationMode == string("demo"))
     {
-      
+
       rewardG.setTrackingCar("ORIGIN");
     }
     else if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       rewardG.updateTrackingCar();
     }
-    
+
     state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, error[4], error[5]);
-    
+
     if (config.get()->simulationMode == string("demo"))
     {
       usrPublic::vector4 trackin = {};
@@ -414,7 +414,6 @@ int main(int argc, char **argv)
         fly_cmd.axes[2] = trackCtrl.track2joy.y; // int image_width = camera->getWidth();
       }
     }
-    
 
     // 无人机控制
     jCtrl.joyCb(fly_cmd);
@@ -431,8 +430,6 @@ int main(int argc, char **argv)
     }
     gcmdCb(gCtrl.gbl2ctrl, camera_roll_motor, camera_pitch_motor, camera_yaw_motor);
 
-    
-
     static int countMax = int(1000. / 2. / config.get()->controlFreq);
     if (countMax < 1)
     {
@@ -444,7 +441,14 @@ int main(int argc, char **argv)
       // 根据追踪车辆情况更新done状态
       // 根据训练执行步长更新done状态
       // if(state.done == 0){
-      state.done = (pCtrl.done) | ((rewardG.isTrackingCarDisp == 2) ? 1 : 0);
+      if (config.get()->simulationMode == string("video"))
+      {
+        state.done = (rewardG.isTrackingCarDisp == 2) ? 1 : 0;
+      }
+      else
+      {
+        state.done = (pCtrl.done) | ((rewardG.isTrackingCarDisp == 2) ? 1 : 0);
+      }
       if (step_count >= config.get()->trainTotalStep)
       {
         state.done = 1;
@@ -468,14 +472,35 @@ int main(int argc, char **argv)
           state.done = 1;
         }
       }
-      std::cout << "id: " << droneDef << "  done: " << state.done << "  reward: " << state.reward << "  count: " << step_count << "  time:" << t << "    carDir:"<<  rewardG.makeReward.carDir << std::endl;
+      std::cout << "id: " << droneDef << "  done: " << state.done << "  reward: " << state.reward << "  count: " << step_count << "  time:" << t << "    carDir:" << rewardG.makeReward.carDir << std::endl;
+      // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
+      // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
+      string machineState = Txt_Input("../../cache/" + droneDef + "_MachineState.txt");
+      if (config.get()->droneSupervisorCtrl == true && config.get()->simulationMode != string("video") && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
+      {
+        Node *droneNode = robot->getFromDef(rewardG.droneDef);
+        const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
+        double cmd_yaw = jCtrl.cmd_yaw_;
+        if (cmd_yaw > M_PI)
+        {
+          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw + M_PI) / (2. * M_PI));
+        }
+        else if (cmd_yaw < -M_PI)
+        {
+          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw - M_PI) / (2. * M_PI));
+        }
+        const double ro_t[4] = {0, 0, 1, cmd_yaw};
+        droneNode->getField("translation")->setSFVec3f(tr_t);
+        droneNode->getField("rotation")->setSFRotation(ro_t);
+      }
+
       // 发送state,reward,done
       state.t = step_count;
       double state_list[22] = {};
       memcpy(state_list, &state, sizeof(state));
       file_create("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::out);
       Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
-      while(get_file_size("../../cache/" + droneDef + "_Ctrl2Global.txt")<22)
+      while (get_file_size("../../cache/" + droneDef + "_Ctrl2Global.txt") < 22)
       {
         delete_file("../../cache/" + droneDef + "_Ctrl2Global.txt");
         Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
@@ -486,7 +511,7 @@ int main(int argc, char **argv)
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
         Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 58, rewardG.makeReward.carTypename);
-        while(get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt")<58)
+        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 58)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
           Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, state_list, 58);
@@ -496,8 +521,25 @@ int main(int argc, char **argv)
     else if (config.get()->simulationMode == string("demo"))
     {
       std::cout << "  reward: " << state.reward << std::endl;
+      if (config.get()->droneSupervisorCtrl == true)
+      {
+        Node *droneNode = robot->getFromDef(rewardG.droneDef);
+        const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
+        double cmd_yaw = jCtrl.cmd_yaw_;
+        if (cmd_yaw > M_PI)
+        {
+          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw + M_PI) / (2. * M_PI));
+        }
+        else if (cmd_yaw < -M_PI)
+        {
+          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw - M_PI) / (2. * M_PI));
+        }
+        const double ro_t[4] = {0, 0, 1, cmd_yaw};
+        droneNode->getField("translation")->setSFVec3f(tr_t);
+        droneNode->getField("rotation")->setSFRotation(ro_t);
+      }
     }
-    
+    jCtrl.setInitialized(true);
 
     // 摄像头视频流抓取,并且发送到全局通信节点
     if (config.get()->simulationMode == string("demo"))
@@ -512,7 +554,7 @@ int main(int argc, char **argv)
           memcpy(cloudData, lidar_cloud, sizeof(LidarPoint) * lidar_number_of_points * lidar_number_of_layers);
           file_create("../../cache/" + droneDef + "_LidarCloud.txt", ios::out);
           Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
-          while(get_file_size("../../cache/" + droneDef + "_LidarCloud.txt")<(sizeof(cloudData) / sizeof(float)))
+          while (get_file_size("../../cache/" + droneDef + "_LidarCloud.txt") < (sizeof(cloudData) / sizeof(float)))
           {
             delete_file("../../cache/" + droneDef + "_LidarCloud.txt");
             Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
@@ -534,7 +576,7 @@ int main(int argc, char **argv)
           file_create("../../cache/" + droneDef + "_LidarCloud.txt", ios::out);
           // std::cout<<"point_cloud_size: "<<sizeof(cloudData)/sizeof(float)<<std::endl;
           Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
-          while(get_file_size("../../cache/" + droneDef + "_LidarCloud.txt")<(sizeof(cloudData) / sizeof(float)))
+          while (get_file_size("../../cache/" + droneDef + "_LidarCloud.txt") < (sizeof(cloudData) / sizeof(float)))
           {
             delete_file("../../cache/" + droneDef + "_LidarCloud.txt");
             Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
