@@ -28,3 +28,8 @@
        * Default:1 Only predict 1 possible future action
        * >1: Predict more than one possible action(get final action by weighted sum of confidence)
      * **Confidence:** Whether need to predict confidence of Results(Default:False)
+4. **Usage**
+  1. Change Directory to `PRETRAIN_DM/`
+  2. Get OriginDataset: Follow instructions in file `OriginDataset/README.md`
+  3. Run `pretrain_datapreprocess.py` script to get data ready according to pretrain_cfg.json
+  4. 

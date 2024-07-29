@@ -2,7 +2,7 @@ import os
 import shutil
 
 ORIDATASET_PATH = "./OriginDataset/"
-VIDEO_PATH = "./OriginDataset/droneVideos/"
+VIDEO_PATH = "../../../Webots_Simulation/traffic_project/droneVideos/"
 VIDEO_PREFIX = "DRONE"
 EPISODE_PREFIX = "episode"
 MIN_EPISODE_LEN = 500
@@ -29,6 +29,6 @@ for folder_name in video_folder_list:
         ## Judge whether the folder is empty
         if len(os.listdir(episode_path)) > MIN_EPISODE_LEN:
             shutil.copytree(episode_path,episode_path_dst)
-            os.rename(episode_path_dst+"/mark.json",episode_path_dst+"/Direction_label.json")
+            os.rename(episode_path_dst+"/mark.json",episode_path_dst+"/Direction_label_src.json")
             episode_idx += 1
 

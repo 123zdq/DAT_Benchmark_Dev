@@ -1,13 +1,13 @@
 from pretrain_utils import read_config,dump_json
-import pandas as pd
+import json
 import os
 import glob
 
-PRETRAIN_ROOT="./pretrain_DM/"
-ORIGIN_DATAPATH="./pretrain_DM/OriginDataset/"
+PRETRAIN_ROOT="./"
+ORIGIN_DATAPATH="./OriginDataset/"
 
 DATA_VOLUME = ORIGIN_DATAPATH+"data_volume.json"
-CFG_PATH="./pretrain_DM/pretrain_cfg.json"
+CFG_PATH="./pretrain_cfg.json"
 
 
 class DataPreprocessing():
@@ -17,11 +17,14 @@ class DataPreprocessing():
         self.evo_step = self.cfg_dict["Evolution_step"]
         self.ori_datapath = ori_datapath
 
-    def read_csv(self,csv_path:str):
-        label_df = pd.read_csv(csv_path,sep=',',header='infer')
-        img_list = list(label_df["name"])
+    def read_json(self,json_path:str):
+        with open(json_path, 'r') as json_file:
+            data_dict = json.load(json_file)
+        img_list = list(data_dict.keys())
         del img_list[-self.evo_step:]
-        label_list = list(label_df["label"])
+        label_list = list(data_dict.values())
+        print(img_list)
+        print(label_list)
         return img_list,label_list
     
     def Acquire_full_label(self,img_list:list,label_list):
@@ -36,17 +39,19 @@ class DataPreprocessing():
     def data_preprocess(self):
         episode_list = glob.glob(self.ori_datapath+"*/")
         for episode in episode_list:
-            csv_path = episode+"Direction_label.csv"
-            json_path = episode+"Direction_label.json"
-            img_list,label_list = self.read_csv(csv_path)
+            json_path_src = episode+"Direction_label_src.json"
+            json_path_dst = episode+"Direction_label.json"
+            img_list,label_list = self.read_json(json_path_src)
             full_label_list = self.Acquire_full_label(img_list,label_list)
             Direction_label_dict = dict(zip(img_list,full_label_list))
-            dump_json(Direction_label_dict,json_path)
+            dump_json(Direction_label_dict,json_path_dst)
 
     
             
 if __name__ == "__main__":
-    label_df = pd.read_csv("C:\\Users\\20669\\Desktop\\test.csv",sep=',',header='infer')
-    n_list = list(label_df["name"])
-    l_list = list(label_df["label"])
-    print(dict(zip(n_list,l_list)))
+    data_p = DataPreprocessing(mode = "Head_backbone")
+    data_p.data_preprocess()
+    # label_df = pd.read_csv("C:\\Users\\20669\\Desktop\\test.csv",sep=',',header='infer')
+    # n_list = list(label_df["name"])
+    # l_list = list(label_df["label"])
+    # print(dict(zip(n_list,l_list)))

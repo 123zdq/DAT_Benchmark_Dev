@@ -4,6 +4,5 @@
 * `generate_datavolume.py` A script generate data_volume.json file 
 
 * **Usage:**
-1. First, copy `droneVideos` directory to `OriginDataset` directory 
-2. Run `turn_video2ori.py` script to get origin dataset
-3. Run `generate_datavolume.py` script to get data_volume.json
+1. Run `turn_video2ori.py` script to get origin dataset
+2. Run `generate_datavolume.py` script to get data_volume.json
