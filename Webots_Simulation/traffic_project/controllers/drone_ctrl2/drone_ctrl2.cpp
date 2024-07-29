@@ -452,7 +452,7 @@ int main(int argc, char **argv)
       if(config.get()->simulationMode == string("train"))
       {
         static int noRewardCount = 0;
-        if(state.reward < 0.001)
+        if(state.reward > 0.001)
         {
           noRewardCount = 0;
         }
