@@ -9,11 +9,11 @@
         "Done_Range": {
                 "max_height": 50,
                 "min_height": 2,
-                "velocity": 60,
+                "velocity": 10000,
                 "omiga": 6.283,
                 "roll": 1.22,
                 "pitch": 1.22,
-                "distance_error": 30
+                "distance_error": 50
         },
         "Reward_Config": {
                 "reward_mode": "discrete",

@@ -473,6 +473,7 @@ int main(int argc, char **argv)
         }
       }
       std::cout << "id: " << droneDef << "  done: " << state.done << "  reward: " << state.reward << "  count: " << step_count << "  time:" << t << "    carDir:" << rewardG.makeReward.carDir << std::endl;
+      std::cout << "done_state: " << pCtrl.done_state << std::endl;
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
       // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
       string machineState = Txt_Input("../../cache/" + droneDef + "_MachineState.txt");

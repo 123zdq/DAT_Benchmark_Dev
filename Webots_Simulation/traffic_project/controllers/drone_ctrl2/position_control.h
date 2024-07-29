@@ -27,6 +27,7 @@ public:
   void stateCb(usrPublic::Odometry state,const configData_s *cfg);
   void cmdCb(usrPublic::Joy msg);
   bool done = false;
+  int done_state = 0;
 private:
   // 状态量定义
   double des_yaw_;
@@ -119,18 +120,23 @@ bool PositionControl::done_check(usrPublic::Odometry state, Eigen::Vector3d _pos
     // 高度
     if((state.position.z < cfg->doneRange.minHeight) || (state.position.z > cfg->doneRange.maxHeight)){
       _done = true;
+      done_state = 1;
     }// 距离误差
     else if(dist_err > cfg->doneRange.distanceError){
       _done = true;
+      done_state = 2;
     }// 速度误差
     else if(v >= cfg->doneRange.velocity){
       _done = true;
+      done_state = 3;
     }// yaw角速度
     else if(abs(state.angular.z) > cfg->doneRange.omiga){
       _done = true;
+      done_state = 4;
     }// pitch和roll
     else if((abs(state.angle.x) > cfg->doneRange.roll) || (abs(state.angle.y) > cfg->doneRange.pitch)){
       _done = true;
+      done_state = 5;
     }
     return _done;
 }
