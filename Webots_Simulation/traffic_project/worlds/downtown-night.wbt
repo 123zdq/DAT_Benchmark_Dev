@@ -23,6 +23,8 @@ IMPORTABLE EXTERNPROTO "../protos/trajectary.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/protos/SumoInterface.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/PedestrianCrossing.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/StreetLight.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/BusSimple.proto"
 
 WorldInfo {
   info [

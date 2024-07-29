@@ -28,6 +28,8 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/Pole.proto"
 IMPORTABLE EXTERNPROTO "../protos/trajectary.proto"
 IMPORTABLE EXTERNPROTO "../protos/M100.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/BusSimple.proto"
 
 WorldInfo {
   info [
@@ -903,7 +905,7 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 150
-  seed 95
+  seed 64
   children [
     Solid {
       translation 196.99 223.18 0

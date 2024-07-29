@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-28 14:45:03
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-12 16:22:50
+LastEditTime: 2024-07-29 23:30:32
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/SUMOGod/SUMOGod.py
 Description: 
 
@@ -306,7 +306,7 @@ class getSumoCarNode:
     param {*} transVector
     return {*} true or false
     '''
-    def SingleProcessRandomInit(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle):
+    def SingleProcessRandomInit(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle, fixedColorList=None):
         '''no block version: single process random simulation init
             running until move a drone to a random car while the car is in the map
                 return True or False'''
@@ -345,6 +345,9 @@ class getSumoCarNode:
                 self.currentUseCarNode = carNode
                 # 把此次得到的车辆DEF装进列表
                 self.usedSumoDefList.append(self.carName)
+                # 更改该车辆的颜色
+                if fixedColorList is not None:
+                    carNode.getField("children").getMFNode(0).getField("color").setSFVec3f(fixedColorList)
 
         if is_car_get == True:
             with open("../../cache/" + droneNode.getDef() + "_Car.txt", "w") as f:

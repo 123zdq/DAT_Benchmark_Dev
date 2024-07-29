@@ -101,10 +101,14 @@ def random_by_os(folder_path, _sys, _configData):
 
 
 # 插入对车辆速度的描述
-def add_speed_constrain(root, max_speed):
+def add_speed_constrain(root, config):
     car_type=etree.Element('vType')
     car_type.set('id', 'type1')
-    car_type.set('maxSpeed', str(max_speed))
+    car_type.set('maxSpeed', str(config["max_car_speed"]))
+    car_type.set('accel', str(config["max_car_accel"]))
+    car_type.set('decel', str(config["max_car_decel"]))
+    car_type.set('vClass', str(config["car_type"]))
+
     
     root.insert(0, car_type)
     root.insert(1, etree.Comment('\n '))  # 使用注释来添加换行
@@ -131,7 +135,7 @@ def sumo_rou_random_os(folder_path, _numPerGroup, _sys, _configData):
     random_by_os(folder_path, _sys, _configData)
     
     tree, root = read_xml(folder_path + '/sumo.rou.xml')
-    add_speed_constrain(root=root, max_speed=_configData["max_car_speed"])
+    add_speed_constrain(root=root, config=_configData)
     count,attribute_list = collect_xml(root=root,tag="route",attribute="edges")
     
     groupAndSetDepart(root=root,totalNum=count+1,numPerGroup=_numPerGroup,intervalBetweenGroup=_configData["car_import_interval"])

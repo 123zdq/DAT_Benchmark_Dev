@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "video",
         "Drone_Supervisor_Ctrl": true,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 500,
@@ -26,7 +26,12 @@
         "Sumo_Params": {
                 "max_sumo_car": 150,
                 "car_import_interval": 60.0,
+                "car_type": "bus",
+                "fixed_color": true,
+                "normalize_color": [1,0,0],
                 "max_car_speed": 15,
+                "max_car_accel": 5,
+                "max_car_decel": 5,
                 "max_rou_distance": 5000,
                 "min_rou_distance": 20,
                 "route_num": 5000
