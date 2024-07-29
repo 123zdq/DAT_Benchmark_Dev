@@ -102,9 +102,11 @@ inline Vector3d camera2real::Location_of_World_Calculate(const Vector3d location
 inline double camera2real::hyperbolic_tangent_func(double input, double scale)
 {
     double real_input = pow(input,3) * scale;
-    double k1 = std::exp(real_input);
-    double k2 = std::exp(-real_input);
-    double out = double((k1 - k2) / (k1 + k2));
+    // double k1 = std::exp(real_input);
+    // double k2 = std::exp(-real_input);
+    // double out = double((k1 - k2) / (k1 + k2));
+    double k = std::exp(-2.*real_input);
+    double out = double((1 - k)/(1 + k));
     // std::cout<<"real_input: "<<real_input<<"  out: "<< out<<std::endl;
     return out;
 }

@@ -3,6 +3,8 @@
         "Drone_Supervisor_Ctrl": true,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 500,
+        "Init_No_Done_Steps": 100,
+        "No_Reward_Done_Steps": 100,
         "Control_Frequence": 50,
         "Customized_Rewards": true,
         "Lidar_Enable": false,

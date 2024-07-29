@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-24 10:56:08
+ * @LastEditTime: 2024-07-29 19:56:25
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -27,6 +27,8 @@ typedef struct _configData_s{
     std::string simulationMode = "demo";
     bool droneSupervisorCtrl = false;
     int trainTotalStep = 10000;
+    int initNoDoneSteps = 100;
+    int noRewardDoneSteps = 1000;
     bool customizedReward = false;
     double controlFreq = 10;
     bool lidarEnable = false;
@@ -87,6 +89,8 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.simulationMode = config.at("Simulation_Mode");
     configData.droneSupervisorCtrl = config.at("Drone_Supervisor_Ctrl");
     configData.trainTotalStep = config.at("Train_Total_Steps");
+    configData.initNoDoneSteps = config.at("Init_No_Done_Steps");
+    configData.noRewardDoneSteps = config.at("No_Reward_Done_Steps");
     configData.controlFreq = config.at("Control_Frequence");
     configData.customizedReward = config.at("Customized_Rewards");
     configData.lidarEnable = config.at("Lidar_Enable");

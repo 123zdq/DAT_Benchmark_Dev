@@ -449,11 +449,27 @@ int main(int argc, char **argv)
       {
         state.done = (pCtrl.done) | ((rewardG.isTrackingCarDisp == 2) ? 1 : 0);
       }
+      if(config.get()->simulationMode == string("train"))
+      {
+        static int noRewardCount = 0;
+        if(state.reward < 0.001)
+        {
+          noRewardCount = 0;
+        }
+        else
+        {
+          noRewardCount++;
+        }
+        if(noRewardCount > config.get()->noRewardDoneSteps)
+        {
+          state.done = 1;
+        }
+      }
       if (step_count >= config.get()->trainTotalStep)
       {
         state.done = 1;
       }
-      if (step_count < 100 && config.get()->simulationMode == string("train"))
+      if (step_count < double(config.get()->initNoDoneSteps) && config.get()->simulationMode == string("train"))
       {
         state.done = 0;
       }
