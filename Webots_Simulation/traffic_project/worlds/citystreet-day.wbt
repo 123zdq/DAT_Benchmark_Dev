@@ -70,13 +70,6 @@ DEF land Floor {
     metalness 0
   }
 }
-DEF DRONE1 M100 {
-  translation 0 14.87 0.73
-  rotation 0 0 1 0.523599
-  controller "drone_ctrl2"
-  customData "online"
-  supervisor TRUE
-}
 Cypress {
   translation 0.547543 -199.827 0
   rotation 0 0 1 0.7854009999999998
@@ -910,7 +903,7 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 150
-  seed 47
+  seed 95
   children [
     Solid {
       translation 196.99 223.18 0
