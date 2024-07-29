@@ -23,15 +23,13 @@ class DataPreprocessing():
         img_list = list(data_dict.keys())
         del img_list[-self.evo_step:]
         label_list = list(data_dict.values())
-        print(img_list)
-        print(label_list)
         return img_list,label_list
     
-    def Acquire_full_label(self,img_list:list,label_list):
+    def Acquire_full_label(self,img_list:list,label_list:list):
         full_label_list = []
         for idx in range(len(img_list)):
             idx_label = []
-            for i in range(idx,self.evo_step):
+            for i in range(idx,idx+self.evo_step):
                 idx_label.append(label_list[i])
             full_label_list.append(idx_label)
         return full_label_list
@@ -44,6 +42,8 @@ class DataPreprocessing():
             img_list,label_list = self.read_json(json_path_src)
             full_label_list = self.Acquire_full_label(img_list,label_list)
             Direction_label_dict = dict(zip(img_list,full_label_list))
+            if os.path.exists(json_path_dst):
+                os.unlink(json_path_dst)
             dump_json(Direction_label_dict,json_path_dst)
 
     
