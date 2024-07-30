@@ -5,3 +5,10 @@ runs/Benchmark_training/*.0
 runs/Benchmark_training/*.1
 trained_models/*.dat
 __pycache__/
+
+# Conda Environments
+.conda/
+.conda/*
+
+# PPO Model Parameters
+params.pth
