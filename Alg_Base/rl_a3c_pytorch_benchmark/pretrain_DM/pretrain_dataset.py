@@ -5,6 +5,7 @@ from PIL import Image
 import numpy as np
 from pretrain_utils import read_config
 import random
+import copy
 
 ORIGIN_DATAPATH="./OriginDataset/"
 DYNAMICS_DATAPATH = "./DynamicsDataset/"
@@ -55,17 +56,31 @@ class DynamicsDataset(object):
         img_files = sorted(glob.glob(
             os.path.join(self.dataset_path_list[index], '*.jpeg')))
 
+        if self.statebuf > 1:
+            total_img_list = self.imglist2statebuf(img_files)
+        else:
+            total_img_list = img_files
         anno_path = self.dataset_path_list[index]+"Direction_label.json"
         with open(anno_path, 'r') as f:
             label_res = json.load(f)
         label_list = list(label_res.values())
         label_list = sum(label_list, [])
 
-        return img_files, label_list
+        return total_img_list, label_list
     ### Return number of sequence in dataset
     def __len__(self):
         return len(self.dataset_path_list)
     
+    ### turn img list to state buffer style
+    def imglist2statebuf(self,img_list:list)->list:
+        total_img_list = []
+        single_img_list = [img_list[0]]*self.statebuf
+        for img_path in img_list:
+            single_img_list.append(img_path)
+            del single_img_list[0]
+            total_img_list.append(copy.deepcopy(single_img_list))
+        return total_img_list
+        
     ### shuffle the train/test set
     def shuffle_set(self):
         random.shuffle(self.dataset_path_list)
@@ -112,4 +127,6 @@ class DynamicsDataLoader(object):
     
 if __name__ == "__main__":
     ddateset = DynamicsDataset(mode="Head_backbone")
-    print(len(ddateset))
+    print(ddateset[0][0][0])
+    print(ddateset[0][0][1])
+    print(ddateset[0][0][3])
