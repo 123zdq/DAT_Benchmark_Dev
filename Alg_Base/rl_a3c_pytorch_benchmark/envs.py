@@ -1,7 +1,7 @@
 import asyncio
 import numpy as np
 from torch.utils.tensorboard import SummaryWriter
-
+import concurrent.futures
 
 """
 # Conda Environments
@@ -111,22 +111,33 @@ class Envs:
         self.rewards = None
         self.done = None
 
+        self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=self.num_envs)
+
         if "logs_show" in kwargs:
             if kwargs["logs_show"]:
                 _env = self.env_list[0].env
                 self.env_list[0] = self.Env_T(_env)
 
     async def reset_(self):
+        loop = asyncio.get_running_loop()
         await asyncio.gather(
-            *tuple([asyncio.to_thread(env.reset) for env in self.env_list])
+            *tuple(
+                [
+                    loop.run_in_executor(self.executor, env.reset)
+                    for env in self.env_list
+                ]
+            )
         )
         self.states = np.array([env.state for env in self.env_list])
 
     async def step_(self, actions):
+        loop = asyncio.get_running_loop()
         await asyncio.gather(
             *tuple(
                 [
-                    asyncio.to_thread(self.env_list[i].step, actions[i])
+                    loop.run_in_executor(
+                        self.executor, self.env_list[i].step, actions[i]
+                    )
                     for i in range(self.num_envs)
                 ]
             )
@@ -147,11 +158,11 @@ class Envs:
 
 
 """#
-my=Envs(num_envs=2,env_list=GE(2))
+num = 21
+my = Envs(num_envs=num, env_list=GE(num))
 print("Gen!")
 print(my.reset())
 rng = np.random.default_rng()
 while True:
-    my.step(rng.integers(0, 7, size=2))
-
+    my.step(rng.integers(0, 7, size=num))
 #"""
