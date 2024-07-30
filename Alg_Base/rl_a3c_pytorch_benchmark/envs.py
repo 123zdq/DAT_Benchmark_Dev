@@ -1,5 +1,7 @@
 import asyncio
 import numpy as np
+from torch.utils.tensorboard import SummaryWriter
+
 
 """
 # Conda Environments
@@ -32,7 +34,7 @@ def GE(num):
 
 
 class Envs:
-    class Env:  # need to modify
+    class Env:
         def __init__(self, env):
             self.env = env
             self.state = None
@@ -59,45 +61,42 @@ class Envs:
             self.state = None
             self.reward = None
             self.done = None
+            self.should_reset = False
 
-            """
-            self.rewards=0
-            self.tot=0
-            self.score=0
-            self.y=[]
-            self.x=[]
-            self.steps=0
-            """
+            self.rewards = 0
+            self.SummaryWriter = SummaryWriter("PPO_logs")
+            self.steps = 0
+            # self.sum=0
+            # self.tot=0
 
         def reset(self):
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
-            self.state, self.reward, self.done, _ = self.env.step(action)
-            if self.done:
+            if self.should_reset:
                 self.state, _ = self.env.reset()
+                self.should_reset = False
 
-            """
-            self.steps+=1
-            self.rewards+=self.reward
-            if self.done:
-                self.score+=self.rewards
-                self.rewards=0
-                self.tot+=1
-            if self.tot==20:
-                self.y.append(self.score/self.tot)
-                self.x.append(self.steps)
-                self.tot=0
-                self.score=0
-            """
+                self.SummaryWriter.add_scalar("rewards", self.rewards, self.steps)
+                self.rewards = 0
+            else:
+                self.steps += 1
+
+                self.state, self.reward, self.done, _ = self.env.step(action)
+                if self.done > 0.5:
+                    self.should_reset = True
+
+                self.rewards += self.reward
 
     def __init__(self, *args, **kwargs):
         # num_envs
         # env_mk
         # env_mk_args
         # env_mk or env_list
+        # logs_show
 
         self.num_envs = kwargs["num_envs"]
+        assert self.num_envs > 0
 
         if "env_list" in kwargs:
             self.env_list = [self.Env(env) for env in kwargs["env_list"]]
@@ -111,6 +110,11 @@ class Envs:
         self.states = None
         self.rewards = None
         self.done = None
+
+        if "logs_show" in kwargs:
+            if kwargs["logs_show"]:
+                _env = self.env_list[0].env
+                self.env_list[0] = self.Env_T(_env)
 
     async def reset_(self):
         await asyncio.gather(

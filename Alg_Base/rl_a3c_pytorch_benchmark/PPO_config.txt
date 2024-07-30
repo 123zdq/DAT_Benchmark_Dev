@@ -1,3 +1,6 @@
+tensorboard --logdir PPO_logs
+
+
 envconfig
 "Simulation_Mode": "train",
 "Train_Total_Steps": 3000,
@@ -5,6 +8,9 @@ envconfig
 "max_sumo_car": 11,
 "height_random": false,
 "direction_random": false,
+"max_rou_distance": 1000,
+"min_rou_distance": 200,
+"route_num": 200
 
 
 config
@@ -13,3 +19,9 @@ config
 
 /home/zdq/桌面/UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 while init_count < (12010 + 6*multiCom.Number_process):
+
+
+先抓取
+git stash
+git pull
+git stash pop

@@ -12,3 +12,7 @@ __pycache__/
 
 # PPO Model Parameters
 params.pth
+
+# PPO train logs
+PPO_logs/
+PPO_logs/*

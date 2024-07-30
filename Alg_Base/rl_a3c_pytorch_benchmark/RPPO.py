@@ -286,10 +286,10 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
 
 from envs import Envs, GE
 
-workers = 2
+workers = 5
 
 agent = UAV_RPPO_discrete(
-    envs=Envs(num_envs=workers, env_list=GE(workers)),
+    envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
     num_envs=workers,
     num_minibatches=1,
     num_steps=50,
