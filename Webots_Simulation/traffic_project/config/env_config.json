@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "video",
+        "Simulation_Mode": "train",
         "Drone_Supervisor_Ctrl": true,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 500,
@@ -24,7 +24,7 @@
         },
         "Sumo_Random_Mode": 2,
         "Sumo_Params": {
-                "max_sumo_car": 150,
+                "max_sumo_car": 20,
                 "car_import_interval": 60.0,
                 "car_type": "bus",
                 "fixed_color": true,
@@ -48,7 +48,7 @@
                 "height_fixed": 15.0,
                 "height_random_max": 20.0,
                 "height_random_min": 13.0,
-                "direction_random": true,
+                "direction_random": false,
                 "direction_random_max": 0.1,
                 "direction_random_min": -0.1
         }

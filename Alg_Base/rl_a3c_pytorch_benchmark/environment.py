@@ -8,6 +8,7 @@ from sendSocket import SendActionSocket
 import time
 import os
 from logger_cfg import create_logger
+import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
 
@@ -28,11 +29,16 @@ def process_frame(state,conf,env=None):
     if conf["Need_render"]:
         state = env.render(mode = "rgb_array")
     state_new = cv2.resize(state, (conf["State_size"], conf["State_size"]))
-    state_new = state_new.reshape((conf["State_channel"],conf["State_size"],conf["State_size"]))
+    state_new = state_new.astype(np.float32)
     if conf["Norm_Type"] == 0:
         state_new = state_new/255.0
     elif conf["Norm_Type"] == 1:
         state_new = (state_new-128.0)/128.0
+    state_new = cv2.cvtColor(state_new,cv2.COLOR_BGR2RGB)
+    state_new = state_new.reshape((conf["State_channel"],conf["State_size"],conf["State_size"]))
+    # plt.imshow(state_new.reshape(84,84,3))
+    # plt.show()
+    
     return state_new
 
 """
