@@ -32,4 +32,5 @@
   1. Change Directory to `PRETRAIN_DM/`
   2. Get OriginDataset: Follow instructions in file `OriginDataset/README.md`
   3. Run `pretrain_datapreprocess.py` script to get data ready according to pretrain_cfg.json
-  4. 
+  4. Run `pretrain_datasplit.py` script to generate train and test set in folder `DynamicsDataset/Batch${Batch_size}State${State_Buffer}`
+  5. 
