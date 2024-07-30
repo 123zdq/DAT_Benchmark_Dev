@@ -1,0 +1,15 @@
+envconfig
+"Simulation_Mode": "train",
+"Train_Total_Steps": 3000,
+"reward_mode": "continuous",
+"max_sumo_car": 11,
+"height_random": false,
+"direction_random": false,
+
+
+config
+"end_reward_list":[-20,100],
+
+
+/home/zdq/桌面/UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
+while init_count < (12010 + 6*multiCom.Number_process):
