@@ -3,6 +3,9 @@
 logs/*.log
 runs/Benchmark_training/*.0
 runs/Benchmark_training/*.1
+runs/Benchmark_train_vis/*.1
+runs/Benchmark_train_vis/*.0
+
 trained_models/*.dat
 __pycache__/
 

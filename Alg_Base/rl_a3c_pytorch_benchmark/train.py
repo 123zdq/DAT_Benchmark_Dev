@@ -48,6 +48,12 @@ def train(rank, args, shared_model, optimizer, env_conf):
         player.model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
 
 
+    if args.tensorboard_logger:
+        from torch.utils.tensorboard import SummaryWriter
+        writer = SummaryWriter(f"runs/{args.env}_train_vis")
+        iterate_num = 1
+        writer.close()
+
     player.state,player.suppleinfo = player.env.reset()
     if args.train_mode == "privilege":
         player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
@@ -81,6 +87,8 @@ def train(rank, args, shared_model, optimizer, env_conf):
             else:
                 player.cx = player.cx.data
                 player.hx = player.hx.data
+
+            
             for step in range(num_steps):
                 player.action_train()
                 if player.done:
@@ -134,9 +142,18 @@ def train(rank, args, shared_model, optimizer, env_conf):
                     - (args.entropy_coef * player.entropies[i])
                 )
 
+            if args.tensorboard_logger:
+                Model_loss = policy_loss + 0.5 * value_loss
+                writer.add_scalar(f'Loss/train_Agent{rank}', Model_loss.item(), iterate_num)
+                for name, param in player.model.named_parameters():
+                    if param.grad is not None:
+                        writer.add_histogram(f'{name}.grad_Agent{rank}', param.grad, iterate_num)
+                iterate_num += 1
+
             player.model.zero_grad()
             # print("Model loss: ",policy_loss + 0.5 * value_loss)
             (policy_loss + 0.5 * value_loss).backward()
+            
             ensure_shared_grads(player.model, shared_model, gpu=gpu_id >= 0)
             optimizer.step()
             player.clear_actions()

@@ -12,7 +12,7 @@
     "CW_omega":0.2,
     "CCW_omega":-0.2,
     "Control_Frequence":50,
-    "port_process":7787,
+    "port_process":7789,
     "end_reward":true,
     "end_reward_list":[-20,20],
     "scene":"farmland",
