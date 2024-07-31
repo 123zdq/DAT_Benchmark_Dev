@@ -144,7 +144,7 @@ elif configData["Simulation_Mode"] == "train":
             global_init = True
             init_count = 0
             # firstly run 310 steps for sumo to prepare for the cars
-            while init_count < (310 + 6*multiCom.Number_process):
+            while init_count < (620 + 6*multiCom.Number_process):
                 init_count = init_count + 1
                 while robot.step(timestep) == -1: # step until simulation is running
                     pass 

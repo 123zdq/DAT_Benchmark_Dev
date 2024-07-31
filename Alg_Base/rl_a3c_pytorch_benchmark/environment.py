@@ -8,7 +8,8 @@ from sendSocket import SendActionSocket
 import time
 import os
 from logger_cfg import create_logger
-import matplotlib.pyplot as plt
+import copy
+# import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
 
@@ -232,7 +233,7 @@ class BenchEnv_Multi():
             done: Whether the env is done receive from server through socket
             self.SuppleInfo: Other Sensor data/Reward Params for User to Customize their own State/Reward
     """
-    def step(self,action):
+    def step(self,action,prob=None):
         self.logger.info("\n")
         self.logger.info('<----- Step Function ----->')
         
@@ -271,7 +272,6 @@ class BenchEnv_Multi():
 
         ## Read Reward,Done,Current step(Use to Manage Done) and Other_state
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
-        self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
@@ -290,6 +290,32 @@ class BenchEnv_Multi():
             self.SuppleInfo.append(point_cloud)
 
         self.logger.info('Get Direction of the car:  '+str(reward_params[-1]))
+
+        ###### Test Cheat
+        if prob is not None:
+            
+            cardir = int(reward_params[-1])
+            if cardir == 0:
+                dynamics = np.array([0,0,0,0,0,0,1])
+            elif cardir == 1:
+                dynamics = np.array([1,0,0,0,0,0,0])
+            elif cardir == 2:
+                dynamics = np.array([0,0,0,0,0,1,0])
+            elif cardir == 3:
+                dynamics = np.array([0,0,0,0,1,0,0])
+            
+            prob_np = copy.deepcopy(prob.detach().numpy())
+            prob_np = np.ravel(prob_np)
+            self.logger.info(f'Output Prob of Policy Network is {prob_np}')
+            norm = np.linalg.norm(dynamics - prob_np)
+            norm = float(norm)
+            self.logger.info(f'Norm between dynamics and predict is {norm}')
+        #     reward = 2-norm
+            # print(type(norm))
+            # print(norm)
+
+        self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
+
         """
             Done Management:
                 1. Open done detection in the early stage of episode
@@ -305,7 +331,7 @@ class BenchEnv_Multi():
                 self.done_flag = False
                 self.last_done_flag = step_curr
                 if self.end_reward:
-                    if reward == 0.0:
+                    if reward <= 0.0:
                         self.logger.info('<--Failure Situation--> Reward += {}'.format(self.end_reward_list[0]))
                         reward += self.end_reward_list[0]
                     else:

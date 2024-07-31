@@ -10,6 +10,7 @@ from model import A3Clstm,A3ClstmE2E,A3ClstmADVOT
 from player_util import Agent
 from torch.autograd import Variable
 import time
+import logging
 
 """
     train: Multi-Process Training Function
@@ -23,6 +24,21 @@ import time
         None
 """
 def train(rank, args, shared_model, optimizer, env_conf):
+    logger = logging.getLogger(f'train_logger_{rank}')
+    logger.setLevel(logging.INFO)
+    # 创建文件处理器
+    if os.path.exists(f"./logs/Agent_train{rank}.log"):
+        os.unlink(f"./logs/Agent_train{rank}.log")
+    file_handler = logging.FileHandler(f"./logs/Agent_train{rank}.log")
+    file_handler.setLevel(logging.INFO)
+    # 创建格式化器并将其添加到文件处理器
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    file_handler.setFormatter(formatter)
+    # 将文件处理器添加到日志记录器
+    if not logger.handlers: # 避免重复添加处理器
+        logger.addHandler(file_handler)
+
+    
     episode = 0
     ptitle(f"Train Agent: {rank}")
     gpu_id = args.gpu_ids[rank % len(args.gpu_ids)]
@@ -71,6 +87,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
         num_steps = args.num_steps
     try:
         while episode < args.max_episode_length:
+            logger.info("\n")
             if gpu_id >= 0:
                 with torch.cuda.device(gpu_id):
                     player.model.load_state_dict(shared_model.state_dict())
@@ -118,16 +135,22 @@ def train(rank, args, shared_model, optimizer, env_conf):
                 value, _, _, _ = player.model(
                     state.unsqueeze(0), player.hx, player.cx,player.privilegeinfo
                 )
+                
                 # print("The value we receive is:",value)
                 R = value.detach()
             player.values.append(R)
             policy_loss = 0
             value_loss = 0
+            logger.info(f"episode_num: {episode}, player.rewards list: {player.rewards}")
+            logger.info(f"episode_num: {episode}, player.values list: {player.values}")
             for i in reversed(range(len(player.rewards))):
                 R = args.gamma * R + player.rewards[i]
+                logger.info(f"iter_num: {i}, R: {R}")
                 advantage = R - player.values[i]
+                logger.info(f"iter_num: {i}, advantage: {advantage}")
                 value_loss = value_loss + 0.5 * advantage.pow(2)
-
+                logger.info(f"iter_num: {i}, delta value_loss: {0.5 * advantage.pow(2)}")
+                
                 # Generalized Advantage Estimataion
                 delta_t = (
                     player.rewards[i]
@@ -142,6 +165,12 @@ def train(rank, args, shared_model, optimizer, env_conf):
                     - (args.entropy_coef * player.entropies[i])
                 )
 
+                logger.info(f"\n")
+            logger.info(f"episode_num: {episode}, value_loss: {value_loss}")
+            logger.info(f"episode_num: {episode}, delta_t: {delta_t}")
+            logger.info(f"episode_num: {episode}, policy_loss: {policy_loss}")
+            logger.info(f"\n")
+            
             if args.tensorboard_logger:
                 Model_loss = policy_loss + 0.5 * value_loss
                 writer.add_scalar(f'Loss/train_Agent{rank}', Model_loss.item(), iterate_num)
@@ -152,7 +181,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
 
             player.model.zero_grad()
             # print("Model loss: ",policy_loss + 0.5 * value_loss)
-            (policy_loss + 0.5 * value_loss).backward()
+            (policy_loss + 0.05 * value_loss).backward()
             
             ensure_shared_grads(player.model, shared_model, gpu=gpu_id >= 0)
             optimizer.step()

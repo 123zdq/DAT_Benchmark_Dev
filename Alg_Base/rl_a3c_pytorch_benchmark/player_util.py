@@ -53,7 +53,7 @@ class Agent(object):
             rand_action = random.randint(0,6)
             action = torch.tensor([[rand_action]])
         log_prob = log_prob.gather(1, action)
-        state, self.reward, self.done, self.info = self.env.step(action.item())
+        state, self.reward, self.done, self.info = self.env.step(action.item(),prob)
         
         state = self.process_func(state = state,env=self.env)
         if self.gpu_id >= 0:
@@ -62,7 +62,8 @@ class Agent(object):
         else:
             self.state = torch.from_numpy(state).float()
         self.eps_len += 1
-        self.reward = max(min(self.reward, 1), -1)
+        # self.reward = max(min(self.reward, 1), -1)
+        
         self.values.append(value)
         self.log_probs.append(log_prob)
         self.rewards.append(self.reward)
