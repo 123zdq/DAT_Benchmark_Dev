@@ -44,6 +44,8 @@ class Agent(object):
         log_prob = F.log_softmax(logit, dim=1)
         entropy = -(log_prob * prob).sum(1)
         self.entropies.append(entropy)
+        print(logit)
+        print(torch.argmax(prob).data)
         action = prob.multinomial(1).data
         ## epsilon greedy
         ran = random.random()

@@ -66,7 +66,7 @@ class A3Clstm(torch.nn.Module):
         x = x.view(x.size(0), -1)
 
         hx, cx = self.lstm(x, (hx, cx))
-        if privilege_info is not None:
+        if privilege_info is not None and self.privilege_dim != 0:
             if not isinstance(privilege_info,torch.Tensor):
                 raise TypeError("privilege_info should be Tensor")
             else:

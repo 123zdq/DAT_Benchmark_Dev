@@ -170,7 +170,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
             logger.info(f"episode_num: {episode}, delta_t: {delta_t}")
             logger.info(f"episode_num: {episode}, policy_loss: {policy_loss}")
             logger.info(f"\n")
-            
+
             if args.tensorboard_logger:
                 Model_loss = policy_loss + 0.5 * value_loss
                 writer.add_scalar(f'Loss/train_Agent{rank}', Model_loss.item(), iterate_num)
@@ -181,7 +181,7 @@ def train(rank, args, shared_model, optimizer, env_conf):
 
             player.model.zero_grad()
             # print("Model loss: ",policy_loss + 0.5 * value_loss)
-            (policy_loss + 0.05 * value_loss).backward()
+            (policy_loss + 0.5 * value_loss).backward()
             
             ensure_shared_grads(player.model, shared_model, gpu=gpu_id >= 0)
             optimizer.step()

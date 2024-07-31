@@ -31,7 +31,8 @@ parser.add_argument(
     "--train-mode",
     type=str,
     help="config training setting",
-    default="privilege"
+    # default="privilege"
+    default="Normal"
 )
 
 parser.add_argument(
