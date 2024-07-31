@@ -101,7 +101,7 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
         self.global_step = 0  # Initialization not supported !!!
 
         self.lr = 3e-4  # Learning rate
-        self.gamma = 0.999  # Discount factor
+        self.gamma = 0.9  # Discount factor
         self.lamda = 0.95  # GAE parameter
         self.epsilon = 0.2  # PPO clip parameter
         self.K_epochs = 3  # PPO parameter
@@ -286,12 +286,12 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
 
 from envs import Envs, GE
 
-workers = 5
+workers = 3
 
 agent = UAV_RPPO_discrete(
     envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
     num_envs=workers,
     num_minibatches=1,
-    num_steps=50,
+    num_steps=45,
 )
 agent.run()

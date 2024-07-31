@@ -2,6 +2,7 @@ import asyncio
 import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 import concurrent.futures
+import time
 
 """
 # Conda Environments
@@ -69,19 +70,29 @@ class Envs:
             # self.sum=0
             # self.tot=0
 
+            self.st = time.time()
+
+            #self.actions = []  # should modify
+
         def reset(self):
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
+            #self.actions.append(action)
+            self.steps += 1
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
 
                 self.SummaryWriter.add_scalar("rewards", self.rewards, self.steps)
+                self.SummaryWriter.add_scalar(
+                    "runtime/step(s)", (time.time() - self.st) / self.steps, self.steps
+                )
+
+                #self.SummaryWriter.add_histogram("actions", np.array(self.actions))  ###
+
                 self.rewards = 0
             else:
-                self.steps += 1
-
                 self.state, self.reward, self.done, _ = self.env.step(action)
                 if self.done > 0.5:
                     self.should_reset = True
