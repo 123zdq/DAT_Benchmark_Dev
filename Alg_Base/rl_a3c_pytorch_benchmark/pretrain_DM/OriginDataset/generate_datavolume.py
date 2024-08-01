@@ -1,10 +1,13 @@
 import os
 import json
+import time
 
 ORIDATASET_PATH = "./OriginDataset/"
 EPISODE_PREFIX = "episode"
 
 def Generate_Ori2DataVolume(oridata_path=ORIDATASET_PATH,episode_prefix=EPISODE_PREFIX):
+    print("<------ Generating Data Volume ------>")
+    start_t = time.time()
     data_volume_dict = {}
 
     num_episode = 0
@@ -24,6 +27,7 @@ def Generate_Ori2DataVolume(oridata_path=ORIDATASET_PATH,episode_prefix=EPISODE_
         os.unlink(json_path)
     with open(json_path, 'w') as json_file:
         json.dump(data_volume_dict, json_file)
+    print(f"<------ Finish Generating Data Volume Time Comsume:{time.time()-start_t} ------>\n")
 
 if __name__ == "__main__":
     Generate_Ori2DataVolume()

@@ -88,7 +88,8 @@ class DynamicsDataset(object):
         with open(anno_path, 'r') as f:
             label_res = json.load(f)
         label_list = list(label_res.values())
-        label_list = sum(label_list, [])
+        if len(label_list) == 1:
+            label_list = sum(label_list, [])
 
         ## Get Image tensor and label tensor
         label_tensor = torch.tensor(label_list,dtype=torch.float32)

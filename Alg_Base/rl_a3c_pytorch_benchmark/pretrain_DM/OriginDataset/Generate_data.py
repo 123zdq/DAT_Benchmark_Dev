@@ -4,10 +4,13 @@
 
 from turn_video2ori import Generate_Video2Ori
 from generate_datavolume import Generate_Ori2DataVolume
-from ..pretrain_datasplit import DynamicsDataSplit
+### Append parent dir to sys_path
+import sys
+import os
+PARENT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(PARENT_DIR)
+from pretrain_datasplit import DynamicsDataSplit
 import argparse
-
-CFG_PATH="../pretrain_cfg.json"
 
 parser = argparse.ArgumentParser(description="Data Generation Argparser")
 

@@ -56,11 +56,15 @@ class DynamicsDataSplit():
         return train_idx,test_idx
     
     def Split_data(self):
+        print("<------ Begin Data Split ------>")
+        start_t = time.time()
         ### extract episode data from 
         episode_pathlib = glob.glob(self.oridata_path+"*/")
         episode_pathlib.sort()
         split_idx = 0
+        episode_idx = 0
         for episode in episode_pathlib:
+            episode_idx += 1
             img_lib = glob.glob(episode+"*.jpeg")
             img_lib.sort() # make sure the img list is in order
             split_idx_single = 0
@@ -80,7 +84,7 @@ class DynamicsDataSplit():
             
                 ### Split label
                 label_idx_list = list(range(split_idx_single*self.bs,(split_idx_single+1)*self.bs))
-                label_json = episode+"Direction_label.json"
+                label_json = episode+"Direction_label_src.json"
                 label_dict = read_config(label_json)
                 curr_label_dict = {}
                 
@@ -88,13 +92,19 @@ class DynamicsDataSplit():
                     label_key = str(index).zfill(6)
                     label_value = label_dict[label_key]
                     curr_label_dict[label_key]=label_value
+                
                 dump_json(curr_label_dict,json_path)
                 # print(split_idx_single)
                 # print(split_idx)
                 split_idx_single += 1
                 split_idx += 1
+                print(f"Finish Generating Episode: {episode_idx}/{len(episode_pathlib)} Split: {split_idx_single}/{int(len(img_lib)/self.bs)}")
+        print(f"<------ Finish Data Split Time Comsume:{time.time()-start_t} ------>\n")
+
     # Check the correctness of the data
     def Check_split(self):
+        print("<------ Begin Checking Data Split ------>")
+        start_t = time.time()
         train_ls = glob.glob(self.train_dir+"*/")
         test_ls = glob.glob(self.test_dir+"*/")
         train_ls.sort()
@@ -109,9 +119,10 @@ class DynamicsDataSplit():
             print("train_dir: {} contains {} images and {} json file".format(test_dir_name,num_img_t,num_json_t))
         print("Number of train episode is {}".format(len(train_ls)))
         print("Number of test episode is {}".format(len(test_ls)))
-"""
-    !!!Notice: If run in this file,make sure mode="Head_only" matches real setting in pretrain_main.py
-"""
+        print(f"<------ Finish Checking Data Split Time Comsume:{time.time()-start_t} ------>\n")
+
+
+
 if __name__ == "__main__":
     # print(glob.glob("*/"))
     datasplit = DynamicsDataSplit(mode="Head_backbone")
