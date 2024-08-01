@@ -1,6 +1,6 @@
 #### OriginDataset
 * Fold with origin data before datasplit
-* `turn_video2ori.py` A script turn data collected by video
+* `turn_video2ori.py` A script turn data collected by video to Origindataset
 * `generate_datavolume.py` A script generate data_volume.json file 
 
 * **Usage:**
