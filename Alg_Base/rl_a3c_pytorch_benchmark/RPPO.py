@@ -80,6 +80,12 @@ class AC_RPPO(nn.Module):  # input_channels * 84 * 84
             lstm_state,
         )
 
+    def predict_action(self, x, lstm_state, done):
+        hidden, lstm_state = self.get_states(x, lstm_state, done)
+        logits = self.actor(hidden)
+        action = torch.argmax(logits, dim=1)
+        return action, lstm_state
+
 
 class UAV_RPPO_discrete:  # now:  torch base on GPU
     def __init__(self, **kwargs):
@@ -267,7 +273,18 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
         torch.save(self.model.state_dict(), self.savepath)
         return next_lstm_state, next_state, next_done
 
-    def run(self):
+    def test_step(self, next_lstm_state, next_state, next_done):  # modify
+        with torch.no_grad():
+            action, next_lstm_state = self.model.predict_action(
+                next_state, next_lstm_state, next_done
+            )
+            next_state, _, done = self.envs.step(action.cpu().numpy())
+            next_state, next_done = torch.Tensor(next_state).to(
+                self.device
+            ), torch.Tensor(done).to(self.device)
+        return next_lstm_state, next_state, next_done
+
+    def run(self, train_mode=True):
         next_lstm_state = (
             torch.zeros(
                 self.model.lstm.num_layers, self.num_envs, self.model.lstm.hidden_size
@@ -278,10 +295,16 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
         )
         next_state = torch.Tensor(self.envs.reset()).to(self.device)
         next_done = torch.zeros(self.num_envs).to(self.device)
-        while True:
-            next_lstm_state, next_state, next_done = self.sample_update(
-                next_lstm_state, next_state, next_done
-            )
+        if train_mode:
+            while True:
+                next_lstm_state, next_state, next_done = self.sample_update(
+                    next_lstm_state, next_state, next_done
+                )
+        else:
+            while True:
+                next_lstm_state, next_state, next_done = self.test_step(
+                    next_lstm_state, next_state, next_done
+                )
 
 
 from envs import Envs, GE
@@ -292,6 +315,7 @@ agent = UAV_RPPO_discrete(
     envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
     num_envs=workers,
     num_minibatches=1,
-    num_steps=45,
+    num_steps=40,
 )
-agent.run()
+
+agent.run(train_mode=False)
