@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-29 23:34:05
+LastEditTime: 2024-08-01 18:16:45
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -24,6 +24,7 @@ import platform
 import logging
 import MultiPortRecv
 import socket
+import math
 
 
 class droneManager:
@@ -74,6 +75,8 @@ class droneManager:
         self.machine_state = 1
         # multiprocess actuate flag
         self.multi_state = 0
+        # drone camera pitch angle
+        self.camera_pitch = 1
         # establish drone manager threading
         self.loop = threading.Thread(target=self.mainLoop)
         self.videoloop = threading.Thread(target=self.mainLoopForVideo)
@@ -172,15 +175,42 @@ class droneManager:
     return {*}
     '''
     def init(self):
+        if self.configData["Drone_Random_Config"]["view_pitch_random"] == False:
+            self.camera_pitch = self.configData["Drone_Random_Config"]["view_pitch_fixed"]
+        else:
+            self.camera_pitch = random.uniform(self.configData["Drone_Random_Config"]["view_pitch_random_min"],self.configData["Drone_Random_Config"]["view_pitch_random_max"])
+        self.updatePitchAngle()
+        
+        if self.configData["Drone_Random_Config"]["horizon_bias_random"] == False:
+            horizon_bias = self.configData["Drone_Random_Config"]["horizon_bias_fixed"]
+        else:
+            if self.configData["Drone_Random_Config"]["horizon_bias_multilateral"] == False:
+                horizon_bias = random.uniform(self.configData["Drone_Random_Config"]["horizon_bias_random_min"],self.configData["Drone_Random_Config"]["horizon_bias_random_max"])
+            else:
+                horizon_side = random.choice([1,-1])
+                horizon_bias = horizon_side * random.uniform(abs(self.configData["Drone_Random_Config"]["horizon_bias_random_min"]),abs(self.configData["Drone_Random_Config"]["horizon_bias_random_max"]))
+                
+        if self.configData["Drone_Random_Config"]["verticle_bias_random"] == False:
+            verticle_bias = self.configData["Drone_Random_Config"]["verticle_bias_fixed"]
+        else:
+            if self.configData["Drone_Random_Config"]["verticle_bias_multilateral"] == False:
+                verticle_bias = random.uniform(self.configData["Drone_Random_Config"]["verticle_bias_random_min"],self.configData["Drone_Random_Config"]["verticle_bias_random_max"])
+            else:
+                verticle_side = random.choice([1,-1])
+                verticle_bias = verticle_side * random.uniform(abs(self.configData["Drone_Random_Config"]["verticle_bias_random_min"]),abs(self.configData["Drone_Random_Config"]["verticle_bias_random_max"]))
+            
+            
         if self.configData["Drone_Random_Config"]["height_random"] == False:
             transScale = self.configData["Drone_Random_Config"]["height_fixed"]
         else:
             transScale = random.uniform(self.configData["Drone_Random_Config"]["height_random_min"],self.configData["Drone_Random_Config"]["height_random_max"])
-        transVector = [-2/3*transScale, 0, transScale]
+        transVector = [-math.tan(abs(1.5708-self.camera_pitch))*transScale-1+verticle_bias, horizon_bias, transScale]
+        
         if self.configData["Drone_Random_Config"]["direction_random"] == False:
-            rotateAngle = 0
+            rotateAngle = self.configData["Drone_Random_Config"]["direction_fixed"]
         else:
             rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
+        
         if self.configData["Sumo_Params"]["fixed_color"] is True:
             colorList = list(self.configData["Sumo_Params"]["normalize_color"])
         else:
@@ -197,12 +227,25 @@ class droneManager:
         self.drone.restartController()
         
     '''
-    description: send socket to update machine state
+    description: write files to update machine state
     param {*} self
+    param {*} filePath: the path to write files
     return {*}
     '''
-    def updateMachineState(self,filePath:str=None):
-        self.recCtrlPort.sendMachine(self.machine_state,self.id,filePath)
+    def updateMachineState(self):
+        self.recCtrlPort.sendMachine(self.machine_state,self.id,"../../cache/" + self.droneDef + "_MachineState.txt")
+        
+    '''
+    description: write files to update machine state
+    param {*} self
+    param {*} filePath: the path to write files
+    return {*}
+    '''
+    def updatePitchAngle(self, filePath:str=None):
+        with open("../../cache/" + self.droneDef + "_PitchAngle.txt", "w") as f:
+            f.write(str(self.camera_pitch))
+            f.close()
+            
         
     '''
     description: 1.Drone manager mainLoop, which manage the state machine.
@@ -218,7 +261,7 @@ class droneManager:
         self.lastTime = self.initTime
         while True:
             self.initTime = time.time()
-            self.updateMachineState("../../cache/" + self.droneDef + "_MachineState.txt")
+            self.updateMachineState()
             self.recCtrlPort.keepSocketRunning()
             self.actionUpdate()
             

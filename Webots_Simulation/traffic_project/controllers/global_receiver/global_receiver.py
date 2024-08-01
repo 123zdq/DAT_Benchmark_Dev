@@ -143,8 +143,8 @@ elif configData["Simulation_Mode"] == "train":
         if global_init == False:
             global_init = True
             init_count = 0
-            # firstly run 310 steps for sumo to prepare for the cars
-            while init_count < (620 + 6*multiCom.Number_process):
+            # firstly run steps for sumo to prepare for the cars
+            while init_count < (int(configData["Drone_Random_Config"]["start_time_bias_ms"]) + 6*multiCom.Number_process):
                 init_count = init_count + 1
                 while robot.step(timestep) == -1: # step until simulation is running
                     pass 
@@ -167,8 +167,8 @@ elif configData["Simulation_Mode"] == "video":
         if global_init == False:
             global_init = True
             init_count = 0
-            # firstly run 310 steps for sumo to prepare for the cars
-            while init_count < (310 + 4*configData["Out_Video"]["channels"]):
+            # firstly run steps for sumo to prepare for the cars
+            while init_count < (int(configData["Drone_Random_Config"]["start_time_bias_ms"]) + 4*configData["Out_Video"]["channels"]):
                 init_count = init_count + 1
                 while robot.step(timestep) == -1: # step until simulation is running
                     pass 

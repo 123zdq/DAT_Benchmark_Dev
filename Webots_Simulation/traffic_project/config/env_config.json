@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "video",
         "Drone_Supervisor_Ctrl": true,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 500,
@@ -26,7 +26,7 @@
         "Sumo_Params": {
                 "max_sumo_car": 20,
                 "car_import_interval": 60.0,
-                "car_type": "bus",
+                "car_type": "private",
                 "fixed_color": true,
                 "normalize_color": [1,0,0],
                 "max_car_speed": 15,
@@ -38,18 +38,34 @@
         },
         "Socket_Ip": "127.0.0.1",
         "Out_Video": {
-                "channels": 16,
+                "channels": 4,
                 "fps": 50.0,
                 "start_time": 1.0,
                 "total_time": 50.0
         },
         "Drone_Random_Config": {
+                "start_time_bias_ms": 310,
+                "view_pitch_random": true,
+                "view_pitch_fixed": 1,
+                "view_pitch_random_max": 1.57,
+                "view_pitch_random_min": 0.7,
                 "height_random": false,
-                "height_fixed": 25.0,
+                "height_fixed": 15.0,
                 "height_random_max": 20.0,
                 "height_random_min": 13.0,
                 "direction_random": false,
+                "direction_fixed": 1,
                 "direction_random_max": 0.1,
-                "direction_random_min": -0.1
+                "direction_random_min": -0.1,
+                "horizon_bias_random": true,
+                "horizon_bias_multilateral": true,
+                "horizon_bias_fixed": 0,
+                "horizon_bias_random_max": 3,
+                "horizon_bias_random_min": 2,
+                "verticle_bias_random": true,
+                "verticle_bias_multilateral": true,
+                "verticle_bias_fixed": 0,
+                "verticle_bias_random_max": 3,
+                "verticle_bias_random_min": 2
         }
 }

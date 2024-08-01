@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-28 19:03:00
+ * @LastEditTime: 2024-08-01 17:36:42
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -274,7 +274,7 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   const double *T_car_of_land = trackingCar->getPose(land_node);
   double T_car_of_land_temp[16];
   memcpy(T_car_of_land_temp, T_car_of_land, sizeof(T_car_of_land_temp));
-  Vector3d V_car_comp(1, 0, 0);
+  Vector3d V_car_comp(-1, 0, 0);
   Matrix3d M_car_of_land;
   Vector3d V_car_of_land;
   for (int i = 0; i < 3; i++)

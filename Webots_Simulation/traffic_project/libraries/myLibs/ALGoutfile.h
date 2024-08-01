@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-29 01:05:51
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-25 17:15:57
+ * @LastEditTime: 2024-08-01 18:14:20
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/libraries/myLibs/ALGoutfile.h
  * @Description: 
  * 
@@ -48,7 +48,7 @@ void Txt_Output(string name,std::ios_base::openmode my_mode,double a[],int j){
     ofstream outfile(name, my_mode);
 	if(!outfile)
 	{
-		cerr<<"open error!"<<endl;
+		std::cerr << "Unable to open file " + name << std::endl;
 		exit(1);
 	}
 	// cout << name << " ok" << endl;
@@ -69,7 +69,7 @@ void Txt_Output(string name,std::ios_base::openmode my_mode,double a[], int j,st
     ofstream outfile(name, my_mode);
 	if(!outfile)
 	{
-		cerr<<"open error!"<<endl;
+		std::cerr << "Unable to open file " + name << std::endl;
 		exit(1);
 	}
 	// cout << name << " ok" << endl;
@@ -86,7 +86,7 @@ void Txt_Output(string name,std::ios_base::openmode my_mode,float *a,int j){
     ofstream outfile(name, my_mode);
 	if(!outfile)
 	{
-		cerr<<"open error!"<<endl;
+		std::cerr << "Unable to open file " + name << std::endl;
 		exit(1);
 	}
 	// cout << name << " ok" << endl;
@@ -107,7 +107,7 @@ string Txt_Input(string name){
 	ifstream inputFile(name);
     // 检查文件是否成功打开
     if (!inputFile) {
-        std::cerr << "Unable to open file example.txt" << std::endl;
+        std::cerr << "Unable to open file " + name << std::endl;
         return string("error");
     }
     string line;
@@ -126,7 +126,7 @@ void Txt_Input(string name, string *buffer, int size){
 	ifstream inputFile(name);
     // 检查文件是否成功打开
     if (!inputFile) {
-        std::cerr << "Unable to open file example.txt" << std::endl;
+        std::cerr << "Unable to open file " + name << std::endl;
     }
     string line;
 	int count = 0;
@@ -149,7 +149,7 @@ void Txt_Input(string name, double *buffer, int size){
 	ifstream inputFile(name);
     // 检查文件是否成功打开
     if (!inputFile) {
-        std::cerr << "Unable to open file example.txt" << std::endl;
+        std::cerr << "Unable to open file " + name << std::endl;
     }
     string line;
 	int count = 0;

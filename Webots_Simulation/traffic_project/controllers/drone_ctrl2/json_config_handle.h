@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-29 19:56:25
+ * @LastEditTime: 2024-08-01 16:35:54
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -33,7 +33,7 @@ typedef struct _configData_s{
     double controlFreq = 10;
     bool lidarEnable = false;
     bool cameraEnable = true;
-    struct _doneRange{
+    struct _droneRange{
         double maxHeight = 50;
         double minHeight = 1;
         double velocity = 30;
@@ -42,13 +42,20 @@ typedef struct _configData_s{
         double pitch = 1.22;
         double distanceError = 20;
     };
-    _doneRange doneRange;
+    _droneRange droneRange;
     struct _rewardConfig{
         std::string rewardMode = "discrete";
         double distanceScale = 0.05;
         double rewardRange = 7;
     };
     _rewardConfig rewardConfig;
+    // struct _droneRandomConfig{
+    //     bool viewPitchRandom = false;
+    //     double viewPitchFixed = -1.2;
+    //     double viewPitchRandomMax = -1.57;
+    //     double viewPitchRandomMin = -0.7;
+    // };
+    // _droneRandomConfig droneRandomConfig;
     struct _outVideo{
         double fps = 30;
         double startTime = 0;
@@ -94,16 +101,20 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.controlFreq = config.at("Control_Frequence");
     configData.customizedReward = config.at("Customized_Rewards");
     configData.lidarEnable = config.at("Lidar_Enable");
-    configData.doneRange.maxHeight = config.at("Done_Range").at("max_height");
-    configData.doneRange.minHeight = config.at("Done_Range").at("min_height");
-    configData.doneRange.velocity = config.at("Done_Range").at("velocity");
-    configData.doneRange.omiga = config.at("Done_Range").at("omiga");
-    configData.doneRange.roll = config.at("Done_Range").at("roll");
-    configData.doneRange.pitch = config.at("Done_Range").at("pitch");
-    configData.doneRange.distanceError = config.at("Done_Range").at("distance_error");
+    configData.droneRange.maxHeight = config.at("Done_Range").at("max_height");
+    configData.droneRange.minHeight = config.at("Done_Range").at("min_height");
+    configData.droneRange.velocity = config.at("Done_Range").at("velocity");
+    configData.droneRange.omiga = config.at("Done_Range").at("omiga");
+    configData.droneRange.roll = config.at("Done_Range").at("roll");
+    configData.droneRange.pitch = config.at("Done_Range").at("pitch");
+    configData.droneRange.distanceError = config.at("Done_Range").at("distance_error");
     configData.rewardConfig.rewardMode = config.at("Reward_Config").at("reward_mode");
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
     configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
+    // configData.droneRandomConfig.viewPitchRandom = config.at("Drone_Random_Config").at("view_pitch_random");
+    // configData.droneRandomConfig.viewPitchFixed = config.at("Drone_Random_Config").at("view_pitch_fixed");
+    // configData.droneRandomConfig.viewPitchRandomMax = config.at("Drone_Random_Config").at("view_pitch_random_max");
+    // configData.droneRandomConfig.viewPitchRandomMin = config.at("Drone_Random_Config").at("view_pitch_random_min");
     configData.video.fps = config.at("Out_Video").at("fps");
     configData.video.startTime = config.at("Out_Video").at("start_time");
     configData.video.totalTime = config.at("Out_Video").at("total_time");
@@ -116,17 +127,22 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     std::cout<< "    Customized_Rewards:    " << configData.customizedReward << std::endl;
     std::cout<< "    Lidar_Enable:          " << configData.lidarEnable << std::endl;
     std::cout<< "    Done_Range: {\n"
-                << "        max_height:      " << configData.doneRange.maxHeight << "\n"
-                << "        min_height:      " << configData.doneRange.minHeight << "\n"
-                << "        velocity:        " << configData.doneRange.velocity << "\n"
-                << "        omiga:           " << configData.doneRange.omiga << "\n"
-                << "        roll:            " << configData.doneRange.roll << "\n"
-                << "        pitch:           " << configData.doneRange.pitch << "\n"
-                << "        distance_error:  " << configData.doneRange.distanceError << std::endl;
+                << "        max_height:      " << configData.droneRange.maxHeight << "\n"
+                << "        min_height:      " << configData.droneRange.minHeight << "\n"
+                << "        velocity:        " << configData.droneRange.velocity << "\n"
+                << "        omiga:           " << configData.droneRange.omiga << "\n"
+                << "        roll:            " << configData.droneRange.roll << "\n"
+                << "        pitch:           " << configData.droneRange.pitch << "\n"
+                << "        distance_error:  " << configData.droneRange.distanceError << std::endl;
     std::cout<< "    Reward_Config: {\n"
                 << "        reward_mode:     " << configData.rewardConfig.rewardMode << "\n"
                 << "        distance_scale:  " << configData.rewardConfig.distanceScale << "\n"
                 << "        reward_range:    " << configData.rewardConfig.rewardRange << std::endl;
+    // std::cout<< "    Drone_Random_Config: {\n"
+    //             << "        view_pitch_random:     " << configData.droneRandomConfig.viewPitchRandom << "\n"
+    //             << "        view_pitch_fixed:      " << configData.droneRandomConfig.viewPitchFixed << "\n"
+    //             << "        view_pitch_random_max: " << configData.droneRandomConfig.viewPitchRandomMax << "\n"
+    //             << "        view_pitch_rendom_min: " << configData.droneRandomConfig.viewPitchRandomMin << std::endl;
     std::cout<< "    Out_Video: {\n}"
                 << "        fps:             " << configData.video.fps << "\n"
                 << "        start_time:      " << configData.video.startTime << "\n"

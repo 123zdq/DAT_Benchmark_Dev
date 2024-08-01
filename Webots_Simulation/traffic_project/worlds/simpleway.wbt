@@ -38,8 +38,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.4114284988136774 0.41974017163275973 0.809039417260757 1.761547091767345
-  position 24.995728608005358 -3962.4812699176973 4402.635485417631
+  orientation -0.3841885846175974 0.36544400866266985 0.8478501093837787 1.784240806989292
+  position 226.7407274940293 -4198.622059703178 3971.8369843898
   near 3
 }
 TexturedBackground {
@@ -47,7 +47,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 DEF land Floor {
-  translation 0 0 -0.1
+  translation 0 0 -0.2
   size 7000 5000
   appearance PBRAppearance {
     baseColorMap ImageTexture {
@@ -1288,7 +1288,7 @@ DEF ORIGIN BmwX5Simple {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 20
-  seed 32
+  seed 41
 }
 Robot {
   children [

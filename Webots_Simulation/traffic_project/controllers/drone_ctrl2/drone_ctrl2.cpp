@@ -311,8 +311,21 @@ int main(int argc, char **argv)
     if (config.get()->simulationMode == string("train"))
     {
       drone_fly = true;
-      gimbal_cmd.y = 1.;
-      gimbal_cmd.y = CLAMP(gimbal_cmd.y, -0.5, 1.5);
+      string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
+      if(pitchAngle == string("error"))
+      {
+        gimbal_cmd.y = 1.;
+      }
+      else
+      {
+        try{
+          gimbal_cmd.y = std::stod(pitchAngle);
+        } catch(const std::exception& e){
+          std::cerr << "Error: " << e.what() << std::endl;
+          gimbal_cmd.y = 1.;
+        }
+      }
+      gimbal_cmd.y = CLAMP(gimbal_cmd.y, 0.5, 1.5);
       // 获取action数据
       Txt_Input("../../cache/" + droneDef + "_Global2Ctrl.txt", action, 5);
       if (t < 0.1)
@@ -339,8 +352,21 @@ int main(int argc, char **argv)
     if (config.get()->simulationMode == string("video"))
     {
       drone_fly = true;
-      gimbal_cmd.y = 1.;
-      gimbal_cmd.y = CLAMP(gimbal_cmd.y, -0.5, 1.5);
+      string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
+      if(pitchAngle == string("error"))
+      {
+        gimbal_cmd.y = 1.;
+      }
+      else
+      {
+        try{
+          gimbal_cmd.y = std::stod(pitchAngle);
+        } catch(const std::exception& e){
+          std::cerr << "Error: " << e.what() << std::endl;
+          gimbal_cmd.y = 1.;
+        }
+      }
+      gimbal_cmd.y = CLAMP(gimbal_cmd.y, 0.5, 1.5);
     }
 
     if (config.get()->simulationMode == string("demo"))
@@ -449,8 +475,10 @@ int main(int argc, char **argv)
       {
         state.done = (pCtrl.done) | ((rewardG.isTrackingCarDisp == 2) ? 1 : 0);
       }
+      string machineState;
       if(config.get()->simulationMode == string("train"))
       {
+        machineState = Txt_Input("../../cache/" + droneDef + "_MachineState.txt");
         static int noRewardCount = 0;
         if(state.reward > 0.001)
         {
@@ -488,11 +516,16 @@ int main(int argc, char **argv)
           state.done = 1;
         }
       }
-      std::cout << "id: " << droneDef << "  done: " << state.done << "  reward: " << state.reward << "  count: " << step_count << "  time:" << t << "    carDir:" << rewardG.makeReward.carDir << std::endl;
-      std::cout << "done_state: " << pCtrl.done_state << std::endl;
+      std::cout << "id: " << droneDef 
+                << "  done: " << state.done 
+                << "  reward: " << state.reward 
+                << "  count: " << step_count 
+                << "  time:" << std::setprecision(3) << t 
+                << "  carDir:" << rewardG.makeReward.carDir 
+                << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y 
+                << "  done_state:" << pCtrl.done_state << std::endl;
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
       // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
-      string machineState = Txt_Input("../../cache/" + droneDef + "_MachineState.txt");
       if (config.get()->droneSupervisorCtrl == true && config.get()->simulationMode != string("video") && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
