@@ -5,17 +5,19 @@ import glob
 
 PRETRAIN_ROOT="./"
 ORIGIN_DATAPATH="./OriginDataset/"
+EPISODE_PREFIX = "episode"
 
 DATA_VOLUME = ORIGIN_DATAPATH+"data_volume.json"
 CFG_PATH="./pretrain_cfg.json"
 
 
 class DataPreprocessing():
-    def __init__(self,mode,cfg_path=CFG_PATH,ori_datapath=ORIGIN_DATAPATH) -> None:
+    def __init__(self,mode,cfg_path=CFG_PATH,ori_datapath=ORIGIN_DATAPATH,episode_prefix=EPISODE_PREFIX) -> None:
         self.cfg = read_config(cfg_path)
         self.cfg_dict = self.cfg[mode]
         self.evo_step = self.cfg_dict["Evolution_step"]
         self.ori_datapath = ori_datapath
+        self.episode_prefix = episode_prefix
 
     def read_json(self,json_path:str):
         with open(json_path, 'r') as json_file:
@@ -37,14 +39,17 @@ class DataPreprocessing():
     def data_preprocess(self):
         episode_list = glob.glob(self.ori_datapath+"*/")
         for episode in episode_list:
-            json_path_src = episode+"Direction_label_src.json"
-            json_path_dst = episode+"Direction_label.json"
-            img_list,label_list = self.read_json(json_path_src)
-            full_label_list = self.Acquire_full_label(img_list,label_list)
-            Direction_label_dict = dict(zip(img_list,full_label_list))
-            if os.path.exists(json_path_dst):
-                os.unlink(json_path_dst)
-            dump_json(Direction_label_dict,json_path_dst)
+            if self.episode_prefix in episode:
+                json_path_src = episode+"Direction_label_src.json"
+                json_path_dst = episode+"Direction_label.json"
+                img_list,label_list = self.read_json(json_path_src)
+                full_label_list = self.Acquire_full_label(img_list,label_list)
+                Direction_label_dict = dict(zip(img_list,full_label_list))
+                if os.path.exists(json_path_dst):
+                    os.unlink(json_path_dst)
+                dump_json(Direction_label_dict,json_path_dst)
+            else:
+                continue
 
     
             

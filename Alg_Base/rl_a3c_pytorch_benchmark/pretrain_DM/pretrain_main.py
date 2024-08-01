@@ -8,16 +8,8 @@ from pretrain_dataset import DynamicsDataset,DynamicsDataLoader
 parser = argparse.ArgumentParser(description="DynamicsModel")
 """
     Argument that we need to config：
-        --TrainMode
         --gpu-ids
 """
-parser.add_argument(
-    "-Mode",
-    "--TrainMode",
-    type=str,
-    default="Self_train",
-    help="Training Mode:Head_only(Only Train Dynamics Model Head);Head_backbone(Train Both Head and Backbone)",
-)
 
 parser.add_argument(
     "-E",
@@ -71,6 +63,7 @@ if __name__ == "__main__":
     model,params_opt = load_model(cfg_dict)
     dynamics_trainset = DynamicsDataset(train=True)
     dynamics_testset = DynamicsDataset(train=False)
+    
 
 
     
