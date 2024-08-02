@@ -6,7 +6,6 @@ from pretrain_dataset import DynamicsDataset,DynamicsDataLoader
 import tqdm
 from torch.utils.tensorboard import SummaryWriter
 import os
-from datetime import datetime
 
 
 parser = argparse.ArgumentParser(description="DynamicsModel")
@@ -113,6 +112,7 @@ def train(args,model:torch.nn.Module):
         load_path = get_newest_path(args)
         model.load_state_dict(torch.load(load_path))
     model.to(device)
+    model.train()
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
     train_dataset = DynamicsDataset(mode=args.TrainMode,train=True,shuffle=True)
@@ -140,34 +140,57 @@ def train(args,model:torch.nn.Module):
 
 
 
-def test(testset:DynamicsDataset):
-    pass
+def test(args,model:torch.nn.Module):
+    ### get device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    model.to(device)
+    model.eval()
 
+    ### Load model weight
+    if not os.path.exists(args.weight_dir) or not os.path.exists(args.weight_dir+args.TrainMode):
+            raise FileNotFoundError(f"Directory:{args.weight_dir+args.TrainMode} does not exist. Cannot Init Model weight!")
+    load_path = get_newest_path(args)
+    model.load_state_dict(torch.load(load_path))
+
+    ### test set and loader
+    test_dataset = DynamicsDataset(mode=args.TrainMode,train=False,shuffle=False)
+    test_dl = DynamicsDataLoader(mode=args.TrainMode,dataset=test_dataset)
+    criterion = torch.nn.CrossEntropyLoss()
+    
+    ### start test
+    total_loss = 0.0 # loss sum
+    correct = 0 # correct sample number
+    total = 0 # number of sample
+    with torch.no_grad():
+        for data in test_dl:
+            inputs, labels = data
+            inputs, labels = inputs.to(device), labels.to(device)
+            
+            # Feed forward
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+            
+            # Total loss
+            total_loss += loss.item()
+            
+            # Accuracy
+            _, predicted = torch.max(outputs.data, 1)
+            total += labels.size(0)
+            correct += (predicted == labels).sum().item()
+
+    # calculate average loss and accuracy
+    average_loss = total_loss / len(test_dl) ## Average loss of batch
+    accuracy = 100 * correct / total
+
+    print(f"Average Loss: {average_loss:.4f}")
+    print(f"Accuracy: {accuracy:.2f}%")
 
 
 if __name__ == "__main__":
-    # args = parser.parse_args()
-    # torch.manual_seed(args.seed)
-    # cfg = read_config(args.env_config)
-    # cfg_dict = cfg[args.TrainMode]
-    # model,params_opt = load_model(cfg_dict)
-    # dynamics_trainset = DynamicsDataset(train=True)
-    # dynamics_testset = DynamicsDataset(train=False)
-    from datetime import datetime, timedelta
-
-    # 创建几个 datetime 对象
-    now = datetime.now()
-    past = now - timedelta(days=10)
-    future = now + timedelta(days=10)
-    earlier_today = now - timedelta(hours=2)
-
-    # 将这些 datetime 对象放入一个列表
-    datetime_list = [now, past, future, earlier_today]
-
-    # 获取列表中的最大值和最小值
-    max_datetime = max(datetime_list)
-    min_datetime = min(datetime_list)
-
-    print("Datetime list:", datetime_list)
-    print("Max datetime:", max_datetime)
-    print("Min datetime:", min_datetime)
+    args = parser.parse_args()
+    torch.manual_seed(args.seed)
+    cfg = read_config(args.env_config)
+    cfg_dict = cfg[args.TrainMode]
+    model,params_opt = load_model(cfg_dict)
+    train(args,model)
+    test(args,model)
