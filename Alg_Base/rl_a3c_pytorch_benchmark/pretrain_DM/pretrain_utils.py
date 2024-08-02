@@ -3,6 +3,10 @@ from collections import OrderedDict
 import copy
 from torchvision import models
 import torch
+import re
+import os
+from datetime import datetime
+from glob import glob
 
 def read_config(file_path:str)->dict:
     """Read JSON config."""
@@ -44,6 +48,50 @@ def norm_col_init(weights, std=1.0):
     x *= std / torch.sqrt((x**2).sum(1, keepdim=True))
     return x
 
+def get_epoch_date(weight_name:str):
+    """
+        Example legal weight_name:
+            weight_name = "weight_10_2024-07-31-16-20-00.pth"
+    """
+
+    # re pattern,to match epoch and time
+    pattern = r"weight_(\d+)_(.+)\.pth"
+
+    # re.match to match pattern in weight name
+    match = re.match(pattern, weight_name)
+
+    if match:
+        epoch = match.group(1)
+        time = match.group(2)
+        return epoch,time
+    else:
+        raise ValueError(f"weight_name:{weight_name} is illegal! Legal form: weight_$Epoch_$Date")
+
+
+def save_weight(args,model:torch.nn.Module,Epoch:int):
+    weight_path = args.weight_dir + args.TrainMode
+    if not os.path.exists(args.weight_dir):
+        os.makedirs(args.weight_dir)
+    if not os.path.exists(weight_path):
+        os.makedirs(weight_path)
+    
+    now = datetime.now()
+    formatted_time = now.strftime("%Y-%m-%d-%H-%M-%S")
+    weight_path = f"weight_{Epoch}_{formatted_time}.pth"
+
+    torch.save(model.state_dict(),weight_path)
+    print(f"Saving checkpoint to {weight_path}")
+
+def get_newest_path(args)->str:
+    weight_dir = args.weight_dir
+    target_list = glob(weight_dir+"*.pth")
+    date_epoch_dict = {}
+    for weight_path in target_list:
+        epoch,date = get_epoch_date(weight_path)
+        date_epoch_dict[date] = epoch
+    max_date = max(list(date_epoch_dict.keys()))
+    max_epoch = date_epoch_dict[max_date]
+    return f"weight_{max_epoch}_{max_date}.pth"
 
 if __name__ == "__main__":
     d = {"11":1,"22":2}
