@@ -45,23 +45,28 @@
         },
         "Drone_Random_Config": {
                 "start_time_bias_ms": 310,
+
                 "view_pitch_random": true,
                 "view_pitch_fixed": 1,
                 "view_pitch_random_max": 1.57,
                 "view_pitch_random_min": 0.7,
+
                 "height_random": false,
                 "height_fixed": 15.0,
                 "height_random_max": 20.0,
                 "height_random_min": 13.0,
+
                 "direction_random": false,
                 "direction_fixed": 1,
                 "direction_random_max": 0.1,
                 "direction_random_min": -0.1,
+
                 "horizon_bias_random": true,
                 "horizon_bias_multilateral": true,
                 "horizon_bias_fixed": 0,
                 "horizon_bias_random_max": 3,
                 "horizon_bias_random_min": 2,
+                
                 "verticle_bias_random": true,
                 "verticle_bias_multilateral": true,
                 "verticle_bias_fixed": 0,

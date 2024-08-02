@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-17 11:05:17
+ * @LastEditTime: 2024-08-02 16:19:37
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -40,7 +40,7 @@ namespace usrPublic{
         double done;//是否结束仿真
     }Odometry;
 
-    // make reward data ---- double * 58 + string
+    // make reward data ---- double * 64 + string
     typedef struct _rewardData{
         double cameraWidth;
         double cameraHeight;
@@ -55,6 +55,8 @@ namespace usrPublic{
         vector3 Tesla;
         vector3 Toyota;
         double T_tw[16];
+        vector3 cameraMidGlobalPos;
+        vector3 carMidGlobalPos;
         double carDir;
         std::string carTypename = std::string("ToyotaPriusSimple");
     }rewardData;

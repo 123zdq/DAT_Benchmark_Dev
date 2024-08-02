@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-01 17:36:42
+ * @LastEditTime: 2024-08-02 16:27:42
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -291,6 +291,13 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
     T_car_of_land_temp[3 + i * 4] = V_car_of_land(i);
   }
   memcpy(&makeReward.T_tw, T_car_of_land_temp, sizeof(makeReward.T_tw));
+  // 直接把计算reward的坐标点加入参数中
+  makeReward.cameraMidGlobalPos.x = cameraMid(0);
+  makeReward.cameraMidGlobalPos.y = cameraMid(1);
+  makeReward.cameraMidGlobalPos.z = cameraMid(2);
+  makeReward.carMidGlobalPos.x = V_car_of_land(0);
+  makeReward.carMidGlobalPos.y = V_car_of_land(1);
+  makeReward.carMidGlobalPos.z = V_car_of_land(2);
 
   double reward = 0;
   if (_run_mode == string("demo"))

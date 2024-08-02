@@ -557,14 +557,14 @@ int main(int argc, char **argv)
       }
       if (config.get()->customizedReward)
       {
-        double makeReward_list[58] = {};
+        double makeReward_list[64] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
-        Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 58, rewardG.makeReward.carTypename);
-        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 58)
+        Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 64, rewardG.makeReward.carTypename);
+        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 64)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
-          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, state_list, 58);
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, state_list, 64);
         }
       }
     }
