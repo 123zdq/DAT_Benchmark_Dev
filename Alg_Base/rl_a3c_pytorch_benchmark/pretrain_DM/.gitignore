@@ -1,5 +1,4 @@
 __pycache__/
-pretrain_weight/*.pth
 OriginDataset/*/
 OriginDataset/*.json
 DynamicsDataset/*/

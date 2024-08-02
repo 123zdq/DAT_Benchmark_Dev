@@ -2,11 +2,14 @@ import torch
 from torchvision import models
 import numpy as np
 from pretrain_utils import Acquire_need_statedict,norm_col_init
+import torch.nn.functional as F
 
 WEIGHT_PATH_DICT = {
     "resnet18":"resnet18-5c106cde.pth",
     "resnet34":"resnet34-333f7ec4.pth",
 }
+
+PRETRAIN_DIR = "./pretrain_weight/"
 
 def load_resnet(cfg_dict:list):
     Backbone = cfg_dict["Backbone"]
@@ -74,6 +77,11 @@ def load_resnet(cfg_dict:list):
 def load_selftrain(cfg_dict:list):
     ## Get General Tensor shape for FCN layer
     Tensor_shape = [cfg_dict["State_channel"]*cfg_dict["State_Buffer"],cfg_dict["State_size"],cfg_dict["State_size"]]
+    conv1 = torch.nn.Conv2d(Tensor_shape[0], 32, 5, stride=1, padding=2)
+    conv2 = torch.nn.Conv2d(32, 32, 5, stride=1, padding=1)
+    conv3 = torch.nn.Conv2d(32, 64, 4, stride=1, padding=1)
+    conv4 = torch.nn.Conv2d(64, 64, 3, stride=1, padding=1)
+    
     layer_shapedict = {"Layer1":[16,4,-1],"Layer2":[32,2,-1]}
     for layer_name in layer_shapedict.keys():
         Tensor_shape[0] = layer_shapedict[layer_name][0]
@@ -102,8 +110,8 @@ def load_selftrain(cfg_dict:list):
     layer2.add_module("conv1",conv2)
     layer2.add_module("relu1",torch.nn.ReLU())
 
-    backbone.add_module(layer1)
-    backbone.add_module(layer2)
+    backbone.add_module("conv_block1",layer1)
+    backbone.add_module("conv_block2",layer2)
 
     ## head
     lin1 = torch.nn.Linear(in_features=in_dim,out_features=cfg_dict["Hidden_dim"][0])
@@ -168,9 +176,9 @@ class Dynamics_Model(torch.nn.Module):
         x = self.head(x)
         return x
 
-def init_model(model:Dynamics_Model)->Dynamics_Model:
+def init_model(model:Dynamics_Model,pretrain_dir=PRETRAIN_DIR)->Dynamics_Model:
     if model.cfg_dict["Model_Type"] != "Self_train":
-        pretrain_dir = "./pretrain_DM/pretrain_weight/"
+        pretrain_dir = pretrain_dir
         pretrained_dict = torch.load(pretrain_dir+WEIGHT_PATH_DICT[model.cfg_dict["Model_Type"]])
         pretrained_dict_need = Acquire_need_statedict(pretrained_dict,model.cfg_dict)
         model.load_state_dict(pretrained_dict_need,strict=False)
@@ -195,16 +203,61 @@ def load_model(cfg_dict:dict):
     return model,params_opt
 
 
+class CNNLSTM(torch.nn.Module):
+    def __init__(self,cfg_dict:dict)->None:
+        super(CNNLSTM,self).__init__()
+        self.conv1 = torch.nn.Conv2d(cfg_dict["State_channel"], 32, 5, stride=1, padding=2)
+        self.conv2 = torch.nn.Conv2d(32, 32, 5, stride=1, padding=1)
+        self.conv3 = torch.nn.Conv2d(32, 64, 4, stride=1, padding=1)
+        self.conv4 = torch.nn.Conv2d(64, 64, 3, stride=1, padding=1)
+        # Get ConvNet Output size
+        self.input_shape = cfg_dict["State_size"]
+        conv1_outdim = int(self.input_shape/2)
+        conv2_outdim = int((conv1_outdim-2)/2)
+        conv3_outdim = int((conv2_outdim-1)/2)
+        conv4_outdim = int(conv3_outdim/2)
+        self.conv_outdim = conv4_outdim
+
+        # Fully connected layer
+        self.fc_hidden = cfg_dict["Hidden_dim"][0]
+        self.output_dim = cfg_dict["Action_dim"]
+        self.fcn1 = torch.nn.Linear(64*self.conv_outdim*self.conv_outdim,self.fc_hidden)
+        self.fcn2 = torch.nn.Linear(self.fc_hidden,self.output_dim)
+        
+        relu_gain = torch.nn.init.calculate_gain("relu")
+        self.conv1.weight.data.mul_(relu_gain)
+        self.conv1.bias.data.fill_(0)
+        self.conv2.weight.data.mul_(relu_gain)
+        self.conv2.bias.data.fill_(0)
+        self.conv3.weight.data.mul_(relu_gain)
+        self.conv3.bias.data.fill_(0)
+        self.conv4.weight.data.mul_(relu_gain)
+        self.conv4.bias.data.fill_(0)
+
+        self.train()
+    def forward(self,input):
+        x = F.relu(F.max_pool2d(self.conv1(input), 2, 2))
+        x = F.relu(F.max_pool2d(self.conv2(x), 2, 2))
+        x = F.relu(F.max_pool2d(self.conv3(x), 2, 2))
+        x = F.relu(F.max_pool2d(self.conv4(x), 2, 2))
+        
+        x = x.view(x.size(0), -1)
+
+        x = F.relu(self.fcn1(x))
+        x = F.relu(self.fcn2(x))
+        
+        return F.softmax(x)
+
 if __name__ == "__main__":
     from torchsummary import summary
     # summary(models.resnet34(pretrained=False).cuda(),input_size=(3,84,84))
     
     from pretrain_utils import read_config,Acquire_need_statedict
-    cfg = read_config("./pretrain_DM/pretrain_cfg.json")
-    cfg_dict = cfg["Head_only"]
-    model = Dynamics_Model(cfg_dict)
-    model = init_model(model)
-    
+    cfg = read_config("./pretrain_cfg.json")
+    cfg_dict = cfg["Head_backbone"]
+    # model = Dynamics_Model(cfg_dict)
+    # model = init_model(model)
+    model = CNNLSTM(cfg_dict)
     summary(model.cuda(),input_size=(3,84,84))
 
     # pretrain_dir = "./Alg_Base/rl_a3c_pytorch_benchmark/pretrain_DM/pretrain_weight/"
