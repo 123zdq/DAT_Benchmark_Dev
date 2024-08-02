@@ -364,7 +364,7 @@ class RecvRewardParams:
         Output:
             None
     """
-    def __init__(self, _data_size=57, id=None,rewardparam_path=None):
+    def __init__(self, _data_size=64, id=None,rewardparam_path=None):
         ## Init udp socket
         if rewardparam_path is None:
             self.udp_socket = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
