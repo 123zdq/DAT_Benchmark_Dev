@@ -99,6 +99,7 @@ PROTO M100 [
           name "camera yaw"
           minPosition -1.7
           maxPosition 1.7
+          maxVelocity 35
         }
         PositionSensor {
           name "camera yaw sensor"
@@ -127,6 +128,7 @@ PROTO M100 [
                 name "camera pitch"
                 minPosition -0.5
                 maxPosition 1.7
+                maxVelocity 35
               }
               PositionSensor {
                 name "camera pitch sensor"
@@ -153,6 +155,7 @@ PROTO M100 [
                       name "camera roll"
                       minPosition -0.5
                       maxPosition 0.5
+                      maxVelocity 35
                     }
                     PositionSensor {
                       name "camera roll sensor"

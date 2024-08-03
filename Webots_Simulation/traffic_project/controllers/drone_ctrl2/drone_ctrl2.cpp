@@ -57,9 +57,9 @@ void cmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3, Moto
 
 void gcmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3)
 {
-  motor1->setTorque(msg.axes[0]);
-  motor2->setTorque(msg.axes[1]);
-  motor3->setTorque(msg.axes[2]);
+  motor1->setTorque(CLAMP(msg.axes[0],-3,3));
+  motor2->setTorque(CLAMP(msg.axes[1],-3,3));
+  motor3->setTorque(CLAMP(msg.axes[2],-3,3));
 }
 
 void serialRec(Receiver *_receiver, float *buffer, int size)
