@@ -575,6 +575,7 @@ int main(int argc, char **argv)
       // 发送state,reward,done
       state.t = step_count;
       double state_list[22] = {};
+      static double state_list_last[22] = {0};
       memcpy(state_list, &state, sizeof(state));
       for(int i=0;i<22;i++)
       {
@@ -587,6 +588,10 @@ int main(int argc, char **argv)
       {
         Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
       }
+      else
+      {
+        Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list_last, 22);
+      }
       while (get_file_size("../../cache/" + droneDef + "_Ctrl2Global.txt") < 22)
       {
         delete_file("../../cache/" + droneDef + "_Ctrl2Global.txt");
@@ -594,6 +599,14 @@ int main(int argc, char **argv)
         {
           Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
         }
+        else
+        {
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list_last, 22);
+        }
+      }
+      if(is_nan == false)
+      {
+        memcpy(state_list_last, &state_list, sizeof(state_list));
       }
 
       

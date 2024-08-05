@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "video",
         "Drone_Supervisor_Ctrl": true,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 500,
