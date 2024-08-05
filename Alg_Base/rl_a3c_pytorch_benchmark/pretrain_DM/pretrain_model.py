@@ -244,9 +244,9 @@ class CNNLSTM(torch.nn.Module):
         x = x.view(x.size(0), -1)
 
         x = F.relu(self.fcn1(x))
-        x = F.relu(self.fcn2(x))
+        x = self.fcn2(x)
         
-        return F.softmax(x)
+        return F.softmax(x, dim=1)
 
 if __name__ == "__main__":
     from torchsummary import summary
