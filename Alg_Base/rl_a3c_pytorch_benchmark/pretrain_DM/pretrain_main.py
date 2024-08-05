@@ -1,7 +1,7 @@
 import argparse
 from pretrain_utils import read_config,save_weight,get_newest_path
 import torch
-from pretrain_model import load_model
+from pretrain_model import CNNLSTM
 from pretrain_dataset import DynamicsDataset,DynamicsDataLoader
 import tqdm
 from torch.utils.tensorboard import SummaryWriter
@@ -39,7 +39,7 @@ parser.add_argument(
 
 parser.add_argument(
     "-evc", "--env-config",
-    default="./pretrain_DM/pretrain_cfg.json",
+    default="./pretrain_cfg.json",
     help="pretrain Dynamics Model info (default: pretrain_cfg.json)")
 
 parser.add_argument(
@@ -191,6 +191,14 @@ if __name__ == "__main__":
     torch.manual_seed(args.seed)
     cfg = read_config(args.env_config)
     cfg_dict = cfg[args.TrainMode]
-    model,params_opt = load_model(cfg_dict)
+    if cfg_dict["Model_Type"] == "Self_train":
+        model = CNNLSTM(cfg_dict)
+    elif cfg_dict["Model_Type"] == "resnet18":
+        pass
+    elif cfg_dict["Model_Type"] == "resnet33":
+        pass
+    else:
+        model_type = cfg_dict["Model_Type"]
+        raise KeyError(f"Model Type:{model_type} is Illegal! Legal Choise: Self_train,E2E,resnet18,resnet33")
     train(args,model)
     test(args,model)

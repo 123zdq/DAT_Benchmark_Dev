@@ -10,7 +10,7 @@
     "State_size":84,
     "State_channel":3,
     "Backbone":["Conv1","Bn1","Layer1","Layer2"],
-    "Action_dim":7,
+    "Action_dim":4,
     "Number_Action":1,
     "Confidence":false
   },
@@ -20,11 +20,11 @@
     "TrainSplit":0.8,
     "Action_Buffer":10,
     "Evolution_step":1,
-    "Model_Type":"Self_train",
+    "Model_Type":"E2E",
     "Hidden_dim":[256],
     "State_size":84,
     "State_channel":3,
-    "Action_dim":7,
+    "Action_dim":4,
     "Number_Action":1,
     "Confidence":false
   }
