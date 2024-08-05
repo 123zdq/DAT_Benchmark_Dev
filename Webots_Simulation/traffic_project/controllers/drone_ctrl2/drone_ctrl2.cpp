@@ -47,8 +47,17 @@ using namespace std;
 #define MAX_MOTOR_VEL 10000
 #define CLAMP(value, low, high) ((value) < (low) ? (low) : ((value) > (high) ? (high) : (value)))
 
+bool is_nan = false;
+
 void cmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3, Motor *motor4)
 {
+  for (int i = 0; i < 4; i++)
+  {
+    if (std::isnan(msg.axes[i]))
+    {
+      is_nan = true;
+    }
+  }
   motor1->setVelocity(CLAMP(msg.axes[0], -MAX_MOTOR_VEL, MAX_MOTOR_VEL));
   motor2->setVelocity(CLAMP(msg.axes[1], -MAX_MOTOR_VEL, MAX_MOTOR_VEL));
   motor3->setVelocity(CLAMP(msg.axes[2], -MAX_MOTOR_VEL, MAX_MOTOR_VEL));
@@ -57,9 +66,16 @@ void cmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3, Moto
 
 void gcmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3)
 {
-  motor1->setTorque(CLAMP(msg.axes[0],-3,3));
-  motor2->setTorque(CLAMP(msg.axes[1],-3,3));
-  motor3->setTorque(CLAMP(msg.axes[2],-3,3));
+  for (int i = 0; i < 3; i++)
+  {
+    if (std::isnan(msg.axes[i]))
+    {
+      is_nan = true;
+    }
+  }
+  motor1->setTorque(CLAMP(msg.axes[0], -3, 3));
+  motor2->setTorque(CLAMP(msg.axes[1], -3, 3));
+  motor3->setTorque(CLAMP(msg.axes[2], -3, 3));
 }
 
 void serialRec(Receiver *_receiver, float *buffer, int size)
@@ -312,15 +328,18 @@ int main(int argc, char **argv)
     {
       drone_fly = true;
       string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
-      if(pitchAngle == string("error"))
+      if (pitchAngle == string("error"))
       {
         gimbal_cmd.y = 1.;
       }
       else
       {
-        try{
+        try
+        {
           gimbal_cmd.y = std::stod(pitchAngle);
-        } catch(const std::exception& e){
+        }
+        catch (const std::exception &e)
+        {
           std::cerr << "Error: " << e.what() << std::endl;
           gimbal_cmd.y = 1.;
         }
@@ -353,15 +372,18 @@ int main(int argc, char **argv)
     {
       drone_fly = true;
       string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
-      if(pitchAngle == string("error"))
+      if (pitchAngle == string("error"))
       {
         gimbal_cmd.y = 1.;
       }
       else
       {
-        try{
+        try
+        {
           gimbal_cmd.y = std::stod(pitchAngle);
-        } catch(const std::exception& e){
+        }
+        catch (const std::exception &e)
+        {
           std::cerr << "Error: " << e.what() << std::endl;
           gimbal_cmd.y = 1.;
         }
@@ -476,11 +498,11 @@ int main(int argc, char **argv)
         state.done = (pCtrl.done) | ((rewardG.isTrackingCarDisp == 2) ? 1 : 0);
       }
       string machineState;
-      if(config.get()->simulationMode == string("train"))
+      if (config.get()->simulationMode == string("train"))
       {
         machineState = Txt_Input("../../cache/" + droneDef + "_MachineState.txt");
         static int noRewardCount = 0;
-        if(state.reward > 0.001)
+        if (state.reward > 0.001)
         {
           noRewardCount = 0;
         }
@@ -488,7 +510,7 @@ int main(int argc, char **argv)
         {
           noRewardCount++;
         }
-        if(noRewardCount > config.get()->noRewardDoneSteps)
+        if (noRewardCount > config.get()->noRewardDoneSteps)
         {
           state.done = 1;
         }
@@ -505,6 +527,12 @@ int main(int argc, char **argv)
       // else{
       //   state.done = 1;(
       // }
+
+      if(is_nan == true)
+      {
+        state.done = 1;
+      }
+
       if (config.get()->simulationMode == string("video"))
       {
         if (state.done == 1 && t > 0.7)
@@ -516,13 +544,13 @@ int main(int argc, char **argv)
           state.done = 1;
         }
       }
-      std::cout << "id: " << droneDef 
-                << "  done: " << state.done 
-                << "  reward: " << state.reward 
-                << "  count: " << step_count 
-                << "  time:" << std::setprecision(3) << t 
-                << "  carDir:" << rewardG.makeReward.carDir 
-                << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y 
+      std::cout << "id: " << droneDef
+                << "  done: " << state.done
+                << "  reward: " << state.reward
+                << "  count: " << step_count
+                << "  time:" << std::setprecision(3) << t
+                << "  carDir:" << rewardG.makeReward.carDir
+                << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y
                 << "  done_state:" << pCtrl.done_state << std::endl;
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
       // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
@@ -548,23 +576,49 @@ int main(int argc, char **argv)
       state.t = step_count;
       double state_list[22] = {};
       memcpy(state_list, &state, sizeof(state));
+      for(int i=0;i<22;i++)
+      {
+        if(std::isnan(state_list[i])){
+          is_nan = true;
+        }
+      }
       file_create("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::out);
-      Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
+      if(is_nan == false)
+      {
+        Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
+      }
       while (get_file_size("../../cache/" + droneDef + "_Ctrl2Global.txt") < 22)
       {
         delete_file("../../cache/" + droneDef + "_Ctrl2Global.txt");
-        Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
+        if(is_nan == false)
+        {
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2Global.txt", ios::app, state_list, 22);
+        }
       }
+
+      
       if (config.get()->customizedReward)
       {
         double makeReward_list[64] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
+        for(int i=0;i<64;i++)
+        {
+          if(std::isnan(state_list[i])){
+            is_nan = true;
+          }
+        }
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
-        Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 64, rewardG.makeReward.carTypename);
+        if(is_nan == false)
+        {
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 64, rewardG.makeReward.carTypename);
+        }
         while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 64)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
-          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, state_list, 64);
+          if(is_nan == false)
+          {
+            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 64, rewardG.makeReward.carTypename);
+          }
         }
       }
     }
@@ -591,16 +645,16 @@ int main(int argc, char **argv)
     }
     jCtrl.setInitialized(true);
 
-    // 摄像头视频流抓取,并且发送到全局通信节点
+    // 雷达点云信息和摄像头
     if (config.get()->simulationMode == string("demo"))
     {
-      if ((int)(t * 1000) % (STATE_PERIOD_MS * 10) == 0)
+      if ((int)(t * 1000) % (STATE_PERIOD_MS * 10) == 0 && is_nan == false)
       {
         string filename = "../../cache/" + droneDef + "_VideoFrame.jpeg";
         camera->saveImage(filename, 100);
         if (config.get()->lidarEnable)
         {
-          float cloudData[sizeof(LidarPoint) * lidar_number_of_points * lidar_number_of_layers / sizeof(float)];
+          float cloudData[sizeof(LidarPoint) * lidar_number_of_points * lidar_number_of_layers / sizeof(float)] = {};
           memcpy(cloudData, lidar_cloud, sizeof(LidarPoint) * lidar_number_of_points * lidar_number_of_layers);
           file_create("../../cache/" + droneDef + "_LidarCloud.txt", ios::out);
           Txt_Output("../../cache/" + droneDef + "_LidarCloud.txt", ios::app, cloudData, sizeof(cloudData) / sizeof(float));
@@ -615,7 +669,7 @@ int main(int argc, char **argv)
     else if (config.get()->simulationMode == string("train"))
     {
       // if ((int)(t * 1000) % (250/int(config.get()->controlFreq)) == 0)
-      if ((int)(t * 1000) % (STATE_PERIOD_MS) == 0)
+      if ((int)(t * 1000) % (STATE_PERIOD_MS) == 0 && is_nan == false)
       {
         string filename = "../../cache/" + droneDef + "_VideoFrame.jpeg";
         camera->saveImage(filename, 100);
