@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-28 14:45:03
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-29 23:30:32
+LastEditTime: 2024-08-05 20:26:34
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/SUMOGod/SUMOGod.py
 Description: 
 
@@ -55,8 +55,8 @@ class getSumoCarNode:
         for i in reversed(range(n)):
             tempnode=root_children_field.getMFNode(i)
             if usual_sumo_carname in tempnode.getDef():
-                # Node:{Def,Typename,color,translation,rotation}
-                cardictionary[tempnode]={"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString(),"Typename":tempnode.getField("children").getMFNode(0).getTypeName(),"color":tempnode.getField("children").getMFNode(0).getField("color").getSFVec3f(),"translation":tempnode.getField("translation").getSFVec3f(),"rotation":tempnode.getField("rotation").getSFVec3f()}
+                # Node:{Def,Typename,color}
+                cardictionary[tempnode]={"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString(),"Typename":tempnode.getField("children").getMFNode(0).getTypeName()}
         
         return cardictionary
 
@@ -79,23 +79,23 @@ class getSumoCarNode:
 
         return typename_list
 
-    '''
-    description: get all car colors
-    param {*} self
-    param {dict} cardictionary
-    param {bool} removeDuplicate
-    return {*}
-    '''
-    def GetAllCarRGB(self, cardictionary:dict,removeDuplicate:bool=False):
-        '''return a list of all sumo cars' color'''
-        RGB_list=[]
+    # '''
+    # description: get all car colors
+    # param {*} self
+    # param {dict} cardictionary
+    # param {bool} removeDuplicate
+    # return {*}
+    # '''
+    # def GetAllCarRGB(self, cardictionary:dict,removeDuplicate:bool=False):
+    #     '''return a list of all sumo cars' color'''
+    #     RGB_list=[]
 
-        for car in iter(cardictionary):
-            RGB_list.append(cardictionary[car]["color"])
-        if removeDuplicate:
-            RGB_list=[list(t) for t in set(tuple(_) for _ in RGB_list)]
+    #     for car in iter(cardictionary):
+    #         RGB_list.append(cardictionary[car]["color"])
+    #     if removeDuplicate:
+    #         RGB_list=[list(t) for t in set(tuple(_) for _ in RGB_list)]
 
-        return RGB_list
+    #     return RGB_list
     
     '''
     description: get all car DEFs
@@ -133,34 +133,31 @@ class getSumoCarNode:
 
         return Name_list
 
-    '''
-    description: use typename and color to get car information
-    param {*} self
-    param {dict} cardictionary
-    param {str} carType
-    param {list} color
-    return {*}
-    '''
-    def GetCarInfoByTypeandRGB(self, cardictionary:dict, carType:str, color:list):
-        '''find a sumo car by type and colorRGB\n
-            return the first car found: 
-                Webots Node,Def,translation,rotation'''
-        carNode:Node=None
-        carDef:str=None
-        translation:list=None
-        rotation:list=None
+    # '''
+    # description: use typename and color to get car information
+    # param {*} self
+    # param {dict} cardictionary
+    # param {str} carType
+    # param {list} color
+    # return {*}
+    # '''
+    # def GetCarInfoByTypeandRGB(self, cardictionary:dict, carType:str, color:list):
+    #     '''find a sumo car by type and colorRGB\n
+    #         return the first car found: 
+    #             Webots Node,Def'''
+    #     carNode:Node=None
+    #     carDef:str=None
+    #     translation:list=None
 
-        for car in iter(cardictionary):
-            if carType == cardictionary[car]["Typename"] and color == cardictionary[car]["color"]:
-                carNode= car
-                carDef=cardictionary[car]["Def"]
-                carName=cardictionary[car]["Name"]
-                carTypeName=cardictionary[car]["Typename"]
-                translation=cardictionary[car]["translation"]
-                rotation=cardictionary[car]["rotation"]
-                break
+    #     for car in iter(cardictionary):
+    #         if carType == cardictionary[car]["Typename"] and color == cardictionary[car]["color"]:
+    #             carNode= car
+    #             carDef=cardictionary[car]["Def"]
+    #             carName=cardictionary[car]["Name"]
+    #             carTypeName=cardictionary[car]["Typename"]
+    #             break
 
-        return carNode,carDef,carName,carTypeName,translation,rotation
+    #     return carNode,carDef,carName,carTypeName
     
     '''
     description: use DEF to get car information
@@ -172,11 +169,9 @@ class getSumoCarNode:
     def GetCarInfoByDef(self, cardictionary:dict, _carDef:str):
         '''find a sumo car by def\n
             return the first car found: 
-                Webots Node,Def,translation,rotation'''
+                Webots Node,Def'''
         carNode:Node=None
         carDef:str=None
-        translation:list=None
-        rotation:list=None
 
         for car in iter(cardictionary):
             if _carDef == cardictionary[car]["Def"]:
@@ -184,11 +179,9 @@ class getSumoCarNode:
                 carDef=cardictionary[car]["Def"]
                 carName=cardictionary[car]["Name"]
                 carTypeName=cardictionary[car]["Typename"]
-                translation=cardictionary[car]["translation"]
-                rotation=cardictionary[car]["rotation"]
                 break
             
-        return carNode,carDef,carName,carTypeName,translation,rotation
+        return carNode,carDef,carName,carTypeName
     
     '''
     description: use car name to get car information
@@ -200,13 +193,11 @@ class getSumoCarNode:
     def GetCarInfoByName(self, cardictionary:dict, _carName:str):
         '''find a sumo car by def\n
             return the first car found: 
-                Webots Node,Def,translation,rotation'''
+                Webots Node,Def'''
         carNode:Node=None
         carDef:str=None
         carName:str=None
         carTypeName:str=None
-        translation:list=None
-        rotation:list=None
 
         for car in iter(cardictionary):
             if _carName == cardictionary[car]["Name"]:
@@ -214,11 +205,9 @@ class getSumoCarNode:
                 carDef=cardictionary[car]["Def"]
                 carName=cardictionary[car]["Name"]
                 carTypeName=cardictionary[car]["Typename"]
-                translation=cardictionary[car]["translation"]
-                rotation=cardictionary[car]["rotation"]
                 break
             
-        return carNode,carDef,carName,carTypeName,translation,rotation
+        return carNode,carDef,carName,carTypeName
 
     '''
     description: use supervisor to move a drone above the target car
@@ -285,7 +274,7 @@ class getSumoCarNode:
                     # 修改标志位表示已经得到车辆,不需要再抓车辆
                     is_car_get = True
                     # 得到该车辆的数据
-                    carNode,carDef,self.carName,carTypeName,translation,rotation = self.GetCarInfoByName(cardictionary, Name_list[availableList[randomChoice]])
+                    carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(cardictionary, Name_list[availableList[randomChoice]])
                     self.currentUseCarNode = carNode
                     # 把此次得到的车辆DEF装进列表
                     self.usedSumoDefList.append(self.carName)
@@ -341,7 +330,7 @@ class getSumoCarNode:
                 # 修改标志位表示已经得到车辆,不需要再抓车辆
                 is_car_get = True
                 # 得到该车辆的数据
-                carNode,carDef,self.carName,carTypeName,translation,rotation = self.GetCarInfoByName(self.sumoDictionary, Name_list[availableList[randomChoice]])
+                carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(self.sumoDictionary, Name_list[availableList[randomChoice]])
                 self.currentUseCarNode = carNode
                 # 把此次得到的车辆DEF装进列表
                 self.usedSumoDefList.append(self.carName)

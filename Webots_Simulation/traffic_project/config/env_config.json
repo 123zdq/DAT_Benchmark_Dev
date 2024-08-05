@@ -26,7 +26,7 @@
         "Sumo_Params": {
                 "max_sumo_car": 20,
                 "car_import_interval": 60.0,
-                "car_type": "private",
+                "car_type": "motorcycle",
                 "fixed_color": true,
                 "normalize_color": [1,0,0],
                 "max_car_speed": 15,
@@ -44,7 +44,7 @@
                 "total_time": 50.0
         },
         "Drone_Random_Config": {
-                "start_time_bias_ms": 310,
+                "start_time_bias_ms": 620,
 
                 "view_pitch_random": true,
                 "view_pitch_fixed": 1,

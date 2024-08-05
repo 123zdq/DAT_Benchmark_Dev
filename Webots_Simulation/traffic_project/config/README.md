@@ -55,9 +55,9 @@
                 "car_import_interval": 60.0,
             	// The time interval between each batch of vehicles entering the map.(s)
                 "car_type": "private",
-            	// The type of vehicle to be tracked, including "private", "bus", "truck".
+            	// The type of vehicle to be tracked, including "passenger", "bus", "truck", "trailer", "motorcycle"
                 "fixed_color": true,
-            	// If true, then use color below. If false, random color.
+            	// If true, then use color below. If false, random color.(motorcycle is always random color)
                 "normalize_color": [1,0,0],
                 "max_car_speed": 15,
             	// (m/s)

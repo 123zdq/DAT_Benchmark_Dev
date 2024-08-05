@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-01 18:16:45
+LastEditTime: 2024-08-05 20:37:57
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -211,7 +211,7 @@ class droneManager:
         else:
             rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
         
-        if self.configData["Sumo_Params"]["fixed_color"] is True:
+        if self.configData["Sumo_Params"]["fixed_color"] is True and self.configData["Sumo_Params"]["car_type"] != "motorcycle":
             colorList = list(self.configData["Sumo_Params"]["normalize_color"])
         else:
             colorList = None
