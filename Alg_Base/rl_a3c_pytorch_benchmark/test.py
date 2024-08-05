@@ -45,7 +45,7 @@ def test(args, shared_model, env_conf):
         
     if args.tensorboard_logger:
         from torch.utils.tensorboard import SummaryWriter
-        # dummy_input = (torch.zeros(1, 3, 80, 80), torch.zeros(1, args.hidden_size), torch.zeros(1, args.hidden_size),  )
+        # dummy_input = (torch.zeros(1, 3, 84, 84), torch.zeros(1, args.hidden_size), torch.zeros(1, args.hidden_size),  )
         writer = SummaryWriter(f"runs/{args.env}_training")
         # writer.add_graph(player.model, dummy_input, False)
         writer.close()

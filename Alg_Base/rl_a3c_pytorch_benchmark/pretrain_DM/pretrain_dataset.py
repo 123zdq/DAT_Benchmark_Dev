@@ -75,7 +75,7 @@ class DynamicsDataset(object):
         if index < 0 or index >= len(self.dataset_path_list):
             raise Exception('Index:{} is illegal.'.format(index))
         
-        print(f"Curr_idx:{index} Curr_episode:{self.dataset_path_list[index]}")
+        # print(f"Curr_idx:{index} Curr_episode:{self.dataset_path_list[index]}")
 
         img_files = sorted(glob.glob(
             os.path.join(self.dataset_path_list[index], '*.jpeg')))

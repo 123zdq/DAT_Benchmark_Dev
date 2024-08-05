@@ -1,9 +1,9 @@
 import argparse
 from pretrain_utils import read_config,save_weight,get_newest_path
 import torch
-from pretrain_model import CNNLSTM
+from pretrain_model import CNNLSTM,E2ECNNLSTM,ResNet18Dynamics,ResNet33Dynamics
 from pretrain_dataset import DynamicsDataset,DynamicsDataLoader
-import tqdm
+from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 import os
 
@@ -119,10 +119,11 @@ def train(args,model:torch.nn.Module):
     train_dl = DynamicsDataLoader(mode=args.TrainMode,dataset=train_dataset)
     for epoch in tqdm(range(args.Epoch),desc="Train Epochs"):
         running_loss = 0.0
-        for i,train_data in tqdm(enumerate(train_dl),desc="Train Iteration",leave=False):
+        for i,train_data in tqdm(enumerate(train_dl),desc=f"Train Iteration {len(train_dl)}",leave=False):
             train_tensor,train_label = train_data
-            train_tensor.to(device)
-            train_label.to(device)
+            train_tensor = train_tensor.to(device)
+            train_label = train_label.to(device).long()
+
             optimizer.zero_grad()
             output = model(train_tensor)
             loss = criterion(output,train_label)
@@ -193,10 +194,12 @@ if __name__ == "__main__":
     cfg_dict = cfg[args.TrainMode]
     if cfg_dict["Model_Type"] == "Self_train":
         model = CNNLSTM(cfg_dict)
+    elif cfg_dict["Model_Type"] == "E2E":
+        model = E2ECNNLSTM(cfg_dict)
     elif cfg_dict["Model_Type"] == "resnet18":
-        pass
+        model = ResNet18Dynamics(cfg_dict)
     elif cfg_dict["Model_Type"] == "resnet33":
-        pass
+        model = ResNet33Dynamics(cfg_dict)
     else:
         model_type = cfg_dict["Model_Type"]
         raise KeyError(f"Model Type:{model_type} is Illegal! Legal Choise: Self_train,E2E,resnet18,resnet33")

@@ -27,7 +27,7 @@ class ResNet33Dynamics(torch.nn.Module):
 class E2ECNNLSTM(torch.nn.Module):
     def __init__(self,cfg_dict:dict)->None:
         super(E2ECNNLSTM,self).__init__()
-        self.conv1 = torch.nn.Conv2d(cfg_dict["State_channel"], 16, 8, stride=4)
+        self.conv1 = torch.nn.Conv2d(cfg_dict["State_channel"]*cfg_dict["State_Buffer"], 16, 8, stride=4)
         self.conv2 = torch.nn.Conv2d(16, 32, 4, stride=2)
         
         # Get ConvNet Output size
@@ -66,7 +66,7 @@ class E2ECNNLSTM(torch.nn.Module):
 class CNNLSTM(torch.nn.Module):
     def __init__(self,cfg_dict:dict)->None:
         super(CNNLSTM,self).__init__()
-        self.conv1 = torch.nn.Conv2d(cfg_dict["State_channel"], 32, 5, stride=1, padding=2)
+        self.conv1 = torch.nn.Conv2d(cfg_dict["State_channel"]*cfg_dict["State_Buffer"], 32, 5, stride=1, padding=2)
         self.conv2 = torch.nn.Conv2d(32, 32, 5, stride=1, padding=1)
         self.conv3 = torch.nn.Conv2d(32, 64, 4, stride=1, padding=1)
         self.conv4 = torch.nn.Conv2d(64, 64, 3, stride=1, padding=1)
@@ -122,7 +122,7 @@ if __name__ == "__main__":
         model = CNNLSTM(cfg_dict)
     elif cfg_dict["Model_Type"] == "E2E":
         model = E2ECNNLSTM(cfg_dict)
-    summary(model.cuda(),input_size=(3,84,84))
+    summary(model.cuda(),input_size=(30,84,84))
 
 
 
