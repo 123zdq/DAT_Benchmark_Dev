@@ -87,6 +87,74 @@ class AC_RPPO(nn.Module):  # input_channels * 84 * 84
         return action, lstm_state
 
 
+class AC_RPPO_A3ClstmE2E(nn.Module):  # input_channels * 84 * 84
+    def __init__(self, input_channels, hidden_width, action_dim):
+        super().__init__()
+        self.network = nn.Sequential(
+            layer_init(nn.Conv2d(input_channels, 16, 8, stride=4)),
+            nn.ReLU(),
+            layer_init(nn.Conv2d(16, 32, 4, stride=2)),
+            nn.ReLU(),
+            nn.Flatten(),
+            layer_init(nn.Linear(32 * 9 * 9, hidden_width), std=1),
+            nn.ReLU(),
+        )
+
+        self.lstm = nn.LSTM(hidden_width, hidden_width)
+        for name, param in self.lstm.named_parameters():
+            if "bias" in name:
+                nn.init.constant_(param, 0)
+            elif "weight" in name:
+                nn.init.orthogonal_(param, 1.0)
+
+        self.actor = layer_init(nn.Linear(hidden_width, action_dim), std=0.01)
+        self.critic = layer_init(nn.Linear(hidden_width, 1), std=1)
+
+    def get_states(self, x, lstm_state, done):
+        hidden = self.network(x)
+
+        # LSTM logic
+        batch_size = lstm_state[0].shape[1]
+        hidden = hidden.view((-1, batch_size, self.lstm.input_size))
+        done = done.view((-1, batch_size))
+        new_hidden = []
+        for h, d in zip(hidden, done):
+            h, lstm_state = self.lstm(
+                h.unsqueeze(0),
+                (
+                    (1.0 - d).view(self.lstm.num_layers, -1, 1) * lstm_state[0],
+                    (1.0 - d).view(self.lstm.num_layers, -1, 1) * lstm_state[1],
+                ),
+            )
+            new_hidden += [h]
+        new_hidden = torch.flatten(torch.cat(new_hidden), 0, 1)
+        return new_hidden, lstm_state
+
+    def get_value(self, x, lstm_state, done):
+        hidden, _ = self.get_states(x, lstm_state, done)
+        return self.critic(hidden)
+
+    def get_action_and_value(self, x, lstm_state, done, action=None):
+        hidden, lstm_state = self.get_states(x, lstm_state, done)
+        logits = self.actor(hidden)
+        probs = Categorical(logits=logits)
+        if action is None:
+            action = probs.sample()
+        return (
+            action,
+            probs.log_prob(action),
+            probs.entropy(),
+            self.critic(hidden),
+            lstm_state,
+        )
+
+    def predict_action(self, x, lstm_state, done):
+        hidden, lstm_state = self.get_states(x, lstm_state, done)
+        logits = self.actor(hidden)
+        action = torch.argmax(logits, dim=1)
+        return action, lstm_state
+
+
 class UAV_RPPO_discrete:  # now:  torch base on GPU
     def __init__(self, **kwargs):
         self.device = torch.device("cuda")
@@ -309,13 +377,15 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
 
 from envs import Envs, GE
 
-workers = 3
+workers = 28
 
 agent = UAV_RPPO_discrete(
     envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
     num_envs=workers,
     num_minibatches=1,
-    num_steps=40,
+    num_steps=100,
+    model=AC_RPPO_A3ClstmE2E(3, 64, 7).to(torch.device("cuda")),
+    K_epochs = 5,
 )
 
-agent.run(train_mode=False)
+agent.run(train_mode=True)

@@ -1,8 +1,8 @@
 {
-        "Simulation_Mode": "video",
-        "Drone_Supervisor_Ctrl": true,
+        "Simulation_Mode": "train",
+        "Drone_Supervisor_Ctrl": false,
         "Config_Agen_Num_Port":7789,
-        "Train_Total_Steps": 500,
+        "Train_Total_Steps": 3000,
         "Init_No_Done_Steps": 100,
         "No_Reward_Done_Steps": 100,
         "Control_Frequence": 50,
@@ -18,23 +18,23 @@
                 "distance_error": 50
         },
         "Reward_Config": {
-                "reward_mode": "discrete",
+                "reward_mode": "continuous",
                 "distance_scale": 0.01,
                 "reward_range": 7
         },
         "Sumo_Random_Mode": 2,
         "Sumo_Params": {
-                "max_sumo_car": 20,
-                "car_import_interval": 60.0,
-                "car_type": "motorcycle",
+                "max_sumo_car": 32,
+                "car_import_interval": 20.0,
+                "car_type": "bus",
                 "fixed_color": true,
                 "normalize_color": [1,0,0],
                 "max_car_speed": 15,
                 "max_car_accel": 5,
                 "max_car_decel": 5,
-                "max_rou_distance": 3000,
-                "min_rou_distance": 200,
-                "route_num": 30000
+                "max_rou_distance": 8000,
+                "min_rou_distance": 300,
+                "route_num": 100000
         },
         "Socket_Ip": "127.0.0.1",
         "Out_Video": {
@@ -51,26 +51,26 @@
                 "view_pitch_random_max": 1.57,
                 "view_pitch_random_min": 0.7,
 
-                "height_random": false,
+                "height_random": true,
                 "height_fixed": 15.0,
-                "height_random_max": 20.0,
+                "height_random_max": 25.0,
                 "height_random_min": 13.0,
 
-                "direction_random": false,
-                "direction_fixed": 1,
-                "direction_random_max": 0.1,
-                "direction_random_min": -0.1,
+                "direction_random": true,
+                "direction_fixed": 0,
+                "direction_random_max": 3.1415926535,
+                "direction_random_min": -3.1415926535,
 
                 "horizon_bias_random": true,
                 "horizon_bias_multilateral": true,
                 "horizon_bias_fixed": 0,
                 "horizon_bias_random_max": 3,
-                "horizon_bias_random_min": 2,
+                "horizon_bias_random_min": 0.1,
                 
                 "verticle_bias_random": true,
                 "verticle_bias_multilateral": true,
                 "verticle_bias_fixed": 0,
                 "verticle_bias_random_max": 3,
-                "verticle_bias_random_min": 2
+                "verticle_bias_random_min": 0.1
         }
 }
