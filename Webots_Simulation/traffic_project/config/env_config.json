@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "video",
         "Drone_Supervisor_Ctrl": false,
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 3000,
@@ -22,7 +22,7 @@
                 "distance_scale": 0.01,
                 "reward_range": 7
         },
-        "Tracking_Object": "Pedestrian",
+        "Tracking_Object": "SUMO_VEHICLE",
         "Sumo_Random_Mode": 2,
         "Sumo_Params": {
                 "max_sumo_car": 60,
@@ -59,7 +59,7 @@
                 "start_time_bias_ms": 310,
 
                 "view_pitch_random": false,
-                "view_pitch_fixed": 1.5,
+                "view_pitch_fixed": 1,
                 "view_pitch_random_max": 1.57,
                 "view_pitch_random_min": 0.7,
 
