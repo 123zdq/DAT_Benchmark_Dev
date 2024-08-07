@@ -75,10 +75,11 @@ if configData["Simulation_Mode"] == "demo":
     getFromPort[4] = -1
     getFromPort[5] = -1
     if configData["Tracking_Object"] == "SUMO_VEHICLE":
-        if configData["Sumo_Random_Mode"] == 1:
-            randomorder.sumo_rou_random(file_path, int(4), configData["Sumo_Params"])
-        elif configData["Sumo_Random_Mode"] == 2:
-            randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
+        # if configData["Sumo_Random_Mode"] == 1:
+        #     randomorder.sumo_rou_random(file_path, int(4), configData["Sumo_Params"])
+        # elif configData["Sumo_Random_Mode"] == 2:
+        #     randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
+        randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
 elif configData["Simulation_Mode"] == "train":
     if System == "Linux":
         os.system("rm -rf ../../Files2Alg/*.txt")
@@ -95,10 +96,11 @@ elif configData["Simulation_Mode"] == "train":
     multiCom.main()
     # activate map random init
     if configData["Tracking_Object"] == "SUMO_VEHICLE":
-        if configData["Sumo_Random_Mode"] == 1:
-            randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*3), configData["Sumo_Params"])
-        elif configData["Sumo_Random_Mode"] == 2:
-            randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
+        # if configData["Sumo_Random_Mode"] == 1:
+        #     randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*3), configData["Sumo_Params"])
+        # elif configData["Sumo_Random_Mode"] == 2:
+        #     randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
+        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section
@@ -118,10 +120,11 @@ elif configData["Simulation_Mode"] == "video":
         
     # activate map random init
     if configData["Tracking_Object"] == "SUMO_VEHICLE":
-        if configData["Sumo_Random_Mode"] == 1:
-            randomorder.sumo_rou_random(file_path, int(configData["Out_Video"]["channels"]*2), configData["Sumo_Params"])
-        elif configData["Sumo_Random_Mode"] == 2:
-            randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
+        # if configData["Sumo_Random_Mode"] == 1:
+        #     randomorder.sumo_rou_random(file_path, int(configData["Out_Video"]["channels"]*2), configData["Sumo_Params"])
+        # elif configData["Sumo_Random_Mode"] == 2:
+        #     randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
+        randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section

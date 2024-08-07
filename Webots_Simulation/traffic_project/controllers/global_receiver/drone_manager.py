@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-06 19:37:21
+LastEditTime: 2024-08-07 16:47:27
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -209,7 +209,10 @@ class droneManager:
         if self.configData["Drone_Random_Config"]["direction_random"] == False:
             rotateAngle = self.configData["Drone_Random_Config"]["direction_fixed"]
         else:
-            rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
+            if self.configData["Drone_Random_Config"]["direction_random_multilateral"] == False:
+                rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
+            else:
+                rotateAngle = random.choice([1,-1]) * random.uniform(abs(self.configData["Drone_Random_Config"]["direction_random_min"]),abs(self.configData["Drone_Random_Config"]["direction_random_max"]))
         
         if self.configData["Sumo_Params"]["fixed_color"] is True and self.configData["Sumo_Params"]["car_type"] != "motorcycle" and self.configData["Tracking_Object"] == "SUMO_VEHICLE":
             colorList = list(self.configData["Sumo_Params"]["normalize_color"])

@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-02 16:19:37
+ * @LastEditTime: 2024-08-07 19:55:29
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -42,23 +42,23 @@ namespace usrPublic{
 
     // make reward data ---- double * 64 + string
     typedef struct _rewardData{
-        double cameraWidth;
-        double cameraHeight;
-        double cameraFov;
-        double cameraF;
-        double T_ct[16];
-        vector3 BMW;
+        double cameraWidth;// 图像宽度（像素）
+        double cameraHeight;// 图像高度（像素）
+        double cameraFov;// 摄像头焦距（mm）
+        double cameraF;// 摄像头焦距估算（像素）
+        double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
+        vector3 BMW;// 车辆的长宽高
         vector3 Citroen;
         vector3 Lincoln;
         vector3 Benz;
         vector3 Rover;
         vector3 Tesla;
         vector3 Toyota;
-        double T_tw[16];
-        vector3 cameraMidGlobalPos;
-        vector3 carMidGlobalPos;
-        double carDir;
-        std::string carTypename = std::string("ToyotaPriusSimple");
+        double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
+        vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
+        vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
+        double carDir;// 车辆运行方向(0停止，1前进，2左转，3右转)
+        std::string carTypename = std::string("BmwX5Simple");// 对象类型
     }rewardData;
 
     typedef struct _Pose{

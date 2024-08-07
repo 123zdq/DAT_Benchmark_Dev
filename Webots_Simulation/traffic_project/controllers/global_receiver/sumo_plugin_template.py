@@ -131,6 +131,7 @@ class SumoSupervisorPlugin:
                 self.objInfo[tempnode] = {"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString(),"Index":i}
                 
     def add_obj(self,defName:str,count:int,setPoint:list,height:float,addPosition:int):
+        rotation = random.uniform(-math.pi,math.pi)
         if self.configData["Tracking_Object"] == "Pedestrian":
             pointNum = random.randint(2,4)# random points
             trajectoryStr = "--trajectory="
@@ -140,8 +141,9 @@ class SumoSupervisorPlugin:
                 else:
                     trajectoryStr = trajectoryStr + str(round(setPoint[0]+random.uniform(-30,30),3)) + " " + str(round(setPoint[1]+random.uniform(-30,30),3)) + ","
             speedStr = "--speed=2"
-        protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' name "' + str(count) + '"' + ' controllerArgs' + ' ["' + speedStr + '","' + trajectoryStr + '"]' + ' }'
-        # protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' name "' + str(count) + '"' + ' }'        
+            protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' rotation 0 0 1 '+ str(rotation) + ' name "' + str(count) + '"' + ' controllerArgs' + ' ["' + speedStr + '","' + trajectoryStr + '"]' + ' }'
+        else:
+            protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' rotation 0 0 1 '+ str(rotation) + ' name "' + str(count) + '"' + ' }'        
         self.rootChildField.importMFNodeFromString(addPosition,protoString)
         
 
@@ -149,7 +151,9 @@ class SumoSupervisorPlugin:
     def update_obj(self,objName:str,count:int,setPoint:list,height:float):
         objNode,objDef,objIndex = self.getObjInfoByName(objName)
         trList = [setPoint[0],setPoint[1],height]
+        roList = [0,0,1,random.uniform(-math.pi,math.pi)]
         objNode.getField('translation').setSFVec3f(trList)
+        objNode.getField('rotation').setSFRotation(roList)
         objNode.getField('name').setSFString(str(count))
         objNode.restartController()
         objNode.resetPhysics()
