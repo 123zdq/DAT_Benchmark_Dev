@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-02 16:27:42
+ * @LastEditTime: 2024-08-07 01:06:03
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -188,6 +188,10 @@ inline void rewardGenerator::updateTrackingCar()
     }
     else
     {
+      if(isTrackingCarDisp == 1)
+      {
+        isTrackingCarDisp = 2;
+      }
       trackingCar = supervisor->getFromDef("ORIGIN");
       makeReward.carTypename = string("ToyotaPriusSimple");
       carDef = string("ORIGIN");

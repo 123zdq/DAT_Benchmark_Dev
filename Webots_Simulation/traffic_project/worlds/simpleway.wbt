@@ -22,6 +22,12 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterSimple.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeDriver.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterDriver.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTankSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/humans/pedestrian/protos/Pedestrian.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bluebotics/shrimp/protos/Shrimp.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
 
 WorldInfo {
   info [
@@ -43,8 +49,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.3841885846175974 0.36544400866266985 0.8478501093837787 1.784240806989292
-  position 226.7407274940293 -4198.622059703178 3971.8369843898
+  orientation -0.19820651413900936 -0.09564580277579307 0.9754824745551489 4.021524856483768
+  position 103.87868862487211 127.4392585474977 70.67051940646769
   near 3
 }
 TexturedBackground {
@@ -52,7 +58,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 DEF land Floor {
-  translation 0 0 -0.2
+  translation 0 0 -0.1
   size 7000 5000
   appearance PBRAppearance {
     baseColorMap ImageTexture {
@@ -90,6 +96,7 @@ Road {
     40.882788 2587.023384 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 1165.212848 -1754.190471 0.01
@@ -117,6 +124,7 @@ Road {
     41.032627 2612.145377 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -719.572583 -1722.827504 0.01
@@ -144,6 +152,7 @@ Road {
     41.376642 2591.824256 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 3016.048185 -1784.506607 0.01
@@ -171,6 +180,7 @@ Road {
     39.984488 2589.240352 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -392.532897 -1728.304977 0.01
@@ -198,6 +208,7 @@ Road {
     41.317715 2595.35028 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 1544.171735 -1760.436582 0.01
@@ -225,6 +236,7 @@ Road {
     40.536928 2590.515154 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -2199.853756 -1697.848322 0.01
@@ -252,6 +264,7 @@ Road {
     41.639349 2575.864432 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 2611.454815 -1777.92027 0.01
@@ -279,6 +292,7 @@ Road {
     40.199537 2593.450213 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -2552.896805 -1691.845741 0.01
@@ -306,6 +320,7 @@ Road {
     41.994321 2589.201952 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 1871.306596 -1765.812415 0.01
@@ -333,6 +348,7 @@ Road {
     40.335577 2585.470177 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -1821.270869 -1704.265836 0.01
@@ -360,6 +376,7 @@ Road {
     41.718558 2588.518118 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -12 -1934 0.01
@@ -383,6 +400,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -394.9 -1928 0.01
@@ -407,6 +425,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -721.95 -1922.7 0.01
@@ -431,6 +450,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1092.1 -1916.5 0.01
@@ -455,6 +475,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1470.75 -1910.1 0.01
@@ -479,6 +500,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1823.63 -1904.2 0.01
@@ -503,6 +525,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -2202.2 -1897.5 0.01
@@ -527,6 +550,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -2555.25 -1891.7 0.01
@@ -551,6 +575,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 422.9 -1941.8 0.01
@@ -575,6 +600,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 784.45 -1947.6 0.01
@@ -599,6 +625,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1162.85 -1954 0.01
@@ -623,6 +650,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1541.8 -1960.4 0.01
@@ -647,6 +675,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1868.95 -1965.6 0.01
@@ -671,6 +700,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 2238.95 -1971.8 0.01
@@ -695,6 +725,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 2609.1 -1977.8 0.01
@@ -719,6 +750,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 3013.7 -1984.4 0.01
@@ -743,6 +775,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1162.85 -1954 0.01
@@ -767,6 +800,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 31.75 873.2 0.01
@@ -791,6 +825,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -351.2 867 0.01
@@ -815,6 +850,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -678.2 868.7 0.01
@@ -839,6 +875,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1048.15 879.76 0.01
@@ -863,6 +900,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1426.76 882 0.01
@@ -887,6 +925,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1779.55 884 0.01
@@ -911,6 +950,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -2158.2 877.5 0.01
@@ -935,6 +975,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -2510.9 897.2 0.01
@@ -959,6 +1000,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 466.1 845 0.01
@@ -983,6 +1025,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 827.5 834.3 0.01
@@ -1007,6 +1050,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1206.25 857.9 0.01
@@ -1031,6 +1075,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1584.7 830 0.01
@@ -1055,6 +1100,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 1911.65 819.5 0.01
@@ -1079,6 +1125,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 2281.7 826 0.01
@@ -1103,6 +1150,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 2651.65 815.5 0.01
@@ -1127,6 +1175,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation 3056.03 804.7 0.01
@@ -1151,6 +1200,7 @@ Road {
     0 0 0
     200 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
   translation -1468.413328 -1710.229279 0.01
@@ -1178,6 +1228,7 @@ Road {
     41.65571 2592.322495 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -1089.73656 -1716.60977 0.01
@@ -1205,6 +1256,7 @@ Road {
     41.587848 2596.405249 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 786.813042 -1747.933601 0.01
@@ -1232,6 +1284,7 @@ Road {
     40.67459 2582.349574 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -9.644949 -1734.698886 0.01
@@ -1259,6 +1312,7 @@ Road {
     41.391921 2608.050421 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 2241.287401 -1771.874361 0.01
@@ -1286,14 +1340,16 @@ Road {
     40.408695 2598.031228 0
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 DEF ORIGIN BmwX5Simple {
   translation 0 157.19 0.4
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 20
-  seed 24
+  maxVehicles 0
+  step 100
+  seed 63
 }
 Robot {
   children [

@@ -35,6 +35,12 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterSimple.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeDriver.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterDriver.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTankSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/humans/pedestrian/protos/Pedestrian.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bluebotics/shrimp/protos/Shrimp.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
 
 WorldInfo {
   info [
@@ -57,7 +63,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.23363893435512875 -0.3862568066201667 0.8923107797695774 5.0917532619442385
-  position -12.702046234893439 30.264762773590853 15.17131360264307
+  position -92.44685860406133 182.3926660172265 111.73690218077037
   near 3
 }
 TexturedBackground {
@@ -727,6 +733,7 @@ Crossroad {
     "-1098_2"
     "-1100"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -130.590101 -33.219399 0.01
@@ -737,6 +744,7 @@ Crossroad {
     "1121913941"
     "161688770"
   ]
+  boundingObject TRUE
 }
 BmwX5 {
   translation -17.28811696716581 4.423737494868385 53.74188847002018
@@ -909,8 +917,9 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 150
-  seed 64
+  maxVehicles 0
+  step 100
+  seed 30
   children [
     Solid {
       translation 196.99 223.18 0
@@ -2293,6 +2302,7 @@ Crossroad {
     "1122667815"
     "161688768"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -253.834396 65.057379 0.01
@@ -2303,6 +2313,7 @@ Crossroad {
     "603942760"
     "606916054"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 196.6232 222.800434 0.01
@@ -2322,6 +2333,7 @@ Crossroad {
     "399179069"
     "608741621"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 69.291049 64.567117 0.01
@@ -2344,6 +2356,7 @@ Crossroad {
     "404995536"
     "607576339"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -29.55125 143.381828 0.01
@@ -2366,6 +2379,7 @@ Crossroad {
     "606916054"
     "608741620"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 264.999481 -91.481388 0.01
@@ -2376,6 +2390,7 @@ Crossroad {
     "234665446"
     "382238932"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 166.676037 -13.083853 0.01
@@ -2398,6 +2413,7 @@ Crossroad {
     "382229043"
     "405164498"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 40.615275 -169.73652 0.01
@@ -2420,6 +2436,7 @@ Crossroad {
     "323126706"
     "438258030"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 81.662661 54.702384 0.01
@@ -2430,6 +2447,7 @@ Crossroad {
     "382229043"
     "607576339"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -125.717494 23.883209 0.01
@@ -2440,6 +2458,7 @@ Crossroad {
     "161687301"
     "603942759"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 3.566779 -215.775011 0.01
@@ -2450,6 +2469,7 @@ Crossroad {
     "-1098_1"
     "323126706"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -185.512074 -252.059479 0.01
@@ -2470,6 +2490,7 @@ Crossroad {
     "543624991"
     "580285684"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 119.153078 -72.139967 0.01
@@ -2480,6 +2501,7 @@ Crossroad {
     "1046059231"
     "405164498"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 88.380253 -110.380615 0.01
@@ -2490,6 +2512,7 @@ Crossroad {
     "1046059231"
     "323126705"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 5.973702 -14.114627 0.01
@@ -2500,6 +2523,7 @@ Crossroad {
     "404995536"
     "543624990"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 93.421339 94.553063 0.01
@@ -2510,6 +2534,7 @@ Crossroad {
     "161890281"
     "399179069"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -4.294963 174.766326 0.01
@@ -2520,6 +2545,7 @@ Crossroad {
     "608741620"
     "608741621"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -56.770393 -92.082996 0.01
@@ -2542,6 +2568,7 @@ Crossroad {
     "543624990"
     "543624991"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 138.939406 -248.136632 0.01
@@ -2562,6 +2589,7 @@ Crossroad {
     "382238932"
     "438258030"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation -155.613382 -13.265695 0.01
@@ -2584,6 +2612,7 @@ Crossroad {
     "603942759"
     "603942760"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 191.710141 18.025912 0.01
@@ -2594,6 +2623,7 @@ Crossroad {
     "1046059232"
     "382219819"
   ]
+  boundingObject TRUE
 }
 Crossroad {
   translation 15.231707 107.67265 0.01
@@ -2604,6 +2634,7 @@ Crossroad {
     "1049269630"
     "186070725"
   ]
+  boundingObject TRUE
 }
 Road {
   translation 132.670066 -255.927355 0.01
@@ -2652,6 +2683,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -35.814465 135.586179 0.01
@@ -2700,6 +2732,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -36.414936 134.838789 -0.07
@@ -2753,6 +2786,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -48.426447 -98.736142 -0.07
@@ -2800,6 +2834,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -65.45668 -85.156583 -0.07
@@ -2845,6 +2880,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 76.136964 73.05191 -0.07
@@ -2891,6 +2927,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 59.216944 72.617405 -0.07
@@ -2939,6 +2976,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 256.481447 -84.68966 -0.07
@@ -2989,6 +3027,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 47.281499 -161.454776 -0.07
@@ -3032,6 +3071,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 34.672148 -177.120682 -0.07
@@ -3081,6 +3121,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 242.609747 81.279113 -0.07
@@ -3128,6 +3169,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 156.870048 -5.263014 -0.07
@@ -3176,6 +3218,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 144.114338 -241.705809 -0.07
@@ -3228,6 +3271,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 188.408466 212.59201 -0.07
@@ -3275,6 +3319,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 9.735341 -9.440222 -0.07
@@ -3326,6 +3371,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 158.993074 -22.627063 -0.07
@@ -3380,6 +3426,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 50.796267 -177.854947 -0.07
@@ -3436,6 +3483,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -50.215856 -83.937941 -0.07
@@ -3499,6 +3547,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -176.574294 -240.953388 -0.07
@@ -3561,6 +3610,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -161.780282 -20.925887 -0.07
@@ -3613,6 +3663,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -149.170822 -5.260472 -0.07
@@ -3660,6 +3711,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -244.853784 57.896017 -0.07
@@ -3724,6 +3776,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -39.252954 151.081803 -0.07
@@ -3776,6 +3829,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 77.417633 58.099459 -0.07
@@ -3822,6 +3876,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -22.270401 152.463039 -0.07
@@ -3871,6 +3926,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation 88.380253 -110.380615 0.01
@@ -3903,6 +3959,7 @@ Road {
     -0.893188
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 103.222033 -91.937124 -0.07
@@ -3947,6 +4004,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 173.077159 -5.099362 -0.07
@@ -3994,6 +4052,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -21.074214 136.623032 -0.07
@@ -4040,6 +4099,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -146.913806 -20.202486 -0.07
@@ -4086,6 +4146,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 32.631238 -163.369268 -0.07
@@ -4131,6 +4192,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -93.598721 -325.351418 0.01
@@ -4176,6 +4238,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
   translation -172.207 272.366 53.46

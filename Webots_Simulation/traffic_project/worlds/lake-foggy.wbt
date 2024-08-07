@@ -39,6 +39,12 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterSimple.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeDriver.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterDriver.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTankSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/humans/pedestrian/protos/Pedestrian.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bluebotics/shrimp/protos/Shrimp.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
 
 WorldInfo {
   info [
@@ -150,6 +156,7 @@ ComposedHouse {
   translation 0 516.46 0
 }
 Crossroad {
+  boundingObject TRUE
   translation -252.019209 576.133471 0.01
   name "crossroad(1)"
   id "10782118915"
@@ -170,6 +177,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -167.140604 575.264177 0.01
   name "crossroad(2)"
   id "10782118916"
@@ -190,6 +198,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -108.895757 574.675399 0.01
   name "crossroad(3)"
   id "10782118917"
@@ -212,6 +221,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -406.378734 577.716786 0.01
   name "crossroad(4)"
   id "10782118919"
@@ -232,6 +242,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 693.178738 587.543687 0.01
   name "crossroad(5)"
   id "11425730083"
@@ -251,6 +262,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 693.669795 537.301185 0.01
   name "crossroad(6)"
   id "11425730084"
@@ -270,6 +282,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 824.740413 391.696725 0.01
   name "crossroad(7)"
   id "1433738491"
@@ -292,6 +305,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 746.513658 489.419939 0.01
   name "crossroad(8)"
   id "1433738503"
@@ -314,6 +328,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 350.949615 -30.126735 0.01
   name "crossroad(9)"
   id "180234309"
@@ -334,6 +349,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 450.573751 -3.107152 0.01
   name "crossroad(10)"
   id "180234316"
@@ -354,6 +370,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 548.192122 8.370621 0.01
   name "crossroad(11)"
   id "180234326"
@@ -372,6 +389,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 651.423925 8.936514 0.01
   name "crossroad(12)"
   id "180234328"
@@ -390,6 +408,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -407.167833 587.780538 0.01
   name "crossroad(13)"
   id "180237105"
@@ -409,6 +428,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -394.898425 496.942877 0.01
   name "crossroad(14)"
   id "180238359"
@@ -428,6 +448,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 648.311752 587.004623 0.01
   name "crossroad(15)"
   id "180251829"
@@ -450,6 +471,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 648.778803 488.232413 0.01
   name "crossroad(16)"
   id "180251830"
@@ -468,6 +490,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 649.281645 388.449667 0.01
   name "crossroad(17)"
   id "180251831"
@@ -489,6 +512,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 649.146531 286.305769 0.01
   name "crossroad(18)"
   id "180251832"
@@ -508,6 +532,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 650.029963 184.677802 0.01
   name "crossroad(19)"
   id "180251835"
@@ -530,6 +555,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 251.725653 582.289918 0.01
   name "crossroad(20)"
   id "180253556"
@@ -551,6 +577,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 251.30242 385.086355 0.01
   name "crossroad(21)"
   id "180253557"
@@ -573,6 +600,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 251.735808 179.217738 0.01
   name "crossroad(22)"
   id "180253558"
@@ -595,6 +623,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 250.259641 -22.975737 0.01
   name "crossroad(23)"
   id "180253561"
@@ -614,6 +643,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -54.042529 -24.494747 0.01
   name "crossroad(24)"
   id "180254922"
@@ -632,6 +662,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 46.852704 -23.612882 0.01
   name "crossroad(25)"
   id "180254925"
@@ -650,6 +681,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 145.032038 -24.512279 0.01
   name "crossroad(26)"
   id "180254927"
@@ -669,6 +701,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -205.082885 476.330614 0.01
   name "crossroad(27)"
   id "180256006"
@@ -687,6 +720,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -249.796713 458.25398 0.01
   name "crossroad(28)"
   id "180261931"
@@ -706,6 +740,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -189.507886 477.970384 0.01
   name "crossroad(29)"
   id "180261934"
@@ -727,6 +762,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -168.242851 479.043575 0.01
   name "crossroad(30)"
   id "180261937"
@@ -748,6 +784,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -204.710889 575.653197 0.01
   name "crossroad(31)"
   id "180265229"
@@ -768,6 +805,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -166.987144 585.722016 0.01
   name "crossroad(32)"
   id "180270920"
@@ -787,6 +825,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -47.552029 578.74304 0.01
   name "crossroad(33)"
   id "180270921"
@@ -811,6 +850,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 52.986972 579.937858 0.01
   name "crossroad(34)"
   id "180270922"
@@ -831,6 +871,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 150.554122 581.084928 0.01
   name "crossroad(35)"
   id "180270925"
@@ -851,6 +892,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 351.190667 583.473004 0.01
   name "crossroad(36)"
   id "180270928"
@@ -871,6 +913,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 449.406947 584.631444 0.01
   name "crossroad(37)"
   id "180270930"
@@ -890,6 +933,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 547.573303 585.802623 0.01
   name "crossroad(38)"
   id "180270932"
@@ -911,6 +955,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 844.887318 589.652136 0.01
   name "crossroad(39)"
   id "180270933"
@@ -931,6 +976,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 148.390454 384.22464 0.01
   name "crossroad(40)"
   id "180273918"
@@ -951,6 +997,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 146.377925 177.670876 0.01
   name "crossroad(41)"
   id "180273921"
@@ -971,6 +1018,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 350.385276 385.927522 0.01
   name "crossroad(42)"
   id "180274995"
@@ -993,6 +1041,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 350.672459 180.193035 0.01
   name "crossroad(43)"
   id "180274997"
@@ -1015,6 +1064,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -168.428553 381.57406 0.01
   name "crossroad(44)"
   id "180276430"
@@ -1034,6 +1084,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -49.800307 382.571608 0.01
   name "crossroad(45)"
   id "180276433"
@@ -1054,6 +1105,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 51.072292 383.40918 0.01
   name "crossroad(46)"
   id "180276436"
@@ -1074,6 +1126,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 450.067382 386.766562 0.01
   name "crossroad(47)"
   id "180276439"
@@ -1096,6 +1149,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 548.151207 387.594082 0.01
   name "crossroad(48)"
   id "180276442"
@@ -1118,6 +1172,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 49.473017 176.830768 0.01
   name "crossroad(49)"
   id "180276857"
@@ -1138,6 +1193,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 431.829293 727.547937 0.01
   name "crossroad(50)"
   id "180279231"
@@ -1159,6 +1215,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 549.05615 182.622167 0.01
   name "crossroad(51)"
   id "180279236"
@@ -1181,6 +1238,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 849.700675 186.619258 0.01
   name "crossroad(52)"
   id "180283111"
@@ -1202,6 +1260,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 850.273738 288.705063 0.01
   name "crossroad(53)"
   id "180292876"
@@ -1222,6 +1281,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -349.838403 483.618098 0.01
   name "crossroad(54)"
   id "180296984"
@@ -1241,6 +1301,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -52.539168 175.211614 0.01
   name "crossroad(55)"
   id "180297772"
@@ -1262,6 +1323,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -389.093802 316.977894 0.01
   name "crossroad(56)"
   id "180302488"
@@ -1280,6 +1342,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -374.357852 376.211985 0.01
   name "crossroad(57)"
   id "180302492"
@@ -1299,6 +1362,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 449.163533 181.849558 0.01
   name "crossroad(58)"
   id "180320994"
@@ -1321,6 +1385,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -232.560938 325.818682 0.01
   name "crossroad(59)"
   id "180330476"
@@ -1342,6 +1407,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -294.232402 358.071479 0.01
   name "crossroad(60)"
   id "180345193"
@@ -1363,6 +1429,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -274.949655 351.861652 0.01
   name "crossroad(61)"
   id "180345194"
@@ -1385,6 +1452,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -111.718802 308.304999 0.01
   name "crossroad(62)"
   id "180345951"
@@ -1404,6 +1472,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -108.766827 585.222205 0.01
   name "crossroad(63)"
   id "1877436618"
@@ -1423,6 +1492,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -111.594433 330.75392 0.01
   name "crossroad(64)"
   id "1877436657"
@@ -1443,6 +1513,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -196.254432 360.588168 0.01
   name "crossroad(65)"
   id "1877436677"
@@ -1461,6 +1532,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -111.324542 382.046793 0.01
   name "crossroad(66)"
   id "1877436774"
@@ -1481,6 +1553,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 449.579881 534.368554 0.01
   name "crossroad(67)"
   id "1878419216"
@@ -1501,6 +1574,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 350.981079 533.389982 0.01
   name "crossroad(68)"
   id "1878419220"
@@ -1521,6 +1595,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 987.922023 188.309143 0.01
   name "crossroad(69)"
   id "1878419230"
@@ -1542,6 +1617,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 250.362954 -32.335906 0.01
   name "crossroad(70)"
   id "1878419238"
@@ -1561,6 +1637,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 399.872521 386.337832 0.01
   name "crossroad(71)"
   id "1878419275"
@@ -1581,6 +1658,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 455.594821 696.543797 0.01
   name "crossroad(72)"
   id "1878419317"
@@ -1600,6 +1678,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 498.485502 182.228223 0.01
   name "crossroad(73)"
   id "1878419318"
@@ -1620,6 +1699,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 947.72454 238.702569 0.01
   name "crossroad(74)"
   id "1878419338"
@@ -1640,6 +1720,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 195.05267 178.384338 0.01
   name "crossroad(75)"
   id "1878419347"
@@ -1660,6 +1741,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -0.839443 -24.031376 0.01
   name "crossroad(76)"
   id "1878419350"
@@ -1680,6 +1762,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 547.720856 535.351146 0.01
   name "crossroad(77)"
   id "1878419374"
@@ -1700,6 +1783,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -251.974684 586.447621 0.01
   name "crossroad(78)"
   id "1878419392"
@@ -1720,6 +1804,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 400.799962 -13.64182 0.01
   name "crossroad(79)"
   id "1878419416"
@@ -1739,6 +1824,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -0.317671 176.03605 0.01
   name "crossroad(80)"
   id "1878419440"
@@ -1759,6 +1845,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 150.018523 531.003809 0.01
   name "crossroad(81)"
   id "1878419452"
@@ -1778,6 +1865,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 708.604072 537.603191 0.01
   name "crossroad(82)"
   id "1878419461"
@@ -1788,6 +1876,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 99.327656 383.813568 0.01
   name "crossroad(83)"
   id "1878419523"
@@ -1807,6 +1896,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 378.934957 583.79936 0.01
   name "crossroad(84)"
   id "1878419552"
@@ -1826,6 +1916,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 399.797277 181.016281 0.01
   name "crossroad(85)"
   id "1878419562"
@@ -1846,6 +1937,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 850.004526 237.778636 0.01
   name "crossroad(86)"
   id "1878419622"
@@ -1868,6 +1960,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -299.112313 343.689142 0.01
   name "crossroad(87)"
   id "1878419640"
@@ -1888,6 +1981,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 301.18102 385.515897 0.01
   name "crossroad(88)"
   id "1878419770"
@@ -1908,6 +2002,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 650.601201 133.946342 0.01
   name "crossroad(89)"
   id "1878419788"
@@ -1926,6 +2021,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -280.574698 338.149886 0.01
   name "crossroad(90)"
   id "1878419809"
@@ -1945,6 +2041,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 498.788845 387.182021 0.01
   name "crossroad(91)"
   id "1878419845"
@@ -1965,6 +2062,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3.391696 579.34185 0.01
   name "crossroad(92)"
   id "1878419854"
@@ -1983,6 +2081,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 649.590437 235.153139 0.01
   name "crossroad(93)"
   id "1878419855"
@@ -2002,6 +2101,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 96.063035 -24.069009 0.01
   name "crossroad(94)"
   id "1878419915"
@@ -2021,6 +2121,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -245.217355 318.099621 0.01
   name "crossroad(95)"
   id "1878419934"
@@ -2038,6 +2139,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 785.982073 440.106507 0.01
   name "crossroad(96)"
   id "1878419937"
@@ -2058,6 +2160,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 193.857986 -23.799695 0.01
   name "crossroad(97)"
   id "1878419949"
@@ -2077,6 +2180,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -281.161196 411.842004 0.01
   name "crossroad(98)"
   id "1878419952"
@@ -2096,6 +2200,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 850.441146 136.120011 0.01
   name "crossroad(99)"
   id "1878419990"
@@ -2113,6 +2218,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 649.126678 338.81047 0.01
   name "crossroad(100)"
   id "1878420010"
@@ -2133,6 +2239,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 499.459474 5.045956 0.01
   name "crossroad(101)"
   id "1878420074"
@@ -2153,6 +2260,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 101.400135 580.507855 0.01
   name "crossroad(102)"
   id "1878420117"
@@ -2171,6 +2279,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 301.324833 179.704509 0.01
   name "crossroad(103)"
   id "1878420185"
@@ -2191,6 +2300,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 597.66521 535.826764 0.01
   name "crossroad(104)"
   id "1878420263"
@@ -2211,6 +2321,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 597.624125 183.605445 0.01
   name "crossroad(105)"
   id "1878420270"
@@ -2231,6 +2342,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 251.611216 531.517965 0.01
   name "crossroad(106)"
   id "1878420312"
@@ -2251,6 +2363,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -378.340355 360.192264 0.01
   name "crossroad(107)"
   id "1878420438"
@@ -2271,6 +2384,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 97.688217 177.246502 0.01
   name "crossroad(108)"
   id "1878420453"
@@ -2291,6 +2405,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 775.680327 541.300459 0.01
   name "crossroad(109)"
   id "1878420473"
@@ -2310,6 +2425,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 497.859594 534.853187 0.01
   name "crossroad(110)"
   id "1878420488"
@@ -2330,6 +2446,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -361.751995 431.417389 0.01
   name "crossroad(111)"
   id "1878420530"
@@ -2350,6 +2467,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1.992826 382.998872 0.01
   name "crossroad(112)"
   id "1878420532"
@@ -2368,6 +2486,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 865.146111 341.623351 0.01
   name "crossroad(113)"
   id "1878420561"
@@ -2388,6 +2507,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 651.319608 38.292598 0.01
   name "crossroad(114)"
   id "1878420566"
@@ -2405,6 +2525,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 399.402311 533.873124 0.01
   name "crossroad(115)"
   id "1878420592"
@@ -2427,6 +2548,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 301.874851 -32.104638 0.01
   name "crossroad(116)"
   id "1878420596"
@@ -2449,6 +2571,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 648.947661 438.458096 0.01
   name "crossroad(117)"
   id "1878420642"
@@ -2469,6 +2592,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 597.281555 8.640307 0.01
   name "crossroad(118)"
   id "1878420643"
@@ -2488,6 +2612,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 597.480264 388.006676 0.01
   name "crossroad(119)"
   id "1878420645"
@@ -2508,6 +2633,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 198.42296 531.452385 0.01
   name "crossroad(120)"
   id "1878420696"
@@ -2529,6 +2655,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 196.920539 384.639174 0.01
   name "crossroad(121)"
   id "1878420698"
@@ -2549,6 +2676,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -310.581265 300.456704 0.01
   name "crossroad(122)"
   id "1878420765"
@@ -2568,6 +2696,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 907.679116 289.384024 0.01
   name "crossroad(123)"
   id "1878420776"
@@ -2589,6 +2718,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 301.167112 532.449005 0.01
   name "crossroad(124)"
   id "1878420787"
@@ -2608,6 +2738,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1055.294535 189.431539 0.01
   name "crossroad(125)"
   id "351102433"
@@ -2626,6 +2757,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 974.463435 291.152997 0.01
   name "crossroad(126)"
   id "351102435"
@@ -2646,6 +2778,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 866.339591 427.218116 0.01
   name "crossroad(127)"
   id "351102436"
@@ -2664,6 +2797,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 855.538965 440.803559 0.01
   name "crossroad(128)"
   id "351102437"
@@ -2682,6 +2816,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 790.12477 523.119502 0.01
   name "crossroad(129)"
   id "351102438"
@@ -2700,6 +2835,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 738.511816 588.080331 0.01
   name "crossroad(130)"
   id "351102439"
@@ -2721,6 +2857,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 649.17967 696.361064 0.01
   name "crossroad(131)"
   id "351102440"
@@ -2739,6 +2876,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 550.081948 822.364171 0.01
   name "crossroad(132)"
   id "351102442"
@@ -2758,6 +2896,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 648.550152 536.308371 0.01
   name "crossroad(133)"
   id "4311925756"
@@ -2778,6 +2917,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -53.766581 15.206848 0.01
   name "crossroad(134)"
   id "4333071455"
@@ -2795,6 +2935,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -52.886815 129.004254 0.01
   name "crossroad(135)"
   id "4333071456"
@@ -2812,6 +2953,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -51.843036 218.408091 0.01
   name "crossroad(136)"
   id "4333071457"
@@ -2830,6 +2972,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -47.878511 540.351827 0.01
   name "crossroad(137)"
   id "4333071458"
@@ -2847,6 +2990,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 847.06602 541.753676 0.01
   name "crossroad(138)"
   id "5005642371"
@@ -2857,6 +3001,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -23.869832 579.0252 0.01
   name "crossroad(139)"
   id "6788493616"
@@ -2876,6 +3021,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -47.959641 530.837292 0.01
   name "crossroad(140)"
   id "6788493618"
@@ -2895,6 +3041,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -26.504461 530.31099 0.01
   name "crossroad(141)"
   id "6788493619"
@@ -2916,6 +3063,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -7.502675 537.193618 0.01
   name "crossroad(142)"
   id "6788493622"
@@ -2935,6 +3083,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 7.331129 551.506363 0.01
   name "crossroad(143)"
   id "6788493624"
@@ -2945,6 +3094,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 7.307081 558.72326 0.01
   name "crossroad(144)"
   id "6788493625"
@@ -2955,6 +3105,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3.927768 565.793395 0.01
   name "crossroad(145)"
   id "6788493626"
@@ -2974,6 +3125,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -11.616733 579.16388 0.01
   name "crossroad(146)"
   id "6788493627"
@@ -2992,6 +3144,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -24.036313 566.324693 0.01
   name "crossroad(147)"
   id "6788493628"
@@ -3011,6 +3164,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -10.961282 566.103239 0.01
   name "crossroad(148)"
   id "6788493629"
@@ -3030,6 +3184,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -6.983144 566.013163 0.01
   name "crossroad(149)"
   id "6788493630"
@@ -3049,6 +3204,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -111.230769 176.812877 0.01
   name "crossroad(150)"
   id "7144624488"
@@ -3068,6 +3224,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -85.954788 176.119495 0.01
   name "crossroad(151)"
   id "7144624495"
@@ -3087,6 +3244,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 53.172454 601.54262 0.01
   name "crossroad(152)"
   id "7516461980"
@@ -3105,6 +3263,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 101.645171 602.356524 0.01
   name "crossroad(153)"
   id "7516461981"
@@ -3126,6 +3285,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 150.726291 601.890371 0.01
   name "crossroad(154)"
   id "7516461982"
@@ -3144,6 +3304,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 824.517882 589.347957 0.01
   name "crossroad(155)"
   id "7912620584"
@@ -3163,6 +3324,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -48.751688 467.15688 0.01
   name "crossroad(156)"
   id "7915688581"
@@ -3181,6 +3343,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -110.219154 467.664281 0.01
   name "crossroad(157)"
   id "7915688582"
@@ -3200,6 +3363,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -30.570002 175.559394 0.01
   name "crossroad(158)"
   id "7919890304"
@@ -3219,6 +3383,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -51.910932 213.956311 0.01
   name "crossroad(159)"
   id "7919890305"
@@ -3237,6 +3402,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -29.570652 212.325622 0.01
   name "crossroad(160)"
   id "7919890306"
@@ -3259,6 +3425,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 0.084127 211.717739 0.01
   name "crossroad(161)"
   id "7919890307"
@@ -3279,6 +3446,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 399.058235 539.093399 0.01
   name "crossroad(162)"
   id "7934446901"
@@ -3298,6 +3466,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 404.123741 584.096336 0.01
   name "crossroad(163)"
   id "7934446907"
@@ -3316,6 +3485,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 648.503811 611.484934 0.01
   name "crossroad(164)"
   id "8086668434"
@@ -3336,6 +3506,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -331.258121 478.322711 0.01
   name "crossroad(165)"
   id "8087391413"
@@ -3357,6 +3528,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -236.300397 465.87923 0.01
   name "crossroad(166)"
   id "8087434817"
@@ -3376,6 +3548,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -54.541737 -94.971679 0.01
   name "crossroad(167)"
   id "8105958040"
@@ -3395,6 +3568,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 761.855704 558.700671 0.01
   name "crossroad(168)"
   id "8251681025"
@@ -3413,6 +3587,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 706.638794 587.698799 0.01
   name "crossroad(169)"
   id "8251681032"
@@ -3431,6 +3606,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 588.42805 586.286663 0.01
   name "crossroad(170)"
   id "8251681034"
@@ -3450,6 +3626,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 591.247612 608.830935 0.01
   name "crossroad(171)"
   id "8251681037"
@@ -3470,6 +3647,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 424.784215 584.342109 0.01
   name "crossroad(172)"
   id "8489289227"
@@ -3488,6 +3666,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 493.491529 585.162721 0.01
   name "crossroad(173)"
   id "8625852586"
@@ -3507,6 +3686,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 23.526913 -23.819682 0.01
   name "crossroad(174)"
   id "8814031177"
@@ -3525,6 +3705,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 89.345722 -24.007294 0.01
   name "crossroad(175)"
   id "8814031180"
@@ -3543,6 +3724,7 @@ Crossroad {
   ]
 }
 Road {
+  roadBoundingObject TRUE
   translation -398.594504 495.413497 0.01
   name "road(1)"
   id "17409457"
@@ -3568,6 +3750,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 861.109939 445.10261 0.01
   name "Community Court"
   id "17413402"
@@ -3609,6 +3792,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation -204.72587 571.653226 0.01
   name "Forsythe Square"
   id "17413962"
@@ -3639,6 +3823,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 742.535719 598.072615 0.01
   name "Cleveland Avenue"
   id "17414110"
@@ -3670,6 +3855,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 850.3825 140.119581 0.01
   name "Kelly Place"
   id "17418014"
@@ -3699,6 +3885,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 843.489268 640.121912 0.01
   name "Central Avenue"
   id "17423583"
@@ -3727,6 +3914,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 652.788523 488.279295 0.01
   name "Euclid Avenue"
   id "17424859"
@@ -3762,6 +3950,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 817.74161 391.567294 0.01
   name "120th Street"
   id "17425692"
@@ -3797,6 +3986,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -115.718774 308.290023 0.01
   name "Hollywood Court"
   id "17429659"
@@ -3833,6 +4023,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -115.5944 330.770299 0.01
   name "road(2)"
   id "177289753"
@@ -3869,6 +4060,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 101.600313 598.356776 0.01
   name "road(3)"
   id "177388574"
@@ -3901,6 +4093,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 378.903198 587.804384 0.01
   name "road(4)"
   id "177388584"
@@ -3934,6 +4127,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 654.601265 133.989851 0.01
   name "road(5)"
   id "177388595"
@@ -3962,6 +4156,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 652.958741 438.505999 0.01
   name "road(6)"
   id "177388596"
@@ -4001,6 +4196,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 653.148135 338.863285 0.01
   name "road(7)"
   id "177388609"
@@ -4040,6 +4236,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 786.284323 541.371473 0.01
   name "road(8)"
   id "177388612"
@@ -4075,6 +4272,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -47.870008 541.351791 0.01
   name "Calumet Avenue"
   id "435394418"
@@ -4114,6 +4312,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -52.879292 130.004226 0.01
   name "Calumet Avenue(1)"
   id "435394419"
@@ -4153,6 +4352,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -47.494957 585.742808 0.01
   name "Calumet Avenue(2)"
   id "435394420"
@@ -4188,6 +4388,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -53.993876 -17.494916 0.01
   name "Calumet Avenue(3)"
   id "435394421"
@@ -4227,6 +4428,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -53.75885 16.206818 0.01
   name "Calumet Avenue(4)"
   id "435394428"
@@ -4260,6 +4462,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 846.196561 585.439457 0.01
   name "road(9)"
   id "511808891"
@@ -4295,6 +4498,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 861.0136 422.668909 0.01
   name "120th Street(1)"
   id "582885998"
@@ -4331,6 +4535,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -252.001941 580.133434 0.01
   name "road(10)"
   id "583523162"
@@ -4363,6 +4568,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 7.331129 551.506363 0.01
   name "road(11)"
   id "723804402"
@@ -4387,6 +4593,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -30.503258 530.409082 0.01
   name "road(12)"
   id "723804404"
@@ -4419,6 +4626,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -20.036886 566.256954 0.01
   name "road(13)"
   id "723804406"
@@ -4451,6 +4659,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -7.430579 541.192968 0.01
   name "road(14)"
   id "723804407"
@@ -4481,6 +4690,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -47.925534 534.837146 0.01
   name "Calumet Avenue(5)"
   id "723804408"
@@ -4520,6 +4730,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 824.46738 593.351318 0.01
   name "road(15)"
   id "847956785"
@@ -4550,6 +4761,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -55.751508 467.214662 0.01
   name "road(16)"
   id "848283003"
@@ -4582,6 +4794,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -44.918246 213.445892 0.01
   name "road(17)"
   id "848826495"
@@ -4614,6 +4827,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -25.571492 212.243645 0.01
   name "road(18)"
   id "848826496"
@@ -4646,6 +4860,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 395.328683 540.526293 0.01
   name "road(19)"
   id "850482428"
@@ -4672,6 +4887,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 404.100246 580.072828 0.01
   name "road(20)"
   id "850482429"
@@ -4706,6 +4922,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 654.803792 614.536202 0.01
   name "road(21)"
   id "867583780"
@@ -4737,6 +4954,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -243.345596 468.223546 0.01
   name "Maiden Lane"
   id "867650189"
@@ -4768,6 +4986,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -47.539939 -94.742641 0.01
   name "road(22)"
   id "869999684"
@@ -4803,6 +5022,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 756.506446 554.180407 0.01
   name "road(23)"
   id "887513071"
@@ -4856,6 +5076,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 588.408068 590.295964 0.01
   name "road(24)"
   id "887513072"
@@ -4886,6 +5107,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 591.265917 609.875017 0.01
   name "road(25)"
   id "887513073"
@@ -4908,6 +5130,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 493.432859 581.127531 0.01
   name "road(26)"
   id "930260913"
@@ -4934,6 +5157,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 23.574131 -27.823309 0.01
   name "road(27)"
   id "952271325"
@@ -4974,6 +5198,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 749.678896 491.865602 0.01
   name "Euclid Avenue(1)"
   id "1065094419"
@@ -5009,6 +5234,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 708.604072 537.603191 0.01
   name "road(28)"
   id "1222298761"
@@ -5044,6 +5270,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 693.219365 583.541386 0.01
   name "road(29)"
   id "1231913401"
@@ -5083,6 +5310,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 651.323161 37.292604 0.01
   name "Atchison Avenue"
   id "1234648019"
@@ -5104,6 +5332,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -321.641311 475.581004 0.01
   name "Maiden Lane(1)"
   id "1234648023"
@@ -5133,6 +5362,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 859.895153 435.324178 0.01
   name "Indianapolis Boulevard"
   id "1276494568"
@@ -5178,6 +5408,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -47.002847 -24.433435 0.01
   name "East 122nd Street"
   id "17412261_1"
@@ -5211,6 +5442,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -248.954246 458.792729 0.01
   name "Maiden Lane(2)"
   id "17413400_1"
@@ -5245,6 +5477,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -235.150869 466.399727 0.01
   name "Maiden Lane(3)"
   id "17413400_2"
@@ -5280,6 +5513,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -57.27229 581.091768 0.01
   name "119th Street"
   id "17414708_1"
@@ -5310,6 +5544,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 150.693192 597.890508 0.01
   name "Stanton Avenue"
   id "17415082_1"
@@ -5335,6 +5570,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 351.161374 576.473065 0.01
   name "Wespark Avenue"
   id "17415204_1"
@@ -5368,6 +5604,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -161.428793 381.632008 0.01
   name "120th Street(2)"
   id "17415447_1"
@@ -5401,6 +5638,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 46.905056 -19.608167 0.01
   name "Davis Avenue"
   id "17415522_1"
@@ -5429,6 +5667,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 542.97661 591.353925 0.01
   name "Lincoln Avenue"
   id "17415833_1"
@@ -5459,6 +5698,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 453.161373 699.718436 0.01
   name "Lincoln Avenue(1)"
   id "17415833_2"
@@ -5487,6 +5727,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 657.029641 184.745001 0.01
   name "121st Street"
   id "1276494570_1"
@@ -5534,6 +5775,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation -411.234605 587.071556 0.01
   name "119th Street(1)"
   id "17414708_3"
@@ -5558,6 +5800,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -406.855152 583.792778 0.01
   name "Maiden Lane(4)"
   id "17418723_1"
@@ -5591,6 +5834,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -406.066458 573.728995 0.01
   name "Maiden Lane(5)"
   id "17418723_2"
@@ -5626,6 +5870,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -456.409391 573.917865 0.01
   name "119th Street(2)"
   id "1159432240_1"
@@ -5648,6 +5893,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -403.950989 319.9308 0.01
   name "road(30)"
   id "177388601_1"
@@ -5672,6 +5918,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -385.131614 316.144141 0.01
   name "road(31)"
   id "177388601_2"
@@ -5704,6 +5951,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -388.1279 320.859521 0.01
   name "Blossom Row"
   id "17419801_1"
@@ -5737,6 +5985,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 653.163303 286.351647 0.01
   name "Fred Street"
   id "17420033_1"
@@ -5772,6 +6021,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 546.511943 826.770512 0.01
   name "Indianapolis Boulevard(1)"
   id "1032477262_1"
@@ -5807,6 +6057,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 544.614801 817.930215 0.01
   name "Reese Street"
   id "17420899_1"
@@ -5836,6 +6087,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 428.715752 725.03679 0.01
   name "Reese Street(1)"
   id "17420899_2"
@@ -5864,6 +6116,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 848.886892 589.710474 0.01
   name "119th Street(3)"
   id "1222298760_2"
@@ -5904,6 +6157,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 449.431031 577.631486 0.01
   name "Superior Avenue"
   id "17423596_1"
@@ -5937,6 +6191,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -172.308931 380.603149 0.01
   name "Benjamin Place"
   id "17425998_1"
@@ -5972,6 +6227,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -111.616272 304.306314 0.01
   name "road(32)"
   id "177289738_3"
@@ -5996,6 +6252,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -199.143349 357.821552 0.01
   name "Benjamin Place(1)"
   id "17425998_2"
@@ -6029,6 +6286,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -235.624571 323.246882 0.01
   name "Benjamin Place(2)"
   id "17425998_3"
@@ -6060,6 +6318,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -112.766679 585.256543 0.01
   name "119th Street(4)"
   id "17414708_2"
@@ -6088,6 +6347,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -167.045834 581.722447 0.01
   name "Warwick Avenue"
   id "17429661_1"
@@ -6121,6 +6381,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -200.711103 575.611782 0.01
   name "119th Street(5)"
   id "1159432240_2"
@@ -6149,6 +6410,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -276.959714 336.437611 0.01
   name "Roosevelt Drive"
   id "17429453_3"
@@ -6179,6 +6441,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -279.056541 341.850589 0.01
   name "South Hamann Court East"
   id "17429777_1"
@@ -6207,6 +6470,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -273.452931 355.571075 0.01
   name "South Hamann Court East(1)"
   id "17429777_2"
@@ -6241,6 +6505,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -235.852714 328.518942 0.01
   name "Roosevelt Drive(1)"
   id "1202710343_1"
@@ -6272,6 +6537,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -278.75709 353.087801 0.01
   name "Roosevelt Drive(2)"
   id "1202710343_2"
@@ -6300,6 +6566,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -253.358282 452.22792 0.01
   name "South Hamann Court West"
   id "17429779_1"
@@ -6329,6 +6596,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -282.552435 408.099128 0.01
   name "South Hamann Court West(1)"
   id "17429779_2"
@@ -6358,6 +6626,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 154.553842 581.13232 0.01
   name "119th Street(6)"
   id "1024510380_2"
@@ -6392,6 +6661,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 261.724946 582.408854 0.01
   name "119th Street(7)"
   id "1024510380_6"
@@ -6425,6 +6695,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 251.709876 575.289935 0.01
   name "Lake Avenue"
   id "48378824_1"
@@ -6458,6 +6729,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -111.345684 378.028754 0.01
   name "road(33)"
   id "177289738_2"
@@ -6490,6 +6762,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -111.616593 326.753981 0.01
   name "road(34)"
   id "177289738_4"
@@ -6522,6 +6795,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -414.036468 444.885166 0.01
   name "road(35)"
   id "177388571_1"
@@ -6546,6 +6820,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -357.84711 430.468898 0.01
   name "road(36)"
   id "177388571_2"
@@ -6578,6 +6853,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -360.861974 435.317114 0.01
   name "Blossom Row(1)"
   id "17419801_3"
@@ -6611,6 +6887,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 57.17189 601.609774 0.01
   name "road(37)"
   id "803549161_1"
@@ -6639,6 +6916,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 105.64499 602.318535 0.01
   name "road(38)"
   id "803549161_2"
@@ -6667,6 +6945,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 105.399859 580.554812 0.01
   name "119th Street(8)"
   id "1024510380_7"
@@ -6700,6 +6979,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 647.423985 8.91463 0.01
   name "122nd Street"
   id "177388579_1"
@@ -6725,6 +7005,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 355.190391 583.520052 0.01
   name "119th Street(9)"
   id "1024510380_3"
@@ -6758,6 +7039,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 650.645607 129.946589 0.01
   name "Atchison Avenue(1)"
   id "48378830_5"
@@ -6788,6 +7070,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 648.791615 484.232434 0.01
   name "Atchison Avenue(2)"
   id "48378830_3"
@@ -6828,6 +7111,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 648.974165 434.458184 0.01
   name "Atchison Avenue(3)"
   id "48378830_6"
@@ -6868,6 +7152,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 749.013559 486.297361 0.01
   name "road(39)"
   id "1065094420_1"
@@ -6907,6 +7192,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 786.829969 439.047458 0.01
   name "road(40)"
   id "1065094420_3"
@@ -6946,6 +7232,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 948.570113 237.642564 0.01
   name "road(41)"
   id "1065094420_4"
@@ -6985,6 +7272,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 940.724857 238.636037 0.01
   name "road(42)"
   id "177388600_1"
@@ -7024,6 +7312,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 846.004858 237.727087 0.01
   name "road(43)"
   id "177388600_2"
@@ -7070,6 +7359,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 850.25421 284.705111 0.01
   name "Kelly Place(1)"
   id "658575609_1"
@@ -7105,6 +7395,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 849.98062 233.778708 0.01
   name "Kelly Place(2)"
   id "658575609_2"
@@ -7140,6 +7431,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 499.437486 9.045896 0.01
   name "road(44)"
   id "177388606_1"
@@ -7172,6 +7464,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 649.261592 381.449696 0.01
   name "Atchison Avenue(4)"
   id "48378830_4"
@@ -7212,6 +7505,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 649.128165 334.81047 0.01
   name "Atchison Avenue(5)"
   id "48378830_7"
@@ -7252,6 +7546,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 827.253828 388.585014 0.01
   name "road(45)"
   id "1065094420_2"
@@ -7291,6 +7586,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 99.295737 379.791879 0.01
   name "road(46)"
   id "177388613_1"
@@ -7323,6 +7619,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 97.655746 173.22431 0.01
   name "road(47)"
   id "177388613_2"
@@ -7355,6 +7652,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 53.472868 176.865256 0.01
   name "121st Street(1)"
   id "17427279_2"
@@ -7388,6 +7686,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 197.857559 -23.741266 0.01
   name "East 122nd Street(1)"
   id "17412261_4"
@@ -7421,6 +7720,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 193.881783 -19.772313 0.01
   name "road(48)"
   id "177388625_1"
@@ -7453,6 +7753,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 597.660206 531.826767 0.01
   name "road(49)"
   id "177388629_1"
@@ -7485,6 +7786,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 601.480118 388.040881 0.01
   name "120th Street(3)"
   id "17415447_4"
@@ -7518,6 +7820,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -0.828972 -20.016299 0.01
   name "road(50)"
   id "177388630_1"
@@ -7550,6 +7853,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3.68182 176.099887 0.01
   name "121st Street(2)"
   id "17427279_6"
@@ -7583,6 +7887,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 400.779358 -9.641873 0.01
   name "road(51)"
   id "177388632_1"
@@ -7615,6 +7920,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 255.63866 531.593631 0.01
   name "road(52)"
   id "177388624_4"
@@ -7647,6 +7953,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 305.166399 532.524551 0.01
   name "road(53)"
   id "177388624_6"
@@ -7679,6 +7986,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 301.167491 528.449005 0.01
   name "road(54)"
   id "177388636_1"
@@ -7711,6 +8019,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -52.416074 182.210532 0.01
   name "Calumet Avenue(6)"
   id "435394422_1"
@@ -7764,6 +8073,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -51.830594 219.408013 0.01
   name "Calumet Avenue(7)"
   id "435394431_1"
@@ -7803,6 +8113,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -107.324687 382.080912 0.01
   name "120th Street(4)"
   id "17415447_2"
@@ -7836,6 +8147,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 593.281615 8.618332 0.01
   name "122nd Street(1)"
   id "177388579_2"
@@ -7864,6 +8176,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 544.201399 8.098364 0.01
   name "122nd Street(2)"
   id "177388579_5"
@@ -7892,6 +8205,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 548.211956 12.370572 0.01
   name "Lincoln Avenue(2)"
   id "582885999_1"
@@ -7925,6 +8239,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 502.485381 182.259382 0.01
   name "121st Street(3)"
   id "17427279_3"
@@ -7958,6 +8273,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -402.259068 577.67453 0.01
   name "119th Street(10)"
   id "1159432240_3"
@@ -7986,6 +8302,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -248.019415 576.092865 0.01
   name "119th Street(11)"
   id "1159432240_5"
@@ -8014,6 +8331,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -170.995187 585.756236 0.01
   name "119th Street(12)"
   id "17414708_4"
@@ -8042,6 +8360,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -255.974538 586.481724 0.01
   name "119th Street(13)"
   id "17414708_5"
@@ -8071,6 +8390,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -40.501305 578.827046 0.01
   name "119th Street(14)"
   id "1024510380_1"
@@ -8104,6 +8424,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -23.922699 574.99204 0.01
   name "road(55)"
   id "723804400_1"
@@ -8134,6 +8455,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -25.130648 562.4773 0.01
   name "road(56)"
   id "723804400_2"
@@ -8165,6 +8487,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -26.557106 526.311337 0.01
   name "road(57)"
   id "723804401_1"
@@ -8201,6 +8524,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3.503496 537.112576 0.01
   name "road(58)"
   id "723804401_2"
@@ -8231,6 +8555,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 7.307081 558.72326 0.01
   name "road(59)"
   id "723804403_1"
@@ -8258,6 +8583,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3.769624 569.790268 0.01
   name "road(60)"
   id "723804403_2"
@@ -8288,6 +8614,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -19.870088 579.070469 0.01
   name "119th Street(15)"
   id "1024510380_9"
@@ -8321,6 +8648,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -11.413668 575.117577 0.01
   name "road(61)"
   id "723804405_1"
@@ -8353,6 +8681,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -2.983955 565.932612 0.01
   name "road(62)"
   id "723804405_3"
@@ -8385,6 +8714,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -111.25441 172.812947 0.01
   name "road(63)"
   id "764856109_2"
@@ -8423,6 +8753,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 751.702193 588.271616 0.01
   name "119th Street(16)"
   id "1222298760_1"
@@ -8463,6 +8794,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 828.51741 589.409446 0.01
   name "119th Street(17)"
   id "1222298760_3"
@@ -8503,6 +8835,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation -49.71328 389.571067 0.01
   name "Calumet Avenue(8)"
   id "435394431_2"
@@ -8549,6 +8882,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -48.70194 471.15657 0.01
   name "Calumet Avenue(9)"
   id "435394431_3"
@@ -8594,6 +8928,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -110.270793 463.664614 0.01
   name "road(64)"
   id "177289738_5"
@@ -8626,6 +8961,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -28.433367 254.131662 0.01
   name "road(65)"
   id "848826494_1"
@@ -8650,6 +8986,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -29.679337 208.327099 0.01
   name "road(66)"
   id "848826494_2"
@@ -8682,6 +9019,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -0.272221 180.07226 0.01
   name "road(67)"
   id "177388630_2"
@@ -8714,6 +9052,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 0.128699 215.717491 0.01
   name "road(68)"
   id "177388630_3"
@@ -8746,6 +9085,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 354.999808 533.43008 0.01
   name "road(69)"
   id "177388624_2"
@@ -8778,6 +9118,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 403.402116 533.912617 0.01
   name "road(70)"
   id "177388624_7"
@@ -8810,6 +9151,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 382.934679 583.846517 0.01
   name "119th Street(18)"
   id "1024510380_8"
@@ -8843,6 +9185,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 649.047872 680.021803 0.01
   name "Atchison Avenue(6)"
   id "48378830_1"
@@ -8884,6 +9227,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation -54.070861 -28.494647 0.01
   name "Calumet Avenue(10)"
   id "1276494565_1"
@@ -8929,6 +9273,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -54.579793 -98.971498 0.01
   name "Calumet Avenue(11)"
   id "1276494565_2"
@@ -8972,6 +9317,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 746.597772 577.901072 0.01
   name "Indianapolis Boulevard(2)"
   id "1276494567_1"
@@ -9023,6 +9369,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 764.343984 555.568824 0.01
   name "Indianapolis Boulevard(3)"
   id "1276494567_3"
@@ -9068,6 +9415,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 710.638503 587.747024 0.01
   name "119th Street(19)"
   id "1024510380_12"
@@ -9108,6 +9456,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 551.573022 585.850011 0.01
   name "119th Street(20)"
   id "1024510380_4"
@@ -9141,6 +9490,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 408.123458 584.143916 0.01
   name "119th Street(21)"
   id "1024510380_11"
@@ -9174,6 +9524,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 428.783939 584.389109 0.01
   name "119th Street(22)"
   id "1024510380_14"
@@ -9207,6 +9558,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 453.406657 584.679646 0.01
   name "119th Street(23)"
   id "1024510380_5"
@@ -9240,6 +9592,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 497.491249 585.210046 0.01
   name "119th Street(24)"
   id "1024510380_15"
@@ -9273,6 +9626,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3.160406 -23.996625 0.01
   name "East 122nd Street(2)"
   id "17412261_2"
@@ -9306,6 +9660,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 27.526755 -23.78422 0.01
   name "East 122nd Street(3)"
   id "17412261_5"
@@ -9339,6 +9694,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 50.852532 -23.650007 0.01
   name "East 122nd Street(4)"
   id "17412261_3"
@@ -9372,6 +9728,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 781.900898 533.47074 0.01
   name "Indianapolis Boulevard(4)"
   id "1276494567_2"
@@ -9417,6 +9774,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 792.613247 519.987812 0.01
   name "Indianapolis Boulevard(5)"
   id "1276494567_4"
@@ -9469,6 +9827,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -295.517632 354.28358 0.01
   name "South Hamann Court West(2)"
   id "1202710342_1"
@@ -9502,6 +9861,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -374.374076 359.366092 0.01
   name "Roosevelt Drive(3)"
   id "17429453_2"
@@ -9530,6 +9890,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -295.234765 342.526605 0.01
   name "Roosevelt Drive(4)"
   id "17429453_4"
@@ -9559,6 +9920,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 697.178473 587.589779 0.01
   name "119th Street(25)"
   id "1024510380_16"
@@ -9592,6 +9954,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 697.668977 537.382058 0.01
   name "road(71)"
   id "177388624_8"
@@ -9620,6 +9983,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -391.062622 495.808585 0.01
   name "Maiden Lane(6)"
   id "1234648022_1"
@@ -9653,6 +10017,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -343.106467 481.699494 0.01
   name "Maiden Lane(7)"
   id "1234648022_2"
@@ -9686,6 +10051,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 868.828769 424.086984 0.01
   name "Indianapolis Boulevard(6)"
   id "1276494569_1"
@@ -9738,6 +10104,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 975.403144 289.969842 0.01
   name "Indianapolis Boulevard(7)"
   id "1276494569_2"
@@ -9778,6 +10145,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -201.128314 476.931753 0.01
   name "Maiden Lane(8)"
   id "17413400_3"
@@ -9812,6 +10180,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -188.132543 478.039794 0.01
   name "Maiden Lane(9)"
   id "17413400_4"
@@ -9845,6 +10214,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 150.511025 577.05513 0.01
   name "Stanton Avenue(1)"
   id "17415082_2"
@@ -9873,6 +10243,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 350.964918 529.390014 0.01
   name "Wespark Avenue(1)"
   id "17415204_2"
@@ -9906,6 +10277,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 305.18088 385.549358 0.01
   name "120th Street(5)"
   id "17415447_5"
@@ -9939,6 +10311,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 49.504152 180.852527 0.01
   name "Davis Avenue(1)"
   id "17415522_2"
@@ -9967,6 +10340,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 55.072151 383.442699 0.01
   name "120th Street(6)"
   id "17415447_8"
@@ -10000,6 +10374,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 650.108778 177.678245 0.01
   name "Atchison Avenue(7)"
   id "48378830_9"
@@ -10033,6 +10408,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 856.700108 186.708335 0.01
   name "121st Street(4)"
   id "1276494570_2"
@@ -10074,6 +10450,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 989.369334 188.333168 0.01
   name "121st Street(5)"
   id "1276494570_3"
@@ -10110,6 +10487,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation -300.394787 339.900308 0.01
   name "South Hamann Court West(3)"
   id "1202710342_2"
@@ -10144,6 +10522,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -311.561817 296.578751 0.01
   name "South Hamann Court West(4)"
   id "1202710342_3"
@@ -10169,6 +10548,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -298.272318 358.986122 0.01
   name "Roosevelt Drive(5)"
   id "17429453_1"
@@ -10197,6 +10577,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -378.278174 377.1809 0.01
   name "Roosevelt Drive(6)"
   id "17429453_5"
@@ -10236,6 +10617,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -377.375328 364.074109 0.01
   name "Blossom Row(2)"
   id "17419801_2"
@@ -10269,6 +10651,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -373.467393 380.111611 0.01
   name "Blossom Row(3)"
   id "17419801_4"
@@ -10302,6 +10685,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 854.273458 288.75237 0.01
   name "Fred Street(1)"
   id "17420033_2"
@@ -10330,6 +10714,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 911.677717 289.489797 0.01
   name "Fred Street(2)"
   id "17420033_3"
@@ -10365,6 +10750,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 865.998402 340.57654 0.01
   name "road(72)"
   id "1065094420_5"
@@ -10404,6 +10790,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 910.158971 286.246833 0.01
   name "road(73)"
   id "1065094420_6"
@@ -10443,6 +10830,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 552.538743 819.207565 0.01
   name "Indianapolis Boulevard(8)"
   id "1032477262_2"
@@ -10492,6 +10880,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 659.361754 684.019056 0.01
   name "Indianapolis Boulevard(9)"
   id "1032477262_3"
@@ -10547,6 +10936,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 449.593092 530.368576 0.01
   name "Superior Avenue(1)"
   id "17423596_2"
@@ -10580,6 +10970,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -167.199186 571.264606 0.01
   name "Warwick Avenue(1)"
   id "17429661_2"
@@ -10614,6 +11005,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -168.256187 472.043588 0.01
   name "Warwick Avenue(2)"
   id "17429661_3"
@@ -10647,6 +11039,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -163.134717 575.223683 0.01
   name "119th Street(26)"
   id "1159432240_4"
@@ -10675,6 +11068,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -104.895968 574.634326 0.01
   name "119th Street(27)"
   id "1159432240_6"
@@ -10704,6 +11098,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -108.815721 581.222504 0.01
   name "road(74)"
   id "177289738_1"
@@ -10736,6 +11131,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -108.94522 570.675705 0.01
   name "road(75)"
   id "177289738_6"
@@ -10768,6 +11164,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 251.602781 527.517974 0.01
   name "Lake Avenue(1)"
   id "48378824_2"
@@ -10801,6 +11198,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 258.302161 385.146635 0.01
   name "120th Street(7)"
   id "17415447_10"
@@ -10834,6 +11232,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 154.018352 531.040876 0.01
   name "road(76)"
   id "177388624_1"
@@ -10866,6 +11265,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 202.422957 531.457317 0.01
   name "road(77)"
   id "177388624_9"
@@ -10898,6 +11298,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 649.182177 282.305928 0.01
   name "Atchison Avenue(8)"
   id "48378830_2"
@@ -10938,6 +11339,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 649.625056 231.153289 0.01
   name "Atchison Avenue(9)"
   id "48378830_10"
@@ -10978,6 +11380,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 498.491441 186.240598 0.01
   name "road(78)"
   id "177388606_2"
@@ -11010,6 +11413,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 498.763657 391.184683 0.01
   name "road(79)"
   id "177388606_3"
@@ -11042,6 +11446,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 457.067127 386.82625 0.01
   name "120th Street(8)"
   id "17415447_9"
@@ -11075,6 +11480,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 195.089181 182.41598 0.01
   name "road(80)"
   id "177388625_2"
@@ -11107,6 +11513,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 196.961723 388.663649 0.01
   name "road(81)"
   id "177388625_3"
@@ -11139,6 +11546,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 200.920403 384.672064 0.01
   name "120th Street(9)"
   id "17415447_12"
@@ -11172,6 +11580,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 101.688065 177.281365 0.01
   name "121st Street(6)"
   id "17427279_4"
@@ -11205,6 +11614,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 150.377496 177.729501 0.01
   name "121st Street(7)"
   id "17427279_9"
@@ -11238,6 +11648,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 146.351162 173.650415 0.01
   name "Stanton Avenue(2)"
   id "17415082_4"
@@ -11266,6 +11677,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 453.588485 534.408793 0.01
   name "road(82)"
   id "177388624_3"
@@ -11298,6 +11710,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 597.483087 383.99645 0.01
   name "road(83)"
   id "177388629_2"
@@ -11330,6 +11743,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 597.616235 179.575739 0.01
   name "road(84)"
   id "177388629_3"
@@ -11362,6 +11776,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 556.054716 182.763856 0.01
   name "121st Street(8)"
   id "17427279_8"
@@ -11395,6 +11810,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 601.623288 183.687278 0.01
   name "121st Street(9)"
   id "17427279_10"
@@ -11428,6 +11844,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -45.45366 175.326461 0.01
   name "121st Street(10)"
   id "17427279_1"
@@ -11468,6 +11885,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation -26.570498 175.622411 0.01
   name "121st Street(11)"
   id "17427279_11"
@@ -11501,6 +11919,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 495.468536 4.776847 0.01
   name "122nd Street(3)"
   id "177388579_3"
@@ -11531,6 +11950,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 446.626077 -3.752027 0.01
   name "122nd Street(4)"
   id "177388579_6"
@@ -11560,6 +11980,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 397.197203 -15.379673 0.01
   name "122nd Street(5)"
   id "177388579_4"
@@ -11590,6 +12011,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 399.798752 185.039341 0.01
   name "road(85)"
   id "177388632_2"
@@ -11622,6 +12044,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 399.85975 390.344957 0.01
   name "road(86)"
   id "177388632_3"
@@ -11654,6 +12077,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 357.385035 385.985559 0.01
   name "120th Street(10)"
   id "17415447_7"
@@ -11687,6 +12111,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 403.872375 386.371996 0.01
   name "120th Street(11)"
   id "17415447_13"
@@ -11720,6 +12145,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 199.052238 178.443143 0.01
   name "121st Street(12)"
   id "17427279_5"
@@ -11753,6 +12179,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 251.317156 378.086371 0.01
   name "Lake Avenue(2)"
   id "48378824_3"
@@ -11786,6 +12213,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 251.684704 172.217924 0.01
   name "Lake Avenue(3)"
   id "48378824_5"
@@ -11819,6 +12247,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 403.796707 181.083789 0.01
   name "121st Street(13)"
   id "17427279_7"
@@ -11852,6 +12281,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 456.163327 181.903299 0.01
   name "121st Street(14)"
   id "17427279_13"
@@ -11885,6 +12315,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 450.036506 379.76663 0.01
   name "Superior Avenue(2)"
   id "17423596_3"
@@ -11918,6 +12349,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 449.216903 174.849762 0.01
   name "Superior Avenue(3)"
   id "17423596_4"
@@ -11951,6 +12383,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 301.183822 381.505333 0.01
   name "road(87)"
   id "177388636_2"
@@ -11983,6 +12416,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 258.735471 179.286447 0.01
   name "121st Street(15)"
   id "17427279_12"
@@ -12016,6 +12450,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 549.025246 189.622099 0.01
   name "Lincoln Avenue(3)"
   id "582885999_2"
@@ -12049,6 +12484,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 502.788705 387.215411 0.01
   name "120th Street(12)"
   id "17415447_11"
@@ -12082,6 +12518,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 555.150962 387.652629 0.01
   name "120th Street(13)"
   id "17415447_14"
@@ -12115,6 +12552,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -7.617014 579.211309 0.01
   name "119th Street(28)"
   id "1024510380_10"
@@ -12148,6 +12586,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -59.536906 175.401767 0.01
   name "road(88)"
   id "764856109_1"
@@ -12181,6 +12620,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -89.953284 176.229184 0.01
   name "road(89)"
   id "764856109_3"
@@ -12213,6 +12653,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -42.747748 382.629787 0.01
   name "120th Street(14)"
   id "17415447_6"
@@ -12246,6 +12687,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 5.992686 383.032311 0.01
   name "120th Street(15)"
   id "17415447_15"
@@ -12279,6 +12721,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 648.472369 607.485058 0.01
   name "Atchison Avenue(10)"
   id "48378830_8"
@@ -12319,6 +12762,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 592.427763 586.334616 0.01
   name "119th Street(29)"
   id "1024510380_13"
@@ -12352,6 +12796,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 655.311253 587.088216 0.01
   name "119th Street(30)"
   id "1024510380_18"
@@ -12392,6 +12837,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 601.665031 535.86462 0.01
   name "road(90)"
   id "177388624_5"
@@ -12424,6 +12870,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 652.572704 536.397779 0.01
   name "road(91)"
   id "177388624_11"
@@ -12463,6 +12910,7 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 648.348059 580.004717 0.01
   name "Atchison Avenue(11)"
   id "48378830_11"
@@ -12503,6 +12951,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 648.569582 532.308418 0.01
   name "Atchison Avenue(12)"
   id "48378830_12"
@@ -12543,6 +12992,7 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
+  roadBoundingObject TRUE
   translation 350.395047 378.927529 0.01
   name "Wespark Avenue(2)"
   id "17415204_3"
@@ -12576,6 +13026,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 350.681683 173.193041 0.01
   name "Wespark Avenue(3)"
   id "17415204_4"
@@ -12609,6 +13060,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 305.324637 179.744106 0.01
   name "121st Street(16)"
   id "17427279_14"
@@ -12642,6 +13094,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 357.671476 180.310326 0.01
   name "121st Street(17)"
   id "17427279_15"
@@ -12675,6 +13128,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 51.111641 387.433274 0.01
   name "Davis Avenue(2)"
   id "17415522_3"
@@ -12704,6 +13158,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 53.021545 583.964949 0.01
   name "Davis Avenue(3)"
   id "17415522_4"
@@ -12729,6 +13184,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 7.391407 579.389916 0.01
   name "119th Street(31)"
   id "1024510380_17"
@@ -12762,6 +13218,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 56.986695 579.98495 0.01
   name "119th Street(32)"
   id "1024510380_19"
@@ -12795,6 +13252,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 100.062871 -24.105216 0.01
   name "East 122nd Street(5)"
   id "17412261_7"
@@ -12828,6 +13286,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 149.031612 -24.453907 0.01
   name "East 122nd Street(6)"
   id "17412261_8"
@@ -12861,6 +13320,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 250.407969 -36.335653 0.01
   name "Lake Avenue(4)"
   id "48378824_6"
@@ -12886,6 +13346,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 103.327515 383.847081 0.01
   name "120th Street(16)"
   id "17415447_3"
@@ -12919,6 +13380,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 152.390308 384.258806 0.01
   name "120th Street(17)"
   id "17415447_16"
@@ -12952,6 +13414,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 149.974158 527.004055 0.01
   name "Stanton Avenue(3)"
   id "17415082_3"
@@ -12980,6 +13443,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 148.351246 380.200594 0.01
   name "Stanton Avenue(4)"
   id "17415082_5"
@@ -13008,6 +13472,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 501.859395 534.893133 0.01
   name "road(92)"
   id "177388624_10"
@@ -13040,6 +13505,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 551.729481 535.38932 0.01
   name "road(93)"
   id "177388624_12"
@@ -13072,6 +13538,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 548.130819 394.594052 0.01
   name "Lincoln Avenue(4)"
   id "582885999_3"
@@ -13105,6 +13572,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 547.709157 539.351129 0.01
   name "Lincoln Avenue(5)"
   id "582885999_4"
@@ -13138,6 +13606,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 346.988943 -30.686268 0.01
   name "122nd Street(6)"
   id "177388579_7"
@@ -13167,6 +13636,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 297.874891 -32.122596 0.01
   name "122nd Street(7)"
   id "177388579_8"
@@ -13195,6 +13665,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 301.335245 175.694886 0.01
   name "road(94)"
   id "177388636_3"
@@ -13227,6 +13698,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 301.917638 -36.104409 0.01
   name "road(95)"
   id "177388636_4"
@@ -14372,6 +14844,7 @@ DEF pool Pose {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 150
+  step 100
   seed 87
 }
 Forest {

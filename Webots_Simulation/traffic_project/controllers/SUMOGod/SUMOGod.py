@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-28 14:45:03
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-05 20:26:34
+LastEditTime: 2024-08-07 12:35:51
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/SUMOGod/SUMOGod.py
 Description: 
 
@@ -56,8 +56,11 @@ class getSumoCarNode:
             tempnode=root_children_field.getMFNode(i)
             if usual_sumo_carname in tempnode.getDef():
                 # Node:{Def,Typename,color}
-                cardictionary[tempnode]={"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString(),"Typename":tempnode.getField("children").getMFNode(0).getTypeName()}
-        
+                if usual_sumo_carname == "SUMO_VEHICLE":   
+                    cardictionary[tempnode]={"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString(),"Typename":tempnode.getField("children").getMFNode(0).getTypeName()}
+                else:
+                    cardictionary[tempnode]={"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString()}                    
+                
         return cardictionary
 
     
@@ -190,7 +193,7 @@ class getSumoCarNode:
     param {str} _carName
     return {*}
     '''
-    def GetCarInfoByName(self, cardictionary:dict, _carName:str):
+    def GetCarInfoByName(self, cardictionary:dict, _carName:str, _objName:str):
         '''find a sumo car by def\n
             return the first car found: 
                 Webots Node,Def'''
@@ -204,7 +207,10 @@ class getSumoCarNode:
                 carNode= car
                 carDef=cardictionary[car]["Def"]
                 carName=cardictionary[car]["Name"]
-                carTypeName=cardictionary[car]["Typename"]
+                if _objName == "SUMO_VEHICLE":
+                    carTypeName=cardictionary[car]["Typename"]
+                else:
+                    carTypeName = _objName
                 break
             
         return carNode,carDef,carName,carTypeName
@@ -220,22 +226,25 @@ class getSumoCarNode:
     def MoveDroneToCar(self, carNode:Node, droneNode:Node, transVector, rotateAngle, isReset:bool):
         '''move a drone to a car while the car is in the map
             return True or False'''
-        carOr = carNode.getOrientation() # 获取车辆相对于世界坐标系的旋转矩阵
-        carTr = carNode.getPosition() # 获取相对位置
-        if carTr[0] < 5000:
-            carOrV = carNode.getField('rotation').getSFRotation() # 四维向量，旋转轴3维，旋转角1维
-            carTrV = carNode.getField('translation').getSFVec3f()
-            carOr = np.dot(np.reshape(carOr,(3,3)),tfs.euler.euler2mat(0,0,rotateAngle,"sxyz"))
-            carTr = np.reshape(carTr,(3,1))
-            droneTrSet = carTr + np.dot(carOr,np.array(transVector).reshape((3,1)))
-            carOrV[3] = carOrV[3] + carOrV[2] * rotateAngle
-            droneNode.getField('translation').setSFVec3f(list(droneTrSet))
-            droneNode.getField('rotation').setSFRotation(carOrV)
-            if isReset == True:
-                droneNode.resetPhysics()
-                droneNode.restartController()
-            return True
-        else:
+        try:
+            carOr = carNode.getOrientation() # 获取车辆相对于世界坐标系的旋转矩阵
+            carTr = carNode.getPosition() # 获取相对位置
+            if carTr[0] < 5000:
+                carOrV = carNode.getField('rotation').getSFRotation() # 四维向量，旋转轴3维，旋转角1维
+                carTrV = carNode.getField('translation').getSFVec3f()
+                carOr = np.dot(np.reshape(carOr,(3,3)),tfs.euler.euler2mat(0,0,rotateAngle,"sxyz"))
+                carTr = np.reshape(carTr,(3,1))
+                droneTrSet = carTr + np.dot(carOr,np.array(transVector).reshape((3,1)))
+                carOrV[3] = carOrV[3] + carOrV[2] * rotateAngle
+                droneNode.getField('translation').setSFVec3f(list(droneTrSet))
+                droneNode.getField('rotation').setSFRotation(carOrV)
+                if isReset == True:
+                    droneNode.resetPhysics()
+                    droneNode.restartController()
+                return True
+            else:
+                return False
+        except:
             return False
             
     '''
@@ -247,13 +256,13 @@ class getSumoCarNode:
     param {*} transVector
     return {*} true or false
     '''
-    def SingleProcessRandomInitBlock(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle):
+    def SingleProcessRandomInitBlock(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle, objName:str, fixedColorList=None):
         self.transVector = transVector
         self.rotateAngle = rotateAngle
         is_car_get = False
         while supervisor.step(timeStep) != -1:
             # 收集所有车辆信息
-            cardictionary = self.CollectSumoCar(supervisor)
+            cardictionary = self.CollectSumoCar(supervisor,objName)
             # 只要有信息，就随机选择一辆
             if cardictionary != {} and is_car_get == False:
                 # 获取必要的list
@@ -274,10 +283,13 @@ class getSumoCarNode:
                     # 修改标志位表示已经得到车辆,不需要再抓车辆
                     is_car_get = True
                     # 得到该车辆的数据
-                    carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(cardictionary, Name_list[availableList[randomChoice]])
+                    carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(cardictionary, Name_list[availableList[randomChoice]],objName)
                     self.currentUseCarNode = carNode
                     # 把此次得到的车辆DEF装进列表
                     self.usedSumoDefList.append(self.carName)
+                    # 更改该车辆的颜色
+                    if fixedColorList is not None:
+                        carNode.getField("children").getMFNode(0).getField("color").setSFVec3f(fixedColorList)
                 
             
             if is_car_get == True:
@@ -295,7 +307,7 @@ class getSumoCarNode:
     param {*} transVector
     return {*} true or false
     '''
-    def SingleProcessRandomInit(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle, fixedColorList=None):
+    def SingleProcessRandomInit(self, supervisor:Supervisor, timeStep:int, droneNode:Node, transVector, rotateAngle, objName:str, fixedColorList=None):
         '''no block version: single process random simulation init
             running until move a drone to a random car while the car is in the map
                 return True or False'''
@@ -308,7 +320,7 @@ class getSumoCarNode:
                 is_dict_get = True
         if is_dict_get == False:
             # 收集所有车辆信息
-            self.sumoDictionary = self.CollectSumoCar(supervisor)
+            self.sumoDictionary = self.CollectSumoCar(supervisor,objName)
             self.sumoGetFlag[self.sumoId] = True
         # 只要有信息，就随机选择一辆
         if self.sumoDictionary != {} and is_car_get == False:
@@ -330,7 +342,7 @@ class getSumoCarNode:
                 # 修改标志位表示已经得到车辆,不需要再抓车辆
                 is_car_get = True
                 # 得到该车辆的数据
-                carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(self.sumoDictionary, Name_list[availableList[randomChoice]])
+                carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(self.sumoDictionary, Name_list[availableList[randomChoice]],objName)
                 self.currentUseCarNode = carNode
                 # 把此次得到的车辆DEF装进列表
                 self.usedSumoDefList.append(self.carName)

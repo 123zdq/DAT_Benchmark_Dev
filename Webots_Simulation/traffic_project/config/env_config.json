@@ -22,11 +22,12 @@
                 "distance_scale": 0.01,
                 "reward_range": 7
         },
+        "Tracking_Object": "Pedestrian",
         "Sumo_Random_Mode": 2,
         "Sumo_Params": {
-                "max_sumo_car": 32,
-                "car_import_interval": 20.0,
-                "car_type": "bus",
+                "max_sumo_car": 60,
+                "car_import_interval": 60.0,
+                "car_type": "passenger",
                 "fixed_color": true,
                 "normalize_color": [1,0,0],
                 "max_car_speed": 15,
@@ -36,6 +37,17 @@
                 "min_rou_distance": 300,
                 "route_num": 100000
         },
+        "Other_Params": {
+                "max_obj_num": 10,
+                "obj_import_interval": 0.5,
+                "import_group_num": 4,
+                "obj_edge_distribution_random": false,
+                "obj_edge_distribution_multilateral": false,
+                "obj_edge_distribution_fixed": 0,
+                "obj_edge_distribution_max":10,
+                "obj_edge_distribution_min":-10
+
+        },
         "Socket_Ip": "127.0.0.1",
         "Out_Video": {
                 "channels": 4,
@@ -44,10 +56,10 @@
                 "total_time": 50.0
         },
         "Drone_Random_Config": {
-                "start_time_bias_ms": 620,
+                "start_time_bias_ms": 310,
 
-                "view_pitch_random": true,
-                "view_pitch_fixed": 1,
+                "view_pitch_random": false,
+                "view_pitch_fixed": 1.5,
                 "view_pitch_random_max": 1.57,
                 "view_pitch_random_min": 0.7,
 
@@ -56,18 +68,18 @@
                 "height_random_max": 25.0,
                 "height_random_min": 13.0,
 
-                "direction_random": true,
+                "direction_random": false,
                 "direction_fixed": 0,
-                "direction_random_max": 3.1415926535,
-                "direction_random_min": -3.1415926535,
+                "direction_random_max": 0.1,
+                "direction_random_min": -0.1,
 
-                "horizon_bias_random": true,
+                "horizon_bias_random": false,
                 "horizon_bias_multilateral": true,
                 "horizon_bias_fixed": 0,
                 "horizon_bias_random_max": 3,
                 "horizon_bias_random_min": 0.1,
                 
-                "verticle_bias_random": true,
+                "verticle_bias_random": false,
                 "verticle_bias_multilateral": true,
                 "verticle_bias_fixed": 0,
                 "verticle_bias_random_max": 3,

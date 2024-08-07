@@ -35,6 +35,12 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterSimple.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeDriver.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterDriver.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTankSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/humans/pedestrian/protos/Pedestrian.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bluebotics/shrimp/protos/Shrimp.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
 
 WorldInfo {
   info [
@@ -714,6 +720,7 @@ Cypress {
   enableBoundingObject FALSE
 }
 Crossroad {
+  boundingObject TRUE
   translation -88.125712 -329.715609 0.01
   name "crossroad(1)"
   id "-25462"
@@ -734,6 +741,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -130.590101 -33.219399 0.01
   name "crossroad(2)"
   id "10261232154"
@@ -915,6 +923,7 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 150
+  step 100
   seed 100
   children [
     Solid {
@@ -2290,6 +2299,7 @@ DEF SUMO_INTERFACE SumoInterface {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3.985036 -140.528447 0.01
   name "crossroad(3)"
   id "10267739701"
@@ -2300,6 +2310,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -253.834396 65.057379 0.01
   name "crossroad(4)"
   id "122641670"
@@ -2310,6 +2321,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 196.6232 222.800434 0.01
   name "crossroad(5)"
   id "123396147"
@@ -2329,6 +2341,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 69.291049 64.567117 0.01
   name "crossroad(6)"
   id "1736499182"
@@ -2351,6 +2364,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -29.55125 143.381828 0.01
   name "crossroad(7)"
   id "1736499199"
@@ -2373,6 +2387,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 264.999481 -91.481388 0.01
   name "crossroad(8)"
   id "1736513666"
@@ -2383,6 +2398,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 166.676037 -13.083853 0.01
   name "crossroad(9)"
   id "1736513671"
@@ -2405,6 +2421,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 40.615275 -169.73652 0.01
   name "crossroad(10)"
   id "1837240570"
@@ -2427,6 +2444,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 81.662661 54.702384 0.01
   name "crossroad(11)"
   id "1967655309"
@@ -2437,6 +2455,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -125.717494 23.883209 0.01
   name "crossroad(12)"
   id "1967750287"
@@ -2447,6 +2466,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3.566779 -215.775011 0.01
   name "crossroad(13)"
   id "2611822743"
@@ -2457,6 +2477,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -185.512074 -252.059479 0.01
   name "crossroad(14)"
   id "26666275"
@@ -2477,6 +2498,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 119.153078 -72.139967 0.01
   name "crossroad(15)"
   id "3299219872"
@@ -2487,6 +2509,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 88.380253 -110.380615 0.01
   name "crossroad(16)"
   id "3898602818"
@@ -2497,6 +2520,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 5.973702 -14.114627 0.01
   name "crossroad(17)"
   id "3898602843"
@@ -2507,6 +2531,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 93.421339 94.553063 0.01
   name "crossroad(18)"
   id "4019296931"
@@ -2517,6 +2542,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -4.294963 174.766326 0.01
   name "crossroad(19)"
   id "5766742578"
@@ -2527,6 +2553,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -56.770393 -92.082996 0.01
   name "crossroad(20)"
   id "71987057"
@@ -2549,6 +2576,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 138.939406 -248.136632 0.01
   name "crossroad(21)"
   id "72017905"
@@ -2569,6 +2597,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -155.613382 -13.265695 0.01
   name "crossroad(22)"
   id "73909660"
@@ -2591,6 +2620,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 191.710141 18.025912 0.01
   name "crossroad(23)"
   id "9619955250"
@@ -2601,6 +2631,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 15.231707 107.67265 0.01
   name "crossroad(24)"
   id "9642835947"
@@ -2611,6 +2642,7 @@ Crossroad {
   ]
 }
 Road {
+  roadBoundingObject TRUE
   translation 132.670066 -255.927355 0.01
   name "West 6th Street"
   id "-1100"
@@ -2659,6 +2691,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -35.814465 135.586179 0.01
   name "South Grand Avenue"
   id "161687301"
@@ -2719,6 +2752,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -48.951654 -98.317362 0.01
   name "West 6th Street(1)"
   id "161688768"
@@ -2766,6 +2800,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -130.590101 -33.219399 0.01
   name "West 6th Street(2)"
   id "161688770"
@@ -2813,6 +2848,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 75.57043 72.34975 0.01
   name "South Olive Street"
   id "161890281"
@@ -2858,6 +2894,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 61.478959 70.809813 0.01
   name "West 5th Street"
   id "186070725"
@@ -2904,6 +2941,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 264.999481 -91.481388 0.01
   name "West 5th Street(1)"
   id "234665446"
@@ -2958,6 +2996,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 46.885615 -161.946601 0.01
   name "South Hill Street"
   id "323126705"
@@ -3002,6 +3041,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 34.345359 -177.52678 0.01
   name "South Hill Street(1)"
   id "323126706"
@@ -3045,6 +3085,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 191.710141 18.025912 0.01
   name "South Hill Street(2)"
   id "382219819"
@@ -3094,6 +3135,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 158.858042 -6.848554 0.01
   name "West 5th Street(2)"
   id "382229043"
@@ -3141,6 +3183,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 143.327908 -242.683096 0.01
   name "South Broadway"
   id "382238932"
@@ -3195,6 +3238,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 93.421339 94.553063 0.01
   name "South Olive Street(1)"
   id "399179069"
@@ -3241,6 +3285,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 5.973702 -14.114627 0.01
   name "South Olive Street(2)"
   id "404995536"
@@ -3294,6 +3339,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 119.153078 -72.139967 0.01
   name "South Hill Street(3)"
   id "405164498"
@@ -3339,6 +3385,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 48.43383 -175.971116 0.01
   name "West 6th Street(3)"
   id "438258030"
@@ -3399,6 +3446,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -50.501019 -84.2923 0.01
   name "South Olive Street(3)"
   id "543624990"
@@ -3455,6 +3503,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -179.24252 -244.268928 0.01
   name "South Olive Street(4)"
   id "543624991"
@@ -3518,6 +3567,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -161.884302 -21.055147 0.01
   name "South Grand Avenue(1)"
   id "580285684"
@@ -3580,6 +3630,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -125.717494 23.883209 0.01
   name "South Grand Avenue(2)"
   id "603942759"
@@ -3626,6 +3677,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -253.834396 65.057379 0.01
   name "West 6th Street(4)"
   id "603942760"
@@ -3679,6 +3731,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -37.384056 149.598511 0.01
   name "West 5th Street(3)"
   id "606916054"
@@ -3743,6 +3796,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 81.662661 54.702384 0.01
   name "West 5th Street(4)"
   id "607576339"
@@ -3789,6 +3843,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -4.294963 174.766326 0.01
   name "South Grand Avenue(3)"
   id "608741620"
@@ -3835,6 +3890,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 188.804443 229.034778 0.01
   name "South Grand Avenue(4)"
   id "608741621"
@@ -3878,6 +3934,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 88.380253 -110.380615 0.01
   name "South Hill Street(4)"
   id "1046059231"
@@ -3916,6 +3973,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 172.931045 -5.281618 0.01
   name "South Hill Street(5)"
   id "1046059232"
@@ -3960,6 +4018,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 15.231707 107.67265 0.01
   name "West 5th Street(5)"
   id "1049269630"
@@ -4007,6 +4066,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation -147.794678 -19.500105 0.01
   name "West 6th Street(5)"
   id "1121913941"
@@ -4053,6 +4113,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 3.985036 -140.528447 0.01
   name "West 6th Street(6)"
   id "1122667815"
@@ -4099,6 +4160,7 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
+  roadBoundingObject TRUE
   translation 3.566779 -215.775011 0.01
   name "West 6th Street(7)"
   id "-1098_1"
@@ -4138,6 +4200,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -93.598721 -325.351418 0.01
   name "West 6th Street(8)"
   id "-1098_2"
@@ -4183,6 +4246,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -172.207 272.366 53.46
   rotation 0 0 1 -1.06
   name "bridge_seg1"
@@ -4206,6 +4270,7 @@ Road {
   leftBorderBoundingObject TRUE
 }
 Road {
+  roadBoundingObject TRUE
   translation -203.962 345.716 53.5
   rotation 0 0 -1 -0.523595307179586
   name "road(26)"
@@ -4247,6 +4312,7 @@ CurvedRoadSegment {
   leftBorderBoundingObject TRUE
 }
 Road {
+  roadBoundingObject TRUE
   translation -394.065 177.635 28.5
   rotation 0 0 -1 1.04
   name "road(28)"
@@ -4373,6 +4439,7 @@ CurvedRoadSegment {
   leftBorderBoundingObject TRUE
 }
 Road {
+  roadBoundingObject TRUE
   translation 16.0025 -165.495 53.5
   rotation 0 0 -1 -0.9
   name "road(31)"
@@ -4418,6 +4485,7 @@ CurvedRoadSegment {
   roadBoundingObject TRUE
 }
 Road {
+  roadBoundingObject TRUE
   translation -349.592 -93.4924 0
   rotation 0 0 1 0.7
   name "road(30)"

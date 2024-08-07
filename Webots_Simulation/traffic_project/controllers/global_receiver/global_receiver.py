@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-28 19:17:06
+LastEditTime: 2024-08-06 21:06:35
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -44,7 +44,10 @@ with open('../../config/env_config.json', 'r') as file:
     
 # set config data to sumo interface
 SUMO_Interface = robot.getFromDef("SUMO_INTERFACE")
-SUMO_Interface.getField("maxVehicles").setSFInt32(configData["Sumo_Params"]["max_sumo_car"])
+if configData["Tracking_Object"] == "SUMO_VEHICLE":
+    SUMO_Interface.getField("maxVehicles").setSFInt32(configData["Sumo_Params"]["max_sumo_car"])
+else:
+    SUMO_Interface.getField("maxVehicles").setSFInt32(0)
 randomSeed = random.randint(1, 100)
 SUMO_Interface.getField("seed").setSFInt32(randomSeed)
 
@@ -59,6 +62,7 @@ global_init = False
 
 # seperate different simulation modes
 FollowPort = None
+file_path = world_path[:-4] + '_net'
 if configData["Simulation_Mode"] == "demo":
     drone_manager.droneManager(robot, timestep, 0, [], configData, [], {}, [False])
     data = [0.] * 6
@@ -70,6 +74,11 @@ if configData["Simulation_Mode"] == "demo":
     getFromPortStr = ["0"] * FollowPort.data_size
     getFromPort[4] = -1
     getFromPort[5] = -1
+    if configData["Tracking_Object"] == "SUMO_VEHICLE":
+        if configData["Sumo_Random_Mode"] == 1:
+            randomorder.sumo_rou_random(file_path, int(4), configData["Sumo_Params"])
+        elif configData["Sumo_Random_Mode"] == 2:
+            randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
 elif configData["Simulation_Mode"] == "train":
     if System == "Linux":
         os.system("rm -rf ../../Files2Alg/*.txt")
@@ -85,11 +94,11 @@ elif configData["Simulation_Mode"] == "train":
     multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"],configData["Config_Agen_Num_Port"])
     multiCom.main()
     # activate map random init
-    file_path = world_path[:-4] + '_net'
-    if configData["Sumo_Random_Mode"] == 1:
-        randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*3), configData["Sumo_Params"])
-    elif configData["Sumo_Random_Mode"] == 2:
-        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
+    if configData["Tracking_Object"] == "SUMO_VEHICLE":
+        if configData["Sumo_Random_Mode"] == 1:
+            randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*3), configData["Sumo_Params"])
+        elif configData["Sumo_Random_Mode"] == 2:
+            randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section
@@ -108,11 +117,11 @@ elif configData["Simulation_Mode"] == "video":
         os.mkdir("../../droneVideos/DRONE"+str(i))    
         
     # activate map random init
-    file_path = world_path[:-4] + '_net'
-    if configData["Sumo_Random_Mode"] == 1:
-        randomorder.sumo_rou_random(file_path, int(configData["Out_Video"]["channels"]*2), configData["Sumo_Params"])
-    elif configData["Sumo_Random_Mode"] == 2:
-        randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
+    if configData["Tracking_Object"] == "SUMO_VEHICLE":
+        if configData["Sumo_Random_Mode"] == 1:
+            randomorder.sumo_rou_random(file_path, int(configData["Out_Video"]["channels"]*2), configData["Sumo_Params"])
+        elif configData["Sumo_Random_Mode"] == 2:
+            randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section

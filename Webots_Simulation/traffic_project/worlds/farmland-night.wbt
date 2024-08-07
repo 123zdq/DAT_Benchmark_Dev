@@ -24,6 +24,12 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterSimple.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeDriver.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterDriver.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTankSimple.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/humans/pedestrian/protos/Pedestrian.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bluebotics/shrimp/protos/Shrimp.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
 
 WorldInfo {
   info [
@@ -74,6 +80,7 @@ DEF land Floor {
   }
 }
 Crossroad {
+  boundingObject TRUE
   translation -3210.33699 -2809.414427 0.01
   name "way"
   id "-59155"
@@ -94,6 +101,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3167.680643 -2824.971687 0.01
   name "way(1)"
   id "-59174"
@@ -114,6 +122,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1260.52203 1945.695316 0.01
   name "way(2)"
   id "-59198"
@@ -136,6 +145,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1020.579005 1940.111066 0.01
   name "way(3)"
   id "-59199"
@@ -158,6 +168,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1264.365416 442.914628 0.01
   name "way(4)"
   id "-59200"
@@ -180,6 +191,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1016.975724 425.198472 0.01
   name "way(5)"
   id "-59201"
@@ -202,6 +214,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1267.817832 -907.046019 0.01
   name "way(6)"
   id "-59202"
@@ -224,6 +237,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1013.793663 -912.63124 0.01
   name "way(7)"
   id "-59203"
@@ -246,6 +260,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 2507.028426 3886.985578 0.01
   name "way(8)"
   id "-59237"
@@ -256,6 +271,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3182.450633 3860.453539 0.01
   name "way(9)"
   id "-59239"
@@ -278,6 +294,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1255.866257 3884.352395 0.01
   name "way(10)"
   id "-59240"
@@ -297,6 +314,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -3192.203286 3883.443446 0.01
   name "way(11)"
   id "-59241"
@@ -319,6 +337,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1025.170465 3885.815874 0.01
   name "way(12)"
   id "-59261"
@@ -339,6 +358,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3180.449747 2954.731241 0.01
   name "way(13)"
   id "-59278"
@@ -349,6 +369,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3176.473972 1155.10129 0.01
   name "way(14)"
   id "-59279"
@@ -359,6 +380,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3173.289391 -286.351649 0.01
   name "way(15)"
   id "-59280"
@@ -369,6 +391,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 3169.708446 -1907.165416 0.01
   name "way(16)"
   id "-59283"
@@ -379,6 +402,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 2184.320925 -2822.780847 0.01
   name "way(17)"
   id "-59284"
@@ -389,6 +413,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -26.436915 -2817.578903 0.01
   name "way(18)"
   id "-59285"
@@ -399,6 +424,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -2298.557708 -2811.833642 0.01
   name "way(19)"
   id "-59286"
@@ -409,6 +435,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -2157.368878 3883.886668 0.01
   name "crossroad(1)"
   id "-59351"
@@ -419,6 +446,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -585.936095 3884.739828 0.01
   name "crossroad(2)"
   id "-59352"
@@ -429,6 +457,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1453.133517 3886.135976 0.01
   name "crossroad(3)"
   id "-59353"
@@ -439,6 +468,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -3194.833724 2912.709562 0.01
   name "crossroad(4)"
   id "-59365"
@@ -449,6 +479,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -3198.842076 1433.394337 0.01
   name "crossroad(5)"
   id "-59366"
@@ -459,6 +490,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -3203.264026 -198.670175 0.01
   name "crossroad(6)"
   id "-59367"
@@ -469,6 +501,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -3207.644898 -1815.68563 0.01
   name "crossroad(7)"
   id "-59368"
@@ -479,6 +512,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -59.845375 -910.053882 0.01
   name "crossroad(8)"
   id "-59370"
@@ -489,6 +523,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -2030.630277 -905.087683 0.01
   name "crossroad(9)"
   id "-59371"
@@ -499,6 +534,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 2133.353057 -915.222594 0.01
   name "crossroad(10)"
   id "-59372"
@@ -509,6 +545,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -2090.948842 449.434359 0.01
   name "crossroad(11)"
   id "-59373"
@@ -519,6 +556,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -120.253973 433.978801 0.01
   name "crossroad(12)"
   id "-59374"
@@ -529,6 +567,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1949.787204 418.072146 0.01
   name "crossroad(13)"
   id "-59375"
@@ -539,6 +578,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1867.471808 1947.249942 0.01
   name "crossroad(14)"
   id "-59376"
@@ -549,6 +589,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 317.540079 1941.788607 0.01
   name "crossroad(15)"
   id "-59377"
@@ -559,6 +600,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1935.187478 1937.986747 0.01
   name "crossroad(16)"
   id "-59378"
@@ -569,6 +611,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1258.462066 2751.125749 0.01
   name "crossroad(17)"
   id "-59380"
@@ -579,6 +622,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1262.011632 1363.261496 0.01
   name "crossroad(18)"
   id "-59381"
@@ -589,6 +633,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1265.366365 51.529517 0.01
   name "crossroad(19)"
   id "-59382"
@@ -599,6 +644,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation -1269.657703 -1626.490161 0.01
   name "crossroad(20)"
   id "-59383"
@@ -609,6 +655,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1022.250909 2643.019114 0.01
   name "crossroad(21)"
   id "-59384"
@@ -619,6 +666,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1018.532583 1079.743598 0.01
   name "crossroad(22)"
   id "-59385"
@@ -629,6 +677,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1014.940888 -430.303945 0.01
   name "crossroad(23)"
   id "-59386"
@@ -639,6 +688,7 @@ Crossroad {
   ]
 }
 Crossroad {
+  boundingObject TRUE
   translation 1011.820446 -1742.232513 0.01
   name "crossroad(24)"
   id "-59387"
@@ -649,6 +699,7 @@ Crossroad {
   ]
 }
 Road {
+  roadBoundingObject TRUE
   translation 3160.68066 -2824.956258 0.01
   name "way"
   id "-6923"
@@ -688,6 +739,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3167.696109 -2817.971704 0.01
   name "way(1)"
   id "-6987"
@@ -727,6 +779,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3176.473972 1155.10129 0.01
   name "way(2)"
   id "-6993"
@@ -760,6 +813,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3173.289391 -286.351649 0.01
   name "way(3)"
   id "-6998"
@@ -793,6 +847,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3169.708446 -1907.165416 0.01
   name "way(4)"
   id "-7005"
@@ -826,6 +881,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 2184.320925 -2822.780847 0.01
   name "way(5)"
   id "-7011"
@@ -859,6 +915,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -26.436915 -2817.578903 0.01
   name "way(6)"
   id "-7016"
@@ -892,6 +949,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -2298.557708 -2811.833642 0.01
   name "way(7)"
   id "-7021"
@@ -931,6 +989,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1453.133517 3886.135976 0.01
   name "way(8)"
   id "-7091"
@@ -964,6 +1023,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3207.644898 -1815.68563 0.01
   name "way(9)"
   id "-7109"
@@ -1003,6 +1063,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3194.833724 2912.709562 0.01
   name "way(10)"
   id "-7114"
@@ -1036,6 +1097,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3198.842076 1433.394337 0.01
   name "way(11)"
   id "-7120"
@@ -1069,6 +1131,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3203.264026 -198.670175 0.01
   name "way(12)"
   id "-7126"
@@ -1102,6 +1165,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3205.169502 -901.98315 0.01
   name "way(13)"
   id "-7140"
@@ -1131,6 +1195,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 2133.353057 -915.222594 0.01
   name "way(14)"
   id "-7147"
@@ -1160,6 +1225,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3201.484114 458.278149 0.01
   name "way(15)"
   id "-7153"
@@ -1189,6 +1255,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1949.787204 418.072146 0.01
   name "way(16)"
   id "-7167"
@@ -1218,6 +1285,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3197.440258 1950.757574 0.01
   name "way(17)"
   id "-7173"
@@ -1247,6 +1315,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1935.187478 1937.986747 0.01
   name "way(18)"
   id "-7187"
@@ -1276,6 +1345,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1258.462066 2751.125749 0.01
   name "way(19)"
   id "-7197"
@@ -1315,6 +1385,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1272.695725 -2814.4777 0.01
   name "way(20)"
   id "-7217"
@@ -1344,6 +1415,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1011.820446 -1742.232513 0.01
   name "way(21)"
   id "-7249"
@@ -1373,6 +1445,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1269.657703 -1626.490161 0.01
   name "way(22)"
   id "-6849_1"
@@ -1412,6 +1485,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1267.799931 -900.046042 0.01
   name "way(23)"
   id "-6849_2"
@@ -1451,6 +1525,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -2030.630277 -905.087683 0.01
   name "way(24)"
   id "-6890_1"
@@ -1490,6 +1565,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1260.817854 -907.063449 0.01
   name "way(25)"
   id "-6890_2"
@@ -1529,6 +1605,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1018.532583 1079.743598 0.01
   name "way(26)"
   id "-6852_1"
@@ -1568,6 +1645,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1016.959075 418.198492 0.01
   name "way(27)"
   id "-6852_2"
@@ -1607,6 +1685,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -120.253973 433.978801 0.01
   name "way(28)"
   id "-7161_1"
@@ -1646,6 +1725,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1023.97552 425.144996 0.01
   name "way(29)"
   id "-7161_2"
@@ -1685,6 +1765,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1867.471808 1947.249942 0.01
   name "way(30)"
   id "-6887_1"
@@ -1724,6 +1805,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1253.522051 1945.677987 0.01
   name "way(31)"
   id "-6887_2"
@@ -1763,6 +1845,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1262.011632 1363.261496 0.01
   name "way(32)"
   id "-7205_1"
@@ -1802,6 +1885,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1260.504126 1952.695293 0.01
   name "way(33)"
   id "-7205_2"
@@ -1841,6 +1925,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -2090.948842 449.434359 0.01
   name "way(34)"
   id "-6893_1"
@@ -1880,6 +1965,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1257.36563 442.859957 0.01
   name "way(35)"
   id "-6893_2"
@@ -1919,6 +2005,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1265.366365 51.529517 0.01
   name "way(36)"
   id "-7212_1"
@@ -1958,6 +2045,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1264.347514 449.914605 0.01
   name "way(37)"
   id "-7212_2"
@@ -1997,6 +2085,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3192.222254 3876.443472 0.01
   name "way(38)"
   id "-6908_2"
@@ -2036,6 +2125,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -3185.203297 3883.43362 0.01
   name "way(39)"
   id "-6935_2"
@@ -2075,6 +2165,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3180.449747 2954.731241 0.01
   name "way(40)"
   id "-6926_1"
@@ -2114,6 +2205,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3182.466096 3867.453522 0.01
   name "way(41)"
   id "-6926_2"
@@ -2149,6 +2241,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 2507.028426 3886.985578 0.01
   name "way(42)"
   id "-6940_1"
@@ -2188,6 +2281,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 3189.445245 3860.178964 0.01
   name "way(43)"
   id "-6940_2"
@@ -2223,6 +2317,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -2157.368878 3883.886668 0.01
   name "way(44)"
   id "-7078_1"
@@ -2262,6 +2357,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -1248.866258 3884.356443 0.01
   name "way(45)"
   id "-7078_2"
@@ -2301,6 +2397,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -585.936095 3884.739828 0.01
   name "way(46)"
   id "-7085_1"
@@ -2340,6 +2437,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1032.170463 3885.82111 0.01
   name "way(47)"
   id "-7085_2"
@@ -2379,6 +2477,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1025.176724 3878.815877 0.01
   name "way(48)"
   id "-7227_2"
@@ -2419,6 +2518,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation -59.845375 -910.053882 0.01
   name "way(49)"
   id "-7135_1"
@@ -2458,6 +2558,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1020.793644 -912.647443 0.01
   name "way(50)"
   id "-7135_2"
@@ -2497,6 +2598,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1014.940888 -430.303945 0.01
   name "way(51)"
   id "-7243_1"
@@ -2536,6 +2638,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1013.777013 -919.63122 0.01
   name "way(52)"
   id "-7243_2"
@@ -2575,6 +2678,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 317.540079 1941.788607 0.01
   name "way(53)"
   id "-7181_1"
@@ -2614,6 +2718,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1027.578986 1940.094807 0.01
   name "way(54)"
   id "-7181_2"
@@ -2653,6 +2758,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1022.250909 2643.019114 0.01
   name "way(55)"
   id "-7235_1"
@@ -2692,6 +2798,7 @@ Road {
   splineSubdivision 0
 }
 Road {
+  roadBoundingObject TRUE
   translation 1020.562355 1933.111085 0.01
   name "way(56)"
   id "-7235_2"
@@ -5383,6 +5490,7 @@ DEF ORIGIN BmwX5Simple {
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 150
+  step 100
   seed 95
 }
 Robot {

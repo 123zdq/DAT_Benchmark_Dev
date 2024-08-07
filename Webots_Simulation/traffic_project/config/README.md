@@ -47,11 +47,14 @@
                 "reward_range": 7		
             	// The maximum range(m)
         },
+    	"Tracking_Object": "SUMO_VEHICLE",
+    	// Defines which object to track. "SUMO_VEHICLE" refers to automobile vehiles controlled by sumo. Other example objects include "Pedestrian", "Shrimp", "Create", "Sojourner", "Mantis". What's more, customized objects are supported, which can be referenced in the user manual.
         "Sumo_Random_Mode": 2,			
     	// The sumo line has a randomization mode that allows you to choose 1 or 2, with 2 being more recommended.
         "Sumo_Params": {
-        // Adjust the parameters of sumo random initialization.
+        // Adjust the parameters of "SUMO_VEHICLE" random initialization.
                 "max_sumo_car": 20,
+            	// Maximum vehecles imported into the world.
                 "car_import_interval": 60.0,
             	// The time interval between each batch of vehicles entering the map.(s)
                 "car_type": "private",
@@ -65,8 +68,25 @@
                 "max_car_decel": 5,
             	// (m/s^2)
                 "max_rou_distance": 3000,
+            	// The route distance is between [min, max]. If the gap between min and max is too small, the routes might not be generated.
                 "min_rou_distance": 200,
                 "route_num": 30000
+        },
+    	"Other_Params": {
+        // Adjust the parameters except "SUMO_VEHICLE" random initialization.
+                "max_obj_num": 10,
+            	// Maximum objects imported into the world.
+                "obj_import_interval": 0.5,
+            	// The time interval between each batch of objects entering the map.(s)
+                "import_group_num": 4,
+            	// The number of objects in a batch, which is realted to the number of agents expected to be trained.
+                "obj_edge_distribution_random": false,
+            	// Whether objects should be randomly distrubuted perpendicular to the roads. If false, use the fixed value below. If true, random between min and max.
+                "obj_edge_distribution_multilateral": false,
+            	// If true, the random form becomes to [min, max]∪[-max,-min].
+                "obj_edge_distribution_fixed": 0,
+                "obj_edge_distribution_max":10,
+                "obj_edge_distribution_min":-10
         },
         "Socket_Ip": "127.0.0.1",
     	// Ip for udp communication.

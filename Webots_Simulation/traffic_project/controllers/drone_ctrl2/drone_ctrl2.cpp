@@ -435,9 +435,7 @@ int main(int argc, char **argv)
     {
       rewardG.updateTrackingCar();
     }
-
     state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, error[4], error[5]);
-
     if (config.get()->simulationMode == string("demo"))
     {
       usrPublic::vector4 trackin = {};
@@ -637,7 +635,7 @@ int main(int argc, char **argv)
     }
     else if (config.get()->simulationMode == string("demo"))
     {
-      std::cout << "  reward: " << state.reward << std::endl;
+      // std::cout << "  reward: " << state.reward << std::endl;
       if (config.get()->droneSupervisorCtrl == true)
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
