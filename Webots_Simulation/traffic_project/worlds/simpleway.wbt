@@ -28,6 +28,13 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/sphero/bb8/protos/BB-8.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/sony/aibo/protos/AiboErs7.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/robotis/bioloid/protos/BioloidDog.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nex/protos/FireBird6.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/scout/protos/Scout.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/epfl/biorob/protos/GhostDog.proto"
+IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/fujitsu/hoap2/protos/Hoap2.proto"
 
 WorldInfo {
   info [
@@ -49,8 +56,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.19820651413900936 -0.09564580277579307 0.9754824745551489 4.021524856483768
-  position 103.87868862487211 127.4392585474977 70.67051940646769
+  orientation -0.18891384013992377 -0.06462219733250815 0.979865058370542 3.7884482861472817
+  position 7.094753763212833 7.739896651296328 3.8074902018671497
   near 3
 }
 TexturedBackground {

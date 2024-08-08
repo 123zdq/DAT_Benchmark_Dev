@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-06 21:06:35
+LastEditTime: 2024-08-08 10:26:44
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -26,6 +26,20 @@ import random
 import os
 import platform
 import transforms3d as tfs
+import sys
+sys.path.append("../../config")
+import safetyCheck
+
+def check(input:str, container:list):
+        is_contain = False
+        for i in range(len(container)):
+            if input == container[i]:
+                is_contain = True
+        if is_contain == True:
+            return input
+        else:
+            return container[0]
+
 
 # check running system
 System = platform.system()
@@ -41,6 +55,12 @@ world_path = robot.getWorldPath()
 with open('../../config/env_config.json', 'r') as file:
     configData = json.load(file)
     file.close()
+    
+# safety check
+configData["Simulation_Mode"] = check(str(configData["Simulation_Mode"]),safetyCheck.SIMULATION_MODE)
+configData["Tracking_Object"] = check(configData["Tracking_Object"],safetyCheck.TRACKING_OBJECT)
+configData["Reward_Config"]["reward_mode"] = check(configData["Reward_Config"]["reward_mode"],safetyCheck.REWARD_MODE)
+configData["Sumo_Params"]["car_type"] = check(configData["Sumo_Params"]["car_type"],safetyCheck.CAR_TYPE)
     
 # set config data to sumo interface
 SUMO_Interface = robot.getFromDef("SUMO_INTERFACE")

@@ -1,6 +1,20 @@
 import math
 import json
 import random
+import sys
+import sys
+sys.path.append("../../config")
+import safetyCheck
+
+def check(input:str, container:list):
+        is_contain = False
+        for i in range(len(container)):
+            if input == container[i]:
+                is_contain = True
+        if is_contain == True:
+            return input
+        else:
+            return container[0]
 
 class SumoSupervisorPlugin:
     def __init__(self, supervisor, traci, net):
@@ -8,6 +22,11 @@ class SumoSupervisorPlugin:
         with open('../../config/env_config.json', 'r') as file:
             self.configData = json.load(file)
             file.close()
+        # safety check
+        self.configData["Simulation_Mode"] = check(str(self.configData["Simulation_Mode"]),safetyCheck.SIMULATION_MODE)
+        self.configData["Tracking_Object"] = check(self.configData["Tracking_Object"],safetyCheck.TRACKING_OBJECT)
+        self.configData["Reward_Config"]["reward_mode"] = check(self.configData["Reward_Config"]["reward_mode"],safetyCheck.REWARD_MODE)
+        self.configData["Sumo_Params"]["car_type"] = check(self.configData["Sumo_Params"]["car_type"],safetyCheck.CAR_TYPE)
         if self.configData["Tracking_Object"] != "SUMO_VEHICLE":
             self.supervisor = supervisor
             self.isInit = False
@@ -131,6 +150,7 @@ class SumoSupervisorPlugin:
                 self.objInfo[tempnode] = {"Def":tempnode.getDef(),"Name":tempnode.getField("name").getSFString(),"Index":i}
                 
     def add_obj(self,defName:str,count:int,setPoint:list,height:float,addPosition:int):
+        rotation = random.uniform(-math.pi,math.pi)
         if self.configData["Tracking_Object"] == "Pedestrian":
             pointNum = random.randint(2,4)# random points
             trajectoryStr = "--trajectory="
@@ -140,8 +160,11 @@ class SumoSupervisorPlugin:
                 else:
                     trajectoryStr = trajectoryStr + str(round(setPoint[0]+random.uniform(-30,30),3)) + " " + str(round(setPoint[1]+random.uniform(-30,30),3)) + ","
             speedStr = "--speed=2"
-        protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' name "' + str(count) + '"' + ' controllerArgs' + ' ["' + speedStr + '","' + trajectoryStr + '"]' + ' }'
-        # protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' name "' + str(count) + '"' + ' }'        
+            protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' rotation 0 0 1 '+ str(rotation) + ' name "' + str(count) + '"' + ' controllerArgs' + ' ["' + speedStr + '","' + trajectoryStr + '"]' + ' }'
+        elif self.configData["Tracking_Object"] == "Hoap2":
+            protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' rotation 0 0 1 '+ str(rotation) + ' name "' + str(count) + '"' + ' controllerArgs' + ' ["walk"]' + ' }'
+        else:
+            protoString = 'DEF ' + defName + str(count) + ' ' + self.configData["Tracking_Object"] + ' { translation ' + str(setPoint[0]) + ' ' + str(setPoint[1]) + ' ' + str(height) + ' rotation 0 0 1 '+ str(rotation) + ' name "' + str(count) + '"' + ' }'        
         self.rootChildField.importMFNodeFromString(addPosition,protoString)
         
 
@@ -149,7 +172,9 @@ class SumoSupervisorPlugin:
     def update_obj(self,objName:str,count:int,setPoint:list,height:float):
         objNode,objDef,objIndex = self.getObjInfoByName(objName)
         trList = [setPoint[0],setPoint[1],height]
+        roList = [0,0,1,random.uniform(-math.pi,math.pi)]
         objNode.getField('translation').setSFVec3f(trList)
+        objNode.getField('rotation').setSFRotation(roList)
         objNode.getField('name').setSFString(str(count))
         objNode.restartController()
         objNode.resetPhysics()
