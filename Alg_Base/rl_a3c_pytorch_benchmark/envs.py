@@ -82,9 +82,10 @@ class Envs:
             # self.tot=0
 
             self.st = time.time()
+            self.ts = 0
 
             # self.actions = []  # should modify
-            
+
             if os.path.exists("./PPO_logs/steps.txt"):
                 with open("./PPO_logs/steps.txt", "r") as file:
                     self.steps = int(file.readline().strip())
@@ -97,13 +98,14 @@ class Envs:
         def step(self, action: int):
             # self.actions.append(action)
             self.steps += 1
+            self.ts += 1
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
 
                 self.SummaryWriter.add_scalar("rewards", self.rewards, self.steps)
                 self.SummaryWriter.add_scalar(
-                    "runtime/step(s)", (time.time() - self.st) / self.steps, self.steps
+                    "runtime/step(s)", (time.time() - self.st) / self.ts, self.ts
                 )
                 with open("./PPO_logs/steps.txt", "w") as file:
                     file.write(str(self.steps))
