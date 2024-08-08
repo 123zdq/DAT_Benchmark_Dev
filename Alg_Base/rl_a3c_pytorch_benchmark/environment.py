@@ -9,6 +9,7 @@ import time
 import os
 from logger_cfg import create_logger
 import copy
+from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward
 # import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
@@ -83,7 +84,8 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                              action_list=[env_conf["Forward_Speed"],env_conf["Backward_Speed"],env_conf["Left_Speed"],\
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
-                             scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"])
+                             scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"],\
+                             reward_type=env_conf["RewardType"])
         process_func = Identity
         return env,process_func
 
@@ -107,7 +109,7 @@ class BenchEnv_Multi():
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
         port_process,end_reward,end_reward_list,scene,weather,auto_start,\
-        Control_Frequence = 500) -> None:
+        Control_Frequence = 500,reward_type="default") -> None:
         
         self.Action_dim = Action_dim
         self.process_state = process_state
@@ -214,6 +216,12 @@ class BenchEnv_Multi():
         self.end_reward = end_reward
         self.end_reward_list = end_reward_list
 
+        # reward type
+        if reward_type not in ["default","E2E","DVAT","ENHANCE"]:
+            raise AttributeError(f"reward_type: {reward_type} is not legal! Legal ones: ['default','E2E','DVAT','ENHANCE']")
+        else:
+            self.reward_type = reward_type
+
     """
         step: 
             1. Send an action to server through socket
@@ -282,6 +290,7 @@ class BenchEnv_Multi():
             self.logger.info('Start Getting reward_params')
             reward_params = self.recv_reward_params.read()
             self.logger.info('Get Reward Params:  '+str(reward_params))
+            self.logger.info(f'delta y: {reward_params[-5]-reward_params[-8]} delta x: {reward_params[-4]-reward_params[-7]} delta z: {reward_params[-3]-reward_params[-6]}')
             self.SuppleInfo.append(reward_params)
         if self.CloudPoint:
             self.logger.info('Start Getting point_cloud')
@@ -289,12 +298,12 @@ class BenchEnv_Multi():
             self.logger.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
 
-        self.logger.info('Get Direction of the car:  '+str(reward_params[-1]))
+        self.logger.info('Get Direction of the car:  '+str(reward_params[-2]))
 
         ###### Test Cheat
         if prob is not None:
             
-            cardir = int(reward_params[-1])
+            cardir = int(reward_params[-2])
             if cardir == 0:
                 dynamics = np.array([0,0,0,0,0,0,1])
             elif cardir == 1:
@@ -310,9 +319,16 @@ class BenchEnv_Multi():
             norm = np.linalg.norm(dynamics - prob_np)
             norm = float(norm)
             self.logger.info(f'Norm between dynamics and predict is {norm}')
-        #     reward = 2-norm
-            # print(type(norm))
-            # print(norm)
+        
+        if self.reward_type == "default":
+            pass
+        elif self.reward_type == "E2E":
+            reward = get_E2E_reward()
+        elif self.reward_type == "DVAT":
+            reward = get_DVAT_reward()
+        elif self.reward_type == "ENHANCE":
+            reward = get_ENHANCE_reward()
+        # 11111111111111111111111111111111111111111111111111
 
         self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
@@ -330,7 +346,7 @@ class BenchEnv_Multi():
             if self.done_flag:
                 self.done_flag = False
                 self.last_done_flag = step_curr
-                if self.end_reward:
+                if self.end_reward and self.reward_type == "default":
                     if reward <= 0.0:
                         self.logger.info('<--Failure Situation--> Reward += {}'.format(self.end_reward_list[0]))
                         reward += self.end_reward_list[0]

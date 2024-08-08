@@ -9,6 +9,9 @@ runs/Benchmark_train_vis/*.0
 trained_models/*.dat
 __pycache__/
 
+# zip file
+*.zip
+
 # Conda Environments
 .conda/
 .conda/*

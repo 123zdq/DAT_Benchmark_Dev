@@ -20,7 +20,8 @@
     "auto_start":false,
     "Other_State":false,
     "CloudPoint":false,
-    "RewardParams":true
+    "RewardParams":true,
+    "RewardType":"default"
   },
   "LunarLander":{
     "Need_render":1,
