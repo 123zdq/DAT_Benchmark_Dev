@@ -1,6 +1,6 @@
 {
-        "Simulation_Mode": "video",
-        "Drone_Supervisor_Ctrl": false,
+        "Simulation_Mode": "train",
+        "Drone_Supervisor_Ctrl": true,
         "Socket_Ip": "127.0.0.1",
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 3000,
@@ -26,15 +26,15 @@
         },
         "Sumo_Params": {
                 "max_sumo_car": 60,
-                "car_import_interval": 60.0,
-                "car_type": "passenger",
+                "car_import_interval": 10.0,
+                "car_type": "bus",
                 "fixed_color": true,
                 "normalize_color": [1,0,0],
                 "max_car_speed": 15,
                 "max_car_accel": 5,
                 "max_car_decel": 5,
-                "max_rou_distance": 8000,
-                "min_rou_distance": 300,
+                "max_rou_distance": 10000,
+                "min_rou_distance": 250,
                 "route_num": 100000
         },
         "Other_Params": {
@@ -65,7 +65,7 @@
                 "height_random": true,
                 "height_fixed": 15.0,
                 "height_random_max": 25.0,
-                "height_random_min": 13.0,
+                "height_random_min": 15.0,
 
                 "direction_random": false,
                 "direction_random_multilateral": false,

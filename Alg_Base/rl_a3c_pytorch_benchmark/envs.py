@@ -3,6 +3,7 @@ import numpy as np
 from torch.utils.tensorboard import SummaryWriter
 import concurrent.futures
 import time
+import os
 
 """
 # Conda Environments
@@ -32,6 +33,16 @@ def GE(num):
         env, process_func = general_env(args.env, env_conf, num - 1, process_idx=_)
         res.append(env)
     return res
+
+
+def train_log_reset():
+    try:
+        os.remove("./PPO_logs/steps.txt")
+        print("日志成功初始化")
+    except FileNotFoundError:
+        print("日志无需初始化")
+    except Exception as e:
+        print(f"日志初始化失败: {e}")
 
 
 class Envs:
@@ -72,13 +83,19 @@ class Envs:
 
             self.st = time.time()
 
-            #self.actions = []  # should modify
+            # self.actions = []  # should modify
+            
+            if os.path.exists("./PPO_logs/steps.txt"):
+                with open("./PPO_logs/steps.txt", "r") as file:
+                    self.steps = int(file.readline().strip())
+            else:
+                self.SummaryWriter.add_scalar("rewards", 0, 0)
 
         def reset(self):
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
-            #self.actions.append(action)
+            # self.actions.append(action)
             self.steps += 1
             if self.should_reset:
                 self.state, _ = self.env.reset()
@@ -88,8 +105,10 @@ class Envs:
                 self.SummaryWriter.add_scalar(
                     "runtime/step(s)", (time.time() - self.st) / self.steps, self.steps
                 )
+                with open("./PPO_logs/steps.txt", "w") as file:
+                    file.write(str(self.steps))
 
-                #self.SummaryWriter.add_histogram("actions", np.array(self.actions))  ###
+                # self.SummaryWriter.add_histogram("actions", np.array(self.actions))  ###
 
                 self.rewards = 0
             else:
