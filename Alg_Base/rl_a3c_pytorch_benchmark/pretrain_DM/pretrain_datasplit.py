@@ -17,7 +17,7 @@ class DynamicsDataSplit():
         self.volume_dict = read_config(data_volume)
         self.cfg = read_config(cfg_path)
         self.cfg_dict = self.cfg[mode]
-        self.bs = self.cfg_dict["Batch_size"]
+        self.bs = self.cfg_dict["Episode_size"]
         self.statebuf = self.cfg_dict["State_Buffer"]
         self.datavolome = self.Acquire_datavolume()
 
@@ -25,7 +25,7 @@ class DynamicsDataSplit():
         self.train_idx,self.test_idx = self.Acquire_Index()
 
         ### make 3 dir: base/train/test
-        self.base_dir = DYNAMICS_DATAPATH+"Batch{Batch_size}State{State_Buffer}".format(Batch_size=self.bs,State_Buffer=self.statebuf)
+        self.base_dir = DYNAMICS_DATAPATH+"Batch{Episode_size}State{State_Buffer}".format(Episode_size=self.bs,State_Buffer=self.statebuf)
         self.train_dir = self.base_dir+"/train/"
         self.test_dir = self.base_dir+"/test/"
         if not os.path.exists(self.base_dir):

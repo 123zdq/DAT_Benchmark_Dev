@@ -217,5 +217,5 @@ if __name__ == "__main__":
     else:
         model_type = cfg_dict["Model_Type"]
         raise KeyError(f"Model Type:{model_type} is Illegal! Legal Choise: Self_train,E2E,resnet18,resnet33")
-    # train(args,model)
-    test(args,model)
+    train(args,model)
+    # test(args,model)

@@ -1,7 +1,7 @@
 {
   "Head_only":{
     "State_Buffer":10,
-    "Batch_size":256,
+    "Episode_size":256,
     "TrainSplit":0.8,
     "Action_Buffer":10,
     "Evolution_step":1,
@@ -16,7 +16,7 @@
   },
   "Head_backbone":{
     "State_Buffer":10,
-    "Batch_size":256,
+    "Episode_size":256,
     "TrainSplit":0.8,
     "Action_Buffer":10,
     "Evolution_step":1,

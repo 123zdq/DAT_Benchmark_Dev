@@ -17,7 +17,7 @@ parser = argparse.ArgumentParser(description="Data Generation Argparser")
 
 # Add Arguments
 parser.add_argument('-m', '--mode', type=str,default="Head_backbone", help="Config train mode Head_backbone/Head_only")
-parser.add_argument('-min', '--min_episode', type=int,default=1000, help="Mini length of episode")
+parser.add_argument('-min', '--min_episode', type=int,default=1500, help="Mini length of episode")
 
 # Parse arguments
 args = parser.parse_args()

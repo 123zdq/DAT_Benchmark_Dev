@@ -30,9 +30,9 @@ class DynamicsDataset(object):
         super(DynamicsDataset, self).__init__()
         self.cfg = read_config(cfg_path)
         self.cfg_dict = self.cfg[mode]
-        self.bs = self.cfg_dict["Batch_size"]
+        self.bs = self.cfg_dict["Episode_size"]
         self.statebuf = self.cfg_dict["State_Buffer"]
-        self.dynamics_dir = root_dir+"Batch{Batch_size}State{State_Buffer}/".format(Batch_size=self.bs,State_Buffer=self.statebuf)
+        self.dynamics_dir = root_dir+"Batch{Episode_size}State{State_Buffer}/".format(Episode_size=self.bs,State_Buffer=self.statebuf)
         self.train = train
         if self.train:
             self.dataset_dir = self.dynamics_dir+"train/"
@@ -150,9 +150,9 @@ class DynamicsDatasetSample(object):
         super(DynamicsDatasetSample, self).__init__()
         self.cfg = read_config(cfg_path)
         self.cfg_dict = self.cfg[mode]
-        self.bs = self.cfg_dict["Batch_size"]
+        self.bs = self.cfg_dict["Episode_size"]
         self.statebuf = self.cfg_dict["State_Buffer"]
-        self.dynamics_dir = root_dir+"Batch{Batch_size}State{State_Buffer}/".format(Batch_size=self.bs,State_Buffer=self.statebuf)
+        self.dynamics_dir = root_dir+"Batch{Episode_size}State{State_Buffer}/".format(Episode_size=self.bs,State_Buffer=self.statebuf)
         self.train = train
         if self.train:
             self.dataset_dir = self.dynamics_dir+"train/"
@@ -260,13 +260,13 @@ class DynamicsDataLoader(object):
         self.cfg = read_config(cfg_path)
         self.cfg_dict = self.cfg[mode]
         self.State_Buffer = self.cfg_dict["State_Buffer"]
-        self.Batch_size = self.cfg_dict["Batch_size"]
+        self.Episode_size = self.cfg_dict["Episode_size"]
         self.root_path = root_path
         self.dataset = dataset
         if self.dataset.train:
-            self.set_dir = self.root_path+f"Batch{self.Batch_size}State{self.State_Buffer}/train"
+            self.set_dir = self.root_path+f"Batch{self.Episode_size}State{self.State_Buffer}/train"
         else:
-            self.set_dir = self.root_path+f"Batch{self.Batch_size}State{self.State_Buffer}/test"
+            self.set_dir = self.root_path+f"Batch{self.Episode_size}State{self.State_Buffer}/test"
         self.batch_volume = self.GetBatch_volume(set_dir=self.set_dir)
     """
         Return how many batch in trainset
