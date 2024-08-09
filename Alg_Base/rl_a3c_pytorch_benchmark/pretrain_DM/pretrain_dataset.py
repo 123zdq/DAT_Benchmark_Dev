@@ -8,6 +8,7 @@ import random
 import copy
 from torchvision import transforms
 import torch
+from torch.utils.data import DataLoader
 
 ORIGIN_DATAPATH="./OriginDataset/"
 DYNAMICS_DATAPATH = "./DynamicsDataset/"
@@ -174,6 +175,7 @@ class DynamicsDataLoader(object):
 if __name__ == "__main__":
     ddateset = DynamicsDataset(mode="Head_backbone",train=False)
     ddloader = DynamicsDataLoader(mode="Head_backbone",dataset=ddateset)
+    # ddloader = DataLoader(ddateset,batch_size=)
     import time
     start_t = time.time()
     for img_batch,label_batch in ddloader:

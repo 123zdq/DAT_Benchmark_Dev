@@ -163,9 +163,9 @@ def test(args,model:torch.nn.Module):
     correct = 0 # correct sample number
     total = 0 # number of sample
     with torch.no_grad():
-        for data in test_dl:
+        for _,data in tqdm(enumerate(test_dl),desc=f"Train Iteration {len(test_dl)}"):
             inputs, labels = data
-            inputs, labels = inputs.to(device), labels.to(device)
+            inputs, labels = inputs.to(device), labels.to(device).long()
             
             # Feed forward
             outputs = model(inputs)
@@ -203,5 +203,5 @@ if __name__ == "__main__":
     else:
         model_type = cfg_dict["Model_Type"]
         raise KeyError(f"Model Type:{model_type} is Illegal! Legal Choise: Self_train,E2E,resnet18,resnet33")
-    train(args,model)
+    # train(args,model)
     test(args,model)

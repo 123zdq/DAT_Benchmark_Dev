@@ -83,15 +83,17 @@ def save_weight(args,model:torch.nn.Module,Epoch:int):
     print(f"Saving checkpoint to {weight_path}")
 
 def get_newest_path(args)->str:
-    weight_dir = args.weight_dir
+    weight_dir = args.weight_dir + args.TrainMode + "/"
     target_list = glob(weight_dir+"*.pth")
     date_epoch_dict = {}
     for weight_path in target_list:
-        epoch,date = get_epoch_date(weight_path)
+        epoch,date = get_epoch_date(weight_path.split('/')[-1])
         date_epoch_dict[date] = epoch
     max_date = max(list(date_epoch_dict.keys()))
     max_epoch = date_epoch_dict[max_date]
-    return f"weight_{max_epoch}_{max_date}.pth"
+    target_path = weight_dir+f"weight_{max_epoch}_{max_date}.pth"
+    print(f"Loading weight: {target_path}")
+    return target_path
 
 if __name__ == "__main__":
     d = {"11":1,"22":2}
