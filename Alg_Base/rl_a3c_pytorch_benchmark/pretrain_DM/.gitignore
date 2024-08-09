@@ -4,3 +4,4 @@ OriginDataset/*.json
 DynamicsDataset/*/
 runs/*.0
 runs/*.1
+*.pth

@@ -77,7 +77,7 @@ def save_weight(args,model:torch.nn.Module,Epoch:int):
     
     now = datetime.now()
     formatted_time = now.strftime("%Y-%m-%d-%H-%M-%S")
-    weight_path = f"weight_{Epoch}_{formatted_time}.pth"
+    weight_path += f"/weight_{Epoch}_{formatted_time}.pth"
 
     torch.save(model.state_dict(),weight_path)
     print(f"Saving checkpoint to {weight_path}")
