@@ -2,7 +2,8 @@ import argparse
 from pretrain_utils import read_config,save_weight,get_newest_path
 import torch
 from pretrain_model import CNNLSTM,E2ECNNLSTM,ResNet18Dynamics,ResNet33Dynamics
-from pretrain_dataset import DynamicsDataset,DynamicsDataLoader
+from pretrain_dataset import DynamicsDataset,DynamicsDataLoader,DynamicsDatasetSample
+from torch.utils.data import DataLoader
 from tqdm import tqdm
 from torch.utils.tensorboard import SummaryWriter
 import os
@@ -95,6 +96,14 @@ parser.add_argument(
     help="How many epoch do we save a model",
 )
 
+parser.add_argument(
+    "-bs",
+    "--batch-size",
+    type=int,
+    default=1024,
+    help="Batch size of dataloader",
+)
+
 
 
 def train(args,model:torch.nn.Module):
@@ -115,8 +124,10 @@ def train(args,model:torch.nn.Module):
     model.train()
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.SGD(model.parameters(), lr=0.001, momentum=0.9)
-    train_dataset = DynamicsDataset(mode=args.TrainMode,train=True,shuffle=True)
-    train_dl = DynamicsDataLoader(mode=args.TrainMode,dataset=train_dataset)
+    # train_dataset = DynamicsDataset(mode=args.TrainMode,train=True,shuffle=True)
+    # train_dl = DynamicsDataLoader(mode=args.TrainMode,dataset=train_dataset)
+    train_dataset = DynamicsDatasetSample(mode=args.TrainMode,train=True)
+    train_dl = DataLoader(train_dataset,batch_size=args.batch_size,shuffle=True,num_workers=16)
     for epoch in tqdm(range(args.Epoch),desc="Train Epochs"):
         running_loss = 0.0
         for i,train_data in tqdm(enumerate(train_dl),desc=f"Train Iteration {len(train_dl)}",leave=False):
@@ -154,8 +165,11 @@ def test(args,model:torch.nn.Module):
     model.load_state_dict(torch.load(load_path))
 
     ### test set and loader
-    test_dataset = DynamicsDataset(mode=args.TrainMode,train=False,shuffle=False)
-    test_dl = DynamicsDataLoader(mode=args.TrainMode,dataset=test_dataset)
+    # test_dataset = DynamicsDataset(mode=args.TrainMode,train=False,shuffle=False)
+    # test_dl = DynamicsDataLoader(mode=args.TrainMode,dataset=test_dataset)
+    test_dataset = DynamicsDatasetSample(mode=args.TrainMode,train=False)
+    test_dl = DataLoader(test_dataset,batch_size=args.batch_size,shuffle=False,num_workers=8)
+
     criterion = torch.nn.CrossEntropyLoss()
     
     ### start test
@@ -163,7 +177,7 @@ def test(args,model:torch.nn.Module):
     correct = 0 # correct sample number
     total = 0 # number of sample
     with torch.no_grad():
-        for _,data in tqdm(enumerate(test_dl),desc=f"Train Iteration {len(test_dl)}"):
+        for _,data in tqdm(enumerate(test_dl),desc=f"Test Iteration {len(test_dl)}"):
             inputs, labels = data
             inputs, labels = inputs.to(device), labels.to(device).long()
             

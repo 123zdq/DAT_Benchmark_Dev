@@ -9,6 +9,7 @@ import copy
 from torchvision import transforms
 import torch
 from torch.utils.data import DataLoader
+import math
 
 ORIGIN_DATAPATH="./OriginDataset/"
 DYNAMICS_DATAPATH = "./DynamicsDataset/"
@@ -134,6 +135,124 @@ class DynamicsDataset(object):
         full_state_tensor = torch.stack(full_state_list,dim=0)
         return full_state_tensor
 
+class DynamicsDatasetSample(object):
+    r"""`DynamicsDataset`_ Datasets.
+    
+    Args:
+        mode (string): training mode
+        cfg_path (string): path of pretrain_cfg.json
+        root_dir (string): path of DynamicsDataset
+        train: whether the dataset is trained or not
+
+    """
+
+    def __init__(self,mode,cfg_path=CFG_PATH,root_dir=DYNAMICS_DATAPATH,train=True):
+        super(DynamicsDatasetSample, self).__init__()
+        self.cfg = read_config(cfg_path)
+        self.cfg_dict = self.cfg[mode]
+        self.bs = self.cfg_dict["Batch_size"]
+        self.statebuf = self.cfg_dict["State_Buffer"]
+        self.dynamics_dir = root_dir+"Batch{Batch_size}State{State_Buffer}/".format(Batch_size=self.bs,State_Buffer=self.statebuf)
+        self.train = train
+        if self.train:
+            self.dataset_dir = self.dynamics_dir+"train/"
+        else:
+            self.dataset_dir = self.dynamics_dir+"test/"
+        
+        self.dataset_prefix = "episode"
+        self.dataset_path_list = sorted(glob.glob(
+            os.path.join(self.dataset_dir, '*/')))
+
+        self.img_size = self.cfg_dict["State_size"]
+        self.img_channel = self.cfg_dict["State_channel"]
+        if self.img_channel == 1:
+            self.transform = transforms.Compose([
+                transforms.Resize((self.img_size, self.img_size)),  # Resize image
+                transforms.Grayscale(num_output_channels=1), # Turn RGB to Grayscale
+                transforms.ToTensor(),          # Turn Image into tensor and normalize
+            ])
+        elif self.img_channel == 3:
+            self.transform = transforms.Compose([
+                transforms.Resize((self.img_size, self.img_size)),  # Resize image
+                transforms.ToTensor(),          # Turn Image into tensor(HWC->CHW)
+            ])
+        else:
+            raise ValueError("State_channel:{} is illegal! Legal value: 1(Grayscale) or 3(RGB)".format(self.img_channel))
+
+
+    ### get image and label for a sequence(data of one sample)
+    def __getitem__(self, index):
+        r"""        
+        Args:
+            index (integer or string): Index of a sequence.
+        
+        Returns:
+            tuple: (img_files, anno), where ``img_files`` is a list of
+                file names and ``anno`` is a N x 4 (rectangles) numpy array.
+        """
+        
+        if index < 0 or index >= len(self.dataset_path_list)*self.bs:
+            raise Exception('Index:{} is illegal.'.format(index))
+        
+        batch_index = math.floor(index/self.bs)
+        episode_idx = index%self.bs
+        
+        # print(f"Curr_idx:{index} Curr_episode:{self.dataset_path_list[index]}")
+
+        img_files_path = sorted(glob.glob(
+            os.path.join(self.dataset_path_list[batch_index], '*.jpeg')))
+
+
+        single_img_list = self.imglist2statebuf(img_files_path,episode_idx)
+        # print(f"batch_index: {batch_index} episode_idx: {episode_idx} len(img_files_path)= {len(img_files_path)} len(single_img_list)= {len(single_img_list)}")
+        anno_path = self.dataset_path_list[batch_index]+"Direction_label.json"
+
+        with open(anno_path, 'r') as f:
+            label_res = json.load(f)
+        label_list = list(label_res.values())
+        if len(label_list) == 1:
+            label_list = sum(label_list, [])
+
+        label = label_list[episode_idx]
+
+        ## Get Image tensor and label tensor
+        label_tensor = torch.tensor(label,dtype=torch.float32)
+        sample_state_tensor = self.imgpath2Tensor(single_img_list)
+
+        return sample_state_tensor, label_tensor
+    ### Return number of sequence in dataset
+    def __len__(self):
+        return len(self.dataset_path_list)*self.bs
+    
+    ### turn img list to state buffer style
+    def imglist2statebuf(self,img_list:list,episode_idx:int)->list:
+        single_img_list = []
+        if episode_idx < self.statebuf-1:
+            single_img_list = [img_list[0]]*self.statebuf
+            for img_path in img_list[:episode_idx+1]:
+                single_img_list.append(img_path)
+                del single_img_list[0]
+        else:
+            for img_path in img_list[episode_idx+1-self.statebuf:episode_idx+1]:
+                single_img_list.append(img_path)
+        return single_img_list
+    
+    def imgpath2Tensor(self,path_list_single:list)->dict:
+        img_tensor_list = []
+        for img_path in path_list_single:
+            img_tensor = self.transform(copy.deepcopy(Image.open(img_path)))
+            img_tensor_list.append(img_tensor)
+        img_tensor_sample = torch.stack(img_tensor_list,dim=0)
+        # import matplotlib.pyplot as plt
+        # for i in range(img_tensor_sample.shape[0]):
+        #     img_np = img_tensor_sample[i].permute(1, 2, 0).numpy()
+        #     plt.imshow(img_np)
+        #     plt.axis('off')  # 隐藏坐标轴
+        #     plt.show()
+        new_shape_tuple = (img_tensor_sample.shape[0]*img_tensor_sample.shape[1], img_tensor_sample.shape[2], img_tensor_sample.shape[3])
+        img_tensor_sample = torch.reshape(img_tensor_sample, new_shape_tuple)
+        
+        return img_tensor_sample
 
     
 class DynamicsDataLoader(object):
@@ -173,14 +292,20 @@ class DynamicsDataLoader(object):
             return full_state_tensor, label_tensor
     
 if __name__ == "__main__":
-    ddateset = DynamicsDataset(mode="Head_backbone",train=False)
-    ddloader = DynamicsDataLoader(mode="Head_backbone",dataset=ddateset)
-    # ddloader = DataLoader(ddateset,batch_size=)
+    # ddateset = DynamicsDataset(mode="Head_backbone",train=False)
+    # ddloader = DynamicsDataLoader(mode="Head_backbone",dataset=ddateset)
+    ddateset = DynamicsDatasetSample(mode="Head_backbone",train=True)
+    ddloader = DataLoader(ddateset,batch_size=256,shuffle=True,num_workers=16)
+    # data,label = ddateset[256]
+    # print(data.shape)
+    # print(label.shape)
+    
+    
     import time
     start_t = time.time()
     for img_batch,label_batch in ddloader:
         print(f"image batch shape {img_batch.shape}")
         print(f"label batch shape {label_batch.shape}")
     print(f"Total Time Consumption is {time.time()-start_t}")
-    # sample_tensor = ddateset[1][1]
+    sample_tensor = ddateset[1][1]
 
