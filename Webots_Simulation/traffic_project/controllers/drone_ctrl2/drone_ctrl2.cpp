@@ -550,6 +550,13 @@ int main(int argc, char **argv)
                 << "  carDir:" << rewardG.makeReward.carDir
                 << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y
                 << "  done_state:" << pCtrl.done_state << std::endl;
+      if(pCtrl.done_state == string("distance"))
+      {
+        rewardG.makeReward.crash = true;
+      }
+      else{
+        rewardG.makeReward.crash = false;
+      }
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
       // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
       if (config.get()->droneSupervisorCtrl == true && config.get()->simulationMode != string("video") && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
@@ -610,9 +617,9 @@ int main(int argc, char **argv)
       
       if (config.get()->customizedReward)
       {
-        double makeReward_list[64] = {};
+        double makeReward_list[51] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
-        for(int i=0;i<64;i++)
+        for(int i=0;i<51;i++)
         {
           if(std::isnan(state_list[i])){
             is_nan = true;
@@ -621,14 +628,14 @@ int main(int argc, char **argv)
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
         if(is_nan == false)
         {
-          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 64, rewardG.makeReward.carTypename);
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 51, rewardG.makeReward.carTypename);
         }
-        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 64)
+        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 51)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
           if(is_nan == false)
           {
-            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 64, rewardG.makeReward.carTypename);
+            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 51, rewardG.makeReward.carTypename);
           }
         }
       }

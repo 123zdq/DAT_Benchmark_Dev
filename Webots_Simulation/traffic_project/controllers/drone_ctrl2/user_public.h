@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-07 19:55:29
+ * @LastEditTime: 2024-08-10 23:45:03
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -40,23 +40,26 @@ namespace usrPublic{
         double done;//是否结束仿真
     }Odometry;
 
-    // make reward data ---- double * 64 + string
+    // make reward data ---- double * 51 + string
     typedef struct _rewardData{
         double cameraWidth;// 图像宽度（像素）
         double cameraHeight;// 图像高度（像素）
-        double cameraFov;// 摄像头焦距（mm）
+        double cameraFov;// 摄像头视场角 （rad）
         double cameraF;// 摄像头焦距估算（像素）
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
-        vector3 BMW;// 车辆的长宽高
-        vector3 Citroen;
-        vector3 Lincoln;
-        vector3 Benz;
-        vector3 Rover;
-        vector3 Tesla;
-        vector3 Toyota;
+        // vector3 BMW;// 车辆的长宽高
+        // vector3 Citroen;
+        // vector3 Lincoln;
+        // vector3 Benz;
+        // vector3 Rover;
+        // vector3 Tesla;
+        // vector3 Toyota;
         double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
+        vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
+        vector4 carCameraPosOri; // 车辆中心在无人机坐标系下的3D坐标和1D姿态
+        double crash; // 无人机是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1前进，2左转，3右转)
         std::string carTypename = std::string("BmwX5Simple");// 对象类型
     }rewardData;

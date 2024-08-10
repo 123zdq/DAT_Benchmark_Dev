@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-07 01:06:03
+ * @LastEditTime: 2024-08-10 23:44:13
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -75,29 +75,29 @@ inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanc
   land_node = supervisor->getFromDef("land");
   trackingCar = supervisor->getFromDef("ORIGIN");
 
-  makeReward.Toyota.x = 4.2;
-  makeReward.Toyota.y = 1.8;
-  makeReward.Toyota.z = 1.4;
+  // makeReward.Toyota.x = 4.2;
+  // makeReward.Toyota.y = 1.8;
+  // makeReward.Toyota.z = 1.4;
 
-  makeReward.Lincoln.x = 4.9;
-  makeReward.Lincoln.y = 1.8;
-  makeReward.Lincoln.z = 1.3;
+  // makeReward.Lincoln.x = 4.9;
+  // makeReward.Lincoln.y = 1.8;
+  // makeReward.Lincoln.z = 1.3;
 
-  makeReward.Tesla.x = 4.5;
-  makeReward.Tesla.y = 1.8;
-  makeReward.Tesla.z = 1.4;
+  // makeReward.Tesla.x = 4.5;
+  // makeReward.Tesla.y = 1.8;
+  // makeReward.Tesla.z = 1.4;
 
-  makeReward.Rover.x = 4.5;
-  makeReward.Rover.y = 1.8;
-  makeReward.Rover.z = 1.55;
+  // makeReward.Rover.x = 4.5;
+  // makeReward.Rover.y = 1.8;
+  // makeReward.Rover.z = 1.55;
 
-  makeReward.BMW.x = 4.5;
-  makeReward.BMW.y = 1.8;
-  makeReward.BMW.z = 1.6;
+  // makeReward.BMW.x = 4.5;
+  // makeReward.BMW.y = 1.8;
+  // makeReward.BMW.z = 1.6;
 
-  makeReward.Citroen.x = 3.3;
-  makeReward.Citroen.y = 1.4;
-  makeReward.Citroen.z = 1.5;
+  // makeReward.Citroen.x = 3.3;
+  // makeReward.Citroen.y = 1.4;
+  // makeReward.Citroen.z = 1.5;
 
   distanceScale = _distanceScale;
   rewardRange = _rewardRange;
@@ -146,6 +146,9 @@ inline void rewardGenerator::locateCamera(double _width, double _height, double 
   cameraRL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
 
   makeReward.cameraF = Camera2real.cameraF;
+  makeReward.cameraMidPos.x = T_camera_of_land[3];
+  makeReward.cameraMidPos.y = T_camera_of_land[7];
+  makeReward.cameraMidPos.z = T_camera_of_land[11];
 }
 
 /**
@@ -302,6 +305,10 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   makeReward.carMidGlobalPos.x = V_car_of_land(0);
   makeReward.carMidGlobalPos.y = V_car_of_land(1);
   makeReward.carMidGlobalPos.z = V_car_of_land(2);
+  makeReward.carCameraPosOri.x = makeReward.carMidGlobalPos.x - makeReward.cameraMidGlobalPos.x;
+  makeReward.carCameraPosOri.y = makeReward.carMidGlobalPos.y - makeReward.cameraMidGlobalPos.y;
+  makeReward.carCameraPosOri.z = makeReward.carMidGlobalPos.z - makeReward.cameraMidGlobalPos.z;
+  makeReward.carCameraPosOri.w = atan2(makeReward.carCameraPosOri.y,makeReward.carCameraPosOri.x);
 
   double reward = 0;
   if (_run_mode == string("demo"))
