@@ -35,7 +35,7 @@ See :ref:`usage` for detailed usage instructions.
 Images
 ------
 
-.. image:: images/example.png
+.. image:: _static/image/运行流程.png
    :alt: Example Image
    :width: 200px
    :align: center
@@ -55,3 +55,8 @@ Tables
 
 Usage
 ------
+
+.. raw:: html
+
+   <span style="background-color: yellow;">这是有底色的文本</span>
+

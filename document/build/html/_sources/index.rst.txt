@@ -17,3 +17,6 @@ documentation for details.
 
    basicusage
    Overview
+   Installation
+   Simulator
+   Algorithm
