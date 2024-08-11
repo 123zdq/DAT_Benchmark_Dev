@@ -767,15 +767,58 @@ Hoap2
 
    根据小孔成像的原理，可以估算Webots中相机的焦距，由于一般有 :math:`z_{o}\gg z_{i}` ，所以可以认为 :math:`f\approx z_{i}`
 
+   .. figure:: _static/image/小孔成像.png
+      :alt: 小孔成像原理图                                  
+      :width: 600px                                              
+      :align: center
+
+      小孔成像原理图
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
+
    因此，焦距f的估算如下所示，交点处为透镜光心：
+
+   .. figure:: _static/image/焦距估算.png
+      :alt: 焦距估算原理图                                  
+      :width: 600px                                              
+      :align: center
+
+      焦距估算原理图
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
 
    可得: :math:`\frac{f}{\frac{1}{2} \times  width } =tan(\frac{1}{2} \times FOV)`           **焦距的单位：像素**
 
    投影相机图像像素点到3维空间
 
+   .. figure:: _static/image/三维小孔成像.png
+      :alt: 三维小孔成像原理图                                  
+      :width: 600px                                              
+      :align: center
+
+      三维小孔成像原理图
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
 
    由于图像大小和焦距比例已知，因此连接像素点和光心的空间向量已知。
    用两点式构建直线方程，用齐次变换矩阵构造目标平面B的平面方程，求解交点，即可得到3维空间坐标。
+
+   .. figure:: _static/image/求解三维空间坐标.png
+      :alt: 求解三维空间坐标原理图                                  
+      :width: 600px                                              
+      :align: center
+
+      求解三维空间坐标原理图
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画，并且推导全部转化成公式形式</span>
 
 投影可视化
 ~~~~~~~~~~~~~~~~~~~~
@@ -810,6 +853,54 @@ Hoap2
          注意：视场角上限不能超过地平线，否则计算结果没有意义。
       </div>
 
+如何转化为Reward
+~~~~~~~~~~~~~~~~~~~~
+
+1. (对于跟踪算法而言：如Follow_Anything)用于计算reward共有三个变量：
+   
+   a. 跟踪算法输出被跟踪目标的像素点中点，并且投影到地面坐标系的二维位置，记为P1
+   b. 仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P2
+   c. 仿真环境中无人机摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P3
+
+2. (对于强化学习算法为而言：如D-VAT)用于计算reward共有两个变量：
+
+   a. 仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P1
+   b. 仿真环境中无人机摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P2
+
+3. 首要目标是实现无人机tracking，是否正确tracking是获得奖励的前提。因此要求P1与P2之间的距离在给定范围以内，即可获得奖励值1，在给定范围以外，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
+
+   .. figure:: _static/image/阶跃函数.png
+      :alt: 阶跃函数                                  
+      :width: 600px                                              
+      :align: center
+
+      阶跃函数示意图
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
+
+4. 次要目标是无人机tracking得更好。因此P1与P3之间的距离可以作为奖励的惩罚项。距离越远惩罚越大。使用正切双曲线函数实现： :math:`f(x)=\frac{e^{αx}-e^{-αx}}{e^{αx}+e^{-αx}}`
+
+   .. figure:: _static/image/双曲正切函数.png
+      :alt: 双曲正切函数                                  
+      :width: 600px                                              
+      :align: center
+
+      双曲正切函数示意图
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
+
+5. 最终的奖励计算框图如下：
+
+   .. figure:: _static/image/奖励框图.png
+      :alt: 奖励框图                                  
+      :width: 600px                                              
+      :align: center
+
+      奖励框图
 
 .. _定制化参数接口:
 
@@ -874,6 +965,10 @@ Hoap2
       :align: center
 
       无人机坐标系定义
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
 
 **雷达数据包**
 
