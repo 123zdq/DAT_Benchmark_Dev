@@ -314,7 +314,7 @@ SUMO_VEHICLE
             <img src="_static/image/BMWX5.png" alt="Image 1" style="width: 90%;" />
             <figcaption>BmwX5</figcaption>
          </figure>
-         <figure style="text-align: center; width: 25%;">
+         <figure style="text-align: center; width: 25%;">  
             <img src="_static/image/CITROENCZero.png" alt="Image 2" style="width: 90%;" />
             <figcaption>CitroenCZero</figcaption>
          </figure>
@@ -578,58 +578,303 @@ Hoap2
 
       1. 按照一定标准建立webots使用的描述文件proto文件，其中必须必须开放到场景树的属性包括"translation"，"rotation"，"name"。描述文件存放在 :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
       
-         .. figure:: _static/image/HOAP2.png
-            :alt: HOAP2                                  
-            :width: 500px                                              
-            :align: center
+      .. figure:: _static/image/场景树属性包.png
+         :alt: 场景树属性包                                  
+         :width: 600px                                              
+         :align: center
 
-            场景树属性包
+         场景树属性包
 
       2. 可以选择编写控制器，让被跟踪对象有自主的行为
       3. 在webots的 :code:`IMPORTABLE EXTERNPROTO` 模块中载入已经建立的proto文件
 
-.. raw:: html
+      .. raw:: html
 
-   <div style="display: flex; align-items: center; justify-content: space-between;">
-       <div style="text-align: center; width: 50%;">
-           <img src="_static/image/HOAP2.png" alt="Image 1" style="width: 90%;" />
-       </div>
-       <div style="text-align: center; width: 50%;">
-           <img src="_static/image/HOAP2.png" alt="Image 2" style="width: 90%;" />
-       </div>
-   </div>
+         <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="text-align: center; width: 38%;">
+               <img src="_static/image/IMPORT_PROTO.png" alt="IMPORT_PROTO" style="width: 90%;" />
+            </div>
+            <div style="text-align: center; width: 62%;">
+               <img src="_static/image/IMPORT_PROTO2.png" alt="IMPORT_PROTO2" style="width: 90%;" />
+            </div>
+         </div>
 
-   <p style="text-align: center; font-weight: bold;">
-       Figure 1: This is a shared caption for both images.
-   </p>
-   
-.. raw:: html
+         <p style="text-align: center; ">
+            IMPORT PROTO
+         </p>
 
-   <div style="display: flex; align-items: center; justify-content: space-between;">
-       <figure style="text-align: center; width: 25%;">
-           <img src="_static/image/HOAP2.png" alt="Image 1" style="width: 90%;" />
-           <figcaption>Image 1 Title</figcaption>
-       </figure>
-       <figure style="text-align: center; width: 25%;">
-           <img src="_static/image/HOAP2.png" alt="Image 2" style="width: 90%;" />
-           <figcaption>Image 1 Title</figcaption>
-       </figure>
-       <figure style="text-align: center; width: 25%;">
-           <img src="_static/image/HOAP2.png" alt="Image 2" style="width: 90%;" />
-           <figcaption>Image 1 Title</figcaption>
-       </figure>
-       <figure style="text-align: center; width: 25%;">
-           <img src="_static/image/HOAP2.png" alt="Image 2" style="width: 90%;" />
-           <figcaption>Image 1 Title</figcaption>
-       </figure>
-   </div>
+      4. 把proto的名称写进安全检查文件 :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py`
+      
+         .. figure:: _static/image/SafeCheck.png
+            :alt: SafeCheck                                  
+            :width: 600px                                              
+            :align: center
+
+            安全检查
+      
+      5. 在json配置文件中修改 :code:`Tracking_Object` 的描述，其描述应当与proto名称相同
+      6. 经过上述步骤就能够使用无人机跟踪自定义对象
 
 .. _内置Reward:
 
 内置Reward
 --------------------
 
+   由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标 :code:`(xf,yf,zf)` 以及 :code:`(xv,yv,zv)` ，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
+
+基本思路
+~~~~~~~~~~~~~~~~~~~~
+
+   .. figure:: _static/image/GetReward.png
+      :alt: GetReward                                 
+      :width: 600px                                              
+      :align: center
+
+      内置Reward获取示意图
+
+   1. 首先， 需要从Webots中读出的参数有：飞机的空间坐标 :math:`[x_f,y_f,z_f]` ，被跟踪小车的空间坐标 :math:`[x_v,y_v,z_v]` ，摄像头Camera的Roll角度 :math:`\alpha` 和Pitch角度 :math:`\gamma` 以及Camera的水平视场fieldOfView :math:`FOV_{hor}`
+
+   .. raw:: html
+
+      <div style="line-height: 0.1;">
+         <br>
+      </div>
+
+   2. 则可以根据获取图像的分辨率w*h以及Camera的水平视场计算Camera的垂直视场 :math:`FOV_{ver}` ，计算公式为： :math:`FOV_{ver} = 2*\arctan{(\tan(\frac{FOV_{hor}}{2}*\frac{height}{width}))}` ，其中先取tan再取arctan是为了将FOV限制在 :math:`[0,\pi]` 范围内
+   
+   .. raw:: html
+
+      <div style="line-height: 0.1;">
+         <br>
+      </div>
+   
+   3. 因此，可以计算在当前Camera位姿下，相机FOV对应的实际x方向范围 :math:`[x_{min},x_{max}]` ，以及Camera视场对应的实际距离 :math:`FOV_{height}` ，计算公式如下：
+
+      * :math:`x_{min} = \frac{z_f}{\tan{(\frac{FOV_{ver}}{2}+\gamma)}}`
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+   
+      * :math:`x_{max} = \frac{z_f}{\tan{(|\gamma-\frac{FOV_{ver}}{2}|)}}`
+      
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+      * :math:`FOV_{height} = x_{max}-x_{min}`
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+      * 因此，可以根据图像中得到的检测点坐标，映射到实际的世界坐标系中
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+   4. 在上述结果的基础上，可以得到Camera在当前位姿下对应的y方向视场范围 :math:`[y_{min},y_{max}]` ，以及实际距离 :math:`FOV_{width}`
+
+      * :math:`y_{min} = FOV_{height}*\tan{(|\alpha-\frac{FOV_{ver}}{2}|)}`
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+      * :math:`y_{max} =  FOV_{height}*\tan{(\alpha+\frac{FOV_{ver}}{2})}`
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+      * :math:`FOV_{width} = y_{max}-y_{min}`
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+      * 因此可以根据图像中检测点的y坐标映射到实际的坐标系中
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+
+   5. 因此，在图像中检测到的像素坐标 :code:`[x,y]` 可以被映射为世界坐标系中的坐标点（高度为0） :code:`[x',y',z']`
+
+      .. raw:: html
+
+         <div style="line-height: 0.1;">
+            <br>
+         </div>
+      
+   6. 对于小车在斜坡上的情况，如下图所示：
+
+      .. figure:: _static/image/GetReward2.png
+         :alt: GetReward2                               
+         :width: 600px                                              
+         :align: center
+
+         小车在斜坡情况内置Reward获取示意图
+
+      * 依然可以按照之前的方案进行计算，但是斜坡应该仅和x或和y有关，不应该有弯曲的斜坡，否则很难进行判断
+         
+         .. raw:: html
+
+            <div style="line-height: 0.1;">
+               <br>
+            </div>
+         
+      * 实际上，由于webots接口足够完善，只需要知道无人机什么时候在观察斜坡即可，斜坡可以有一定的复杂性（但每一段必须是平面，不能是曲面）。
+
+数据获取
+~~~~~~~~~~~~~~~~~~~~
+
+**getFromDef()**
+
+   首先在Webots中通过 :code:`getFromDef()` 函数获取指向地面和摄像头节点的指针
+
+**getPose()**
+
+   Node节点有 :code:`getPose(Node *fromNode)` 函数，可以获取该节点的姿态齐次变换矩阵（4X4）。给 :code:`fromNode` 指向参考坐标系，如果传入该参数，比如:
+
+   .. code:: c++
+
+      land_node->getPose(camera_slot_node);
+
+   则返回的是地面相对相机坐标系的齐次变换矩阵。
+
+实现原理
+~~~~~~~~~~~~~~~~~~~~
+
+**相机焦距估算**
+
+   根据小孔成像的原理，可以估算Webots中相机的焦距，由于一般有 :math:`z_{o}\gg z_{i}` ，所以可以认为 :math:`f\approx z_{i}`
+
+   因此，焦距f的估算如下所示，交点处为透镜光心：
+
+   可得: :math:`\frac{f}{\frac{1}{2} \times  width } =tan(\frac{1}{2} \times FOV)`           **焦距的单位：像素**
+
+   投影相机图像像素点到3维空间
+
+
+   由于图像大小和焦距比例已知，因此连接像素点和光心的空间向量已知。
+   用两点式构建直线方程，用齐次变换矩阵构造目标平面B的平面方程，求解交点，即可得到3维空间坐标。
+
+投影可视化
+~~~~~~~~~~~~~~~~~~~~
+
+   通过Webots的supervisor节点，调用 :code:`importMFNodeFromString()` 函数给世界添加节点。
+   对相机的4个角点和中心点进行投影并可视化:
+
+   .. code:: c++
+
+      std::string ballprotoString = "DEF LocationBall" + std::to_string(i + 1) + " trajectary {translation " + std::to_string(0+i) + " " + std::to_string(0+i) + " " + std::to_string(0) + "}";
+      
+      robot->getRoot()->getField("children")->importMFNodeFromString(-1, ballprotoString); // 导入坐标球
+
+   通过获取 :code:`translation` 域，然后传入投影的空间3维坐标，可以实时改变投影点的位置
+
+   .. code:: c++
+
+      robot->getFromDef("LocationBall1")->getField("translation")->setSFVec3f(location00.data());
+
+   效果如下视频：
+
+   .. raw:: html
+
+      <video width="640" height="360" controls>
+         <source src="_static/video/GetReward_Video.mp4" type="video/mp4">
+         Your browser does not support the video tag.
+      </video>
+
+   .. raw:: html
+
+      <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+         注意：视场角上限不能超过地平线，否则计算结果没有意义。
+      </div>
+
+
 .. _定制化参数接口:
 
 定制化参数接口
 --------------------
+
+输入动作
+~~~~~~~~~~~~~~~~~~~~
+
+   输入动作用于控制无人机的运动，目前无人机有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数
+
+返回参数
+~~~~~~~~~~~~~~~~~~~~
+
+   返回参数主要包括三个部分，基础数据包，自定义奖励数据包，雷达数据包
+
+**基础数据包**
+
+   基础数据包共22个浮点数，如下所示：
+
+   .. code:: c++
+      
+      typedef struct _Odometry{
+        double t;// 仿真步数（不是仿真时间）
+        vector3 position;//三轴位置m
+        vector3 linear;//三轴线速度m/s
+        vector3 acc;//三轴加速度m/s^2
+        vector3 angular;//三轴角速度rad
+        vector4 orientation;//四元数
+        vector3 angle;//欧拉角
+        double reward;//reward
+        double done;//是否结束仿真
+      }Odometry;
+
+**自定义奖励数据包**
+
+   自定义奖励数据包共64个浮点数，包括以下部分
+
+   .. code:: c++
+      
+      typedef struct _rewardData{
+        double cameraWidth;// 图像宽度（像素）
+        double cameraHeight;// 图像高度（像素）
+        double cameraFov;// 摄像头视场角（rad）[0,pi`    ]
+        double cameraF;// 摄像头焦距估算（像素）
+        double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
+        double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
+        vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
+        vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
+        vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
+        vector4 carCameraPosOri; // 车辆中心在无人机坐标系下的1D姿态+3D坐标（第一个元素是姿态）
+        double crash; // 无人机是否与建筑物碰撞
+        double carDir;// 车辆运行方向(0停止，1直行，2左转，3右转)
+        std::string carTypename;// 对象类型
+      }rewardData;
+
+   - 其中，参数 :code:`carCameraPosOri` 中无人机坐标系定义和姿态角定义如下：
+   
+   .. figure:: _static/image/无人机坐标系.png
+      :alt: 无人机坐标系                                  
+      :width: 600px                                              
+      :align: center
+
+      无人机坐标系定义
+
+**雷达数据包**
+
+   雷达点云数据。该环境中的无人机搭载了RpLidarA2单线雷达，其点云数据将输出一个很长的数组。
