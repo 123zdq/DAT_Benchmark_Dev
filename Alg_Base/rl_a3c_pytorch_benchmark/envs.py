@@ -14,6 +14,8 @@ import os
 params.pth
 """
 
+T_ = False  # 屏蔽旋转动作
+
 
 def GE(num):
     from main import parser
@@ -58,6 +60,8 @@ class Envs:
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
+            if T_ and action > 3:
+                action = 6
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
@@ -96,6 +100,8 @@ class Envs:
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
+            if T_ and action > 3:
+                action = 6
             # self.actions.append(action)
             self.steps += 1
             self.ts += 1
