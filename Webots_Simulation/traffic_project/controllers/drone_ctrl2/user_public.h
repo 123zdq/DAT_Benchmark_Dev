@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-10 23:45:03
+ * @LastEditTime: 2024-08-12 16:12:45
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -14,20 +14,25 @@
 
 
 namespace usrPublic{
+    #pragma pack(1)
     typedef struct _vector3{
         double x;
         double y;
         double z;
     }vector3;
+    #pragma pack()
 
+    #pragma pack(1)
     typedef struct _vector4{
         double w;
         double x;
         double y;
         double z;
     }vector4;
+    #pragma pack()
 
     // sensor data and reward and done ---- double * 22
+    #pragma pack(1)
     typedef struct _Odometry{
         double t;
         vector3 position;//三轴位置m
@@ -39,8 +44,10 @@ namespace usrPublic{
         double reward;//reward
         double done;//是否结束仿真
     }Odometry;
+    #pragma pack()
 
     // make reward data ---- double * 51 + string
+    #pragma pack(1)
     typedef struct _rewardData{
         double cameraWidth;// 图像宽度（像素）
         double cameraHeight;// 图像高度（像素）
@@ -63,13 +70,18 @@ namespace usrPublic{
         double carDir;// 车辆运行方向(0停止，1前进，2左转，3右转)
         std::string carTypename = std::string("BmwX5Simple");// 对象类型
     }rewardData;
+    #pragma pack()
 
+    #pragma pack(1)
     typedef struct _Pose{
         vector4 orientation;
         vector3 position;
     }Pose;
+    #pragma pack()
 
+    #pragma pack(1)
     typedef struct _Joy{
         double axes[10];
     }Joy;
+    #pragma pack()
 }

@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-07-25 20:04:42
+LastEditTime: 2024-08-12 15:59:55
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -122,7 +122,7 @@ class MultiProcessRecv():
         self.udp_socket.bind(('',Processport))
         Numprocess_bytes = self.udp_socket.recvfrom(256)[0]
         Number_process = int(Numprocess_bytes)
-        return Number_process + 1
+        return Number_process
 
     """
         Create_Process: Allocate Port for Multi-Process
