@@ -300,6 +300,10 @@ class BenchEnv_Multi():
 
         self.logger.info('Get Direction of the car:  '+str(reward_params[-2]))
 
+        self.logger.info(f'Get Crash of the car: {reward_params[-3]}')
+
+        self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-6]} y-{reward_params[-5]} z-{reward_params[-4]} w-{reward_params[-7]}')
+
         ###### Test Cheat
         if prob is not None:
             
@@ -320,6 +324,8 @@ class BenchEnv_Multi():
             norm = float(norm)
             self.logger.info(f'Norm between dynamics and predict is {norm}')
         
+        
+
         if self.reward_type == "default":
             pass
         elif self.reward_type == "E2E":
