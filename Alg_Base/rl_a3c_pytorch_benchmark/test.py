@@ -28,7 +28,7 @@ def test(args, shared_model, env_conf):
     torch.manual_seed(args.seed)
     if gpu_id >= 0:
         torch.cuda.manual_seed(args.seed)
-    env,process_func = general_env(args.env, env_conf,args.workers,process_idx=args.workers)
+    env,process_func = general_env(args.env, env_conf,args.workers,process_idx=args.workers-1)
     reward_sum = 0
     start_time = time.time()
     num_tests = 0

@@ -222,6 +222,8 @@ class BenchEnv_Multi():
         else:
             self.reward_type = reward_type
 
+        self.curr_step = 0
+
     """
         step: 
             1. Send an action to server through socket
@@ -280,6 +282,8 @@ class BenchEnv_Multi():
 
         ## Read Reward,Done,Current step(Use to Manage Done) and Other_state
         reward,done,step_curr,other_state = self.recv_rewarddone_socket.read(self.img_path)
+
+        self.curr_step = step_curr
 
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
