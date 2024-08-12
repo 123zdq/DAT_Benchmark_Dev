@@ -32,7 +32,7 @@ def GE(num):
             env_conf = setup_json[i]
     res = []
     for _ in range(num):
-        env, process_func = general_env(args.env, env_conf, num - 1, process_idx=_)
+        env, process_func = general_env(args.env, env_conf, num, process_idx=_)
         res.append(env)
     return res
 
