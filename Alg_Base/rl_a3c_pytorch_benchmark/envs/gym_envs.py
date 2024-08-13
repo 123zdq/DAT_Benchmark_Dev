@@ -95,6 +95,15 @@ register(
 )
 
 
+def make_env(n_envs,rank,gym=True):
+    def _init():
+        if gym:
+            env = UAV_VAT(arg_worker=n_envs,process_idx=rank)
+        else:
+            env = UAV_VAT_Gymnasium(arg_worker=n_envs,process_idx=rank)
+        return env
+    return _init
+
 def gym_test():
     import gym
     import numpy as np
@@ -115,19 +124,10 @@ def gym_test():
 def stableparallel_test(n_envs:int,gym=True):
     from stable_baselines3 import PPO
     from stable_baselines3.common.vec_env import SubprocVecEnv
-
-    def make_env(n_envs,rank):
-        def _init():
-            if gym:
-                env = UAV_VAT(arg_worker=n_envs,process_idx=rank)
-            else:
-                env = UAV_VAT_Gymnasium(arg_worker=n_envs,process_idx=rank)
-            return env
-        return _init
     
     # 创建16个并行环境
     n_envs = n_envs
-    env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
+    env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank,gym=gym) for rank in range(n_envs)])
     # env = SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
     model = PPO('MlpPolicy', env, verbose=1)
     model.learn(total_timesteps=100000) #,callback=CustomCallback
