@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-12 16:07:36
+ * @LastEditTime: 2024-08-14 01:24:57
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -306,7 +306,7 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   makeReward.carMidGlobalPos.y = V_car_of_land(1);
   makeReward.carMidGlobalPos.z = V_car_of_land(2);
   // 得到车辆相对于无人就得坐标和旋转角
-  const double *T_car_of_camera = trackingCar->getPose(camera_slot_node);
+  const double *T_car_of_camera = trackingCar->getPose(supervisor->getFromDef(droneDef));
   makeReward.carCameraPosOri.x = T_car_of_camera[3];
   makeReward.carCameraPosOri.y = T_car_of_camera[7];
   makeReward.carCameraPosOri.z = T_car_of_camera[11];

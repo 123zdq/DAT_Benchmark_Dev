@@ -550,6 +550,12 @@ int main(int argc, char **argv)
                 << "  carDir:" << rewardG.makeReward.carDir
                 << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y
                 << "  done_state:" << pCtrl.done_state << std::endl;
+      // std::cout << "id: " << droneDef
+      //           << "  x: " << rewardG.makeReward.carCameraPosOri.x
+      //           << "  y: " << rewardG.makeReward.carCameraPosOri.y
+      //           << "  z: " << rewardG.makeReward.carCameraPosOri.z
+      //           << "  w: " << rewardG.makeReward.carCameraPosOri.w
+      //           << std::endl;
       if(pCtrl.done_state == string("distance"))
       {
         rewardG.makeReward.crash = true;
