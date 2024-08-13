@@ -4,6 +4,12 @@ from torch.distributions.categorical import Categorical
 import os
 import numpy as np
 
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+grandparent_dir = os.path.dirname(parent_dir)
+sys.path.append(grandparent_dir)
+sys.path.append(parent_dir)
 # import time
 
 
@@ -648,7 +654,7 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
                 )
 
 
-from envs import Envs, GE
+from envs.envs_parallel import Envs, GE
 
 workers = 30
 

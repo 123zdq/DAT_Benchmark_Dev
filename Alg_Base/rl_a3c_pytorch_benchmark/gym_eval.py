@@ -3,10 +3,10 @@ import os
 os.environ["OMP_NUM_THREADS"] = "1"
 import argparse
 import torch
-from environment import atari_env
+from envs.environment import atari_env
 from utils import read_config, setup_logger
-from model import A3Clstm
-from player_util import Agent
+from models.A3CLSTM_E2E.model import A3Clstm
+from models.A3CLSTM_E2E.player_util import Agent
 import gym
 import logging
 import time

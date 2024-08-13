@@ -3,10 +3,15 @@ import gym
 from functools import partial
 import cv2
 import numpy as np
-from receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams,is_file_in_use
-from sendSocket import SendActionSocket
-import time
 import os
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+sys.path.append(parent_dir)
+
+from communication.receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams,is_file_in_use
+from communication.sendSocket import SendActionSocket
+import time
 from logger_cfg import create_logger
 import copy
 from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward

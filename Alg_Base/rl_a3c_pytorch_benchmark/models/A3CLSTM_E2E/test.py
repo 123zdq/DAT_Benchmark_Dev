@@ -3,7 +3,7 @@ import os
 os.environ["OMP_NUM_THREADS"] = "1"
 from setproctitle import setproctitle as ptitle
 import torch
-from environment import general_env
+from envs.environment import general_env
 from utils import setup_logger
 from model import A3Clstm,A3ClstmE2E,A3ClstmADVOT
 from player_util import Agent

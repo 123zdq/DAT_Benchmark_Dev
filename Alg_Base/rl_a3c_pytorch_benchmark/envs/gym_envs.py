@@ -1,4 +1,3 @@
-from typing import Tuple
 import gym
 from gym import spaces
 import gymnasium
@@ -9,8 +8,8 @@ from utils import read_config
 
 from async_vecenv import ASYNC_SubprocVecEnv
 import sys
-for path in sys.path:
-    print(path)
+# for path in sys.path:
+#     print(path)
 
 CONF = "./config.json"
 ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
@@ -52,7 +51,7 @@ class UAV_VAT(gym.Env):
 
 class UAV_VAT_Gymnasium(gymnasium.Env):
     def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0) -> None:
-        super(UAV_VAT,self).__init__()
+        super(UAV_VAT_Gymnasium,self).__init__()
         self.action_space = gymnasium.spaces.Discrete(7)
         self.observation_space = gymnasium.spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
         conf_json = read_config(conf_path)
@@ -113,13 +112,16 @@ def gym_test():
 
     env.close()
 
-def stableparallel_test(n_envs:int):
+def stableparallel_test(n_envs:int,gym=True):
     from stable_baselines3 import PPO
     from stable_baselines3.common.vec_env import SubprocVecEnv
 
     def make_env(n_envs,rank):
         def _init():
-            env = UAV_VAT(arg_worker=n_envs,process_idx=rank)
+            if gym:
+                env = UAV_VAT(arg_worker=n_envs,process_idx=rank)
+            else:
+                env = UAV_VAT_Gymnasium(arg_worker=n_envs,process_idx=rank)
             return env
         return _init
     
@@ -132,7 +134,8 @@ def stableparallel_test(n_envs:int):
     env.close()
 
 if __name__ == "__main__":
-    gym_test()
+    # gym_test()
+    stableparallel_test(n_envs=2,gym=False)
 
 
 

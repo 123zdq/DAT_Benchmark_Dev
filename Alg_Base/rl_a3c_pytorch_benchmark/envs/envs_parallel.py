@@ -18,8 +18,8 @@ T_ = False  # 屏蔽旋转动作
 
 
 def GE(num):
-    from main import parser
-    from environment import general_env
+    from models.A3CLSTM_E2E.main import parser
+    from envs.environment import general_env
     from utils import read_config
     import torch
 

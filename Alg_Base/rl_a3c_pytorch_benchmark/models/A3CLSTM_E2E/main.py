@@ -1,19 +1,24 @@
 from __future__ import print_function, division
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+grandparent_dir = os.path.dirname(parent_dir)
+sys.path.append(grandparent_dir)
+sys.path.append(parent_dir)
+
 import argparse
 import torch
 import torch.multiprocessing as mp
-from environment import general_env
+from envs.environment import general_env
 from utils import read_config
 from model import A3Clstm,A3ClstmE2E,A3ClstmADVOT
 from train import train
-from test import test
+from A3CLSTM_E2E.test import test
 from shared_optim import SharedRMSprop, SharedAdam
-#from gym.configuration import undo_logger_setup
 import time
 
-#undo_logger_setup()"
 parser = argparse.ArgumentParser(description="A3C")
 """
     Argument that we need to config：
