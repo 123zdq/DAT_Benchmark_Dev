@@ -7,7 +7,7 @@
 - 该项目的仿真环境基于开源仿真软件webots搭建，仿真环境的背景是模拟现实生活中在室外场景中的目标追踪问题。为此，设立了包括城市街道、市中心、湖边、乡村、沙漠、农田共六张地图，其中每张地图演化出白天、夜晚、雾天、雪天等，总共24个环境。为了方便模型训练从简单的环境开始，还设置了几张简单的环境地图可供使用。
 - 该项目24个仿真环境示意图：
 
-   .. image:: _static/image/环境示意图.png
+   .. image:: ../_static/image/环境示意图.png
       :alt: 24个环境示意图
       :width: 600px
       :align: center
@@ -17,7 +17,7 @@
 运行流程
 ----------
 
-   .. image:: _static/image/运行流程.png
+   .. image:: ../_static/image/运行流程.png
       :alt: 仿真环境运行流程示意图
       :width: 600px
       :align: center
@@ -286,6 +286,8 @@ SUMO交通系统参数配置
 部分配置参数建议
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+   仿真器部分的参数配置建议请参考文档： :doc:`Configuration`。
+   
 .. raw:: html
 
    <span style="background-color: yellow;">To Do</span>
@@ -311,19 +313,19 @@ SUMO_VEHICLE
 
       <div style="display: flex; align-items: center; justify-content: space-between;">
          <figure style="text-align: center; width: 25%;">
-            <img src="_static/image/BMWX5.png" alt="Image 1" style="width: 90%;" />
+            <img src="../_static/image/BMWX5.png" alt="Image 1" style="width: 90%;" />
             <figcaption>BmwX5</figcaption>
          </figure>
          <figure style="text-align: center; width: 25%;">  
-            <img src="_static/image/CITROENCZero.png" alt="Image 2" style="width: 90%;" />
+            <img src="../_static/image/CITROENCZero.png" alt="Image 2" style="width: 90%;" />
             <figcaption>CitroenCZero</figcaption>
          </figure>
          <figure style="text-align: center; width: 25%;">
-            <img src="_static/image/LINKOLNMKZ.png" alt="Image 2" style="width: 90%;" />
+            <img src="../_static/image/LINKOLNMKZ.png" alt="Image 2" style="width: 90%;" />
             <figcaption>LinkolnMKZ</figcaption>
          </figure>
          <figure style="text-align: center; width: 25%;">
-            <img src="_static/image/MERCEDESBENZSprinter.png" alt="Image 2" style="width: 90%;" />
+            <img src="../_static/image/MERCEDESBENZSprinter.png" alt="Image 2" style="width: 90%;" />
             <figcaption>MercedesBenzSprinter</figcaption>
          </figure>
       </div>
@@ -332,62 +334,62 @@ SUMO_VEHICLE
 
       <div style="display: flex; align-items: center; justify-content: space-between;">
          <figure style="text-align: center; width: 33%;">
-            <img src="_static/image/RANGEROVERSportSVR.png" alt="Image 1" style="width: 90%;" />
+            <img src="../_static/image/RANGEROVERSportSVR.png" alt="Image 1" style="width: 90%;" />
             <figcaption>RangeRoverSportSVR</figcaption>
          </figure>
          <figure style="text-align: center; width: 33%;">
-            <img src="_static/image/TESLAModel3.png" alt="Image 2" style="width: 90%;" />
+            <img src="../_static/image/TESLAModel3.png" alt="Image 2" style="width: 90%;" />
             <figcaption>TeslaModel3</figcaption>
          </figure>
          <figure style="text-align: center; width: 33%;">
-            <img src="_static/image/TOYOTAPrius.png" alt="Image 2" style="width: 90%;" />
+            <img src="../_static/image/TOYOTAPrius.png" alt="Image 2" style="width: 90%;" />
             <figcaption>ToyotaPrius</figcaption>
          </figure>
       </div>
 
-.. .. figure:: _static/image/BMWX5.png
+.. .. figure:: ../_static/image/BMWX5.png
 ..    :alt: BMWX5                                            
 ..    :width: 500px                                              
 ..    :align: center   
 
 ..    BmwX5
 
-.. .. figure:: _static/image/CITROENCZero.png
+.. .. figure:: ../_static/image/CITROENCZero.png
 ..    :alt: CITROENCZero
 ..    :width: 500px
 ..    :align: center
 
 ..    CitroenCZero
 
-.. .. figure:: _static/image/LINKOLNMKZ.png
+.. .. figure:: ../_static/image/LINKOLNMKZ.png
 ..    :alt: LINKOLNMKZ
 ..    :width: 500px
 ..    :align: center
 
 ..    LinkolnMKZ
 
-.. .. figure:: _static/image/MERCEDESBENZSprinter.png
+.. .. figure:: ../_static/image/MERCEDESBENZSprinter.png
 ..    :alt: MERCEDESBENZSprinter
 ..    :width: 500px
 ..    :align: center
 
 ..    MercedesBenzSprinter
 
-.. .. figure:: _static/image/RANGEROVERSportSVR.png
+.. .. figure:: ../_static/image/RANGEROVERSportSVR.png
 ..    :alt: RANGEROVERSportSVR
 ..    :width: 500px
 ..    :align: center
 
 ..    RangeRoverSportSVR
 
-.. .. figure:: _static/image/TESLAModel3.png
+.. .. figure:: ../_static/image/TESLAModel3.png
 ..    :alt: TESLAModel3
 ..    :width: 500px
 ..    :align: center
 
 ..    TeslaModel3
 
-.. .. figure:: _static/image/TOYOTAPrius.png
+.. .. figure:: ../_static/image/TOYOTAPrius.png
 ..    :alt: TOYOTAPrius
 ..    :width: 500px
 ..    :align: center
@@ -398,7 +400,7 @@ SUMO_VEHICLE
 
    统一车型，大型载客车辆
 
-.. figure:: _static/image/BUS.png
+.. figure:: ../_static/image/BUS.png
    :alt: BUS                                            
    :width: 500px                                              
    :align: center   
@@ -409,7 +411,7 @@ SUMO_VEHICLE
 
    统一车型，不带货箱的货车
 
-.. figure:: _static/image/TRUCK.png
+.. figure:: ../_static/image/TRUCK.png
    :alt: TRUCK                                            
    :width: 500px                                              
    :align: center   
@@ -420,7 +422,7 @@ SUMO_VEHICLE
 
    统一车型，带货箱的货车
 
-.. figure:: _static/image/TRAILER.png
+.. figure:: ../_static/image/TRAILER.png
    :alt: TRAILER                                            
    :width: 500px                                              
    :align: center   
@@ -432,7 +434,7 @@ Pedestrian
 
    行人对象会按照一定的路线和一定的速度行进，同时人体会模仿真人步态进行运动
 
-.. figure:: _static/image/PEDESTRIAN.png
+.. figure:: ../_static/image/PEDESTRIAN.png
    :alt: PEDESTRIAN                                           
    :width: 500px                                              
    :align: center   
@@ -444,7 +446,7 @@ Shrimp
 
    轮式机器人
 
-.. figure:: _static/image/SHRIMP.png
+.. figure:: ../_static/image/SHRIMP.png
    :alt: SHRIMP                                            
    :width: 500px                                              
    :align: center   
@@ -456,7 +458,7 @@ Create
 
    轮式机器人
 
-.. figure:: _static/image/CREATE.png
+.. figure:: ../_static/image/CREATE.png
    :alt: CREATE                                            
    :width: 500px                                              
    :align: center   
@@ -468,7 +470,7 @@ Sojourner
 
    月球车
 
-.. figure:: _static/image/SOJOURNER.png
+.. figure:: ../_static/image/SOJOURNER.png
    :alt: SOJOURNER                                            
    :width: 500px                                              
    :align: center   
@@ -480,7 +482,7 @@ Mantis
 
    大型六足机器人
 
-.. figure:: _static/image/MANTIS.png
+.. figure:: ../_static/image/MANTIS.png
    :alt: MANTIS                                           
    :width: 500px                                              
    :align: center   
@@ -492,7 +494,7 @@ BB-8
 
    球形机器人
 
-.. figure:: _static/image/BB_8.png
+.. figure:: ../_static/image/BB_8.png
    :alt: BB-8                                          
    :width: 500px                                              
    :align: center   
@@ -504,7 +506,7 @@ AiboErs7
 
    四足机器人
 
-.. figure:: _static/image/AIBOERS7.png
+.. figure:: ../_static/image/AIBOERS7.png
    :alt: AIBOERS7                                        
    :width: 500px                                              
    :align: center   
@@ -516,7 +518,7 @@ BioloidDog
 
    四足机器人
 
-.. figure:: _static/image/BIOLOIDDOG.png
+.. figure:: ../_static/image/BIOLOIDDOG.png
    :alt: BIOLOIDDOG                                      
    :width: 500px                                              
    :align: center
@@ -528,7 +530,7 @@ FireBird6
 
    轮式机器人
 
-.. figure:: _static/image/FIREBIRD6.png
+.. figure:: ../_static/image/FIREBIRD6.png
    :alt: FIREBIRD6                                      
    :width: 500px                                              
    :align: center
@@ -540,7 +542,7 @@ Scout
 
    双足机器人
 
-.. figure:: _static/image/SCOUT.png
+.. figure:: ../_static/image/SCOUT.png
    :alt: SCOUT                                   
    :width: 500px                                              
    :align: center
@@ -552,7 +554,7 @@ GhostDog
 
    四足机器人
 
-.. figure:: _static/image/GHOSTDOG2.png
+.. figure:: ../_static/image/GHOSTDOG2.png
    :alt: GHOSTDOG2                                  
    :width: 500px                                              
    :align: center
@@ -564,7 +566,7 @@ Hoap2
 
    双足机器人
 
-.. figure:: _static/image/HOAP2.png
+.. figure:: ../_static/image/HOAP2.png
    :alt: HOAP2                                  
    :width: 500px                                              
    :align: center
@@ -578,7 +580,7 @@ Hoap2
 
       1. 按照一定标准建立webots使用的描述文件proto文件，其中必须必须开放到场景树的属性包括"translation"，"rotation"，"name"。描述文件存放在 :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
       
-      .. figure:: _static/image/场景树属性包.png
+      .. figure:: ../_static/image/场景树属性包.png
          :alt: 场景树属性包                                  
          :width: 600px                                              
          :align: center
@@ -592,10 +594,10 @@ Hoap2
 
          <div style="display: flex; align-items: center; justify-content: space-between;">
             <div style="text-align: center; width: 38%;">
-               <img src="_static/image/IMPORT_PROTO.png" alt="IMPORT_PROTO" style="width: 90%;" />
+               <img src="../_static/image/IMPORT_PROTO.png" alt="IMPORT_PROTO" style="width: 90%;" />
             </div>
             <div style="text-align: center; width: 62%;">
-               <img src="_static/image/IMPORT_PROTO2.png" alt="IMPORT_PROTO2" style="width: 90%;" />
+               <img src="../_static/image/IMPORT_PROTO2.png" alt="IMPORT_PROTO2" style="width: 90%;" />
             </div>
          </div>
 
@@ -605,7 +607,7 @@ Hoap2
 
       4. 把proto的名称写进安全检查文件 :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py`
       
-         .. figure:: _static/image/SafeCheck.png
+         .. figure:: ../_static/image/SafeCheck.png
             :alt: SafeCheck                                  
             :width: 600px                                              
             :align: center
@@ -625,7 +627,7 @@ Hoap2
 基本思路
 ~~~~~~~~~~~~~~~~~~~~
 
-   .. figure:: _static/image/GetReward.png
+   .. figure:: ../_static/image/GetReward.png
       :alt: GetReward                                 
       :width: 600px                                              
       :align: center
@@ -726,7 +728,7 @@ Hoap2
       
    6. 对于小车在斜坡上的情况，如下图所示：
 
-      .. figure:: _static/image/GetReward2.png
+      .. figure:: ../_static/image/GetReward2.png
          :alt: GetReward2                               
          :width: 600px                                              
          :align: center
@@ -767,7 +769,7 @@ Hoap2
 
    根据小孔成像的原理，可以估算Webots中相机的焦距，由于一般有 :math:`z_{o}\gg z_{i}` ，所以可以认为 :math:`f\approx z_{i}`
 
-   .. figure:: _static/image/小孔成像.png
+   .. figure:: ../_static/image/小孔成像.png
       :alt: 小孔成像原理图                                  
       :width: 600px                                              
       :align: center
@@ -780,7 +782,7 @@ Hoap2
 
    因此，焦距f的估算如下所示，交点处为透镜光心：
 
-   .. figure:: _static/image/焦距估算.png
+   .. figure:: ../_static/image/焦距估算.png
       :alt: 焦距估算原理图                                  
       :width: 600px                                              
       :align: center
@@ -795,7 +797,7 @@ Hoap2
 
    投影相机图像像素点到3维空间
 
-   .. figure:: _static/image/三维小孔成像.png
+   .. figure:: ../_static/image/三维小孔成像.png
       :alt: 三维小孔成像原理图                                  
       :width: 600px                                              
       :align: center
@@ -809,7 +811,7 @@ Hoap2
    由于图像大小和焦距比例已知，因此连接像素点和光心的空间向量已知。
    用两点式构建直线方程，用齐次变换矩阵构造目标平面B的平面方程，求解交点，即可得到3维空间坐标。
 
-   .. figure:: _static/image/求解三维空间坐标.png
+   .. figure:: ../_static/image/求解三维空间坐标.png
       :alt: 求解三维空间坐标原理图                                  
       :width: 600px                                              
       :align: center
@@ -843,7 +845,7 @@ Hoap2
    .. raw:: html
 
       <video width="640" height="360" controls>
-         <source src="_static/video/GetReward_Video.mp4" type="video/mp4">
+         <source src="../_static/video/GetReward_Video.mp4" type="video/mp4">
          Your browser does not support the video tag.
       </video>
 
@@ -869,7 +871,7 @@ Hoap2
 
 3. 首要目标是实现无人机tracking，是否正确tracking是获得奖励的前提。因此要求P1与P2之间的距离在给定范围以内，即可获得奖励值1，在给定范围以外，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
 
-   .. figure:: _static/image/阶跃函数.png
+   .. figure:: ../_static/image/阶跃函数.png
       :alt: 阶跃函数                                  
       :width: 600px                                              
       :align: center
@@ -882,7 +884,7 @@ Hoap2
 
 4. 次要目标是无人机tracking得更好。因此P1与P3之间的距离可以作为奖励的惩罚项。距离越远惩罚越大。使用正切双曲线函数实现： :math:`f(x)=\frac{e^{αx}-e^{-αx}}{e^{αx}+e^{-αx}}`
 
-   .. figure:: _static/image/双曲正切函数.png
+   .. figure:: ../_static/image/双曲正切函数.png
       :alt: 双曲正切函数                                  
       :width: 600px                                              
       :align: center
@@ -895,7 +897,7 @@ Hoap2
 
 5. 最终的奖励计算框图如下：
 
-   .. figure:: _static/image/奖励框图.png
+   .. figure:: ../_static/image/奖励框图.png
       :alt: 奖励框图                                  
       :width: 600px                                              
       :align: center
@@ -959,7 +961,7 @@ Hoap2
 
    - 其中，参数 :code:`carCameraPosOri` 中无人机坐标系定义和姿态角定义如下：
    
-   .. figure:: _static/image/无人机坐标系.png
+   .. figure:: ../_static/image/无人机坐标系.png
       :alt: 无人机坐标系                                  
       :width: 600px                                              
       :align: center
@@ -973,3 +975,7 @@ Hoap2
 **雷达数据包**
 
    雷达点云数据。该环境中的无人机搭载了RpLidarA2单线雷达，其点云数据将输出一个很长的数组。
+
+   .. raw:: html
+
+      <span style="background-color: yellow;">To Do: 把Webots现有的可以增加的雷达也加入进去吧</span>

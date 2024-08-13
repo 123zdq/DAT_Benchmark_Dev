@@ -18,5 +18,5 @@ documentation for details.
    basicusage
    Overview
    Installation
-   Simulator
-   Algorithm
+   Algorithm/index
+   Webots_Simulator/index
