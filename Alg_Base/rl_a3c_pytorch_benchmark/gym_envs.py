@@ -16,7 +16,7 @@ CONF = "./config.json"
 ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
 
 class UAV_VAT(gym.Env):
-    def __init__(self,arg_worker:int,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0) -> None:
+    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0) -> None:
         super(UAV_VAT,self).__init__()
         self.action_space = spaces.Discrete(7)
         self.observation_space = spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
@@ -51,7 +51,7 @@ class UAV_VAT(gym.Env):
 
 
 class UAV_VAT_Gymnasium(gymnasium.Env):
-    def __init__(self,arg_worker:int,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0) -> None:
+    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0) -> None:
         super(UAV_VAT,self).__init__()
         self.action_space = gymnasium.spaces.Discrete(7)
         self.observation_space = gymnasium.spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
@@ -95,9 +95,25 @@ register(
     entry_point='gym_envs:UAV_VAT',
 )
 
-if __name__ == "__main__":
+
+def gym_test():
     import gym
     import numpy as np
+	
+    env = gym.make('UAVVAT-v0')
+    observation = env.reset()
+
+    for _ in range(10000):
+        action = env.action_space.sample()  # 随机生成一个动作
+        observation, reward, done, info = env.step(action)
+        env.render()
+
+        if done:
+            observation = env.reset()
+
+    env.close()
+
+def stableparallel_test(n_envs:int):
     from stable_baselines3 import PPO
     from stable_baselines3.common.vec_env import SubprocVecEnv
 
@@ -108,12 +124,15 @@ if __name__ == "__main__":
         return _init
     
     # 创建16个并行环境
-    n_envs = 16
+    n_envs = n_envs
     env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
     # env = SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
     model = PPO('MlpPolicy', env, verbose=1)
     model.learn(total_timesteps=100000) #,callback=CustomCallback
     env.close()
+
+if __name__ == "__main__":
+    gym_test()
 
 
 
