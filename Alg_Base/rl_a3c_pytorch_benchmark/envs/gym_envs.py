@@ -5,7 +5,7 @@ import gymnasium.spaces
 import numpy as np
 from environment import general_env
 from utils import read_config
-
+from stable_baselines3.common.monitor import Monitor
 from async_vecenv import ASYNC_SubprocVecEnv
 import sys
 # for path in sys.path:
@@ -75,6 +75,7 @@ class UAV_VAT_Gymnasium(gymnasium.Env):
         info["SuppleInfo"] = SuppleInfo
         if done and curr_step < self.webots_conf["Train_Total_Steps"]:
             truncated = True
+            
         else:
             truncated = False
         return self.state,reward,done,truncated,info
@@ -95,12 +96,16 @@ register(
 )
 
 
-def make_env(n_envs,rank,gym=True):
+def make_env(n_envs,rank,gym=True,monitor=False):
     def _init():
         if gym:
             env = UAV_VAT(arg_worker=n_envs,process_idx=rank)
+            print("Using Gym Environment")
         else:
             env = UAV_VAT_Gymnasium(arg_worker=n_envs,process_idx=rank)
+            print("Using Gymnasium Environment")
+        if monitor:
+            env = Monitor(env)
         return env
     return _init
 

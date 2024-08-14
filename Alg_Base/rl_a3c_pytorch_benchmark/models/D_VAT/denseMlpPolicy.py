@@ -70,6 +70,7 @@ class DenseMlp(nn.Module):
         return out_3
 
 
+
 class DenseActor(BasePolicy):
     """
     Actor network (policy) for SAC.

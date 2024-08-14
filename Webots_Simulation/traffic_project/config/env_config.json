@@ -1,6 +1,6 @@
 {
         "Simulation_Mode": "train",
-        "Drone_Supervisor_Ctrl": false,
+        "Drone_Supervisor_Ctrl": true,
         "Socket_Ip": "127.0.0.1",
         "Config_Agen_Num_Port":7789,
         "Train_Total_Steps": 1500,
@@ -57,7 +57,7 @@
         "Drone_Random_Config": {
                 "start_time_bias_ms": 510,
 
-                "view_pitch_random": false,
+                "view_pitch_random": true,
                 "view_pitch_fixed": 1,
                 "view_pitch_random_max": 1,
                 "view_pitch_random_min": 0.4,
@@ -67,19 +67,19 @@
                 "height_random_max": 15.0,
                 "height_random_min": 10.0,
 
-                "direction_random": false,
+                "direction_random": true,
                 "direction_random_multilateral": false,
                 "direction_fixed": 0,
                 "direction_random_max": 3.1415926535,
                 "direction_random_min": -3.1415926535,
 
-                "horizon_bias_random": false,
+                "horizon_bias_random": true,
                 "horizon_bias_multilateral": true,
                 "horizon_bias_fixed": 0,
                 "horizon_bias_random_max": 3,
                 "horizon_bias_random_min": 2,
                 
-                "verticle_bias_random": false,
+                "verticle_bias_random": true,
                 "verticle_bias_multilateral": true,
                 "verticle_bias_fixed": 0,
                 "verticle_bias_random_max": 3,

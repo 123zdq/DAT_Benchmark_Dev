@@ -44,7 +44,7 @@ class CustomCNN(BaseFeaturesExtractor):
             dims = self.resnet(
                 th.as_tensor(np.zeros(target_shape)).float()
             ).shape
-
+            print(dims)
             self.n_flatten = int(np.prod(dims))
             print(self.n_flatten)
 
@@ -53,7 +53,7 @@ class CustomCNN(BaseFeaturesExtractor):
     def forward(self, observations: th.Tensor) -> th.Tensor:
         # Preprocess
         # t = time.time()
-        input_batch = self.preprocess(observations)
+        input_batch = self.preprocess(observations).unsqueeze(1)
 
         b, s, c, w, h = input_batch.shape
         x0 = input_batch.view(-1, c, w, h)

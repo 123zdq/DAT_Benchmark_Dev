@@ -16,41 +16,18 @@ sys.path.append(grandparent_dir)
 
 from sacd.sacd import SACD
 from pathlib import Path
-from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
-from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.common.evaluation import evaluate_policy
-from stable_baselines3.common.monitor import Monitor
-from typing import Callable
+
 
 from envs.gym_envs import make_env
 from envs.async_vecenv import ASYNC_SubprocVecEnv
 
-from denseMlpPolicy import SACDensePolicy
-
-# def make_env(rank: int,
-#              seed: int = 0,
-#              test: bool = False,
-#              render: bool = False,
-#              ts: float = 0.1,
-#              observation_buffer_length: int = 3) -> Callable:
-
-#     def _init() -> gym.Env:
-#         env = UnrealTrackingEnv(rank,
-#                                 test=test,
-#                                 render=render,
-#                                 ts=ts,
-#                                 observation_buffer_length=observation_buffer_length)
-#         env.seed(seed + rank)
-#         return Monitor(env)
-
-#     set_random_seed(seed + rank)
-#     return _init
-
+from DiscreteMlpPolicy import SACDiscretePolicy
 
 if __name__ == "__main__":
 
-    settings = {'num_cpu': 6,
-                'n_timesteps': 10000,
+    settings = {'num_cpu': 36,
+                'n_timesteps': 60000,
                 'batch_size': 64,
                 'buffer_size': 10000,
                 'train_freq': 8,
@@ -67,7 +44,7 @@ if __name__ == "__main__":
 
     if settings['eval_mode']:
         # try:
-        eval_env = ASYNC_SubprocVecEnv([make_env(n_envs=1,rank=0)])
+        eval_env = ASYNC_SubprocVecEnv([make_env(n_envs=1,rank=0,gym=False)])
         model = SAC.load(os.path.join("experiments/SAC_{}".format(1711119972), "SAC_{}".format(0)), env=eval_env)
 
 
@@ -89,16 +66,20 @@ if __name__ == "__main__":
                        name="SAC_{}".format(t), config=settings)
 
         # Multiprocess RL Training
-        vec_env = ASYNC_SubprocVecEnv([make_env(n_envs=settings['num_cpu'],rank=i) for i in range(settings['num_cpu'])])
+        vec_env = ASYNC_SubprocVecEnv([make_env(n_envs=settings['num_cpu'],rank=i,gym=False) for i in range(settings['num_cpu'])])
 
         policy_kwargs = dict(
-            net_arch=[512]
+            net_arch=[512],
+            normalize_images=False
         )
 
-        model = SACD(SACDensePolicy,
+        tensorboard_logdir = "./DVAT_logs"
+
+        model = SACD(SACDiscretePolicy,
                     vec_env,
                     verbose=1,
                     policy_kwargs=policy_kwargs,
+                    tensorboard_log=tensorboard_logdir,
                     buffer_size=settings['buffer_size'],
                     batch_size=settings['batch_size'],
                     train_freq=settings['train_freq'])
@@ -107,22 +88,25 @@ if __name__ == "__main__":
         print(model.critic)
 
         # Separate environment for evaluation
-        eval_env = ASYNC_SubprocVecEnv([make_env(n_envs=1,rank=0)])
+        # eval_env = ASYNC_SubprocVecEnv([make_env(n_envs=1,rank=0,gym=False,monitor=True)])
         best_episodes = np.zeros((10,))
+
+        epoch = 0
 
         # Training
         while True:
+            epoch += 1
             model.learn(settings['n_timesteps'])
-
+            model.save(os.path.join(current_path, "SAC_Epoch{}".format(epoch)))
             # Eval
-            mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=settings['eval_episodes'], render=settings['render'])
-            print(f'Mean reward: {mean_reward} +/- {std_reward:.2f}')
+            # mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=settings['eval_episodes'], render=settings['render'])
+            # print(f'Mean reward: {mean_reward} +/- {std_reward:.2f}')
 
-            if settings['WandB']:
-                wandb.log({'test': mean_reward})
+            # if settings['WandB']:
+            #     wandb.log({'test': mean_reward})
 
-            worst_model = np.argmin(best_episodes)
-            if mean_reward > best_episodes[worst_model]:
-                best_episodes[worst_model] = mean_reward
-                model.save(os.path.join(current_path, "SAC_{}".format(worst_model)))
+            # worst_model = np.argmin(best_episodes)
+            # if mean_reward > best_episodes[worst_model]:
+            #     best_episodes[worst_model] = mean_reward
+            #     model.save(os.path.join(current_path, "SAC_{}".format(worst_model)))
 
