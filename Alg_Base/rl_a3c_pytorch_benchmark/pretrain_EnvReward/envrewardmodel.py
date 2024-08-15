@@ -8,13 +8,13 @@ class EnvRewardModel(nn.Module):
 
         # 共享的卷积层
         self.encoder = nn.Sequential(
-            nn.Conv2d(input_shape[0], 32, 5, stride=1, padding=2),
+            nn.Conv2d(input_shape[0], 32, 5, stride=2, padding=2),
             nn.ReLU(),
-            nn.Conv2d(32, 32, 5, stride=1, padding=1),
+            nn.Conv2d(32, 32, 5, stride=2, padding=1),
             nn.ReLU(),
-            nn.Conv2d(32, 64, 4, stride=1, padding=1),
+            nn.Conv2d(32, 64, 4, stride=2, padding=1),
             nn.ReLU(),
-            nn.Conv2d(64, 64, 3, stride=1, padding=1),
+            nn.Conv2d(64, 64, 3, stride=2, padding=1),
             nn.ReLU()
         )
 
@@ -22,11 +22,12 @@ class EnvRewardModel(nn.Module):
         def conv2d_output_size(size, kernel_size=3, stride=2,padding=1):
             return (size - kernel_size+2*padding) // stride + 1
         
-        l1_out = conv2d_output_size(input_shape[1],5,1,2)
-        l2_out = conv2d_output_size(l1_out,5,1,1)
-        l3_out = conv2d_output_size(l2_out,4,1,1)
-        self.l4_out = conv2d_output_size(l3_out,3,1,1)
+        l1_out = conv2d_output_size(input_shape[1],5,2,2)
+        l2_out = conv2d_output_size(l1_out,5,2,1)
+        l3_out = conv2d_output_size(l2_out,4,2,1)
+        self.l4_out = conv2d_output_size(l3_out,3,2,1)
 
+        
         decoder_input_size = self.l4_out * self.l4_out * 64 + actions_dim
 
         # Reshpe 
@@ -36,13 +37,13 @@ class EnvRewardModel(nn.Module):
         )
 
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(64, 64, 3, stride=1, padding=1),
+            nn.ConvTranspose2d(64, 64, 3, stride=2, padding=1),
             nn.ReLU(),
-            nn.ConvTranspose2d(64, 32, 4, stride=1, padding=1),
+            nn.ConvTranspose2d(64, 32, 4, stride=2, padding=1),
             nn.ReLU(),
-            nn.ConvTranspose2d(32, 32, 5, stride=1, padding=1),
+            nn.ConvTranspose2d(32, 32, 5, stride=2, padding=1),
             nn.ReLU(),
-            nn.ConvTranspose2d(32, input_shape[0], 5, stride=1, padding=2),
+            nn.ConvTranspose2d(32, input_shape[0], 5, stride=2, padding=2),
             nn.ReLU(),
         )
 
@@ -60,15 +61,20 @@ class EnvRewardModel(nn.Module):
 
         decode_in = self.env_fc(x)
         decode_in = decode_in.view(-1, 64, self.l4_out, self.l4_out)
-        
-        next_state_pred = self.decoder(x)
+        next_state_pred = self.decoder(decode_in)
         reward_pred = self.reward_fc(x)
 
         return next_state_pred, reward_pred
 
 def visualize_model():
-    sample_input = torch.randn(1, 3, 84, 84)
+    sample_state = torch.randn(1, 3, 84, 84)
+    sample_action = torch.randn(1, 7)
+    model = EnvRewardModel(input_shape=(3,84,84),actions_dim=7)
     writer = SummaryWriter('./pretrain_EnvReward/runs/experiment')
+    writer.add_graph(model, (sample_state,sample_action))
+    writer.close()
+
 
 if __name__ == "__main__":
     visualize_model()
+    

@@ -96,6 +96,4 @@ def get_newest_path(args)->str:
     return target_path
 
 if __name__ == "__main__":
-    d = {"11":1,"22":2}
-    for key in d.keys():
-        print(type(key))
+    pass
