@@ -73,7 +73,7 @@ if __name__ == "__main__":
             normalize_images=False
         )
 
-        tensorboard_logdir = "./DVAT_logs"
+        tensorboard_logdir = "./models/D_VAT/DVAT_logs"
 
         model = SACD(SACDiscretePolicy,
                     vec_env,

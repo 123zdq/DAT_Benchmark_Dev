@@ -1,0 +1,74 @@
+import torch
+import torch.nn as nn
+from torch.utils.tensorboard import SummaryWriter
+
+class EnvRewardModel(nn.Module):
+    def __init__(self, input_shape, actions_dim):
+        super(EnvRewardModel, self).__init__()
+
+        # 共享的卷积层
+        self.encoder = nn.Sequential(
+            nn.Conv2d(input_shape[0], 32, 5, stride=1, padding=2),
+            nn.ReLU(),
+            nn.Conv2d(32, 32, 5, stride=1, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(32, 64, 4, stride=1, padding=1),
+            nn.ReLU(),
+            nn.Conv2d(64, 64, 3, stride=1, padding=1),
+            nn.ReLU()
+        )
+
+        # 计算卷积层输出的大小
+        def conv2d_output_size(size, kernel_size=3, stride=2,padding=1):
+            return (size - kernel_size+2*padding) // stride + 1
+        
+        l1_out = conv2d_output_size(input_shape[1],5,1,2)
+        l2_out = conv2d_output_size(l1_out,5,1,1)
+        l3_out = conv2d_output_size(l2_out,4,1,1)
+        self.l4_out = conv2d_output_size(l3_out,3,1,1)
+
+        decoder_input_size = self.l4_out * self.l4_out * 64 + actions_dim
+
+        # Reshpe 
+        self.env_fc = nn.Sequential(
+            nn.Linear(decoder_input_size, self.l4_out * self.l4_out * 64),
+            nn.ReLU(),
+        )
+
+        self.decoder = nn.Sequential(
+            nn.ConvTranspose2d(64, 64, 3, stride=1, padding=1),
+            nn.ReLU(),
+            nn.ConvTranspose2d(64, 32, 4, stride=1, padding=1),
+            nn.ReLU(),
+            nn.ConvTranspose2d(32, 32, 5, stride=1, padding=1),
+            nn.ReLU(),
+            nn.ConvTranspose2d(32, input_shape[0], 5, stride=1, padding=2),
+            nn.ReLU(),
+        )
+
+        # Reward model
+        self.reward_fc = nn.Sequential(
+            nn.Linear(decoder_input_size, 128),
+            nn.ReLU(),
+            nn.Linear(128, 1)  # 输出奖励
+        )
+
+    def forward(self, state, action):
+        x = self.encoder(state)
+        x = x.view(x.size(0), -1)
+        x = torch.cat((x, action), dim=1)
+
+        decode_in = self.env_fc(x)
+        decode_in = decode_in.view(-1, 64, self.l4_out, self.l4_out)
+        
+        next_state_pred = self.decoder(x)
+        reward_pred = self.reward_fc(x)
+
+        return next_state_pred, reward_pred
+
+def visualize_model():
+    sample_input = torch.randn(1, 3, 84, 84)
+    writer = SummaryWriter('./pretrain_EnvReward/runs/experiment')
+
+if __name__ == "__main__":
+    visualize_model()

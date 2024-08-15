@@ -75,7 +75,7 @@ class UAV_VAT_Gymnasium(gymnasium.Env):
         info["SuppleInfo"] = SuppleInfo
         if done and curr_step < self.webots_conf["Train_Total_Steps"]:
             truncated = True
-            
+
         else:
             truncated = False
         return self.state,reward,done,truncated,info
@@ -134,13 +134,14 @@ def stableparallel_test(n_envs:int,gym=True):
     n_envs = n_envs
     env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank,gym=gym) for rank in range(n_envs)])
     # env = SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
-    model = PPO('MlpPolicy', env, verbose=1)
-    model.learn(total_timesteps=100000) #,callback=CustomCallback
+    tb_logdir = "./envs/PPO_testtb"
+    model = PPO('MlpPolicy', env, verbose=1,tensorboard_log=tb_logdir,n_steps=16)
+    model.learn(total_timesteps=100000,log_interval=10) #,callback=CustomCallback
     env.close()
 
 if __name__ == "__main__":
     # gym_test()
-    stableparallel_test(n_envs=2,gym=False)
+    stableparallel_test(n_envs=16,gym=False)
 
 
 
