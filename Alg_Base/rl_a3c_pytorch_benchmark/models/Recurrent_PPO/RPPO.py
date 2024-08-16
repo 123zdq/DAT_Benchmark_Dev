@@ -5,6 +5,7 @@ import os
 import numpy as np
 
 import sys
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 grandparent_dir = os.path.dirname(parent_dir)
@@ -218,8 +219,10 @@ class RPPO_E2E_VAT(nn.Module):
 
     def __init__(self, input_channels, action_dim=7):
         super().__init__()
-        self.actor0, self.actor1= self.GRU(self.CN(input_channels)), self.FC(action_dim, 0.01)
-        self.critic0,self.critic1 = self.GRU(self.CN(input_channels)), self.FC(1)
+        self.actor0, self.actor1 = self.GRU(self.CN(input_channels)), self.FC(
+            action_dim, 0.01
+        )
+        self.critic0, self.critic1 = self.GRU(self.CN(input_channels)), self.FC(1)
 
     def get_value(self, x, gru_state, done):
         hidden, gru_state = self.critic0.get_states(x, gru_state, done)
@@ -656,9 +659,9 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
 
 from envs.envs_parallel import Envs, GE
 
-workers = 30
+workers = 24
 
-'''
+"""
 agent = UAV_RPPO_discrete(
     envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
     num_envs=workers,
@@ -667,14 +670,15 @@ agent = UAV_RPPO_discrete(
     model=AC_RPPO_A3ClstmE2E(3, 64, 7).to(torch.device("cuda")),
     K_epochs = 5,
 )
-'''
+"""
 
 agent = CVAT_RPPO__discrete(
     envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
     num_envs=workers,
     num_minibatches=1,
     num_steps=50,
-    K_epochs = 5,
+    K_epochs=5,
+    entropy_coef=0.1,
 )
 
 agent.run(train_mode=True)
