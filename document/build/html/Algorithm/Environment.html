@@ -59,7 +59,11 @@
 <li class="toctree-l4"><a class="reference internal" href="#part-3">Part 3 构造函数</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#gym-uav-vat-uav-vat-gymnasium">2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gym-uav-vat-uav-vat-gymnasium">2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#uav-vat-gym">UAV_VAT(适配Gym库)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uav-vat-gymnasium-gymnasium">UAV_VAT_Gymnasium(适配Gymnasium库)</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="Model.html">模型搭建</a></li>
@@ -98,10 +102,10 @@
 <blockquote>
 <div><p>本项目提供3种形式的Environment(路径： <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code> ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类</p>
 <p>上述3种Environment的关系如下图所示：</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="3种环境类关系图" src="../_images/Environment3Types.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+<p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -287,7 +291,16 @@
 </section>
 <section id="gym-uav-vat-uav-vat-gymnasium">
 <h2>2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)<a class="headerlink" href="#gym-uav-vat-uav-vat-gymnasium" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>考虑到用户常常基于 <a class="reference external" href="https://github.com/openai/gym">Gym</a> 和 <a class="reference external" href="https://github.com/openai/gym">Gymnasium</a> 环境接口搭建强化学习算法，或利用如 <a class="reference external" href="https://github.com/DLR-RM/stable-baselines3">stable-baselines3</a> 库进行算法验证，本工程将上述底层环境类进行封装，提供完全适配 <a class="reference external" href="https://github.com/openai/gym">Gym</a> 和 <a class="reference external" href="https://github.com/openai/gym">Gymnasium</a> 的环境类</p>
+</div></blockquote>
+<section id="uav-vat-gym">
+<h3>UAV_VAT(适配Gym库)<a class="headerlink" href="#uav-vat-gym" title="Link to this heading"></a></h3>
+</section>
+<section id="uav-vat-gymnasium-gymnasium">
+<h3>UAV_VAT_Gymnasium(适配Gymnasium库)<a class="headerlink" href="#uav-vat-gymnasium-gymnasium" title="Link to this heading"></a></h3>
 <span style="background-color: yellow;">To Do</span></section>
+</section>
 </section>
 
 
