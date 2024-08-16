@@ -252,15 +252,159 @@ Part 3 构造函数
 
   考虑到用户常常基于 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 环境接口搭建强化学习算法，或利用如 `stable-baselines3 <https://github.com/DLR-RM/stable-baselines3>`_ 库进行算法验证，本工程将上述底层环境类进行封装，提供完全适配 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 的环境类
 
-UAV_VAT(适配Gym库)
+.. raw:: html
+
+      <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+          具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
+      </div>
+      </br>
+
+Part1 UAV_VAT(适配Gym库)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. raw:: html
 
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT(gym.Env)</code>类
+        </div>
+        </br>
 
-UAV_VAT_Gymnasium(适配Gymnasium库)
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        1. <code>__init__</code> ：初始化gym环境(包括 <code>action_space</code> 和 <code>observation_space</code>的初始化)
+  </div>
+  </br>
+
+**输入参数：**
+
+* :code:`arg_worker(int)` ：进程数
+* :code:`conf_path(list)` ：环境端配置文件路径
+* :code:`env_conf_path(list)` ：仿真器端配置文件路径
+* :code:`process_idx(list)` ：当前进程序号
+
+.. raw:: html 
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        2. <code>reset</code> ：重置环境,返回初始状态
+  </div>
+  </br>
+
+**返回参数：**
+
+* :code:`state(np.ndarray)` ：返回状态(图像)
+
+.. raw:: html 
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        3. <code>step</code> ：环境交互,输入动作，获取状态信息
+  </div>
+  </br>
+
+**输入参数：**
+
+* :code:`action(torch.tensor)` ：动作
+
+**返回参数：**
+
+* :code:`state(np.ndarray)` ：返回状态(图像)
+* :code:`reward(float)` ：奖励
+* :code:`done(int)` ：环境是否结束
+* :code:`info(dict)` ：信息，其中包括 :code:`info["TimeLimit.truncated"]` 说明是否由于step结束带来的reset
+
+Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  Gymnasium环境与Gym环境大体兼容，以下说明与gym环境的 **区别**
+
+.. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
+        </div>
+        </br>
+
+.. raw:: html 
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        1. <code>reset</code> ：重置环境,返回初始状态
+  </div>
+  </br>
+
+**输入参数：**
+
+* :code:`seed(int)` ：随机种子
+
+**返回参数：**
+
+* :code:`reset_info(dict)` ：重置环境信息(默认为空)
+
+.. raw:: html 
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        2. <code>step</code> ：环境交互,输入动作，获取状态信息
+  </div>
+  </br>
+
+**返回参数：**
+
+* :code:`truncated(bool)` ：是否由于step结束带来的reset(相当于gym环境中的 :code:`info["TimeLimit.truncated"]` )
+
+Part3 调用接口
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>make_env()</code>函数
+        </div>
+        </br>
+
+.. raw:: html 
+
+  <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+        <code>make_env</code> ：初始化多个gym环境
+  </div>
+  </br>
+
+**输入参数：**
+
+* :code:`n_envs(int)` ：环境数量
+* :code:`rank(int)` ：当前环境序号
+* :code:`gym(bool)` ： 如果为:code:`True` 则生成gym库的环境； 如果为:code:`False` 则生成gymnasium库的环境
+* :code:`monitor(bool)` ：是否需要封装成 :code:`stable_baselines3.common.monitor.Monitor` 类
+
+**测试代码：**
+
+.. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
+        </div>
+        </br>
+
+如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：
+
+1. 单进程(仅使用gym环境)
+
+  .. code:: python
+
+    from gym.envs.registration import register
+
+    register(
+        id='UAVVAT-v0',
+        entry_point='gym_envs:UAV_VAT',
+    )
+
+    gym_test()
+
+  2. 利用stable-baselines3进行算法测试
+
+  .. code:: python
+
+    stableparallel_test(n_envs=16,gym=False)
 
 
 .. raw:: html
 
-    <span style="background-color: yellow;">To Do</span>
+    <span style="background-color: yellow;">To Do: 冬青Parallel类书写</span>
