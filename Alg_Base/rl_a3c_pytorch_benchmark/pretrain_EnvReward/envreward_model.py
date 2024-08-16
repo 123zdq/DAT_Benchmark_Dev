@@ -37,15 +37,25 @@ class EnvRewardModel(nn.Module):
         )
 
         self.decoder = nn.Sequential(
-            nn.ConvTranspose2d(64, 64, 3, stride=2, padding=1),
+            nn.ConvTranspose2d(64, 64, 4, stride=2, padding=1),
             nn.ReLU(),
             nn.ConvTranspose2d(64, 32, 4, stride=2, padding=1),
             nn.ReLU(),
-            nn.ConvTranspose2d(32, 32, 5, stride=2, padding=1),
+            nn.ConvTranspose2d(32, 32, 4, stride=2, padding=0),
             nn.ReLU(),
-            nn.ConvTranspose2d(32, input_shape[0], 5, stride=2, padding=2),
+            nn.ConvTranspose2d(32, input_shape[0], 4, stride=2, padding=1),
             nn.ReLU(),
         )
+
+        def trans_conv2d_output_size(size, kernel_size=3, stride=2,padding=1):
+            return (size-1)*stride-2*padding+kernel_size
+
+        t1_out = trans_conv2d_output_size(self.l4_out,4,2,1)
+        t2_out = trans_conv2d_output_size(t1_out,4,2,1)
+        t3_out = trans_conv2d_output_size(t2_out,4,2,0)
+        self.t4_out = trans_conv2d_output_size(t3_out,4,2,1)
+        
+        assert self.t4_out == input_shape[1]
 
         # Reward model
         self.reward_fc = nn.Sequential(
@@ -70,7 +80,7 @@ def visualize_model():
     sample_state = torch.randn(1, 3, 84, 84)
     sample_action = torch.randn(1, 7)
     model = EnvRewardModel(input_shape=(3,84,84),actions_dim=7)
-    writer = SummaryWriter('./pretrain_EnvReward/runs/experiment')
+    writer = SummaryWriter('./runs/experiment')
     writer.add_graph(model, (sample_state,sample_action))
     writer.close()
 

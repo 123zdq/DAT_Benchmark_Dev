@@ -69,7 +69,7 @@ def get_epoch_date(weight_name:str):
 
 
 def save_weight(args,model:torch.nn.Module,Epoch:int):
-    weight_path = args.weight_dir + args.TrainMode
+    weight_path = args.weight_dir
     if not os.path.exists(args.weight_dir):
         os.makedirs(args.weight_dir)
     if not os.path.exists(weight_path):
@@ -83,7 +83,7 @@ def save_weight(args,model:torch.nn.Module,Epoch:int):
     print(f"Saving checkpoint to {weight_path}")
 
 def get_newest_path(args)->str:
-    weight_dir = args.weight_dir + args.TrainMode + "/"
+    weight_dir = args.weight_dir + "/"
     target_list = glob(weight_dir+"*.pth")
     date_epoch_dict = {}
     for weight_path in target_list:
