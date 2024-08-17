@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>模型搭建 &mdash; UAV_VAT 1.0 文档</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f115507d"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="仿真器部分" href="../Webots_Simulator/index.html" />
+    <link rel="prev" title="环境封装" href="Environment.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            UAV_VAT
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../basicusage.html">My Project Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">安装</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">算法部分</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html">算法部分介绍</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Environment.html">环境封装</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">模型搭建</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#baseline1-a3clstm-e2e">Baseline1 A3CLSTM-E2E</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baseline2-cvat">Baseline2 CVAT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baseline3-d-vat">Baseline3 D-VAT</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Webots_Simulator/index.html">仿真器部分</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">UAV_VAT</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">算法部分</a></li>
+      <li class="breadcrumb-item active">模型搭建</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Algorithm/Model.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1>模型搭建<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<blockquote>
+<div><style>
+    #language-switch {
+    display: flex; /* Use Flexbox layout */
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Center buttons vertically */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#language-switch button {
+    width: 180px;
+    height: 40px;
+    font-size: 16px;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+}
+</style>
+
+<!-- Language switch buttons -->
+<div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
+    <b style="font-size: 18px;">You can choose language by </b>
+    <button onclick="switchLanguage('zh')">中文</button>
+    <button onclick="switchLanguage('en')">English</button>
+</div>
+
+<script>
+    function switchLanguage(lang) {
+        if (lang === 'zh') {
+            window.location.href = 'Model.html';
+        } else if (lang === 'en') {
+            window.location.href = '../../en/Algorithm/Model.html';
+        }
+    }
+</script>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br><p>本工程提供了4种baseline方法的算法实现，分别是 <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> <a class="footnote-reference brackets" href="#id8" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> <a class="footnote-reference brackets" href="#id9" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> <a class="footnote-reference brackets" href="#id10" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 以及 （我们的方法）</p>
+<p>其中，上述baseline方法中 <a class="footnote-reference brackets" href="#id8" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id9" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id10" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 分别调用了本工程实现的3种环境 <a class="reference internal" href="Environment.html"><span class="doc">环境封装</span></a> ，为不同需求的算法实现提供了模板</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 环境调用了底层环境类:ref:<cite>BenchEnv_Multi</cite></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 环境调用了并行环境类( <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> <a class="reference internal" href="Environment.html#parallel"><span class="std std-ref">3 并行环境类(Envs)</span></a> )</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> 环境调用了Gym环境类( <code class="code docutils literal notranslate"><span class="pre">UAV_VAT/UAV_VAT_Gymnasium</span></code> <a class="reference internal" href="Environment.html#gymnasium-gym"><span class="std std-ref">2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)</span></a>)</p></li>
+</ul>
+</div></blockquote>
+<section id="baseline1-a3clstm-e2e">
+<h2>Baseline1 A3CLSTM-E2E<a class="headerlink" href="#baseline1-a3clstm-e2e" title="Link to this heading"></a></h2>
+</section>
+<section id="baseline2-cvat">
+<h2>Baseline2 CVAT<a class="headerlink" href="#baseline2-cvat" title="Link to this heading"></a></h2>
+</section>
+<section id="baseline3-d-vat">
+<h2>Baseline3 D-VAT<a class="headerlink" href="#baseline3-d-vat" title="Link to this heading"></a></h2>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id8" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
+</aside>
+<aside class="footnote brackets" id="id9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
+<p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
+</aside>
+<aside class="footnote brackets" id="id10" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
+<p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="Environment.html" class="btn btn-neutral float-left" title="环境封装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="../Webots_Simulator/index.html" class="btn btn-neutral float-right" title="仿真器部分" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2024, Haowei Sun。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
