@@ -51,7 +51,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">安装</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">算法部分</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">算法部分介绍</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">算法部分介绍</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#baseline">快速开始(运行baseline算法)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#baseline1-benchenv-multi-a3clstm-e2e">Baseline1: <code class="code docutils literal notranslate"><span class="pre">BenchEnv_Multi</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline2-envs-cvat">Baseline2: <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline3-uav-vat-uav-vat-gymnasium-d-vat">Baseline3: <code class="code docutils literal notranslate"><span class="pre">UAV_VAT/UAV_VAT_Gymnasium</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> 算法</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="Environment.html">环境封装</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Model.html">模型搭建</a></li>
 </ul>
@@ -86,6 +94,51 @@
              
   <section id="id1">
 <h1>算法部分介绍<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<blockquote>
+<div><div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+      本项目提供了<b>3种环境类的实现，以及4种baseline算法</b>，可供用户后续进行算法设计和性能比较
+      环境类详细文档参考: <a href="Environment.rst">环境封装</a> ；算法类详细文档参考： <a href="Model.rst">环境封装</a>
+</div>
+</br></div></blockquote>
+<section id="baseline">
+<h2>快速开始(运行baseline算法)<a class="headerlink" href="#baseline" title="Link to this heading"></a></h2>
+<section id="baseline1-benchenv-multi-a3clstm-e2e">
+<h3>Baseline1: <code class="code docutils literal notranslate"><span class="pre">BenchEnv_Multi</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 算法<a class="headerlink" href="#baseline1-benchenv-multi-a3clstm-e2e" title="Link to this heading"></a></h3>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+    环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/environment.py</code>
+    算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/</code>
+</div>
+</br><p>可以运行如下代码快速开启算法：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/
+python<span class="w"> </span>./models/A3CLSTM_E2E/main.py
+</pre></div>
+</div>
+</section>
+<section id="baseline2-envs-cvat">
+<h3>Baseline2: <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 算法<a class="headerlink" href="#baseline2-envs-cvat" title="Link to this heading"></a></h3>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+    环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>
+    算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/</code>
+</div>
+</br><p>可以运行如下代码快速开启算法：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/
+python<span class="w"> </span>./models/D_VAT/DVAT_main.py
+</pre></div>
+</div>
+</section>
+<section id="baseline3-uav-vat-uav-vat-gymnasium-d-vat">
+<h3>Baseline3: <code class="code docutils literal notranslate"><span class="pre">UAV_VAT/UAV_VAT_Gymnasium</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> 算法<a class="headerlink" href="#baseline3-uav-vat-uav-vat-gymnasium-d-vat" title="Link to this heading"></a></h3>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+    环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
+    算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO/</code>
+</div>
+</br><p>可以运行如下代码快速开启算法：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py
+</pre></div>
+</div>
+</section>
+</section>
 </section>
 
 
