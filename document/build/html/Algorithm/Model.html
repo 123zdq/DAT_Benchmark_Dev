@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="仿真器部分：" href="../Webots_Simulator/index.html" />
+    <link rel="next" title="仿真器部分" href="../Webots_Simulator/index.html" />
     <link rel="prev" title="环境封装" href="Environment.html" /> 
 </head>
 
@@ -50,13 +50,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">安装</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="index.html">算法部分：</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="Introduction.html">算法部分介绍：</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">算法部分</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html">算法部分介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Environment.html">环境封装</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">模型搭建</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../Webots_Simulator/index.html">仿真器部分：</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Webots_Simulator/index.html">仿真器部分</a></li>
 </ul>
 
         </div>
@@ -73,7 +73,7 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="index.html">算法部分：</a></li>
+          <li class="breadcrumb-item"><a href="index.html">算法部分</a></li>
       <li class="breadcrumb-item active">模型搭建</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/Algorithm/Model.rst.txt" rel="nofollow"> 查看页面源码</a>
@@ -86,6 +86,32 @@
              
   <section id="id1">
 <h1>模型搭建<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>本工程提供了4种baseline方法的算法实现，分别是 <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> <a class="footnote-reference brackets" href="#id8" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> <a class="footnote-reference brackets" href="#id9" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> <a class="footnote-reference brackets" href="#id10" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 以及 （我们的方法）</p>
+<p>其中，上述baseline方法中 <a class="footnote-reference brackets" href="#id8" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id9" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id10" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 分别调用了本工程实现的3种环境 <a class="reference internal" href="Environment.html"><span class="doc">环境封装</span></a></p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 环境调用了底层环境类 <code class="code docutils literal notranslate"><span class="pre">BenchEnv_Multi</span></code> <a class="reference internal" href="Environment.html#benchenv-multi"><span class="std std-ref">1 底层环境类(BenchEnv_Multi)</span></a></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 环境调用了底层环境类(BenchEnv_Multi)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> 环境调用了底层环境类(BenchEnv_Multi)</p></li>
+</ul>
+</div></blockquote>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id8" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
+</aside>
+<aside class="footnote brackets" id="id9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
+<p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
+</aside>
+<aside class="footnote brackets" id="id10" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
+<p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
+</aside>
+</aside>
 </section>
 
 
@@ -93,7 +119,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="Environment.html" class="btn btn-neutral float-left" title="环境封装" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="../Webots_Simulator/index.html" class="btn btn-neutral float-right" title="仿真器部分：" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../Webots_Simulator/index.html" class="btn btn-neutral float-right" title="仿真器部分" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
