@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" data-content_root="./">
+<html class="writer-html5" lang="zh-CN" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>安装 &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=f115507d"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/translations.js?v=beaddf03"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
@@ -93,18 +92,18 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>安装<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<h1>安装<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
     本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)以及<code>Windows</code>系统下的工程安装指引
 </div>
 </br><section id="linux-ubuntu22-04">
-<h2>Linux(Ubuntu22.04)<a class="headerlink" href="#linux-ubuntu22-04" title="Link to this heading"></a></h2>
+<h2>Linux(Ubuntu22.04)<a class="headerlink" href="#linux-ubuntu22-04" title="此标题的永久链接"></a></h2>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       选择<code>Ubuntu22.04</code>是由于我们使用的仿真引擎<code>webots2023b</code>适配的Linux系统版本为<code>Ubuntu22.04</code>
       如果安装了其他版本的Linux系统，可以参考 <a href="https://github.com/cyberbotics/webots">webots</a>的代码仓库下载配置合适的版本
 </div>
 </br><section id="step1-webots">
-<h3>Step1 安装webots仿真软件<a class="headerlink" href="#step1-webots" title="Link to this heading"></a></h3>
+<h3>Step1 安装webots仿真软件<a class="headerlink" href="#step1-webots" title="此标题的永久链接"></a></h3>
 <blockquote>
 <div><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本软件(例如： <code class="code docutils literal notranslate"><span class="pre">webots-R2023b-x86-64.tar.bz2</span></code> )和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )，可以用如下命令解压和安装</p>
 <p><strong>webots解压与安装</strong></p>
@@ -131,7 +130,7 @@ unzip<span class="w"> </span>./assets-R2023b.zip
 </div></blockquote>
 </section>
 <section id="step2">
-<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#step2" title="Link to this heading"></a></h3>
+<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#step2" title="此标题的永久链接"></a></h3>
 <blockquote>
 <div><p><strong>虚拟环境创建</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow39<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
@@ -171,7 +170,7 @@ gedit<span class="w"> </span>~/.bashrc
 </div></blockquote>
 </section>
 <section id="step3-webotspython">
-<h3>Step3 修改webots运行python环境<a class="headerlink" href="#step3-webotspython" title="Link to this heading"></a></h3>
+<h3>Step3 修改webots运行python环境<a class="headerlink" href="#step3-webotspython" title="此标题的永久链接"></a></h3>
 <blockquote>
 <div><p>由于我们使用的环境与webots本身默认的python环境不相同，因此需要为我们新的环境创建软链接并进行配置</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow_alg39/bin/python3.9<span class="w"> </span>/usr/bin/python39
@@ -181,19 +180,19 @@ gedit<span class="w"> </span>~/.bashrc
 <figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id6" title="此图像的永久链接"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
 </section>
 </section>
 <section id="windows">
-<h2>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h2>
+<h2>Windows<a class="headerlink" href="#windows" title="此标题的永久链接"></a></h2>
 <div style="border-left: 4px solid #FA8072; padding-left: 10px; margin-left: 0;">
     <b>注意：</b>虽然本工程经过测试能够在Windows系统下运行，但由于相关cpp库的编译安装流程相对复杂，因此<b>不建议</b>使用Windows系统！
 </div>
 </br><section id="id2">
-<h3>Step1 安装webots仿真软件<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<h3>Step1 安装webots仿真软件<a class="headerlink" href="#id2" title="此标题的永久链接"></a></h3>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本安装器( <code class="code docutils literal notranslate"><span class="pre">.exe</span></code> 文件)和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )。</p></li>
@@ -202,7 +201,7 @@ gedit<span class="w"> </span>~/.bashrc
 </div></blockquote>
 </section>
 <section id="id4">
-<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#id4" title="此标题的永久链接"></a></h3>
 <blockquote>
 <div><p><strong>虚拟环境创建</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow39<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
@@ -280,7 +279,7 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 </br><span style="background-color: yellow;">To Do：补充环境变量配置图文</span></div></blockquote>
 </section>
 <section id="id5">
-<h3>Step3 修改webots运行python环境<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<h3>Step3 修改webots运行python环境<a class="headerlink" href="#id5" title="此标题的永久链接"></a></h3>
 <blockquote>
 <div><p>Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中</p>
 <span style="background-color: yellow;">To Do：补充环境变量配置图文</span></div></blockquote>
@@ -299,7 +298,7 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2024, Haowei Sun。</p>
+    <p>&#169; 版权所有 2024, Haowei Sun.</p>
   </div>
 
   利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 

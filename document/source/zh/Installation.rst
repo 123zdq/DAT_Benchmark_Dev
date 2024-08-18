@@ -151,7 +151,7 @@ Step3 修改webots运行python环境
 
         ln -s /root/miniconda3/envs/uav_follow_alg39/bin/python3.9 /usr/bin/python39
 
-    接着进入webots软件，选择 :code:`Tools` -> :code:`Preferences`, 按照如下图将选项 :code:`Python command` 进行修改：
+    接着进入webots软件，选择 :code:`工具(Tools)` -> :code:`首选项(Preferences)`, 按照如下图将选项 :code:`Python command` 进行修改：
 
     .. figure:: _static/image/Python_Command.png
       :alt: Python command配置                               
@@ -300,19 +300,38 @@ Step2 创建虚拟环境与库安装
       </div>
       </br>
 
-    .. raw:: html
+    * 首先 :code:`WIN+R` 调出运行窗,再输入 :code:`sysdm.cpl` 调出系统属性页面，接着选择“高级”->“环境变量”->“系统变量”->“新建”
+    * 插入 :code:`SUMO_HOME` 按照下图方式进行配置：
 
-        <span style="background-color: yellow;">To Do：补充环境变量配置图文</span>
+        .. figure:: _static/image/SUMO_HOME.png
+            :alt: SUMO_HOME配置                               
+            :width: 600px                                              
+            :align: center
+
+            SUMO_HOME配置
+
+    * 插入 :code:`WEBOTS_HOME` 按照下图方式进行配置：
+
+        .. figure:: _static/image/WEBOTS_HOME.png
+            :alt: WEBOTS_HOME配置                               
+            :width: 600px                                              
+            :align: center
+
+            WEBOTS_HOME配置
 
 Step3 修改webots运行python环境
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中
+    * Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中
 
-    .. raw:: html
+    * 进入webots软件，选择 :code:`工具(Tools)` -> :code:`首选项(Preferences)`, 按照如下图将选项 :code:`Python command` 进行修改：
 
-        <span style="background-color: yellow;">To Do：补充环境变量配置图文</span>
+    .. figure:: _static/image/Python_CommandWIN.png
+        :alt: Python_CommandWIN配置                               
+        :width: 600px                                              
+        :align: center
 
+        Python_Command(Windows)配置
 
 .. raw:: html
 

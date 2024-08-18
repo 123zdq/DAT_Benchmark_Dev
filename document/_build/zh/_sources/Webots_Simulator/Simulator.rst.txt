@@ -794,102 +794,10 @@ Hoap2
          
       * 实际上，由于webots接口足够完善，只需要知道无人机什么时候在观察斜坡即可，斜坡可以有一定的复杂性（但每一段必须是平面，不能是曲面）。
 
-数据获取
-~~~~~~~~~~~~~~~~~~~~
-
-**getFromDef()**
-
-   首先在Webots中通过 :code:`getFromDef()` 函数获取指向地面和摄像头节点的指针
-
-**getPose()**
-
-   Node节点有 :code:`getPose(Node *fromNode)` 函数，可以获取该节点的姿态齐次变换矩阵（4X4）。给 :code:`fromNode` 指向参考坐标系，如果传入该参数，比如:
-
-   .. code:: c++
-
-      land_node->getPose(camera_slot_node);
-
-   则返回的是地面相对相机坐标系的齐次变换矩阵。
-
-实现原理
-~~~~~~~~~~~~~~~~~~~~
-
-**相机焦距估算**
-
-   根据小孔成像的原理，可以估算Webots中相机的焦距，由于一般有 :math:`z_{o}\gg z_{i}` ，所以可以认为 :math:`f\approx z_{i}`
-
-   .. figure:: ../_static/image/小孔成像.png
-      :alt: 小孔成像原理图                                  
-      :width: 600px                                              
-      :align: center
-
-      小孔成像原理图
-
-   .. raw:: html
-
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
-
-   因此，焦距f的估算如下所示，交点处为透镜光心：
-
-   .. figure:: ../_static/image/焦距估算.png
-      :alt: 焦距估算原理图                                  
-      :width: 600px                                              
-      :align: center
-
-      焦距估算原理图
-
-   .. raw:: html
-
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
-
-   可得: :math:`\frac{f}{\frac{1}{2} \times  width } =tan(\frac{1}{2} \times FOV)`           **焦距的单位：像素**
-
-   投影相机图像像素点到3维空间
-
-   .. figure:: ../_static/image/三维小孔成像.png
-      :alt: 三维小孔成像原理图                                  
-      :width: 600px                                              
-      :align: center
-
-      三维小孔成像原理图
-
-   .. raw:: html
-
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
-
-   由于图像大小和焦距比例已知，因此连接像素点和光心的空间向量已知。
-   用两点式构建直线方程，用齐次变换矩阵构造目标平面B的平面方程，求解交点，即可得到3维空间坐标。
-
-   .. figure:: ../_static/image/求解三维空间坐标.png
-      :alt: 求解三维空间坐标原理图                                  
-      :width: 600px                                              
-      :align: center
-
-      求解三维空间坐标原理图
-
-   .. raw:: html
-
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画，并且推导全部转化成公式形式</span>
-
 投影可视化
 ~~~~~~~~~~~~~~~~~~~~
 
-   通过Webots的supervisor节点，调用 :code:`importMFNodeFromString()` 函数给世界添加节点。
-   对相机的4个角点和中心点进行投影并可视化:
-
-   .. code:: c++
-
-      std::string ballprotoString = "DEF LocationBall" + std::to_string(i + 1) + " trajectary {translation " + std::to_string(0+i) + " " + std::to_string(0+i) + " " + std::to_string(0) + "}";
-      
-      robot->getRoot()->getField("children")->importMFNodeFromString(-1, ballprotoString); // 导入坐标球
-
-   通过获取 :code:`translation` 域，然后传入投影的空间3维坐标，可以实时改变投影点的位置
-
-   .. code:: c++
-
-      robot->getFromDef("LocationBall1")->getField("translation")->setSFVec3f(location00.data());
-
-   效果如下视频：
+   按照上述原理实现之后效果如下视频：
 
    .. raw:: html
 
@@ -903,6 +811,11 @@ Hoap2
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
          注意：视场角上限不能超过地平线，否则计算结果没有意义。
       </div>
+
+.. raw:: html
+
+   </br>
+
 
 如何转化为Reward
 ~~~~~~~~~~~~~~~~~~~~
@@ -927,9 +840,9 @@ Hoap2
 
       阶跃函数示意图
 
-   .. raw:: html
+.. raw:: html
 
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
+   </br>
 
 4. 次要目标是无人机tracking得更好。因此P1与P3之间的距离可以作为奖励的惩罚项。距离越远惩罚越大。使用正切双曲线函数实现： :math:`f(x)=\frac{e^{αx}-e^{-αx}}{e^{αx}+e^{-αx}}`
 
@@ -940,9 +853,9 @@ Hoap2
 
       双曲正切函数示意图
 
-   .. raw:: html
+.. raw:: html
 
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
+   </br> 
 
 5. 最终的奖励计算框图如下：
 
@@ -951,7 +864,11 @@ Hoap2
       :width: 600px                                              
       :align: center
 
-      奖励框图
+      奖励框图 
+
+.. raw:: html
+
+   </br>
 
 .. _定制化参数接口:
 
@@ -1016,10 +933,6 @@ Hoap2
       :align: center
 
       无人机坐标系定义
-
-   .. raw:: html
-
-      <span style="background-color: yellow;">To Do: 上图要重新自己用PPT画</span>
 
 **雷达数据包**
 
