@@ -5,7 +5,7 @@ from setproctitle import setproctitle as ptitle
 import torch
 from envs.environment import general_env
 from utils import setup_logger
-from model import A3Clstm,A3ClstmE2E,A3ClstmADVOT
+from model import A3Clstm,A3ClstmE2E
 from player_util import Agent
 from torch.autograd import Variable
 import time
@@ -40,8 +40,6 @@ def test(args, shared_model, env_conf):
         player.model = A3Clstm(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "E2E":
         player.model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
-    elif args.model_type == "ADVOT":
-        player.model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
         
     if args.tensorboard_logger:
         from torch.utils.tensorboard import SummaryWriter

@@ -28,7 +28,7 @@
                 "max_sumo_car": 29,
                 "car_import_interval": 65.0,
                 "car_type": "passenger",
-                "fixed_color": true,
+                "fixed_color": false,
                 "normalize_color": [1,0,0],
                 "max_car_speed": 20,
                 "max_car_accel": 20,

@@ -13,7 +13,7 @@ import torch
 import torch.multiprocessing as mp
 from envs.environment import general_env
 from utils import read_config
-from model import A3Clstm,A3ClstmE2E,A3ClstmADVOT
+from model import A3Clstm,A3ClstmE2E
 from train import train
 from A3CLSTM_E2E.test import test
 from shared_optim import SharedRMSprop, SharedAdam
@@ -55,7 +55,7 @@ parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=16,
+    default=2,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(
@@ -92,8 +92,8 @@ parser.add_argument(
     "-model",
     "--model_type",
     type=str,
-    default = "Default",
-    help="type the model Type:Default or E2E or ADVOT",
+    default = "E2E",
+    help="type the model Type:Default or E2E",
 )
 
 
@@ -238,8 +238,6 @@ if __name__ == '__main__':
         shared_model = A3Clstm(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "E2E":
         shared_model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
-    elif args.model_type == "ADVOT":
-        shared_model = A3ClstmADVOT(env_conf["State_channel"], env_conf["Action_dim"], args)
     if args.load and os.path.exists(args.load_model_dir + "Benchmark_1.dat"):
         if args.load_model_idx == -1:
             num_file = len(os.listdir(args.load_model_dir))
