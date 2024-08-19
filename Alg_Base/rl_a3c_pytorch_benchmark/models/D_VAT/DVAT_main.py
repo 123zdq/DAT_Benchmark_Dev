@@ -26,7 +26,7 @@ from DiscreteMlpPolicy import SACDiscretePolicy
 
 if __name__ == "__main__":
 
-    settings = {'num_cpu': 36,
+    settings = {'num_cpu': 5,
                 'n_timesteps': 60000,
                 'batch_size': 64,
                 'buffer_size': 10000,
@@ -65,15 +65,16 @@ if __name__ == "__main__":
             wandb.init(project=settings['WandB_project'], entity=settings['WandB_entity'],
                        name="SAC_{}".format(t), config=settings)
 
+        tensorboard_logdir = "./models/D_VAT/DVAT_logs"
+
         # Multiprocess RL Training
-        vec_env = ASYNC_SubprocVecEnv([make_env(n_envs=settings['num_cpu'],rank=i,gym=False) for i in range(settings['num_cpu'])])
+        vec_env = ASYNC_SubprocVecEnv([make_env(n_envs=settings['num_cpu'],rank=i,gym=False,end_reward=True,log_dir=tensorboard_logdir) for i in range(settings['num_cpu'])])
 
         policy_kwargs = dict(
             net_arch=[512],
             normalize_images=False
         )
 
-        tensorboard_logdir = "./models/D_VAT/DVAT_logs"
 
         model = SACD(SACDiscretePolicy,
                     vec_env,
