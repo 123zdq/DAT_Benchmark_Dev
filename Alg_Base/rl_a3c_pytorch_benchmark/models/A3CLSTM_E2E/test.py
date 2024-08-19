@@ -44,7 +44,7 @@ def test(args, shared_model, env_conf):
     if args.tensorboard_logger:
         from torch.utils.tensorboard import SummaryWriter
         # dummy_input = (torch.zeros(1, 3, 84, 84), torch.zeros(1, args.hidden_size), torch.zeros(1, args.hidden_size),  )
-        writer = SummaryWriter(f"runs/{args.env}_training")
+        writer = SummaryWriter(f"models/A3CLSTM_E2E/runs/{args.env}_training")
         # writer.add_graph(player.model, dummy_input, False)
         writer.close()
 
@@ -58,6 +58,14 @@ def test(args, shared_model, env_conf):
             player.state = torch.from_numpy(player.state).float().cuda()
     else:
         player.state = torch.from_numpy(player.state).float()
+
+    num_test_path = "./models/A3CLSTM_E2E/num_test.txt"
+    if os.path.exists(num_test_path):
+        with open(num_test_path, "r") as file:
+            data = file.read()
+            print(data)
+        file.close()
+        num_tests = int(data)
 
     flag = True
     max_score = 0
@@ -84,6 +92,12 @@ def test(args, shared_model, env_conf):
                     )
                     for name, weight in player.model.named_parameters():
                         writer.add_histogram(name, weight, num_tests)
+
+                with open(num_test_path,"w") as file:
+                    print(num_tests)
+                    file.write(str(num_tests))
+                file.close()
+
                 if (args.save_max and reward_sum >= max_score) or not args.save_max:
                     if reward_sum >= max_score:
                         max_score = reward_sum
@@ -91,7 +105,7 @@ def test(args, shared_model, env_conf):
                         with torch.cuda.device(gpu_id):
                             state_to_save = player.model.state_dict()
                             torch.save(
-                                state_to_save, f"{args.save_model_dir}{args.env}_"+str(num_tests)+".dat"
+                                state_to_save, f"{args.save_model_dir}{args.env}.dat"
                             )
                     else:
                         state_to_save = player.model.state_dict()

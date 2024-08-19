@@ -15,6 +15,7 @@ import time
 from logger_cfg import create_logger
 import copy
 from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward
+import math
 # import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
@@ -313,6 +314,15 @@ class BenchEnv_Multi():
 
         self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-6]} y-{reward_params[-5]} z-{reward_params[-4]} w-{reward_params[-7]}')
 
+        ori_w = reward_params[-7]
+        pos_x = reward_params[-6]
+        pos_y = reward_params[-5]
+        pos_z = reward_params[-4]
+        camera_xw = reward_params[-10]
+        camera_xg = reward_params[-16]
+        crash = int(reward_params[-3])
+        Afov = reward_params[2]
+
         ###### Test Cheat
         if prob is not None:
             
@@ -333,17 +343,6 @@ class BenchEnv_Multi():
             norm = float(norm)
             self.logger.info(f'Norm between dynamics and predict is {norm}')
         
-        
-
-        if self.reward_type == "default":
-            pass
-        elif self.reward_type == "E2E":
-            reward = get_E2E_reward()
-        elif self.reward_type == "DVAT":
-            reward = get_DVAT_reward()
-        elif self.reward_type == "ENHANCE":
-            reward = get_ENHANCE_reward()
-        # 11111111111111111111111111111111111111111111111111
 
         self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
@@ -357,6 +356,22 @@ class BenchEnv_Multi():
             self.logger.info('Step_curr:{} self.Set_Done_Step:{} Open Done Flag'.format(step_curr,self.Set_Done_Step))
             self.done_flag = True
             self.last_done_flag = 0
+            self.oriw_0 = ori_w
+            self.d_curr = camera_xg - camera_xw
+        
+        if self.reward_type == "default":
+            pass
+        elif self.reward_type == "E2E":
+            reward = get_E2E_reward(x=pos_y,y=pos_x,w=ori_w,w_0=self.oriw_0,d_curr=self.d_curr)
+        elif self.reward_type == "DVAT":
+            reward = get_DVAT_reward(A_fov=Afov,d_cmd=self.d_curr,x=pos_x,y=pos_y,z = pos_z,v=[0,0,0],u=[0,0,0],end_done=crash,discrete=True)
+        elif self.reward_type == "ENHANCE":
+            rho = math.sqrt(math.pow(pos_x,2)+math.pow(pos_y,2))
+            theta = ori_w
+            rho_cmd = self.d_curr
+            theta_cmd = self.oriw_0
+            reward = get_ENHANCE_reward(rho=rho,theta=theta,rho_cmd=rho_cmd,theta_cmd=theta_cmd)
+
         if done:
             if self.done_flag:
                 self.done_flag = False
@@ -393,6 +408,10 @@ class BenchEnv_Multi():
             State: First state received from server through socket
     """
     def reset(self): 
+        ## reset ori_w command and ori_y command
+        self.oriw_0 = 0
+        self.d_curr = 0
+
         self.logger.info("\n")
         self.logger.info('<----- !!!!!Reset Function!!!!! ----->')
         ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!

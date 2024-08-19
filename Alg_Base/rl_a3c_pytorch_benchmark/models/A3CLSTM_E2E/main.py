@@ -55,7 +55,7 @@ parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=2,
+    default=1,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(
@@ -168,7 +168,7 @@ parser.add_argument(
 parser.add_argument(
     "-lmi",
     "--load-model-dir",
-    default="trained_models/",
+    default="./models/A3CLSTM_E2E/trained_models/",
     help="folder to load trained models from",
 )
 
@@ -182,10 +182,10 @@ parser.add_argument(
 parser.add_argument(
     "-smd",
     "--save-model-dir",
-    default="trained_models/",
+    default="./models/A3CLSTM_E2E/trained_models/",
     help="folder to save trained models",
 )
-parser.add_argument("-lg", "--log-dir", default="logs/", help="folder to save logs")
+parser.add_argument("-lg", "--log-dir", default="./models/A3CLSTM_E2E/logs/", help="folder to save logs")
 
 parser.add_argument(
     "-a", "--amsgrad", action="store_true", help="Adam optimizer amsgrad parameter"
@@ -200,7 +200,6 @@ parser.add_argument(
 parser.add_argument(
     "-tl",
     "--tensorboard-logger",
-    # action="store_true",
     default=True,
     help="Creates tensorboard logger to see graph of model, view model weights and biases, and monitor test agent reward progress",
 )
@@ -238,15 +237,10 @@ if __name__ == '__main__':
         shared_model = A3Clstm(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "E2E":
         shared_model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
-    if args.load and os.path.exists(args.load_model_dir + "Benchmark_1.dat"):
-        if args.load_model_idx == -1:
-            num_file = len(os.listdir(args.load_model_dir))
-            model_idx = num_file - 1 # except a markdown file
-        else:
-            model_idx = args.load_model_idx
-        print("Loading Model: "+f"{args.load_model_dir}{args.env}_"+str(model_idx)+".dat")
+    if args.load and os.path.exists(f"{args.save_model_dir}{args.env}.dat"):
+        print("Loading Model: "+f"{args.load_model_dir}{args.env}.dat")
         saved_state = torch.load(
-            f"{args.load_model_dir}{args.env}_"+str(model_idx)+".dat",
+            f"{args.load_model_dir}{args.env}.dat",
             map_location=lambda storage, loc: storage,
         )
         shared_model.load_state_dict(saved_state)
