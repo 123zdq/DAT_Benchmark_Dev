@@ -8,6 +8,8 @@ from utils import read_config
 from stable_baselines3.common.monitor import Monitor
 from async_vecenv import ASYNC_SubprocVecEnv
 from torch.utils.tensorboard import SummaryWriter
+import os
+from copy import deepcopy
 import sys
 # for path in sys.path:
 #     print(path)
@@ -32,17 +34,32 @@ class UAV_VAT(gym.Env):
         self.end_reward = end_reward and process_idx == arg_worker-1
         if self.end_reward:
             assert log_dir != None
+            self.num_test_dir = os.path.dirname(log_dir)
+            self.num_test = f"{self.num_test_dir}/num_test.txt"
+            if os.path.exists(self.num_test):
+                with open(self.num_test,"r") as file:
+                    data = file.read()
+                    print(f"Read: {data}")
+                file.close()
+                self.reward_idx = int(data)
+            else:
+                self.reward_idx = 0
+            self.init_reward_idx = deepcopy(self.reward_idx)
             self.tb_logger = SummaryWriter(log_dir=log_dir)
             self.total_reward = 0
-            self.reward_idx = 0
+            
     
     def reset(self):
         self.state,_ = self.env.reset()
         if self.end_reward:
-            if self.reward_idx != 0:
+            if self.reward_idx != self.init_reward_idx:
                 self.tb_logger.add_scalar('Reward', self.total_reward, self.reward_idx)
                 self.total_reward = 0
             self.reward_idx += 1
+            with open(self.num_test,"w") as file:
+                file.write(str(self.reward_idx))
+                print(f"Write: {self.reward_idx}")
+            file.close()
         return self.state
     
     def step(self, action):
@@ -83,18 +100,32 @@ class UAV_VAT_Gymnasium(gymnasium.Env):
         self.end_reward = end_reward and process_idx == arg_worker-1
         if self.end_reward:
             assert log_dir != None
+            self.num_test_dir = os.path.dirname(log_dir)
+            self.num_test = f"{self.num_test_dir}/num_test.txt"
+            if os.path.exists(self.num_test):
+                with open(self.num_test,"r") as file:
+                    data = file.read()
+                    print(f"Read: {data}")
+                file.close()
+                self.reward_idx = int(data)
+            else:
+                self.reward_idx = 0
+            self.init_reward_idx = deepcopy(self.reward_idx)
             self.tb_logger = SummaryWriter(log_dir=log_dir)
             self.total_reward = 0
-            self.reward_idx = 0
     
     def reset(self,seed=None):
         reset_info={}
         self.state,_ = self.env.reset()
         if self.end_reward:
-            if self.reward_idx != 0:
+            if self.reward_idx != self.init_reward_idx:
                 self.tb_logger.add_scalar('Reward', self.total_reward, self.reward_idx)
                 self.total_reward = 0
             self.reward_idx += 1
+            with open(self.num_test,"w") as file:
+                file.write(str(self.reward_idx))
+                print(f"Write: {self.reward_idx}")
+            file.close()
         return self.state,reset_info
     
     def step(self, action):

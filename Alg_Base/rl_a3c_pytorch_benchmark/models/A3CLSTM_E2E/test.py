@@ -63,7 +63,6 @@ def test(args, shared_model, env_conf):
     if os.path.exists(num_test_path):
         with open(num_test_path, "r") as file:
             data = file.read()
-            print(data)
         file.close()
         num_tests = int(data)
 
@@ -94,7 +93,6 @@ def test(args, shared_model, env_conf):
                         writer.add_histogram(name, weight, num_tests)
 
                 with open(num_test_path,"w") as file:
-                    print(num_tests)
                     file.write(str(num_tests))
                 file.close()
 

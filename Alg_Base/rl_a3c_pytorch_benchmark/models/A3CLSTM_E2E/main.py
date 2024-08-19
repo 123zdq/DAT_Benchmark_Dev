@@ -55,7 +55,7 @@ parser.add_argument(
     "-w",
     "--workers",
     type=int,
-    default=1,
+    default=24,
     help="how many training processes to use (default: 16)",
 )
 parser.add_argument(
