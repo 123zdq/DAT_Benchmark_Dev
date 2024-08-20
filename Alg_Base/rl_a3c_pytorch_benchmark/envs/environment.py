@@ -16,6 +16,7 @@ from logger_cfg import create_logger
 import copy
 from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward,check_memory_usage
 import math
+from threading import Thread
 # import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
@@ -230,6 +231,12 @@ class BenchEnv_Multi():
 
         self.curr_step = 0
 
+        # Memory Protect
+        # if process_idx == 0:
+        current_pid = os.getpid()
+        self.memory_pretect_thread = Thread(target=check_memory_usage, args=(current_pid,0.65,))
+        self.memory_pretect_thread.start()
+
     """
         step: 
             1. Send an action to server through socket
@@ -410,10 +417,6 @@ class BenchEnv_Multi():
     def reset(self): 
         self.logger.info("\n")
         self.logger.info('<----- !!!!!Reset Function!!!!! ----->')
-
-        ## check whether memery usage is normal
-        memory_usage = check_memory_usage(threshold=0.85)
-        self.logger.info(f'Memory Consumption: {memory_usage}%')
 
         ## reset ori_w command and ori_y command
         self.oriw_0 = 0

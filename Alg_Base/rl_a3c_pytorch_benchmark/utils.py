@@ -5,8 +5,10 @@ import json
 import logging
 import math
 import psutil
-import sys
-
+import os
+import warnings
+import time
+import signal
 
 def setup_logger(logger_name, log_file, level=logging.INFO):
     l = logging.getLogger(logger_name)
@@ -124,13 +126,19 @@ def get_ENHANCE_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->flo
     reward = A*r_rho*r_theta
     return reward
 
-def check_memory_usage(threshold:float=0.85)->float:
-    memory_info = psutil.virtual_memory()
+def check_memory_usage(target_pid:int,threshold:float=0.85)->float:
+    while True:
+        memory_info = psutil.virtual_memory()
 
-    # Get memory comsumption in percentage
-    memory_usage = memory_info.percent
+        # Get memory comsumption in percentage
+        memory_usage = memory_info.percent
 
-    if memory_usage > threshold*100:
-        sys.exit(1)
+        if memory_usage > 60:
+            warnings.warn("---- Memory allocation over 60% ---- ")
 
-    return memory_usage
+        if memory_usage > threshold*100:
+            warnings.warn(f"---- Memory allocation over {threshold*100}% ---- ")
+            os.kill(target_pid, signal.SIGKILL)
+        
+        time.sleep(5)
+
