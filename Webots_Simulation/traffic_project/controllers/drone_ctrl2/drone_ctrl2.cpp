@@ -417,9 +417,9 @@ int main(int argc, char **argv)
           default:
             break;
         }
-        std::cout << "id: " << droneDef
-                << "  x: " << random_number
-                << std::endl;
+        // std::cout << "id: " << droneDef
+        //         << "  x: " << random_number
+        //         << std::endl;
       }
     }
 
