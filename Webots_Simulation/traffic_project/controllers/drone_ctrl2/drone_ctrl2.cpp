@@ -192,6 +192,7 @@ int main(int argc, char **argv)
   double action[5] = {0}; // 强化学习action参数buff
   double step_count = 0;
   rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange);
+  bool is_video_warmUp = false;
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -370,14 +371,35 @@ int main(int argc, char **argv)
     }
     else if(config.get()->simulationMode == string("video"))
     {
-      if(config.get()->video.randomAction == true)
+      static int countMax = int(1000. / 2. / config.get()->controlFreq);
+      static double last_step_count = 0;
+      static int random_number = -1;
+      if (countMax < 1)
       {
-        // 创建随机数引擎
-        std::random_device rd;  // 获取随机数种子
-        std::mt19937 gen(rd());  // 使用梅森旋转算法初始化随机数生成器
-        // 创建均匀分布
-        std::uniform_int_distribution<> distrib(0, 5);
-        int random_number = distrib(gen);
+        countMax = 1;
+      }
+      if(step_count <= config.get()->video.warmUpSteps)
+      {
+        is_video_warmUp = false;
+      }
+      else
+      {
+        is_video_warmUp = true;
+      }
+      if(config.get()->video.randomAction == true && rewardG.carDef != string("ORIGIN"))
+      {
+        // use ctrl frequency
+        if((step_count == 1) || ((step_count - last_step_count) >= countMax))
+        {
+          // 创建随机数引擎
+          std::random_device rd;  // 获取随机数种子
+          std::mt19937 gen(rd());  // 使用梅森旋转算法初始化随机数生成器
+          // 创建均匀分布
+          std::uniform_int_distribution<> distrib(0, 5);
+          random_number = distrib(gen);
+          last_step_count = step_count;
+        }
+        // use random number to select random actions
         switch(random_number)
         {
           case 0: fly_cmd.axes[3] = config.get()->video.forwardSpeed;
@@ -392,7 +414,12 @@ int main(int argc, char **argv)
             break;
           case 5: fly_cmd.axes[0] = config.get()->video.ccwOmega  / M_PI * 180.;
             break;
+          default:
+            break;
         }
+        std::cout << "id: " << droneDef
+                << "  x: " << random_number
+                << std::endl;
       }
     }
 
@@ -417,6 +444,11 @@ int main(int argc, char **argv)
         }
       }
       gimbal_cmd.y = CLAMP(gimbal_cmd.y, 0.5, 1.5);
+      // video mode self count
+      if(rewardG.carDef != string("ORIGIN"))
+      {
+        step_count++;
+      }
     }
 
     if (config.get()->simulationMode == string("demo"))
@@ -504,11 +536,6 @@ int main(int argc, char **argv)
     }
     gcmdCb(gCtrl.gbl2ctrl, camera_roll_motor, camera_pitch_motor, camera_yaw_motor);
 
-    static int countMax = int(1000. / 2. / config.get()->controlFreq);
-    if (countMax < 1)
-    {
-      countMax = 1;
-    }
     if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       static bool alreadyDone = false;
@@ -768,7 +795,7 @@ int main(int argc, char **argv)
         }
       }
       // static boost::filesystem::path fn(foldername);
-      if (t >= config.get()->video.startTime && t <= (config.get()->video.startTime + config.get()->video.totalTime))
+      if (t >= config.get()->video.startTime && t <= (config.get()->video.startTime + config.get()->video.totalTime) && is_video_warmUp == true)
       {
         if (videoCount == 0)
         {

@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-08 10:26:44
+LastEditTime: 2024-08-21 00:48:08
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -130,12 +130,16 @@ elif configData["Simulation_Mode"] == "train":
     for i in range(multiCom.Number_process):
         droneM.append(drone_manager.droneManager(robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag))
 elif configData["Simulation_Mode"] == "video":
+    # clear space
+    delete_count = 0
+    while os.path.exists("../../droneVideos/DRONE"+str(delete_count)):
+        if System == "Linux":
+            os.system("rm -rf ../../droneVideos/DRONE" + str(delete_count))
+        elif System == "Windows":
+            os.system("del /s /q /f ../../droneVideos/DRONE" + str(delete_count))
+        delete_count = delete_count + 1
     # create directories to contain frames
     for i in range(configData["Out_Video"]["channels"]):
-        if System == "Linux":
-            os.system("rm -rf ../../droneVideos/DRONE" + str(i))
-        elif System == "Windows":
-            os.system("del /s /q /f ../../droneVideos/DRONE" + str(i))
         os.mkdir("../../droneVideos/DRONE"+str(i))    
         
     # activate map random init
