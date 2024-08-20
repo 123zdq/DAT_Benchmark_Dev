@@ -49,8 +49,8 @@
 
         },
         "Out_Video": {
-                "channels": 4,
-                "fps": 50.0,
+                "channels": 24,
+                "fps": 125.0,
                 "start_time": 1.0,
                 "total_time": 50.0,
                 "output_car_dir": false,
@@ -59,8 +59,8 @@
                 "backward_speed":-40,
                 "left_speed":40,
                 "right_speed":-40,
-                "cw_omega":0.2,
-                "ccw_omega":-0.2
+                "cw_omega":2,
+                "ccw_omega":-2
         },
         "Drone_Random_Config": {
                 "start_time_bias_ms": 510,

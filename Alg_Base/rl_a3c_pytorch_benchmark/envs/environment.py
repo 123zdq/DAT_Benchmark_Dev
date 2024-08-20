@@ -408,14 +408,18 @@ class BenchEnv_Multi():
             State: First state received from server through socket
     """
     def reset(self): 
+        self.logger.info("\n")
+        self.logger.info('<----- !!!!!Reset Function!!!!! ----->')
+
         ## check whether memery usage is normal
-        check_memory_usage(threshold=0.85)
+        memory_usage = check_memory_usage(threshold=0.85)
+        self.logger.info(f'Memory Consumption: {memory_usage}%')
+
         ## reset ori_w command and ori_y command
         self.oriw_0 = 0
         self.d_curr = 0
 
-        self.logger.info("\n")
-        self.logger.info('<----- !!!!!Reset Function!!!!! ----->')
+
         ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!
         if os.path.exists(self.reward_path):
             time.sleep(0.001)

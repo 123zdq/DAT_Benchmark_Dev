@@ -124,13 +124,13 @@ def get_ENHANCE_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->flo
     reward = A*r_rho*r_theta
     return reward
 
-def check_memory_usage(threshold:float=0.85):
+def check_memory_usage(threshold:float=0.85)->float:
     memory_info = psutil.virtual_memory()
 
     # Get memory comsumption in percentage
     memory_usage = memory_info.percent
 
-    print(f"Current memory usage: {memory_usage}%")
-
     if memory_usage > threshold*100:
         sys.exit(1)
+
+    return memory_usage
