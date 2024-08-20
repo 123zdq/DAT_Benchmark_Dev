@@ -4,6 +4,9 @@ import torch
 import json
 import logging
 import math
+import psutil
+import sys
+
 
 def setup_logger(logger_name, log_file, level=logging.INFO):
     l = logging.getLogger(logger_name)
@@ -120,3 +123,14 @@ def get_ENHANCE_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->flo
     r_theta = max(0,1-abs(theta-theta_cmd)/theta_max)
     reward = A*r_rho*r_theta
     return reward
+
+def check_memory_usage(threshold:float=0.85):
+    memory_info = psutil.virtual_memory()
+
+    # Get memory comsumption in percentage
+    memory_usage = memory_info.percent
+
+    print(f"Current memory usage: {memory_usage}%")
+
+    if memory_usage > threshold*100:
+        sys.exit(1)

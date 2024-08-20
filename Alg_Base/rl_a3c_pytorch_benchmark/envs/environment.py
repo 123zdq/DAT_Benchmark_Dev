@@ -14,7 +14,7 @@ from communication.sendSocket import SendActionSocket
 import time
 from logger_cfg import create_logger
 import copy
-from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward
+from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward,check_memory_usage
 import math
 # import matplotlib.pyplot as plt
 
@@ -408,6 +408,8 @@ class BenchEnv_Multi():
             State: First state received from server through socket
     """
     def reset(self): 
+        ## check whether memery usage is normal
+        check_memory_usage(threshold=0.85)
         ## reset ori_w command and ori_y command
         self.oriw_0 = 0
         self.d_curr = 0
