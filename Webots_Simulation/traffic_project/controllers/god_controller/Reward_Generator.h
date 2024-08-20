@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-14 01:24:57
+ * @LastEditTime: 2024-08-20 09:03:30
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -146,9 +146,9 @@ inline void rewardGenerator::locateCamera(double _width, double _height, double 
   cameraRL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
 
   makeReward.cameraF = Camera2real.cameraF;
-  makeReward.cameraMidPos.x = T_camera_of_land[3];
-  makeReward.cameraMidPos.y = T_camera_of_land[7];
-  makeReward.cameraMidPos.z = T_camera_of_land[11];
+  makeReward.cameraMidPos.x = makeReward.T_ct[3];
+  makeReward.cameraMidPos.y = makeReward.T_ct[7];
+  makeReward.cameraMidPos.z = makeReward.T_ct[11];
 }
 
 /**
@@ -310,7 +310,18 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   makeReward.carCameraPosOri.x = T_car_of_camera[3];
   makeReward.carCameraPosOri.y = T_car_of_camera[7];
   makeReward.carCameraPosOri.z = T_car_of_camera[11];
-  makeReward.carCameraPosOri.w = atan2(makeReward.carCameraPosOri.y,makeReward.carCameraPosOri.x);
+  const double *Car_Ori = trackingCar->getField("rotation")->getSFRotation();
+  const double *Drone_Ori = supervisor->getFromDef(droneDef)->getField("rotation")->getSFRotation();
+  makeReward.carCameraPosOri.w = Car_Ori[2]*Car_Ori[3] - Drone_Ori[2]*Drone_Ori[3];
+  // makeReward.carCameraPosOri.w = atan2(makeReward.carCameraPosOri.y,makeReward.carCameraPosOri.x);
+  while(makeReward.carCameraPosOri.w > M_PI)
+  {
+    makeReward.carCameraPosOri.w -= 2 * M_PI;
+  }
+  while(makeReward.carCameraPosOri.w < -M_PI)
+  {
+    makeReward.carCameraPosOri.w += 2 * M_PI;
+  }
 
   double reward = 0;
   if (_run_mode == string("demo"))
@@ -327,7 +338,7 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
     // }
     reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
   }
-  else if (_run_mode == string("train"))
+  else if (_run_mode == string("train") || _run_mode == string("video"))
   {
     if (_reward_mode == string("discrete"))
     {

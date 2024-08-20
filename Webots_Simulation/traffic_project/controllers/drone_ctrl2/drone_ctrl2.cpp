@@ -27,6 +27,7 @@
 #include <../../libraries/myLibs/SecondButterworthLPF.h>
 #include "tracking_control.h"
 #include <string>
+#include <random>
 #include <../../libraries/myLibs/ALGoutfile.h>
 #include <../god_controller/Reward_Generator.h>
 #include <webots/Accelerometer.hpp>
@@ -367,6 +368,33 @@ int main(int argc, char **argv)
       }
       // std::cout<<fly_cmd.axes[3]<<", "<<fly_cmd.axes[2]<<", "<<fly_cmd.axes[1]<<", "<<fly_cmd.axes[0]<<std::endl;
     }
+    else if(config.get()->simulationMode == string("video"))
+    {
+      if(config.get()->video.randomAction == true)
+      {
+        // 创建随机数引擎
+        std::random_device rd;  // 获取随机数种子
+        std::mt19937 gen(rd());  // 使用梅森旋转算法初始化随机数生成器
+        // 创建均匀分布
+        std::uniform_int_distribution<> distrib(0, 5);
+        int random_number = distrib(gen);
+        switch(random_number)
+        {
+          case 0: fly_cmd.axes[3] = config.get()->video.forwardSpeed;
+            break;
+          case 1: fly_cmd.axes[3] = config.get()->video.backwardSpeed;
+            break;
+          case 2: fly_cmd.axes[2] = config.get()->video.leftSpeed;
+            break;
+          case 3: fly_cmd.axes[2] = config.get()->video.rightSpeed;
+            break;
+          case 4: fly_cmd.axes[0] = config.get()->video.cwOmega  / M_PI * 180.;
+            break;
+          case 5: fly_cmd.axes[0] = config.get()->video.ccwOmega  / M_PI * 180.;
+            break;
+        }
+      }
+    }
 
     if (config.get()->simulationMode == string("video"))
     {
@@ -551,10 +579,10 @@ int main(int argc, char **argv)
                 << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y
                 << "  done_state:" << pCtrl.done_state << std::endl;
       // std::cout << "id: " << droneDef
-      //           << "  x: " << rewardG.makeReward.carCameraPosOri.x
-      //           << "  y: " << rewardG.makeReward.carCameraPosOri.y
-      //           << "  z: " << rewardG.makeReward.carCameraPosOri.z
-      //           << "  w: " << rewardG.makeReward.carCameraPosOri.w
+      //           << "  x: " << rewardG.makeReward.cameraMidGlobalPos.x
+      //           << "  y: " << rewardG.makeReward.cameraMidGlobalPos.y
+      //           << "  z: " << rewardG.makeReward.cameraMidGlobalPos.z
+      //           // << "  w: " << rewardG.makeReward.carCameraPosOri.w
       //           << std::endl;
       if(pCtrl.done_state == string("distance"))
       {
@@ -565,7 +593,7 @@ int main(int argc, char **argv)
       }
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
       // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
-      if (config.get()->droneSupervisorCtrl == true && config.get()->simulationMode != string("video") && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
+      if (config.get()->droneSupervisorCtrl == true && (config.get()->simulationMode != string("video") || config.get()->video.randomAction == true) && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
@@ -649,18 +677,32 @@ int main(int argc, char **argv)
     else if (config.get()->simulationMode == string("demo"))
     {
       // std::cout << "  reward: " << state.reward << std::endl;
+      std::cout << "id: " << droneDef
+                << "  x: " << rewardG.makeReward.carCameraPosOri.x
+                << "  y: " << rewardG.makeReward.carCameraPosOri.y
+                << "  z: " << rewardG.makeReward.carCameraPosOri.z
+                << "  w: " << rewardG.makeReward.carCameraPosOri.w
+                << std::endl;
       if (config.get()->droneSupervisorCtrl == true)
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
         double cmd_yaw = jCtrl.cmd_yaw_;
-        if (cmd_yaw > M_PI)
+        // if (cmd_yaw > M_PI)
+        // {
+        //   cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw + M_PI) / (2. * M_PI));
+        // }
+        // else if (cmd_yaw < -M_PI)
+        // {
+        //   cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw - M_PI) / (2. * M_PI));
+        // }
+        while (cmd_yaw > M_PI)
         {
-          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw + M_PI) / (2. * M_PI));
+          cmd_yaw -= 2. * M_PI;
         }
-        else if (cmd_yaw < -M_PI)
+        while (cmd_yaw < -M_PI)
         {
-          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw - M_PI) / (2. * M_PI));
+          cmd_yaw += 2. * M_PI;
         }
         const double ro_t[4] = {0, 0, 1, cmd_yaw};
         droneNode->getField("translation")->setSFVec3f(tr_t);
@@ -752,7 +794,14 @@ int main(int argc, char **argv)
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";
-          config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir);
+          if(config.get()->video.outputCarDir == true)
+          {
+            config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir);
+          }
+          else
+          {
+            config.writeJsonIncrement(jsonpath, formatted, state.reward, state.done);
+          }
           videoCount++;
         }
         else if ((t - last_frame_t) >= (1. / static_cast<double>(config.get()->video.fps)))
@@ -763,7 +812,14 @@ int main(int argc, char **argv)
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";
-          config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir);
+          if(config.get()->video.outputCarDir == true)
+          {
+            config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir);
+          }
+          else
+          {
+            config.writeJsonIncrement(jsonpath, formatted, state.reward, state.done);
+          }
           videoCount++;
           last_frame_t = t;
         }

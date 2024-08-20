@@ -2,7 +2,7 @@
         "Simulation_Mode": "train",
         "Drone_Supervisor_Ctrl": true,
         "Socket_Ip": "127.0.0.1",
-        "Config_Agen_Num_Port":7789,
+        "Config_Agen_Num_Port":7701,
         "Train_Total_Steps": 1500,
         "Init_No_Done_Steps": 100,
         "No_Reward_Done_Steps": 100,
@@ -52,7 +52,15 @@
                 "channels": 4,
                 "fps": 50.0,
                 "start_time": 1.0,
-                "total_time": 50.0
+                "total_time": 50.0,
+                "output_car_dir": false,
+                "random_action": true,
+                "forward_speed":40,
+                "backward_speed":-40,
+                "left_speed":40,
+                "right_speed":-40,
+                "cw_omega":0.2,
+                "ccw_omega":-0.2
         },
         "Drone_Random_Config": {
                 "start_time_bias_ms": 510,

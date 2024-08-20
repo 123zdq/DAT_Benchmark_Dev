@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-01 16:35:54
+ * @LastEditTime: 2024-08-20 08:52:37
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -60,6 +60,14 @@ typedef struct _configData_s{
         double fps = 30;
         double startTime = 0;
         double totalTime = 5;
+        bool outputCarDir = true;
+        bool randomAction = false;
+        double forwardSpeed = 0;
+        double backwardSpeed = 0;
+        double leftSpeed = 0;
+        double rightSpeed = 0;
+        double cwOmega = 0;
+        double ccwOmega = 0;
     };
     _outVideo video;
 }configData_s;
@@ -72,6 +80,7 @@ public:
     nlohmann::json read_json_file(const std::string& file_path);
     void write_json_file(const std::string& file_path, const nlohmann::json& json_obj);;
     void writeJsonIncrement(std::string& _filepath, std::string _mark, int _value);
+    void writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _done);
 private:
     std::string filepath;//json file path and name
     configData_s configData;//json file parse data
@@ -118,6 +127,14 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.video.fps = config.at("Out_Video").at("fps");
     configData.video.startTime = config.at("Out_Video").at("start_time");
     configData.video.totalTime = config.at("Out_Video").at("total_time");
+    configData.video.outputCarDir = config.at("Out_Video").at("output_car_dir");
+    configData.video.randomAction = config.at("Out_Video").at("random_action");
+    configData.video.forwardSpeed = config.at("Out_Video").at("forward_speed");
+    configData.video.backwardSpeed = config.at("Out_Video").at("backward_speed");
+    configData.video.leftSpeed = config.at("Out_Video").at("left_speed");
+    configData.video.rightSpeed = config.at("Out_Video").at("right_speed");
+    configData.video.cwOmega = config.at("Out_Video").at(("cw_omega"));
+    configData.video.ccwOmega = config.at("Out_Video").at("ccw_omega");
     std::cout<< " \n \n"<<std::endl;
     std::cout<< "    Environment config successful!\n \n"<<std::endl;
     std::cout<< "    Simulation_Mode:       " << configData.simulationMode << std::endl;
@@ -146,7 +163,9 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     std::cout<< "    Out_Video: {\n}"
                 << "        fps:             " << configData.video.fps << "\n"
                 << "        start_time:      " << configData.video.startTime << "\n"
-                << "        total_time:      " << configData.video.totalTime << std::endl;
+                << "        total_time:      " << configData.video.totalTime << "\n"
+                << "        output_car_dir:  " << configData.video.outputCarDir << "\n"
+                << "        random_action:   " << configData.video.randomAction << std::endl;
     std::cout<< "    }\n \n \n"<<std::endl;
 }
 
@@ -184,6 +203,15 @@ void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark,
     object[_mark] = _value;
     write_json_file(_filepath, object);
 }
+
+void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _done)
+{
+    json object = read_json_file(_filepath);
+    double _value[2] = {_reward,_done};
+    object[_mark] = _value;
+    write_json_file(_filepath, object);
+}
+
 
 
 

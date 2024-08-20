@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-07 16:47:27
+LastEditTime: 2024-08-20 08:50:29
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -344,7 +344,8 @@ class droneManager:
                         is_reset[self.id] = False
                         self.machine_state = 1 # remember to reset
                     else:
-                        self.sumoGod.MoveDroneToCar(self.sumoGod.currentUseCarNode, self.drone, self.sumoGod.transVector, self.sumoGod.rotateAngle, False)
+                        if self.configData["Out_Video"]["random_action"] == False:
+                            self.sumoGod.MoveDroneToCar(self.sumoGod.currentUseCarNode, self.drone, self.sumoGod.transVector, self.sumoGod.rotateAngle, False)
                         if is_step[self.id] == 1:
                             # self.logger.info("return states reward done")
                             with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
