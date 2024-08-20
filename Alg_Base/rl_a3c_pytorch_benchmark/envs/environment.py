@@ -234,7 +234,7 @@ class BenchEnv_Multi():
         # Memory Protect
         # if process_idx == 0:
         current_pid = os.getpid()
-        self.memory_pretect_thread = Thread(target=check_memory_usage, args=(current_pid,0.65,))
+        self.memory_pretect_thread = Thread(target=check_memory_usage, args=(current_pid,0.85,))
         self.memory_pretect_thread.start()
 
     """
