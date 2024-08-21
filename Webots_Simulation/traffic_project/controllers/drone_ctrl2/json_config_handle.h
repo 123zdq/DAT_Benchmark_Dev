@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-21 00:26:56
+ * @LastEditTime: 2024-08-21 20:01:00
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -81,7 +81,7 @@ public:
     nlohmann::json read_json_file(const std::string& file_path);
     void write_json_file(const std::string& file_path, const nlohmann::json& json_obj);;
     void writeJsonIncrement(std::string& _filepath, std::string _mark, int _value);
-    void writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _done);
+    void writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _action);
 private:
     std::string filepath;//json file path and name
     configData_s configData;//json file parse data
@@ -208,10 +208,10 @@ void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark,
     write_json_file(_filepath, object);
 }
 
-void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _done)
+void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _action)
 {
     json object = read_json_file(_filepath);
-    double _value[2] = {_reward,_done};
+    double _value[2] = {_reward,_action};
     object[_mark] = _value;
     write_json_file(_filepath, object);
 }

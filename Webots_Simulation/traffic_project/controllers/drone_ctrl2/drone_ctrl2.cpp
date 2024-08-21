@@ -193,6 +193,7 @@ int main(int argc, char **argv)
   double step_count = 0;
   rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange);
   bool is_video_warmUp = false;
+  int random_number = -1;
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -373,7 +374,6 @@ int main(int argc, char **argv)
     {
       static int countMax = int(1000. / 2. / config.get()->controlFreq);
       static double last_step_count = 0;
-      static int random_number = -1;
       if (countMax < 1)
       {
         countMax = 1;
@@ -413,6 +413,8 @@ int main(int argc, char **argv)
           case 4: fly_cmd.axes[0] = config.get()->video.cwOmega  / M_PI * 180.;
             break;
           case 5: fly_cmd.axes[0] = config.get()->video.ccwOmega  / M_PI * 180.;
+            break;
+          case 6:
             break;
           default:
             break;
@@ -826,7 +828,7 @@ int main(int argc, char **argv)
           }
           else
           {
-            config.writeJsonIncrement(jsonpath, formatted, state.reward, state.done);
+            config.writeJsonIncrement(jsonpath, formatted, state.reward, double(random_number));
           }
           videoCount++;
         }
@@ -844,7 +846,7 @@ int main(int argc, char **argv)
           }
           else
           {
-            config.writeJsonIncrement(jsonpath, formatted, state.reward, state.done);
+            config.writeJsonIncrement(jsonpath, formatted, state.reward, double(random_number));
           }
           videoCount++;
           last_frame_t = t;
