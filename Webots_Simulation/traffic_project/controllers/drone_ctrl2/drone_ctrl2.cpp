@@ -703,13 +703,12 @@ int main(int argc, char **argv)
     }
     else if (config.get()->simulationMode == string("demo"))
     {
-      // std::cout << "  reward: " << state.reward << std::endl;
       std::cout << "id: " << droneDef
                 << "  x: " << rewardG.makeReward.carCameraPosOri.x
                 << "  y: " << rewardG.makeReward.carCameraPosOri.y
                 << "  z: " << rewardG.makeReward.carCameraPosOri.z
                 << "  w: " << rewardG.makeReward.carCameraPosOri.w
-                << std::endl;
+                << "  reward: " << state.reward << std::endl;
       if (config.get()->droneSupervisorCtrl == true)
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
