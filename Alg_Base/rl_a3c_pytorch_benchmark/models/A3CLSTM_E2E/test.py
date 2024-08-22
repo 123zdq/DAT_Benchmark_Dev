@@ -72,6 +72,8 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
 
     flag = True
     max_score = 0
+    num_step = 0
+    num_episode = 0
     if not read_num_test:
         player.model.load_state_dict(torch.load(load_path))
         print(f"Loading State dict: {load_path}")
@@ -84,9 +86,12 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                 else:
                     player.model.load_state_dict(shared_model.state_dict())
             player.action_test()
+            num_step += 1
             reward_sum += player.reward
             if player.done:
-                num_tests += 1
+                num_tests += num_step*args.workers
+                num_episode += 1
+                print(f"num_episode: {num_episode}")
                 reward_total_sum += reward_sum
                 reward_mean = reward_total_sum / num_tests
                 # log.info(
@@ -109,7 +114,7 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                     with open(num_test_path,"w") as file:
                         file.write(str(num_tests))
                     file.close()
-
+                num_step = 0
                 if (args.save_max and reward_sum >= max_score) or not args.save_max and read_num_test:
                     if reward_sum >= max_score:
                         max_score = reward_sum

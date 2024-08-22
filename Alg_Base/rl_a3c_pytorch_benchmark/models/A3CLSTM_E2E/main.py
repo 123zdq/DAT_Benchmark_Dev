@@ -216,7 +216,7 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
-MODE = "test"
+MODE = "train"
 
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
