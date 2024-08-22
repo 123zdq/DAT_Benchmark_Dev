@@ -20,7 +20,7 @@ import logging
     Output:
         None
 """
-def test(args, shared_model, env_conf):
+def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None,num_worker:int=1,process_idx:int=0):
     ptitle("Test Agent")
     gpu_id = args.gpu_ids[-1]
     setup_logger(f"{args.env}_log", rf"{args.log_dir}{args.env}_log")
@@ -28,7 +28,11 @@ def test(args, shared_model, env_conf):
     torch.manual_seed(args.seed)
     if gpu_id >= 0:
         torch.cuda.manual_seed(args.seed)
-    env,process_func = general_env(args.env, env_conf,args.workers,process_idx=args.workers-1)
+    if read_num_test:
+        env,process_func = general_env(args.env, env_conf,args.workers,process_idx=args.workers-1)
+    else:
+        print(f"number worker: {num_worker} process_idx: {process_idx}")
+        env,process_func = general_env(args.env, env_conf,num_worker,process_idx=process_idx)
     reward_sum = 0
     start_time = time.time()
     num_tests = 0
@@ -60,7 +64,7 @@ def test(args, shared_model, env_conf):
         player.state = torch.from_numpy(player.state).float()
 
     num_test_path = "./models/A3CLSTM_E2E/num_test.txt"
-    if os.path.exists(num_test_path):
+    if os.path.exists(num_test_path) and read_num_test:
         with open(num_test_path, "r") as file:
             data = file.read()
         file.close()
@@ -68,9 +72,12 @@ def test(args, shared_model, env_conf):
 
     flag = True
     max_score = 0
+    if not read_num_test:
+        player.model.load_state_dict(torch.load(load_path))
+        print(f"Loading State dict: {load_path}")
     try:
         while 1:
-            if player.done:
+            if player.done and read_num_test:
                 if gpu_id >= 0:
                     with torch.cuda.device(gpu_id):
                         player.model.load_state_dict(shared_model.state_dict())
@@ -86,17 +93,24 @@ def test(args, shared_model, env_conf):
                 #     f'Time {time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - start_time))}, episode reward {reward_sum}, episode length {player.eps_len}, reward mean {reward_mean:.4f}'
                 # )
                 if args.tensorboard_logger:
-                    writer.add_scalar(
-                        f"{args.env}_Episode_Rewards", reward_sum, num_tests
-                    )
-                    for name, weight in player.model.named_parameters():
-                        writer.add_histogram(name, weight, num_tests)
+                    if read_num_test:
+                        writer.add_scalar(
+                            f"{args.env}_Episode_Rewards", reward_sum, num_tests
+                        )
+                        for name, weight in player.model.named_parameters():
+                            writer.add_histogram(name, weight, num_tests)
+                    else:
+                        filename = os.path.basename(load_path)  # 获取文件名 CityStreet-d.dat
+                        filename_without_ext = os.path.splitext(filename)[0]
+                        writer.add_scalar(
+                            f"{args.env}_Episode_Rewards_"+filename_without_ext, reward_sum, num_tests
+                        )
+                if read_num_test:
+                    with open(num_test_path,"w") as file:
+                        file.write(str(num_tests))
+                    file.close()
 
-                with open(num_test_path,"w") as file:
-                    file.write(str(num_tests))
-                file.close()
-
-                if (args.save_max and reward_sum >= max_score) or not args.save_max:
+                if (args.save_max and reward_sum >= max_score) or not args.save_max and read_num_test:
                     if reward_sum >= max_score:
                         max_score = reward_sum
                     if gpu_id >= 0:

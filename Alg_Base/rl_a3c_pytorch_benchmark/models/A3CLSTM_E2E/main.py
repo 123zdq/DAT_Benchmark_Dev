@@ -216,6 +216,8 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
+MODE = "test"
+
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
 # Training settings
@@ -256,17 +258,31 @@ if __name__ == '__main__':
     else:
         optimizer = None
 
-    processes = []
-    p = mp.Process(target=test, args=(args, shared_model, env_conf))
-    p.start()
-    processes.append(p)
-    time.sleep(0.001)
-    for rank in range(0, args.workers-1):
-        p = mp.Process(
-            target=train, args=(rank, args, shared_model, optimizer, env_conf))
+    if MODE == "train":
+        processes = []
+        p = mp.Process(target=test, args=(args, shared_model, env_conf))
         p.start()
         processes.append(p)
         time.sleep(0.001)
-    for p in processes:
-        time.sleep(0.001)
-        p.join()
+        for rank in range(0, args.workers-1):
+            p = mp.Process(
+                target=train, args=(rank, args, shared_model, optimizer, env_conf))
+            p.start()
+            processes.append(p)
+            time.sleep(0.001)
+        for p in processes:
+            time.sleep(0.001)
+            p.join()
+    else:
+        load_path = "./models/A3CLSTM_E2E/trained_models/"
+        path_list = ["CityStreet-d.dat","CityStreet-n.dat","CityStreet-f.dat","CityStreet-s.dat"]
+        # test(args, shared_model, env_conf,read_num_test=False,load_path=load_path)
+        processes = []
+        for idx,dat in enumerate(path_list):
+            p = mp.Process(target=test, args=(args, shared_model, env_conf,False,load_path+dat,len(path_list),idx))
+            p.start()
+            processes.append(p)
+            time.sleep(0.001)
+        for p in processes:
+            time.sleep(0.001)
+            p.join()

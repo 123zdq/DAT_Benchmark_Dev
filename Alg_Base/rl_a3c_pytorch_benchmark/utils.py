@@ -142,3 +142,11 @@ def check_memory_usage(target_pid:int,threshold:float=0.85)->float:
         
         time.sleep(5)
 
+def get_mean_std(reward_list:list):
+    mean = np.mean(reward_list)
+    std = np.std(reward_list)
+    return mean,std
+
+if __name__ == "__main__":
+    mean,std = get_mean_std([8.178,0.01322,0.008,2.563,0.5019])
+    print(f"mean: {mean} std: {std}")
