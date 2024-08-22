@@ -49,7 +49,7 @@ parser.add_argument(
 )
 
 
-parser.add_argument("-ld", "--load", help="load a trained model",default=False)
+parser.add_argument("-ld", "--load", help="load a trained model",default=True)
 
 parser.add_argument(
     "-w",
