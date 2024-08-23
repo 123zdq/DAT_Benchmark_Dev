@@ -10,6 +10,7 @@ from player_util import Agent
 from torch.autograd import Variable
 import time
 import logging
+from utils import get_mean_std
 
 """
     test: Multi-Process Testing Function
@@ -70,13 +71,15 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
         file.close()
         num_tests = int(data)
 
-    flag = True
+    reward_list = []
     max_score = 0
     num_step = 0
     num_episode = 0
     if not read_num_test:
         player.model.load_state_dict(torch.load(load_path))
         print(f"Loading State dict: {load_path}")
+        filename = os.path.basename(load_path)  # 获取文件名 CityStreet-d.dat
+        filename_without_ext = os.path.splitext(filename)[0]
     try:
         while 1:
             if player.done and read_num_test:
@@ -94,6 +97,14 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                 print(f"num_episode: {num_episode}")
                 reward_total_sum += reward_sum
                 reward_mean = reward_total_sum / num_tests
+                if not read_num_test:
+                    reward_list.append(reward_sum)
+                    if len(reward_list) == 5:
+                        mean,std = get_mean_std(reward_list)
+                        print(f"reward_list for {filename_without_ext}: ")
+                        for reward in reward_list:
+                            print(f"{reward:.3f}")
+                        print(f"{mean:.3f}±{std:.3f}")
                 # log.info(
                 #     f'Time {time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - start_time))}, episode reward {reward_sum}, episode length {player.eps_len}, reward mean {reward_mean:.4f}'
                 # )
@@ -105,8 +116,6 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                         for name, weight in player.model.named_parameters():
                             writer.add_histogram(name, weight, num_tests)
                     else:
-                        filename = os.path.basename(load_path)  # 获取文件名 CityStreet-d.dat
-                        filename_without_ext = os.path.splitext(filename)[0]
                         writer.add_scalar(
                             f"{args.env}_Episode_Rewards_"+filename_without_ext, reward_sum, num_tests
                         )

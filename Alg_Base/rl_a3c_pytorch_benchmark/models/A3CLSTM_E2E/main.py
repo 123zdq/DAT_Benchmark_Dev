@@ -275,7 +275,7 @@ if __name__ == '__main__':
             p.join()
     else:
         load_path = "./models/A3CLSTM_E2E/trained_models/"
-        path_list = ["CityStreet-d.dat","CityStreet-n.dat","CityStreet-f.dat","CityStreet-s.dat"]
+        path_list = ["Downtown-d.dat","Downtown-n.dat","Downtown-f.dat","Downtown-s.dat","Lake-d.dat","Lake-n.dat","Lake-f.dat","Lake-s.dat","Farmland-d.dat","Farmland-n.dat"]
         # test(args, shared_model, env_conf,read_num_test=False,load_path=load_path)
         processes = []
         for idx,dat in enumerate(path_list):
