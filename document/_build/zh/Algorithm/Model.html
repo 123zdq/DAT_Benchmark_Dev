@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="zh-CN" >
+<html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>模型搭建 &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/translations.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f115507d"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -47,13 +48,20 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../basicusage.html">My Project Documentation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">概述</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">安装</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">算法部分</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Introduction.html">算法部分介绍</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Environment.html">环境封装</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">模型搭建</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#baseline1-a3clstm-e2e">Baseline1 A3CLSTM-E2E</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#baseline1-a3clstm-e2e">Baseline1 A3CLSTM-E2E</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">快速运行程序</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">程序入口</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">模型实现</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#log">log文件</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">其他</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#baseline2-cvat">Baseline2 CVAT</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#baseline3-d-vat">Baseline3 D-VAT</a></li>
 </ul>
@@ -89,7 +97,7 @@
            <div itemprop="articleBody">
              
   <section id="id1">
-<h1>模型搭建<a class="headerlink" href="#id1" title="此标题的永久链接"></a></h1>
+<h1>模型搭建<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
 <blockquote>
 <div><style>
     #language-switch {
@@ -136,37 +144,158 @@
 </br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
-</br><p>本工程提供了4种baseline方法的算法实现，分别是 <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> <a class="footnote-reference brackets" href="#id8" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> <a class="footnote-reference brackets" href="#id9" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> <a class="footnote-reference brackets" href="#id10" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 以及 （我们的方法）</p>
-<p>其中，上述baseline方法中 <a class="footnote-reference brackets" href="#id8" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id9" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id10" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 分别调用了本工程实现的3种环境 <a class="reference internal" href="Environment.html"><span class="doc">环境封装</span></a> ，为不同需求的算法实现提供了模板</p>
+</br><p>本工程提供了4种baseline方法的算法实现，分别是 <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> <a class="footnote-reference brackets" href="#id15" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> <a class="footnote-reference brackets" href="#id16" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> <a class="footnote-reference brackets" href="#id17" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 以及 （我们的方法）</p>
+<p>其中，上述baseline方法中 <a class="footnote-reference brackets" href="#id15" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id16" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id17" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 分别调用了本工程实现的3种环境 <a class="reference internal" href="Environment.html"><span class="doc">环境封装</span></a> ，为不同需求的算法实现提供了模板</p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 环境调用了底层环境类:ref:<cite>BenchEnv_Multi</cite></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 环境调用了底层环境类 <a class="reference internal" href="Environment.html#benchenv-multi"><span class="std std-ref">1 底层环境类(BenchEnv_Multi)</span></a></p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 环境调用了并行环境类( <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> <a class="reference internal" href="Environment.html#parallel"><span class="std std-ref">3 并行环境类(Envs)</span></a> )</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> 环境调用了Gym环境类( <code class="code docutils literal notranslate"><span class="pre">UAV_VAT/UAV_VAT_Gymnasium</span></code> <a class="reference internal" href="Environment.html#gymnasium-gym"><span class="std std-ref">2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)</span></a>)</p></li>
 </ul>
 </div></blockquote>
 <section id="baseline1-a3clstm-e2e">
-<h2>Baseline1 A3CLSTM-E2E<a class="headerlink" href="#baseline1-a3clstm-e2e" title="此标题的永久链接"></a></h2>
+<h2>Baseline1 A3CLSTM-E2E<a class="headerlink" href="#baseline1-a3clstm-e2e" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>本工程对于 <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 方法的复现参考了论文 <code class="code docutils literal notranslate"><span class="pre">AD-VAT+</span></code> <a class="footnote-reference brackets" href="#id18" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> 基于代码仓库 <cite>rl_a3c_pytorch &lt;https://github.com/dgriff777/rl_a3c_pytorch&gt;</cite> 的复现方式。</p>
+<div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code>文件夹
+</div>
+</br><p>上述模型文件夹的目录结构如下：</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.
+├── __init__.py
+├── main.py
+├── model.py
+├── num_test.txt
+├── player_util.py
+├── runs
+│   └── Benchmark_training
+├── shared_optim.py
+├── test.py
+├── trained_models
+└── train.py
+</pre></div>
+</div>
+<p>各文件功能解释如下：</p>
+</div></blockquote>
+<section id="id9">
+<h3>快速运行程序<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark
+python<span class="w"> </span>./models/A3CLSTM_E2E/main.py
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>程序入口<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><code class="code docutils literal notranslate"><span class="pre">main.py</span></code> 为整个程序的入口，主要提供两种运行模式：<code class="code docutils literal notranslate"><span class="pre">train</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">test</span></code> 。</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>其中， <code class="code docutils literal notranslate"><span class="pre">train</span></code> 模式下同样提供了测试进程(例如程序以24进程运行，那么最后一位进程编号23对应的进程为测试进程)， 该进程主要用于训练过程的 <code class="code docutils literal notranslate"><span class="pre">tensorboard</span></code> 可视化</p></li>
+<li><p>而 <code class="code docutils literal notranslate"><span class="pre">test</span></code> 模式主要为已经完成训练的模型权重进行测试，该模式同样可以多进程运行，同时对多个模型权重进行测试。</p></li>
+<li><p>上述模式的配置变量为 <code class="code docutils literal notranslate"><span class="pre">MODE</span></code> 变量</p></li>
+</ul>
+</div></blockquote>
+<p>此外， <code class="code docutils literal notranslate"><span class="pre">main.py</span></code> 文件还接收用户的参数配置，参数的含义与默认值如下：</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">load(bool)=True</span></code> ：是否导入现有模型进行进一步的训练(只有当 <code class="code docutils literal notranslate"><span class="pre">load=True</span></code> 而且模型 <code class="code docutils literal notranslate"><span class="pre">A3CLSTM_E2E/trained_models/Benchmark.dat</span></code> 存在的时候才会导入)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">workers(int)=24</span></code> ：环境并行训练的数量数(需要根据实际计算机的内存/显存来决定)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">gpu-ids(list)=[-1]</span></code> ：用于设置GPU的编号，默认为-1，即不使用GPU</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">model_type(str)=&quot;E2E&quot;</span></code> ： 指定当前使用的模型种类，如果用户自主实现了模型可以在此处增加配置。</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">save-max(bool)=False</span></code> ： 是否保存测试进程reward最大时刻的模型权重，默认为 <code class="code docutils literal notranslate"><span class="pre">False</span></code> 即仅保存最后一个时刻的模型权重</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">save-model-dir(str)=&quot;./models/A3CLSTM_E2E/trained_models/&quot;</span></code> ：模型保存的路径</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">tensorboard-logger(bool)=True</span></code> ：是否使能 <code class="code docutils literal notranslate"><span class="pre">tensorboard</span></code> 进行模型的可视化</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">log-dir(str)=&quot;./models/A3CLSTM_E2E/logs/&quot;</span></code> ：如果开启了 <code class="code docutils literal notranslate"><span class="pre">tensorboard</span></code> ，log文件存储的位置</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id11">
+<h3>模型实现<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<blockquote>
+<div><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+    模型代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/main.py</code>
+</div>
+</br><p>在本工程中提供了两种主干网络，1种是代码仓库 <cite>rl_a3c_pytorch &lt;https://github.com/dgriff777/rl_a3c_pytorch&gt;</cite> 中的实现，另外一种是论文 <a class="footnote-reference brackets" href="#id15" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> 中的网络结构。</p>
+<ul class="simple">
+<li><p>代码仓库 <cite>rl_a3c_pytorch &lt;https://github.com/dgriff777/rl_a3c_pytorch&gt;</cite> 中的网络主干见 <code class="code docutils literal notranslate"><span class="pre">A3Clstm</span></code> 类</p></li>
+<li><p>论文 <a class="footnote-reference brackets" href="#id15" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> 中的网络结构见 <code class="code docutils literal notranslate"><span class="pre">A3ClstmE2E</span></code> 类</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="log">
+<h3>log文件<a class="headerlink" href="#log" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>本工程提供了两种log记录方式，第一种是直接输出log文件，另外一种是利用tensorboard记录训练过程的性能变化。</p>
+<p><strong>模式1：直接输出log文件</strong></p>
+<div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+    log文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/logs</code>
+</div>
+</br><ul class="simple">
+<li><p>本模式主要用于程序的调试和数据传输验证，相当于是终端 <code class="code docutils literal notranslate"><span class="pre">print</span></code> 函数的替代</p></li>
+<li><p>在上述文件夹主要包含两种类型的log文件： <code class="code docutils literal notranslate"><span class="pre">Agent_train${n}.log</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">Agent${n}.log</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Agent_train${n}.log</span></code> 主要保存训练过程中的参数情况，例如用于希望观测gae值变化，则可以在 <code class="code docutils literal notranslate"><span class="pre">Agent_train${n}.log</span></code> 进行观测</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Agent${n}.log</span></code> 主要用于保存环境端传输的数据，例如希望观测环境端获取的自定义奖励参数 <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code> ，则可以在该文件观测</p></li>
+</ul>
+<p><strong>模式2：直接输出tensorboard-logger文件</strong></p>
+<div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+    tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
+</div>
+</br><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">tensorboard</span></code> 是神经网络训练过程中的常用可视化平台，因此，本工程也提供了响应的支持</p></li>
+<li><p>本工程在进行多进程训练的时候会预留一个进程进行测试，例如：用户选择并行智能体数量为24,则实际训练的过程中会有23个训练进程以及1个测试进程，测试进程在每条Episode开始的时候同步shared_model的权值，并进行测试。</p></li>
+<li><p>而 <code class="code docutils literal notranslate"><span class="pre">tensorboard-logger</span></code> 文件中记录的就是测试进程的数据，主要是训练过程中的 <code class="code docutils literal notranslate"><span class="pre">value</span></code> ，用于评估智能体训练的情况</p></li>
+<li><p>此外，如果程序因为外部原因中断，本工程提供了 <code class="code docutils literal notranslate"><span class="pre">tensorboard-logger</span></code> 不中断功能，利用 <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> 存储当前数据条目数，并在新训练开始时继续进行记录。</p></li>
+<li><p><strong>注意：</strong> 如果用户希望重新记录训练曲线，需要将 <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> 中的数据手动写为0,或者直接删除 <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> 文件。</p></li>
+<li><p>完成所有配置之后，直接运行如下代码，即可在 <code class="code docutils literal notranslate"><span class="pre">localhost:xxxx</span></code> 查看 <code class="code docutils literal notranslate"><span class="pre">tensorboard</span></code> 可视化记录</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs
+tensorboard<span class="w"> </span>--logdir<span class="w"> </span>Benchmark_training
+</pre></div>
+</div>
+</div></blockquote>
+</section>
+<section id="id14">
+<h3>其他<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">train.py</span></code> 文件为A3C训练脚本， <code class="code docutils literal notranslate"><span class="pre">test.py</span></code> 为测试脚本，而 <code class="code docutils literal notranslate"><span class="pre">player_util.py</span></code> 则定义了智能体类别</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">shared_optim.py</span></code> 定义了优化函数</p></li>
+</ul>
+</div></blockquote>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 </section>
 <section id="baseline2-cvat">
-<h2>Baseline2 CVAT<a class="headerlink" href="#baseline2-cvat" title="此标题的永久链接"></a></h2>
-</section>
+<h2>Baseline2 CVAT<a class="headerlink" href="#baseline2-cvat" title="Link to this heading"></a></h2>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 <section id="baseline3-d-vat">
-<h2>Baseline3 D-VAT<a class="headerlink" href="#baseline3-d-vat" title="此标题的永久链接"></a></h2>
+<h2>Baseline3 D-VAT<a class="headerlink" href="#baseline3-d-vat" title="Link to this heading"></a></h2>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br><p>引用：</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id8" role="note">
+<aside class="footnote brackets" id="id15" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
-<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>,<a role="doc-backlink" href="#id12">3</a>,<a role="doc-backlink" href="#id13">4</a>)</span>
 <p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
-<aside class="footnote brackets" id="id9" role="note">
+<aside class="footnote brackets" id="id16" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
 <p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
 </aside>
-<aside class="footnote brackets" id="id10" role="note">
+<aside class="footnote brackets" id="id17" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id7">2</a>)</span>
 <p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
+</aside>
+<aside class="footnote brackets" id="id18" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">4</a><span class="fn-bracket">]</span></span>
+<p>Zhong, Fangwei, et al. “Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking.” IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.</p>
 </aside>
 </aside>
 </section>
@@ -183,7 +312,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; 版权所有 2024, Haowei Sun.</p>
+    <p>&#169; 版权所有 2024, Haowei Sun。</p>
   </div>
 
   利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 

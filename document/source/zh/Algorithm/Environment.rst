@@ -95,7 +95,7 @@ Part 1 接口详解
     * :code:`Action_dim(int)` ：智能体动作维度
     * :code:`action_list(list)` ：用于将离散的动作指令转化成连续的运动指令
         
-      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CW,CCW]`，即分别代表“前后左右顺逆”的运动指令
+      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CCW,CW]`，即分别代表“前后左右逆顺”的运动指令
 
     * :code:`process_state(function)` ：用于对图像进行后处理的函数
     * :code:`arg_worker(int)` ： 系统并行数

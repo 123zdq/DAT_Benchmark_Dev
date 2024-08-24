@@ -347,6 +347,12 @@ SUMO交通系统参数配置
 跟踪对象
 --------------------
 
+   .. raw:: html
+
+      <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+            本工程提供了18种共24个预定义的跟踪目标，并提供即插即用的接口，支持用户利用自主设计的模型和控制器。
+      </div>
+
 .. _SUMO_VEHICLE:
 
 SUMO_VEHICLE
@@ -478,6 +484,25 @@ SUMO_VEHICLE
 
    Trailer
 
+motorcycle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   两种车型，摩托车
+
+   .. raw:: html
+
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/SCOOTER.png" alt="SCOOTER" style="width: 90%;" />
+            <figcaption>Scooter</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/MOTORBIKE.png" alt="MOTORBIKE" style="width: 90%;" />
+            <figcaption>Motorbike</figcaption>
+         </figure>
+      </div>
+   
+
 Pedestrian
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -490,137 +515,85 @@ Pedestrian
 
    Pedestrian
 
-Shrimp
+.. raw:: html
+
+   <span style="background-color: yellow;">To Do:多截屏几种不同服装颜色的人</span>
+
+
+Wheel Robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    轮式机器人
 
-.. figure:: ../_static/image/SHRIMP.png
-   :alt: SHRIMP                                            
-   :width: 500px                                              
-   :align: center   
+   .. raw:: html
 
-   Shrimp
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/SHRIMP.png" alt="SHRIMP" style="width: 90%;" />
+            <figcaption>Shrimp</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/CREATE.png" alt="CREATE" style="width: 90%;" />
+            <figcaption>Create</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/SOJOURNER.png" alt="SOJOURNER" style="width: 90%;" />
+            <figcaption>Sojourner月球车</figcaption>
+         </figure>
+      </div>
 
-Create
+   .. raw:: html
+
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/BB_8.png" alt="BB_8" style="width: 90%;" />
+            <figcaption>BB-8球形机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/FIREBIRD6.png" alt="FIREBIRD6" style="width: 90%;" />
+            <figcaption>FireBird6</figcaption>
+         </figure>
+      </div>
+
+
+Legged Robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   轮式机器人
+   .. raw:: html
 
-.. figure:: ../_static/image/CREATE.png
-   :alt: CREATE                                            
-   :width: 500px                                              
-   :align: center   
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/MANTIS.png" alt="MANTIS" style="width: 90%;" />
+            <figcaption>Mantis大型六足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/AIBOERS7.png" alt="AIBOERS7" style="width: 90%;" />
+            <figcaption>AiboErs7四足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/BIOLOIDDOG.png" alt="BIOLOIDDOG" style="width: 90%;" />
+            <figcaption>BioloidDog四足机器人</figcaption>
+         </figure>
+      </div>
+   
+   .. raw:: html
 
-   Create
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/SCOUT.png" alt="SCOUT" style="width: 90%;" />
+            <figcaption>Scout双足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/GHOSTDOG2.png" alt="GHOSTDOG2" style="width: 90%;" />
+            <figcaption>GhostDog四足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/HOAP2.png" alt="HOAP2" style="width: 90%;" />
+            <figcaption>Hoap2双足机器人</figcaption>
+         </figure>
+      </div>
 
-Sojourner
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   月球车
-
-.. figure:: ../_static/image/SOJOURNER.png
-   :alt: SOJOURNER                                            
-   :width: 500px                                              
-   :align: center   
-
-   Sojourner
-
-Mantis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   大型六足机器人
-
-.. figure:: ../_static/image/MANTIS.png
-   :alt: MANTIS                                           
-   :width: 500px                                              
-   :align: center   
-
-   Mantis
-
-BB-8
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   球形机器人
-
-.. figure:: ../_static/image/BB_8.png
-   :alt: BB-8                                          
-   :width: 500px                                              
-   :align: center   
-
-   BB-8
-
-AiboErs7
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   四足机器人
-
-.. figure:: ../_static/image/AIBOERS7.png
-   :alt: AIBOERS7                                        
-   :width: 500px                                              
-   :align: center   
-
-   AiboErs7
-
-BioloidDog
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   四足机器人
-
-.. figure:: ../_static/image/BIOLOIDDOG.png
-   :alt: BIOLOIDDOG                                      
-   :width: 500px                                              
-   :align: center
-
-   BioloidDog
-
-FireBird6
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   轮式机器人
-
-.. figure:: ../_static/image/FIREBIRD6.png
-   :alt: FIREBIRD6                                      
-   :width: 500px                                              
-   :align: center
-
-   FireBird6
-
-Scout
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   双足机器人
-
-.. figure:: ../_static/image/SCOUT.png
-   :alt: SCOUT                                   
-   :width: 500px                                              
-   :align: center
-
-   Scout
-
-GhostDog
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   四足机器人
-
-.. figure:: ../_static/image/GHOSTDOG2.png
-   :alt: GHOSTDOG2                                  
-   :width: 500px                                              
-   :align: center
-
-   GhostDog
-
-Hoap2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   双足机器人
-
-.. figure:: ../_static/image/HOAP2.png
-   :alt: HOAP2                                  
-   :width: 500px                                              
-   :align: center
-
-   Hoap2
 
 自定义对象
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
