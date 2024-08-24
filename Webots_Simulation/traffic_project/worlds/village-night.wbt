@@ -6448,8 +6448,8 @@ Solid {
   name "hill2(8)"
 }
 Solid {
-  translation 2810.96 -5144.21 -81.279
-  rotation 0 0 1 2.64417
+  translation 2373.43 -5515.51 -27.67
+  rotation 0 0 1 1.13227
   children [
     DEF TUNNEL Shape {
       appearance PBRAppearance {
@@ -6459,7 +6459,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6468,8 +6468,8 @@ Solid {
   boundingObject USE TUNNEL
 }
 Solid {
-  translation 2556.04 -3912.25 -81.279
-  rotation 0 0 1 0.00654768
+  translation 3006.53 -3835.38 -27.67
+  rotation 0 0 1 1.7017
   children [
     DEF TUNNEL(17) Shape {
       appearance PBRAppearance {
@@ -6479,7 +6479,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6488,8 +6488,8 @@ Solid {
   boundingObject USE TUNNEL(17)
 }
 Solid {
-  translation 2483.77 -3231.15 -81.279
-  rotation 0 0 1 0.281437
+  translation 2849.59 -3013.74 -27.67
+  rotation 0 0 1 1.8195
   children [
     DEF TUNNEL(18) Shape {
       appearance PBRAppearance {
@@ -6499,7 +6499,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6508,8 +6508,8 @@ Solid {
   boundingObject USE TUNNEL(18)
 }
 Solid {
-  translation 2495.88 -3590.28 -81.279
-  rotation 0 0 1 0.0654525
+  translation 2635.99 -2940.98 -27.67
+  rotation 0 0 -1 1.34827
   children [
     DEF TUNNEL(19) Shape {
       appearance PBRAppearance {
@@ -6519,7 +6519,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6528,8 +6528,8 @@ Solid {
   boundingObject USE TUNNEL(19)
 }
 Solid {
-  translation 1832.05 -1444.36 -81.279
-  rotation 0 0 1 0.805036
+  translation 2204.75 -1243.07 -27.67
+  rotation 0 0 1 2.32347
   children [
     DEF TUNNEL(16) Shape {
       appearance PBRAppearance {
@@ -6539,7 +6539,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6548,8 +6548,8 @@ Solid {
   boundingObject USE TUNNEL(16)
 }
 Solid {
-  translation 3760.61 3787.59 -81.279
-  rotation 0 0 1 1.87187
+  translation 3153.84 3833.55 -27.67
+  rotation 0 0 1 0.353432
   children [
     DEF TUNNEL(1) Shape {
       appearance PBRAppearance {
@@ -6559,7 +6559,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6568,8 +6568,8 @@ Solid {
   boundingObject USE TUNNEL(1)
 }
 Solid {
-  translation 4931.6 3354.36 -81.279
-  rotation 0 0 1 0.706861
+  translation 5057.79 3573.73 -27.67
+  rotation 0 0 -1 0.785396
   children [
     DEF TUNNEL(5) Shape {
       appearance PBRAppearance {
@@ -6579,7 +6579,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6588,8 +6588,8 @@ Solid {
   boundingObject USE TUNNEL(5)
 }
 Solid {
-  translation 4652.06 3696.81 -81.279
-  rotation 0 0 1 0.706861
+  translation 5014.94 3918.06 -27.67
+  rotation 0 0 1 2.29075
   children [
     DEF TUNNEL(4) Shape {
       appearance PBRAppearance {
@@ -6599,7 +6599,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6608,8 +6608,8 @@ Solid {
   boundingObject USE TUNNEL(4)
 }
 Solid {
-  translation -6151.43 3851.13 -81.279
-  rotation 0 0 -1 0.0850825
+  translation -5966.12 4080.09 -27.67
+  rotation 0 0 -1 1.26318
   children [
     DEF TUNNEL(2) Shape {
       appearance PBRAppearance {
@@ -6619,7 +6619,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6628,8 +6628,8 @@ Solid {
   boundingObject USE TUNNEL(2)
 }
 Solid {
-  translation -5358.77 1454.4 -81.279
-  rotation 0 0 1 2.27554e-06
+  translation -5088.33 1056.64 -27.67
+  rotation 0 0 1 1.22391
   children [
     DEF TUNNEL(21) Shape {
       appearance PBRAppearance {
@@ -6639,7 +6639,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6648,8 +6648,8 @@ Solid {
   boundingObject USE TUNNEL(21)
 }
 Solid {
-  translation -5507.09 -4305.35 -81.279
-  rotation 0 0 1 0.628321
+  translation -5141.8 -4113.13 -27.67
+  rotation 0 0 1 2.14675
   children [
     DEF TUNNEL(20) Shape {
       appearance PBRAppearance {
@@ -6659,7 +6659,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6668,7 +6668,7 @@ Solid {
   boundingObject USE TUNNEL(20)
 }
 Solid {
-  translation -3972.03 -4573.56 -81.279
+  translation -3972.03 -4573.56 -27.67
   rotation 0 0 1 0.706861
   children [
     Shape {
@@ -6679,7 +6679,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6687,7 +6687,7 @@ Solid {
   name "tunnel(14)"
 }
 Solid {
-  translation -4100.34 -4408.41 -81.279
+  translation -4100.34 -4408.41 -27.67
   rotation 0 0 1 0.706861
   children [
     Shape {
@@ -6698,7 +6698,7 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel4.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
@@ -6706,8 +6706,8 @@ Solid {
   name "tunnel(15)"
 }
 Solid {
-  translation -935.378 -3681.22 -113
-  rotation 0 0 1 1.09956
+  translation -1688.55 -2875.81 -27.67
+  rotation 0 0 1 2.58527
   children [
     DEF TUNNEL(3) Shape {
       appearance PBRAppearance {
@@ -6717,12 +6717,52 @@ Solid {
       }
       geometry Mesh {
         url [
-          "../model/tunnel5.stl"
+          "../model/tunnel3.stl"
         ]
       }
     }
   ]
   name "tunnel(3)"
+  boundingObject USE TUNNEL(3)
+}
+Solid {
+  translation -2312.78 -2509.6 -27.67
+  rotation 0 0 1 2.58527
+  children [
+    DEF TUNNEL(3) Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.6 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/tunnel3.stl"
+        ]
+      }
+    }
+  ]
+  name "tunnel(22)"
+  boundingObject USE TUNNEL(3)
+}
+Solid {
+  translation -1997.67 -2693.16 -27.67
+  rotation 0 0 1 2.58527
+  children [
+    DEF TUNNEL(3) Shape {
+      appearance PBRAppearance {
+        baseColor 0.3 0.6 0.2
+        roughness 1
+        metalness 0
+      }
+      geometry Mesh {
+        url [
+          "../model/tunnel3.stl"
+        ]
+      }
+    }
+  ]
+  name "tunnel(23)"
   boundingObject USE TUNNEL(3)
 }
 Solid {
@@ -7095,7 +7135,7 @@ CrossRoadsTrafficLight {
 StreetLight {
   translation 34.2475 255.618 4.90275e-13
   rotation 0 0 1 1.15192
-  scale 1.5
+  scale 0.8
   name "street light(8)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7105,7 +7145,7 @@ StreetLight {
 StreetLight {
   translation -39.9321 291.326 7.22622e-12
   rotation 0 0 1 1.15192
-  scale 1.5
+  scale 0.8
   name "street light(3)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7115,7 +7155,7 @@ StreetLight {
 StreetLight {
   translation 175.25 187.725 2.62901e-13
   rotation 0 0 1 1.15192
-  scale 1.5
+  scale 0.8
   name "street light(4)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7125,7 +7165,7 @@ StreetLight {
 StreetLight {
   translation 78.9118 233.884 -3.85825e-12
   rotation 0 0 1 1.15192
-  scale 1.5
+  scale 0.8
   name "street light(5)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7135,7 +7175,7 @@ StreetLight {
 StreetLight {
   translation 131.484 207.873 -2.20268e-13
   rotation 0 0 1 1.15192
-  scale 1.5
+  scale 0.8
   name "street light(11)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7145,7 +7185,7 @@ StreetLight {
 StreetLight {
   translation -1.2069 272.967 7.10549e-15
   rotation 0 0 1 1.15192
-  scale 1.5
+  scale 0.8
   name "street light(12)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7155,7 +7195,7 @@ StreetLight {
 StreetLight {
   translation 214.391 164.81 9.35785e-12
   rotation 0 0 1 0.949025
-  scale 1.5
+  scale 0.8
   name "street light(13)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7165,7 +7205,7 @@ StreetLight {
 StreetLight {
   translation 325.896 84.6164 -2.8777e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(7)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7175,7 +7215,7 @@ StreetLight {
 StreetLight {
   translation 371.224 52.676 -2.8777e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(1)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7185,7 +7225,7 @@ StreetLight {
 StreetLight {
   translation 743.722 -210.833 -2.6752e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(2)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7195,7 +7235,7 @@ StreetLight {
 StreetLight {
   translation 817.134 -262.06 -2.68585e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(19)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7205,7 +7245,7 @@ StreetLight {
 StreetLight {
   translation 869.578 -296.891 -2.68585e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(21)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7215,7 +7255,7 @@ StreetLight {
 StreetLight {
   translation 1080.51 -436.925 -2.75689e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(22)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7225,7 +7265,7 @@ StreetLight {
 StreetLight {
   translation 1198.96 -518.024 -2.68584e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(27)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7235,7 +7275,7 @@ StreetLight {
 StreetLight {
   translation 1686.62 -889.33 -6.38065e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(30)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7245,7 +7285,7 @@ StreetLight {
 StreetLight {
   translation 1775.01 -961.912 -6.4446e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(40)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7255,7 +7295,7 @@ StreetLight {
 StreetLight {
   translation 1811.21 -992.573 -6.45881e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(42)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7265,7 +7305,7 @@ StreetLight {
 StreetLight {
   translation 1873.43 -1044.55 -6.45881e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(43)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7275,7 +7315,7 @@ StreetLight {
 StreetLight {
   translation 2253.31 -1498.52 -7.37897e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(45)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7285,7 +7325,7 @@ StreetLight {
 StreetLight {
   translation 2232.78 -1472.05 -7.39673e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(57)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7295,7 +7335,7 @@ StreetLight {
 StreetLight {
   translation 2211.11 -1445.65 -7.40028e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(56)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7305,7 +7345,7 @@ StreetLight {
 StreetLight {
   translation 2186.85 -1415.32 -7.40383e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(55)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7315,7 +7355,7 @@ StreetLight {
 StreetLight {
   translation 2159.87 -1382.41 -7.40383e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(54)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7325,7 +7365,7 @@ StreetLight {
 StreetLight {
   translation 2126.1 -1340 -7.39672e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(53)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7335,7 +7375,7 @@ StreetLight {
 StreetLight {
   translation 2092.23 -1298.86 -7.46067e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(52)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7345,7 +7385,7 @@ StreetLight {
 StreetLight {
   translation 2059.11 -1256.91 -7.46067e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(51)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7355,7 +7395,7 @@ StreetLight {
 StreetLight {
   translation 2026.68 -1215.9 -7.46067e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(50)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7365,7 +7405,7 @@ StreetLight {
 StreetLight {
   translation 1991.43 -1173.71 -5.97564e-12
   rotation 0 0 1 0.66105
-  scale 1.5
+  scale 0.8
   name "street light(49)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7375,7 +7415,7 @@ StreetLight {
 StreetLight {
   translation 2619 -2578.76 -5.97564e-12
   rotation 0 0 1 0.215991
-  scale 1.5
+  scale 0.8
   name "street light(58)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7385,7 +7425,7 @@ StreetLight {
 StreetLight {
   translation 2893.95 -3725.07 -6.15328e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(59)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7395,7 +7435,7 @@ StreetLight {
 StreetLight {
   translation 2876.08 -3866.32 -6.18881e-12
   rotation 0 0 -1 0.0916235
-  scale 1.5
+  scale 0.8
   name "street light(80)"
   beamWidth 1.4
   direction 0 0 -1
@@ -7405,7 +7445,7 @@ StreetLight {
 StreetLight {
   translation 3200.59 3960.16 -6.1746e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(94)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7416,7 +7456,7 @@ StreetLight {
 StreetLight {
   translation 3016.55 3879.69 -6.01828e-12
   rotation 0 0 -1 1.2959
-  scale 1.5
+  scale 0.8
   name "street light(105)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7426,7 +7466,7 @@ StreetLight {
 StreetLight {
   translation 3062.62 3898.2 -6.0467e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(108)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7436,7 +7476,7 @@ StreetLight {
 StreetLight {
   translation 3104.69 3917.31 -6.0467e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(107)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7446,7 +7486,7 @@ StreetLight {
 StreetLight {
   translation 3152.94 3938.89 -6.08933e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(106)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7456,7 +7496,7 @@ StreetLight {
 StreetLight {
   translation 3240.62 3978.05 -6.1746e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(104)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7466,7 +7506,7 @@ StreetLight {
 StreetLight {
   translation 3282.68 3997.52 -6.1746e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(103)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7476,7 +7516,7 @@ StreetLight {
 StreetLight {
   translation 3331.13 4019.07 -6.16039e-12
   rotation 0 0 -1 1.17809
-  scale 1.5
+  scale 0.8
   name "street light(102)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7486,7 +7526,7 @@ StreetLight {
 StreetLight {
   translation 3380.38 4041.12 -6.1746e-12
   rotation 0 0 -1 1.20427
-  scale 1.5
+  scale 0.8
   name "street light(101)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7496,7 +7536,7 @@ StreetLight {
 StreetLight {
   translation 3428.66 4063.03 -6.16039e-12
   rotation 0 0 -1 1.20427
-  scale 1.5
+  scale 0.8
   name "street light(100)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7506,7 +7546,7 @@ StreetLight {
 StreetLight {
   translation 3460.8 4077.38 -6.16039e-12
   rotation 0 0 -1 1.2959
-  scale 1.5
+  scale 0.8
   name "street light(99)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7516,7 +7556,7 @@ StreetLight {
 StreetLight {
   translation 3505.41 4087.74 -6.16039e-12
   rotation 0 0 -1 1.2959
-  scale 1.5
+  scale 0.8
   name "street light(98)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7526,7 +7566,7 @@ StreetLight {
 StreetLight {
   translation 3549.04 4098.06 -6.16039e-12
   rotation 0 0 -1 1.27627
-  scale 1.5
+  scale 0.8
   name "street light(97)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7536,7 +7576,7 @@ StreetLight {
 StreetLight {
   translation 3598.93 4108.48 -6.18881e-12
   rotation 0 0 -1 1.27627
-  scale 1.5
+  scale 0.8
   name "street light(96)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7546,7 +7586,7 @@ StreetLight {
 StreetLight {
   translation 3628.65 4115.11 -6.1746e-12
   rotation 0 0 -1 1.27627
-  scale 1.5
+  scale 0.8
   name "street light(95)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7556,7 +7596,7 @@ StreetLight {
 StreetLight {
   translation 2470.21 -5050.94 -7.80885e-12
   rotation 0 0 -1 0.615223
-  scale 1.5
+  scale 0.8
   name "street light(83)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7566,7 +7606,7 @@ StreetLight {
 StreetLight {
   translation 2232.29 -5546.12 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(85)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7576,7 +7616,7 @@ StreetLight {
 StreetLight {
   translation 2255.56 -5491.71 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(93)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7586,7 +7626,7 @@ StreetLight {
 StreetLight {
   translation 2283.84 -5424.19 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(92)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7596,7 +7636,7 @@ StreetLight {
 StreetLight {
   translation 2310.92 -5360.3 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(91)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7606,7 +7646,7 @@ StreetLight {
 StreetLight {
   translation 2331.73 -5311.42 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(90)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7616,7 +7656,7 @@ StreetLight {
 StreetLight {
   translation 2358.65 -5245.82 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(89)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7626,7 +7666,7 @@ StreetLight {
 StreetLight {
   translation 2377.94 -5204.28 -9.24415e-12
   rotation 0 0 -1 0.418873
-  scale 1.5
+  scale 0.8
   name "street light(88)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7636,7 +7676,7 @@ StreetLight {
 StreetLight {
   translation 2398.85 -5155.92 -7.80885e-12
   rotation 0 0 -1 0.615223
-  scale 1.5
+  scale 0.8
   name "street light(87)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7646,7 +7686,7 @@ StreetLight {
 StreetLight {
   translation 2436.58 -5102.04 -7.80885e-12
   rotation 0 0 -1 0.615223
-  scale 1.5
+  scale 0.8
   name "street light(86)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7656,7 +7696,7 @@ StreetLight {
 StreetLight {
   translation 2510.98 -4990.09 -7.80885e-12
   rotation 0 0 -1 0.615223
-  scale 1.5
+  scale 0.8
   name "street light(84)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7666,7 +7706,7 @@ StreetLight {
 StreetLight {
   translation 2881.72 -3823.16 -6.13907e-12
   rotation 0 0 -1 0.0916235
-  scale 1.5
+  scale 0.8
   name "street light(82)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7676,7 +7716,7 @@ StreetLight {
 StreetLight {
   translation 2890.43 -3768.45 -6.13907e-12
   rotation 0 0 -1 0.0916235
-  scale 1.5
+  scale 0.8
   name "street light(81)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7686,7 +7726,7 @@ StreetLight {
 StreetLight {
   translation 2884.44 -3668.24 -6.1817e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(79)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7696,7 +7736,7 @@ StreetLight {
 StreetLight {
   translation 2873.89 -3602.67 -6.15328e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(78)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7706,7 +7746,7 @@ StreetLight {
 StreetLight {
   translation 2863.21 -3539.86 -6.08223e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(77)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7716,7 +7756,7 @@ StreetLight {
 StreetLight {
   translation 2855.4 -3489.78 -6.08223e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(76)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7726,7 +7766,7 @@ StreetLight {
 StreetLight {
   translation 2847.64 -3441.42 -6.08223e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(75)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7736,7 +7776,7 @@ StreetLight {
 StreetLight {
   translation 2837.89 -3387.38 -6.08223e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(74)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7746,7 +7786,7 @@ StreetLight {
 StreetLight {
   translation 2829.67 -3339.83 -6.08223e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(73)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7756,7 +7796,7 @@ StreetLight {
 StreetLight {
   translation 2820.84 -3287.08 -6.08223e-12
   rotation 0 0 1 0.111271
-  scale 1.5
+  scale 0.8
   name "street light(72)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7766,7 +7806,7 @@ StreetLight {
 StreetLight {
   translation 2812.88 -3242.15 -6.08223e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(71)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7776,7 +7816,7 @@ StreetLight {
 StreetLight {
   translation 2800.6 -3195.45 -5.99696e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(70)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7786,7 +7826,7 @@ StreetLight {
 StreetLight {
   translation 2782.14 -3133.35 -5.98275e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(69)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7796,7 +7836,7 @@ StreetLight {
 StreetLight {
   translation 2763.12 -3070.29 -6.01117e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(68)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7806,7 +7846,7 @@ StreetLight {
 StreetLight {
   translation 2749.46 -3023.53 -5.93301e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(67)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7816,7 +7856,7 @@ StreetLight {
 StreetLight {
   translation 2736.33 -2979.42 -5.93301e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(66)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7826,7 +7866,7 @@ StreetLight {
 StreetLight {
   translation 2721.11 -2931.55 -5.93301e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(65)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7836,7 +7876,7 @@ StreetLight {
 StreetLight {
   translation 2707.26 -2884.32 -5.9188e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(64)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7846,7 +7886,7 @@ StreetLight {
 StreetLight {
   translation 2692.01 -2834.65 -5.97564e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(63)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7856,7 +7896,7 @@ StreetLight {
 StreetLight {
   translation 2672.75 -2770.51 -6.03248e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(62)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7866,7 +7906,7 @@ StreetLight {
 StreetLight {
   translation 2651.18 -2695.36 -6.00406e-12
   rotation 0 0 1 0.255261
-  scale 1.5
+  scale 0.8
   name "street light(61)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7876,7 +7916,7 @@ StreetLight {
 StreetLight {
   translation 2633.56 -2635.83 -5.94722e-12
   rotation 0 0 1 0.215991
-  scale 1.5
+  scale 0.8
   name "street light(60)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7886,7 +7926,7 @@ StreetLight {
 StreetLight {
   translation 1959.93 -1135.74 -6.45881e-12
   rotation 0 0 1 0.733045
-  scale 1.5
+  scale 0.8
   name "street light(48)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7896,7 +7936,7 @@ StreetLight {
 StreetLight {
   translation 1932.39 -1101.7 -6.45881e-12
   rotation 0 0 1 0.733045
-  scale 1.5
+  scale 0.8
   name "street light(47)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7906,7 +7946,7 @@ StreetLight {
 StreetLight {
   translation 1909.19 -1072.37 -6.45881e-12
   rotation 0 0 1 0.81813
-  scale 1.5
+  scale 0.8
   name "street light(46)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7916,7 +7956,7 @@ StreetLight {
 StreetLight {
   translation 1844.12 -1019.07 -6.45881e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(44)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7926,7 +7966,7 @@ StreetLight {
 StreetLight {
   translation 1729.18 -923.35 -6.4446e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(41)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7936,7 +7976,7 @@ StreetLight {
 StreetLight {
   translation 1643.87 -852.031 -5.88327e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(39)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7946,7 +7986,7 @@ StreetLight {
 StreetLight {
   translation 1570.1 -789.81 -5.88327e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(38)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7956,7 +7996,7 @@ StreetLight {
 StreetLight {
   translation 1506.15 -737.755 -5.88327e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(37)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7966,7 +8006,7 @@ StreetLight {
 StreetLight {
   translation 1457.58 -698.003 -5.88327e-12
   rotation 0 0 1 0.87049
-  scale 1.5
+  scale 0.8
   name "street light(36)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7976,7 +8016,7 @@ StreetLight {
 StreetLight {
   translation 1416.28 -664.738 -5.30063e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(35)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7986,7 +8026,7 @@ StreetLight {
 StreetLight {
   translation 1357.51 -624.426 -5.35037e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(34)"
   beamWidth 1.3
   direction 0 0 -1
@@ -7996,7 +8036,7 @@ StreetLight {
 StreetLight {
   translation 1293.68 -582.92 -3.97192e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(33)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8006,7 +8046,7 @@ StreetLight {
 StreetLight {
   translation 1234.29 -541.479 -2.74268e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(32)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8016,7 +8056,7 @@ StreetLight {
 StreetLight {
   translation 1234.29 -541.479 -2.74268e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(31)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8026,7 +8066,7 @@ StreetLight {
 StreetLight {
   translation 1169.24 -499.206 -2.73557e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(29)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8036,7 +8076,7 @@ StreetLight {
 StreetLight {
   translation 1110.61 -457.613 -2.73557e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(28)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8046,7 +8086,7 @@ StreetLight {
 StreetLight {
   translation 1044.26 -412.757 -1.8474e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(26)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8056,7 +8096,7 @@ StreetLight {
 StreetLight {
   translation 1007.59 -388.066 -2.67874e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(25)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8065,7 +8105,7 @@ StreetLight {
 StreetLight {
   translation 968.221 -362.183 -2.67874e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(24)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8075,7 +8115,7 @@ StreetLight {
 StreetLight {
   translation 922.122 -331.191 -2.67874e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(23)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8084,7 +8124,7 @@ StreetLight {
 StreetLight {
   translation 774.37 -232.908 -2.70717e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(20)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8094,7 +8134,7 @@ StreetLight {
 StreetLight {
   translation 711.242 -187.261 -2.68586e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(18)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8104,7 +8144,7 @@ StreetLight {
 StreetLight {
   translation 672.596 -159.332 -2.68586e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(17)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8113,7 +8153,7 @@ StreetLight {
 StreetLight {
   translation 634.222 -133.491 -2.68586e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(16)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8123,7 +8163,7 @@ StreetLight {
 StreetLight {
   translation 588.326 -101.343 -2.68586e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(15)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8132,7 +8172,7 @@ StreetLight {
 StreetLight {
   translation 515.415 -49.3213 -2.66454e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(14)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8142,7 +8182,7 @@ StreetLight {
 StreetLight {
   translation 465.361 -14.1466 -2.65743e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(10)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8151,7 +8191,7 @@ StreetLight {
 StreetLight {
   translation 424.252 15.4038 -4.50484e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(9)"
   beamWidth 1.3
   direction 0 0 -1
@@ -8161,7 +8201,7 @@ StreetLight {
 StreetLight {
   translation 272.26 121.574 -2.8777e-12
   rotation 0 0 1 0.916305
-  scale 1.5
+  scale 0.8
   name "street light(6)"
   beamWidth 1.3
   direction 0 0 -1
