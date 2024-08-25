@@ -349,7 +349,7 @@
 </br><section id="part1-uav-vat-gym">
 <h3>Part1 UAV_VAT(适配Gym库)<a class="headerlink" href="#part1-uav-vat-gym" title="Link to this heading"></a></h3>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT(gym.Env)</code>类
+    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT(gym.Env)</code>类
 </div>
 </br><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       1. <code>__init__</code> ：初始化gym环境(包括 <code>action_space</code> 和 <code>observation_space</code>的初始化)
@@ -389,7 +389,7 @@
 <div><p>Gymnasium环境与Gym环境大体兼容，以下说明与gym环境的 <strong>区别</strong></p>
 </div></blockquote>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
+    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
 </div>
 </br><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       1. <code>reset</code> ：重置环境,返回初始状态
@@ -455,6 +455,27 @@
 </section>
 <section id="envs">
 <span id="parallel"></span><h2>3 并行环境类(Envs)<a class="headerlink" href="#envs" title="Link to this heading"></a></h2>
+<blockquote>
+<div><div style="background-color: #fce6ea; padding: 15px; border-radius: 5px; border: 2px solid #FF6A6A">
+  &nbsp;&nbsp;&nbsp;&nbsp;上述底层环境类(BenchEnv_Multi)设计目标是<b>多进程异步计算</b>(例如A3C算法)，在单独进程内调用环境类获取数据</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以<b>单进程工作在同步并行的数据流上</b>，引申出本类(Envs)</br>
+  &nbsp;&nbsp;&nbsp;&nbsp;本环境主要适配<b>用户的自主算法设计需求</b>(不使用stable-baselines3等基于Gym环境进行算法实现的情况)
+</div>
+</br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
+</div>
+</br><p><strong>数据格式对比：</strong></p>
+<ul>
+<li><p>封装前(BenchEnv_Multi):</p>
+<p>数据采样： <code class="code docutils literal notranslate"><span class="pre">state:ndarray,reward:float,done:float=</span> <span class="pre">env.step(action:int)</span></code></p>
+<p>环境重置： <code class="code docutils literal notranslate"><span class="pre">state:ndarray</span> <span class="pre">=</span> <span class="pre">env.reset()</span></code></p>
+</li>
+<li><p>封装后(Envs),设并行数n：</p>
+<p>数据采样： <code class="code docutils literal notranslate"><span class="pre">states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)=</span> <span class="pre">env.step(action:ndarray(n))</span></code></p>
+<p>环境重置： <code class="code docutils literal notranslate"><span class="pre">states:ndarray(n,)</span> <span class="pre">=</span> <span class="pre">envs.reset()</span></code></p>
+</li>
+</ul>
+</div></blockquote>
 </section>
 </section>
 
