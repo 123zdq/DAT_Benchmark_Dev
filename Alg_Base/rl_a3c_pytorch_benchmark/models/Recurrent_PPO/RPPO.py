@@ -248,6 +248,99 @@ class RPPO_E2E_VAT(nn.Module):
         return action, gru_state
 
 
+class RPPO_E2E_VAT_CNN(nn.Module):
+
+    class CN(nn.Module):
+        def __init__(self, input_channels):
+            super().__init__()
+            self.net = nn.Sequential(
+                layer_init(nn.Conv2d(input_channels, 32, 5, padding=2)),
+                nn.MaxPool2d(2, 2),
+                nn.ReLU(inplace=True),
+                layer_init(nn.Conv2d(32, 32, 5, padding=1)),
+                nn.MaxPool2d(2, 2),
+                nn.ReLU(inplace=True),
+                layer_init(nn.Conv2d(32, 64, 4, padding=1)),
+                nn.MaxPool2d(2, 2),
+                nn.ReLU(inplace=True),
+                layer_init(nn.Conv2d(64, 64, 3, padding=1)),
+                nn.MaxPool2d(2, 2),
+                nn.ReLU(inplace=True),
+                nn.Flatten(),
+            )
+
+        def forward(self, x):
+            return self.net(x)
+
+    class GRU(nn.Module):
+        def __init__(self, cnn: nn.Module):
+            super().__init__()
+            self.cnn = cnn
+            self.gru = nn.GRUCell(1024, 256)
+            self.relu = nn.ReLU(inplace=True)
+
+            for name, param in self.gru.named_parameters():
+                if "bias" in name:
+                    nn.init.constant_(param, 0)
+                elif "weight" in name:
+                    nn.init.orthogonal_(param, 1.0)
+
+        def get_states(self, x, gru_state, done):
+            hidden = self.cnn(x)
+            batch_size = gru_state.shape[0]
+            hidden = hidden.view((-1, batch_size, self.gru.input_size))
+            done = done.view((-1, batch_size))
+            new_hidden = []
+            for h, d in zip(hidden, done):
+                gru_state = self.gru(h, (1.0 - d).view(-1, 1) * gru_state)
+                new_hidden += [gru_state]
+            return self.relu(torch.cat(new_hidden)), gru_state
+
+    class FC(nn.Module):
+        def __init__(self, output_width, std=1):
+            super().__init__()
+            self.net = nn.Sequential(
+                layer_init(nn.Linear(256, 200), std=1),
+                nn.ReLU(inplace=True),
+                layer_init(nn.Linear(200, 100), std=1),
+                nn.ReLU(inplace=True),
+                layer_init(nn.Linear(100, output_width), std=std),
+            )
+
+        def forward(self, x):
+            return self.net(x)
+
+    def __init__(self, input_channels, action_dim=7):
+        super().__init__()
+        self.actor0, self.actor1 = self.GRU(self.CN(input_channels)), self.FC(
+            action_dim, 0.01
+        )
+        self.critic0, self.critic1 = self.GRU(self.CN(input_channels)), self.FC(1)
+
+    def get_value(self, x, gru_state, done):
+        hidden, gru_state = self.critic0.get_states(x, gru_state, done)
+        return self.critic1(hidden), gru_state
+
+    def get_action_and_value(self, x, gru_state, done, action=None):
+        hidden, gru_state0 = self.actor0.get_states(x, gru_state[0], done)
+        probs = Categorical(logits=self.actor1(hidden))
+        if action is None:
+            action = probs.sample()
+        values, gru_state1 = self.get_value(x, gru_state[1], done)
+        return (
+            action,
+            probs.log_prob(action),
+            probs.entropy(),
+            values,
+            torch.stack((gru_state0, gru_state1)),
+        )
+
+    def predict_action(self, x, gru_state, done):
+        hidden, gru_state = self.actor0.get_states(x, gru_state, done)
+        action = torch.argmax(self.actor1(hidden), dim=1)
+        return action, gru_state
+
+
 class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
     def __init__(self, **kwargs):
 
@@ -283,7 +376,8 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-        self.model = RPPO_E2E_VAT(self.input_channels, self.action_dim).to(self.device)
+        #self.model = RPPO_E2E_VAT(self.input_channels, self.action_dim).to(self.device)
+        self.model = RPPO_E2E_VAT_CNN(self.input_channels, self.action_dim).to(self.device)
 
         if os.path.exists(self.savepath):
             self.model.load_state_dict(torch.load(self.savepath))
