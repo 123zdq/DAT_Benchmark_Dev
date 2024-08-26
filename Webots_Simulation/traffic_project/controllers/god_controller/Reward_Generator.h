@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-26 10:29:05
+ * @LastEditTime: 2024-08-26 20:59:13
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -26,12 +26,12 @@ using namespace std;
 class rewardGenerator
 {
 public:
-  rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange);
+  rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange, double _viewScale);
   ~rewardGenerator(){};
   void locateCamera(double _width, double _height, double _fov);
   void updateTrackingCar();
   void setTrackingCar(string _carDef);
-  double getReward(string _run_mode, string _reward_mode, double trackWidth = -1, double trackHeight = -1);
+  double getReward(string _run_mode, string _reward_mode, string _reward_type, double trackWidth = -1, double trackHeight = -1);
   void checkCarDirection(double stop_threshold, double turn_threshold);
   uint8_t isTrackingCarDisp = 0; // 标志初始态
   usrPublic::rewardData makeReward = {};
@@ -45,6 +45,7 @@ private:
   Node *land_node;
   Node *camera_slot_node;
 
+  // 摄像头五个点坐标
   Vector3d cameraMid;
   Vector3d cameraLH;
   Vector3d cameraLL;
@@ -57,6 +58,7 @@ private:
 
   double distanceScale = 0.05;
   double rewardRange = 7;
+  double viewScale = 0.1;
 
   std::vector<Eigen::Vector3d> pointContain;
 };
@@ -66,7 +68,7 @@ private:
  * @param {Supervisor} *_supervisor
  * @return {*}
  */
-inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange)
+inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange, double _viewScale)
 {
   supervisor = _supervisor;
 
@@ -101,6 +103,7 @@ inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanc
 
   distanceScale = _distanceScale;
   rewardRange = _rewardRange;
+  viewScale = _viewScale;
 
   // // 对于车辆状态识别，先初始化长度为3的队列
   pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
@@ -141,8 +144,8 @@ inline void rewardGenerator::locateCamera(double _width, double _height, double 
   }
   cameraMid = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width * 0.5, _height * 0.5), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
   cameraLH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, 0), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
-  cameraLL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, 0), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
-  cameraRH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+  cameraLL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
+  cameraRH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, 0), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
   cameraRL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(_width, _height), T_land_of_camera_M, _fov, Vector2d(_height, _width)), T_camera_of_land_M, T_land_of_world_M);
 
   makeReward.cameraF = Camera2real.cameraF;
@@ -275,13 +278,16 @@ inline void rewardGenerator::setTrackingCar(string _carDef)
  * @param {double} trackHeight
  * @return {*}
  */
-inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, double trackWidth, double trackHeight)
+inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, string _reward_type, double trackWidth, double trackHeight)
 {
   // 获取被指定跟踪车辆在世界中的坐标
   const double *T_car_of_land = trackingCar->getPose(land_node);
   double T_car_of_land_temp[16];
   memcpy(T_car_of_land_temp, T_car_of_land, sizeof(T_car_of_land_temp));
   Vector3d V_car_comp(-1, 0, 0);
+  if (_run_mode == string("demo")){
+    V_car_comp << 1,0,0;
+  }
   Matrix3d M_car_of_land;
   Vector3d V_car_of_land;
   for (int i = 0; i < 3; i++)
@@ -307,20 +313,20 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   makeReward.carMidGlobalPos.z = V_car_of_land(2);
   // 得到车辆相对于无人就得坐标和旋转角
   const double *T_car_of_camera = trackingCar->getPose(supervisor->getFromDef(droneDef));
-  makeReward.carCameraPosOri.x = T_car_of_camera[3];
-  makeReward.carCameraPosOri.y = T_car_of_camera[7];
-  makeReward.carCameraPosOri.z = T_car_of_camera[11];
+  makeReward.carDronePosOri.x = T_car_of_camera[3];
+  makeReward.carDronePosOri.y = T_car_of_camera[7];
+  makeReward.carDronePosOri.z = T_car_of_camera[11];
   const double *Car_Ori = trackingCar->getField("rotation")->getSFRotation();
   const double *Drone_Ori = supervisor->getFromDef(droneDef)->getField("rotation")->getSFRotation();
-  makeReward.carCameraPosOri.w = Car_Ori[2]*Car_Ori[3] - Drone_Ori[2]*Drone_Ori[3];
-  // makeReward.carCameraPosOri.w = atan2(makeReward.carCameraPosOri.y,makeReward.carCameraPosOri.x);
-  while(makeReward.carCameraPosOri.w > M_PI)
+  makeReward.carDronePosOri.w = Car_Ori[2]*Car_Ori[3] - Drone_Ori[2]*Drone_Ori[3];
+  // makeReward.carDronePosOri.w = atan2(makeReward.carDronePosOri.y,makeReward.carDronePosOri.x);
+  while(makeReward.carDronePosOri.w > M_PI)
   {
-    makeReward.carCameraPosOri.w -= 2 * M_PI;
+    makeReward.carDronePosOri.w -= 2 * M_PI;
   }
-  while(makeReward.carCameraPosOri.w < -M_PI)
+  while(makeReward.carDronePosOri.w < -M_PI)
   {
-    makeReward.carCameraPosOri.w += 2 * M_PI;
+    makeReward.carDronePosOri.w += 2 * M_PI;
   }
 
   double reward = 0;
@@ -340,22 +346,54 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
     // }
     if (_reward_mode == string("discrete"))
     {
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
+      if(_reward_type == string("distance"))
+      {
+        reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
+      }
+      else if(_reward_type == string("view"))
+      {
+        Vector3d follow[5] = {cameraMid,cameraLH,cameraLL,cameraRL,cameraRH};
+        reward = Camera2real.Get_View_Reward(follow, V_car_of_land);
+      }
     }
     else if (_reward_mode == string("continuous"))
     {
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+      if(_reward_type == string("distance"))
+      {
+        reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+      }
+      else if(_reward_type == string("view"))
+      {
+        Vector3d follow[5] = {cameraMid,cameraLH,cameraLL,cameraRL,cameraRH};
+        reward = Camera2real.Get_View_Reward(follow, V_car_of_land, viewScale);
+      }
     }
   }
   else if (_run_mode == string("train") || _run_mode == string("video"))
   {
     if (_reward_mode == string("discrete"))
     {
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
+      if(_reward_type == string("distance"))
+      {
+        reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
+      }
+      else if(_reward_type == string("view"))
+      {
+        Vector3d follow[5] = {cameraMid,cameraLH,cameraLL,cameraRL,cameraRH};
+        reward = Camera2real.Get_View_Reward(follow, V_car_of_land);
+      }
     }
     else if (_reward_mode == string("continuous"))
     {
-      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+      if(_reward_type == string("distance"))
+      {
+        reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+      }
+      else if(_reward_type == string("view"))
+      {
+        Vector3d follow[5] = {cameraMid,cameraLH,cameraLL,cameraRL,cameraRH};
+        reward = Camera2real.Get_View_Reward(follow, V_car_of_land, viewScale);
+      }
     }
   }
   return reward;

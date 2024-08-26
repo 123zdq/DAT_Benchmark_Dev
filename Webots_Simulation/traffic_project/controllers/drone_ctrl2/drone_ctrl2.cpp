@@ -191,7 +191,7 @@ int main(int argc, char **argv)
   TrackingCtrl trackCtrl(timeStep);
   double action[5] = {0}; // 强化学习action参数buff
   double step_count = 0;
-  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange);
+  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange, config.get()->rewardConfig.viewScale);
   bool is_video_warmUp = false;
   int random_number = -1;
 
@@ -497,7 +497,7 @@ int main(int argc, char **argv)
     {
       rewardG.updateTrackingCar();
     }
-    state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, error[4], error[5]);
+    state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, config.get()->rewardConfig.rewardType, error[4], error[5]);
     if (config.get()->simulationMode == string("demo"))
     {
       usrPublic::vector4 trackin = {};
@@ -611,7 +611,7 @@ int main(int argc, char **argv)
       //           << "  x: " << rewardG.makeReward.cameraMidGlobalPos.x
       //           << "  y: " << rewardG.makeReward.cameraMidGlobalPos.y
       //           << "  z: " << rewardG.makeReward.cameraMidGlobalPos.z
-      //           // << "  w: " << rewardG.makeReward.carCameraPosOri.w
+      //           // << "  w: " << rewardG.makeReward.carDronePosOri.w
       //           << std::endl;
       if(pCtrl.done_state == string("distance"))
       {
@@ -706,15 +706,15 @@ int main(int argc, char **argv)
     else if (config.get()->simulationMode == string("demo"))
     {
       std::cout << "id: " << droneDef
-                << "  x: " << rewardG.makeReward.carCameraPosOri.x
-                << "  y: " << rewardG.makeReward.carCameraPosOri.y
-                << "  z: " << rewardG.makeReward.carCameraPosOri.z
-                << "  w: " << rewardG.makeReward.carCameraPosOri.w
+                << "  x: " << rewardG.makeReward.carDronePosOri.x
+                << "  y: " << rewardG.makeReward.carDronePosOri.y
+                << "  z: " << rewardG.makeReward.carDronePosOri.z
+                << "  w: " << rewardG.makeReward.carDronePosOri.w
                 << "  reward: " << state.reward << std::endl;
       // std::cout << "id: " << droneDef
       //           << "  x: " << rewardG.cameraMid(0)
-      //           << "  y: " << rewardG.makeReward.carCameraPosOri.y
-      //           << "  z: " << rewardG.makeReward.carCameraPosOri.z
+      //           << "  y: " << rewardG.makeReward.carDronePosOri.y
+      //           << "  z: " << rewardG.makeReward.carDronePosOri.z
       //           << "  reward: " << state.reward << std::endl;
       if (config.get()->droneSupervisorCtrl == true)
       {

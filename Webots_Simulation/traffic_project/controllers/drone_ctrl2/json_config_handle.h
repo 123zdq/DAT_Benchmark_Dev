@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-21 20:01:00
+ * @LastEditTime: 2024-08-26 21:15:09
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -44,9 +44,11 @@ typedef struct _configData_s{
     };
     _droneRange droneRange;
     struct _rewardConfig{
+        std::string rewardType = "view";
         std::string rewardMode = "discrete";
         double distanceScale = 0.05;
         double rewardRange = 7;
+        double viewScale = 2;
     };
     _rewardConfig rewardConfig;
     // struct _droneRandomConfig{
@@ -118,9 +120,11 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.droneRange.roll = config.at("Done_Range").at("roll");
     configData.droneRange.pitch = config.at("Done_Range").at("pitch");
     configData.droneRange.distanceError = config.at("Done_Range").at("distance_error");
+    configData.rewardConfig.rewardType = config.at("Reward_Config").at("reward_type");
     configData.rewardConfig.rewardMode = config.at("Reward_Config").at("reward_mode");
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
     configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
+    configData.rewardConfig.viewScale = config.at("Reward_Config").at("reward_scale");
     
     // configData.droneRandomConfig.viewPitchRandom = config.at("Drone_Random_Config").at("view_pitch_random");
     // configData.droneRandomConfig.viewPitchFixed = config.at("Drone_Random_Config").at("view_pitch_fixed");

@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-12 16:12:45
+ * @LastEditTime: 2024-08-26 11:17:34
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -65,7 +65,7 @@ namespace usrPublic{
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
         vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
-        vector4 carCameraPosOri; // 车辆中心在无人机坐标系下的3D坐标和1D姿态
+        vector4 carDronePosOri; // 车辆中心在无人机坐标系下的3D坐标和1D姿态
         double crash; // 无人机是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1前进，2左转，3右转)
         std::string carTypename = std::string("BmwX5Simple");// 对象类型
