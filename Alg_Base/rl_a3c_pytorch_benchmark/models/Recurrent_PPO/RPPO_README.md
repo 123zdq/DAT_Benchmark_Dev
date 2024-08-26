@@ -8,6 +8,24 @@
 
 ## Experimental setup
 
+working directory
+
+```bash
+......./UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark
+```
+
+run
+
+```bash
+python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt -tp 6006
+```
+
+help info
+
+```bash
+python ./models/Recurrent_PPO/RPPO.py -h
+```
+
 ### Map: simpleway.wbt
 
 number of agents

@@ -659,7 +659,7 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
 
 # 工作目录： /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark
 # 启动命令： python ./models/Recurrent_PPO/RPPO.py
-# cd /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark && python ./models/Recurrent_PPO/RPPO.py
+# cd /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark && python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt -tp 6006
 
 
 if __name__ == "__main__":
@@ -680,7 +680,7 @@ if __name__ == "__main__":
     parse.add_argument(
         "-p",
         "--port",
-        default=7789,
+        default=-1,
         type=int,
         metavar="",
         help="the communication port between the algorithm and the simulator",
@@ -710,6 +710,13 @@ if __name__ == "__main__":
         help="the port of tensorboard",
     )
     args = parse.parse_args()
+
+    if args.port == -1:
+        import socket
+        sock = socket.socket()
+        sock.bind(("", 0))
+        _, args.port = sock.getsockname()
+        sock.close()
 
     import json
 
@@ -744,7 +751,7 @@ if __name__ == "__main__":
         envs=Envs(
             num_envs=args.workers,
             env_list=GE(args.workers, data["Benchmark"]),
-            logs_show=True,
+            logs_show=(args.tensorboard_port != -1),
         ),
         num_envs=args.workers,
         num_minibatches=1,
