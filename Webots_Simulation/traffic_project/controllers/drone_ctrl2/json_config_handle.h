@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-26 21:15:09
+ * @LastEditTime: 2024-08-26 22:47:55
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -53,7 +53,7 @@ typedef struct _configData_s{
     _rewardConfig rewardConfig;
     // struct _droneRandomConfig{
     //     bool viewPitchRandom = false;
-    //     double viewPitchFixed = -1.2;
+    //     double viewPitchFixed = -1.2;viewScale
     //     double viewPitchRandomMax = -1.57;
     //     double viewPitchRandomMin = -0.7;
     // };
@@ -124,7 +124,7 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.rewardConfig.rewardMode = config.at("Reward_Config").at("reward_mode");
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
     configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
-    configData.rewardConfig.viewScale = config.at("Reward_Config").at("reward_scale");
+    configData.rewardConfig.viewScale = config.at("Reward_Config").at("view_scale");
     
     // configData.droneRandomConfig.viewPitchRandom = config.at("Drone_Random_Config").at("view_pitch_random");
     // configData.droneRandomConfig.viewPitchFixed = config.at("Drone_Random_Config").at("view_pitch_fixed");
