@@ -16,8 +16,8 @@ params.pth
 
 T_ = False  # 屏蔽旋转动作
 
-
-def GE(num):
+"""
+def _GE(num):
     from models.A3CLSTM_E2E.main import parser
     from envs.environment import general_env
     from utils import read_config
@@ -34,6 +34,43 @@ def GE(num):
     for _ in range(num):
         env, process_func = general_env(args.env, env_conf, num, process_idx=_)
         res.append(env)
+    return res
+"""
+
+
+def GE(num, env_conf: dict):  # Benchmark
+    from envs.environment import BenchEnv_Multi, process_frame
+    from functools import partial
+
+    res = []
+    for _ in range(num):
+        res.append(
+            BenchEnv_Multi(
+                Action_dim=env_conf["Action_dim"],
+                process_state=partial(process_frame, conf=env_conf),
+                arg_worker=num,
+                process_idx=_,
+                Other_State=env_conf["Other_State"],
+                CloudPoint=env_conf["CloudPoint"],
+                RewardParams=env_conf["RewardParams"],
+                action_list=[
+                    env_conf["Forward_Speed"],
+                    env_conf["Backward_Speed"],
+                    env_conf["Left_Speed"],
+                    env_conf["Right_Speed"],
+                    env_conf["CW_omega"],
+                    env_conf["CCW_omega"],
+                ],
+                port_process=env_conf["port_process"],
+                end_reward=env_conf["end_reward"],
+                end_reward_list=env_conf["end_reward_list"],
+                scene=env_conf["scene"],
+                weather=env_conf["weather"],
+                auto_start=env_conf["auto_start"],
+                Control_Frequence=env_conf["Control_Frequence"],
+                reward_type=env_conf["RewardType"],
+            )
+        )
     return res
 
 

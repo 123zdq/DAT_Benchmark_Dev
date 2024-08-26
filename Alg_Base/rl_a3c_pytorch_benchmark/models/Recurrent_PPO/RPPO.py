@@ -657,9 +657,111 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
                 )
 
 
-from envs.envs_parallel import Envs, GE
+# 工作目录： /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark
+# 启动命令： python ./models/Recurrent_PPO/RPPO.py
+# cd /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark && python ./models/Recurrent_PPO/RPPO.py
 
-workers = 24
+
+if __name__ == "__main__":
+    import argparse
+
+    parse = argparse.ArgumentParser(description="run RPPO")
+    parse.add_argument(
+        "-w", "--workers", default=24, type=int, metavar="", help="the number of agents"
+    )
+    parse.add_argument(
+        "-t",
+        "--train_mode",
+        default=1,
+        type=int,
+        metavar="",
+        help="whether to enable training mode",
+    )
+    parse.add_argument(
+        "-p",
+        "--port",
+        default=7789,
+        type=int,
+        metavar="",
+        help="the communication port between the algorithm and the simulator",
+    )
+    parse.add_argument(
+        "-params",
+        "--savepath",
+        default="params.pth",
+        type=str,
+        metavar="",
+        help="the communication port between the algorithm and the simulator",
+    )
+    parse.add_argument(
+        "-m",
+        "--map",
+        default="simpleway.wbt",
+        type=str,
+        metavar="",
+        help="the filename of map, default: simpleway.wbt",
+    )
+    parse.add_argument(
+        "-tp",
+        "--tensorboard_port",
+        default=-1,
+        type=int,
+        metavar="",
+        help="the port of tensorboard",
+    )
+    args = parse.parse_args()
+
+    import json
+
+    with open(
+        "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
+    ) as file:
+        data = json.load(file)
+    data["Config_Agen_Num_Port"] = args.port
+    with open(
+        "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
+    ) as file:
+        json.dump(data, file, indent=4)
+
+    import subprocess, time
+
+    # simulator !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    simulator = subprocess.Popen(
+        ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
+        shell=True,
+    )
+    time.sleep(15)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+    with open("config.json", "r") as file:
+        data = json.load(file)
+    data["Benchmark"]["port_process"] = args.port
+    with open("config.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+    from envs.envs_parallel import Envs, GE
+
+    agent = CVAT_RPPO__discrete(
+        envs=Envs(
+            num_envs=args.workers,
+            env_list=GE(args.workers, data["Benchmark"]),
+            logs_show=True,
+        ),
+        num_envs=args.workers,
+        num_minibatches=1,
+        num_steps=50,
+        K_epochs=5,
+        entropy_coef=1,
+        savepath=args.savepath,
+    )
+
+    if args.tensorboard_port != -1:
+        tb = subprocess.Popen(
+            ["tensorboard --logdir PPO_logs --port=" + str(args.tensorboard_port)],
+            shell=True,
+        )
+
+    agent.run(train_mode=args.train_mode)
+
 
 """
 agent = UAV_RPPO_discrete(
@@ -671,14 +773,3 @@ agent = UAV_RPPO_discrete(
     K_epochs = 5,
 )
 """
-
-agent = CVAT_RPPO__discrete(
-    envs=Envs(num_envs=workers, env_list=GE(workers), logs_show=True),
-    num_envs=workers,
-    num_minibatches=1,
-    num_steps=50,
-    K_epochs=5,
-    entropy_coef=0.1,
-)
-
-agent.run(train_mode=True)
