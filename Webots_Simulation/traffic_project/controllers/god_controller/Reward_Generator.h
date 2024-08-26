@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-20 09:03:30
+ * @LastEditTime: 2024-08-26 10:29:05
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -324,6 +324,8 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   }
 
   double reward = 0;
+  // std::cout << "cameraMid:  x:" << cameraMid(0) << "  y:" << cameraMid(1) << "  z:" << cameraMid(2) << std::endl;
+  // std::cout << "car:        x:" << V_car_of_land(0) << "  y:" << V_car_of_land(1) << "  z:" << V_car_of_land(2) << std::endl;
   if (_run_mode == string("demo"))
   {
     // if(trackWidth < 0 || trackHeight < 0){
@@ -336,7 +338,14 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
     //   reward = Camera2real.Get_Location_Reward(locationTar, cameraMid, V_car_of_land, rewardRange, distanceScale);
     //   // std::cout<<"is_tracking2: "<< reward <<std::endl;
     // }
-    reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+    if (_reward_mode == string("discrete"))
+    {
+      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange);
+    }
+    else if (_reward_mode == string("continuous"))
+    {
+      reward = Camera2real.Get_Location_Reward(cameraMid, V_car_of_land, rewardRange, distanceScale);
+    }
   }
   else if (_run_mode == string("train") || _run_mode == string("video"))
   {

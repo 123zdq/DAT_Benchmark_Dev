@@ -711,6 +711,11 @@ int main(int argc, char **argv)
                 << "  z: " << rewardG.makeReward.carCameraPosOri.z
                 << "  w: " << rewardG.makeReward.carCameraPosOri.w
                 << "  reward: " << state.reward << std::endl;
+      // std::cout << "id: " << droneDef
+      //           << "  x: " << rewardG.cameraMid(0)
+      //           << "  y: " << rewardG.makeReward.carCameraPosOri.y
+      //           << "  z: " << rewardG.makeReward.carCameraPosOri.z
+      //           << "  reward: " << state.reward << std::endl;
       if (config.get()->droneSupervisorCtrl == true)
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);

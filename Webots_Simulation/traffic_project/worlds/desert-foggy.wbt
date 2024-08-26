@@ -71,8 +71,8 @@ TexturedBackgroundLight {
   texture "noon_sunny_garden"
 }
 DEF land Floor {
-  translation -1000 -1000 -0.1
-  size 17000 12000
+  translation 0 0 -0.1
+  size 17000 14000
   appearance PBRAppearance {
     baseColor 0.64 0.44 0.12
     baseColorMap ImageTexture {
@@ -4883,7 +4883,7 @@ StreetLight {
   castShadows TRUE
 }
 DEF ORIGIN BmwX5Simple {
-  translation 0 157.19 0.4
+  translation 30 30 0.4
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE

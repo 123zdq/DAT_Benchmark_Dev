@@ -133,7 +133,7 @@ GasStation {
   rotation 0 0 1 1.5708
 }
 DEF ORIGIN BmwX5Simple {
-  translation -23.14 363.98 0.4
+  translation 30 30 0.4
   name "v1"
 }
 MotelReception {
