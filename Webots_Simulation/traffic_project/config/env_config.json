@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "demo",
+        "Simulation_Mode": "train",
         "Drone_Supervisor_Ctrl": true,
         "Socket_Ip": "127.0.0.1",
         "Config_Agen_Num_Port": 7789,
