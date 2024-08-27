@@ -11,6 +11,9 @@ from torch.autograd import Variable
 import time
 import logging
 from utils import get_mean_std
+import pandas as pd
+
+
 
 """
     test: Multi-Process Testing Function
@@ -21,6 +24,10 @@ from utils import get_mean_std
     Output:
         None
 """
+
+TEST_NUM = 50
+EXCEL = True
+
 def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None,num_worker:int=1,process_idx:int=0):
     ptitle("Test Agent")
     gpu_id = args.gpu_ids[-1]
@@ -99,12 +106,18 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                 reward_mean = reward_total_sum / num_tests
                 if not read_num_test:
                     reward_list.append(reward_sum)
-                    if len(reward_list) == 5:
+                    if len(reward_list) == TEST_NUM:
                         mean,std = get_mean_std(reward_list)
-                        print(f"reward_list for {filename_without_ext}: ")
-                        for reward in reward_list:
-                            print(f"{reward:.3f}")
-                        print(f"{mean:.3f}±{std:.3f}")
+                        if not EXCEL:
+                            print(f"reward_list for {filename_without_ext}: ")
+                            for reward in reward_list:
+                                print(f"{reward:.3f}")
+                            print(f"{mean:.3f}±{std:.3f}")
+                        else:
+                            reward_list.append(f"{mean:.3f}±{std:.3f}")
+                            df = pd.DataFrame(reward_list, columns=["Values"])
+                            df.to_excel(f"./{filename[:-4]}.xlsx", index=False)
+
                 # log.info(
                 #     f'Time {time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - start_time))}, episode reward {reward_sum}, episode length {player.eps_len}, reward mean {reward_mean:.4f}'
                 # )
