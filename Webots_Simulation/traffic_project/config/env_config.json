@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "demo",
         "Drone_Supervisor_Ctrl": true,
         "Socket_Ip": "127.0.0.1",
         "Config_Agen_Num_Port": 7789,
@@ -10,6 +10,7 @@
         "Customized_Rewards": true,
         "Lidar_Enable": false,
         "Tracking_Object": "SUMO_VEHICLE",
+        "Verbose": false,
         "Done_Range": {
             "max_height": 50,
             "min_height": 2,

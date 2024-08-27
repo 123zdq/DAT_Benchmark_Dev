@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-26 22:47:55
+ * @LastEditTime: 2024-08-27 12:11:47
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -18,6 +18,7 @@
 #include <Eigen/Eigen>
 #include "user_public.h"
 #include <webots/Accelerometer.hpp>
+#include <type_traits>
 
 using json = nlohmann::json;
 using namespace webots;
@@ -26,13 +27,14 @@ using namespace Eigen;
 typedef struct _configData_s{
     std::string simulationMode = "demo";
     bool droneSupervisorCtrl = false;
-    int trainTotalStep = 10000;
+    int trainTotalStep = 2000;
     int initNoDoneSteps = 100;
     int noRewardDoneSteps = 1000;
     bool customizedReward = false;
     double controlFreq = 10;
     bool lidarEnable = false;
     bool cameraEnable = true;
+    bool verbose = false;
     struct _droneRange{
         double maxHeight = 50;
         double minHeight = 1;
@@ -45,7 +47,7 @@ typedef struct _configData_s{
     _droneRange droneRange;
     struct _rewardConfig{
         std::string rewardType = "view";
-        std::string rewardMode = "discrete";
+        std::string rewardMode = "continuous";
         double distanceScale = 0.05;
         double rewardRange = 7;
         double viewScale = 2;
@@ -75,6 +77,66 @@ typedef struct _configData_s{
     _outVideo video;
 }configData_s;
 
+std::string simMode[3] = {std::string("demo"),std::string("video"),std::string("train")};
+std::string rType[2] = {std::string("distance"),std::string("view")};
+std::string rMode[2] = {std::string("discrete"),std::string("continuous")};
+
+void checkType(const auto& variable) {
+    std::cout << "The type is: " << typeid(variable).name() << std::endl;
+}
+
+template<typename T>
+bool checkIfString(T)
+{
+    if (std::is_same<T, std::string>::value)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template<typename T>
+bool checkIfBool(T)
+{
+    if (std::is_same<T, bool>::value)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template<typename T>
+bool checkIfInt(T)
+{
+    if (std::is_integral<T>::value)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+template<typename T>
+bool checkIfFloat(T)
+{
+    if (std::is_floating_point<T>::value)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 class configHandle{
 public:
     configHandle(std::string _filepath);
@@ -87,6 +149,8 @@ public:
 private:
     std::string filepath;//json file path and name
     configData_s configData;//json file parse data
+    bool safetyCheck(std::string obj,std::string* safeGroup,int num);
+    
 };
 
 
@@ -104,8 +168,17 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
         std::cerr << "Error parsing json file: " << e.what() << "\n";
         return;
     }
+    ifs.close();// close it in case of memory leak
 
-    configData.simulationMode = config.at("Simulation_Mode");
+    if(this->safetyCheck(config.at("Simulation_Mode"),simMode,3))
+    {
+        configData.simulationMode = config.at("Simulation_Mode");
+    }
+    else
+    {
+        std::cerr << "Simulation mode(string) is not available!('demo','video','train')" 
+                    << "    Use default value 'demo'." << std::endl;
+    }
     configData.droneSupervisorCtrl = config.at("Drone_Supervisor_Ctrl");
     configData.trainTotalStep = config.at("Train_Total_Steps");
     configData.initNoDoneSteps = config.at("Init_No_Done_Steps");
@@ -113,6 +186,8 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.controlFreq = config.at("Control_Frequence");
     configData.customizedReward = config.at("Customized_Rewards");
     configData.lidarEnable = config.at("Lidar_Enable");
+    configData.verbose = config.at("Verbose");
+
     configData.droneRange.maxHeight = config.at("Done_Range").at("max_height");
     configData.droneRange.minHeight = config.at("Done_Range").at("min_height");
     configData.droneRange.velocity = config.at("Done_Range").at("velocity");
@@ -120,16 +195,28 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.droneRange.roll = config.at("Done_Range").at("roll");
     configData.droneRange.pitch = config.at("Done_Range").at("pitch");
     configData.droneRange.distanceError = config.at("Done_Range").at("distance_error");
-    configData.rewardConfig.rewardType = config.at("Reward_Config").at("reward_type");
-    configData.rewardConfig.rewardMode = config.at("Reward_Config").at("reward_mode");
+
+    if(this->safetyCheck(config.at("Reward_Config").at("reward_type"),rType,2))
+    {
+        configData.rewardConfig.rewardType = config.at("Reward_Config").at("reward_type");
+    }
+    else
+    {
+        std::cerr << "Reward type(string) is not available!('distance','view')" 
+                    << "    Use default value 'view'." << std::endl;
+    }
+    if(this->safetyCheck(config.at("Reward_Config").at("reward_mode"),rMode,2))
+    {
+        configData.rewardConfig.rewardMode = config.at("Reward_Config").at("reward_mode");
+    }
+    else
+    {
+        std::cerr << "Reward mode(string) is not available!('discrete','continuous')" 
+                    << "    Use default value 'continuous'." << std::endl;
+    }
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
     configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
     configData.rewardConfig.viewScale = config.at("Reward_Config").at("view_scale");
-    
-    // configData.droneRandomConfig.viewPitchRandom = config.at("Drone_Random_Config").at("view_pitch_random");
-    // configData.droneRandomConfig.viewPitchFixed = config.at("Drone_Random_Config").at("view_pitch_fixed");
-    // configData.droneRandomConfig.viewPitchRandomMax = config.at("Drone_Random_Config").at("view_pitch_random_max");
-    // configData.droneRandomConfig.viewPitchRandomMin = config.at("Drone_Random_Config").at("view_pitch_random_min");
 
     configData.video.fps = config.at("Out_Video").at("fps");
     configData.video.startTime = config.at("Out_Video").at("start_time");
@@ -143,38 +230,38 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.video.rightSpeed = config.at("Out_Video").at("right_speed");
     configData.video.cwOmega = config.at("Out_Video").at(("cw_omega"));
     configData.video.ccwOmega = config.at("Out_Video").at("ccw_omega");
-    // std::cout<< " \n \n"<<std::endl;
-    // std::cout<< "    Environment config successful!\n \n"<<std::endl;
-    // std::cout<< "    Simulation_Mode:       " << configData.simulationMode << std::endl;
-    // std::cout<< "    Drone_Supervisor_Ctrl: " << configData.droneSupervisorCtrl << std::endl;
-    // std::cout<< "    Train_Total_Steps:     " << configData.trainTotalStep << std::endl;
-    // std::cout<< "    Control_Frequence:     " << configData.controlFreq << std::endl;
-    // std::cout<< "    Customized_Rewards:    " << configData.customizedReward << std::endl;
-    // std::cout<< "    Lidar_Enable:          " << configData.lidarEnable << std::endl;
-    // std::cout<< "    Done_Range: {\n"
-    //             << "        max_height:      " << configData.droneRange.maxHeight << "\n"
-    //             << "        min_height:      " << configData.droneRange.minHeight << "\n"
-    //             << "        velocity:        " << configData.droneRange.velocity << "\n"
-    //             << "        omiga:           " << configData.droneRange.omiga << "\n"
-    //             << "        roll:            " << configData.droneRange.roll << "\n"
-    //             << "        pitch:           " << configData.droneRange.pitch << "\n"
-    //             << "        distance_error:  " << configData.droneRange.distanceError << std::endl;
-    // std::cout<< "    Reward_Config: {\n"
-    //             << "        reward_mode:     " << configData.rewardConfig.rewardMode << "\n"
-    //             << "        distance_scale:  " << configData.rewardConfig.distanceScale << "\n"
-    //             << "        reward_range:    " << configData.rewardConfig.rewardRange << std::endl;
-    // // std::cout<< "    Drone_Random_Config: {\n"
-    // //             << "        view_pitch_random:     " << configData.droneRandomConfig.viewPitchRandom << "\n"
-    // //             << "        view_pitch_fixed:      " << configData.droneRandomConfig.viewPitchFixed << "\n"
-    // //             << "        view_pitch_random_max: " << configData.droneRandomConfig.viewPitchRandomMax << "\n"
-    // //             << "        view_pitch_rendom_min: " << configData.droneRandomConfig.viewPitchRandomMin << std::endl;
-    // std::cout<< "    Out_Video: {\n}"
-    //             << "        fps:             " << configData.video.fps << "\n"
-    //             << "        start_time:      " << configData.video.startTime << "\n"
-    //             << "        total_time:      " << configData.video.totalTime << "\n"
-    //             << "        output_car_dir:  " << configData.video.outputCarDir << "\n"
-    //             << "        random_action:   " << configData.video.randomAction << std::endl;
-    // std::cout<< "    }\n \n \n"<<std::endl;
+
+    // if(configData.verbose == true)
+    // {
+    //     std::cout<< " \n \n"<<std::endl;
+    //     std::cout<< "    Environment config successful!\n \n"<<std::endl;
+    //     std::cout<< "    Simulation_Mode:       " << configData.simulationMode << std::endl;
+    //     std::cout<< "    Drone_Supervisor_Ctrl: " << configData.droneSupervisorCtrl << std::endl;
+    //     std::cout<< "    Train_Total_Steps:     " << configData.trainTotalStep << std::endl;
+    //     std::cout<< "    Control_Frequence:     " << configData.controlFreq << std::endl;
+    //     std::cout<< "    Customized_Rewards:    " << configData.customizedReward << std::endl;
+    //     std::cout<< "    Lidar_Enable:          " << configData.lidarEnable << std::endl;
+    //     std::cout<< "    Done_Range: {\n"
+    //                 << "        max_height:      " << configData.droneRange.maxHeight << "\n"
+    //                 << "        min_height:      " << configData.droneRange.minHeight << "\n"
+    //                 << "        velocity:        " << configData.droneRange.velocity << "\n"
+    //                 << "        omiga:           " << configData.droneRange.omiga << "\n"
+    //                 << "        roll:            " << configData.droneRange.roll << "\n"
+    //                 << "        pitch:           " << configData.droneRange.pitch << "\n"
+    //                 << "        distance_error:  " << configData.droneRange.distanceError << std::endl;
+    //     std::cout<< "    Reward_Config: {\n"
+    //                 << "        reward_mode:     " << configData.rewardConfig.rewardMode << "\n"
+    //                 << "        distance_scale:  " << configData.rewardConfig.distanceScale << "\n"
+    //                 << "        reward_range:    " << configData.rewardConfig.rewardRange << std::endl;
+    //     std::cout<< "    Out_Video: {\n"
+    //                 << "        fps:             " << configData.video.fps << "\n"
+    //                 << "        start_time:      " << configData.video.startTime << "\n"
+    //                 << "        total_time:      " << configData.video.totalTime << "\n"
+    //                 << "        output_car_dir:  " << configData.video.outputCarDir << "\n"
+    //                 << "        random_action:   " << configData.video.randomAction << std::endl;
+    //     std::cout<< "    }\n \n \n"<<std::endl;
+    // }
+    
 }
 
 // 读取JSON文件
@@ -218,6 +305,18 @@ void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark,
     double _value[2] = {_reward,_action};
     object[_mark] = _value;
     write_json_file(_filepath, object);
+}
+
+bool configHandle::safetyCheck(std::string obj,std::string* safeGroup,int num)
+{
+    for(int i(0);i<num;i++)
+    {
+        if(obj == safeGroup[i])
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 

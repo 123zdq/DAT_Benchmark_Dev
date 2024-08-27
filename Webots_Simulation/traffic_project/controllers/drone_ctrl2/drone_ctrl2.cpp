@@ -369,6 +369,15 @@ int main(int argc, char **argv)
         step_count = action[4];
       }
       // std::cout<<fly_cmd.axes[3]<<", "<<fly_cmd.axes[2]<<", "<<fly_cmd.axes[1]<<", "<<fly_cmd.axes[0]<<std::endl;
+      if(config.get()->verbose == true)
+      {
+        std::cout << "id: " << droneDef
+                << "  ACTIONS  "
+                << "  forward:" << std::setprecision(3) << fly_cmd.axes[3]
+                << "  leftRight:" << std::setprecision(3) << fly_cmd.axes[2]
+                << "  turn:" << std::setprecision(3) << fly_cmd.axes[0] 
+                << std::endl;
+      }
     }
     else if(config.get()->simulationMode == string("video"))
     {
@@ -599,7 +608,9 @@ int main(int argc, char **argv)
           state.done = 1;
         }
       }
-      std::cout << "id: " << droneDef
+      if(config.get()->verbose == true)
+      {
+        std::cout << "id: " << droneDef
                 << "  done: " << state.done
                 << "  reward: " << state.reward
                 << "  count: " << step_count
@@ -607,6 +618,7 @@ int main(int argc, char **argv)
                 << "  carDir:" << rewardG.makeReward.carDir
                 << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y
                 << "  done_state:" << pCtrl.done_state << std::endl;
+      } 
       // std::cout << "id: " << droneDef
       //           << "  x: " << rewardG.makeReward.cameraMidGlobalPos.x
       //           << "  y: " << rewardG.makeReward.cameraMidGlobalPos.y
@@ -705,17 +717,18 @@ int main(int argc, char **argv)
     }
     else if (config.get()->simulationMode == string("demo"))
     {
-      std::cout << "id: " << droneDef
-                << "  x: " << rewardG.makeReward.carDronePosOri.x
-                << "  y: " << rewardG.makeReward.carDronePosOri.y
-                << "  z: " << rewardG.makeReward.carDronePosOri.z
-                << "  w: " << rewardG.makeReward.carDronePosOri.w
-                << "  reward: " << state.reward << std::endl;
+      // std::cout << "id: " << droneDef
+      //           << "  x: " << rewardG.makeReward.carDronePosOri.x
+      //           << "  y: " << rewardG.makeReward.carDronePosOri.y
+      //           << "  z: " << rewardG.makeReward.carDronePosOri.z
+      //           << "  w: " << rewardG.makeReward.carDronePosOri.w
+      //           << "  reward: " << state.reward << std::endl;
       // std::cout << "id: " << droneDef
       //           << "  x: " << rewardG.cameraMid(0)
       //           << "  y: " << rewardG.makeReward.carDronePosOri.y
       //           << "  z: " << rewardG.makeReward.carDronePosOri.z
       //           << "  reward: " << state.reward << std::endl;
+      std::cout << "reward: " << state.reward << std::endl;
       if (config.get()->droneSupervisorCtrl == true)
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
