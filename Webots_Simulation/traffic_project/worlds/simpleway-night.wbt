@@ -56,19 +56,19 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.1739124878846461 -0.08607678344063957 0.9809919642434826 4.045636474887115
-  position 700.7452274577024 1305.5961806185373 708.3113773165187
+  orientation -0.18833097722339884 -0.10156781555593308 0.976839506705823 4.111353072396293
+  position 1378.857101447196 2410.3867005158413 1165.396901690098
   near 3
 }
 TexturedBackground {
-  luminosity 0.2
+  luminosity 0.3
   skybox FALSE
   skyColor [
     0.141176 0.121569 0.192157
   ]
 }
 TexturedBackgroundLight {
-  luminosity 0.2
+  luminosity 0.3
 }
 DEF land Floor {
   translation 0 0 -0.1

@@ -64,17 +64,17 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.546271730303159 0.5462693667897177 0.6349621843690799 2.01014266561885
-  position -54.26398300278787 -244.73932861133198 1791.850367579436
+  orientation -0.3105427251986809 0.494886600276272 0.8115728363450628 1.3163753711108717
+  position -839.1642713915519 -1631.363089779892 1895.2903649019781
   near 3
 }
 TexturedBackground {
   texture "empty_office"
-  luminosity 0.1
+  luminosity 0.2
   skybox FALSE
 }
 TexturedBackgroundLight {
-  luminosity 0.1
+  luminosity 0.2
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -90,7 +90,6 @@ DEF land Floor {
   }
 }
 Crossroad {
-  boundingObject TRUE
   translation 88.694928 -32.993243 0.01
   name "crossroad(1)"
   id "10125156111"
@@ -99,9 +98,9 @@ Crossroad {
     "1106474772"
     "1106474773"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 228.412561 -108.705352 0.01
   name "crossroad(2)"
   id "10125156112"
@@ -110,9 +109,9 @@ Crossroad {
     "1106474774"
     "5672951"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 381.067101 -190.99089 0.01
   name "crossroad(3)"
   id "10125156115"
@@ -121,248 +120,296 @@ Crossroad {
     "1106474775"
     "671208356"
   ]
+  boundingObject TRUE
 }
 StreetLight {
   translation 463.83 211.42 0
   rotation 0 0 1 1.0472
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 425.603 141.475 0
   rotation 0 0 1 1.0472
   name "street light(1)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 387.933 71.4089 0
   rotation 0 0 1 1.0472
   name "street light(2)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 350.624 2.06347 0
   rotation 0 0 1 1.0472
   name "street light(3)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 310.579 -71.9264 0
   rotation 0 0 1 1.0472
   name "street light(4)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 272.934 -141.886 0
   rotation 0 0 1 1.0472
   name "street light(5)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 231.419 -217.645 0
   rotation 0 0 1 1.0472
   name "street light(6)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 192.219 -290.919 0
   rotation 0 0 1 1.0472
   name "street light(7)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 63.5762 -222.067 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(8)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 103.409 -149.769 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 -1 -1.8326053071795858
   name "street light(9)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 26.2144 -291.32 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(10)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 144.756 -72.4751 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(11)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 182.652 -3.25299 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(12)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 221.752 70.3881 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(13)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation 260.398 139.202 0
-  rotation 0 0 1 1.0472
+  translation 260.219 139.858 0
+  rotation 0 0 1 1.8326
   name "street light(14)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 297.53 209.675 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 -1 -1.8326053071795858
   name "street light(15)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 334.829 279.93 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(16)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation 200.022 350.397 0
-  rotation 0 0 1 1.0472
+  translation 199.486 352.347 0
+  rotation 0 0 1 1.8326
   name "street light(17)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation 160.712 283.206 0
-  rotation 0 0 1 1.0472
+  translation 160.63 283.515 0
+  rotation 0 0 1 1.8326
   name "street light(18)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation 123.059 214.221 0
-  rotation 0 0 1 1.0472
+  translation 121.513 213.814 0
+  rotation 0 0 1 1.8326
   name "street light(19)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 85.4735 145.115 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(20)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 45.8922 69.6905 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 -1 -1.8326053071795858
   name "street light(21)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 7.62137 0.703518 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(22)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation -33.4423 -77.723 0
-  rotation 0 0 1 1.0472
+  translation -34.0548 -75.4332 0
+  rotation 0 0 1 1.8326
   name "street light(23)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -72.5597 -149.918 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(24)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -111.06 -219.333 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(25)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -148.695 -288.949 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(26)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -422.514 -141.846 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(27)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -383.702 -70.122 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(28)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -347.266 -1.99252 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(29)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -307.105 72.1724 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(30)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -265.785 148.101 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(31)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -225.844 221.283 0
-  rotation 0 0 1 1.0472
+  rotation 0 0 1 1.8326
   name "street light(32)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -92.0039 150.804 0
   rotation 0 0 1 1.0472
   name "street light(33)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -134.029 78.0287 0
   rotation 0 0 1 1.0472
   name "street light(34)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -172.437 -1.00387 0
   rotation 0 0 1 1.0472
   name "street light(35)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -209.942 -75.0395 0
   rotation 0 0 1 1.0472
   name "street light(36)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -247.317 -144.117 0
   rotation 0 0 1 1.0472
   name "street light(37)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -286.14 -214.372 0
   rotation 0 0 1 1.0472
   name "street light(38)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation -323.029 -284.873 0
   rotation 0 0 1 1.0472
   name "street light(39)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation -457.523 -211.923 0
-  rotation 0 0 1 1.0472
+  translation -457.833 -210.77 0
+  rotation 0 0 1 1.8326
   name "street light(40)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation -185.495 -360.281 0
-  rotation 0 0 1 1.0472
+  translation -187.205 -359.291 0
+  rotation 0 0 1 1.8326
   name "street light(41)"
+  direction 0.4 0 -1
 }
 StreetLight {
-  translation -9.21281 -362.475 0
-  rotation 0 0 1 1.0472
+  translation -11.326 -361.255 0
+  rotation 0 0 1 2.0944
   name "street light(42)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 460.754 -143.306 0
   rotation 0 0 1 2.618
   name "street light(43)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 342.728 -363.545 0
   rotation 0 0 1 2.618
   name "street light(44)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 495.137 -81.3524 0
   rotation 0 0 1 2.618
   name "street light(45)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 384.1 -290.274 0
   rotation 0 0 1 1.0472
   name "street light(46)"
+  direction 0.4 0 -1
 }
 StreetLight {
   translation 423.027 -214.886 0
   rotation 0 0 1 2.618
   name "street light(47)"
+  direction 0.4 0 -1
 }
 Crossroad {
-  boundingObject TRUE
   translation -252.984459 192.064224 0.01
   name "crossroad(4)"
   id "11220661302"
@@ -371,9 +418,9 @@ Crossroad {
     "1211049195"
     "497258108_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -343.193942 -84.134982 0.01
   name "crossroad(5)"
   id "11336810277"
@@ -382,9 +429,9 @@ Crossroad {
     "1222356565"
     "1222356566"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 17.551312 -288.53445 0.01
   name "crossroad(6)"
   id "3977886253"
@@ -393,9 +440,9 @@ Crossroad {
     "420906750"
     "458180196"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -278.429141 260.335065 0.01
   name "crossroad(7)"
   id "4207892895"
@@ -404,9 +451,9 @@ Crossroad {
     "420899371"
     "420899372"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -304.830711 274.604491 0.01
   name "crossroad(8)"
   id "4207892896"
@@ -415,9 +462,9 @@ Crossroad {
     "1205900284"
     "420899371"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -431.782499 -218.071829 0.01
   name "crossroad(9)"
   id "4207938835"
@@ -426,9 +473,9 @@ Crossroad {
     "420905128"
     "5671709"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 3.225289 12.811372 0.01
   name "crossroad(10)"
   id "42427762"
@@ -447,9 +494,9 @@ Crossroad {
     "422298615"
     "5669664"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -49.611974 41.43896 0.01
   name "crossroad(11)"
   id "42427764"
@@ -468,9 +515,9 @@ Crossroad {
     "46583189"
     "5669664"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 192.978472 361.072106 0.01
   name "crossroad(12)"
   id "42429970"
@@ -489,9 +536,9 @@ Crossroad {
     "195743342_1"
     "46522160_4"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 329.252936 287.642031 0.01
   name "crossroad(13)"
   id "42429971"
@@ -509,9 +556,9 @@ Crossroad {
     "46522160_3"
     "46522160_4"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 473.235152 210.785636 0.01
   name "crossroad(14)"
   id "42429974"
@@ -530,9 +577,9 @@ Crossroad {
     "671208358_3"
     "671208358_6"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -465.174164 -200.985477 0.01
   name "crossroad(15)"
   id "42430367"
@@ -549,9 +596,9 @@ Crossroad {
     "569345537_1"
     "569345537_3"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -427.577748 -131.114418 0.01
   name "crossroad(16)"
   id "42430371"
@@ -570,9 +617,9 @@ Crossroad {
     "569345537_2"
     "569345537_3"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -388.949119 -59.332633 0.01
   name "crossroad(17)"
   id "42430375"
@@ -592,9 +639,9 @@ Crossroad {
     "541350711_1"
     "569345537_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -352.241858 7.999037 0.01
   name "crossroad(18)"
   id "42430378"
@@ -613,9 +660,9 @@ Crossroad {
     "618990022_1"
     "618990022_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -310.846782 83.952819 0.01
   name "crossroad(19)"
   id "42430384"
@@ -636,9 +683,9 @@ Crossroad {
     "497258109"
     "541350711_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -270.302593 159.932093 0.01
   name "crossroad(20)"
   id "42430390"
@@ -656,9 +703,9 @@ Crossroad {
     "497258108_1"
     "497258108_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -230.05662 233.961806 0.01
   name "crossroad(21)"
   id "42430394"
@@ -677,9 +724,9 @@ Crossroad {
     "5670253"
     "576438593"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -78.270678 -139.119279 0.01
   name "crossroad(22)"
   id "42431544"
@@ -697,9 +744,9 @@ Crossroad {
     "5671129"
     "618990022_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -600.151978 141.147339 0.01
   name "crossroad(23)"
   id "42431549"
@@ -716,9 +763,9 @@ Crossroad {
     "196116988_5"
     "618990022_1"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -37.181368 -62.92141 0.01
   name "crossroad(24)"
   id "42432818"
@@ -738,9 +785,9 @@ Crossroad {
     "497258109"
     "5670139"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 99.514516 -136.572929 0.01
   name "crossroad(25)"
   id "42432825"
@@ -761,9 +808,9 @@ Crossroad {
     "388696207_1"
     "421850829"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 243.455583 -214.489097 0.01
   name "crossroad(26)"
   id "42432834"
@@ -782,9 +829,9 @@ Crossroad {
     "497165757"
     "573228989"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 374.13266 -284.797885 0.01
   name "crossroad(27)"
   id "42432847"
@@ -804,9 +851,9 @@ Crossroad {
     "569345502"
     "588157336"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 116.261792 222.360205 0.01
   name "crossroad(28)"
   id "42436510"
@@ -824,9 +871,9 @@ Crossroad {
     "195743342_2"
     "198595461_3"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 253.906721 148.100993 0.01
   name "crossroad(29)"
   id "42436511"
@@ -845,9 +892,9 @@ Crossroad {
     "458180199_1"
     "458180199_3"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 397.652265 70.707406 0.01
   name "crossroad(30)"
   id "42436514"
@@ -866,9 +913,9 @@ Crossroad {
     "671208358_2"
     "671208358_4"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -191.303267 -349.559573 0.01
   name "crossroad(31)"
   id "42436700"
@@ -885,9 +932,9 @@ Crossroad {
     "458180197"
     "5671709"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -677.704347 4.572108 0.01
   name "crossroad(32)"
   id "42440015"
@@ -905,9 +952,9 @@ Crossroad {
     "196116988_4"
     "226041032"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -637.680514 75.05648 0.01
   name "crossroad(33)"
   id "42440020"
@@ -924,9 +971,9 @@ Crossroad {
     "196116988_5"
     "499172074"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -557.156371 216.867168 0.01
   name "crossroad(34)"
   id "42440022"
@@ -944,9 +991,9 @@ Crossroad {
     "196116988_3"
     "496986969"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -513.898074 293.050713 0.01
   name "crossroad(35)"
   id "42440025"
@@ -963,9 +1010,9 @@ Crossroad {
     "196116988_2"
     "308322447_1"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -115.91179 -207.782573 0.01
   name "crossroad(36)"
   id "42440951"
@@ -984,9 +1031,9 @@ Crossroad {
     "195743336_3"
     "226041012_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 58.801951 -212.422993 0.01
   name "crossroad(37)"
   id "42443612"
@@ -1004,9 +1051,9 @@ Crossroad {
     "528748997_1"
     "5671129"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 203.05888 -289.115017 0.01
   name "crossroad(38)"
   id "42443613"
@@ -1027,9 +1074,9 @@ Crossroad {
     "528748997_3"
     "573228989"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 333.58067 -360.50328 0.01
   name "crossroad(39)"
   id "42443614"
@@ -1045,9 +1092,9 @@ Crossroad {
     "528748997_3"
     "569345502"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -16.248144 -351.468927 0.01
   name "crossroad(40)"
   id "42445936"
@@ -1064,9 +1111,9 @@ Crossroad {
     "458180196"
     "5672954"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 21.44348 -281.36125 0.01
   name "crossroad(41)"
   id "42445941"
@@ -1084,9 +1131,9 @@ Crossroad {
     "420906750"
     "420906752"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 140.710058 -60.950097 0.01
   name "crossroad(42)"
   id "42445947"
@@ -1105,9 +1152,9 @@ Crossroad {
     "388696207_2"
     "5672951"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 177.417639 7.870193 0.01
   name "crossroad(43)"
   id "42445950"
@@ -1127,9 +1174,9 @@ Crossroad {
     "388696207_2"
     "5671574"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 216.217719 80.312374 0.01
   name "crossroad(44)"
   id "42445953"
@@ -1148,9 +1195,9 @@ Crossroad {
     "46334594_3"
     "964208970"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 291.445608 217.830969 0.01
   name "crossroad(45)"
   id "42445961"
@@ -1169,9 +1216,9 @@ Crossroad {
     "5673461_1"
     "5673461_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 414.993097 -208.833258 0.01
   name "crossroad(46)"
   id "42447007"
@@ -1190,9 +1237,9 @@ Crossroad {
     "569345486"
     "588157336"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 452.216914 -139.550311 0.01
   name "crossroad(47)"
   id "42447009"
@@ -1210,9 +1257,9 @@ Crossroad {
     "198924552_3"
     "569345474"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 490.920683 -67.685108 0.01
   name "crossroad(48)"
   id "42447020"
@@ -1230,9 +1277,9 @@ Crossroad {
     "-9711"
     "46334594_1"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 321.7034 -70.084787 0.01
   name "crossroad(49)"
   id "42448317"
@@ -1253,9 +1300,9 @@ Crossroad {
     "671208358_1"
     "671208358_5"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -153.374839 -278.020092 0.01
   name "crossroad(50)"
   id "42450426"
@@ -1276,9 +1323,9 @@ Crossroad {
     "5672954"
     "988984235"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 284.619378 -139.121172 0.01
   name "crossroad(51)"
   id "42456598"
@@ -1299,9 +1346,9 @@ Crossroad {
     "671208356"
     "671208358_1"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 154.728149 291.53412 0.01
   name "crossroad(52)"
   id "42456683"
@@ -1319,9 +1366,9 @@ Crossroad {
     "195743342_2"
     "5673461_1"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 435.287215 140.805633 0.01
   name "crossroad(53)"
   id "42459114"
@@ -1340,9 +1387,9 @@ Crossroad {
     "671208358_4"
     "671208358_6"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -12.66726 114.624254 0.01
   name "crossroad(54)"
   id "4347534767"
@@ -1362,9 +1409,9 @@ Crossroad {
     "5670873"
     "5670874"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 40.092689 175.082906 0.01
   name "crossroad(55)"
   id "4347534768"
@@ -1373,9 +1420,9 @@ Crossroad {
     "1022813500"
     "5672290"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 79.972762 154.610901 0.01
   name "crossroad(56)"
   id "4347534783"
@@ -1394,9 +1441,9 @@ Crossroad {
     "198924778"
     "5672290"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -351.084142 299.600595 0.01
   name "Central Park South & 6th Avenue"
   id "4796245038"
@@ -1405,9 +1452,9 @@ Crossroad {
     "1205900284"
     "196116988_1"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 52.562495 -223.875863 0.01
   name "crossroad(57)"
   id "4960527241"
@@ -1416,9 +1463,9 @@ Crossroad {
     "420906752"
     "421850830"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 431.13081 -179.144766 0.01
   name "crossroad(58)"
   id "5475605297"
@@ -1427,9 +1474,9 @@ Crossroad {
     "569345474"
     "569345486"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 40.887412 82.665714 0.01
   name "crossroad(59)"
   id "5706568771"
@@ -1448,9 +1495,9 @@ Crossroad {
     "5671574"
     "962626218"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 151.093209 -350.542424 0.01
   name "crossroad(60)"
   id "596775907"
@@ -1468,9 +1515,9 @@ Crossroad {
     "226041012_1"
     "497165753_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 382.131065 79.107077 0.01
   name "crossroad(61)"
   id "596775930"
@@ -1488,9 +1535,9 @@ Crossroad {
     "68674962_4"
     "68674962_6"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 228.393419 -206.394575 0.01
   name "crossroad(62)"
   id "596775935"
@@ -1508,9 +1555,9 @@ Crossroad {
     "497165754"
     "671208357"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 269.258772 -130.763782 0.01
   name "crossroad(63)"
   id "596775941"
@@ -1531,9 +1578,9 @@ Crossroad {
     "671208357"
     "68674962_3"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 306.493775 -61.636885 0.01
   name "crossroad(64)"
   id "596775946"
@@ -1554,9 +1601,9 @@ Crossroad {
     "68674962_3"
     "68674962_5"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 188.455272 -281.259285 0.01
   name "crossroad(65)"
   id "596775951"
@@ -1577,9 +1624,9 @@ Crossroad {
     "528748997_2"
     "528748997_4"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 419.758848 149.105219 0.01
   name "crossroad(66)"
   id "596775985"
@@ -1598,9 +1645,9 @@ Crossroad {
     "68674962_2"
     "68674962_4"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 457.775449 218.99713 0.01
   name "crossroad(67)"
   id "596775998"
@@ -1619,9 +1666,9 @@ Crossroad {
     "68674962_1"
     "68674962_2"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 360.756264 2.439954 0.01
   name "crossroad(68)"
   id "6177439750"
@@ -1640,9 +1687,9 @@ Crossroad {
     "671208358_2"
     "671208358_5"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 345.401764 10.712262 0.01
   name "crossroad(69)"
   id "6177439752"
@@ -1661,9 +1708,9 @@ Crossroad {
     "68674962_5"
     "68674962_6"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 115.220721 -242.193683 0.01
   name "crossroad(70)"
   id "7248586387"
@@ -1680,9 +1727,9 @@ Crossroad {
     "528748997_5"
     "776858323"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 121.517781 131.105482 0.01
   name "crossroad(71)"
   id "8254176965"
@@ -1691,9 +1738,9 @@ Crossroad {
     "1052631409"
     "458180198"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 61.724178 120.590777 0.01
   name "crossroad(72)"
   id "8904527314"
@@ -1702,9 +1749,9 @@ Crossroad {
     "198924778"
     "962626218"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 134.079197 -252.242367 0.01
   name "crossroad(73)"
   id "8914958309"
@@ -1722,9 +1769,9 @@ Crossroad {
     "528748997_5"
     "776858323"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 201.608393 54.161693 0.01
   name "crossroad(74)"
   id "8918680640"
@@ -1733,9 +1780,9 @@ Crossroad {
     "198924587"
     "964208970"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation -119.35876 -214.051214 0.01
   name "crossroad(75)"
   id "9140929842"
@@ -1744,9 +1791,9 @@ Crossroad {
     "195743336_3"
     "988984235"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 13.838328 159.376782 0.01
   name "crossroad(76)"
   id "9433097821"
@@ -1755,9 +1802,9 @@ Crossroad {
     "1022813500"
     "5670873"
   ]
+  boundingObject TRUE
 }
 Crossroad {
-  boundingObject TRUE
   translation 33.786478 -101.115703 0.01
   name "crossroad(77)"
   id "9960054857"
@@ -1766,9 +1813,9 @@ Crossroad {
     "1087048475"
     "5670139"
   ]
+  boundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 489.024013 -71.206846 0.01
   name "Lexington Avenue"
   id "-4596"
@@ -1810,9 +1857,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -681.160858 -1.514971 0.01
   name "Central Park South"
   id "-7740"
@@ -1848,9 +1895,9 @@ Road {
   ]
   splineSubdivision 0
   turnLanesForward "left|through|through"
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -193.095589 -353.135545 0.01
   name "5th Avenue"
   id "-7760"
@@ -1881,9 +1928,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -19.385294 -357.726585 0.01
   name "Madison Avenue"
   id "-7765"
@@ -1914,9 +1961,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 194.844922 364.609953 0.01
   name "5th Avenue(1)"
   id "-9706"
@@ -1947,9 +1994,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 492.729708 -64.117556 0.01
   name "Lexington Avenue(1)"
   id "-9711"
@@ -1981,9 +2028,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -46.097358 39.529122 0.01
   name "West 58th Street"
   id "5669664"
@@ -2021,6 +2068,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -7.610469 18.615392 -0.07
@@ -2029,7 +2077,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation -31.020326 -66.237618 0.01
   name "East 57th Street"
   id "5670139"
@@ -2068,6 +2115,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -26.562566 -68.637027 -0.07
@@ -2076,7 +2124,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -223.80265 230.81731 0.01
   name "Central Park South(1)"
   id "5670253"
@@ -2121,6 +2168,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -218.954112 228.379466 -0.07
@@ -2135,7 +2183,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 13.838328 159.376782 0.01
   name "Grand Army Plaza"
   id "5670873"
@@ -2160,6 +2207,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -4.693487 127.17429 -0.07
@@ -2168,7 +2216,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation -9.564485 112.099816 0.01
   name "Grand Army Plaza(1)"
   id "5670874"
@@ -2209,6 +2256,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -3.3129 107.295156 -0.07
@@ -2223,7 +2271,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -72.089477 -142.422866 0.01
   name "East 56th Street"
   id "5671129"
@@ -2253,6 +2300,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -67.720235 -144.758039 -0.07
@@ -2267,7 +2315,6 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 47.987578 78.979573 0.01
   name "East 59th Street"
   id "5671574"
@@ -2307,6 +2354,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 51.74149 77.030682 -0.07
@@ -2321,7 +2369,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -197.580792 -346.462057 0.01
   name "West 53rd Street"
   id "5671709"
@@ -2350,6 +2397,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -200.508623 -345.01738 -0.07
@@ -2364,7 +2412,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 74.01801 158.359204 0.01
   name "Doris C. Freedman Place"
   id "5672290"
@@ -2392,6 +2439,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 70.397257 160.638338 -0.07
@@ -2400,7 +2448,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 146.937795 -64.402823 0.01
   name "East 58th Street"
   id "5672951"
@@ -2433,6 +2480,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 149.495724 -65.820967 -0.07
@@ -2441,7 +2489,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation -147.187702 -281.33062 0.01
   name "East 54th Street"
   id "5672954"
@@ -2470,6 +2517,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -143.648192 -283.224492 -0.07
@@ -2478,7 +2526,6 @@ PedestrianCrossing {
   size 10 4
 }
 Road {
-  roadBoundingObject TRUE
   translation 246.820672 -208.32912 0.01
   name "Park Avenue"
   id "46240204"
@@ -2519,6 +2566,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 249.620729 -203.203465 -0.07
@@ -2533,7 +2581,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -421.410392 -134.427623 0.01
   name "West 54th Street"
   id "46521993"
@@ -2564,6 +2611,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -417.018767 -136.786875 -0.07
@@ -2578,7 +2626,6 @@ PedestrianCrossing {
   size 9 3.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -16.433901 109.065997 0.01
   name "Grand Army Plaza(2)"
   id "46583189"
@@ -2608,6 +2655,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -18.228714 105.843911 -0.07
@@ -2622,7 +2670,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 180.644204 14.08222 0.01
   name "Madison Avenue(1)"
   id "198924587"
@@ -2659,6 +2706,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 181.322334 15.387806 -0.07
@@ -2667,7 +2715,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 78.054626 151.100808 0.01
   name "5th Avenue(2)"
   id "198924778"
@@ -2704,6 +2751,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 75.179505 145.839479 -0.07
@@ -2712,7 +2760,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -670.053286 0.40313 0.01
   name "West 54th Street(1)"
   id "226041032"
@@ -2748,6 +2795,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -573.703119 -51.134703 -0.07
@@ -2762,7 +2810,6 @@ PedestrianCrossing {
   size 10 4
 }
 Road {
-  roadBoundingObject TRUE
   translation 108.306104 -141.338218 0.01
   name "East 57th Street(1)"
   id "388696206"
@@ -2809,6 +2856,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 109.038076 -141.734967 -0.07
@@ -2823,7 +2871,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -304.830711 274.604491 0.01
   name "Central Park South(2)"
   id "420899371"
@@ -2853,9 +2900,9 @@ Road {
     0.494867
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -278.429141 260.335065 0.01
   name "Central Park South(3)"
   id "420899372"
@@ -2894,6 +2941,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -241.308688 240.435694 -0.07
@@ -2902,7 +2950,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -431.782499 -218.071829 0.01
   name "West 53rd Street(1)"
   id "420905128"
@@ -2926,6 +2973,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -453.587348 -207.201141 -0.07
@@ -2934,7 +2982,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 17.551312 -288.53445 0.01
   name "Madison Avenue(2)"
   id "420906750"
@@ -2969,9 +3016,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 24.516611 -275.071905 0.01
   name "Madison Avenue(3)"
   id "420906752"
@@ -3007,6 +3054,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 24.798946 -274.49409 -0.07
@@ -3015,7 +3063,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 62.112229 -206.255169 0.01
   name "Madison Avenue(4)"
   id "421850829"
@@ -3058,6 +3105,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 62.519643 -205.496062 -0.07
@@ -3072,7 +3120,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 52.562495 -223.875863 0.01
   name "Madison Avenue(5)"
   id "421850830"
@@ -3108,6 +3155,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 55.322661 -218.803121 -0.07
@@ -3116,7 +3164,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -0.111147 6.657658 0.01
   name "5th Avenue(3)"
   id "422298615"
@@ -3160,6 +3207,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -0.547592 5.852681 -0.07
@@ -3174,7 +3222,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -12.947398 -345.295996 0.01
   name "Madison Avenue(6)"
   id "458180196"
@@ -3211,6 +3258,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 16.9546 -289.657 -0.07
@@ -3219,7 +3267,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -156.641202 -284.211284 0.01
   name "5th Avenue(4)"
   id "458180197"
@@ -3261,6 +3308,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -156.604104 -284.141842 -0.07
@@ -3275,7 +3323,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 210.010634 83.641551 0.01
   name "East 60th Street"
   id "458180198"
@@ -3300,6 +3347,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 206.653198 85.442316 -0.07
@@ -3308,7 +3356,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation -319.64562 88.704708 0.01
   name "West 57th Street"
   id "496986969"
@@ -3356,6 +3403,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -322.739584 90.375631 -0.07
@@ -3376,7 +3424,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 234.559427 -209.708235 0.01
   name "East 57th Street(2)"
   id "497165754"
@@ -3420,9 +3467,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 165.612501 -358.39922 0.01
   name "Park Avenue(1)"
   id "497165756"
@@ -3454,6 +3501,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 168.702729 -352.678636 -0.07
@@ -3468,7 +3516,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 249.620052 -217.805621 0.01
   name "East 57th Street(3)"
   id "497165757"
@@ -3516,6 +3563,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 253.573575 -219.932641 -0.07
@@ -3530,7 +3578,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -304.680429 80.639801 0.01
   name "West 57th Street(1)"
   id "497258109"
@@ -3578,6 +3625,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -299.379077 77.791525 -0.07
@@ -3598,7 +3646,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -395.107814 -56.005402 0.01
   name "West 55th Street"
   id "499172074"
@@ -3633,6 +3680,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -400.234851 -53.235523 -0.07
@@ -3653,7 +3701,6 @@ PedestrianCrossing {
   size 9 3.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 449.183288 -145.858806 0.01
   name "Lexington Avenue(2)"
   id "569345474"
@@ -3689,6 +3736,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 449.011485 -146.216073 -0.07
@@ -3697,7 +3745,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 431.13081 -179.144766 0.01
   name "Lexington Avenue(3)"
   id "569345486"
@@ -3733,6 +3780,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 418.297043 -202.643753 -0.07
@@ -3741,7 +3789,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 369.37128 -293.591591 0.01
   name "Lexington Avenue(4)"
   id "569345502"
@@ -3777,6 +3824,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 368.43975 -295.312018 -0.07
@@ -3785,7 +3833,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 204.966319 -285.5991 0.01
   name "Park Avenue(2)"
   id "573228989"
@@ -3826,6 +3873,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 206.3807 -282.992018 -0.07
@@ -3840,7 +3888,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -226.849739 240.405612 0.01
   name "Center Drive"
   id "576438593"
@@ -3861,6 +3908,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -223.562326 247.011235 -0.07
@@ -3875,7 +3923,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 411.627633 -214.971145 0.01
   name "Lexington Avenue(5)"
   id "588157336"
@@ -3918,6 +3965,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 410.918653 -216.264172 -0.07
@@ -3932,7 +3980,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 290.78414 -142.43715 0.01
   name "East 58th Street(1)"
   id "671208356"
@@ -3965,6 +4012,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 294.779763 -144.586365 -0.07
@@ -3973,7 +4021,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 265.910772 -136.911212 0.01
   name "Park Avenue(3)"
   id "671208357"
@@ -4014,6 +4061,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 265.564938 -137.546215 -0.07
@@ -4028,7 +4076,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 135.889821 -248.639846 0.01
   name "road(1)"
   id "776858323"
@@ -4065,6 +4112,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 137.345991 -245.742566 -0.07
@@ -4079,7 +4127,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 61.724178 120.590777 0.01
   name "5th Avenue(5)"
   id "962626218"
@@ -4115,6 +4162,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 44.767622 89.698379 -0.07
@@ -4123,7 +4171,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 201.608393 54.161693 0.01
   name "Madison Avenue(7)"
   id "964208970"
@@ -4160,6 +4207,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 211.806811 72.777701 -0.07
@@ -4168,7 +4216,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -119.35876 -214.051214 0.01
   name "5th Avenue(6)"
   id "988984235"
@@ -4203,6 +4250,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -120.006 -215.245 -0.07
@@ -4217,7 +4265,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 40.092689 175.082906 0.01
   name "Grand Army Plaza(3)"
   id "1022813500"
@@ -4245,9 +4292,9 @@ Road {
     -4.145782
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 121.517781 131.105482 0.01
   name "East 60th Street(1)"
   id "1052631409"
@@ -4271,6 +4318,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 90.491079 148.659799 -0.07
@@ -4279,7 +4327,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 33.786478 -101.115703 0.01
   name "East 57th Street(4)"
   id "1087048475"
@@ -4318,6 +4365,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 90.364951 -131.628544 -0.07
@@ -4326,7 +4374,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 10.259236 9.043751 0.01
   name "East 58th Street(2)"
   id "1106474772"
@@ -4359,6 +4406,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 14.444568 6.801945 -0.07
@@ -4367,7 +4415,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 88.694928 -32.993243 0.01
   name "East 58th Street(3)"
   id "1106474773"
@@ -4400,6 +4447,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 131.298253 -55.953326 -0.07
@@ -4408,7 +4456,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 228.412561 -108.705352 0.01
   name "East 58th Street(4)"
   id "1106474774"
@@ -4441,6 +4488,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 260.745388 -126.089697 -0.07
@@ -4449,7 +4497,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 381.067101 -190.99089 0.01
   name "East 58th Street(5)"
   id "1106474775"
@@ -4482,6 +4529,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 406.230878 -204.550841 -0.07
@@ -4490,7 +4538,6 @@ PedestrianCrossing {
   size 12 4.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 275.407592 -134.109229 0.01
   name "East 58th Street(6)"
   id "1115153280"
@@ -4527,9 +4574,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 37.664244 76.451924 0.01
   name "5th Avenue(7)"
   id "1150705656"
@@ -4572,6 +4619,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 37.486296 76.108867 -0.07
@@ -4586,7 +4634,6 @@ PedestrianCrossing {
   size 16 6.4
 }
 Road {
-  roadBoundingObject TRUE
   translation 114.364919 218.838576 0.01
   name "5th Avenue(8)"
   id "1174928402"
@@ -4629,6 +4676,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 112.981951 216.271035 -0.07
@@ -4643,7 +4691,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -351.084142 299.600595 0.01
   name "Central Park South(4)"
   id "1205900284"
@@ -4673,9 +4720,9 @@ Road {
     0.495502
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -252.984459 192.064224 0.01
   name "6th Avenue"
   id "1211049195"
@@ -4711,6 +4758,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -235.922552 223.716014 -0.07
@@ -4719,7 +4767,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -122.165659 -204.512094 0.01
   name "West 55th Street(1)"
   id "1222356565"
@@ -4744,6 +4791,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -125.900277 -202.559065 -0.07
@@ -4752,7 +4800,6 @@ PedestrianCrossing {
   size 9 3.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -343.193942 -84.134982 0.01
   name "West 55th Street(2)"
   id "1222356566"
@@ -4777,6 +4824,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -377.719665 -65.31919 -0.07
@@ -4785,7 +4833,6 @@ PedestrianCrossing {
   size 9 3.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -41.929313 -71.722377 0.01
   name "5th Avenue(9)"
   id "195743336_1"
@@ -4828,6 +4875,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -42.841168 -73.412627 -0.07
@@ -4842,7 +4890,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 104.340191 -127.814341 0.01
   name "Madison Avenue(8)"
   id "388696207_1"
@@ -4886,6 +4933,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 105.763562 -125.230925 -0.07
@@ -4900,7 +4948,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 143.795147 -54.666609 0.01
   name "Madison Avenue(9)"
   id "388696207_2"
@@ -4942,6 +4989,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 143.950263 -54.35068 -0.07
@@ -4956,7 +5004,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 191.0498 357.567791 0.01
   name "5th Avenue(10)"
   id "195743342_1"
@@ -4998,6 +5045,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 158.562731 298.540202 -0.07
@@ -5006,7 +5054,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 152.768107 288.047254 0.01
   name "5th Avenue(11)"
   id "195743342_2"
@@ -5049,6 +5096,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 151.668706 286.091447 -0.07
@@ -5063,7 +5111,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 160.886935 288.206838 0.01
   name "East 62nd Street"
   id "5673461_1"
@@ -5093,6 +5140,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 164.081109 286.481187 -0.07
@@ -5107,7 +5155,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 484.714558 -64.341612 0.01
   name "East 60th Street(2)"
   id "46334594_1"
@@ -5135,6 +5182,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 370.793 -2.967363 -0.07
@@ -5143,7 +5191,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation -424.262815 -124.949094 0.01
   name "6th Avenue(1)"
   id "569345537_2"
@@ -5187,6 +5234,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -423.595113 -123.707259 -0.07
@@ -5201,7 +5249,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 484.126027 204.907415 0.01
   name "East 63rd Street"
   id "46522160_1"
@@ -5221,6 +5268,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 484.126027 204.907415 -0.07
@@ -5229,7 +5277,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 475.105949 214.321186 0.01
   name "Park Avenue(4)"
   id "671208358_3"
@@ -5262,6 +5309,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 476.959369 217.823897 -0.07
@@ -5282,7 +5330,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 498.931197 295.365537 0.01
   name "Park Avenue(5)"
   id "68674962_1"
@@ -5315,6 +5362,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 498.931197 295.365537 -0.07
@@ -5335,7 +5383,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 468.580773 213.257831 0.01
   name "East 63rd Street(1)"
   id "46522160_2"
@@ -5362,9 +5409,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -351.084142 299.600595 0.01
   name "Central Park South(5)"
   id "196116988_1"
@@ -5404,6 +5451,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -462.932061 360.048917 -0.07
@@ -5412,7 +5460,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 406.504434 65.926439 0.01
   name "East 61st Street"
   id "198595461_1"
@@ -5432,6 +5479,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 406.504434 65.926439 -0.07
@@ -5440,7 +5488,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 362.579231 6.000402 0.01
   name "Park Avenue(6)"
   id "671208358_2"
@@ -5481,6 +5528,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 363.048947 6.917807 -0.07
@@ -5495,7 +5543,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 183.624602 4.170233 0.01
   name "East 59th Street(1)"
   id "198924552_1"
@@ -5526,6 +5573,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 186.386094 2.524112 -0.07
@@ -5540,7 +5588,6 @@ PedestrianCrossing {
   size 10 4
 }
 Road {
-  roadBoundingObject TRUE
   translation 303.233892 -67.831448 0.01
   name "Park Avenue(7)"
   id "68674962_3"
@@ -5579,6 +5626,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 303.455207 -67.423543 -0.07
@@ -5593,7 +5641,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 144.928335 -347.226655 0.01
   name "East 55th Street"
   id "226041012_1"
@@ -5619,6 +5666,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 141.739731 -345.511668 -0.07
@@ -5633,7 +5681,6 @@ PedestrianCrossing {
   size 10 4
 }
 Road {
-  roadBoundingObject TRUE
   translation 15.142798 -277.984366 0.01
   name "East 55th Street(1)"
   id "226041012_2"
@@ -5662,6 +5709,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 14.307608 -277.536742 -0.07
@@ -5676,7 +5724,6 @@ PedestrianCrossing {
   size 10 4
 }
 Road {
-  roadBoundingObject TRUE
   translation -507.640988 289.727609 0.01
   name "West 58th Street(1)"
   id "308322447_1"
@@ -5715,6 +5762,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -499.992496 285.665537 -0.07
@@ -5729,7 +5777,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -264.12173 156.615149 0.01
   name "West 58th Street(2)"
   id "308322447_2"
@@ -5768,6 +5815,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -258.639679 153.673219 -0.07
@@ -5782,7 +5830,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -306.135137 92.773273 0.01
   name "6th Avenue(2)"
   id "497258108_1"
@@ -5825,6 +5872,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -304.741835 95.381607 -0.07
@@ -5839,7 +5887,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -266.982026 166.094385 0.01
   name "6th Avenue(3)"
   id "497258108_2"
@@ -5875,6 +5922,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -266.287038 167.384141 -0.07
@@ -5883,7 +5931,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -468.248054 -206.694494 0.01
   name "6th Avenue(4)"
   id "569345537_1"
@@ -5914,6 +5961,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -468.248054 -206.694494 -0.07
@@ -5922,7 +5970,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -463.27795 -197.463493 0.01
   name "6th Avenue(5)"
   id "569345537_3"
@@ -5965,6 +6012,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -461.08392 -193.388351 -0.07
@@ -5979,7 +6027,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -517.35446 286.963563 0.01
   name "Central Park South(6)"
   id "196116988_2"
@@ -6021,9 +6068,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 225.092897 -212.57702 0.01
   name "Park Avenue(8)"
   id "497165753_1"
@@ -6064,6 +6111,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 222.578187 -217.287505 -0.07
@@ -6078,7 +6126,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 185.150434 -287.430026 0.01
   name "Park Avenue(9)"
   id "497165753_2"
@@ -6113,6 +6160,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 184.960868 -287.783982 -0.07
@@ -6127,7 +6175,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 194.619935 -284.575448 0.01
   name "East 56th Street(1)"
   id "528748997_2"
@@ -6155,9 +6202,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 209.181298 -292.50854 0.01
   name "East 56th Street(2)"
   id "528748997_3"
@@ -6182,6 +6229,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 212.788017 -294.507666 -0.07
@@ -6190,7 +6238,6 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -641.137006 68.96939 0.01
   name "Central Park South(7)"
   id "196116988_4"
@@ -6232,9 +6279,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -385.598747 -53.186496 0.01
   name "6th Avenue(6)"
   id "541350711_1"
@@ -6275,6 +6322,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -385.800167 -53.55609 -0.07
@@ -6289,7 +6337,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -348.895162 14.147178 0.01
   name "6th Avenue(7)"
   id "541350711_2"
@@ -6332,6 +6379,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -347.723934 16.298815 -0.07
@@ -6346,7 +6394,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -593.935191 137.804042 0.01
   name "West 56th Street"
   id "618990022_1"
@@ -6384,6 +6431,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -582.1282 131.454416 -0.07
@@ -6404,7 +6452,6 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
-  roadBoundingObject TRUE
   translation -346.062081 4.680453 0.01
   name "West 56th Street(1)"
   id "618990022_2"
@@ -6437,6 +6484,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -341.675601 2.324881 -0.07
@@ -6451,7 +6499,6 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 137.609647 -254.122771 0.01
   name "East 56th Street(3)"
   id "528748997_4"
@@ -6481,6 +6528,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 179.314691 -276.381513 -0.07
@@ -6489,7 +6537,6 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 65.01642 -215.69121 0.01
   name "East 56th Street(4)"
   id "528748997_1"
@@ -6519,6 +6566,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 68.714493 -217.636043 -0.07
@@ -6527,7 +6575,6 @@ PedestrianCrossing {
   size 8 3.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 118.750845 -244.074699 0.01
   name "East 56th Street(5)"
   id "528748997_5"
@@ -6555,9 +6602,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -81.638708 -145.255757 0.01
   name "5th Avenue(12)"
   id "195743336_2"
@@ -6600,6 +6647,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation -81.362036 -144.750954 -0.07
@@ -6614,7 +6662,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -119.284633 -213.916408 0.01
   name "5th Avenue(13)"
   id "195743336_3"
@@ -6649,9 +6696,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 297.612181 214.508829 0.01
   name "East 62nd Street(1)"
   id "5673461_2"
@@ -6680,6 +6727,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 300.662673 212.865426 -0.07
@@ -6694,7 +6742,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 455.866431 215.482069 0.01
   name "Park Avenue(10)"
   id "68674962_2"
@@ -6735,6 +6782,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 454.553136 213.06391 -0.07
@@ -6749,7 +6797,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 218.166781 83.80539 0.01
   name "Madison Avenue(10)"
   id "458180199_1"
@@ -6792,6 +6839,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 219.160996 85.587175 -0.07
@@ -6806,7 +6854,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 255.802614 151.62315 0.01
   name "Madison Avenue(11)"
   id "458180199_3"
@@ -6850,6 +6897,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 257.731678 155.206932 -0.07
@@ -6864,7 +6912,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 247.721088 151.433001 0.01
   name "East 61st Street(1)"
   id "198595461_3"
@@ -6895,6 +6942,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 244.264867 153.294759 -0.07
@@ -6915,7 +6963,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 293.351739 221.347596 0.01
   name "Madison Avenue(12)"
   id "458180199_2"
@@ -6958,6 +7005,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 325.973038 281.574965 -0.07
@@ -6966,7 +7014,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 331.151473 291.162764 0.01
   name "Madison Avenue(13)"
   id "458180199_4"
@@ -6997,6 +7044,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 332.747445 294.122405 -0.07
@@ -7005,7 +7053,6 @@ PedestrianCrossing {
   size 14 5.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 453.140566 221.471806 0.01
   name "East 63rd Street(2)"
   id "46522160_3"
@@ -7034,6 +7081,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 449.433746 223.450966 -0.07
@@ -7048,7 +7096,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 323.087512 290.96124 0.01
   name "East 63rd Street(3)"
   id "46522160_4"
@@ -7077,6 +7124,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 319.908559 292.672656 -0.07
@@ -7091,7 +7139,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 356.088287 4.954848 0.01
   name "East 60th Street(3)"
   id "46334594_2"
@@ -7118,9 +7165,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 340.77092 13.20716 0.01
   name "East 60th Street(4)"
   id "46334594_3"
@@ -7150,6 +7197,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 336.55929 15.476204 -0.07
@@ -7164,7 +7212,6 @@ PedestrianCrossing {
   size 7 2.8
 }
 Road {
-  roadBoundingObject TRUE
   translation 343.497625 7.194556 0.01
   name "Park Avenue(11)"
   id "68674962_5"
@@ -7205,6 +7252,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 340.91741 2.427867 -0.07
@@ -7219,7 +7267,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 287.921653 -132.949059 0.01
   name "Park Avenue(12)"
   id "671208358_1"
@@ -7258,6 +7305,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 287.907037 -132.976326 -0.07
@@ -7272,7 +7320,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 325.117355 -63.973739 0.01
   name "Park Avenue(13)"
   id "671208358_5"
@@ -7313,6 +7360,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 325.961319 -62.463028 -0.07
@@ -7327,7 +7375,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 312.613199 -65.035805 0.01
   name "East 59th Street(2)"
   id "198924552_2"
@@ -7355,9 +7402,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 327.856692 -73.422001 0.01
   name "East 59th Street(3)"
   id "198924552_3"
@@ -7388,6 +7435,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 331.261061 -75.268347 -0.07
@@ -7402,7 +7450,6 @@ PedestrianCrossing {
   size 10 4
 }
 Road {
-  roadBoundingObject TRUE
   translation 399.547228 74.230063 0.01
   name "Park Avenue(14)"
   id "671208358_4"
@@ -7443,6 +7490,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 401.468819 77.80222 -0.07
@@ -7457,7 +7505,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 437.197553 144.319976 0.01
   name "Park Avenue(15)"
   id "671208358_6"
@@ -7498,6 +7545,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 438.955818 147.554558 -0.07
@@ -7512,7 +7560,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 424.401957 146.623575 0.01
   name "East 62nd Street(2)"
   id "5673461_3"
@@ -7539,9 +7586,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 439.925893 138.317685 0.01
   name "East 62nd Street(3)"
   id "5673461_4"
@@ -7561,6 +7608,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 444.402279 135.916781 -0.07
@@ -7569,7 +7617,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation -560.612794 210.780039 0.01
   name "Central Park South(8)"
   id "196116988_3"
@@ -7611,9 +7658,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -602.127097 137.668991 0.01
   name "Central Park South(9)"
   id "196116988_5"
@@ -7655,9 +7702,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 393.029838 73.208944 0.01
   name "East 61st Street(2)"
   id "198595461_2"
@@ -7684,9 +7731,9 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 377.506606 81.592403 0.01
   name "East 61st Street(3)"
   id "198595461_4"
@@ -7716,6 +7763,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 372.548631 84.25697 -0.07
@@ -7736,7 +7784,6 @@ PedestrianCrossing {
   size 4 1.6
 }
 Road {
-  roadBoundingObject TRUE
   translation 417.867675 145.580525 0.01
   name "Park Avenue(16)"
   id "68674962_4"
@@ -7777,6 +7824,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 416.239933 142.546803 -0.07
@@ -7791,7 +7839,6 @@ PedestrianCrossing {
   size 10.5 4.2
 }
 Road {
-  roadBoundingObject TRUE
   translation 380.239801 75.582433 0.01
   name "Park Avenue(17)"
   id "68674962_6"
@@ -7832,6 +7879,7 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
+  roadBoundingObject TRUE
 }
 PedestrianCrossing {
   translation 378.545994 72.425779 -0.07
@@ -36073,7 +36121,6 @@ BigSassafras {
   name "sassafras tree(17)"
 }
 Road {
-  roadBoundingObject TRUE
   translation 11.5 12 0
   rotation 0 0 1 -0.5
   width 8
@@ -36090,9 +36137,9 @@ Road {
     0 0 0
     1.2 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation -5.3 14 0
   rotation 0 0 1 -0.5
   name "road(2)"
@@ -36110,9 +36157,9 @@ Road {
     0 0 0
     1.2 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 32 85 0
   rotation 0 0 1 -0.5
   name "road(2)"
@@ -36130,9 +36177,9 @@ Road {
     0 0 0
     1.2 0 0
   ]
+  roadBoundingObject TRUE
 }
 Road {
-  roadBoundingObject TRUE
   translation 48.5 82 0
   rotation 0 0 1 -0.5
   name "road(2)"
@@ -36150,6 +36197,7 @@ Road {
     0 0 0
     1.2 0 0
   ]
+  roadBoundingObject TRUE
 }
 DEF ORIGIN BmwX5Simple {
   translation 0 36.98 0.4
