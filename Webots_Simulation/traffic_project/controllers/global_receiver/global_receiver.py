@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-30 18:27:41
+LastEditTime: 2024-08-30 20:28:01
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -86,6 +86,7 @@ global_init = False
 # seperate different simulation modes
 FollowPort = None
 file_path = world_path[:-4] + '_net'
+car_import_group_num = configData["Sumo_Params"]["car_group_num"]
 if configData["Simulation_Mode"] == "demo":
     drone_manager.droneManager(robot, timestep, 0, [], configData, [], {}, [False])
     data = [0.] * 6
@@ -102,7 +103,7 @@ if configData["Simulation_Mode"] == "demo":
         #     randomorder.sumo_rou_random(file_path, int(4), configData["Sumo_Params"])
         # elif configData["Sumo_Random_Mode"] == 2:
         #     randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
-        randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
+        randomorder.sumo_rou_random_os(file_path, int(car_import_group_num), System, configData["Sumo_Params"])
 elif configData["Simulation_Mode"] == "train":
     if System == "Linux":
         os.system("rm -rf ../../Files2Alg/*.txt")
@@ -123,7 +124,10 @@ elif configData["Simulation_Mode"] == "train":
         #     randomorder.sumo_rou_random(file_path, int(multiCom.Number_process*3), configData["Sumo_Params"])
         # elif configData["Sumo_Random_Mode"] == 2:
         #     randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
-        randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
+        if configData["Sumo_Params"]["fixed_car_group_num"] == True and car_import_group_num >= multiCom.Number_process*3:
+            randomorder.sumo_rou_random_os(file_path, int(car_import_group_num), System, configData["Sumo_Params"])
+        else:
+            randomorder.sumo_rou_random_os(file_path, int(multiCom.Number_process*3), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section
@@ -151,7 +155,10 @@ elif configData["Simulation_Mode"] == "video":
         #     randomorder.sumo_rou_random(file_path, int(configData["Out_Video"]["channels"]*2), configData["Sumo_Params"])
         # elif configData["Sumo_Random_Mode"] == 2:
         #     randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
-        randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*2), System, configData["Sumo_Params"])
+        if configData["Sumo_Params"]["fixed_car_group_num"] == True and car_import_group_num >= configData["Out_Video"]["channels"]*3:
+            randomorder.sumo_rou_random_os(file_path, int(car_import_group_num), System, configData["Sumo_Params"])
+        else:
+            randomorder.sumo_rou_random_os(file_path, int(configData["Out_Video"]["channels"]*3), System, configData["Sumo_Params"])
     # according to the number of process ,establish multiple objects
     droneM = []
     # sumo shared storage section
