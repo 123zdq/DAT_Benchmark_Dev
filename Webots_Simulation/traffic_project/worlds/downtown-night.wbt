@@ -64,17 +64,17 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.3105427251986809 0.494886600276272 0.8115728363450628 1.3163753711108717
-  position -839.1642713915519 -1631.363089779892 1895.2903649019781
+  orientation -0.0849559690826375 0.9923742418469729 0.08930760010142352 1.5285635264302053
+  position -255.1093259606097 -50.283246624066756 1823.9009532137236
   near 3
 }
 TexturedBackground {
   texture "empty_office"
-  luminosity 0.2
+  luminosity 0.3
   skybox FALSE
 }
 TexturedBackgroundLight {
-  luminosity 0.2
+  luminosity 0.3
 }
 DEF land Floor {
   translation 0 0 -0.1
