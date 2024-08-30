@@ -376,8 +376,8 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-        #self.model = RPPO_E2E_VAT(self.input_channels, self.action_dim).to(self.device)
-        self.model = RPPO_E2E_VAT_CNN(self.input_channels, self.action_dim).to(self.device)
+        self.model = RPPO_E2E_VAT(self.input_channels, self.action_dim).to(self.device)
+        # self.model = RPPO_E2E_VAT_CNN(self.input_channels, self.action_dim).to(self.device)
 
         if os.path.exists(self.savepath):
             self.model.load_state_dict(torch.load(self.savepath))
@@ -507,14 +507,17 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
             action, next_gru_state = self.model.predict_action(
                 next_state, next_gru_state, next_done
             )
-            next_state, _, done = self.envs.step(action.cpu().numpy())
+            next_state, reward, done = self.envs.step(action.cpu().numpy())
             next_state = torch.Tensor(next_state).to(self.device)
             next_done = torch.Tensor(done).to(self.device)
-        return next_gru_state, next_state, next_done
+        return next_gru_state, next_state, reward, next_done
 
     def run(self, train_mode=True):
         next_state = torch.Tensor(self.envs.reset()).to(self.device)
         next_done = torch.zeros(self.num_envs).to(self.device)
+        test_reward = 0
+        test_episode_num = 0
+        test_reward_list = []
         if train_mode:
             self.model.train()
             next_gru_state = torch.zeros(2, self.num_envs, 256).to(self.device)
@@ -526,9 +529,22 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
             self.model.eval()
             next_gru_state = torch.zeros(self.num_envs, 256).to(self.device)
             while True:
-                next_gru_state, next_state, next_done = self.test_step(
+                next_gru_state, next_state,reward, next_done = self.test_step(
                     next_gru_state, next_state, next_done
                 )
+                if next_done:
+                    if test_reward != 0:
+                        test_reward_list.append(test_reward)
+                        test_episode_num += 1
+                        print(f"episode: {test_episode_num}")
+                    if len(test_reward_list) == 10:
+                        test_reward_list.append(f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}")
+                        import pandas as pd
+                        df = pd.DataFrame(test_reward_list, columns=["Values"])
+                        df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
+                    test_reward = 0
+                else:
+                    test_reward += float(reward[0])
 
 
 class UAV_RPPO_discrete:  # now:  torch base on GPU
@@ -761,7 +777,7 @@ if __name__ == "__main__":
 
     parse = argparse.ArgumentParser(description="run RPPO")
     parse.add_argument(
-        "-w", "--workers", default=24, type=int, metavar="", help="the number of agents"
+        "-w", "--workers", default=1, type=int, metavar="", help="the number of agents"
     )
     parse.add_argument(
         "-t",
@@ -831,7 +847,7 @@ if __name__ == "__main__":
         ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
         shell=True,
     )
-    time.sleep(15)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    time.sleep(95)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     with open("config.json", "r") as file:
         data = json.load(file)
