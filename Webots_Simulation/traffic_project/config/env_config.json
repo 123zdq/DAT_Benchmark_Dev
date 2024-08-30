@@ -1,5 +1,5 @@
 {
-        "Simulation_Mode": "train",
+        "Simulation_Mode": "video",
         "Drone_Supervisor_Ctrl": true,
         "Socket_Ip": "127.0.0.1",
         "Config_Agen_Num_Port": 7789,
@@ -44,7 +44,7 @@
             "max_rou_distance": 7000,
             "min_rou_distance": 500,
             "route_num": 100000,
-            "fixed_seed": false,
+            "fixed_seed": true,
             "random_seed": 1
         },
         "Other_Params": {

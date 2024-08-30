@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-30 14:44:46
+LastEditTime: 2024-08-30 18:10:07
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -53,7 +53,11 @@ class droneManager:
         # get configuration
         self.configData = configData
         # define sumoGod
-        self.sumoGod = SUMOGod.getSumoCarNode(id, sumoList, sumoDict, sumoGetFlag)
+        if configData["Sumo_Params"]["fixed_seed"] == True:
+            random.seed(configData["Sumo_Params"]["random_seed"])
+            self.sumoGod = SUMOGod.getSumoCarNode(id, sumoList, sumoDict, sumoGetFlag, configData["Sumo_Params"]["random_seed"])
+        else:
+            self.sumoGod = SUMOGod.getSumoCarNode(id, sumoList, sumoDict, sumoGetFlag)
         # create new drone node
         self.droneDef = 'DRONE' + str(id)
         droneString = 'DEF ' + self.droneDef + ' M100 { controller "drone_ctrl2" customData "online" supervisor TRUE }'

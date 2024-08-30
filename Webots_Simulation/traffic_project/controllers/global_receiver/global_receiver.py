@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-30 17:07:27
+LastEditTime: 2024-08-30 18:27:41
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -72,8 +72,7 @@ else:
 if configData["Sumo_Params"]["fixed_seed"] == True:
     SUMO_Interface.getField("seed").setSFInt32(configData["Sumo_Params"]["random_seed"])
 else:
-    randomSeed = random.randint(1, 100)
-    SUMO_Interface.getField("seed").setSFInt32(randomSeed)
+    SUMO_Interface.getField("seed").setSFInt32(0)
 
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())

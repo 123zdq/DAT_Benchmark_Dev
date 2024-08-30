@@ -224,7 +224,7 @@ controller.run(options.port, options.disableTrafficLights, directory,
                options.radius, options.enableHeight, useDisplay,
                options.displayRefreshRate, options.displayZoom,
                options.displayFitSize, options.maximumLateralSpeed,
-               options.maximumAngularSpeed, options.laneChangeDelay, traci, sumolib)
+               options.maximumAngularSpeed, options.laneChangeDelay, traci, sumolib, options.seed)
 sumoProcess.terminate()
 
 # remove temporary folder

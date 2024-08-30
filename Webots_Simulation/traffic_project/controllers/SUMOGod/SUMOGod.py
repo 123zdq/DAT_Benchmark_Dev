@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-28 14:45:03
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-07 12:35:51
+LastEditTime: 2024-08-30 18:10:03
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/SUMOGod/SUMOGod.py
 Description: 
 
@@ -27,7 +27,7 @@ class getSumoCarNode:
     param {*} _sumoGetFlag: a flag that record whether getting a car
     return {*}
     '''
-    def __init__(self, _sumoId, _usedSumoDefList, _sumoDictionary, _sumoGetFlag):
+    def __init__(self, _sumoId, _usedSumoDefList, _sumoDictionary, _sumoGetFlag, _randomSeed = None):
         self.sumoId = _sumoId
         self.usedSumoDefList = _usedSumoDefList # 创建一个列表，记录已经被分配的sumo车辆的DEF
         # self.usedSumoDefList = []
@@ -37,6 +37,8 @@ class getSumoCarNode:
         self.currentUseCarNode = None
         self.transVector = None
         self.rotateAngle = None
+        if _randomSeed != None:
+            random.seed(_randomSeed)
 
     '''
     description: collect all sumo cars from root tree

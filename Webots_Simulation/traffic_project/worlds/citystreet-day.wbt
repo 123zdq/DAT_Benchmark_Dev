@@ -69,8 +69,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.23363893435512875 -0.3862568066201667 0.8923107797695774 5.0917532619442385
-  position -40.73635957513368 83.74537399608026 49.118975997929184
+  orientation -0.10632283362352368 -0.9716111290457115 0.21134632470138282 5.327698395306926
+  position -460.9982452257519 -189.53599537752115 394.93464686088845
   near 3
 }
 TexturedBackground {
@@ -924,9 +924,8 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 29
+  maxVehicles 28
   step 100
-  seed 15
   children [
     Solid {
       translation 196.99 223.18 0

@@ -158,10 +158,12 @@ class Vehicle:
             self.wheelsAngularVelocity.append(trailerNode.getField("rearLeftWheelAngularVelocity"))
             self.wheelsAngularVelocity.append(trailerNode.getField("rearRightWheelAngularVelocity"))
 
+
     @staticmethod
-    def generate_vehicle_string(index, vehicleClass):
+    def generate_vehicle_string(index, vehicleClass, randomSeed):
         """Generate a string representing the node of the corresponding vehicle class."""
         # randomly select the model
+        random.seed(randomSeed)
         if vehicleClass == 'bus':
             model = BUS_MODEL[0]
             vehicleLength = -4.6

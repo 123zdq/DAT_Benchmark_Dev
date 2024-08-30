@@ -21,6 +21,7 @@ from WebotsVehicle import WebotsVehicle
 import os
 import sys
 import math
+import random
 
 hiddenPosition = 10000
 
@@ -95,17 +96,17 @@ class SumoSupervisor (Supervisor):
             else:
                 break
 
-    def generate_new_vehicle(self, vehicleClass):
+    def generate_new_vehicle(self, vehicleClass, randomSeed):
         """Generate and import a new vehicle that will be controlled by SUMO."""
         # load the new vehicle
-        vehicleString, defName = Vehicle.generate_vehicle_string(self.vehicleNumber, vehicleClass)
+        vehicleString, defName = Vehicle.generate_vehicle_string(self.vehicleNumber, vehicleClass, randomSeed)
         self.rootChildren.importMFNodeFromString(-1, vehicleString)
         nodeRef = self.getFromDef(defName)
         if nodeRef:
             self.vehicles[self.vehicleNumber] = Vehicle(nodeRef)
             self.vehicleNumber += 1
 
-    def get_vehicle_index(self, id, generateIfneeded=True):
+    def get_vehicle_index(self, id, randomSeed, generateIfneeded=True):
         """Look for the vehicle index corresponding to this id (and optionnaly create it if required)."""
         for i in range(0, self.vehicleNumber):
             if self.vehicles[i].currentID == id:
@@ -135,7 +136,7 @@ class SumoSupervisor (Supervisor):
         # no vehicle available => generate a new one if limit is not reached
         if self.vehicleNumber < self.vehiclesLimit:
             vehicleClass = self.get_vehicle_class(id)
-            self.generate_new_vehicle(vehicleClass)
+            self.generate_new_vehicle(vehicleClass, randomSeed)
             return self.vehicleNumber - 1
         return -1
 
@@ -182,7 +183,7 @@ class SumoSupervisor (Supervisor):
                 wheelAngularVelocity.setSFVec3f([0, 0, 0])
 
     def get_vehicles_position(self, id, subscriptionResult, step, xOffset, yOffset,
-                              maximumLateralSpeed, maximumAngularSpeed, laneChangeDelay):
+                              maximumLateralSpeed, maximumAngularSpeed, laneChangeDelay, randomSeed):
         """Compute the new desired position and orientation for all the vehicles controlled by SUMO."""
         if not subscriptionResult:
             return
@@ -208,13 +209,13 @@ class SumoSupervisor (Supervisor):
             zDiff = viewpointPosition[2]
             distance = math.sqrt(xDiff * xDiff + yDiff * yDiff + zDiff * zDiff)
             if distance > self.radius:
-                index = self.get_vehicle_index(id, generateIfneeded=False)
+                index = self.get_vehicle_index(id, randomSeed, generateIfneeded=False)
                 if index >= 0:
                     self.vehicles[index].inUse = False
                     self.vehicles[index].currentID = ""
                     self.vehicles[index].name.setSFString("SUMO vehicle %i" % index)
                 return
-        index = self.get_vehicle_index(id)
+        index = self.get_vehicle_index(id, randomSeed)
         if index >= 0:
             vehicle = self.vehicles[index]
             height = vehicle.wheelRadius
@@ -426,7 +427,7 @@ class SumoSupervisor (Supervisor):
     def run(self, port, disableTrafficLight, directory, step, rotateWheels,
             maxVehicles, radius, enableHeight, useDisplay, displayRefreshRate,
             displayZoom, displayFitSize, maximumLateralSpeed, maximumAngularSpeed,
-            laneChangeDelay, traci, sumolib):
+            laneChangeDelay, traci, sumolib, randomSeed):
         """Main loop function."""
         try:
             print('Connect to SUMO... This operation may take a few seconds.')
@@ -514,7 +515,9 @@ class SumoSupervisor (Supervisor):
                 from SumoDisplay import SumoDisplay
                 self.sumoDisplay = SumoDisplay(display, displayZoom, view, directory, displayRefreshRate, displayFitSize,
                                                self.traci)
-
+                
+        random.seed(randomSeed)
+        
         # Main simulation loop
         while self.step(step) >= 0:
             if self.usePlugin:
@@ -550,7 +553,7 @@ class SumoSupervisor (Supervisor):
             for id in idList:
                 self.get_vehicles_position(id, self.traci.vehicle.getSubscriptionResults(id),
                                            step, xOffset, yOffset, maximumLateralSpeed, maximumAngularSpeed,
-                                           laneChangeDelay)
+                                           laneChangeDelay, random.randint(1,100))
             self.disable_unused_vehicles(idList)
 
             # hide unused vehicles

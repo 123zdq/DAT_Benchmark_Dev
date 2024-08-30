@@ -85,22 +85,23 @@ def random_by_os(folder_path, _sys, _configData):
     maxD = str(_configData["max_rou_distance"])
     minD = str(_configData["min_rou_distance"])
     rouN = str(_configData["route_num"])
-    if _configData["fixed_seed"] == True:
-        randS = str(_configData["random_seed"])
-    else:
-        randS = str(random.randint(1, 100))
-    if _configData["rou_update"] == True:
-        # 使用从系统获取的python路径
-        if _sys == "Linux":
-            os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')
-        elif _sys == "Windows":
-            os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')       
-        # 使用webots建立的python软链接
-        # os.system('python3.11 $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
-        if _sys == "Linux":
-            os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
-        elif _sys == "Windows":
-            os.system('%SUMO_HOME%/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+    # 使用从系统获取的python路径
+    if _sys == "Linux":
+        if _configData["fixed_seed"] == True:
+            os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --seed=' + str(_configData["random_seed"]) + ' --allow-fringe')
+        else:
+            os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --random' + ' --allow-fringe')
+    elif _sys == "Windows":
+        if _configData["fixed_seed"] == True:
+            os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --seed=' + str(_configData["random_seed"]) + ' --allow-fringe')       
+        else:
+            os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --random' + ' --allow-fringe')               
+    # 使用webots建立的python软链接
+    # os.system('python3.11 $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
+    if _sys == "Linux":
+        os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+    elif _sys == "Windows":
+        os.system('%SUMO_HOME%/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
 
 
 
@@ -136,14 +137,15 @@ def sumo_rou_random(folder_path, _numPerGroup, _configData):
     write_xml(tree, folder_path + '/sumo.rou.xml')
     
 def sumo_rou_random_os(folder_path, _numPerGroup, _sys, _configData):
-    random_by_os(folder_path, _sys, _configData)
-    
-    tree, root = read_xml(folder_path + '/sumo.rou.xml')
-    add_speed_constrain(root=root, config=_configData)
-    count,attribute_list = collect_xml(root=root,tag="route",attribute="edges")
-    
-    groupAndSetDepart(root=root,totalNum=count+1,numPerGroup=_numPerGroup,intervalBetweenGroup=_configData["car_import_interval"])
-    write_xml(tree, folder_path + '/sumo.rou.xml')
+    if _configData["rou_update"] == True:
+        random_by_os(folder_path, _sys, _configData)
+        
+        tree, root = read_xml(folder_path + '/sumo.rou.xml')
+        add_speed_constrain(root=root, config=_configData)
+        count,attribute_list = collect_xml(root=root,tag="route",attribute="edges")
+        
+        groupAndSetDepart(root=root,totalNum=count+1,numPerGroup=_numPerGroup,intervalBetweenGroup=_configData["car_import_interval"])
+        write_xml(tree, folder_path + '/sumo.rou.xml')
 
 
 
