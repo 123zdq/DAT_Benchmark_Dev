@@ -11,6 +11,7 @@ from player_util import Agent
 from torch.autograd import Variable
 import time
 import logging
+from logs.Empty_Log import Empty_Logger
 
 """
     train: Multi-Process Training Function
@@ -23,20 +24,25 @@ import logging
     Output:
         None
 """
-def train(rank, args, shared_model, optimizer, env_conf):
-    logger = logging.getLogger(f'train_logger_{rank}')
-    logger.setLevel(logging.INFO)
-    # 创建文件处理器
-    if os.path.exists(f"./logs/Agent_train{rank}.log"):
-        os.unlink(f"./logs/Agent_train{rank}.log")
-    file_handler = logging.FileHandler(f"./logs/Agent_train{rank}.log")
-    file_handler.setLevel(logging.INFO)
-    # 创建格式化器并将其添加到文件处理器
-    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(formatter)
-    # 将文件处理器添加到日志记录器
-    if not logger.handlers: # 避免重复添加处理器
-        logger.addHandler(file_handler)
+
+def train(rank, args, shared_model, optimizer, env_conf,log = False):
+    if log:
+        logger = logging.getLogger(f'train_logger_{rank}')
+        logger.setLevel(logging.INFO)
+        # 创建文件处理器
+        if os.path.exists(f"./logs/Agent_train{rank}.log"):
+            os.unlink(f"./logs/Agent_train{rank}.log")
+        file_handler = logging.FileHandler(f"./logs/Agent_train{rank}.log")
+        file_handler.setLevel(logging.INFO)
+        # 创建格式化器并将其添加到文件处理器
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        file_handler.setFormatter(formatter)
+        # 将文件处理器添加到日志记录器
+        if not logger.handlers: # 避免重复添加处理器
+            logger.addHandler(file_handler)
+    else:
+        logger = Empty_Logger()
+
 
     
     episode = 0

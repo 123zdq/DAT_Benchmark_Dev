@@ -24,7 +24,8 @@
         "Other_State": false,
         "CloudPoint": false,
         "RewardParams": true,
-        "RewardType": "default"
+        "RewardType": "default",
+        "verbose": false
     },
     "LunarLander": {
         "Need_render": 1,

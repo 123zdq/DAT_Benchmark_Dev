@@ -17,6 +17,7 @@ import copy
 from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward,check_memory_usage
 import math
 from threading import Thread
+from logs.Empty_Log import Empty_Logger
 # import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
@@ -92,7 +93,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
                              scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"],\
-                             reward_type=env_conf["RewardType"])
+                             reward_type=env_conf["RewardType"],verbose=env_conf["verbose"])
         process_func = Identity
         return env,process_func
 
@@ -116,7 +117,7 @@ class BenchEnv_Multi():
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
         port_process,end_reward,end_reward_list,scene,weather,auto_start,\
-        Control_Frequence = 500,reward_type="default") -> None:
+        Control_Frequence = 500,reward_type="default",verbose=False) -> None:
         
         self.Action_dim = Action_dim
         self.process_state = process_state
@@ -214,7 +215,10 @@ class BenchEnv_Multi():
         self.Set_Done_Step = 10000/self.Control_Frequence
 
         # Logging
-        self.logger = create_logger(self.process_id)
+        if verbose:
+            self.logger = create_logger(self.process_id)
+        else:
+            self.logger = Empty_Logger()
 
         # reset
         self.reset_time = 0
