@@ -12,15 +12,15 @@
         "CW_omega": 2,
         "CCW_omega": -2,
         "Control_Frequence": 125,
-        "port_process": 7789,
+        "port_process": 53319,
         "end_reward": false,
         "end_reward_list": [
             -20,
             20
         ],
-        "scene": "farmland",
+        "scene": "citystreet",
         "weather": "day",
-        "auto_start": false,
+        "auto_start": true,
         "Other_State": false,
         "CloudPoint": false,
         "RewardParams": true,

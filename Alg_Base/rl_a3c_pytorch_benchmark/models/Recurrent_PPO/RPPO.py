@@ -806,10 +806,10 @@ if __name__ == "__main__":
     parse.add_argument(
         "-m",
         "--map",
-        default="simpleway.wbt",
+        default="citystreet-day.wbt",
         type=str,
         metavar="",
-        help="the filename of map, default: simpleway.wbt",
+        help="the filename of map, default: citystreet-day.wbt",
     )
     parse.add_argument(
         "-tp",
@@ -828,6 +828,7 @@ if __name__ == "__main__":
         _, args.port = sock.getsockname()
         sock.close()
 
+    
     import json
 
     with open(
@@ -835,9 +836,24 @@ if __name__ == "__main__":
     ) as file:
         data = json.load(file)
     data["Config_Agen_Num_Port"] = args.port
+    if not args.train_mode:
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+    else:
+        data["Drone_Random_Config"]["direction_random"] = True
+        data["Drone_Random_Config"]["horizon_bias_random"] = True
+        data["Drone_Random_Config"]["verticle_bias_random"] = True
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
+        json.dump(data, file, indent=4)
+
+    with open("config.json", "r") as file:
+        data = json.load(file)
+    data["Benchmark"]["port_process"] = args.port
+    data["Benchmark"]["auto_start"] = False
+    with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
     import subprocess, time
@@ -848,12 +864,6 @@ if __name__ == "__main__":
         shell=True,
     )
     time.sleep(95)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-    with open("config.json", "r") as file:
-        data = json.load(file)
-    data["Benchmark"]["port_process"] = args.port
-    with open("config.json", "w") as file:
-        json.dump(data, file, indent=4)
 
     from envs.envs_parallel import Envs, GE
 
@@ -876,6 +886,12 @@ if __name__ == "__main__":
             ["tensorboard --logdir PPO_logs --port=" + str(args.tensorboard_port)],
             shell=True,
         )
+
+    with open("config.json", "r") as file:
+        data = json.load(file)
+    data["Benchmark"]["auto_start"] = True
+    with open("config.json", "w") as file:
+        json.dump(data, file, indent=4)
 
     agent.run(train_mode=args.train_mode)
 

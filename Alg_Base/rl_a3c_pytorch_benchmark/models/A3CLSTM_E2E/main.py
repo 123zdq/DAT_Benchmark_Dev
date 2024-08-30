@@ -216,7 +216,7 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
-MODE = "test"
+MODE = "train"
 
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
@@ -227,6 +227,26 @@ MODE = "test"
             # cv2.waitKey(0)
 if __name__ == '__main__':
     args = parser.parse_args()
+
+    import json
+
+    with open(
+        "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
+    ) as file:
+        data = json.load(file)
+    if MODE == "test":
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+    elif MODE == "train":
+        data["Drone_Random_Config"]["direction_random"] = True
+        data["Drone_Random_Config"]["horizon_bias_random"] = True
+        data["Drone_Random_Config"]["verticle_bias_random"] = True
+    with open(
+        "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
+    ) as file:
+        json.dump(data, file, indent=4)
+
     torch.manual_seed(args.seed)
     if args.gpu_ids != [-1]:
         torch.cuda.manual_seed(args.seed)
