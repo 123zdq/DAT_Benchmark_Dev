@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-20 08:50:29
+LastEditTime: 2024-08-27 12:11:24
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -65,8 +65,9 @@ class droneManager:
         droneTrV[1] = droneTrV[1] + 1 * id
         self.drone.getField('translation').setSFVec3f(droneTrV)
         # Logging
-        MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
-        self.logger = logging.getLogger("drone"+str(id))
+        if self.configData["Verbose"] == True:
+            MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
+            self.logger = logging.getLogger("drone"+str(id))
         # init communications
         self.getFromActionPort = [0.] * 5
         # init action files
@@ -120,7 +121,8 @@ class droneManager:
     return {*}
     '''
     def returnState(self, step_count):
-        self.logger.info(str(step_count))
+        if self.configData["Verbose"] == True:
+            self.logger.info(str(step_count))
         # send state reward and done
         with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
             data = f.readline()
@@ -129,7 +131,8 @@ class droneManager:
             with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
                 data = f.readline()
                 f.close()
-        self.logger.info(data)
+        if self.configData["Verbose"] == True:
+            self.logger.info(data)
         self.recCtrlPort.sendState(data,self.id,"../../Files2Alg/" + self.droneDef + "_Ctrl2Global.txt")
         # if config files defines,then send below data
         if self.configData["Customized_Rewards"]:
@@ -140,7 +143,8 @@ class droneManager:
                 with open("../../cache/" + self.droneDef + "_Ctrl2GlobalR.txt", "r") as f:
                     data = f.readline()
                     f.close()
-            self.logger.info(data)
+            if self.configData["Verbose"] == True:
+                self.logger.info(data)
             self.recCtrlPort.sendMakeReward(data,self.id,"../../Files2Alg/" + self.droneDef + "_RewardParams.txt")
         if self.configData["Lidar_Enable"]:
             with open("../../cache/" + self.droneDef + "_LidarCloud.txt", "r") as f:
@@ -226,7 +230,8 @@ class droneManager:
     return {*}
     '''
     def reset(self):
-        print("\nid:   ",self.id,"    reset: rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+        if self.configData["Verbose"] == True:
+            print("\nid:   ",self.id,"    reset: rrrrrrrrrrrrrrrr")
         self.drone.restartController()
         
     '''
@@ -274,23 +279,27 @@ class droneManager:
                     self.recCtrlPort.is_step[self.id] = 0
                     self.step_count = 0
                     if self.init():
-                        # self.logger.info("drone finish sumo init")
+                        # if self.configData["Verbose"] == True:
+                        #     self.logger.info("drone finish sumo init")
                         # self.returnOnlyImage()
                         self.returnState(self.step_count)
                         self.machine_state = 2 # init come to an end and transfer to steps
                 elif self.machine_state == 2:
                     self.sumoGod.ResetSumoDictionary()
                     if self.recCtrlPort.is_reset[self.id] == True and self.step_count > 100:
-                        # self.logger.info("begin to reset")
+                        # if self.configData["Verbose"] == True:
+                        #     self.logger.info("begin to reset")
                         self.reset()
-                        # self.logger.info("finish reset")
+                        # if self.configData["Verbose"] == True:
+                        #     self.logger.info("finish reset")
                         self.sumoGod.delectDefList()
                         self.recCtrlPort.is_reset[self.id] = False
                         self.machine_state = 1 # remember to reset
                     else:
                         self.actionActivateFile(self.step_count)
                         if self.recCtrlPort.is_step[self.id] == 1:
-                            # self.logger.info("return states reward done")
+                            # if self.configData["Verbose"] == True:
+                            #     self.logger.info("return states reward done")
                             self.returnState(self.step_count)
                         # reset step counts that have been actuated
                         self.recCtrlPort.is_step[self.id] = self.recCtrlPort.is_step[self.id] - 1
@@ -328,7 +337,8 @@ class droneManager:
                             os.system("del /s /q /f ../../droneVideos/DRONE" + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
                     episode = episode + 1
                     if self.init():
-                        # self.logger.info("drone finish sumo init")
+                        # if self.configData["Verbose"] == True:
+                        #     self.logger.info("drone finish sumo init")
                         with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
                             data = f.readline()
                             f.close()
@@ -337,9 +347,11 @@ class droneManager:
                 elif self.machine_state == 2:
                     self.sumoGod.ResetSumoDictionary()
                     if is_reset[self.id] == True and self.step_count > 100:
-                        # self.logger.info("begin to reset")
+                        # if self.configData["Verbose"] == True:
+                        #     self.logger.info("begin to reset")
                         self.reset()
-                        # self.logger.info("finish reset")
+                        # if self.configData["Verbose"] == True:
+                        #     self.logger.info("finish reset")
                         self.sumoGod.delectDefList()
                         is_reset[self.id] = False
                         self.machine_state = 1 # remember to reset
@@ -347,7 +359,8 @@ class droneManager:
                         if self.configData["Out_Video"]["random_action"] == False:
                             self.sumoGod.MoveDroneToCar(self.sumoGod.currentUseCarNode, self.drone, self.sumoGod.transVector, self.sumoGod.rotateAngle, False)
                         if is_step[self.id] == 1:
-                            # self.logger.info("return states reward done")
+                            # if self.configData["Verbose"] == True:
+                            #     self.logger.info("return states reward done")
                             with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
                                 data = f.readline()
                                 f.close()

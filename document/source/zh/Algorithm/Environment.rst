@@ -95,7 +95,7 @@ Part 1 接口详解
     * :code:`Action_dim(int)` ：智能体动作维度
     * :code:`action_list(list)` ：用于将离散的动作指令转化成连续的运动指令
         
-      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CW,CCW]`，即分别代表“前后左右顺逆”的运动指令
+      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CCW,CW]`，即分别代表“前后左右逆顺”的运动指令
 
     * :code:`process_state(function)` ：用于对图像进行后处理的函数
     * :code:`arg_worker(int)` ： 系统并行数
@@ -319,7 +319,7 @@ Part1 UAV_VAT(适配Gym库)
 .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT(gym.Env)</code>类
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT(gym.Env)</code>类
         </div>
         </br>
 
@@ -373,10 +373,10 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
-        </div>
-        </br>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
+  </div>
+  </br>
 
 .. raw:: html 
 
@@ -409,10 +409,10 @@ Part3 调用接口
 
 .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>make_env()</code>函数
-        </div>
-        </br>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>make_env()</code>函数
+  </div>
+  </br>
 
 .. raw:: html 
 
@@ -432,10 +432,10 @@ Part3 调用接口
 
 .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
-        </div>
-        </br>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
+  </div>
+  </br>
 
 如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：
 
@@ -465,7 +465,37 @@ Part3 调用接口
 
 .. _Parallel:
 
+
 3 并行环境类(Envs)
 -------------------------------------------------
 
+  .. raw:: html 
 
+    <div style="background-color: #fce6ea; padding: 15px; border-radius: 5px; border: 2px solid #FF6A6A">
+      &nbsp;&nbsp;&nbsp;&nbsp;上述底层环境类(BenchEnv_Multi)设计目标是<b>多进程异步计算</b>(例如A3C算法)，在单独进程内调用环境类获取数据</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以<b>单进程工作在同步并行的数据流上</b>，引申出本类(Envs)</br>
+      &nbsp;&nbsp;&nbsp;&nbsp;本环境主要适配<b>用户的自主算法设计需求</b>(不使用stable-baselines3等基于Gym环境进行算法实现的情况)
+    </div>
+    </br>
+  
+
+  .. raw:: html
+
+    <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
+    </div>
+    </br>
+
+  **数据格式对比：**
+  
+  * 封装前(BenchEnv_Multi): 
+
+    数据采样： :code:`state:ndarray,reward:float,done:float= env.step(action:int)` 
+
+    环境重置： :code:`state:ndarray = env.reset()`
+
+  * 封装后(Envs),设并行数n： 
+
+    数据采样： :code:`states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)= env.step(action:ndarray(n))` 
+
+    环境重置： :code:`states:ndarray(n,) = envs.reset()`

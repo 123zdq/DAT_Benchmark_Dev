@@ -170,17 +170,21 @@ train模式
 .. code:: json
 
    "Reward_Config": {
+        "reward_type": "view",
         "reward_mode": "continuous",
         "distance_scale": 0.01,
-        "reward_range": 7
+        "reward_range": 7,
+        "view_scale": 4
    }
 
 **参数说明**
 
+   - :code:`reward_type` ：reward的类型（默认view）。view是按照摄像头视角投影到地面的四边形进行检测，而distance是按照摄像头视角中点投影点到目标的距离进行检测。
    - :code:`reward_mode` ：默认reward的模式。continuous产生的是[0，1]之间的连续浮点数 ，而discrete产生的是0或1的整数。
    - :code:`distance_scale` ：距离比例（默认continuous）。该参数只对continuous模式有效，控制reward因距离误差而衰减的速度。
+   - :code:`reward_range` ：产生reward的距离误差范围。
 
-   * :code:`reward_range` ：产生reward的距离误差范围。
+   * :code:`view_scale` ：视角比例。该参数只对continuous模式、view类型有效，控制reward距视角中心误差而衰减的速度。
       
       * 具体参数含义见： :ref:`内置Reward` 
 
@@ -223,6 +227,7 @@ SUMO交通系统参数配置
 
 其他对象追踪的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+只有 :code:`Tracking_Object` 非“SUMO_VEHICLE”时生效。
 
 .. code:: json
 
@@ -251,6 +256,7 @@ SUMO交通系统参数配置
 
 输出视频的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+只有 :code:`Simulation_Mode` 非“video”时生效。
 
 .. code:: json
 
@@ -258,7 +264,16 @@ SUMO交通系统参数配置
         "channels": 4,
         "fps": 50.0,
         "start_time": 1.0,
-        "total_time": 50.0
+        "total_time": 50.0,
+        "warm_up_steps": 30,
+        "output_car_dir": false,
+        "random_action": true,
+        "forward_speed":40,
+        "backward_speed":-40,
+        "left_speed":40,
+        "right_speed":-40,
+        "cw_omega":2,
+        "ccw_omega":-2
    }
 
 **参数说明**
@@ -267,6 +282,15 @@ SUMO交通系统参数配置
    - :code:`fps` ：根据仿真时间计算的每秒帧数（按照该帧数导出视频图像）。
    - :code:`start_time` ：视频开始导出的仿真时间（s）。
    - :code:`total_time` ：视频持续的仿真时间（s）。
+   - :code:`warm_up_steps` ：reset过后一开始多少个step不输出任何数据，注意，每个step的周期为2ms。
+   - :code:`output_car_dir` ：是否输出车辆方向，如果使能，则只输出车辆运动方向，否则，输出reward和action。（车辆方向：0停止，1直行，2左转，3右转）
+   - :code:`random_action` ：无人机是否使用随机动作，如果使能，则根据Control_Frequence输出随机动作，否则，无人机将无差跟随车辆，此时输出action为-1（无意义）
+   - :code:`forward_speed` ：无人机随机动作的前进速度（m/s）。
+   - :code:`backward_speed` ：无人机随机动作的后退速度（m/s）。
+   - :code:`left_speed` ：无人机随机动作的左移速度（m/s）。
+   - :code:`right_speed` ：无人机随机动作的右移速度（m/s）。
+   - :code:`cw_omega` ：无人机随机动作的顺时针旋转速度（rad/s）。
+   - :code:`ccw_omega` ：无人机随机动作的逆时针旋转速度（rad/s）。
 
 无人机控制的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -346,6 +370,12 @@ SUMO交通系统参数配置
 
 跟踪对象
 --------------------
+
+   .. raw:: html
+
+      <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+            本工程提供了18种共24个预定义的跟踪目标，并提供即插即用的接口，支持用户利用自主设计的模型和控制器。
+      </div>
 
 .. _SUMO_VEHICLE:
 
@@ -478,6 +508,25 @@ SUMO_VEHICLE
 
    Trailer
 
+motorcycle
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   两种车型，摩托车
+
+   .. raw:: html
+
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/SCOOTER.png" alt="SCOOTER" style="width: 90%;" />
+            <figcaption>Scooter</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/MOTORBIKE.png" alt="MOTORBIKE" style="width: 90%;" />
+            <figcaption>Motorbike</figcaption>
+         </figure>
+      </div>
+   
+
 Pedestrian
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -490,137 +539,85 @@ Pedestrian
 
    Pedestrian
 
-Shrimp
+.. raw:: html
+
+   <span style="background-color: yellow;">To Do:多截屏几种不同服装颜色的人</span>
+
+
+Wheel Robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    轮式机器人
 
-.. figure:: ../_static/image/SHRIMP.png
-   :alt: SHRIMP                                            
-   :width: 500px                                              
-   :align: center   
+   .. raw:: html
 
-   Shrimp
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/SHRIMP.png" alt="SHRIMP" style="width: 90%;" />
+            <figcaption>Shrimp</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/CREATE.png" alt="CREATE" style="width: 90%;" />
+            <figcaption>Create</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/SOJOURNER.png" alt="SOJOURNER" style="width: 90%;" />
+            <figcaption>Sojourner月球车</figcaption>
+         </figure>
+      </div>
 
-Create
+   .. raw:: html
+
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/BB_8.png" alt="BB_8" style="width: 90%;" />
+            <figcaption>BB-8球形机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 50%;">
+            <img src="../_static/image/FIREBIRD6.png" alt="FIREBIRD6" style="width: 90%;" />
+            <figcaption>FireBird6</figcaption>
+         </figure>
+      </div>
+
+
+Legged Robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   轮式机器人
+   .. raw:: html
 
-.. figure:: ../_static/image/CREATE.png
-   :alt: CREATE                                            
-   :width: 500px                                              
-   :align: center   
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/MANTIS.png" alt="MANTIS" style="width: 90%;" />
+            <figcaption>Mantis大型六足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/AIBOERS7.png" alt="AIBOERS7" style="width: 90%;" />
+            <figcaption>AiboErs7四足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/BIOLOIDDOG.png" alt="BIOLOIDDOG" style="width: 90%;" />
+            <figcaption>BioloidDog四足机器人</figcaption>
+         </figure>
+      </div>
+   
+   .. raw:: html
 
-   Create
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/SCOUT.png" alt="SCOUT" style="width: 90%;" />
+            <figcaption>Scout双足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/GHOSTDOG2.png" alt="GHOSTDOG2" style="width: 90%;" />
+            <figcaption>GhostDog四足机器人</figcaption>
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/HOAP2.png" alt="HOAP2" style="width: 90%;" />
+            <figcaption>Hoap2双足机器人</figcaption>
+         </figure>
+      </div>
 
-Sojourner
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   月球车
-
-.. figure:: ../_static/image/SOJOURNER.png
-   :alt: SOJOURNER                                            
-   :width: 500px                                              
-   :align: center   
-
-   Sojourner
-
-Mantis
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   大型六足机器人
-
-.. figure:: ../_static/image/MANTIS.png
-   :alt: MANTIS                                           
-   :width: 500px                                              
-   :align: center   
-
-   Mantis
-
-BB-8
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   球形机器人
-
-.. figure:: ../_static/image/BB_8.png
-   :alt: BB-8                                          
-   :width: 500px                                              
-   :align: center   
-
-   BB-8
-
-AiboErs7
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   四足机器人
-
-.. figure:: ../_static/image/AIBOERS7.png
-   :alt: AIBOERS7                                        
-   :width: 500px                                              
-   :align: center   
-
-   AiboErs7
-
-BioloidDog
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   四足机器人
-
-.. figure:: ../_static/image/BIOLOIDDOG.png
-   :alt: BIOLOIDDOG                                      
-   :width: 500px                                              
-   :align: center
-
-   BioloidDog
-
-FireBird6
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   轮式机器人
-
-.. figure:: ../_static/image/FIREBIRD6.png
-   :alt: FIREBIRD6                                      
-   :width: 500px                                              
-   :align: center
-
-   FireBird6
-
-Scout
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   双足机器人
-
-.. figure:: ../_static/image/SCOUT.png
-   :alt: SCOUT                                   
-   :width: 500px                                              
-   :align: center
-
-   Scout
-
-GhostDog
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   四足机器人
-
-.. figure:: ../_static/image/GHOSTDOG2.png
-   :alt: GHOSTDOG2                                  
-   :width: 500px                                              
-   :align: center
-
-   GhostDog
-
-Hoap2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-   双足机器人
-
-.. figure:: ../_static/image/HOAP2.png
-   :alt: HOAP2                                  
-   :width: 500px                                              
-   :align: center
-
-   Hoap2
 
 自定义对象
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -820,18 +817,12 @@ Hoap2
 如何转化为Reward
 ~~~~~~~~~~~~~~~~~~~~
 
-1. (对于跟踪算法而言：如Follow_Anything)用于计算reward共有三个变量：
-   
-   a. 跟踪算法输出被跟踪目标的像素点中点，并且投影到地面坐标系的二维位置，记为P1
-   b. 仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P2
-   c. 仿真环境中无人机摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P3
-
-2. (对于强化学习算法为而言：如D-VAT)用于计算reward共有两个变量：
+1. 用于计算reward共有两个变量：
 
    a. 仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P1
    b. 仿真环境中无人机摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P2
 
-3. 首要目标是实现无人机tracking，是否正确tracking是获得奖励的前提。因此要求P1与P2之间的距离在给定范围以内，即可获得奖励值1，在给定范围以外，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
+2. 首要目标是实现无人机tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
 
    .. figure:: ../_static/image/阶跃函数.png
       :alt: 阶跃函数                                  
@@ -844,7 +835,7 @@ Hoap2
 
    </br>
 
-4. 次要目标是无人机tracking得更好。因此P1与P3之间的距离可以作为奖励的惩罚项。距离越远惩罚越大。使用正切双曲线函数实现： :math:`f(x)=\frac{e^{αx}-e^{-αx}}{e^{αx}+e^{-αx}}`
+3. 次要目标是无人机tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
 
    .. figure:: ../_static/image/双曲正切函数.png
       :alt: 双曲正切函数                                  
@@ -857,14 +848,25 @@ Hoap2
 
    </br> 
 
-5. 最终的奖励计算框图如下：
+4. 最终的奖励计算框图如下：
 
-   .. figure:: ../_static/image/奖励框图.png
-      :alt: 奖励框图                                  
+   .. figure:: ../_static/image/distance奖励框图.png
+      :alt: distance奖励框图                                  
       :width: 600px                                              
       :align: center
 
-      奖励框图 
+      distance奖励框图 
+
+   .. raw:: html
+
+      </br>
+
+   .. figure:: ../_static/image/view奖励框图.png
+      :alt: view奖励框图                                  
+      :width: 600px                                              
+      :align: center
+
+      view奖励框图 
 
 .. raw:: html
 
@@ -919,7 +921,7 @@ Hoap2
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
         vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
-        vector4 carCameraPosOri; // 车辆中心在无人机坐标系下的1D姿态+3D坐标（第一个元素是姿态）
+        vector4 carDronePosOri; // 车辆中心在无人机坐标系下的1D姿态+3D坐标（第一个元素是姿态）
         double crash; // 无人机是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1直行，2左转，3右转)
         std::string carTypename;// 对象类型

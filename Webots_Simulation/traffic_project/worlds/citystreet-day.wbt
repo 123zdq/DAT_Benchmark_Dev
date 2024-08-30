@@ -49,7 +49,6 @@ IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R20
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/epfl/biorob/protos/GhostDog.proto"
 IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/fujitsu/hoap2/protos/Hoap2.proto"
 
-
 WorldInfo {
   info [
     "World generated using the Open Street Map to Webots importer"
@@ -71,7 +70,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.23363893435512875 -0.3862568066201667 0.8923107797695774 5.0917532619442385
-  position -92.44685860406133 182.3926660172265 111.73690218077037
+  position -40.73635957513368 83.74537399608026 49.118975997929184
   near 3
 }
 TexturedBackground {
@@ -920,14 +919,14 @@ BmwX5 {
   ]
 }
 DEF ORIGIN RangeRoverSportSVRSimple {
-  translation 0 28.01 0.4
+  translation 0 10 0.4
   name "v1"
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 0
+  maxVehicles 29
   step 100
-  seed 30
+  seed 15
   children [
     Solid {
       translation 196.99 223.18 0

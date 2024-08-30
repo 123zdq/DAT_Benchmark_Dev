@@ -56,13 +56,19 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.18891384013992377 -0.06462219733250815 0.979865058370542 3.7884482861472817
-  position 7.094753763212833 7.739896651296328 3.8074902018671497
+  orientation -0.18833097722339884 -0.10156781555593308 0.976839506705823 4.111353072396293
+  position 1378.857101447196 2410.3867005158413 1165.396901690098
   near 3
 }
 TexturedBackground {
+  luminosity 0.3
+  skybox FALSE
+  skyColor [
+    0.141176 0.121569 0.192157
+  ]
 }
 TexturedBackgroundLight {
+  luminosity 0.3
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -1350,7 +1356,7 @@ Road {
   roadBoundingObject TRUE
 }
 DEF ORIGIN BmwX5Simple {
-  translation 0 157.19 0.4
+  translation 30 30 0.4
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE

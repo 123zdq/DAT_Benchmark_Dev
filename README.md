@@ -14,7 +14,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/webots/lib/webots
 ```
 Then try to open webots by:
 ```bash
-cd /opt/webot/bin
+cd /opt/webots/bin
 ./webots-bin
 ```
 Download the assets file for webots and copy it to the specified path.

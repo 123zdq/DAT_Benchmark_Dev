@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-12 15:59:55
+LastEditTime: 2024-08-27 12:06:38
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -55,7 +55,7 @@ BASE_PORT = 6000
 class MultiProcessRecv():
     Number_process = 0
     
-    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float,process_port=7787) -> None:
+    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float,process_port=7787,verbose=False) -> None:
         
         self.tar_ip = tar_ip
         self.ctrl_freq = ctrl_freq
@@ -71,6 +71,7 @@ class MultiProcessRecv():
         
         self.max_data_size = max_data_size
         self.process_port = process_port
+        self.verbose = verbose
         MultiProcessRecv.Number_process = self.get_NumProcess(base_dir+"start.txt",process_port)
         self.s = [b'']*MultiProcessRecv.Number_process
         self.s_last = [b'']*MultiProcessRecv.Number_process
@@ -140,8 +141,9 @@ class MultiProcessRecv():
     def Create_Process(self):
         print(MultiProcessRecv.Number_process)
         for i in range(MultiProcessRecv.Number_process):
-            setup_logger("drone"+str(i),"../../logs/Agent"+str(i)+".log")
-            self.logger_list.append(logging.getLogger("drone"+str(i)))
+            if self.verbose == True:
+                setup_logger("drone"+str(i),"../../logs/Agent"+str(i)+".log")
+                self.logger_list.append(logging.getLogger("drone"+str(i)))
             # Curr_Process = []
             # for port in range(6):
             #     self.socketPort.append(BASE_PORT + i*6 + port)
@@ -175,7 +177,8 @@ class MultiProcessRecv():
             if action_path is None:
                 self.s[idx],_=self.ProcessSocket_list[idx][3].recvfrom(1024) # one receive
             else:
-                self.logger_list[idx].info("trying receive action")
+                if self.verbose == True:
+                    self.logger_list[idx].info("trying receive action")
                 while not os.path.exists(action_path):
                     time.sleep(0.001)
                 while os.path.getsize(action_path) == 0:
@@ -184,19 +187,22 @@ class MultiProcessRecv():
                 with open(action_path, "r") as f:
                     self.s[idx] = f.readline()
                     f.close()
-                self.logger_list[idx].info("finish receive action:  "+self.s[idx])
-                
-                self.logger_list[idx].info("writing for the action to be deleted")
+                if self.verbose == True:
+                    self.logger_list[idx].info("finish receive action:  "+self.s[idx])
+                if self.verbose == True:
+                    self.logger_list[idx].info("writing for the action to be deleted")
                 if self.s[idx] != b'' and self.s[idx] != b'\n':
                     while os.path.exists(self.savedir[idx]):
                         time.sleep(0.001)
-                    
-                    self.logger_list[idx].info("writing action to:  "+str(self.savedir[idx]))
+                        
+                    if self.verbose == True:
+                        self.logger_list[idx].info("writing action to:  "+str(self.savedir[idx]))
                     with open(self.savedir[idx],"w") as actionfile:
                         actionfile.write(self.s[idx])
                         # self.actionCount = 0
                         actionfile.close()
-                    self.logger_list[idx].info("Finish writing action")
+                    if self.verbose == True:
+                        self.logger_list[idx].info("Finish writing action")
                     
             if action_path is not None:
                 while is_file_in_use(action_path):
@@ -239,14 +245,17 @@ class MultiProcessRecv():
                 if action_get == '':
                     rgetqueue = lastrgetqueue
                 else:
-                    # self.logger_list[getqueue].info("Action_get:  "+action_get)
+                    # if self.verbose == True:
+                    #     self.logger_list[getqueue].info("Action_get:  "+action_get)
                     rgetqueue = [float(x) for x in action_get.rstrip().split(',')]
-                self.logger_list[getqueue].info("IDX:  "+str(getqueue)+"  real get actions: " + str(rgetqueue))
+                if self.verbose == True:
+                    self.logger_list[getqueue].info("IDX:  "+str(getqueue)+"  real get actions: " + str(rgetqueue))
                 self.Action_list[getqueue] = rgetqueue
                 lastrgetqueue = rgetqueue
                 self.is_step[getqueue] = self.is_step[getqueue] + int(1000./2./self.ctrl_freq)
                 self.is_reset[getqueue] = self.Action_list[getqueue][4]
-                self.logger_list[getqueue].info("Unlink the file: " + str(self.savedir[getqueue]))
+                if self.verbose == True:
+                    self.logger_list[getqueue].info("Unlink the file: " + str(self.savedir[getqueue]))
                 while is_file_in_use(self.savedir[getqueue]):
                     pass
                 os.unlink(self.savedir[getqueue])
@@ -286,7 +295,8 @@ class MultiProcessRecv():
             img_encode = cv2.imencode('.jpeg', frame)[1]
             data_encode = np.array(img_encode)
             while data_encode[-1] != '\xd9' or data_encode[-2] != '\xff':
-                self.logger_list[idx].info("get good graph")
+                if self.verbose == True:
+                    self.logger_list[idx].info("get good graph")
                 if os.path.exists(gfilePath):
                     frame = cv2.imread(gfilePath)
                 if frame is None:
@@ -311,7 +321,8 @@ class MultiProcessRecv():
                             with open(gfilePath, 'rb') as f:
                                 f.seek(-2, 2)
                                 tail_content = f.read()
-                                # self.logger_list[idx].info("tail_content:    "+str(tail_content))
+                                # if self.verbose == True:
+                                #     self.logger_list[idx].info("tail_content:    "+str(tail_content))
                                 f.close()
                         except OSError:
                             print("os_error")

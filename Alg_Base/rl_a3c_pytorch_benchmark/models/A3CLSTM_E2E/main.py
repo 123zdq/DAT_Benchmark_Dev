@@ -216,7 +216,7 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
-MODE = "train"
+MODE = "test"
 
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
@@ -275,7 +275,8 @@ if __name__ == '__main__':
             p.join()
     else:
         load_path = "./models/A3CLSTM_E2E/trained_models/"
-        path_list = ["Downtown-d.dat","Downtown-n.dat","Downtown-f.dat","Downtown-s.dat","Lake-d.dat","Lake-n.dat","Lake-f.dat","Lake-s.dat","Farmland-d.dat","Farmland-n.dat"]
+        # path_list = ["CityStreet-n.dat","CityStreet-s.dat","Downtown-d.dat","Downtown-f.dat","Farmland-d.dat","Farmland-f.dat","Farmland-s.dat","Lake-d.dat","Lake-s.dat","Village-s.dat"]
+        path_list = ["CityStreet-d.dat","CityStreet-f.dat","Downtown-n.dat","Downtown-s.dat","Farmland-n.dat","Lake-n.dat","Lake-f.dat","Village-d.dat","Village-n.dat","Village-f.dat"]
         # test(args, shared_model, env_conf,read_num_test=False,load_path=load_path)
         processes = []
         for idx,dat in enumerate(path_list):

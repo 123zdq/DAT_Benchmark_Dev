@@ -16,3 +16,5 @@ envconfig
 git stash
 git pull
 git stash pop
+
+cd /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark && python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt -tp 6008

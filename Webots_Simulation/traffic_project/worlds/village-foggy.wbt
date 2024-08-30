@@ -9441,7 +9441,7 @@ Robot {
   supervisor TRUE
 }
 DEF ORIGIN BmwX5Simple {
-  translation 0 157.19 0.4
+  translation 30 30 0.4
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
