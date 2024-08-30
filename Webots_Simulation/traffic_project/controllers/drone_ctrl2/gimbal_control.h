@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 18:40:33
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-07-28 19:48:21
+ * @LastEditTime: 2024-08-30 10:46:12
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/gimbal_control.h
  * @Description: 
  * 
@@ -109,6 +109,7 @@ void GimbalControl::cmdCb(usrPublic::vector3 msg){
         gimbalPid[i].target = tarF[i].f(upper::constrain(theta[i],angle_constrain(i,0),angle_constrain(i,1)));
         // std::cout<<i<<"  "<<gimbalPid[i].target<<std::endl;
         gbl2ctrl.axes[i] = gimbalPid[i].Adjust(0);
+        gbl2ctrl.axes[i+3] = gimbalPid[i].target;
     }
 }
 

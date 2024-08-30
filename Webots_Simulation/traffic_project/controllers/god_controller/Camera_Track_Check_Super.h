@@ -24,9 +24,9 @@ public:
     double Get_Location_Reward(const Vector3d follow_location, const Vector3d target_real_world_location, const double range);
     double Get_Location_Reward(const Vector3d follow_location, const Vector3d target_real_world_location, const double range, const double scale);
     double cameraF;
-    double Get_View_Proportions(const Vector3d follow_location[5], const Vector3d target_real_world_location);
-    double Get_View_Reward(const Vector3d follow_location[5], const Vector3d target_real_world_location);
-    double Get_View_Reward(const Vector3d follow_location[5], const Vector3d target_real_world_location, const double scale);
+    double Get_View_Proportions(Vector3d* follow_location, const Vector3d& target_real_world_location);
+    double Get_View_Reward(Vector3d* follow_location, const Vector3d& target_real_world_location);
+    double Get_View_Reward(Vector3d* follow_location, const Vector3d& target_real_world_location, const double scale);
 };
 
 /**
@@ -178,7 +178,7 @@ inline double camera2real::Get_Location_Reward(const Vector3d follow_location, c
     return reward;
 }
 
-inline double camera2real::Get_View_Proportions(const Vector3d follow_location[5], const Vector3d target_real_world_location)
+inline double camera2real::Get_View_Proportions(Vector3d* follow_location, const Vector3d& target_real_world_location)
 {
     int sector = 0;
     double line_angle[4];
@@ -234,17 +234,7 @@ inline double camera2real::Get_View_Proportions(const Vector3d follow_location[5
             sector = 4;
         }
     }
-    // for(int i = 0;i<4;i++)
-    // {
-    //     std::cout << "point" << i << ":  " << follow_location[i+1] - follow_location[0]  << std::endl;
-    // }
-    // std::cout << "car:  " << target_real_world_location - follow_location[0] << std::endl;
-    // std::cout << "line1: " << line_angle[0] << std::endl;
-    // std::cout << "line2: " << line_angle[1] << std::endl;
-    // std::cout << "line3: " << line_angle[2] << std::endl;
-    // std::cout << "line4: " << line_angle[3] << std::endl;
-    // std::cout << "angle: " << follow_angle << std::endl;
-    // std::cout << "sector: " << sector << std::endl;
+    
     // 计算要测定比例的两条直线
     Vector2d follow_line;
     Vector2d edge_line;
@@ -274,16 +264,16 @@ inline double camera2real::Get_View_Proportions(const Vector3d follow_location[5
     {
         proportions = 1;
     }
-    return 1 - proportions;
+    return (1. - proportions);
 }
 
-inline double camera2real::Get_View_Reward(const Vector3d follow_location[5], const Vector3d target_real_world_location)
+inline double camera2real::Get_View_Reward(Vector3d* follow_location, const Vector3d& target_real_world_location)
 {
     double p = Get_View_Proportions(follow_location,target_real_world_location);
     return (p>0)?1:0;
 }
 
-inline double camera2real::Get_View_Reward(const Vector3d follow_location[5], const Vector3d target_real_world_location, const double scale)
+inline double camera2real::Get_View_Reward(Vector3d* follow_location, const Vector3d& target_real_world_location, const double scale)
 {
     double p = Get_View_Proportions(follow_location,target_real_world_location);
     return hyperbolic_tangent_func(p, scale);

@@ -42,7 +42,9 @@
             "max_car_decel": 25,
             "max_rou_distance": 7000,
             "min_rou_distance": 500,
-            "route_num": 100000
+            "route_num": 100000,
+            "fixed_seed": false,
+            "random_seed": 1
         },
         "Other_Params": {
             "max_obj_num": 10,
@@ -59,7 +61,7 @@
             "fps": 50.0,
             "start_time": 1.5,
             "total_time": 50.0,
-            "warm_up_steps": 30,
+            "warm_up_steps": 50,
             "output_car_dir": false,
             "random_action": true,
             "forward_speed": 40,

@@ -85,7 +85,10 @@ def random_by_os(folder_path, _sys, _configData):
     maxD = str(_configData["max_rou_distance"])
     minD = str(_configData["min_rou_distance"])
     rouN = str(_configData["route_num"])
-    randS = str(random.randint(1, 100))
+    if _configData["fixed_seed"] == True:
+        randS = str(_configData["random_seed"])
+    else:
+        randS = str(random.randint(1, 100))
     # 使用从系统获取的python路径
     if _sys == "Linux":
         os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')

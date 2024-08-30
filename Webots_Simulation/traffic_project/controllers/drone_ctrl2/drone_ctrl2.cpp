@@ -65,18 +65,27 @@ void cmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3, Moto
   motor4->setVelocity(CLAMP(msg.axes[3], -MAX_MOTOR_VEL, MAX_MOTOR_VEL));
 }
 
-void gcmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3)
+void gcmdCb(usrPublic::Joy msg, Motor *motor1, Motor *motor2, Motor *motor3,bool _is_supervisor,Supervisor *_robot)
 {
-  for (int i = 0; i < 3; i++)
+  if(_is_supervisor == true)
   {
-    if (std::isnan(msg.axes[i]))
-    {
-      is_nan = true;
-    }
+    _robot->getSelf()->getField("rollAngle")->setSFFloat(msg.axes[3]);
+    _robot->getSelf()->getField("pitchAngle")->setSFFloat(msg.axes[4]);
+    _robot->getSelf()->getField("yawAngle")->setSFFloat(msg.axes[5]);
   }
-  motor1->setTorque(CLAMP(msg.axes[0], -3, 3));
-  motor2->setTorque(CLAMP(msg.axes[1], -3, 3));
-  motor3->setTorque(CLAMP(msg.axes[2], -3, 3));
+  else
+  {
+    for (int i = 0; i < 3; i++)
+    {
+      if (std::isnan(msg.axes[i]))
+      {
+        is_nan = true;
+      }
+    }
+    motor1->setTorque(CLAMP(msg.axes[0], -3, 3));
+    motor2->setTorque(CLAMP(msg.axes[1], -3, 3));
+    motor3->setTorque(CLAMP(msg.axes[2], -3, 3));
+  }
 }
 
 void serialRec(Receiver *_receiver, float *buffer, int size)
@@ -132,6 +141,9 @@ int main(int argc, char **argv)
   camera_roll_motor->setVelocity(0);
   camera_pitch_motor->setVelocity(0);
   camera_yaw_motor->setVelocity(0);
+  // camera_roll_motor->setControlPID(Kroll,Iroll,Droll);
+  // camera_pitch_motor->setControlPID(Kpitch,Ipitch,Dpitch);
+  // camera_yaw_motor->setControlPID(Kyaw,Iyaw,Dyaw);
   // 云台电机位置传感
   PositionSensor *camera_roll_sensor = robot->getPositionSensor("camera roll sensor");
   PositionSensor *camera_pitch_sensor = robot->getPositionSensor("camera pitch sensor");
@@ -499,14 +511,16 @@ int main(int argc, char **argv)
     rewardG.locateCamera(camera->getWidth(), camera->getHeight(), camera->getFov());
     if (config.get()->simulationMode == string("demo"))
     {
-
       rewardG.setTrackingCar("ORIGIN");
     }
     else if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       rewardG.updateTrackingCar();
     }
-    state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, config.get()->rewardConfig.rewardType, error[4], error[5]);
+    if(t > 0.1)
+    {
+      state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, config.get()->rewardConfig.rewardType, error[4], error[5]);
+    }
     if (config.get()->simulationMode == string("demo"))
     {
       usrPublic::vector4 trackin = {};
@@ -545,7 +559,7 @@ int main(int argc, char **argv)
     {
       cmdCb(aCtrl.att2ctrl, motor1, motor2, motor3, motor4);
     }
-    gcmdCb(gCtrl.gbl2ctrl, camera_roll_motor, camera_pitch_motor, camera_yaw_motor);
+    gcmdCb(gCtrl.gbl2ctrl, camera_roll_motor, camera_pitch_motor, camera_yaw_motor,config.get()->droneSupervisorCtrl,robot);
 
     if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
@@ -636,7 +650,6 @@ int main(int argc, char **argv)
       // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
       if (config.get()->droneSupervisorCtrl == true && (config.get()->simulationMode != string("video") || config.get()->video.randomAction == true) && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
       {
-        Node *droneNode = robot->getFromDef(rewardG.droneDef);
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
         double cmd_yaw = jCtrl.cmd_yaw_;
         if (cmd_yaw > M_PI)
@@ -648,8 +661,8 @@ int main(int argc, char **argv)
           cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw - M_PI) / (2. * M_PI));
         }
         const double ro_t[4] = {0, 0, 1, cmd_yaw};
-        droneNode->getField("translation")->setSFVec3f(tr_t);
-        droneNode->getField("rotation")->setSFRotation(ro_t);
+        robot->getSelf()->getField("translation")->setSFVec3f(tr_t);
+        robot->getSelf()->getField("rotation")->setSFRotation(ro_t);
       }
 
       // 发送state,reward,done
