@@ -89,17 +89,18 @@ def random_by_os(folder_path, _sys, _configData):
         randS = str(_configData["random_seed"])
     else:
         randS = str(random.randint(1, 100))
-    # 使用从系统获取的python路径
-    if _sys == "Linux":
-        os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')
-    elif _sys == "Windows":
-        os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')       
-    # 使用webots建立的python软链接
-    # os.system('python3.11 $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
-    if _sys == "Linux":
-        os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
-    elif _sys == "Windows":
-        os.system('%SUMO_HOME%/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+    if _configData["rou_update"] == True:
+        # 使用从系统获取的python路径
+        if _sys == "Linux":
+            os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')
+        elif _sys == "Windows":
+            os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random' + ' --allow-fringe')       
+        # 使用webots建立的python软链接
+        # os.system('python3.11 $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
+        if _sys == "Linux":
+            os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
+        elif _sys == "Windows":
+            os.system('%SUMO_HOME%/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
 
 
 

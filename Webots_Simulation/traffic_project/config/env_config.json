@@ -21,13 +21,14 @@
             "distance_error": 50
         },
         "Reward_Config": {
-            "reward_type": "distance",
+            "reward_type": "view",
             "reward_mode": "continuous",
             "distance_scale": 0.01,
             "reward_range": 7,
             "view_scale": 4
         },
         "Sumo_Params": {
+            "rou_update": false,
             "max_sumo_car": 28,
             "car_import_interval": 75.0,
             "car_type": "passenger",

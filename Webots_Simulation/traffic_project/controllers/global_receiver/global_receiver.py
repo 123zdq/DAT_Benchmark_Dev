@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-27 12:11:14
+LastEditTime: 2024-08-30 17:07:27
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -68,8 +68,12 @@ if configData["Tracking_Object"] == "SUMO_VEHICLE":
     SUMO_Interface.getField("maxVehicles").setSFInt32(configData["Sumo_Params"]["max_sumo_car"])
 else:
     SUMO_Interface.getField("maxVehicles").setSFInt32(0)
-randomSeed = random.randint(1, 100)
-SUMO_Interface.getField("seed").setSFInt32(randomSeed)
+    
+if configData["Sumo_Params"]["fixed_seed"] == True:
+    SUMO_Interface.getField("seed").setSFInt32(configData["Sumo_Params"]["random_seed"])
+else:
+    randomSeed = random.randint(1, 100)
+    SUMO_Interface.getField("seed").setSFInt32(randomSeed)
 
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())

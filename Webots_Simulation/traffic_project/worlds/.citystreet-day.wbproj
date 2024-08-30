@@ -6,7 +6,7 @@ minimizedPerspectives: 000000ff00000000fd00000003000000000000016c00000469fc02000
 maximizedDockId: -1
 centralWidgetVisible: 1
 orthographicViewHeight: 1
-textFiles: 1 "controllers/drone_ctrl2/drone_ctrl2.cpp" "protos/M100.proto"
+textFiles: 0 "controllers/drone_ctrl2/drone_ctrl2.cpp" "protos/M100.proto"
 consoles: Console:All:All
 renderingDevicePerspectives: vehicle(10):camera;1;0.5;0;0.00596421
 renderingDevicePerspectives: vehicle(12):camera;1;0.5;0;0.0059645
