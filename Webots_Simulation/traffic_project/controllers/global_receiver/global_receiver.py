@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-30 20:28:01
+LastEditTime: 2024-08-30 21:04:35
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -55,8 +55,13 @@ world_path = robot.getWorldPath()
 with open('../../config/env_config.json', 'r') as file:
     configData = json.load(file)
     file.close()
+with open('../../config/env_config_backup.json', 'r') as file:
+    configData_backup = json.load(file)
+    file.close()
     
 # safety check
+if configData["Sumo_Params"]["rou_update"] == False:
+    configData["Sumo_Params"]["rou_update"] = safetyCheck.checkSumoUpdate(configData,configData_backup)
 configData["Simulation_Mode"] = check(str(configData["Simulation_Mode"]),safetyCheck.SIMULATION_MODE)
 configData["Tracking_Object"] = check(configData["Tracking_Object"],safetyCheck.TRACKING_OBJECT)
 configData["Reward_Config"]["reward_mode"] = check(configData["Reward_Config"]["reward_mode"],safetyCheck.REWARD_MODE)
@@ -167,7 +172,10 @@ elif configData["Simulation_Mode"] == "video":
     sumoGetCarFlag = [False]*configData["Out_Video"]["channels"]
     for i in range(configData["Out_Video"]["channels"]):
         droneM.append(drone_manager.droneManager(robot, timestep, i, None, configData, sumoList, sumoDictionary, sumoGetCarFlag))
-    
+  
+with open('../../config/env_config_backup.json', 'w') as file:
+    json.dump(configData,file)
+    file.close() 
 
 # Main loop:
 # - perform simulation steps until Webots is stopping the controller
