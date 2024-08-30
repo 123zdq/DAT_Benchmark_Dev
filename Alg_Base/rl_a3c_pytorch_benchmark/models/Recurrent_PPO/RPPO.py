@@ -840,10 +840,12 @@ if __name__ == "__main__":
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["horizon_bias_random"] = False
         data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Sumo_Params"]["fixed_seed"] = True
     else:
         data["Drone_Random_Config"]["direction_random"] = True
         data["Drone_Random_Config"]["horizon_bias_random"] = True
         data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Sumo_Params"]["fixed_seed"] = False
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:

@@ -216,7 +216,7 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
-MODE = "train"
+MODE = "test"
 
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
@@ -235,13 +235,17 @@ if __name__ == '__main__':
     ) as file:
         data = json.load(file)
     if MODE == "test":
+        data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["horizon_bias_random"] = False
         data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Sumo_Params"]["fixed_seed"] = True
     elif MODE == "train":
+        data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = True
         data["Drone_Random_Config"]["horizon_bias_random"] = True
         data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Sumo_Params"]["fixed_seed"] = False
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
@@ -296,7 +300,8 @@ if __name__ == '__main__':
     else:
         load_path = "./models/A3CLSTM_E2E/trained_models/"
         # path_list = ["CityStreet-n.dat","CityStreet-s.dat","Downtown-d.dat","Downtown-f.dat","Farmland-d.dat","Farmland-f.dat","Farmland-s.dat","Lake-d.dat","Lake-s.dat","Village-s.dat"]
-        path_list = ["CityStreet-d.dat","CityStreet-f.dat","Downtown-n.dat","Downtown-s.dat","Farmland-n.dat","Lake-n.dat","Lake-f.dat","Village-d.dat","Village-n.dat","Village-f.dat"]
+        # path_list = ["CityStreet-d.dat","CityStreet-f.dat","Downtown-n.dat","Downtown-s.dat","Farmland-n.dat","Lake-n.dat","Lake-f.dat","Village-d.dat","Village-n.dat","Village-f.dat"]
+        path_list = ["CityStreet-d.dat"]
         # test(args, shared_model, env_conf,read_num_test=False,load_path=load_path)
         processes = []
         for idx,dat in enumerate(path_list):
