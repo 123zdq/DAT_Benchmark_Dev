@@ -21,8 +21,8 @@ WorldInfo {
   lineScale 3
 }
 Viewpoint {
-  orientation -0.2127211997376353 -0.41058820835234977 0.8866605970404846 5.225593656772483
-  position -416.6244903673311 573.1850907116982 294.6380262777579
+  orientation -0.297897146678145 -0.1260724584208927 0.946236241764567 3.9033893472597274
+  position 420.0028286768311 479.98168801401374 356.90781100186416
   near 3
 }
 TexturedBackground {
@@ -1950,22 +1950,22 @@ GenericTrafficLight {
   name "generic traffic light(11)"
 }
 StreetLight {
-  translation 265.604 -277.403 1.5632e-13
-  rotation 0 0 1 2.62454
+  translation 269.11 -232.392 2.13163e-13
+  rotation 0 0 1 -3.1088653071795864
 }
 StreetLight {
-  translation -96.135 -102.303 3.33956e-13
-  rotation 0 0 -1 -1.9373153071795866
+  translation -269.444 -164.035 3.33956e-13
+  rotation 0 0 -1 -3.1154153071795863
   name "street light(6)"
 }
 StreetLight {
-  translation -55.4866 -77.2309 3.33956e-13
-  rotation 0 0 1 2.33001
+  translation -251.109 -123.466 3.33956e-13
+  rotation 0 0 1 1.61006
   name "street light(9)"
 }
 StreetLight {
-  translation 124.01 75.6542 3.48167e-13
-  rotation 0 0 1 2.0813
+  translation 241.68 103.47 3.41062e-13
+  rotation 0 0 1 1.60352
   name "street light(10)"
 }
 StreetLight {
@@ -1974,8 +1974,8 @@ StreetLight {
   name "street light(15)"
 }
 StreetLight {
-  translation -112.05 322.449 1.05871e-12
-  rotation 0 0 1 -1.5380753071795858
+  translation -270.349 286.367 1.05871e-12
+  rotation 0 0 -1 0.641412
   name "street light(20)"
 }
 StreetLight {
@@ -1984,8 +1984,8 @@ StreetLight {
   name "street light(19)"
 }
 StreetLight {
-  translation -7.72346 324.484 1.05871e-12
-  rotation 0 0 1 -1.5380753071795858
+  translation -35.3464 275.186 1.05871e-12
+  rotation 0 0 -1 3.12196
   name "street light(18)"
 }
 StreetLight {
@@ -1994,17 +1994,17 @@ StreetLight {
   name "street light(17)"
 }
 StreetLight {
-  translation 93.1377 323.657 1.05871e-12
+  translation 135.843 325.046 1.05871e-12
   rotation 0 0 1 -1.5380753071795858
   name "street light(16)"
 }
 StreetLight {
-  translation 85.2829 47.8852 3.33956e-13
-  rotation 0 0 1 2.33001
+  translation 150.163 88.1474 3.33956e-13
+  rotation 0 0 1 1.8915
   name "street light(14)"
 }
 StreetLight {
-  translation 46.463 13.2679 3.48167e-13
+  translation 58.9343 25.1023 3.48167e-13
   rotation 0 0 1 2.33001
   name "street light(13)"
 }
@@ -2014,28 +2014,28 @@ StreetLight {
   name "street light(12)"
 }
 StreetLight {
-  translation -20.4373 -46.4304 3.33956e-13
+  translation -55.4289 -76.4627 3.33956e-13
   rotation 0 0 1 2.33001
   name "street light(11)"
 }
 StreetLight {
-  translation 269.912 -178.993 2.70007e-13
+  translation 273.326 31.4121 2.70007e-13
   rotation 0 0 1 -3.121955307179586
   name "street light(8)"
 }
 StreetLight {
-  translation 269.741 -229.631 2.41585e-13
+  translation 272.427 -88.5964 2.41585e-13
   rotation 0 0 1 -3.121955307179586
   name "street light(7)"
 }
 StreetLight {
-  translation 229.207 -315.075 1.13687e-13
+  translation 233.631 -312.921 1.13687e-13
   rotation 0 0 1 2.0224
   name "street light(5)"
 }
 StreetLight {
-  translation 178.426 -322.872 1.13687e-13
-  rotation 0 0 1 1.55771
+  translation 162.857 -302.304 1.13687e-13
+  rotation 0 0 -1 1.61006
   name "street light(4)"
 }
 StreetLight {
@@ -2044,12 +2044,97 @@ StreetLight {
   name "street light(3)"
 }
 StreetLight {
-  translation 66.4847 -322.958 1.13687e-13
+  translation 14.4039 -324.798 1.13687e-13
   rotation 0 0 1 1.55771
   name "street light(2)"
 }
 StreetLight {
-  translation 28.604 -322.933 1.13687e-13
+  translation -221.385 -326.178 1.13687e-13
   rotation 0 0 1 1.55771
+  name "street light(1)"
+}
+StreetLight {
+  translation -272.509 209.394 1.13687e-13
+  rotation 0 0 1 -3.1284953071795862
+  name "street light(1)"
+}
+StreetLight {
+  translation -270.883 114.056 1.13687e-13
+  rotation 0 0 1 3.11542
+  name "street light(1)"
+}
+StreetLight {
+  translation -271.115 30.4709 1.13687e-13
+  rotation 0 0 1 3.1285
+  name "street light(1)"
+}
+StreetLight {
+  translation -270.515 -52.5403 1.13687e-13
+  rotation 0 0 1 3.11542
+  name "street light(1)"
+}
+StreetLight {
+  translation -125.569 -110.526 1.03029e-13
+  rotation 0 0 1 1.87841
+  name "street light(1)"
+}
+StreetLight {
+  translation -179.563 -119.369 1.13687e-13
+  rotation 0 0 1 1.61007
+  name "street light(1)"
+}
+StreetLight {
+  translation -289.482 -248.055 1.13687e-13
+  rotation 0 0 -1 0.0392663
+  name "street light(1)"
+}
+StreetLight {
+  translation -145.846 -324.923 1.13687e-13
+  rotation 0 0 1 1.55771
+  name "street light(1)"
+}
+StreetLight {
+  translation -69.057 -323.738 1.13687e-13
+  rotation 0 0 1 1.55771
+  name "street light(1)"
+}
+StreetLight {
+  translation 218.046 322.442 1.13687e-13
+  rotation 0 0 1 -1.8914953071795866
+  name "street light(1)"
+}
+StreetLight {
+  translation 269.441 266.494 1.13687e-13
+  rotation 0 0 1 -2.886335307179586
+  name "street light(1)"
+}
+StreetLight {
+  translation 272.867 163.727 8.59757e-13
+  rotation 0 0 1 3.10233
+  name "street light(1)"
+}
+StreetLight {
+  translation -78.106 138.206 1.13687e-13
+  rotation 0 0 -1 0.143986
+  name "street light(1)"
+}
+StreetLight {
+  translation -36.845 42.0128 1.13687e-13
+  rotation 0 0 1 0.719952
+  name "street light(1)"
+}
+StreetLight {
+  translation 95.9485 -73.1362 1.13687e-13
+  rotation 0 0 1 -2.4870953071795863
+  name "street light(1)"
+}
+StreetLight {
+  translation 132.081 -140.412 1.13687e-13
+  rotation 0 0 1 -2.8339753071795863
+  name "street light(1)"
+}
+StreetLight {
+  translation 150.105 -218.297 9.94761e-14
+  rotation 0 0 -1 3.08923
   name "street light(1)"
 }
