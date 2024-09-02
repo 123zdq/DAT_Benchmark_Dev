@@ -21,8 +21,8 @@ WorldInfo {
   lineScale 3
 }
 Viewpoint {
-  orientation -0.24191367166923103 -0.42446519532827554 0.8725291246797672 5.125977371951977
-  position -181.09304036254585 361.7531829103959 153.62863381547763
+  orientation -0.275620701179308 -0.5069140171573147 0.8167443959347749 5.108508306028451
+  position -316.78853407652093 505.8105174058226 336.42689238283356
   near 3
 }
 TexturedBackground {
@@ -2052,4 +2052,191 @@ StreetLight {
   translation 28.604 -322.933 1.13687e-13
   rotation 0 0 1 1.55771
   name "street light(1)"
+}
+Solid {
+  translation -78.3899 -85.317 0.0201
+  rotation 0 0 1 0.863939
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand"
+}
+Solid {
+  translation 83.9979 -74.3807 0.0201
+  rotation 0 0 1 1.81951
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(2)"
+}
+Solid {
+  translation 140.543 -291.945 0.0201
+  rotation 0 0 1 1.81951
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(3)"
+}
+Solid {
+  translation -49.3645 242.927 0.0201
+  rotation 0 0 1 1.81951
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(4)"
+}
+Solid {
+  translation -285.43 182.973 0.0201
+  rotation 0 0 1 1.81951
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(5)"
+}
+Solid {
+  translation -281.204 -88.1356 0.0201
+  rotation 0 0 1 1.81951
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(6)"
+}
+Solid {
+  translation -223.676 -314.698 0.0201
+  rotation 0 0 1 2.98452
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(7)"
+}
+Solid {
+  translation -124.156 313.672 0.0201
+  rotation 0 0 1 2.98452
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(8)"
+}
+Solid {
+  translation 216.579 310.022 0.0201
+  rotation 0 0 1 2.98452
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(9)"
+}
+Solid {
+  translation 259.343 -9.12547 0.0201
+  rotation 0 0 1 -1.695145307179586
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(10)"
+}
+Solid {
+  translation -13.0731 -27.1071 0.0201
+  rotation 0 0 1 0.3927
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.61 0.44 0.14
+        roughness 1
+        metalness 0
+      }
+      geometry Plane {
+        size 15 32
+      }
+    }
+  ]
+  name "roadsand(1)"
 }
