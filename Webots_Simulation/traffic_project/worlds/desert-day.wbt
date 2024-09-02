@@ -5,75 +5,36 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/Road.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/Crossroad.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/RoadLine.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/buildings/protos/SimpleBuilding.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/CrossRoadsTrafficLight.proto"
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/GenericTrafficLight.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/buildings/protos/SimpleBuilding.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/bmw/BmwX5Simple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/toyota/ToyotaPriusSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/lincoln/LincolnMKZSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/mercedes_benz/MercedesBenzSprinterSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/tesla/TeslaModel3Simple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/range_rover/RangeRoverSportSVRSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/citroen/CitroenCZeroSimple.proto"
-IMPORTABLE EXTERNPROTO "../protos/M100.proto"
-IMPORTABLE EXTERNPROTO "../protos/trajectary.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/protos/SumoInterface.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/BusSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTrailerSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/MotorbikeDriver.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/ScooterDriver.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/vehicles/protos/generic/TruckTankSimple.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/humans/pedestrian/protos/Pedestrian.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/bluebotics/shrimp/protos/Shrimp.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/irobot/create/protos/Create.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nasa/protos/Sojourner.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/mantis/protos/Mantis.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/sphero/bb8/protos/BB-8.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/sony/aibo/protos/AiboErs7.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/robotis/bioloid/protos/BioloidDog.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/nex/protos/FireBird6.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/micromagic/scout/protos/Scout.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/epfl/biorob/protos/GhostDog.proto"
-IMPORTABLE EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/fujitsu/hoap2/protos/Hoap2.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/traffic/protos/StreetLight.proto"
 
 WorldInfo {
   info [
     "World generated using the Open Street Map to Webots importer"
     "Author: David Mansolino <david.mansolino@epfl.ch>"
   ]
-  basicTimeStep 2
-  FPS 30
-  defaultDamping Damping {
-  }
-  contactProperties [
-    ContactProperties {
-      coulombFriction [
-        30
-      ]
-      bounce 0
-      bounceVelocity 0
-    }
-  ]
+  gpsCoordinateSystem "WGS84"
+  gpsReference 26.559064999999997 104.97447500000001 0
+  lineScale 3
 }
 Viewpoint {
-  orientation 0.35696904787606437 0.34696937508603487 -0.8672861993660816 1.7407580776950615
-  position -473.91988010512443 6001.32985612537 7839.381133870459
+  orientation -0.17795375775190087 -0.4006210433800782 0.8987965507850124 5.365199996984372
+  position -527.0068659632595 584.5762594327424 255.22798500285438
   near 3
 }
 TexturedBackground {
   texture "mars"
 }
 TexturedBackgroundLight {
-  texture "noon_sunny_garden"
 }
-DEF land Floor {
-  translation 0 0 -0.1
-  size 17000 14000
+Floor {
+  translation 0 0 -0.02
+  size 982 998
   appearance PBRAppearance {
-    baseColor 0.64 0.44 0.12
+    baseColor 0.61 0.44 0.14
     baseColorMap ImageTexture {
       url [
         ""
@@ -84,484 +45,181 @@ DEF land Floor {
   }
 }
 Crossroad {
-  translation 2921.711608 1566.48606 0.01
+  translation -218.058113 311.742961 0.01
   name "crossroad(1)"
-  id "-58679"
+  id "-59498"
   shape []
   connectedRoadIDs [
-    "-6050"
-    "-6468"
+    "-7675_1"
+    "-7683"
   ]
-  boundingObject TRUE
 }
 Crossroad {
-  translation 2090.669509 -5898.701213 0.01
+  translation 203.368809 314.409199 0.01
   name "crossroad(2)"
-  id "-58682"
+  id "-59499"
   shape []
   connectedRoadIDs [
-    "-6051"
-    "-6584"
+    "-7675_2"
+    "-7684_1"
   ]
-  boundingObject TRUE
 }
 Crossroad {
-  translation -6258.185944 -5303.94451 0.01
+  translation -279.57203 -253.745481 0.01
   name "crossroad(3)"
-  id "-58685"
+  id "-59511"
   shape []
   connectedRoadIDs [
-    "-6052"
-    "-7133"
+    "-7872_2"
+    "-7889"
   ]
-  boundingObject TRUE
 }
 Crossroad {
-  translation -3977.105887 2287.343047 0.01
+  translation 260.231066 -257.154071 0.01
   name "crossroad(4)"
-  id "-58738"
-  shape [
-    8.555149 4.603376 0
-    8.499403 -0.100725 0
-    8.448359 -4.407914 0
-    4.976231 -8.560269 0
-    -0.101896 -8.499389 0
-    -8.550447 -4.206464 0
-    -8.443658 4.804819 0
-    0.101896 8.499389 0
-    5.180022 8.43851 0
-    8.555149 4.603376 0
-  ]
+  id "-59514"
+  shape []
   connectedRoadIDs [
-    "-6546_1"
-    "-6546_2"
-    "-6559"
+    "-7677_2"
+    "-7860"
   ]
-  boundingObject TRUE
 }
 Crossroad {
-  translation -1875.929827 -5802.482006 0.01
+  translation -279.561029 -111.817688 0.01
   name "crossroad(5)"
-  id "-58754"
+  id "-59536"
   shape [
-    8.507445 -1.477704 0
-    0.042618 -8.499893 0
-    -1.257829 -8.506413 0
-    -8.492346 -1.562144 0
-    -8.506373 1.261756 0
-    -1.343064 8.493373 0
-    -0.042618 8.499893 0
-    8.493417 1.346209 0
-    8.499895 0.04222 0
-    8.507445 -1.477704 0
+    10.00062 -7.999225 0
+    8.408996 -9.658612 0
+    -7.577159 -10.324081 0
+    -10.040434 -7.949194 0
+    -9.959309 8.050601 0
+    9.99938 8.000775 0
+    10.00062 -7.999225 0
   ]
   connectedRoadIDs [
-    "-6598_1"
-    "-6598_2"
-    "-6612"
+    "-7711"
+    "-7872_1"
+    "-7872_2"
   ]
-  boundingObject TRUE
 }
 Crossroad {
-  translation 2926.287757 -858.407382 0.01
+  translation 262.616134 113.60604 0.01
   name "crossroad(6)"
-  id "-58861"
+  id "-59547"
   shape [
-    10.531254 7.832157 0
-    9.426467 -9.131906 0
-    -10.531253 -7.832158 0
-    -9.426468 9.131905 0
-    -7.839507 10.525784 0
-    9.125324 9.43284 0
-    10.531254 7.832157 0
+    10.051255 -7.935507 0
+    -9.909312 -8.112061 0
+    -10.089421 7.886925 0
+    -7.835513 10.129399 0
+    8.16235 9.86793 0
+    9.948331 8.064162 0
+    10.051255 -7.935507 0
   ]
   connectedRoadIDs [
-    "-6471"
-    "-6486"
-    "-6501"
+    "-7684_1"
+    "-7684_2"
+    "-7844"
   ]
-  boundingObject TRUE
 }
 Crossroad {
-  translation -5177.041804 2265.026715 0.01
+  translation -47.18274 312.82236 0.01
   name "crossroad(7)"
-  id "-58884"
-  shape []
-  connectedRoadIDs [
-    "-6053"
-    "-6530"
+  id "-59549"
+  shape [
+    10.159769 7.796095 0
+    9.83614 -8.200632 0
+    7.936507 -10.050466 0
+    -8.063172 -9.949133 0
+    -7.936673 10.050334 0
+    8.063008 9.949266 0
+    10.159769 7.796095 0
   ]
-  boundingObject TRUE
+  connectedRoadIDs [
+    "-7675_1"
+    "-7675_2"
+    "-7724"
+  ]
 }
 Crossroad {
-  translation -6268.137835 -2649.048086 0.01
+  translation 16.423426 -0.19802 0.01
   name "crossroad(8)"
-  id "-58925"
-  shape [
-    10.109402 -8.369587 0
-    8.627714 -9.890023 0
-    -8.370885 -10.108328 0
-    -9.888916 -8.628983 0
-    -10.109402 8.369587 0
-    9.888915 8.628983 0
-    10.109402 -8.369587 0
-  ]
-  connectedRoadIDs [
-    "-6637"
-    "-6666_1"
-    "-6666_2"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 2925.221596 -842.036394 0.01
-  name "crossroad(9)"
-  id "-58949"
-  shape []
-  connectedRoadIDs [
-    "-6468"
-    "-6471"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 2927.169971 -871.953826 0.01
-  name "crossroad(10)"
-  id "-58950"
-  shape []
-  connectedRoadIDs [
-    "-6486"
-    "-7052"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 2910.826237 -859.403477 0.01
-  name "crossroad(11)"
-  id "-58951"
-  shape []
-  connectedRoadIDs [
-    "-6501"
-    "-7031"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -3981.809985 2287.287302 0.01
-  name "crossroad(12)"
-  id "-58966"
-  shape []
-  connectedRoadIDs [
-    "-6530"
-    "-6546_1"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -3972.798699 2287.394091 0.01
-  name "crossroad(13)"
-  id "-58967"
-  shape []
-  connectedRoadIDs [
-    "-6546_2"
-    "-7016"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -3977.045008 2282.26492 0.01
-  name "crossroad(14)"
-  id "-58968"
-  shape []
-  connectedRoadIDs [
-    "-6559"
-    "-7148"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -1874.409903 -5802.489556 0.01
-  name "crossroad(15)"
-  id "-58981"
-  shape []
-  connectedRoadIDs [
-    "-6598_1"
-    "-7098"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -1877.233809 -5802.475528 0.01
-  name "crossroad(16)"
-  id "-58982"
-  shape []
-  connectedRoadIDs [
-    "-6598_2"
-    "-7066"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -1875.923307 -5801.181559 0.01
-  name "crossroad(17)"
-  id "-58983"
-  shape []
-  connectedRoadIDs [
-    "-6612"
-    "-7127"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -6239.209916 -2649.419593 0.01
-  name "crossroad(18)"
-  id "-59000"
-  shape []
-  connectedRoadIDs [
-    "-6637"
-    "-7179"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -6268.39536 -2668.902169 0.01
-  name "crossroad(19)"
-  id "-59001"
-  shape []
-  connectedRoadIDs [
-    "-6652"
-    "-6666_1"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -6267.796626 -2622.742405 0.01
-  name "crossroad(20)"
-  id "-59002"
-  shape []
-  connectedRoadIDs [
-    "-6666_2"
-    "-7079"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -2767.692163 -2202.896779 0.01
-  name "crossroad(21)"
-  id "-59045"
-  shape []
-  connectedRoadIDs [
-    "-6427_2"
-    "-7115"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -2417.428043 -1734.061484 0.01
-  name "crossroad(22)"
-  id "-59046"
-  shape []
-  connectedRoadIDs [
-    "-6370"
-    "-6390_2"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -2860.306863 -1880.83358 0.01
-  name "crossroad(23)"
-  id "-59059"
-  shape [
-    11.95964 5.405276 0
-    7.261405 -10.932612 0
-    4.922668 -12.166238 0
-    -11.21426 -6.818384 0
-    -12.094374 -5.096678 0
-    -6.978543 11.115302 0
-    -5.133911 12.078616 0
-    11.093751 7.012752 0
-    11.95964 5.405276 0
-  ]
-  connectedRoadIDs [
-    "-6390_1"
-    "-6390_2"
-    "-6427_1"
-    "-6427_2"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 363.747644 2300.024562 0.01
-  name "crossroad(24)"
-  id "-59538"
-  shape []
-  connectedRoadIDs [
-    "-6050"
-    "-7167"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 852.685735 -911.783513 0.01
-  name "crossroad(25)"
-  id "-59539"
-  shape []
-  connectedRoadIDs [
-    "-6370"
-    "-7031"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 2949.315813 -3535.788149 0.01
-  name "crossroad(26)"
-  id "-59548"
-  shape []
-  connectedRoadIDs [
-    "-6051"
-    "-7052"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -4090.022991 -5834.604261 0.01
-  name "crossroad(27)"
-  id "-59550"
-  shape []
-  connectedRoadIDs [
-    "-6052"
-    "-7066"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -6233.526829 -905.091837 0.01
-  name "crossroad(28)"
-  id "-59551"
-  shape []
-  connectedRoadIDs [
-    "-7079"
-    "-7092"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -6192.461997 1153.36083 0.01
-  name "crossroad(29)"
-  id "-59552"
-  shape []
-  connectedRoadIDs [
-    "-6053"
-    "-7092"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -423.297792 -5837.843229 0.01
-  name "crossroad(30)"
-  id "-59553"
-  shape []
-  connectedRoadIDs [
-    "-7098"
-    "-7103"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation 1003.855831 -5872.452401 0.01
-  name "crossroad(31)"
-  id "-59554"
-  shape []
-  connectedRoadIDs [
-    "-6584"
-    "-7103"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -2159.773789 -3124.078089 0.01
-  name "crossroad(32)"
-  id "-59555"
-  shape []
-  connectedRoadIDs [
-    "-6110"
-    "-7115"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -1712.500305 -4622.972871 0.01
-  name "crossroad(33)"
   id "-59556"
-  shape []
-  connectedRoadIDs [
-    "-6110"
-    "-7127"
+  shape [
+    12.778119 -0.848335 0
+    1.977309 -12.652678 0
+    -0.666895 -12.788872 0
+    -12.62334 -2.156684 0
+    -12.788255 0.678629 0
+    -2.145101 12.625314 0
+    0.666811 12.788877 0
+    12.623326 2.156767 0
+    12.778119 -0.848335 0
   ]
-  boundingObject TRUE
+  connectedRoadIDs [
+    "-7711"
+    "-7724"
+    "-7844"
+    "-7847"
+  ]
 }
 Crossroad {
-  translation -6265.518028 -4032.654109 0.01
-  name "crossroad(34)"
-  id "-59558"
-  shape []
-  connectedRoadIDs [
-    "-6652"
-    "-7133"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -3750.721433 1222.379835 0.01
-  name "crossroad(35)"
-  id "-59559"
-  shape []
-  connectedRoadIDs [
-    "-7148"
-    "-7161"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -2646.56131 -452.756383 0.01
-  name "crossroad(36)"
-  id "-59560"
-  shape []
-  connectedRoadIDs [
-    "-6427_1"
-    "-7161"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -1813.635671 2293.498292 0.01
-  name "crossroad(37)"
-  id "-59561"
-  shape []
-  connectedRoadIDs [
-    "-7016"
-    "-7167"
-  ]
-  boundingObject TRUE
-}
-Crossroad {
-  translation -4349.101637 -2122.921067 0.01
-  name "crossroad(38)"
+  translation 142.415577 -312.772511 0.01
+  name "crossroad(9)"
   id "-59562"
+  shape [
+    8.063155 9.949147 0
+    7.999839 -0.050724 0
+    7.936435 -10.050523 0
+    -8.063244 -9.949075 0
+    -9.859755 -8.172223 0
+    -10.137237 7.825371 0
+    -7.936524 10.050452 0
+    8.063155 9.949147 0
+  ]
+  connectedRoadIDs [
+    "-7677_1"
+    "-7677_2"
+    "-7847"
+  ]
+}
+Crossroad {
+  translation 261.823537 -9.60466 0.01
+  name "crossroad(10)"
+  id "-59608"
   shape []
   connectedRoadIDs [
-    "-6390_1"
-    "-7179"
+    "-7684_2"
+    "-7860"
   ]
-  boundingObject TRUE
+}
+Crossroad {
+  translation -280.445253 62.571405 0.01
+  name "crossroad(11)"
+  id "-59609"
+  shape []
+  connectedRoadIDs [
+    "-7683"
+    "-7872_1"
+  ]
+}
+Crossroad {
+  translation -31.80827 -313.875635 0.01
+  name "crossroad(12)"
+  id "-59610"
+  shape []
+  connectedRoadIDs [
+    "-7677_1"
+    "-7889"
+  ]
 }
 Road {
-  translation 363.747644 2300.024562 0.01
-  name "way"
-  id "-6050"
-  startJunction "-59538"
-  endJunction "-58679"
-  width 17
+  translation -218.058113 311.742961 0.01
+  name "road(1)"
+  id "-7683"
+  startJunction "-59498"
+  endJunction "-59609"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -578,160 +236,29 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    61.649142 0.190197 0
-    1809.231532 11.757915 0
-    1939.818617 -6.279225 0
-    2083.524763 -47.997292 0
-    2201.762163 -115.84412 0
-    2307.672316 -208.192035 0
-    2420.964179 -331.584278 0
-    2481.699435 -442.704198 0
-    2537.497925 -581.597818 0
-    2555.539231 -658.393777 0
-    2557.963964 -733.538502 0
+    -28.208951 -14.846226 0
+    -45.359421 -41.246704 0
+    -58.084784 -64.34765 0
+    -63.06606 -81.399345 0
+    -64.727787 -92.950885 0
+    -63.073241 -113.854726 0
+    -62.38714 -249.171556 0
   ]
   startingAngle [
-    -0.002997
+    -3.147909
   ]
   endingAngle [
-    1.539178
+    1.565726
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation 2949.315813 -3535.788149 0.01
-  name "way(1)"
-  id "-6051"
-  startJunction "-59548"
-  endJunction "-58682"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    22.525791 -1787.825014 0
-    2.769458 -1918.607434 0
-    -56.445297 -2050.182151 0
-    -137.013118 -2141.698692 0
-    -241.418309 -2244.649838 0
-    -360.606288 -2318.169351 0
-    -493.754048 -2360.62186 0
-    -669.618104 -2358.099323 0
-    -858.646304 -2362.913065 0
-  ]
-  startingAngle [
-    1.558199
-  ]
-  endingAngle [
-    -3.117445
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -4090.022991 -5834.604261 0.01
-  name "way(2)"
-  id "-6052"
-  startJunction "-59550"
-  endJunction "-58685"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -1353.529772 -19.463803 0
-    -1533.479496 -7.849382 0
-    -1683.816698 42.166233 0
-    -1780.730342 97.849178 0
-    -1872.711562 154.344812 0
-    -1999.163474 251.746081 0
-    -2119.032262 355.679751 0
-    -2157.569588 435.822656 0
-    -2168.162953 530.659751 0
-  ]
-  startingAngle [
-    -3.156111
-  ]
-  endingAngle [
-    -1.576564
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -6192.461997 1153.36083 0.01
-  name "way(3)"
-  id "-6053"
-  startJunction "-59552"
-  endJunction "-58884"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    7.32798 367.354811 0
-    39.541464 525.78995 0
-    139.915211 689.064305 0
-    287.098329 850.654316 0
-    462.974301 965.651894 0
-    654.416302 1046.326076 0
-    821.187969 1097.619999 0
-    1001.878612 1110.969748 0
-    1015.420193 1111.665886 0
-  ]
-  startingAngle [
-    -1.550851
-  ]
-  endingAngle [
-    -0.051362
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -2159.773789 -3124.078089 0.01
-  name "way(4)"
-  id "-6110"
-  startJunction "-59555"
+  translation -269.569682 -112.233606 0.01
+  name "road(2)"
+  id "-7711"
+  startJunction "-59536"
   endJunction "-59556"
-  width 17
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -748,128 +275,24 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    213.45141 -184.221864 0
-    560.991706 -600.146162 0
-    454.366636 -1023.389953 0
-    535.672544 -1306.585028 0
-    447.273484 -1498.894782 0
+    16.576215 -0.690032 0
+    50.866765 -0.14739 0
+    98.98468 3.142922 0
+    139.360266 9.735664 0
+    191.352667 27.878325 0
+    278.520286 105.390518 0
   ]
   startingAngle [
-    0.712055
+    0.041604
   ]
   endingAngle [
-    -4.281522
+    -0.726834
   ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -2417.428043 -1734.061484 0.01
-  name "way(5)"
-  id "-6370"
-  startJunction "-59046"
-  endJunction "-59539"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    21.022392 15.857919 0
-    343.268241 290.163903 0
-    869.203418 525.105905 0
-    1618.56255 759.918241 0
-    2847.540799 831.08236 0
-    3270.113778 822.277971 0
-  ]
-  startingAngle [
-    -0.64627
-  ]
-  endingAngle [
-    0.020832
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 2921.711608 1566.48606 0.01
-  name "way(6)"
-  id "-6468"
-  startJunction "-58679"
-  endJunction "-58949"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    29.250254 -924.804673 0
-    78.437283 -1182.983922 0
-    7.381341 -1391.979869 0
-    6.045182 -1795.807504 0
-    3.509989 -2408.522454 0
-  ]
-  startingAngle [
-    1.539178
-  ]
-  endingAngle [
-    -4.708251
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 2925.221596 -842.036394 0.01
-  name "way(7)"
-  id "-6471"
-  startJunction "-58949"
-  endJunction "-58861"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    0.416287 -6.392127 0
-  ]
-  startingAngle [
-    -4.708251
-  ]
-  endingAngle [
-    1.505763
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
@@ -878,15 +301,14 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation 2926.937632 -868.386243 0.01
-  name "way(8)"
-  id "-6486"
-  startJunction "-58861"
-  endJunction "-58950"
-  width 17
+  translation -46.980472 302.824405 0.01
+  name "road(3)"
+  id "-7724"
+  startJunction "-59549"
+  endJunction "-59556"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -903,53 +325,25 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    0.232339 -3.567583 0
+    0.910922 -45.026131 0
+    -1.860275 -74.180337 0
+    -9.056172 -104.433893 0
+    -19.573493 -149.53936 0
+    -22.345434 -181.994369 0
+    -5.20948 -226.005554 0
+    56.751926 -295.555747 0
   ]
   startingAngle [
-    1.505763
+    1.550568
   ]
   endingAngle [
-    1.455564
+    0.843039
   ]
   startLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 2910.826237 -859.403477 0.01
-  name "way(9)"
-  id "-6501"
-  startJunction "-58951"
-  endJunction "-58861"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    5.482208 0.353186 0
-  ]
-  startingAngle [
-    -0.064335
-  ]
-  endingAngle [
-    -0.064335
   ]
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
@@ -958,472 +352,14 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -5177.041804 2265.026715 0.01
-  name "way(10)"
-  id "-6530"
-  startJunction "-58884"
-  endJunction "-58966"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    1195.231819 22.260586 0
-  ]
-  startingAngle [
-    -0.051362
-  ]
-  endingAngle [
-    -0.01185
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 2090.669509 -5898.701213 0.01
-  name "way(11)"
-  id "-6584"
-  startJunction "-58682"
-  endJunction "-59554"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -1086.813678 26.248812 0
-  ]
-  startingAngle [
-    -3.117445
-  ]
-  endingAngle [
-    -3.117445
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -6258.138659 -2649.1765 0.01
-  name "way(12)"
-  id "-6637"
-  startJunction "-58925"
-  endJunction "-59000"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    18.928744 -0.243092 0
-  ]
-  startingAngle [
-    0.012842
-  ]
-  endingAngle [
-    0.012842
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -6265.518028 -4032.654109 0.01
-  name "way(13)"
-  id "-6652"
-  startJunction "-59558"
-  endJunction "-59001"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -6.778318 1175.494139 0
-    -2.877332 1363.75194 0
-  ]
-  startingAngle [
-    -1.576563
-  ]
-  endingAngle [
-    -1.557826
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -3972.798699 2287.394091 0.01
-  name "way(14)"
-  id "-7016"
-  startJunction "-58967"
-  endJunction "-59561"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    2159.163028 6.104201 0
-  ]
-  startingAngle [
-    -0.01185
-  ]
-  endingAngle [
-    -0.002997
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 852.685735 -911.783513 0.01
-  name "way(15)"
-  id "-7031"
-  startJunction "-59539"
-  endJunction "-58951"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    221.459381 -4.608555 0
-    806.343481 -24.498737 0
-    1207.231386 -11.602225 0
-    1719.847075 20.873133 0
-    2058.140502 52.380036 0
-  ]
-  startingAngle [
-    0.020832
-  ]
-  endingAngle [
-    -0.064335
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 2927.169971 -871.953826 0.01
-  name "way(16)"
-  id "-7052"
-  startJunction "-58950"
-  endJunction "-59548"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    65.765968 -568.195754 0
-    12.70993 -1914.839893 0
-    22.145842 -2663.834323 0
-  ]
-  startingAngle [
-    1.455564
-  ]
-  endingAngle [
-    1.558199
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -1877.233809 -5802.475528 0.01
-  name "way(17)"
-  id "-7066"
-  startJunction "-58982"
-  endJunction "-59550"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -2212.789181 -32.128733 0
-  ]
-  startingAngle [
-    -3.156111
-  ]
-  endingAngle [
-    -3.156111
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -6267.796626 -2622.742405 0.01
-  name "way(18)"
-  id "-7079"
-  startJunction "-59002"
-  endJunction "-59551"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    34.269797 1717.650568 0
-  ]
-  startingAngle [
-    -1.557826
-  ]
-  endingAngle [
-    -1.55085
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -6233.526829 -905.091837 0.01
-  name "way(19)"
-  id "-7092"
-  startJunction "-59551"
-  endJunction "-59552"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    41.064831 2058.452667 0
-  ]
-  startingAngle [
-    -1.55085
-  ]
-  endingAngle [
-    -1.550851
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -423.297792 -5837.843229 0.01
-  name "way(20)"
-  id "-7098"
-  startJunction "-59553"
-  endJunction "-58981"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -1451.112111 35.353673 0
-  ]
-  startingAngle [
-    -3.117347
-  ]
-  endingAngle [
-    -3.136626
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation 1003.855831 -5872.452401 0.01
-  name "way(21)"
-  id "-7103"
-  startJunction "-59554"
-  endJunction "-59553"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -1427.153623 34.609172 0
-  ]
-  startingAngle [
-    -3.117445
-  ]
-  endingAngle [
-    -3.117347
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -2767.692163 -2202.896779 0.01
-  name "way(22)"
-  id "-7115"
-  startJunction "-59045"
-  endJunction "-59555"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    64.763488 -218.154288 0
-    151.141526 -526.933351 0
-    607.918374 -921.18131 0
-  ]
-  startingAngle [
-    1.290785
-  ]
-  endingAngle [
-    0.712055
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -1712.500305 -4622.972871 0.01
-  name "way(23)"
-  id "-7127"
+  translation 23.896204 6.447098 0.01
+  name "road(4)"
+  id "-7844"
   startJunction "-59556"
-  endJunction "-58983"
-  width 17
+  endJunction "-59547"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1440,167 +376,40 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    -221.997263 -482.933544 0
-    -162.492954 -690.206196 0
-    -163.423002 -1178.208688 0
+    65.495704 58.241615 0
+    86.514956 73.090219 0
+    118.595719 89.587044 0
+    157.865184 100.581641 0
+    205.982665 106.623884 0
+    228.721266 106.995524 0
   ]
   startingAngle [
-    -4.281522
+    -0.72684
   ]
   endingAngle [
-    -4.707375
+    -0.016343
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -6258.185944 -5303.94451 0.01
-  name "way(24)"
-  id "-7133"
-  startJunction "-58685"
-  endJunction "-59558"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    -7.332084 1271.290401 0
-  ]
-  startingAngle [
-    -1.576564
-  ]
-  endingAngle [
-    -1.576563
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -3977.045008 2282.26492 0.01
-  name "way(25)"
-  id "-7148"
-  startJunction "-58968"
-  endJunction "-59559"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    5.695046 -424.317364 0
-    163.155148 -839.724071 0
-    226.323574 -1059.885086 0
-  ]
-  startingAngle [
-    1.558808
-  ]
-  endingAngle [
-    1.291376
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -3750.721433 1222.379835 0.01
-  name "way(26)"
-  id "-7161"
-  startJunction "-59559"
-  endJunction "-59560"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    121.092812 -422.033168 0
-    710.087613 -822.727298 0
-    849.360565 -1308.017832 0
-    1104.160123 -1675.136218 0
-  ]
-  startingAngle [
-    1.291376
-  ]
-  endingAngle [
-    0.964059
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -1813.635671 2293.498292 0.01
-  name "way(27)"
-  id "-7167"
-  startJunction "-59561"
-  endJunction "-59538"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    2177.383315 6.52627 0
-  ]
-  startingAngle [
-    -0.002997
-  ]
-  endingAngle [
-    -0.002997
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -6239.209916 -2649.419593 0.01
-  name "way(28)"
-  id "-7179"
-  startJunction "-59000"
+  translation 23.173932 -7.575734 0.01
+  name "road(5)"
+  id "-7847"
+  startJunction "-59556"
   endJunction "-59562"
-  width 17
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1617,27 +426,229 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    286.231798 -0.362285 0
-    674.036585 12.310433 0
-    1121.246706 279.895117 0
-    1890.108278 526.498525 0
+    55.68407 -60.857826 0
+    78.35466 -88.367373 0
+    96.598789 -126.32811 0
+    116.496243 -196.195527 0
+    120.359397 -240.755162 0
+    119.415071 -295.198282 0
   ]
   startingAngle [
-    0.012842
+    0.829763
   ]
   endingAngle [
-    -0.310408
+    -4.695046
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -4349.101637 -2122.921067 0.01
-  name "way(29)"
-  id "-6390_1"
+  translation 261.823537 -9.60466 0.01
+  name "road(6)"
+  id "-7860"
+  startJunction "-59608"
+  endJunction "-59514"
+  width 16
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    -1.592471 -247.549411 0
+  ]
+  startingAngle [
+    -4.705956
+  ]
+  endingAngle [
+    -4.705956
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -279.57203 -253.745481 0.01
+  name "road(7)"
+  id "-7889"
+  startJunction "-59511"
+  endJunction "-59610"
+  width 16
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    0.549795 -14.853132 0
+    4.418792 -26.40634 0
+    11.605666 -40.710852 0
+    19.899561 -51.164825 0
+    35.384113 -58.869804 0
+    54.74138 -61.349526 0
+    247.76376 -60.130154 0
+  ]
+  startingAngle [
+    1.533798
+  ]
+  endingAngle [
+    -0.006317
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -218.058113 311.742961 0.01
+  name "road(8)"
+  id "-7675_1"
+  startJunction "-59498"
+  endJunction "-59549"
+  width 16
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    160.875573 1.016231 0
+  ]
+  startingAngle [
+    -0.006317
+  ]
+  endingAngle [
+    -0.006317
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -37.18294 312.885692 0.01
+  name "road(9)"
+  id "-7675_2"
+  startJunction "-59549"
+  endJunction "-59499"
+  width 16
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    240.55175 1.523507 0
+  ]
+  startingAngle [
+    -0.006333
+  ]
+  endingAngle [
+    -0.006333
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation -31.80827 -313.875635 0.01
+  name "road(10)"
+  id "-7677_1"
+  startJunction "-59610"
+  endJunction "-59562"
+  width 16
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  lines [
+    RoadLine {
+    }
+    RoadLine {
+      type "continuous"
+    }
+    RoadLine {
+    }
+  ]
+  rightBorder FALSE
+  leftBorder FALSE
+  wayPoints [
+    0 0 0
+    164.224048 1.039808 0
+  ]
+  startingAngle [
+    -0.006317
+  ]
+  endingAngle [
+    -0.006332
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  splineSubdivision 0
+}
+Road {
+  translation 152.415376 -312.709107 0.01
+  name "road(11)"
+  id "-7677_2"
   startJunction "-59562"
-  endJunction "-59059"
-  width 17
+  endJunction "-59514"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1654,57 +665,19 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    125.274419 40.18515 0
-    710.267183 91.959466 0
-    1052.027127 85.12907 0
-    1464.594628 234.532816 0
-    1479.249091 239.107568 0
+    44.201597 0.280264 0
+    60.794149 1.102397 0
+    76.281687 8.251055 0
+    89.557385 18.150691 0
+    98.961708 29.151253 0
+    107.260448 43.452681 0
+    107.81569 55.555036 0
   ]
   startingAngle [
-    -0.310408
+    -0.006341
   ]
   endingAngle [
-    -0.302588
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  splineSubdivision 0
-  roadBoundingObject TRUE
-}
-Road {
-  translation -2850.814552 -1877.687784 0.01
-  name "way(30)"
-  id "-6390_2"
-  startJunction "-59059"
-  endJunction "-59046"
-  width 17
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  lines [
-    RoadLine {
-    }
-    RoadLine {
-      type "continuous"
-    }
-    RoadLine {
-    }
-  ]
-  rightBorder FALSE
-  leftBorder FALSE
-  wayPoints [
-    0 0 0
-    433.386509 143.6263 0
-  ]
-  startingAngle [
-    -0.320014
-  ]
-  endingAngle [
-    -0.64627
+    -1.564363
   ]
   startLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
@@ -1713,15 +686,14 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -2646.56131 -452.756383 0.01
-  name "way(31)"
-  id "-6427_1"
-  startJunction "-59560"
-  endJunction "-59059"
-  width 17
+  translation 203.368809 314.409199 0.01
+  name "road(12)"
+  id "-7684_1"
+  startJunction "-59499"
+  endJunction "-59547"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1738,17 +710,20 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    87.498105 -126.064705 0
-    -48.809463 -550.478237 0
-    -334.785999 -1006.026156 0
-    -222.804124 -1399.370738 0
-    -216.754865 -1418.540738 0
+    22.121018 -6.054992 0
+    43.686926 -23.661691 0
+    54.74387 -46.767389 0
+    59.717828 -66.571495 0
+    60.8206 -85.274757 0
+    60.817164 -104.527941 0
+    60.263026 -110.578848 0
+    59.359893 -190.803792 0
   ]
   startingAngle [
-    0.964059
+    -0.006333
   ]
   endingAngle [
-    1.265127
+    -4.701132
   ]
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
@@ -1757,15 +732,14 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -2857.543195 -1890.444102 0.01
-  name "way(32)"
-  id "-6427_2"
-  startJunction "-59059"
-  endJunction "-59045"
-  width 17
+  translation 262.551807 103.606247 0.01
+  name "road(13)"
+  id "-7684_2"
+  startJunction "-59547"
+  endJunction "-59608"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1782,13 +756,13 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    89.851032 -312.452676 0
+    -0.728269 -113.210908 0
   ]
   startingAngle [
-    1.290785
+    -4.705956
   ]
   endingAngle [
-    1.290785
+    -4.705956
   ]
   startLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
@@ -1797,15 +771,14 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -6268.39536 -2668.902169 0.01
-  name "way(33)"
-  id "-6666_1"
-  startJunction "-59001"
-  endJunction "-58925"
-  width 17
+  translation -280.445253 62.571405 0.01
+  name "road(14)"
+  id "-7872_1"
+  startJunction "-59609"
+  endJunction "-59536"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1822,13 +795,13 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    0.127827 9.854924 0
+    0.83352 -164.389221 0
   ]
   startingAngle [
-    -1.557826
+    1.565726
   ]
   endingAngle [
-    -1.557826
+    1.565726
   ]
   endLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
@@ -1837,15 +810,14 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Road {
-  translation -6268.008136 -2639.048927 0.01
-  name "way(34)"
-  id "-6666_2"
-  startJunction "-58925"
-  endJunction "-59002"
-  width 17
+  translation -279.561804 -121.817688 0.01
+  name "road(15)"
+  id "-7872_2"
+  startJunction "-59536"
+  endJunction "-59511"
+  width 16
   numberOfLanes 4
   numberOfForwardLanes 4
   speedLimit 27.777778
@@ -1862,13 +834,13 @@ Road {
   leftBorder FALSE
   wayPoints [
     0 0 0
-    0.21151 16.306522 0
+    -0.010226 -131.927793 0
   ]
   startingAngle [
-    -1.557826
+    -4.712311
   ]
   endingAngle [
-    -1.557826
+    1.533798
   ]
   startLine [
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
@@ -1877,2592 +849,1204 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   splineSubdivision 0
-  roadBoundingObject TRUE
 }
 Solid {
-  translation 2162.98 4409.3 -426.302
-  rotation 0 0 -1 2.58524
+  translation -261.303 -223.686 -103.11
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand"
+  name "hill1"
 }
 Solid {
-  translation 2292.24 4456.29 -426.302
-  rotation 0 0 -1 2.58524
+  translation 43.2102 -393.702 -130.11
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(70)"
+  name "hill1(32)"
 }
 Solid {
-  translation -857.725 4293.16 -452.42
-  rotation 0 0 -1 2.58524
+  translation 53.416 -422.359 -130.11
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(1)"
+  name "hill1(33)"
 }
 Solid {
-  translation 677.277 2628.4 -656.42
-  rotation 0 0 -1 -2.9780053071795862
+  translation -2.00173 -443.694 -136.11
+  rotation 0 0 -1 0.0261785
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(52)"
+  name "hill1(34)"
 }
 Solid {
-  translation 1044.49 1933.87 -656.42
-  rotation 0 0 -1 -2.9780053071795862
+  translation 50.9983 -478.453 -136.11
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(53)"
+  name "hill1(35)"
 }
 Solid {
-  translation 479.998 915.406 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -550.852 -214.765 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(54)"
+  name "hill1(20)"
 }
 Solid {
-  translation 5455.23 3560.7 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -549.332 -415.845 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(60)"
+  name "hill1(22)"
 }
 Solid {
-  translation 5455.23 3560.7 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation 271.084 -260.69 -39.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(69)"
+  name "hill1(36)"
 }
 Solid {
-  translation 5316.64 3726.84 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -522.201 -583.749 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(68)"
+  name "hill1(23)"
 }
 Solid {
-  translation 5387.66 3177.02 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -380.123 -709.167 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(67)"
+  name "hill1(24)"
 }
 Solid {
-  translation 5439.19 2797.41 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -523.281 -703.941 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(66)"
+  name "hill1(49)"
 }
 Solid {
-  translation 5416.39 2380.99 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -286.74 -709.766 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(65)"
+  name "hill1(25)"
 }
 Solid {
-  translation 4577.38 1611.12 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -212.644 -719.13 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(64)"
+  name "hill1(26)"
 }
 Solid {
-  translation 4843.37 1666.08 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation 7.73107 -721.019 -48.4723
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(63)"
+  name "hill1(27)"
 }
 Solid {
-  translation 5076.41 1668.83 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -162.21 -114.996 -128.989
+  rotation 0 0 1 0.0589063
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(62)"
+  name "hill1(21)"
 }
 Solid {
-  translation 5385.23 1727.59 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -291.325 -460.183 -92.9892
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(61)"
+  name "hill1(46)"
 }
 Solid {
-  translation 6246.36 1356.03 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -286.175 -484.861 -92.9892
+  rotation 0 0 1 0.386156
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(78)"
+  name "hill1(28)"
 }
 Solid {
-  translation 6150.46 1811.06 -923.372
-  rotation 0 0 -1 -2.9780053071795862
+  translation -138.756 -387.485 -95.5978
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(79)"
+  name "hill1(7)"
 }
 Solid {
-  translation 5314.45 596.491 -849.371
-  rotation 0 0 -1 -2.9780053071795862
+  translation -318.698 -249.548 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(72)"
+  name "hill1(8)"
 }
 Solid {
-  translation 5323.04 526.75 -849.371
-  rotation 0 0 -1 -2.9780053071795862
+  translation -366.328 -266.508 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(75)"
+  name "hill1(40)"
 }
 Solid {
-  translation 4845.45 565.221 -849.371
-  rotation 0 0 -1 -2.9780053071795862
+  translation -366.183 -77.7226 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(73)"
+  name "hill1(41)"
 }
 Solid {
-  translation 5119.48 509.63 -849.371
-  rotation 0 0 -1 -2.9780053071795862
+  translation -367.296 -116.262 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(76)"
+  name "hill1(43)"
 }
 Solid {
-  translation 5119.48 509.63 -849.371
-  rotation 0 0 -1 -2.9780053071795862
+  translation -362.072 -7.48631 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(74)"
+  name "hill1(44)"
 }
 Solid {
-  translation -123.545 -576.495 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -317.821 5.18059 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(55)"
+  name "hill1(45)"
 }
 Solid {
-  translation 442.753 -107.853 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -370.458 -190.954 -130.826
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(109)"
+  name "hill1(42)"
 }
 Solid {
-  translation -183.293 -287.419 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -312.52 -148.242 -103.11
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill3.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(111)"
+  name "hill1(6)"
 }
 Solid {
-  translation -280.991 -325.165 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -319.664 9.35523 -59.2606
+  rotation 0 0 1 1.45879e-06
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(105)"
+  name "hill1(1)"
 }
 Solid {
-  translation -1221.09 -394.86 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -543.05 -21.7519 -35.8063
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(104)"
+  name "hill1(5)"
 }
 Solid {
-  translation -985.255 -378.416 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -543.101 82.0774 -27.6783
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(108)"
+  name "hill1(4)"
 }
 Solid {
-  translation -806.848 -401.241 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -545.454 187.113 -45.5658
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(107)"
+  name "hill1(3)"
 }
 Solid {
-  translation -570.491 -378.545 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -97.523 -61.9883 -45.5658
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(106)"
+  name "hill1(2)"
 }
 Solid {
-  translation 301.516 721.724 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -130.864 -436.27 -27.2925
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(103)"
+  name "hill1(9)"
 }
 Solid {
-  translation 704.348 1042.94 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation -39.011 -57.5259 -45.5658
+  rotation 0 0 1 0.196351
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(56)"
+  name "hill1(19)"
 }
 Solid {
-  translation 1661.94 1476.25 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation 328.634 -217.585 -54.5658
+  rotation 0 0 1 1.49226
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(57)"
+  name "hill1(29)"
 }
 Solid {
-  translation 1661.94 1476.25 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation 368.616 -185.141 -54.5658
+  rotation 0 0 1 1.49226
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(59)"
+  name "hill1(30)"
 }
 Solid {
-  translation 1347.48 1340.42 -928.939
-  rotation 0 0 -1 -2.9780053071795862
+  translation 332.951 -338.045 -63.5658
+  rotation 0 0 1 1.309
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(58)"
+  name "hill1(31)"
 }
 Solid {
-  translation -2225.19 4894.61 -697.639
-  rotation 0 0 -1 2.58524
+  translation 107.892 -82.462 -57.1148
+  rotation 0 0 1 0.48433
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(5)"
+  name "hill1(10)"
 }
 Solid {
-  translation -2201.25 7206.9 -270.896
-  rotation 0 0 -1 1.96347
+  translation 281.746 -129.373 -19.9191
+  rotation 0 0 1 0.215985
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(7)"
+  name "hill1(11)"
 }
 Solid {
-  translation -2201.25 7206.9 -270.896
-  rotation 0 0 -1 1.96347
+  translation 271.988 -423.492 -19.9191
+  rotation 0 0 1 0.215985
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(12)"
+  name "hill1(37)"
 }
 Solid {
-  translation -7279.74 7266.55 -66.896
-  rotation 0 0 -1 2.3889
+  translation 341.878 -692.746 -7.9191
+  rotation 0 0 1 0.654499
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(11)"
+  name "hill1(38)"
 }
 Solid {
-  translation -10745.5 3011.54 -66.896
-  rotation 0 0 -1 1.66895
+  translation 50.6716 -744.019 -7.9191
+  rotation 0 0 1 0.31416
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(17)"
+  name "hill1(48)"
 }
 Solid {
-  translation -9587.16 2213.52 -270.896
-  rotation 0 0 -1 1.96347
+  translation 447.451 -561.434 -7.9191
+  rotation 0 0 1 0.654499
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(16)"
+  name "hill1(39)"
 }
 Solid {
-  translation -530.827 -4701.48 -66.896
-  rotation 0 0 -1 2.21218
+  translation 246.787 118.098 -19.9191
+  rotation 0 0 1 0.215985
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(15)"
+  name "hill1(13)"
 }
 Solid {
-  translation 1929.92 -4688.18 -66.896
-  rotation 0 0 -1 2.21218
+  translation 112.976 185.67 -19.9191
+  rotation 0 0 1 0.215985
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(31)"
+  name "hill1(15)"
 }
 Solid {
-  translation 470.531 -6047.4 -66.896
-  rotation 0 0 -1 2.21218
+  translation -0.695173 184.266 -19.9191
+  rotation 0 0 1 0.490874
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(32)"
+  name "hill1(16)"
 }
 Solid {
-  translation 470.531 -6047.4 -66.896
-  rotation 0 0 -1 2.21218
+  translation -178.077 175.672 -19.9191
+  rotation 0 0 1 0.490874
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(34)"
+  name "hill1(17)"
 }
 Solid {
-  translation 4623.8 696.015 -201.778
-  rotation 0 0 -1 2.21218
+  translation -305.768 170.896 -19.9191
+  rotation 0 0 1 0.490874
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(33)"
+  name "hill1(18)"
 }
 Solid {
-  translation -893.724 -400.393 -192.587
-  rotation 0 0 -1 1.91111
+  translation 271 -10.7536 -19.9191
+  rotation 0 0 1 0.215985
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(38)"
+  name "hill1(14)"
 }
 Solid {
-  translation 4672.41 3031.52 -81.4366
-  rotation 0 0 -1 2.21218
+  translation -91.3065 -725.523 -19.9191
+  rotation 0 0 1 0.215985
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(39)"
+  name "hill1(47)"
 }
 Solid {
-  translation 4105.29 5835.84 -66.896
-  rotation 0 0 -1 2.21218
+  translation -4.7632 5.65136 -57.1148
+  rotation 0 0 1 0.00654612
   children [
     Shape {
       appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
+        baseColor 0.6 0.45 0.18
         roughness 1
         metalness 0
       }
       geometry Mesh {
         url [
-          "../model/sand.stl"
+          "../model/hill2.stl"
         ]
         ccw FALSE
       }
     }
   ]
-  name "sand(42)"
+  name "hill1(12)"
 }
-Solid {
-  translation 2423.62 6144.41 -66.896
-  rotation 0 0 -1 1.82603
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(44)"
-}
-Solid {
-  translation 4553.42 4980.88 -270.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(43)"
-}
-Solid {
-  translation 4760.94 194.407 -66.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(40)"
-}
-Solid {
-  translation 4760.94 194.407 -66.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(41)"
-}
-Solid {
-  translation 4633.37 -616.75 -69.1351
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(37)"
-}
-Solid {
-  translation 4882.67 -1808.39 -66.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(36)"
-}
-Solid {
-  translation 4342.81 -3659.81 -66.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(35)"
-}
-Solid {
-  translation -2924.82 -4715.03 -66.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(30)"
-}
-Solid {
-  translation -5272.74 -4763.19 -66.896
-  rotation 0 0 -1 2.21218
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(29)"
-}
-Solid {
-  translation -8980.83 -4994.79 -66.896
-  rotation 0 0 -1 1.82603
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(28)"
-}
-Solid {
-  translation -10561.7 -2424.25 -66.896
-  rotation 0 0 -1 1.82603
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(27)"
-}
-Solid {
-  translation -10516.8 -363.821 -66.896
-  rotation 0 0 -1 1.82603
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(26)"
-}
-Solid {
-  translation -6523.14 -460.545 -474.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(25)"
-}
-Solid {
-  translation -6508.8 -676.433 -474.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(24)"
-}
-Solid {
-  translation -5076.34 -867.04 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(23)"
-}
-Solid {
-  translation -5076.34 -867.04 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(102)"
-}
-Solid {
-  translation -6335.74 -1085.22 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(101)"
-}
-Solid {
-  translation -5695.29 -743.58 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(100)"
-}
-Solid {
-  translation 225.295 -1713.81 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(22)"
-}
-Solid {
-  translation -232.089 -1594.6 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(83)"
-}
-Solid {
-  translation -2192.97 -1726.13 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(82)"
-}
-Solid {
-  translation -1972.78 -1576.91 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(81)"
-}
-Solid {
-  translation -3059.71 902.331 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(80)"
-}
-Solid {
-  translation -2903.43 895.146 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(110)"
-}
-Solid {
-  translation -1392.3 795.852 -406.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(21)"
-}
-Solid {
-  translation -2011.2 793.93 -406.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(20)"
-}
-Solid {
-  translation -1725.59 -820.312 -71.3248
-  rotation 0 0 -1 1.58386
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(19)"
-}
-Solid {
-  translation -1670.25 -982.86 -118.217
-  rotation 0 0 -1 1.58386
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(77)"
-}
-Solid {
-  translation -1699.2 -845.699 -104.847
-  rotation 0 0 -1 1.58386
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(71)"
-}
-Solid {
-  translation -6304.96 3764.89 -610.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(18)"
-}
-Solid {
-  translation -6329.46 3056.23 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(50)"
-}
-Solid {
-  translation -6440.35 4238.78 -474.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(49)"
-}
-Solid {
-  translation -6994.68 4040.27 -474.896
-  rotation 0 0 -1 1.85875
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(51)"
-}
-Solid {
-  translation -7321.82 849.775 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(48)"
-}
-Solid {
-  translation -7389.89 751.704 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(89)"
-}
-Solid {
-  translation -4830.03 1445.02 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(90)"
-}
-Solid {
-  translation -5006.5 1393.82 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(92)"
-}
-Solid {
-  translation -5006.5 1393.82 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(95)"
-}
-Solid {
-  translation -5344.15 1373.82 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(94)"
-}
-Solid {
-  translation -4770.79 2041.61 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(96)"
-}
-Solid {
-  translation -4853.4 1768.48 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(97)"
-}
-Solid {
-  translation -4813.29 1910.62 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(98)"
-}
-Solid {
-  translation -4966.41 1450.35 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(93)"
-}
-Solid {
-  translation -7606.58 753.953 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(91)"
-}
-Solid {
-  translation -7536.04 864.423 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(88)"
-}
-Solid {
-  translation -7565 975.435 -968.847
-  rotation 0 0 -1 1.89148
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(87)"
-}
-Solid {
-  translation -6994.38 1419.62 -833.335
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(86)"
-}
-Solid {
-  translation -6702.55 1964.58 -553.827
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(85)"
-}
-Solid {
-  translation -6092.18 2725.96 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(84)"
-}
-Solid {
-  translation -6257.78 2773.85 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(99)"
-}
-Solid {
-  translation -4410.49 7048.81 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(14)"
-}
-Solid {
-  translation -8191.26 6868.35 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(13)"
-}
-Solid {
-  translation -7075.01 6994.46 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(47)"
+SimpleBuilding {
+  translation -21.7074 3.78833 0
+  rotation 0 0 1 0.693768
 }
-Solid {
-  translation -6545.91 7081.89 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(46)"
-}
-Solid {
-  translation -5170.14 7047.83 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(45)"
-}
-Solid {
-  translation -1066.29 7079.27 -270.896
-  rotation 0 0 -1 1.96347
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(10)"
-}
-Solid {
-  translation -2586.93 5156.36 -833.271
-  rotation 0 0 -1 2.58524
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(9)"
+SimpleBuilding {
+  translation -79.2909 283.795 -1.1255e-11
+  rotation 0 0 -1 0.0196353
+  name "building(1)"
 }
-Solid {
-  translation -2178.1 4885.51 -660.274
-  rotation 0 0 -1 2.58524
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(8)"
+SimpleBuilding {
+  translation -24.2272 334.226 -1.87015e-11
+  rotation 0 0 -1 0.0196353
+  name "building(6)"
 }
-Solid {
-  translation -1808.94 4745.31 -571.96
-  rotation 0 0 -1 2.58524
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(6)"
+SimpleBuilding {
+  translation 237.49 86.5876 -1.01181e-11
+  rotation 0 0 -1 0.0196353
+  name "building(2)"
 }
-Solid {
-  translation 373.91 4397.69 -452.42
-  rotation 0 0 -1 2.58524
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(4)"
+SimpleBuilding {
+  translation 88.6199 -284.346 -1.01181e-11
+  rotation 0 0 -1 0.0196353
+  name "building(3)"
 }
-Solid {
-  translation 33.5464 4363.86 -321.271
-  rotation 0 0 -1 2.58524
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(3)"
+SimpleBuilding {
+  translation -15.3747 -336.65 -1.01181e-11
+  rotation 0 0 -1 0.0196353
+  name "building(5)"
 }
-Solid {
-  translation 1235.62 4338.67 -321.271
-  rotation 0 0 -1 2.58524
-  children [
-    Shape {
-      appearance PBRAppearance {
-        baseColor 0.700008 0.475196 0.0209964
-        roughness 1
-        metalness 0
-      }
-      geometry Mesh {
-        url [
-          "../model/sand.stl"
-        ]
-        ccw FALSE
-      }
-    }
-  ]
-  name "sand(2)"
+SimpleBuilding {
+  translation 116.16 -284.921 -1.01181e-11
+  rotation 0 0 -1 0.0196353
+  name "building(4)"
 }
 CrossRoadsTrafficLight {
-  translation -2860.84 -1880.16 -3.19744e-13
-  rotation 0 0 1 0.287979
+  translation 16.5331 0.0311792 0
+  rotation 0 0 1 0.733038
 }
 GenericTrafficLight {
-  translation -1883.49 -5809.73 -1.42109e-14
-  rotation 0 0 1 3.0696
-  state "green"
+  translation 152.425 -312.602 -2.66454e-15
+  rotation 0 0 1 0.00654498
 }
 GenericTrafficLight {
-  translation -1867.76 -5796 0
-  rotation 0 0 1 -0.04581530717958593
+  translation 132.792 -312.906 -2.22045e-15
+  rotation 0 0 1 -3.135045307179586
   name "generic traffic light(1)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -1882.52 -5794.36 -2.13163e-14
+  translation 142.476 -303.057 0
   rotation 0 0 1 1.56425
   name "generic traffic light(2)"
-  state "green"
 }
 GenericTrafficLight {
-  translation 2916.04 -866.14 0
-  rotation 0 0 1 -3.121955307179586
+  translation 252.887 113.405 -1.77636e-15
+  rotation 0 0 1 -3.1088653071795864
   name "generic traffic light(3)"
-  state "green"
 }
 GenericTrafficLight {
-  translation 2918.51 -848.423 3.55271e-15
-  rotation 0 0 1 1.56425
+  translation 262.634 103.772 0
+  rotation 0 0 -1 1.59043
   name "generic traffic light(4)"
-  state "green"
 }
 GenericTrafficLight {
-  translation 2934.11 -868.266 0
-  rotation 0 0 1 -1.4791653071795858
+  translation 262.701 123.345 4.88498e-14
+  rotation 0 0 1 1.55771
   name "generic traffic light(5)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -3985.23 2280.21 3.10862e-13
-  rotation 0 0 -1 -3.1285053071795863
+  translation -37.3088 312.995 8.88178e-16
   name "generic traffic light(6)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -3969.12 2294.48 -7.10543e-15
-  rotation 0 0 1 1.23383e-06
+  translation -57.1317 312.7 3.55271e-15
+  rotation 0 0 1 -3.1285053071795863
   name "generic traffic light(7)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -3970.29 2278.92 0
-  rotation 0 0 -1 1.57734
+  translation -46.9157 303.032 0
+  rotation 0 0 -1 1.52498
   name "generic traffic light(8)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -6261.56 -2660.52 0
-  rotation 0 0 -1 1.57734
+  translation -269.77 -112.186 0
+  rotation 0 0 -1 0.0458149
   name "generic traffic light(9)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -6257.64 -2641.95 -3.55271e-15
-  rotation 0 0 -1 0.0589036
+  translation -279.656 -102.001 -3.10862e-13
+  rotation 0 0 1 1.59043
   name "generic traffic light(10)"
-  state "green"
 }
 GenericTrafficLight {
-  translation -6275.24 -2638.62 -4.9738e-14
-  rotation 0 0 1 1.57734
+  translation -279.502 -121.653 0
+  rotation 0 0 -1 1.57734
   name "generic traffic light(11)"
-  state "green"
 }
-SimpleBuilding {
-  translation 3014.66 -1135.97 2.27375e-13
-  rotation 0 0 -1 1.47262
-  name "building(10)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 265.604 -277.403 1.5632e-13
+  rotation 0 0 1 2.62454
 }
-SimpleBuilding {
-  translation 3005.4 -1045.71 4.54749e-13
-  rotation 0 0 -1 1.47262
-  name "building(1)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -96.135 -102.303 3.33956e-13
+  rotation 0 0 -1 -1.9373153071795866
+  name "street light(6)"
 }
-SimpleBuilding {
-  translation 2856.66 -767.159 7.12816e-11
-  rotation 0 0 -1 1.47262
-  name "building(5)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -55.4866 -77.2309 3.33956e-13
+  rotation 0 0 1 2.33001
+  name "street light(9)"
 }
-SimpleBuilding {
-  translation 2733.84 -964.795 -5.11595e-12
-  rotation 0 0 -1 1.47262
-  name "building(8)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 124.01 75.6542 3.48167e-13
+  rotation 0 0 1 2.0813
+  name "street light(10)"
 }
-SimpleBuilding {
-  translation -4088.11 2177.29 -5.79807e-12
-  rotation 0 0 -1 1.47262
-  name "building(9)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -171.896 322.53 1.05871e-12
+  rotation 0 0 1 -1.5380753071795858
+  name "street light(15)"
 }
-SimpleBuilding {
-  translation -2003.97 -5664.88 4.99995e-10
-  rotation 0 0 -1 1.47262
-  name "building(11)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -112.05 322.449 1.05871e-12
+  rotation 0 0 1 -1.5380753071795858
+  name "street light(20)"
 }
-SimpleBuilding {
-  translation -2161.15 -5935.34 4.99995e-10
-  rotation 0 0 -1 1.47262
-  name "building(18)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -60.1861 323.077 1.05871e-12
+  rotation 0 0 1 -1.5380753071795858
+  name "street light(19)"
 }
-SimpleBuilding {
-  translation -1744.17 -5514.23 4.99995e-10
-  rotation 0 0 -1 1.47262
-  name "building(19)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -7.72346 324.484 1.05871e-12
+  rotation 0 0 1 -1.5380753071795858
+  name "street light(18)"
 }
-SimpleBuilding {
-  translation -4056.7 2025.83 -5.68438e-12
-  rotation 0 0 -1 1.47262
-  name "building(17)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 39.5318 323.873 1.05871e-12
+  rotation 0 0 1 -1.5380753071795858
+  name "street light(17)"
 }
-SimpleBuilding {
-  translation -6152.34 -2794.87 -2.47838e-11
-  rotation 0 0 -1 1.47262
-  name "building(12)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 93.1377 323.657 1.05871e-12
+  rotation 0 0 1 -1.5380753071795858
+  name "street light(16)"
 }
-SimpleBuilding {
-  translation -6163.03 -2935.19 -2.29648e-11
-  rotation 0 0 -1 1.47262
-  name "building(14)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 85.2829 47.8852 3.33956e-13
+  rotation 0 0 1 2.33001
+  name "street light(14)"
 }
-SimpleBuilding {
-  translation -6362.74 -2822.92 -2.25101e-11
-  rotation 0 0 -1 1.47262
-  name "building(15)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 46.463 13.2679 3.48167e-13
+  rotation 0 0 1 2.33001
+  name "street light(13)"
 }
-SimpleBuilding {
-  translation -6362.26 -2471.18 -2.16006e-11
-  rotation 0 0 -1 1.47262
-  name "building(16)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 11.5133 -17.8463 3.33956e-13
+  rotation 0 0 1 2.33001
+  name "street light(12)"
 }
-SimpleBuilding {
-  translation -3853.32 2128.08 -6.59387e-12
-  rotation 0 0 -1 1.47262
-  name "building(13)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation -20.4373 -46.4304 3.33956e-13
+  rotation 0 0 1 2.33001
+  name "street light(11)"
 }
-SimpleBuilding {
-  translation 2998.95 -821.658 3.41062e-13
-  rotation 0 0 -1 1.47262
-  name "building(7)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 269.912 -178.993 2.70007e-13
+  rotation 0 0 1 -3.121955307179586
+  name "street light(8)"
 }
-SimpleBuilding {
-  translation 3002.18 -956.137 3.41062e-13
-  rotation 0 0 -1 1.47262
-  name "building(2)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 269.741 -229.631 2.41585e-13
+  rotation 0 0 1 -3.121955307179586
+  name "street light(7)"
 }
-SimpleBuilding {
-  translation 2859.41 -971.445 4.54749e-13
-  rotation 0 0 -1 1.47262
-  name "building(3)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 229.207 -315.075 1.13687e-13
+  rotation 0 0 1 2.0224
+  name "street light(5)"
 }
-SimpleBuilding {
-  translation 2872.78 -1069.08 1.64911e-18
-  rotation 0 0 -1 1.47262
-  name "building(4)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 178.426 -322.872 1.13687e-13
+  rotation 0 0 1 1.55771
+  name "street light(4)"
 }
-SimpleBuilding {
-  translation 2895.45 -1166.92 1.64911e-18
-  rotation 0 0 -1 1.47262
-  name "building(6)"
-  floorHeight 5
-  floorNumber 9
-  corners [
-    30 30
-    30 -30
-    -30 -30
-    -30 30
-  ]
+StreetLight {
+  translation 119.41 -323.104 1.13687e-13
+  rotation 0 0 1 1.55771
+  name "street light(3)"
 }
-DEF ORIGIN BmwX5Simple {
-  translation 30 30 0.4
+StreetLight {
+  translation 66.4847 -322.958 1.13687e-13
+  rotation 0 0 1 1.55771
+  name "street light(2)"
 }
-DEF SUMO_INTERFACE SumoInterface {
-  gui FALSE
-  maxVehicles 29
-  step 100
-  seed 4
-}
-Robot {
-  children [
-    Receiver {
-      name "receiverState"
-      channel 12
-    }
-    Emitter {
-      type "serial"
-      channel 1
-    }
-  ]
-  name "global_receiver"
-  controller "global_receiver"
-  customData "local"
-  supervisor TRUE
+StreetLight {
+  translation 28.604 -322.933 1.13687e-13
+  rotation 0 0 1 1.55771
+  name "street light(1)"
 }
