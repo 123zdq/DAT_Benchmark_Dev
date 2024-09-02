@@ -40,4 +40,6 @@ def checkSumoUpdate(configData,configData_backup):
     for i in range(len(SUMO_UPDATE)):
         if configSumo[SUMO_UPDATE[i]] != configSumoB[SUMO_UPDATE[i]]:
             return True
+    if configData["Sumo_Params"]["fixed_car_group_num"] == False:
+        return True
     return False
