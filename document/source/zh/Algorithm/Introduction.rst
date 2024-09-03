@@ -78,7 +78,12 @@ Baseline1: :code:`BenchEnv_Multi` 环境 +  :code:`A3CLSTM-E2E` 算法
 .. code:: bash
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
-    python ./models/A3CLSTM_E2E/main.py
+    # 测试模式
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d"
+    # 新训练模式
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
+    # 中断重开训练模式
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
 Baseline2: :code:`Envs` 环境 +  :code:`CVAT` 算法 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -116,4 +121,8 @@ Baseline3: :code:`UAV_VAT/UAV_VAT_Gymnasium` 环境 +  :code:`D-VAT` 算法
 .. code:: bash
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
-    python ./models/Recurrent_PPO/RPPO.py
+    # 测试模式
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0
+    # 训练模式
+    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt -tp 6008 --train_mode 1
+    

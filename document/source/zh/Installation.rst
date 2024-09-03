@@ -123,6 +123,9 @@ Step2 创建虚拟环境与库安装
         pip install sb3_contrib==2.3.0
         pip install gymnasium==0.29.1
         pip install wandb==0.17.6
+        pip install memory_profiler==0.61.0
+        pip install psutil==6.0.0
+        pip install openpyxl
 
     **仿真器端**
 
@@ -134,7 +137,7 @@ Step2 创建虚拟环境与库安装
 
         sudo apt install sumo sumo-tools sumo-doc
         pip install lxml pyproj shapely webcolors configparser --user
-        pip install transform3d
+        pip install transforms3d
 
         ## config
         gedit ~/.bashrc
