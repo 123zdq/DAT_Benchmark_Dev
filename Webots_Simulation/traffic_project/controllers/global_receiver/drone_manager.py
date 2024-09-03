@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-30 18:10:07
+LastEditTime: 2024-09-02 16:49:31
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -41,7 +41,7 @@ class droneManager:
     param {*} sumoGetFlag: a list that judges whether the cars are allocated 
     return {*}
     '''    
-    def __init__(self, supervisor:Supervisor, timeStep, id, recCtrlPort, configData, sumoList, sumoDict, sumoGetFlag):
+    def __init__(self, trackerDef:str, supervisor:Supervisor, timeStep, id, recCtrlPort, configData, sumoList, sumoDict, sumoGetFlag):
         # get supervisor node
         self.supervisor = supervisor
         # get timeStep value
@@ -59,8 +59,12 @@ class droneManager:
         else:
             self.sumoGod = SUMOGod.getSumoCarNode(id, sumoList, sumoDict, sumoGetFlag)
         # create new drone node
-        self.droneDef = 'DRONE' + str(id)
-        droneString = 'DEF ' + self.droneDef + ' M100 { controller "drone_ctrl2" customData "online" supervisor TRUE }'
+        self.trackerDef = trackerDef
+        self.droneDef = trackerDef + str(id)
+        if trackerDef == 'DRONE':
+            droneString = 'DEF ' + self.droneDef + ' M100 { controller "drone_ctrl2" customData "online" supervisor TRUE }'
+        elif trackerDef == 'CAR':
+            droneString = 'DEF ' + self.droneDef + ' SimpleRobot { controller "simpleCar_ctrl" }'
         rootChildrenField = self.supervisor.getRoot().getField('children')
         rootChildrenField.importMFNodeFromString(id, droneString)
         self.drone = self.supervisor.getFromDef(self.droneDef)
@@ -70,8 +74,8 @@ class droneManager:
         self.drone.getField('translation').setSFVec3f(droneTrV)
         # Logging
         if self.configData["Verbose"] == True:
-            MultiPortRecv.setup_logger("drone"+str(id),"../../logs/Agent"+str(id)+".log")
-            self.logger = logging.getLogger("drone"+str(id))
+            MultiPortRecv.setup_logger(trackerDef+str(id),"../../logs/Agent"+str(id)+".log")
+            self.logger = logging.getLogger(trackerDef+str(id))
         # init communications
         self.getFromActionPort = [0.] * 5
         # init action files
@@ -332,13 +336,13 @@ class droneManager:
                     is_step[self.id] = 1
                     self.step_count = 0
                     System = platform.system()
-                    if not os.path.exists("../../droneVideos/DRONE"+str(self.id)+"/episode"+str(episode)):
-                        os.mkdir("../../droneVideos/DRONE"+str(self.id)+"/episode"+str(episode))
+                    if not os.path.exists("../../Videos/"+self.trackerDef+str(self.id)+"/episode"+str(episode)):
+                        os.mkdir("../../Videos/"+self.trackerDef+str(self.id)+"/episode"+str(episode))
                     else:
                         if System == "Linux":
-                            os.system("rm -rf ../../droneVideos/DRONE" + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
+                            os.system("rm -rf ../../Videos/" + self.trackerDef + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
                         elif System == "Windows":
-                            os.system("del /s /q /f ../../droneVideos/DRONE" + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
+                            os.system("del /s /q /f ../../Videos/" + self.trackerDef + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
                     episode = episode + 1
                     if self.init():
                         # if self.configData["Verbose"] == True:

@@ -1,5 +1,6 @@
 {
-    "Simulation_Mode": "train",
+    "Simulation_Mode": "video",
+    "Tracker_Def": "CAR",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
     "Config_Agen_Num_Port": 7789,
@@ -66,7 +67,7 @@
         "total_time": 50.0,
         "warm_up_steps": 50,
         "output_car_dir": false,
-        "random_action": true,
+        "random_action": false,
         "forward_speed": 40,
         "backward_speed": -40,
         "left_speed": 40,

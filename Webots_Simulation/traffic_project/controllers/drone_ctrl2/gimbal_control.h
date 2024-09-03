@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 18:40:33
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-30 10:46:12
+ * @LastEditTime: 2024-09-02 16:10:45
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/gimbal_control.h
  * @Description: 
  * 
@@ -33,6 +33,7 @@ public:
     ~GimbalControl();
     void stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal_state);// 更新基本状态
     void cmdCb(usrPublic::vector3 msg);// 进行控制解算，得到输出
+    void updateConstrain(double* p);
     usrPublic::Joy gbl2ctrl = {};
     double theta[3] = {0};
 private:
@@ -69,6 +70,20 @@ GimbalControl::GimbalControl(double _timeStep){
     angle_constrain(2, 0) = -1.7;
     angle_constrain(2, 1) = 1.7;
 
+}
+
+/**
+ * @description: 更新云台转角限制
+ * @param: {double*} p
+ * @return: {*}
+ */
+void GimbalControl::updateConstrain(double* p){
+    angle_constrain(0, 0) = p[0];
+    angle_constrain(0, 1) = p[1];
+    angle_constrain(1, 0) = p[2];
+    angle_constrain(1, 1) = p[3];
+    angle_constrain(2, 0) = p[4];
+    angle_constrain(2, 1) = p[5];
 }
 
 // 析构函数

@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-26 20:59:13
+ * @LastEditTime: 2024-09-02 21:37:32
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -18,7 +18,7 @@
 #include <webots/Node.hpp>
 #include "Camera_Track_Check_Super.h"
 #include <../../libraries/myLibs/ALGoutfile.h>
-#include "user_public.h"
+#include "../drone_ctrl2/user_public.h"
 
 using namespace webots;
 using namespace std;
@@ -71,9 +71,9 @@ private:
 inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanceScale, double _rewardRange, double _viewScale)
 {
   supervisor = _supervisor;
-
+  
   droneDef = supervisor->getSelf()->getDef();
-  camera_slot_node = supervisor->getFromDef(droneDef)->getFromProtoDef("CAMERA_SLOT");
+  camera_slot_node = supervisor->getSelf()->getFromProtoDef("CAMERA_SLOT");
   land_node = supervisor->getFromDef("land");
   trackingCar = supervisor->getFromDef("ORIGIN");
 
