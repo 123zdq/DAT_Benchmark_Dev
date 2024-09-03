@@ -233,7 +233,7 @@ Road {
   width 16.000000
   leftBorder FALSE
   rightBorder FALSE
-  startingAngle -3.626054
+  startingAngle -3.147909
   endingAngle 1.565726
   lines [
     RoadLine {
@@ -531,7 +531,7 @@ Road {
   width 16.000000
   leftBorder FALSE
   rightBorder FALSE
-  startingAngle -0.484462
+  startingAngle -0.006317
   endingAngle -0.006317
   lines [
     RoadLine {
