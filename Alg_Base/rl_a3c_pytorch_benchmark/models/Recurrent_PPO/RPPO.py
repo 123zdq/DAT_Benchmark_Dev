@@ -515,9 +515,6 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
     def run(self, train_mode=True):
         next_state = torch.Tensor(self.envs.reset()).to(self.device)
         next_done = torch.zeros(self.num_envs).to(self.device)
-        test_reward = 0
-        test_episode_num = 0
-        test_reward_list = []
         if train_mode:
             self.model.train()
             next_gru_state = torch.zeros(2, self.num_envs, 256).to(self.device)
@@ -527,19 +524,26 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
                 )
         else:
             self.model.eval()
+            if self.num_envs == 1:
+                test_reward = 0
+                test_episode_num = 0
+                test_reward_list = []
             next_gru_state = torch.zeros(self.num_envs, 256).to(self.device)
             while True:
-                next_gru_state, next_state,reward, next_done = self.test_step(
+                next_gru_state, next_state, reward, next_done = self.test_step(
                     next_gru_state, next_state, next_done
                 )
-                if next_done:
+                if self.num_envs == 1 and next_done:
                     if test_reward != 0:
                         test_reward_list.append(test_reward)
                         test_episode_num += 1
                         print(f"episode: {test_episode_num}")
                     if len(test_reward_list) == 10:
-                        test_reward_list.append(f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}")
+                        test_reward_list.append(
+                            f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}"
+                        )
                         import pandas as pd
+
                         df = pd.DataFrame(test_reward_list, columns=["Values"])
                         df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
                     test_reward = 0
@@ -823,12 +827,12 @@ if __name__ == "__main__":
 
     if args.port == -1:
         import socket
+
         sock = socket.socket()
         sock.bind(("", 0))
         _, args.port = sock.getsockname()
         sock.close()
 
-    
     import json
 
     with open(
@@ -867,7 +871,7 @@ if __name__ == "__main__":
         ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
         shell=True,
     )
-    time.sleep(95)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    time.sleep(13)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     from envs.envs_parallel import Envs, GE
 
@@ -875,13 +879,14 @@ if __name__ == "__main__":
         envs=Envs(
             num_envs=args.workers,
             env_list=GE(args.workers, data["Benchmark"]),
-            logs_show=(args.tensorboard_port != -1),
+            logs_show=(0 if args.tensorboard_port == -1 else args.workers),
         ),
         num_envs=args.workers,
         num_minibatches=1,
         num_steps=50,
         K_epochs=5,
-        entropy_coef=1,
+        entropy_coef=0.7,
+        gamma=0.01,
         savepath=args.savepath,
     )
 

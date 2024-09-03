@@ -102,7 +102,6 @@ class Envs:
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
-                assert self.done
             else:
                 self.state, self.reward, self.done, _ = self.env.step(action)
                 if self.done > 0.5:
@@ -117,21 +116,6 @@ class Envs:
             self.should_reset = False
 
             self.rewards = 0
-            self.SummaryWriter = SummaryWriter("PPO_logs")
-            self.steps = 0
-            # self.sum=0
-            # self.tot=0
-
-            self.st = time.time()
-            self.ts = 0
-
-            # self.actions = []  # should modify
-
-            if os.path.exists("./PPO_logs/steps.txt"):
-                with open("./PPO_logs/steps.txt", "r") as file:
-                    self.steps = int(file.readline().strip())
-            else:
-                self.SummaryWriter.add_scalar("rewards", 0, 0)
 
         def reset(self):
             self.state, _ = self.env.reset()
@@ -139,22 +123,9 @@ class Envs:
         def step(self, action: int):
             if T_ and action > 3:
                 action = 6
-            # self.actions.append(action)
-            self.steps += 1
-            self.ts += 1
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
-
-                self.SummaryWriter.add_scalar("rewards", self.rewards, self.steps)
-                self.SummaryWriter.add_scalar(
-                    "runtime/step(s)", (time.time() - self.st) / self.ts, self.ts
-                )
-                with open("./PPO_logs/steps.txt", "w") as file:
-                    file.write(str(self.steps))
-
-                # self.SummaryWriter.add_histogram("actions", np.array(self.actions))  ###
-
                 self.rewards = 0
             else:
                 self.state, self.reward, self.done, _ = self.env.step(action)
@@ -189,9 +160,25 @@ class Envs:
         self.executor = concurrent.futures.ThreadPoolExecutor(max_workers=self.num_envs)
 
         if "logs_show" in kwargs:
-            if kwargs["logs_show"]:
-                _env = self.env_list[0].env
-                self.env_list[0] = self.Env_T(_env)
+            self.logs = kwargs["logs_show"]
+            if self.logs > 0:
+                self.SummaryWriter = SummaryWriter("PPO_logs")
+
+                for i in range(self.logs):
+                    _env = self.env_list[i].env
+                    self.env_list[i] = self.Env_T(_env)
+
+                # self.rewards=[]
+                self.steps = 0
+
+                self.st = time.time()
+                self.ts = 0
+
+                if os.path.exists("./PPO_logs/steps.txt"):
+                    with open("./PPO_logs/steps.txt", "r") as file:
+                        self.steps = int(file.readline().strip())
+                else:
+                    self.SummaryWriter.add_scalar("rewards", 0, 0)
 
     async def reset_(self):
         loop = asyncio.get_running_loop()
@@ -229,6 +216,49 @@ class Envs:
 
     def step(self, actions):
         asyncio.run(self.step_(actions))
+
+        if self.logs > 0:
+            self.steps += 1
+            self.ts += 1
+            rs = 0
+            tot = 0
+            for i in range(self.logs):
+                if self.env_list[i].should_reset and self.env_list[i].rewards > 0:
+                    rs += self.env_list[i].rewards
+                    tot += 1
+            if tot > 0:
+                self.SummaryWriter.add_scalar("rewards", rs / tot, self.steps)
+            self.SummaryWriter.add_scalar(
+                "runtime/step (s)", (time.time() - self.st) / self.ts, self.ts
+            )
+            with open("./PPO_logs/steps.txt", "w") as file:
+                file.write(str(self.steps))
+                
+                
+                # self.SummaryWriter.add_histogram("actions", np.array(self.actions))  ###
+                """
+
+                test_reward = 0
+                test_episode_num = 0
+                test_reward_list = []
+
+                
+
+                if next_done:
+                    if test_reward != 0:
+                        test_reward_list.append(test_reward)
+                        test_episode_num += 1
+                        print(f"episode: {test_episode_num}")
+                    if len(test_reward_list) == 10:
+                        test_reward_list.append(f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}")
+                        import pandas as pd
+                        df = pd.DataFrame(test_reward_list, columns=["Values"])
+                        df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
+                    test_reward = 0
+                else:
+                    test_reward += float(reward[0])
+                """
+
         return self.states, self.rewards, self.done
 
 

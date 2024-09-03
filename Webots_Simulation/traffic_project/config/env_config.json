@@ -29,11 +29,11 @@
         "view_scale": 4
     },
     "Sumo_Params": {
-        "rou_update": false,
-        "max_sumo_car": 28,
-        "fixed_car_group_num": true,
+        "rou_update": true,
+        "max_sumo_car": 40,
+        "fixed_car_group_num": false,
         "car_group_num": 10,
-        "car_import_interval": 75.0,
+        "car_import_interval": 52.0,
         "car_type": "passenger",
         "fixed_color": false,
         "normalize_color": [
@@ -47,7 +47,7 @@
         "max_rou_distance": 7000,
         "min_rou_distance": 500,
         "route_num": 100000,
-        "fixed_seed": true,
+        "fixed_seed": false,
         "random_seed": 1
     },
     "Other_Params": {
@@ -77,28 +77,28 @@
     },
     "Drone_Random_Config": {
         "start_time_bias_ms": 510,
-        "view_pitch_random": false,
+        "view_pitch_random": true,
         "view_pitch_fixed": 1.37,
-        "view_pitch_random_max": 0.6,
-        "view_pitch_random_min": 0.2,
-        "height_random": false,
+        "view_pitch_random_max": 1.38,
+        "view_pitch_random_min": 0.6,
+        "height_random": true,
         "height_fixed": 22,
-        "height_random_max": 15.0,
-        "height_random_min": 10.0,
-        "direction_random": false,
+        "height_random_max": 22.0,
+        "height_random_min": 13.0,
+        "direction_random": true,
         "direction_random_multilateral": false,
         "direction_fixed": 0,
         "direction_random_max": 3.1415926535,
         "direction_random_min": -3.1415926535,
-        "horizon_bias_random": false,
+        "horizon_bias_random": true,
         "horizon_bias_multilateral": true,
         "horizon_bias_fixed": 0,
         "horizon_bias_random_max": 4.5,
-        "horizon_bias_random_min": 3.6,
-        "verticle_bias_random": false,
+        "horizon_bias_random_min": 2.5,
+        "verticle_bias_random": true,
         "verticle_bias_multilateral": true,
         "verticle_bias_fixed": 0,
         "verticle_bias_random_max": 4.5,
-        "verticle_bias_random_min": 3.6
+        "verticle_bias_random_min": 2.5
     }
 }
