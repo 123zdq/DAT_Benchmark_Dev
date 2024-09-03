@@ -18,9 +18,11 @@ from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward,check_memory
 import math
 from threading import Thread
 from logs.Empty_Log import Empty_Logger
+import json
 # import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
+ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
 
 global_start_flag = False
 
@@ -149,13 +151,16 @@ class BenchEnv_Multi():
         for i in range(6):
             self.port_list.append(BASE_PORT+6*process_idx+i)
         
+        with open(ENV_CONF, "r") as file:
+            data = json.load(file)
+            Tracker_Mode = data["Tracker_Def"]
         ## Specify the File Path of each system path
         ## To do: CHANGE ABSOLUTE PATH TO RELATIVE PATH
-        self.action_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_AlgAction.txt"
-        self.reward_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_Ctrl2Global.txt"
-        self.img_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_VideoFrame.jpeg"
-        self.pointcloud_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_PointCloud.txt"
-        self.rewardparam_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + "DRONE" + str(process_idx) + "_RewardParams.txt"
+        self.action_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_AlgAction.txt"
+        self.reward_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_Ctrl2Global.txt"
+        self.img_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_VideoFrame.jpeg"
+        self.pointcloud_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_PointCloud.txt"
+        self.rewardparam_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_RewardParams.txt"
         
         self.port_process = port_process
         """
