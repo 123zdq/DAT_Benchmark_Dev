@@ -93,7 +93,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
                              scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"],\
-                             reward_type=env_conf["RewardType"],verbose=env_conf["verbose"])
+                             reward_type=env_conf["RewardType"],verbose=env_conf["verbose"],delay=env_conf["delay"])
         process_func = Identity
         return env,process_func
 
@@ -117,7 +117,7 @@ class BenchEnv_Multi():
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
         port_process,end_reward,end_reward_list,scene,weather,auto_start,\
-        Control_Frequence = 500,reward_type="default",verbose=False) -> None:
+        Control_Frequence = 500,reward_type="default",verbose=False,delay=20) -> None:
         
         self.Action_dim = Action_dim
         self.process_state = process_state
@@ -195,7 +195,7 @@ class BenchEnv_Multi():
         # while not global_start_flag:
         #     pass
         if auto_start:
-            time.sleep(20)
+            time.sleep(delay)
             
         
         # Inform Env of Num worker

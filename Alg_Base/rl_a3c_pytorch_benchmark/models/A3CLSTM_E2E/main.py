@@ -96,8 +96,69 @@ parser.add_argument(
     help="type the model Type:Default or E2E",
 )
 
+parser.add_argument(
+    "-Mode",
+    "--Mode",
+    type=int,
+    default=1,
+    help="specify train mode(1) or test mode(0)",
+)
 
+parser.add_argument(
+    "-TP",
+    "--Test_Param",
+    type=str,
+    default="CityStreet-d",
+    help="specify train mode(1) or test mode(0)",
+)
 
+parser.add_argument(
+    "-Sc",
+    "--Scene",
+    type=str,
+    default="citystreet",
+    help="[citystreet,downtown,lake,village,desert,farmland]",
+)
+
+parser.add_argument(
+    "-W",
+    "--Weather",
+    type=str,
+    default="day",
+    help="[day,night,foggy,snow]",
+)
+
+parser.add_argument(
+    "-P",
+    "--Port",
+    type=int,
+    default=-1,
+    help="Communication Port -1 for normal",
+)
+
+parser.add_argument(
+    "-F",
+    "--Freq",
+    type=int,
+    default=125,
+    help="Control Frequency",
+)
+
+parser.add_argument(
+    "-D",
+    "--delay",
+    type=int,
+    default=20,
+    help="Delay after webots start",
+)
+
+parser.add_argument(
+    "-N",
+    "--New_Train",
+    action='store_true',
+    default=False,
+    help="Whether restart a new training",
+)
 
 parser.add_argument(
     "-l", "--lr", type=float, default=0.0001, help="learning rate (default: 0.0001)"
@@ -216,7 +277,7 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
-MODE = "test"
+
 
 # Based on
 # https://github.com/pytorch/examples/tree/master/mnist_hogwild
@@ -227,6 +288,18 @@ MODE = "test"
             # cv2.waitKey(0)
 if __name__ == '__main__':
     args = parser.parse_args()
+    if args.Mode == 0:
+        MODE = "test"
+    else:
+        MODE = "train"
+
+    if args.Port == -1:
+        import socket
+
+        sock = socket.socket()
+        sock.bind(("", 0))
+        _, args.Port = sock.getsockname()
+        sock.close()
 
     import json
 
@@ -234,6 +307,8 @@ if __name__ == '__main__':
         "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
     ) as file:
         data = json.load(file)
+    data["Config_Agen_Num_Port"] = args.Port
+    data["Control_Frequence"] = args.Freq
     if MODE == "test":
         data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False
@@ -253,6 +328,36 @@ if __name__ == '__main__':
     ) as file:
         json.dump(data, file, indent=4)
 
+    with open(
+        "./config.json", "r"
+    ) as file:
+        data = json.load(file)
+
+    data["Benchmark"]["auto_start"]=True
+    data["Benchmark"]["scene"]=args.Scene
+    data["Benchmark"]["weather"]=args.Weather
+    data["Benchmark"]["port_process"] = args.Port
+    data["Benchmark"]["Control_Frequence"] = args.Freq
+    data["Benchmark"]["delay"] = args.delay
+
+    with open(
+        "./config.json", "w"
+    ) as file:
+        json.dump(data, file, indent=4)
+
+    if args.New_Train and os.path.exists("./models/A3CLSTM_E2E/num_test.txt"):
+        with open(
+            "./models/A3CLSTM_E2E/num_test.txt", "w"
+        ) as file:
+            file.write("0")
+
+    if MODE == "train":
+        import subprocess
+        tb = subprocess.Popen(
+            ["tensorboard --logdir ./models/A3CLSTM_E2E/runs/Benchmark_training"],
+            shell=True,
+        )
+
     torch.manual_seed(args.seed)
     if args.gpu_ids != [-1]:
         torch.cuda.manual_seed(args.seed)
@@ -265,7 +370,7 @@ if __name__ == '__main__':
         shared_model = A3Clstm(env_conf["State_channel"], env_conf["Action_dim"], args)
     elif args.model_type == "E2E":
         shared_model = A3ClstmE2E(env_conf["State_channel"], env_conf["Action_dim"], args)
-    if args.load and os.path.exists(f"{args.save_model_dir}{args.env}.dat"):
+    if args.load and os.path.exists(f"{args.save_model_dir}{args.env}.dat") and MODE == "train" and not args.New_Train:
         print("Loading Model: "+f"{args.load_model_dir}{args.env}.dat")
         saved_state = torch.load(
             f"{args.load_model_dir}{args.env}.dat",
@@ -303,7 +408,7 @@ if __name__ == '__main__':
         load_path = "./models/A3CLSTM_E2E/trained_models/"
         # path_list = ["CityStreet-n.dat","CityStreet-s.dat","Downtown-d.dat","Downtown-f.dat","Farmland-d.dat","Farmland-f.dat","Farmland-s.dat","Lake-d.dat","Lake-s.dat","Village-s.dat"]
         # path_list = ["CityStreet-d.dat","CityStreet-f.dat","Downtown-n.dat","Downtown-s.dat","Farmland-n.dat","Lake-n.dat","Lake-f.dat","Village-d.dat","Village-n.dat","Village-f.dat"]
-        path_list = ["CityStreet-d.dat"]
+        path_list = [args.Test_Param+".dat"]
         # test(args, shared_model, env_conf,read_num_test=False,load_path=load_path)
         processes = []
         for idx,dat in enumerate(path_list):
