@@ -2,7 +2,7 @@
 #include <Eigen/Eigen>
 #include <iostream>
 #include <math.h>
-#include "user_public.h"
+#include "../drone_ctrl2/user_public.h"
 using namespace Eigen;
 
 class camera2real

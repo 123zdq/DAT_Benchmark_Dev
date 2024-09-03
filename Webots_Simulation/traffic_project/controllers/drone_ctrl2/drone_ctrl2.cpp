@@ -338,7 +338,7 @@ int main(int argc, char **argv)
         key = keyboard->getKey();
       }
     }
-
+    // 获取云台目标姿态，和action数据
     if (config.get()->simulationMode == string("train"))
     {
       drone_fly = true;
@@ -652,13 +652,29 @@ int main(int argc, char **argv)
       {
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
         double cmd_yaw = jCtrl.cmd_yaw_;
-        if (cmd_yaw > M_PI)
+        while (cmd_yaw > M_PI)
         {
-          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw + M_PI) / (2. * M_PI));
+          cmd_yaw -= 2. * M_PI;
         }
-        else if (cmd_yaw < -M_PI)
+        while (cmd_yaw < -M_PI)
         {
-          cmd_yaw = cmd_yaw - 2. * M_PI * int((cmd_yaw - M_PI) / (2. * M_PI));
+          cmd_yaw += 2. * M_PI;
+        }
+        const double ro_t[4] = {0, 0, 1, cmd_yaw};
+        robot->getSelf()->getField("translation")->setSFVec3f(tr_t);
+        robot->getSelf()->getField("rotation")->setSFRotation(ro_t);
+      }
+      else if(config.get()->simulationMode == string("video") && config.get()->video.randomAction == true && step_count>5 && step_count<(config.get()->trainTotalStep-5))
+      {
+        const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
+        double cmd_yaw = jCtrl.cmd_yaw_;
+        while (cmd_yaw > M_PI)
+        {
+          cmd_yaw -= 2. * M_PI;
+        }
+        while (cmd_yaw < -M_PI)
+        {
+          cmd_yaw += 2. * M_PI;
         }
         const double ro_t[4] = {0, 0, 1, cmd_yaw};
         robot->getSelf()->getField("translation")->setSFVec3f(tr_t);
@@ -817,7 +833,7 @@ int main(int argc, char **argv)
     {
       static double last_frame_t = config.get()->video.startTime;
       static uint32_t videoCount = 0;
-      static string foldername = "../../droneVideos/" + droneDef;
+      static string foldername = "../../Videos/" + droneDef;
       static int32_t episode = -1;
       if (episode == -1)
       {

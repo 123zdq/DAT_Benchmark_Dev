@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-05-10 11:12:11
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-08-27 12:06:38
+LastEditTime: 2024-09-02 16:54:35
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
 Description: 
 
@@ -55,8 +55,9 @@ BASE_PORT = 6000
 class MultiProcessRecv():
     Number_process = 0
     
-    def __init__(self,tar_ip,max_data_size:int,ctrl_freq:float,process_port=7787,verbose=False) -> None:
+    def __init__(self,trackerDef:str,tar_ip,max_data_size:int,ctrl_freq:float,process_port=7787,verbose=False) -> None:
         
+        self.trackerDef = trackerDef
         self.tar_ip = tar_ip
         self.ctrl_freq = ctrl_freq
         base_dir = "../../Files2Alg/"
@@ -142,8 +143,8 @@ class MultiProcessRecv():
         print(MultiProcessRecv.Number_process)
         for i in range(MultiProcessRecv.Number_process):
             if self.verbose == True:
-                setup_logger("drone"+str(i),"../../logs/Agent"+str(i)+".log")
-                self.logger_list.append(logging.getLogger("drone"+str(i)))
+                setup_logger(self.trackerDef+str(i),"../../logs/Agent"+str(i)+".log")
+                self.logger_list.append(logging.getLogger(self.trackerDef+str(i)))
             # Curr_Process = []
             # for port in range(6):
             #     self.socketPort.append(BASE_PORT + i*6 + port)
@@ -215,8 +216,8 @@ class MultiProcessRecv():
         self.thread_list = []
         for i in range(MultiProcessRecv.Number_process):
             t = threading.Thread(target = self.Single_action,args=(i,
-                                                                   "../../Files2Alg/" + "DRONE" + str(i) + "_AlgAction.txt",
-                                                                   "../../Files2Alg/" + "DRONE" + str(i) + "_VideoFrame.txt"))
+                                                                   "../../Files2Alg/" + self.trackerDef + str(i) + "_AlgAction.txt",
+                                                                   "../../Files2Alg/" + self.trackerDef + str(i) + "_VideoFrame.txt"))
             self.thread_list.append(t)
         for j in range(MultiProcessRecv.Number_process):
             self.thread_list[j].start()

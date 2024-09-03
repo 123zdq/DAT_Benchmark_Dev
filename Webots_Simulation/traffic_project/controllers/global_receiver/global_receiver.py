@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-02 13:09:16
+LastEditTime: 2024-09-02 22:53:21
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -30,17 +30,6 @@ import sys
 sys.path.append("../../config")
 import safetyCheck
 
-def check(input:str, container:list):
-        is_contain = False
-        for i in range(len(container)):
-            if input == container[i]:
-                is_contain = True
-        if is_contain == True:
-            return input
-        else:
-            return container[0]
-
-
 # check running system
 System = platform.system()
 
@@ -62,10 +51,16 @@ with open('../../config/env_config_backup.json', 'r') as file:
 # safety check
 if configData["Sumo_Params"]["rou_update"] == False:
     configData["Sumo_Params"]["rou_update"] = safetyCheck.checkSumoUpdate(configData,configData_backup)
-configData["Simulation_Mode"] = check(str(configData["Simulation_Mode"]),safetyCheck.SIMULATION_MODE)
-configData["Tracking_Object"] = check(configData["Tracking_Object"],safetyCheck.TRACKING_OBJECT)
-configData["Reward_Config"]["reward_mode"] = check(configData["Reward_Config"]["reward_mode"],safetyCheck.REWARD_MODE)
-configData["Sumo_Params"]["car_type"] = check(configData["Sumo_Params"]["car_type"],safetyCheck.CAR_TYPE)
+    if world_path != configData_backup["World_Path"]:
+        configData["Sumo_Params"]["rou_update"] = True
+configData["Simulation_Mode"] = safetyCheck.check(str(configData["Simulation_Mode"]),safetyCheck.SIMULATION_MODE)
+configData["Tracker_Def"] = safetyCheck.check(str(configData["Tracker_Def"]),safetyCheck.TRACKER_DEF)
+configData["Tracking_Object"] = safetyCheck.check(configData["Tracking_Object"],safetyCheck.TRACKING_OBJECT)
+configData["Reward_Config"]["reward_mode"] = safetyCheck.check(configData["Reward_Config"]["reward_mode"],safetyCheck.REWARD_MODE)
+configData["Sumo_Params"]["car_type"] = safetyCheck.check(configData["Sumo_Params"]["car_type"],safetyCheck.CAR_TYPE)
+
+# get tracker def
+trackerDef = str(configData["Tracker_Def"])
     
 # set config data to sumo interface
 SUMO_Interface = robot.getFromDef("SUMO_INTERFACE")
@@ -95,8 +90,21 @@ global_init = False
 FollowPort = None
 file_path = world_path[:-4] + '_net'
 car_import_group_num = configData["Sumo_Params"]["car_group_num"]
+
+# clear cache files
+if System == "Linux":
+        os.system("rm -rf ../../Files2Alg/*.txt")
+        os.system("rm -rf ../../Files2Alg/*.jpeg")
+        os.system("rm -rf ../../cache/*.txt")
+        os.system("rm -rf ../../cache/*.jpeg")
+elif System == "Windows":
+    os.system("del /s /q /f ../../Files2Alg/*.txt")
+    os.system("del /s /q /f ../../Files2Alg/*.jpeg")
+    os.system("del /s /q /f ../../cache/*.txt")
+    os.system("del /s /q /f ../../cache/*.jpeg")
+    
 if configData["Simulation_Mode"] == "demo":
-    drone_manager.droneManager(robot, timestep, 0, [], configData, [], {}, [False])
+    drone_manager.droneManager(trackerDef, robot, timestep, 0, [], configData, [], {}, [False])
     data = [0.] * 6
     data[4] = -1 # inited to -1
     data[5] = -1
@@ -113,18 +121,8 @@ if configData["Simulation_Mode"] == "demo":
         #     randomorder.sumo_rou_random_os(file_path, int(4), System, configData["Sumo_Params"])
         randomorder.sumo_rou_random_os(file_path, int(car_import_group_num), System, configData["Sumo_Params"])
 elif configData["Simulation_Mode"] == "train":
-    if System == "Linux":
-        os.system("rm -rf ../../Files2Alg/*.txt")
-        os.system("rm -rf ../../Files2Alg/*.jpeg")
-        os.system("rm -rf ../../cache/*.txt")
-        os.system("rm -rf ../../cache/*.jpeg")
-    elif System == "Windows":
-        os.system("del /s /q /f ../../Files2Alg/*.txt")
-        os.system("del /s /q /f ../../Files2Alg/*.jpeg")
-        os.system("del /s /q /f ../../cache/*.txt")
-        os.system("del /s /q /f ../../cache/*.jpeg")
     # multiple communications
-    multiCom = MultiPortRecv.MultiProcessRecv(configData["Socket_Ip"],5,configData["Control_Frequence"],configData["Config_Agen_Num_Port"],configData["Verbose"])
+    multiCom = MultiPortRecv.MultiProcessRecv(trackerDef,configData["Socket_Ip"],5,configData["Control_Frequence"],configData["Config_Agen_Num_Port"],configData["Verbose"])
     multiCom.main()
     # activate map random init
     if configData["Tracking_Object"] == "SUMO_VEHICLE":
@@ -144,19 +142,26 @@ elif configData["Simulation_Mode"] == "train":
     sumoDictionary = {}
     sumoGetCarFlag = [False]*multiCom.Number_process
     for i in range(multiCom.Number_process):
-        droneM.append(drone_manager.droneManager(robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag))
+        droneM.append(drone_manager.droneManager(trackerDef, robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag))
 elif configData["Simulation_Mode"] == "video":
     # clear space
     delete_count = 0
-    while os.path.exists("../../droneVideos/DRONE"+str(delete_count)):
+    while os.path.exists("../../Videos/" + "DRONE" + str(delete_count)):
         if System == "Linux":
-            os.system("rm -rf ../../droneVideos/DRONE" + str(delete_count))
+            os.system("rm -rf ../../Videos/" + "DRONE" + str(delete_count))
         elif System == "Windows":
-            os.system("del /s /q /f ../../droneVideos/DRONE" + str(delete_count))
+            os.system("del /s /q /f ../../Videos/" + "DRONE" + str(delete_count))
+        delete_count = delete_count + 1
+    delete_count = 0
+    while os.path.exists("../../Videos/" + "CAR" + str(delete_count)):
+        if System == "Linux":
+            os.system("rm -rf ../../Videos/" + "CAR" + str(delete_count))
+        elif System == "Windows":
+            os.system("del /s /q /f ../../Videos/" + "CAR" + str(delete_count))
         delete_count = delete_count + 1
     # create directories to contain frames
     for i in range(configData["Out_Video"]["channels"]):
-        os.mkdir("../../droneVideos/DRONE"+str(i))    
+        os.mkdir("../../Videos/" + str(trackerDef) + str(i))    
         
     # activate map random init
     if configData["Tracking_Object"] == "SUMO_VEHICLE":
@@ -176,8 +181,9 @@ elif configData["Simulation_Mode"] == "video":
     sumoDictionary = {}
     sumoGetCarFlag = [False]*configData["Out_Video"]["channels"]
     for i in range(configData["Out_Video"]["channels"]):
-        droneM.append(drone_manager.droneManager(robot, timestep, i, None, configData, sumoList, sumoDictionary, sumoGetCarFlag))
+        droneM.append(drone_manager.droneManager(trackerDef, robot, timestep, i, None, configData, sumoList, sumoDictionary, sumoGetCarFlag))
   
+configData["World_Path"] = world_path
 with open('../../config/env_config_backup.json', 'w') as file:
     json.dump(configData,file)
     file.close() 

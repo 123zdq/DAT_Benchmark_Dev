@@ -1,4 +1,5 @@
 SIMULATION_MODE = ["demo", "video", "train"]
+TRACKER_DEF = ["DRONE","CAR"]
 TRACKING_OBJECT = ["SUMO_VEHICLE",
                    "Pedestrian",
                    "Shrimp",
@@ -43,3 +44,13 @@ def checkSumoUpdate(configData,configData_backup):
     if configData["Sumo_Params"]["fixed_car_group_num"] == False:
         return True
     return False
+
+def check(input:str, container:list):
+        is_contain = False
+        for i in range(len(container)):
+            if input == container[i]:
+                is_contain = True
+        if is_contain == True:
+            return input
+        else:
+            return container[0]
