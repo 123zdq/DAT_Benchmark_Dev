@@ -67,6 +67,17 @@
   <node id='-59428' action='modify' visible='true' lat='26.55879993496' lon='104.9718739659' />
   <node id='-59429' action='modify' visible='true' lat='26.55901848072' lon='104.97185730714' />
   <node id='-59430' action='modify' visible='true' lat='26.55926186072' lon='104.97184064838' />
+  <node id='-59432' action='modify' visible='true' lat='26.55970413107' lon='104.97310389989' />
+  <node id='-59433' action='modify' visible='true' lat='26.55961706472' lon='104.97454281777' />
+  <node id='-59434' action='modify' visible='true' lat='26.5591979291' lon='104.97605172897' />
+  <node id='-59435' action='modify' visible='true' lat='26.56076035479' lon='104.97580145464' />
+  <node id='-59436' action='modify' visible='true' lat='26.56190051864' lon='104.97293030717' />
+  <node id='-59437' action='modify' visible='true' lat='26.56194553285' lon='104.97498227023' />
+  <node id='-59438' action='modify' visible='true' lat='26.56078916507' lon='104.97155124141' />
+  <node id='-59439' action='modify' visible='true' lat='26.55814256554' lon='104.97175121' />
+  <node id='-59445' action='modify' visible='true' lat='26.55810616284' lon='104.97552966545' />
+  <node id='-59450' action='modify' visible='true' lat='26.55643995196' lon='104.97540081425' />
+  <node id='-59451' action='modify' visible='true' lat='26.56027803856' lon='104.97738575361' />
   <node id='4399048181' action='delete' timestamp='2016-09-13T15:49:21Z' uid='56597' user='Oberaffe' visible='true' version='1' changeset='42129235' lat='26.5932618' lon='104.9517814'>
     <tag k='power' v='tower' />
   </node>
@@ -604,13 +615,10 @@
   </node>
   <node id='11191694722' action='delete' timestamp='2023-09-14T21:34:36Z' uid='10216874' user='Maps Man' visible='true' version='1' changeset='141277258' lat='26.5529127' lon='104.9692298' />
   <way id='-7461' action='modify' visible='true'>
-    <nd ref='-59271' />
-    <nd ref='-59272' />
-    <nd ref='-59277' />
+    <nd ref='-59433' />
     <nd ref='-59273' />
     <nd ref='-59282' />
-    <nd ref='-59274' />
-    <nd ref='-59275' />
+    <nd ref='-59434' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -625,8 +633,6 @@
     <nd ref='-59277' />
     <nd ref='-59278' />
     <nd ref='-59288' />
-    <nd ref='-59279' />
-    <nd ref='-59280' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -638,8 +644,7 @@
     <tag k='width' v='12' />
   </way>
   <way id='-7472' action='modify' visible='true'>
-    <nd ref='-59282' />
-    <nd ref='-59283' />
+    <nd ref='-59435' />
     <nd ref='-59284' />
     <nd ref='-59285' />
     <nd ref='-59286' />
@@ -657,8 +662,7 @@
     <nd ref='-59288' />
     <nd ref='-59303' />
     <nd ref='-59289' />
-    <nd ref='-59290' />
-    <nd ref='-59291' />
+    <nd ref='-59445' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -670,11 +674,9 @@
     <tag k='width' v='12' />
   </way>
   <way id='-7495' action='modify' visible='true'>
-    <nd ref='-59319' />
-    <nd ref='-59320' />
+    <nd ref='-59437' />
     <nd ref='-59321' />
     <nd ref='-59286' />
-    <nd ref='-59322' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -686,10 +688,9 @@
     <tag k='width' v='12' />
   </way>
   <way id='-7499' action='modify' visible='true'>
-    <nd ref='-59324' />
+    <nd ref='-59439' />
     <nd ref='-59325' />
     <nd ref='-59271' />
-    <nd ref='-59319' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -701,10 +702,8 @@
     <tag k='width' v='12' />
   </way>
   <way id='-7502' action='modify' visible='true'>
-    <nd ref='-59326' />
     <nd ref='-59291' />
     <nd ref='-59275' />
-    <nd ref='-59322' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -718,7 +717,6 @@
   <way id='-7508' action='modify' visible='true'>
     <nd ref='-59324' />
     <nd ref='-59280' />
-    <nd ref='-59326' />
     <tag k='cutting' v='yes' />
     <tag k='embankment' v='yes' />
     <tag k='highway' v='trunk' />
@@ -868,6 +866,234 @@
     <nd ref='-59430' />
     <nd ref='-59399' />
     <tag k='natural' v='water' />
+  </way>
+  <way id='-7664' action='modify' visible='true'>
+    <nd ref='-59271' />
+    <nd ref='-59272' />
+    <nd ref='-59432' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7673' action='modify' visible='true'>
+    <nd ref='-59432' />
+    <nd ref='-59277' />
+    <nd ref='-59433' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7682' action='modify' visible='true'>
+    <nd ref='-59434' />
+    <nd ref='-59274' />
+    <nd ref='-59275' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7689' action='modify' visible='true'>
+    <nd ref='-59282' />
+    <nd ref='-59283' />
+    <nd ref='-59435' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7697' action='modify' visible='true'>
+    <nd ref='-59319' />
+    <nd ref='-59436' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7705' action='modify' visible='true'>
+    <nd ref='-59436' />
+    <nd ref='-59320' />
+    <nd ref='-59437' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7709' action='modify' visible='true'>
+    <nd ref='-59286' />
+    <nd ref='-59322' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7716' action='modify' visible='true'>
+    <nd ref='-59438' />
+    <nd ref='-59319' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7719' action='modify' visible='true'>
+    <nd ref='-59271' />
+    <nd ref='-59438' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7724' action='modify' visible='true'>
+    <nd ref='-59324' />
+    <nd ref='-59439' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7733' action='modify' visible='true'>
+    <nd ref='-59288' />
+    <nd ref='-59279' />
+    <nd ref='-59280' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7741' action='modify' visible='true'>
+    <nd ref='-59445' />
+    <nd ref='-59290' />
+    <nd ref='-59291' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7750' action='modify' visible='true'>
+    <nd ref='-59280' />
+    <nd ref='-59450' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7755' action='modify' visible='true'>
+    <nd ref='-59450' />
+    <nd ref='-59326' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7757' action='modify' visible='true'>
+    <nd ref='-59326' />
+    <nd ref='-59291' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7761' action='modify' visible='true'>
+    <nd ref='-59275' />
+    <nd ref='-59451' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
+  </way>
+  <way id='-7766' action='modify' visible='true'>
+    <nd ref='-59451' />
+    <nd ref='-59322' />
+    <tag k='cutting' v='yes' />
+    <tag k='embankment' v='yes' />
+    <tag k='highway' v='trunk' />
+    <tag k='lanes' v='4' />
+    <tag k='lanes:backward' v='2' />
+    <tag k='lanes:forward' v='2' />
+    <tag k='motorroad' v='yes' />
+    <tag k='oneway' v='yes' />
+    <tag k='width' v='12' />
   </way>
   <way id='442502299' action='delete' timestamp='2023-09-14T21:34:36Z' uid='10216874' user='Maps Man' visible='true' version='3' changeset='141277258'>
     <tag k='cables' v='3' />
