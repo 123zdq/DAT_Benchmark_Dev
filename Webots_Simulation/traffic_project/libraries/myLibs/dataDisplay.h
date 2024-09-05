@@ -58,12 +58,12 @@ private:
 			int _color;
 			switch (i)
 			{
-			case 0: _color = getcolor(255, 0, 0); break;// ��
-			case 1: _color = getcolor(0, 255, 0); break;// ��
-			case 2: _color = getcolor(0, 0, 255); break;// ��
-			case 3: _color = getcolor(0, 255, 255); break;// ��
-			case 4: _color = getcolor(255, 0, 255); break;// ��
-			case 5: _color = getcolor(255, 255, 0); break;// ��
+			case 0: _color = getcolor(255, 0, 0); break;// 红
+			case 1: _color = getcolor(0, 255, 0); break;// 绿
+			case 2: _color = getcolor(0, 0, 255); break;// 蓝
+			case 3: _color = getcolor(0, 255, 255); break;// 蓝绿（亮蓝）
+			case 4: _color = getcolor(255, 0, 255); break;// 紫色
+			case 5: _color = getcolor(255, 255, 0); break;// 黄色
 			default:break;
 			}
 			currentDisp->setElement(num2row(_data[i]), width - 1, _color);// �Ѹ��µ���ɫд�����һ��������
@@ -133,6 +133,14 @@ public:
 				anxis->setElement(num2row(-i * DATAMAX / (double)ANXISDIVID), j, anxis_color);
 			}
 		}
+	}
+	~dataDisplay()
+	{
+		// delete currentDisp;
+		// delete lastDisp;
+		// delete isUpdate;
+		// delete transfer;
+		// delete anxis;
 	}
 
 	/* ���߻��� */

@@ -51,7 +51,7 @@ Crossroad {
   shape [
   ]
   connectedRoadIDs [
-    "-7675_1"
+    "-7675"
     "-7683"
   ]
 }
@@ -62,8 +62,8 @@ Crossroad {
   shape [
   ]
   connectedRoadIDs [
-    "-7675_2"
-    "-7684_1"
+    "-7684"
+    "-7929"
   ]
 }
 Crossroad {
@@ -73,8 +73,8 @@ Crossroad {
   shape [
   ]
   connectedRoadIDs [
-    "-7872_2"
     "-7889"
+    "-7938"
   ]
 }
 Crossroad {
@@ -84,7 +84,7 @@ Crossroad {
   shape [
   ]
   connectedRoadIDs [
-    "-7677_2"
+    "-7677"
     "-7860"
   ]
 }
@@ -103,13 +103,35 @@ Crossroad {
   ]
   connectedRoadIDs [
     "-7711"
-    "-7872_1"
-    "-7872_2"
+    "-7872"
+    "-7938"
+  ]
+}
+Crossroad {
+  translation -130.209416 -102.497942 0.010000
+  name "crossroad(6)"
+  id "-59540"
+  shape [
+  ]
+  connectedRoadIDs [
+    "-7711"
+    "-7909"
+  ]
+}
+Crossroad {
+  translation 142.491923 96.034142 0.010000
+  name "crossroad(7)"
+  id "-59544"
+  shape [
+  ]
+  connectedRoadIDs [
+    "-7844"
+    "-7906"
   ]
 }
 Crossroad {
   translation 262.616134 113.606040 0.010000
-  name "crossroad(6)"
+  name "crossroad(8)"
   id "-59547"
   shape [
     10.051255 -7.935507 0.000000
@@ -121,14 +143,14 @@ Crossroad {
     10.051255 -7.935507 0.000000
   ]
   connectedRoadIDs [
-    "-7684_1"
-    "-7684_2"
-    "-7844"
+    "-7684"
+    "-7906"
+    "-7932"
   ]
 }
 Crossroad {
   translation -47.182740 312.822360 0.010000
-  name "crossroad(7)"
+  name "crossroad(9)"
   id "-59549"
   shape [
     10.159769 7.796095 0.000000
@@ -140,14 +162,25 @@ Crossroad {
     10.159769 7.796095 0.000000
   ]
   connectedRoadIDs [
-    "-7675_1"
-    "-7675_2"
+    "-7675"
     "-7724"
+    "-7929"
+  ]
+}
+Crossroad {
+  translation -69.325906 120.830037 0.010000
+  name "crossroad(10)"
+  id "-59554"
+  shape [
+  ]
+  connectedRoadIDs [
+    "-7724"
+    "-7903"
   ]
 }
 Crossroad {
   translation 16.423426 -0.198020 0.010000
-  name "crossroad(8)"
+  name "crossroad(11)"
   id "-59556"
   shape [
     12.778119 -0.848335 0.000000
@@ -161,15 +194,15 @@ Crossroad {
     12.778119 -0.848335 0.000000
   ]
   connectedRoadIDs [
-    "-7711"
-    "-7724"
     "-7844"
     "-7847"
+    "-7903"
+    "-7909"
   ]
 }
 Crossroad {
   translation 142.415577 -312.772511 0.010000
-  name "crossroad(9)"
+  name "crossroad(12)"
   id "-59562"
   shape [
     8.063155 9.949147 0.000000
@@ -182,47 +215,127 @@ Crossroad {
     8.063155 9.949147 0.000000
   ]
   connectedRoadIDs [
-    "-7677_1"
-    "-7677_2"
+    "-7677"
     "-7847"
+    "-7934"
   ]
 }
 Crossroad {
   translation 261.823537 -9.604660 0.010000
-  name "crossroad(10)"
+  name "crossroad(13)"
   id "-59608"
   shape [
   ]
   connectedRoadIDs [
-    "-7684_2"
     "-7860"
+    "-7932"
   ]
 }
 Crossroad {
   translation -280.445253 62.571405 0.010000
-  name "crossroad(11)"
+  name "crossroad(14)"
   id "-59609"
   shape [
   ]
   connectedRoadIDs [
     "-7683"
-    "-7872_1"
+    "-7872"
   ]
 }
 Crossroad {
   translation -31.808270 -313.875635 0.010000
-  name "crossroad(12)"
+  name "crossroad(15)"
   id "-59610"
   shape [
   ]
   connectedRoadIDs [
-    "-7677_1"
     "-7889"
+    "-7934"
   ]
 }
 Road {
   translation -218.058113 311.742961 0.010000
   name "road(1)"
+  id "-7675"
+  startJunction "-59498"
+  endJunction "-59549"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle -0.006317
+  endingAngle -0.006317
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    160.875573 1.016231 0.000000
+  ]
+}
+Road {
+  translation 152.415376 -312.709107 0.010000
+  name "road(2)"
+  id "-7677"
+  startJunction "-59562"
+  endJunction "-59514"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle -0.006341
+  endingAngle -1.524950
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    44.201597 0.280264 0.000000
+    60.794149 1.102397 0.000000
+    76.281687 8.251055 0.000000
+    89.557385 18.150691 0.000000
+    98.961708 29.151253 0.000000
+    107.260448 43.452681 0.000000
+    107.815690 55.555036 0.000000
+  ]
+}
+Road {
+  translation -218.058113 311.742961 0.010000
+  name "road(3)"
   id "-7683"
   startJunction "-59498"
   endJunction "-59609"
@@ -258,107 +371,10 @@ Road {
   ]
 }
 Road {
-  translation -269.569682 -112.233606 0.010000
-  name "road(2)"
-  id "-7711"
-  startJunction "-59536"
-  endJunction "-59556"
-  splineSubdivision 0
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  width 16.000000
-  leftBorder FALSE
-  rightBorder FALSE
-  startingAngle 0.041604
-  endingAngle -0.726834
-  lines [
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  wayPoints [
-    0.000000 0.000000 0.000000
-    16.576215 -0.690032 0.000000
-    50.866765 -0.147390 0.000000
-    98.984680 3.142922 0.000000
-    139.360266 9.735664 0.000000
-    191.352667 27.878325 0.000000
-    278.520286 105.390518 0.000000
-  ]
-}
-Road {
-  translation -46.980472 302.824405 0.010000
-  name "road(3)"
-  id "-7724"
-  startJunction "-59549"
-  endJunction "-59556"
-  splineSubdivision 0
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  width 16.000000
-  leftBorder FALSE
-  rightBorder FALSE
-  startingAngle 1.550568
-  endingAngle 0.843039
-  lines [
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  wayPoints [
-    0.000000 0.000000 0.000000
-    0.910922 -45.026131 0.000000
-    -1.860275 -74.180337 0.000000
-    -9.056172 -104.433893 0.000000
-    -19.573493 -149.539360 0.000000
-    -22.345434 -181.994369 0.000000
-    -5.209480 -226.005554 0.000000
-    56.751926 -295.555747 0.000000
-  ]
-}
-Road {
-  translation 23.896204 6.447098 0.010000
+  translation 203.368809 314.409199 0.010000
   name "road(4)"
-  id "-7844"
-  startJunction "-59556"
+  id "-7684"
+  startJunction "-59499"
   endJunction "-59547"
   splineSubdivision 0
   numberOfLanes 4
@@ -367,8 +383,52 @@ Road {
   width 16.000000
   leftBorder FALSE
   rightBorder FALSE
-  startingAngle -0.726840
-  endingAngle -0.016343
+  startingAngle 0.267177
+  endingAngle -4.701132
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    22.121018 -6.054992 0.000000
+    43.686926 -23.661691 0.000000
+    54.743870 -46.767389 0.000000
+    59.717828 -66.571495 0.000000
+    60.820600 -85.274757 0.000000
+    60.817164 -104.527941 0.000000
+    60.263026 -110.578848 0.000000
+    59.359893 -190.803792 0.000000
+  ]
+}
+Road {
+  translation -269.569682 -112.233606 0.010000
+  name "road(5)"
+  id "-7711"
+  startJunction "-59536"
+  endJunction "-59540"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle 0.041604
+  endingAngle -0.161857
   lines [
     RoadLine {
       type "dashed"
@@ -386,25 +446,97 @@ Road {
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
     "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  wayPoints [
+    0.000000 0.000000 0.000000
+    16.576215 -0.690032 0.000000
+    50.866765 -0.147390 0.000000
+    98.984680 3.142922 0.000000
+    139.360266 9.735664 0.000000
+  ]
+}
+Road {
+  translation -46.980472 302.824405 0.010000
+  name "road(6)"
+  id "-7724"
+  startJunction "-59549"
+  endJunction "-59554"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle 1.550568
+  endingAngle -4.627187
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    0.910922 -45.026131 0.000000
+    -1.860275 -74.180337 0.000000
+    -9.056172 -104.433893 0.000000
+    -19.573493 -149.539360 0.000000
+    -22.345434 -181.994369 0.000000
+  ]
+}
+Road {
+  translation 23.896204 6.447098 0.010000
+  name "road(7)"
+  id "-7844"
+  startJunction "-59556"
+  endJunction "-59544"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle -0.726840
+  endingAngle -0.474965
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  startLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
   ]
   wayPoints [
     0.000000 0.000000 0.000000
     65.495704 58.241615 0.000000
     86.514956 73.090219 0.000000
     118.595719 89.587044 0.000000
-    157.865184 100.581641 0.000000
-    205.982665 106.623884 0.000000
-    228.721266 106.995524 0.000000
   ]
 }
 Road {
   translation 23.173932 -7.575734 0.010000
-  name "road(5)"
+  name "road(8)"
   id "-7847"
   startJunction "-59556"
   endJunction "-59562"
@@ -452,7 +584,7 @@ Road {
 }
 Road {
   translation 261.823537 -9.604660 0.010000
-  name "road(6)"
+  name "road(9)"
   id "-7860"
   startJunction "-59608"
   endJunction "-59514"
@@ -464,7 +596,7 @@ Road {
   leftBorder FALSE
   rightBorder FALSE
   startingAngle -4.705956
-  endingAngle -4.705956
+  endingAngle -4.666542
   lines [
     RoadLine {
       type "dashed"
@@ -482,8 +614,45 @@ Road {
   ]
 }
 Road {
+  translation -280.445253 62.571405 0.010000
+  name "road(10)"
+  id "-7872"
+  startJunction "-59609"
+  endJunction "-59536"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle 1.565726
+  endingAngle 1.565726
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    0.833520 -164.389221 0.000000
+  ]
+}
+Road {
   translation -279.572030 -253.745481 0.010000
-  name "road(7)"
+  name "road(11)"
   id "-7889"
   startJunction "-59511"
   endJunction "-59610"
@@ -519,11 +688,11 @@ Road {
   ]
 }
 Road {
-  translation -218.058113 311.742961 0.010000
-  name "road(8)"
-  id "-7675_1"
-  startJunction "-59498"
-  endJunction "-59549"
+  translation -69.325906 120.830037 0.010000
+  name "road(12)"
+  id "-7903"
+  startJunction "-59554"
+  endJunction "-59556"
   splineSubdivision 0
   numberOfLanes 4
   numberOfForwardLanes 4
@@ -531,8 +700,8 @@ Road {
   width 16.000000
   leftBorder FALSE
   rightBorder FALSE
-  startingAngle -0.006317
-  endingAngle -0.006317
+  startingAngle -4.627187
+  endingAngle 0.843039
   lines [
     RoadLine {
       type "dashed"
@@ -552,13 +721,91 @@ Road {
   ]
   wayPoints [
     0.000000 0.000000 0.000000
-    160.875573 1.016231 0.000000
+    17.135954 -44.011186 0.000000
+    79.097361 -113.561378 0.000000
+  ]
+}
+Road {
+  translation 142.491923 96.034142 0.010000
+  name "road(13)"
+  id "-7906"
+  startJunction "-59544"
+  endJunction "-59547"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle -0.474965
+  endingAngle -0.016343
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    39.269464 10.994597 0.000000
+    87.386946 17.036840 0.000000
+    110.125546 17.408480 0.000000
+  ]
+}
+Road {
+  translation -130.209416 -102.497942 0.010000
+  name "road(14)"
+  id "-7909"
+  startJunction "-59540"
+  endJunction "-59556"
+  splineSubdivision 0
+  numberOfLanes 4
+  numberOfForwardLanes 4
+  speedLimit 27.777778
+  width 16.000000
+  leftBorder FALSE
+  rightBorder FALSE
+  startingAngle -0.161857
+  endingAngle -0.726834
+  lines [
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+    RoadLine {
+      type "dashed"
+    }
+  ]
+  endLine [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
+  ]
+  wayPoints [
+    0.000000 0.000000 0.000000
+    51.992401 18.142662 0.000000
+    139.160020 95.654854 0.000000
   ]
 }
 Road {
   translation -37.182940 312.885692 0.010000
-  name "road(9)"
-  id "-7675_2"
+  name "road(15)"
+  id "-7929"
   startJunction "-59549"
   endJunction "-59499"
   splineSubdivision 0
@@ -569,7 +816,7 @@ Road {
   leftBorder FALSE
   rightBorder FALSE
   startingAngle -0.006333
-  endingAngle -0.006333
+  endingAngle 0.267177
   lines [
     RoadLine {
       type "dashed"
@@ -593,133 +840,9 @@ Road {
   ]
 }
 Road {
-  translation -31.808270 -313.875635 0.010000
-  name "road(10)"
-  id "-7677_1"
-  startJunction "-59610"
-  endJunction "-59562"
-  splineSubdivision 0
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  width 16.000000
-  leftBorder FALSE
-  rightBorder FALSE
-  startingAngle -0.006317
-  endingAngle -0.006332
-  lines [
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  wayPoints [
-    0.000000 0.000000 0.000000
-    164.224048 1.039808 0.000000
-  ]
-}
-Road {
-  translation 152.415376 -312.709107 0.010000
-  name "road(11)"
-  id "-7677_2"
-  startJunction "-59562"
-  endJunction "-59514"
-  splineSubdivision 0
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  width 16.000000
-  leftBorder FALSE
-  rightBorder FALSE
-  startingAngle -0.006341
-  endingAngle -1.564363
-  lines [
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-  ]
-  startLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_dashed.png"
-  ]
-  wayPoints [
-    0.000000 0.000000 0.000000
-    44.201597 0.280264 0.000000
-    60.794149 1.102397 0.000000
-    76.281687 8.251055 0.000000
-    89.557385 18.150691 0.000000
-    98.961708 29.151253 0.000000
-    107.260448 43.452681 0.000000
-    107.815690 55.555036 0.000000
-  ]
-}
-Road {
-  translation 203.368809 314.409199 0.010000
-  name "road(12)"
-  id "-7684_1"
-  startJunction "-59499"
-  endJunction "-59547"
-  splineSubdivision 0
-  numberOfLanes 4
-  numberOfForwardLanes 4
-  speedLimit 27.777778
-  width 16.000000
-  leftBorder FALSE
-  rightBorder FALSE
-  startingAngle -0.006333
-  endingAngle -4.701132
-  lines [
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-    RoadLine {
-      type "dashed"
-    }
-  ]
-  endLine [
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/road/protos/textures/road_line_triangle.png"
-  ]
-  wayPoints [
-    0.000000 0.000000 0.000000
-    22.121018 -6.054992 0.000000
-    43.686926 -23.661691 0.000000
-    54.743870 -46.767389 0.000000
-    59.717828 -66.571495 0.000000
-    60.820600 -85.274757 0.000000
-    60.817164 -104.527941 0.000000
-    60.263026 -110.578848 0.000000
-    59.359893 -190.803792 0.000000
-  ]
-}
-Road {
   translation 262.551807 103.606247 0.010000
-  name "road(13)"
-  id "-7684_2"
+  name "road(16)"
+  id "-7932"
   startJunction "-59547"
   endJunction "-59608"
   splineSubdivision 0
@@ -754,11 +877,11 @@ Road {
   ]
 }
 Road {
-  translation -280.445253 62.571405 0.010000
-  name "road(14)"
-  id "-7872_1"
-  startJunction "-59609"
-  endJunction "-59536"
+  translation -31.808270 -313.875635 0.010000
+  name "road(17)"
+  id "-7934"
+  startJunction "-59610"
+  endJunction "-59562"
   splineSubdivision 0
   numberOfLanes 4
   numberOfForwardLanes 4
@@ -766,8 +889,8 @@ Road {
   width 16.000000
   leftBorder FALSE
   rightBorder FALSE
-  startingAngle 1.565726
-  endingAngle 1.565726
+  startingAngle -0.006317
+  endingAngle -0.006332
   lines [
     RoadLine {
       type "dashed"
@@ -787,13 +910,13 @@ Road {
   ]
   wayPoints [
     0.000000 0.000000 0.000000
-    0.833520 -164.389221 0.000000
+    164.224048 1.039808 0.000000
   ]
 }
 Road {
   translation -279.561804 -121.817688 0.010000
-  name "road(15)"
-  id "-7872_2"
+  name "road(18)"
+  id "-7938"
   startJunction "-59536"
   endJunction "-59511"
   splineSubdivision 0

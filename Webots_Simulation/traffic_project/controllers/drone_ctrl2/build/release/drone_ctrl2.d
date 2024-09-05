@@ -26,4 +26,7 @@ build/release/drone_ctrl2.o: drone_ctrl2.cpp \
  ../god_controller/Reward_Generator.h \
  ../god_controller/Camera_Track_Check_Super.h \
  /usr/local/webots/include/controller/cpp/webots/Lidar.hpp \
- /usr/local/webots/include/controller/cpp/webots/../../c/webots/lidar_point.h
+ /usr/local/webots/include/controller/cpp/webots/../../c/webots/lidar_point.h \
+ ../../libraries/myLibs/dataDisplay.h ../../libraries/myLibs/myMatrices.h \
+ /usr/local/webots/include/controller/cpp/webots/Display.hpp \
+ /usr/local/webots/include/controller/cpp/webots/ImageRef.hpp

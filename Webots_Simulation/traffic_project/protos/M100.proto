@@ -46,6 +46,8 @@ PROTO M100 [
                                          DEF RECEIVER Receiver{
                                            type "serial"
                                            channel 1
+                                         }
+                                         DEF DISPLAY Display{
                                          }]
   field MFNode     cameraSlot          [ Camera { width 320 height 240 } ] # Extends the robot with a Camera.
   field SFFloat    rollAngle           0

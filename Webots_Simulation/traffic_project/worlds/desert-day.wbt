@@ -62,8 +62,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.08700763642146021 -0.9727932602428496 -0.21471596128476012 5.493793147808188
-  position -880.2086415979554 -273.34826890420237 780.2268748752974
+  orientation 0.04901909131247937 -0.9954445126811635 -0.08177622429447041 5.199154055044634
+  position -299.1667707310822 -118.13208824343285 73.47676282555695
   near 3
 }
 TexturedBackground {
@@ -1932,60 +1932,72 @@ CrossRoadsTrafficLight {
 GenericTrafficLight {
   translation 152.425 -312.602 -2.66454e-15
   rotation 0 0 1 0.00654498
+  state "green"
 }
 GenericTrafficLight {
   translation 132.792 -312.906 -2.22045e-15
   rotation 0 0 1 -3.135045307179586
   name "generic traffic light(1)"
+  state "green"
 }
 GenericTrafficLight {
   translation 142.476 -303.057 0
   rotation 0 0 1 1.56425
   name "generic traffic light(2)"
+  state "green"
 }
 GenericTrafficLight {
   translation 252.887 113.405 -1.77636e-15
   rotation 0 0 1 -3.1088653071795864
   name "generic traffic light(3)"
+  state "green"
 }
 GenericTrafficLight {
   translation 262.634 103.772 0
   rotation 0 0 -1 1.59043
   name "generic traffic light(4)"
+  state "green"
 }
 GenericTrafficLight {
   translation 262.701 123.345 4.88498e-14
   rotation 0 0 1 1.55771
   name "generic traffic light(5)"
+  state "green"
 }
 GenericTrafficLight {
   translation -37.3088 312.995 8.88178e-16
   name "generic traffic light(6)"
+  state "green"
 }
 GenericTrafficLight {
   translation -57.1317 312.7 3.55271e-15
   rotation 0 0 1 -3.1285053071795863
   name "generic traffic light(7)"
+  state "green"
 }
 GenericTrafficLight {
   translation -46.9157 303.032 0
   rotation 0 0 -1 1.52498
   name "generic traffic light(8)"
+  state "green"
 }
 GenericTrafficLight {
   translation -269.77 -112.186 0
   rotation 0 0 -1 0.0458149
   name "generic traffic light(9)"
+  state "green"
 }
 GenericTrafficLight {
   translation -279.656 -102.001 -3.10862e-13
   rotation 0 0 1 1.59043
   name "generic traffic light(10)"
+  state "green"
 }
 GenericTrafficLight {
   translation -279.502 -121.653 0
   rotation 0 0 -1 1.57734
   name "generic traffic light(11)"
+  state "green"
 }
 StreetLight {
   translation 265.604 -277.403 1.5632e-13
@@ -2283,9 +2295,10 @@ DEF ORIGIN BmwX5Simple {
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 28
+  maxVehicles 40
   step 100
-  port 7789
+  port 38711
+  seed 0
 }
 Robot {
   children [

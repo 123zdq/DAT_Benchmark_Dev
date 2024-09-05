@@ -35,6 +35,8 @@
 #include "json_config_handle.h"
 #include <sstream>
 #include "../god_controller/Reward_Generator.h"
+#include "../../libraries/myLibs/dataDisplay.h"
+#include <webots/Display.hpp>
 // #define BOOST_NO_CXX11_SCOPED_ENUMS
 // #include <boost/filesystem.hpp>
 // #undef BOOST_NO_CXX11_SCOPED_ENUMS
@@ -169,6 +171,7 @@ int main(int argc, char **argv)
   Emitter *emitter = robot->getEmitter("emitter");
   Receiver *receiver = robot->getReceiver("receiver");
   receiver->enable(timeStep);
+  Display *disp = robot->getDisplay("display");
 
   // 额外的传感器初始化
   Lidar *lidar;
@@ -206,6 +209,7 @@ int main(int argc, char **argv)
   rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange, config.get()->rewardConfig.viewScale);
   bool is_video_warmUp = false;
   int random_number = -1;
+  dataDisplay<6> dispData(disp);
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -282,10 +286,10 @@ int main(int argc, char **argv)
         switch (key)
         {
         case keyboard->UP:
-          fly_cmd.axes[3] = 5;
+          fly_cmd.axes[3] = 40;
           break;
         case keyboard->DOWN:
-          fly_cmd.axes[3] = -5;
+          fly_cmd.axes[3] = -40;
           break;
         case keyboard->RIGHT:
           fly_cmd.axes[0] = -60;
@@ -294,10 +298,10 @@ int main(int argc, char **argv)
           fly_cmd.axes[0] = 60;
           break;
         case (keyboard->SHIFT + keyboard->RIGHT):
-          fly_cmd.axes[2] = -5;
+          fly_cmd.axes[2] = -40;
           break;
         case (keyboard->SHIFT + keyboard->LEFT):
-          fly_cmd.axes[2] = 5;
+          fly_cmd.axes[2] = 40;
           break;
         case (keyboard->SHIFT + keyboard->UP):
           fly_cmd.axes[1] = 0.007;
@@ -639,7 +643,7 @@ int main(int argc, char **argv)
       //           << "  z: " << rewardG.makeReward.cameraMidGlobalPos.z
       //           // << "  w: " << rewardG.makeReward.carDronePosOri.w
       //           << std::endl;
-      if(pCtrl.done_state == string("distance"))
+      if(pCtrl.done_state == string("distance") || pCtrl.done_state == string("yaw velocity"))
       {
         rewardG.makeReward.crash = true;
       }
@@ -758,6 +762,9 @@ int main(int argc, char **argv)
       //           << "  z: " << rewardG.makeReward.carDronePosOri.z
       //           << "  reward: " << state.reward << std::endl;
       std::cout << "reward: " << state.reward << std::endl;
+      std::cout << pCtrl.done_state << std::endl;
+      // double Ddata[6] = {state.linear.x,state.linear.y,state.linear.z,state.angular.x,state.angular.y,state.angular.z};
+      // dispData.sendCtrl(Ddata);
       if (config.get()->droneSupervisorCtrl == true)
       {
         Node *droneNode = robot->getFromDef(rewardG.droneDef);
