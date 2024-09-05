@@ -137,7 +137,7 @@ Step2 创建虚拟环境与库安装
 
         sudo apt install sumo sumo-tools sumo-doc
         pip install lxml pyproj shapely webcolors configparser --user
-        pip install transform3d
+        pip install transforms3d
 
         ## config
         gedit ~/.bashrc

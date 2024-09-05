@@ -635,7 +635,7 @@ int main(int argc, char **argv)
                 << "  time:" << std::setprecision(3) << t
                 << "  carDir:" << rewardG.makeReward.carDir
                 << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y
-                << "  done_state:" << pCtrl.done_state << std::endl;
+                << "  doneState:" << pCtrl.done_state << std::endl;
       } 
       // std::cout << "id: " << droneDef
       //           << "  x: " << rewardG.makeReward.cameraMidGlobalPos.x
@@ -762,7 +762,6 @@ int main(int argc, char **argv)
       //           << "  z: " << rewardG.makeReward.carDronePosOri.z
       //           << "  reward: " << state.reward << std::endl;
       std::cout << "reward: " << state.reward << std::endl;
-      std::cout << pCtrl.done_state << std::endl;
       // double Ddata[6] = {state.linear.x,state.linear.y,state.linear.z,state.angular.x,state.angular.y,state.angular.z};
       // dispData.sendCtrl(Ddata);
       if (config.get()->droneSupervisorCtrl == true)

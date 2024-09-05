@@ -74,12 +74,12 @@
 demo模式
 ~~~~~~~~~
 
-   该模式在地图中生成一个无人机。可以通过键盘操作无人机在地图中飞行，浏览地图。同时该无人机默认跟踪其初始位置附近的一辆BmwX5车辆，并实时把reward参数输出在Console状态栏。可以用该对象测试内置reward参数是否合理，进行调试。
+   该模式在地图中生成一个跟踪器。可以通过键盘操作跟踪器在地图中飞行，浏览地图。同时该跟踪器默认跟踪其初始位置附近的一辆BmwX5车辆，并实时把reward参数输出在Console状态栏。可以用该对象测试内置reward参数是否合理，进行调试。
 
 video模式
 ~~~~~~~~~~
 
-   - 该模式主要用于记录被跟踪对象的行为。环境将自动调度无人机误差跟踪对象，并且按照仿真时间和配置参数导出视频图像，同时生成对应每张图像的标签。
+   - 该模式主要用于记录被跟踪对象的行为。环境将自动调度跟踪器误差跟踪对象，并且按照仿真时间和配置参数导出视频图像，同时生成对应每张图像的标签。
    - 数据存储的位置为： :code:`./Webots_Simulation/traffic_project/droneVideos/DRONEX/episodeX` ，图像格式为jpeg，标签为 :code:`mark.json` 文件。
    - 同时还可以通过脚本生成多组视频图像的文件结构描述，直接执行 :code:`./Webots_Simulation/traffic_project/fileStruct.py` 脚本，在相同目录下生成描述文件 :code:`dir_info.json`。
 
@@ -99,35 +99,38 @@ train模式
 .. code:: json
 
    {
-      "Simulation_Mode": "train",
-      "Drone_Supervisor_Ctrl": false,
+      "Simulation_Mode": "demo",
+      "Tracker_Def": "DRONE",
+      "Drone_Supervisor_Ctrl": true,
       "Socket_Ip": "127.0.0.1",
-      "Config_Agen_Num_Port":7789,
-      "Train_Total_Steps": 3000,
+      "Config_Agen_Num_Port": 38711,
+      "Train_Total_Steps": 1500,
       "Init_No_Done_Steps": 100,
       "No_Reward_Done_Steps": 100,
-      "Control_Frequence": 50,
+      "Control_Frequence": 125,
       "Customized_Rewards": true,
       "Lidar_Enable": false,
-      "Tracking_Object": "SUMO_VEHICLE"
+      "Tracking_Object": "SUMO_VEHICLE",
+      "Verbose": false
    }
 
 **参数说明**
 
    * :code:`Simulation_Mode` ：仿真模式有三种:"demo"、"video"、"train"。demo与video模式是仿真端自运行的模式（默认demo）。
 
-      * demo会在地图中生成一个无人机，支持键盘直接控制，同时默认追踪地图中一辆静置车辆Bmx，可以通过该模式浏览地图或者调试reward参数。
-      * video模式是视频拍摄模式，在该模式下无人机会自动跟踪目标对象，导出视频图像和标签。
-      * train是训练模式，仿真端与算法端进行交互，对无人机的追踪算法进行训练。
+      * demo会在地图中生成一个跟踪器，支持键盘直接控制，同时默认追踪地图中一辆静置车辆Bmx，可以通过该模式浏览地图或者调试reward参数。
+      * video模式是视频拍摄模式，在该模式下跟踪器会自动跟踪目标对象，导出视频图像和标签。
+      * train是训练模式，仿真端与算法端进行交互，对跟踪器的追踪算法进行训练。
       * 完整系统运行流程图见： :ref:`运行流程` 
 
-   - :code:`Drone_Supervisor_Ctrl` ：是否使用supervisor控制无人机，supervisor是webots的超级管理员，可以直接控制任何节点。如果为true，则使用supervisor控制无人机，其所有的动作都是实时无差响应的，这有利于简化算法的训练。如果为false，则使用传统PID控制器控制无人机的运动。
+   - :code:`Tracker_Def` ：选择什么跟踪器，当前的选择参数有无人机（“DRONE”）以及车（“CAR”）。其中，无人机是一个仿真无人机跟踪器，带有物理属性检测和约束，相比之下，车被认为是一个理想的跟踪器，不考虑自身物理属性，能够在任何情况下执行任何动作。
+   - :code:`Drone_Supervisor_Ctrl` ：是否使用supervisor控制跟踪器，supervisor是webots的超级管理员，可以直接控制任何节点。如果为true，则使用supervisor控制跟踪器，其所有的动作都是实时无差响应的，这有利于简化算法的训练。如果为false，则使用传统PID控制器控制跟踪器的运动。该参数仅适用于无人机跟踪器，车跟踪器永远都使用supervisor进行控制。
    - :code:`Socket_Ip` ：socket通信的ip地址，如果为本机通信，默认 **"127.0.0.1"**。
-   - :code:`Config_Agen_Num_Port` ：配置socket通信端口，该端口用于与算法端进行通信，以确定将要设置的无人机（智能体）数量。
+   - :code:`Config_Agen_Num_Port` ：配置socket通信端口，该端口用于与算法端进行通信，以确定将要设置的跟踪器（智能体）数量。
    - :code:`Train_Total_Steps` ：训练的最大步长数，如果步长超出则返回done。
-   - :code:`Init_No_Done_Steps` ：初始化没有done的仿真步长数，为了防止无人机在初始化的时候物理属性不稳定导致done状态的出发，因此设置该参数在合理大小内。
-   - :code:`No_Reward_Done_Steps` ：连续reward为0时产生done状态的仿真步长。
-   - :code:`Control_Frequence` ：控制算法控制频率。在进行训练时仿真端根据仿真时间进行500Hz的控制频率，该参数用于调整算法端的平均控制频率。
+   - :code:`Init_No_Done_Steps` ：初始化没有done的仿真步长数，为了防止跟踪器在初始化的时候物理属性不稳定导致done状态的触发，因此需设置该参数在合理大小内。
+   - :code:`No_Reward_Done_Steps` ：连续reward为0时产生done状态的仿真步长，有利于提高训练效率。
+   - :code:`Control_Frequence` ：控制算法控制频率。在进行训练时仿真端根据仿真时间固定执行500Hz的控制频率，该参数用于调整算法端的平均控制频率。
 
    * :code:`Customized_Rewards` ：是否启用定制化reward参数。用户可以根据定制化reward参数，自行计算reward。
 
@@ -135,16 +138,32 @@ train模式
    * :code:`Lidar_Enable` ：是否启用雷达点云数据。
 
       * 雷达点云数据的详细内容见： :ref:`定制化参数接口` 
-   * :code:`Tracking_Object` ：跟踪对象设置（默认SUMO_VEHICLE）。可以使用示例跟踪对象，包括“SUMO_VEHICLE”、“Pedestrian”、“Shrimp”、“Create”、“Sojourner”、“Mantis”等等。也可以自定义跟踪对象。项目说明书
+   * :code:`Tracking_Object` ：被跟踪对象设置（默认SUMO_VEHICLE）。可以使用示例跟踪对象，包括“SUMO_VEHICLE”、“Pedestrian”、“Shrimp”、“Create”、“Sojourner”、“Mantis”等等。也可以自定义跟踪对象。项目说明书
       
       * 追踪对象类型的具体描述见： :ref:`追踪对象` 
 
-无人机产生done的物理范围参数配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   * :code:`Verbose` ：使能日志记录。如果设置为true，则会在webots终端窗口打印部分重要参数，可供使用者观察。同时在 :code:`Webots_Simulation/traffic_project/logs` 文件夹下产生程序运行日志，这部分多用于调试仿真环境。
+
+      .. image:: ../_static/image/webots日志输出.png
+         :alt: webots日志输出（“train”&“video”）
+         :width: 500px
+         :align: center
+
+      * :code:`id` ：跟踪器的名称。
+      * :code:`done` ：是否返回done。
+      * :code:`reward` ：当前reward大小。
+      * :code:`count` ：steps的步数记录。
+      * :code:`time` ：仿真时间。
+      * :code:`carDir` ：被跟踪目标运动方向。
+      * :code:`pitchAngle` ：摄像头pitch轴角度。
+      * :code:`doneState` ：产生done的原因，包括“height”（跟踪器高度不合理），“distance”（跟踪器目标位置和实际位置误差过大），“velocity”（跟踪器运动速度不合理），“yaw velocity”（跟踪器绕竖直方向旋转速度不合理），“pitch or yaw angle”（跟踪器姿态不合理）。
+
+跟踪器（仅无人机有效）产生done的物理范围参数配置
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
-   "Done_Range": {"127.0.0.1"
+   "Done_Range": {
         "max_height": 50,
         "min_height": 2,
         "velocity": 100,
@@ -156,16 +175,16 @@ train模式
 
 **参数说明**
 
-   - :code:`max_height` ：无人机最大飞行高度（m）。
-   - :code:`min_height` ：无人机最小飞行高度（m）。
-   - :code:`velocity` ：无人机最大飞行速度（m/s）。
-   - :code:`omiga` ：无人机最大飞行角速度（rad/s）。
-   - :code:`roll` ：无人机最大飞行roll角度（rad）。
-   - :code:`pitch` ：无人机最大飞行pitch角度（rad）。
-   - :code:`distance_error` ：无人机期望位置和当前位置的最大误差（m）。
+   - :code:`max_height` ：跟踪器最大飞行高度（m）。
+   - :code:`min_height` ：跟踪器最小飞行高度（m）。
+   - :code:`velocity` ：跟踪器最大飞行速度（m/s）。
+   - :code:`omiga` ：跟踪器最大飞行角速度（rad/s）。
+   - :code:`roll` ：跟踪器最大飞行roll角度（rad）。
+   - :code:`pitch` ：跟踪器最大飞行pitch角度（rad）。
+   - :code:`distance_error` ：跟踪器期望位置和当前位置的最大误差（m）。
 
-内置reward的参数配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+内置reward的参数配置（仅无人机有效，车默认返回reward=1）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
@@ -194,22 +213,30 @@ SUMO交通系统参数配置
 .. code:: json
 
    "Sumo_Params": {
-        "max_sumo_car": 60,
-        "car_import_interval": 60.0,
+        "rou_update": false,
+        "max_sumo_car": 40,
+        "fixed_car_group_num": true,
+        "car_group_num": 5,
+        "car_import_interval": 52.0,
         "car_type": "passenger",
-        "fixed_color": true,
+        "fixed_color": false,
         "normalize_color": [1,0,0],
-        "max_car_speed": 15,
-        "max_car_accel": 5,
-        "max_car_decel": 5,
-        "max_rou_distance": 8000,
-        "min_rou_distance": 300,
-        "route_num": 100000
+        "max_car_speed": 20,
+        "max_car_accel": 25,
+        "max_car_decel": 25,
+        "max_rou_distance": 7000,
+        "min_rou_distance": 500,
+        "route_num": 100000,
+        "fixed_seed": false,
+        "random_seed": 1
    }
 
 **参数说明**
 
+   - :code:`rou_update` ：交通模拟路径文件是否更新，如果希望获得确定的路径，请设置为false。 **注意：** 该模块的所有参数改动都会导致路径自动刷新。
    - :code:`max_sumo_car` ：地图中最大载具数量。
+   - :code:`fixed_car_group_num` ：是否自定义每组加入环境中车辆的数量。
+   - :code:`car_group_num` ：自定义每组加入环境中车辆的数量。 **注意：** 在训练和视频模式下如果该参数设置不合理（＜Agent数量*3），系统会自动设置合理的参数（＝Agent数量*3），否则环境无法稳定运行。
    - :code:`car_import_interval` ：加入地图每组载具的间隔时间（s）。
 
    * :code:`car_type` ：载具的类型（默认passenger），包括“passenger”、“bus”、“truck”、“trailer”、“motorcycle”。
@@ -224,6 +251,8 @@ SUMO交通系统参数配置
    - :code:`max_rou_distance` ：最大路径长度（m）。
    - :code:`min_rou_distance` ：最小路径长度（m）。
    - :code:`route_num` ：路径最大数量（注意是最大， :code:`obj_edge_distribution_multilateral` 实际由于随机化的过程不一定完全成功，会比设置的参数要少）。
+   - :code:`fixed_seed` ：是否使用固定的随机种子，如果希望获得稳定的路径和车辆样式，请设置为true。
+   - :code:`random_seed` ：固定的随机种子。
 
 其他对象追踪的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -240,7 +269,6 @@ SUMO交通系统参数配置
         "obj_edge_distribution_fixed": 0,
         "obj_edge_distribution_max":10,
         "obj_edge_distribution_min":-10
-
    }
 
 **参数说明**
@@ -278,24 +306,24 @@ SUMO交通系统参数配置
 
 **参数说明**
 
-   - :code:`channels` ：视频通道数量，也就是导入地图中的无人机数量。
+   - :code:`channels` ：视频通道数量，也就是导入地图中的跟踪器数量。
    - :code:`fps` ：根据仿真时间计算的每秒帧数（按照该帧数导出视频图像）。
    - :code:`start_time` ：视频开始导出的仿真时间（s）。
    - :code:`total_time` ：视频持续的仿真时间（s）。
    - :code:`warm_up_steps` ：reset过后一开始多少个step不输出任何数据，注意，每个step的周期为2ms。
    - :code:`output_car_dir` ：是否输出车辆方向，如果使能，则只输出车辆运动方向，否则，输出reward和action。（车辆方向：0停止，1直行，2左转，3右转）
-   - :code:`random_action` ：无人机是否使用随机动作，如果使能，则根据Control_Frequence输出随机动作，否则，无人机将无差跟随车辆，此时输出action为-1（无意义）
-   - :code:`forward_speed` ：无人机随机动作的前进速度（m/s）。
-   - :code:`backward_speed` ：无人机随机动作的后退速度（m/s）。
-   - :code:`left_speed` ：无人机随机动作的左移速度（m/s）。
-   - :code:`right_speed` ：无人机随机动作的右移速度（m/s）。
-   - :code:`cw_omega` ：无人机随机动作的顺时针旋转速度（rad/s）。
-   - :code:`ccw_omega` ：无人机随机动作的逆时针旋转速度（rad/s）。
+   - :code:`random_action` ：跟踪器是否使用随机动作，如果使能，则根据Control_Frequence输出随机动作，否则，跟踪器将无差跟随车辆，此时输出action为-1（无意义）
+   - :code:`forward_speed` ：跟踪器随机动作的前进速度（m/s）。
+   - :code:`backward_speed` ：跟踪器随机动作的后退速度（m/s）。
+   - :code:`left_speed` ：跟踪器随机动作的左移速度（m/s）。
+   - :code:`right_speed` ：跟踪器随机动作的右移速度（m/s）。
+   - :code:`cw_omega` ：跟踪器随机动作的顺时针旋转速度（rad/s）。
+   - :code:`ccw_omega` ：跟踪器随机动作的逆时针旋转速度（rad/s）。
 
-无人机控制的参数配置
+跟踪器控制的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   此组参数用于随机化无人机自身的跟踪属性。
+   此组参数用于随机化跟踪器自身的跟踪属性。
 
 .. code:: json
 
@@ -337,24 +365,24 @@ SUMO交通系统参数配置
 
       * **注意，总的初始化时间会根据设置智能体的数量增加而增加，比该参数设置的时间要长。**
 
-   - :code:`view_pitch_random` ：无人机摄像头俯仰角随机化。
+   - :code:`view_pitch_random` ：跟踪器摄像头俯仰角随机化。
 
    * :code:`view_pitch_fixed` ：上述参数为false，采用该参数定义的角度。
 
-      * 若角度>0则为俯角，反之为仰角。
+      * 若角度＞0则为俯角，反之为仰角。
       * 在使用场景中，俯角是常态。因此仿真环境中该参数的范围限制在 :code:`[0.5, 1.57](rad)`
 
    - :code:`view_pitch_random_max` ：最大摄像头俯角。
    - :code:`view_pitch_random_min` ：最小摄像头俯角。
-   - :code:`height_random` ：无人机飞行高度随机化。其余参数意义同上。
-   - :code:`direction_random` ：初始视角无人机跟随对象方向随机化，范围 :code:`[-pi,pi](rad)`
+   - :code:`height_random` ：跟踪器飞行高度随机化。其余参数意义同上。
+   - :code:`direction_random` ：初始视角跟踪器跟随对象方向随机化，范围 :code:`[-pi,pi](rad)`
 
    * :code:`direction_random_multilateral` ：是否启用双边随机化配置。
       
       * false, :code:`[min, max]` ;true, :code:`[-max, -min] ∪ [min, max]` 
 
-   - :code:`horizon_bias_random` ：初始视角无人机跟踪对象水平偏移。如果后续参数为正，则对象向左偏移，如果后续参数为负，则对象向右偏移。其余参数同上。
-   - :code:`verticle_bias_random` ：初始视角无人机跟踪对象竖直偏移。如果后续参数为正，则对象向上偏移，如果后续参数为负，则对象向下偏移。其余参数同上。
+   - :code:`horizon_bias_random` ：初始视角跟踪器跟踪对象水平偏移。如果后续参数为正，则对象向左偏移，如果后续参数为负，则对象向右偏移。其余参数同上。
+   - :code:`verticle_bias_random` ：初始视角跟踪器跟踪对象竖直偏移。如果后续参数为正，则对象向上偏移，如果后续参数为负，则对象向下偏移。其余参数同上。
 
 部分配置参数建议
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -661,7 +689,7 @@ Legged Robots
             安全检查
       
       5. 在json配置文件中修改 :code:`Tracking_Object` 的描述，其描述应当与proto名称相同
-      6. 经过上述步骤就能够使用无人机跟踪自定义对象
+      6. 经过上述步骤就能够使用跟踪器跟踪自定义对象
 
 .. _内置Reward:
 
@@ -789,7 +817,7 @@ Legged Robots
                <br>
             </div>
          
-      * 实际上，由于webots接口足够完善，只需要知道无人机什么时候在观察斜坡即可，斜坡可以有一定的复杂性（但每一段必须是平面，不能是曲面）。
+      * 实际上，由于webots接口足够完善，只需要知道跟踪器什么时候在观察斜坡即可，斜坡可以有一定的复杂性（但每一段必须是平面，不能是曲面）。
 
 投影可视化
 ~~~~~~~~~~~~~~~~~~~~
@@ -820,9 +848,9 @@ Legged Robots
 1. 用于计算reward共有两个变量：
 
    a. 仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P1
-   b. 仿真环境中无人机摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P2
+   b. 仿真环境中跟踪器摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P2
 
-2. 首要目标是实现无人机tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
+2. 首要目标是实现跟踪器tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
 
    .. figure:: ../_static/image/阶跃函数.png
       :alt: 阶跃函数                                  
@@ -835,7 +863,7 @@ Legged Robots
 
    </br>
 
-3. 次要目标是无人机tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
+3. 次要目标是跟踪器tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
 
    .. figure:: ../_static/image/双曲正切函数.png
       :alt: 双曲正切函数                                  
@@ -880,7 +908,7 @@ Legged Robots
 输入动作
 ~~~~~~~~~~~~~~~~~~~~
 
-   输入动作用于控制无人机的运动，目前无人机有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数
+   输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数
 
 返回参数
 ~~~~~~~~~~~~~~~~~~~~
@@ -921,13 +949,13 @@ Legged Robots
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
         vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
-        vector4 carDronePosOri; // 车辆中心在无人机坐标系下的1D姿态+3D坐标（第一个元素是姿态）
-        double crash; // 无人机是否与建筑物碰撞
+        vector4 carDronePosOri; // 车辆中心在跟踪器坐标系下的1D姿态+3D坐标（第一个元素是姿态）
+        double crash; // 跟踪器是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1直行，2左转，3右转)
         std::string carTypename;// 对象类型
       }rewardData;
 
-   - 其中，参数 :code:`carCameraPosOri` 中无人机坐标系定义和姿态角定义如下：
+   - 其中，参数 :code:`carCameraPosOri` 中跟踪器坐标系定义和姿态角定义如下：
    
    .. figure:: ../_static/image/无人机坐标系.png
       :alt: 无人机坐标系                                  
@@ -938,7 +966,7 @@ Legged Robots
 
 **雷达数据包**
 
-   雷达点云数据。该环境中的无人机搭载了RpLidarA2单线雷达，其点云数据将输出一个很长的数组。
+   雷达点云数据。该环境中的跟踪器搭载了RpLidarA2单线雷达，其点云数据将输出一个很长的数组。
 
    .. raw:: html
 
