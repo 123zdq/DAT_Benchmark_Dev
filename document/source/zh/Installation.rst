@@ -71,22 +71,17 @@ Linux(Ubuntu22.04)
 Step1 安装webots仿真软件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    从 `webots <https://github.com/cyberbotics/webots>`_ 下载webots2023b版本软件(例如： :code:`webots-R2023b-x86-64.tar.bz2` )和资产文件( :code:`assets-R2023b.zip` )，可以用如下命令解压和安装
+    从 `webots <https://github.com/cyberbotics/webots>`_ 下载webots2023b版本的deb包(例如： :code:`webots-R2023b-x86-64.deb` )和资产文件( :code:`assets-R2023b.zip` )，使用如下命令安装:
 
-    **webots解压与安装**
+    **webots安装**
 
     .. code:: bash
         
-        ## unpack
-        sudo tar -jxvf webots-R2023b-x86-64.tar.bz2 -C /opt
-        
-        ## config
-        gedit ~/.bashrc
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/webots/lib/webots
+        ## install
+        sudo dpkg -i webots-R2023b-x86-64.deb
 
         ## run
-        cd /opt/webot/bin
-        ./webots-bin
+        webots
 
     **assets解压**
 
@@ -95,8 +90,7 @@ Step1 安装webots仿真软件
         cp ~/Downloads/assets-R2023b.zip ~/.cache/Cyberbotics/Webots/assets/
         
         ## unzip
-        cd ~/.cache/Cyberbotics/Webots/assets/
-        unzip ./assets-R2023b.zip
+        cd ~/.cache/Cyberbotics/Webots/assets/ && unzip ./assets-R2023b.zip
 
 Step2 创建虚拟环境与库安装
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>安装 &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
   
@@ -151,26 +151,20 @@
 </br><section id="step1-webots">
 <h3>Step1 安装webots仿真软件<a class="headerlink" href="#step1-webots" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本软件(例如： <code class="code docutils literal notranslate"><span class="pre">webots-R2023b-x86-64.tar.bz2</span></code> )和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )，可以用如下命令解压和安装</p>
-<p><strong>webots解压与安装</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## unpack</span>
-sudo<span class="w"> </span>tar<span class="w"> </span>-jxvf<span class="w"> </span>webots-R2023b-x86-64.tar.bz2<span class="w"> </span>-C<span class="w"> </span>/opt
-
-<span class="c1">## config</span>
-gedit<span class="w"> </span>~/.bashrc
-<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/opt/webots/lib/webots
+<div><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本的deb包(例如： <code class="code docutils literal notranslate"><span class="pre">webots-R2023b-x86-64.deb</span></code> )和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )，使用如下命令安装:</p>
+<p><strong>webots安装</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## install</span>
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>webots-R2023b-x86-64.deb
 
 <span class="c1">## run</span>
-<span class="nb">cd</span><span class="w"> </span>/opt/webot/bin
-./webots-bin
+webots
 </pre></div>
 </div>
 <p><strong>assets解压</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>~/Downloads/assets-R2023b.zip<span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
 
 <span class="c1">## unzip</span>
-<span class="nb">cd</span><span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
-unzip<span class="w"> </span>./assets-R2023b.zip
+<span class="nb">cd</span><span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>unzip<span class="w"> </span>./assets-R2023b.zip
 </pre></div>
 </div>
 </div></blockquote>
