@@ -137,7 +137,7 @@ Step2 创建虚拟环境与库安装
         gedit ~/.bashrc
         # Change dir according to your installation
         export SUMO_HOME=/usr/share/sumo
-        export WEBOTS_HOME=/opt/webots
+        export WEBOTS_HOME=/usr/local/webots
 
 Step3 修改webots运行python环境
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
