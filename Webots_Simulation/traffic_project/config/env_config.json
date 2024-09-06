@@ -3,7 +3,7 @@
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
-    "Config_Agen_Num_Port": 46843,
+    "Config_Agen_Num_Port": 34953,
     "Train_Total_Steps": 1500,
     "Init_No_Done_Steps": 100,
     "No_Reward_Done_Steps": 100,
