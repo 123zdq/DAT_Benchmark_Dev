@@ -220,35 +220,19 @@ Step2 创建虚拟环境与库安装
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            2. <code>Eigen3</code> 库安装
+            2. C++ 库安装(如不需要重新编译C++部分代码，可忽略)
       </div>
       </br>
 
     
     * 首先在 `eigen <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_ 官网下在最新版本的 :code:`Eigen3` 库
-
-    .. raw:: html
-
-        <span style="background-color: yellow;">To Do：补充eigen库的编译过程</span>
-
-    .. raw:: html
-
-      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            3. <code>nlohmann-json3</code> 库安装
-      </div>
-      </br>
-
-
-    * 首先在 `nlohmann-json3 <https://github.com/nlohmann/json/tree/develop>`_ 官方仓库下载 :code:`nlohmann-json3` 库
-
-    .. raw:: html
-
-        <span style="background-color: yellow;">To Do：补充nlohmann-json3库的编译过程</span>
+    * 下载最新版本的 :code:`Eigen3` 库并编译安装。 `eigen下载链接 <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_ 
+    * 下载最新版本的 :code:`nlohmann-json3` 库并编译安装。 `nlohmann-json3下载链接 <https://github.com/nlohmann/json/tree/develop>`_ 
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            4. webots的<code>makefile</code>配置
+            3. webots的<code>makefile</code>配置(如不需要重新编译C++部分代码，可忽略)
       </div>
       </br>
     
@@ -256,11 +240,13 @@ Step2 创建虚拟环境与库安装
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            makefile文件路径为 <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+            需要修改的makefile文件路径包括： 
+            <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+            <code>Webots_Simulation/traffic_project/controllers/simpleCar_ctrl/Makefile</code>
         </div>
         </br>
         
-    由于linux系统一般不需要设置包含路径，因此做了windows系统的判断，如果是windows系统需要手动修改drone_ctrl2控制器的makefile，添加eigen以及nlohmann_json的包含路径
+    由于linux系统一般不需要额外设置包含路径，因此做了windows系统的判断，如果是windows系统需要手动修改drone_ctrl2和simpleCar_ctrl控制器的makefile，添加eigen以及nlohmann_json的包含路径
 
         .. code:: make
 
@@ -275,15 +261,12 @@ Step2 创建虚拟环境与库安装
 
         * 其中， :code:`INCLUDE += -I D:/cppLibrary/include/Eigen3/include/eigen3` 需要配置成 :code:`Eigen3` 库的路径
         *  :code:`INCLUDE += -I D:/cppLibrary/include/nlohmann_json/include` 需要配置成 :code:`nlohmann-json3` 库的路径
-
-    .. raw:: html
-
-        <span style="background-color: yellow;">配置完之后需要重新编译吧？</span>
+        * 完成上述修改后就可以进入webots编辑器打开控制器并进行重新编译了
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            5. 安装 <code>sumo</code>
+            4. 安装 <code>sumo</code>
       </div>
       </br>
 
@@ -293,7 +276,7 @@ Step2 创建虚拟环境与库安装
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            6. <code>webots</code> 和 <code>sumo</code> 环境变量配置
+            5. <code>webots</code> 和 <code>sumo</code> 环境变量配置
       </div>
       </br>
 
@@ -329,7 +312,3 @@ Step3 修改webots运行python环境
         :align: center
 
         Python_Command(Windows)配置
-
-.. raw:: html
-
-    <span style="background-color: yellow;">To Do：Finish Windows Version Configuration</span>

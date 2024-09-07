@@ -59,7 +59,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">Step1 安装webots仿真软件</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id4">Step2 创建虚拟环境与库安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Step3 修改webots运行python环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">Step3 修改webots运行python环境</a></li>
 </ul>
 </li>
 </ul>
@@ -220,10 +220,10 @@ gedit<span class="w"> </span>~/.bashrc
 </pre></div>
 </div>
 <p>接着进入webots软件，选择 <code class="code docutils literal notranslate"><span class="pre">工具(Tools)</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">首选项(Preferences)</span></code>, 按照如下图将选项 <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> 进行修改：</p>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -276,24 +276,22 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 </pre></div>
 </div>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      2. <code>Eigen3</code> 库安装
+      2. C++ 库安装(如不需要重新编译C++部分代码，可忽略)
 </div>
 </br><ul class="simple">
 <li><p>首先在 <a class="reference external" href="https://eigen.tuxfamily.org/index.php?title=Main_Page">eigen</a> 官网下在最新版本的 <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> 库</p></li>
+<li><p>下载最新版本的 <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> 库并编译安装。 <a class="reference external" href="https://eigen.tuxfamily.org/index.php?title=Main_Page">eigen下载链接</a></p></li>
+<li><p>下载最新版本的 <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> 库并编译安装。 <a class="reference external" href="https://github.com/nlohmann/json/tree/develop">nlohmann-json3下载链接</a></p></li>
 </ul>
-<span style="background-color: yellow;">To Do：补充eigen库的编译过程</span><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      3. <code>nlohmann-json3</code> 库安装
-</div>
-</br><ul class="simple">
-<li><p>首先在 <a class="reference external" href="https://github.com/nlohmann/json/tree/develop">nlohmann-json3</a> 官方仓库下载 <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> 库</p></li>
-</ul>
-<span style="background-color: yellow;">To Do：补充nlohmann-json3库的编译过程</span><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      4. webots的<code>makefile</code>配置
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+      3. webots的<code>makefile</code>配置(如不需要重新编译C++部分代码，可忽略)
 </div>
 </br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    makefile文件路径为 <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+    需要修改的makefile文件路径包括：
+    <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+    <code>Webots_Simulation/traffic_project/controllers/simpleCar_ctrl/Makefile</code>
 </div>
-</br><p>由于linux系统一般不需要设置包含路径，因此做了windows系统的判断，如果是windows系统需要手动修改drone_ctrl2控制器的makefile，添加eigen以及nlohmann_json的包含路径</p>
+</br><p>由于linux系统一般不需要额外设置包含路径，因此做了windows系统的判断，如果是windows系统需要手动修改drone_ctrl2和simpleCar_ctrl控制器的makefile，添加eigen以及nlohmann_json的包含路径</p>
 <blockquote>
 <div><div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">null</span><span class="w"> </span><span class="o">:=</span>
 <span class="nv">space</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>null<span class="k">)</span><span class="w"> </span><span class="k">$(</span>null<span class="k">)</span>
@@ -308,35 +306,36 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <ul class="simple">
 <li><p>其中， <code class="code docutils literal notranslate"><span class="pre">INCLUDE</span> <span class="pre">+=</span> <span class="pre">-I</span> <span class="pre">D:/cppLibrary/include/Eigen3/include/eigen3</span></code> 需要配置成 <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> 库的路径</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">INCLUDE</span> <span class="pre">+=</span> <span class="pre">-I</span> <span class="pre">D:/cppLibrary/include/nlohmann_json/include</span></code> 需要配置成 <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> 库的路径</p></li>
+<li><p>完成上述修改后就可以进入webots编辑器打开控制器并进行重新编译了</p></li>
 </ul>
 </div></blockquote>
-<span style="background-color: yellow;">配置完之后需要重新编译吧？</span><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      5. 安装 <code>sumo</code>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+      4. 安装 <code>sumo</code>
 </div>
 </br><ul class="simple">
 <li><p>按照文档 <a class="reference external" href="https://github.com/cyberbotics/webots/blob/master/docs/automobile/sumo-interface.md">sumo-interface.md</a> 进行安装即可</p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      6. <code>webots</code> 和 <code>sumo</code> 环境变量配置
+      5. <code>webots</code> 和 <code>sumo</code> 环境变量配置
 </div>
 </br><ul>
 <li><p>首先 <code class="code docutils literal notranslate"><span class="pre">WIN+R</span></code> 调出运行窗,再输入 <code class="code docutils literal notranslate"><span class="pre">sysdm.cpl</span></code> 调出系统属性页面，接着选择“高级”-&gt;“环境变量”-&gt;“系统变量”-&gt;“新建”</p></li>
 <li><p>插入 <code class="code docutils literal notranslate"><span class="pre">SUMO_HOME</span></code> 按照下图方式进行配置：</p>
 <blockquote>
-<div><figure class="align-center" id="id7">
+<div><figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="_images/SUMO_HOME.png"><img alt="SUMO_HOME配置" src="_images/SUMO_HOME.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">SUMO_HOME配置</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">SUMO_HOME配置</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
 </li>
 <li><p>插入 <code class="code docutils literal notranslate"><span class="pre">WEBOTS_HOME</span></code> 按照下图方式进行配置：</p>
 <blockquote>
-<div><figure class="align-center" id="id8">
+<div><figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="_images/WEBOTS_HOME.png"><img alt="WEBOTS_HOME配置" src="_images/WEBOTS_HOME.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">WEBOTS_HOME配置</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text">WEBOTS_HOME配置</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -344,21 +343,21 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 </ul>
 </div></blockquote>
 </section>
-<section id="id5">
-<h3>Step3 修改webots运行python环境<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id6">
+<h3>Step3 修改webots运行python环境<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中</p></li>
 <li><p>进入webots软件，选择 <code class="code docutils literal notranslate"><span class="pre">工具(Tools)</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">首选项(Preferences)</span></code>, 按照如下图将选项 <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> 进行修改：</p></li>
 </ul>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="_images/Python_CommandWIN.png"><img alt="Python_CommandWIN配置" src="_images/Python_CommandWIN.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Python_Command(Windows)配置</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">Python_Command(Windows)配置</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
-<span style="background-color: yellow;">To Do：Finish Windows Version Configuration</span></section>
+</section>
 </section>
 </section>
 
