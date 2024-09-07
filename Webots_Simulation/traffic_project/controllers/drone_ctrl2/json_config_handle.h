@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-27 12:11:47
+ * @LastEditTime: 2024-09-07 10:20:26
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -48,9 +48,11 @@ typedef struct _configData_s{
     struct _rewardConfig{
         std::string rewardType = "view";
         std::string rewardMode = "continuous";
+        double rewardCurOff = 0.001;
         double distanceScale = 0.05;
-        double rewardRange = 7;
+        double distanceRange = 7;
         double viewScale = 2;
+        double viewRange = 1;
     };
     _rewardConfig rewardConfig;
     // struct _droneRandomConfig{
@@ -214,9 +216,11 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
         std::cerr << "Reward mode(string) is not available!('discrete','continuous')" 
                     << "    Use default value 'continuous'." << std::endl;
     }
+    configData.rewardConfig.rewardCurOff = config.at("Reward_Config").at("reward_cut_off");
     configData.rewardConfig.distanceScale = config.at("Reward_Config").at("distance_scale");
-    configData.rewardConfig.rewardRange = config.at("Reward_Config").at("reward_range");
+    configData.rewardConfig.distanceRange = config.at("Reward_Config").at("distance_range");
     configData.rewardConfig.viewScale = config.at("Reward_Config").at("view_scale");
+    configData.rewardConfig.viewRange = config.at("Reward_Config").at("view_range");
 
     configData.video.fps = config.at("Out_Video").at("fps");
     configData.video.startTime = config.at("Out_Video").at("start_time");

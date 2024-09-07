@@ -191,21 +191,26 @@ train模式
    "Reward_Config": {
         "reward_type": "view",
         "reward_mode": "continuous",
+        "reward_cut_off": 0.001,
         "distance_scale": 0.01,
-        "reward_range": 7,
-        "view_scale": 4
+        "distance_range": 7,
+        "view_scale": 4,
+        "view_range": 0.7
    }
 
 **参数说明**
 
    - :code:`reward_type` ：reward的类型（默认view）。view是按照摄像头视角投影到地面的四边形进行检测，而distance是按照摄像头视角中点投影点到目标的距离进行检测。
    - :code:`reward_mode` ：默认reward的模式。continuous产生的是[0，1]之间的连续浮点数 ，而discrete产生的是0或1的整数。
+   - :code:`reward_cut_off` ：奖励截断。当获得的奖励小于这个值时，:code:`No_Reward_Done_Steps` 开始计数。
    - :code:`distance_scale` ：距离比例（默认continuous）。该参数只对continuous模式有效，控制reward因距离误差而衰减的速度。
-   - :code:`reward_range` ：产生reward的距离误差范围。
+   - :code:`distance_range` ：产生reward的距离误差范围。
 
    * :code:`view_scale` ：视角比例。该参数只对continuous模式、view类型有效，控制reward距视角中心误差而衰减的速度。
       
       * 具体参数含义见： :ref:`内置Reward` 
+   
+   - :code:`view_range` ：产生reward的视角范围。该参数用于缩放计算reward所用的四边形，也就是摄像头画面中四边形框的大小。一般设置范围为[0,1]。
 
 SUMO交通系统参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -88,7 +88,7 @@ int main(int argc, char **argv) {
   bool is_video_warmUp = false;
   int random_number = -1;
   bool is_nan = false;
-  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange, config.get()->rewardConfig.viewScale);
+  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.distanceRange, config.get()->rewardConfig.viewScale, config.get()->rewardConfig.viewRange);
 
   
   while (robot->step(timeStep) != -1) {
@@ -160,28 +160,28 @@ int main(int argc, char **argv) {
         switch (key)
         {
           case keyboard->UP:
-            simpleCar_cmd.axes[3] = 5;
+            simpleCar_cmd.axes[3] = 20;
             break;
           case keyboard->DOWN:
-            simpleCar_cmd.axes[3] = -5;
+            simpleCar_cmd.axes[3] = -20;
             break;
           case keyboard->RIGHT:
-            simpleCar_cmd.axes[0] = -60;
+            simpleCar_cmd.axes[0] = -90;
             break;
           case keyboard->LEFT:
-            simpleCar_cmd.axes[0] = 60;
+            simpleCar_cmd.axes[0] = 90;
             break;
           case (keyboard->SHIFT + keyboard->RIGHT):
-            simpleCar_cmd.axes[2] = -5;
+            simpleCar_cmd.axes[2] = -20;
             break;
           case (keyboard->SHIFT + keyboard->LEFT):
-            simpleCar_cmd.axes[2] = 5;
+            simpleCar_cmd.axes[2] = 20;
             break;
           case (keyboard->SHIFT + keyboard->UP):
-            simpleCar_cmd.axes[1] = 0.007;
+            simpleCar_cmd.axes[1] = 0.01;
             break;
           case (keyboard->SHIFT + keyboard->DOWN):
-            simpleCar_cmd.axes[1] = -0.007;
+            simpleCar_cmd.axes[1] = -0.01;
             break;
           case 'W':
             gimbal_cmd.y -= 0.003;

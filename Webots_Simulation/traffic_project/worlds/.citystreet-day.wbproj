@@ -10,6 +10,7 @@ textFiles: -1
 consoles: Console:All:All
 renderingDevicePerspectives: M100(1):camera;1;1;0;0
 renderingDevicePerspectives: M100(1):display;1;1;0;0
+<<<<<<< Updated upstream
 renderingDevicePerspectives: M100(10):camera;1;1;0;0
 renderingDevicePerspectives: M100(10):display;1;1;0;0
 renderingDevicePerspectives: M100(11):camera;1;1;0;0
@@ -54,6 +55,12 @@ renderingDevicePerspectives: M100(8):camera;1;1;0;0
 renderingDevicePerspectives: M100(8):display;1;1;0;0
 renderingDevicePerspectives: M100(9):camera;1;1;0;0
 renderingDevicePerspectives: M100(9):display;1;1;0;0
+=======
+renderingDevicePerspectives: M100(2):camera;1;1;0;0
+renderingDevicePerspectives: M100(2):display;1;1;0;0
+renderingDevicePerspectives: M100(3):camera;1;1;0;0
+renderingDevicePerspectives: M100(3):display;1;1;0;0
+>>>>>>> Stashed changes
 renderingDevicePerspectives: M100:camera;1;1;0;0
 renderingDevicePerspectives: M100:display;1;1;0;0
 renderingDevicePerspectives: vehicle(10):camera;1;0.5;0;0.00596421

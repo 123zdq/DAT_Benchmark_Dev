@@ -206,7 +206,7 @@ int main(int argc, char **argv)
   TrackingCtrl trackCtrl(timeStep);
   double action[5] = {0}; // 强化学习action参数buff
   double step_count = 0;
-  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.rewardRange, config.get()->rewardConfig.viewScale);
+  rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.distanceRange, config.get()->rewardConfig.viewScale, config.get()->rewardConfig.viewRange);
   bool is_video_warmUp = false;
   int random_number = -1;
   dataDisplay<6> dispData(disp);
@@ -286,30 +286,30 @@ int main(int argc, char **argv)
         switch (key)
         {
         case keyboard->UP:
-          fly_cmd.axes[3] = 40;
+          fly_cmd.axes[3] = 20;
           break;
         case keyboard->DOWN:
-          fly_cmd.axes[3] = -40;
+          fly_cmd.axes[3] = -20;
           break;
         case keyboard->RIGHT:
-          fly_cmd.axes[0] = -60;
+          fly_cmd.axes[0] = -90;
           break;
         case keyboard->LEFT:
-          fly_cmd.axes[0] = 60;
+          fly_cmd.axes[0] = 90;
           break;
         case (keyboard->SHIFT + keyboard->RIGHT):
-          fly_cmd.axes[2] = -40;
+          fly_cmd.axes[2] = -20;
           break;
         case (keyboard->SHIFT + keyboard->LEFT):
-          fly_cmd.axes[2] = 40;
+          fly_cmd.axes[2] = 20;
           break;
         case (keyboard->SHIFT + keyboard->UP):
-          fly_cmd.axes[1] = 0.007;
+          fly_cmd.axes[1] = 0.01;
           // fly_cmd.axes[1] = 3;
           // printf("target altitude: %f [m]\n", fly_cmd.axes[1]);
           break;
         case (keyboard->SHIFT + keyboard->DOWN):
-          fly_cmd.axes[1] = -0.007;
+          fly_cmd.axes[1] = -0.01;
           // fly_cmd.axes[1] = -2;
           // printf("target altitude: %f [m]\n", fly_cmd.axes[1]);
           break;
@@ -584,7 +584,7 @@ int main(int argc, char **argv)
       {
         machineState = Txt_Input("../../cache/" + droneDef + "_MachineState.txt");
         static int noRewardCount = 0;
-        if (state.reward > 0.001)
+        if (state.reward > config.get()->rewardConfig.rewardCurOff)
         {
           noRewardCount = 0;
         }

@@ -1,5 +1,9 @@
 {
+<<<<<<< Updated upstream
     "Simulation_Mode": "train",
+=======
+    "Simulation_Mode": "demo",
+>>>>>>> Stashed changes
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
@@ -24,9 +28,11 @@
     "Reward_Config": {
         "reward_type": "view",
         "reward_mode": "continuous",
+        "reward_cut_off": 0.001,
         "distance_scale": 0.01,
-        "reward_range": 7,
-        "view_scale": 4
+        "distance_range": 7,
+        "view_scale": 4,
+        "view_range": 0.7
     },
     "Sumo_Params": {
         "rou_update": false,
