@@ -117,6 +117,8 @@ Part 1 接口详解
     * :code:`auto_start(bool)` ： 是否自动启动仿真端
     * :code:`Control_Frequence(int)` ： 指定系统控制频率
     * :code:`reward_type(str)` ： 指定reward类别(可以选择不同baseline算法的reward)
+    * :code:`verbose(bool)`: 配置环境是否输出log文件
+    * :code:`delay(int)`: 配置系统等待地图加载的时长
     
     .. raw:: html
 
@@ -207,7 +209,10 @@ Part 2 配置文件
                 "Other_State":false,
                 "CloudPoint":false,
                 "RewardParams":true,
-                "RewardType":"default"
+                "RewardType":"default",
+                "verbose": false,
+                "delay": 20
+                
             },
             "LunarLander":{
                 "Need_render":1,
@@ -242,6 +247,8 @@ Part 2 配置文件
     *  :code:`"CloudPoint"` ：是否启用仿真器端的点云选项
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
+    * :code:`"verbose"(bool)`: 配置环境是否输出log文件
+    * :code:`"delay"(int)`: 配置系统等待地图加载的时长
 
 .. raw:: html
 
@@ -425,7 +432,7 @@ Part3 调用接口
 
 * :code:`n_envs(int)` ：环境数量
 * :code:`rank(int)` ：当前环境序号
-* :code:`gym(bool)` ： 如果为:code:`True` 则生成gym库的环境； 如果为:code:`False` 则生成gymnasium库的环境
+* :code:`gym(bool)` ： 如果为 :code:`True` 则生成gym库的环境； 如果为 :code:`False` 则生成gymnasium库的环境
 * :code:`monitor(bool)` ：是否需要封装成 :code:`stable_baselines3.common.monitor.Monitor` 类
 
 **测试代码：**
@@ -469,33 +476,27 @@ Part3 调用接口
 3 并行环境类(Envs)
 -------------------------------------------------
 
-  .. raw:: html 
+* 上述底层环境类(BenchEnv_Multi)设计目标是 **多进程异步计算** (例如A3C算法)，在单独进程内调用环境类获取数据
+* 为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 **单进程工作在同步并行的数据流上**，引申出本类(Envs)
+* 本环境主要适配 **用户的自主算法设计需求** (不使用stable-baselines3等基于Gym环境进行算法实现的情况)
 
-    <div style="background-color: #fce6ea; padding: 15px; border-radius: 5px; border: 2px solid #FF6A6A">
-      &nbsp;&nbsp;&nbsp;&nbsp;上述底层环境类(BenchEnv_Multi)设计目标是<b>多进程异步计算</b>(例如A3C算法)，在单独进程内调用环境类获取数据</br>
-      &nbsp;&nbsp;&nbsp;&nbsp;为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以<b>单进程工作在同步并行的数据流上</b>，引申出本类(Envs)</br>
-      &nbsp;&nbsp;&nbsp;&nbsp;本环境主要适配<b>用户的自主算法设计需求</b>(不使用stable-baselines3等基于Gym环境进行算法实现的情况)
-    </div>
-    </br>
-  
+.. raw:: html
 
-  .. raw:: html
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
+  </div>
+  </br>
 
-    <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
-    </div>
-    </br>
+**数据格式对比：**
 
-  **数据格式对比：**
-  
-  * 封装前(BenchEnv_Multi): 
+* 封装前(BenchEnv_Multi): 
 
-    数据采样： :code:`state:ndarray,reward:float,done:float= env.step(action:int)` 
+  数据采样： :code:`state:ndarray,reward:float,done:float= env.step(action:int)` 
 
-    环境重置： :code:`state:ndarray = env.reset()`
+  环境重置： :code:`state:ndarray = env.reset()`
 
-  * 封装后(Envs),设并行数n： 
+* 封装后(Envs),设并行数n： 
 
-    数据采样： :code:`states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)= env.step(action:ndarray(n))` 
+  数据采样： :code:`states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)= env.step(action:ndarray(n))` 
 
-    环境重置： :code:`states:ndarray(n,) = envs.reset()`
+  环境重置： :code:`states:ndarray(n,) = envs.reset()`

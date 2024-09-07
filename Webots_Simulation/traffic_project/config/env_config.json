@@ -31,7 +31,7 @@
         "view_range": 0.7
     },
     "Sumo_Params": {
-        "rou_update": false,
+        "rou_update": true,
         "max_sumo_car": 40,
         "fixed_car_group_num": false,
         "car_group_num": 5,

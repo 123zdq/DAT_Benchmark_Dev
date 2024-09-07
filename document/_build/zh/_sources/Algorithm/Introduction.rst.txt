@@ -91,8 +91,8 @@ Baseline2: :code:`Envs` 环境 +  :code:`CVAT` 算法
 .. raw:: html
 
     <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-        环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>
-        算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/</code>
+        环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
+        算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO/</code>
     </div>
     </br>
 
@@ -102,9 +102,23 @@ Baseline2: :code:`Envs` 环境 +  :code:`CVAT` 算法
 .. code:: bash
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
-    python ./models/D_VAT/DVAT_main.py
+    # 测试模式
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0
+    # 新训练模式
+    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    # 中断重开训练模式
+    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
 
-Baseline3(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
+Baseline3: :code:`FollowAnything` 算法 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+    <span style="background-color: yellow;">To do:补充Follow Anything的启动过程</span>
+
+
+
+Baseline4(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html

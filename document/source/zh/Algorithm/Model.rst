@@ -51,7 +51,7 @@
         </br>
 
 
-    本工程提供了4种baseline方法的算法实现，分别是 :code:`A3CLSTM-E2E` [1]_ , :code:`CVAT` [2]_ , :code:`D-VAT` [3]_ 以及 （我们的方法）
+    本工程提供了4种baseline方法的算法实现，分别是 :code:`A3CLSTM-E2E` [1]_ , :code:`CVAT` [2]_ , :code:`FollowAnything` [3]_ 以及PPO+CL(Ours)
 
     其中，上述baseline方法中 [1]_ [2]_ [3]_ 分别调用了本工程实现的3种环境 :doc:`Environment` ，为不同需求的算法实现提供了模板
     
@@ -62,42 +62,27 @@
 Baseline1 A3CLSTM-E2E
 ---------------------------------
 
-    本工程对于 :code:`A3CLSTM-E2E` 方法的复现参考了论文 :code:`AD-VAT+` [4]_ 基于代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>` 的复现方式。
-    
-    .. raw:: html
+本工程对于 :code:`A3CLSTM-E2E` 方法的复现参考了论文 :code:`AD-VAT+` [4]_ 基于代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>`_ 的复现方式。
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code>文件夹
-        </div>
-        </br>
+.. raw:: html
 
-    上述模型文件夹的目录结构如下：
-
-    .. code-block:: none
-
-        .
-        ├── __init__.py
-        ├── main.py
-        ├── model.py
-        ├── num_test.txt
-        ├── player_util.py
-        ├── runs
-        │   └── Benchmark_training
-        ├── shared_optim.py
-        ├── test.py
-        ├── trained_models
-        └── train.py
-
-    各文件功能解释如下：
+    <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code>文件夹
+    </div>
+    </br>
 
 快速运行程序
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark
-    python ./models/A3CLSTM_E2E/main.py
-
+    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    # 测试模式
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d"
+    # 新训练模式
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
+    # 中断重开训练模式
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
 程序入口
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -110,34 +95,58 @@ Baseline1 A3CLSTM-E2E
 
     此外， :code:`main.py` 文件还接收用户的参数配置，参数的含义与默认值如下：
     
-    * :code:`load(bool)=True` ：是否导入现有模型进行进一步的训练(只有当 :code:`load=True` 而且模型 :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` 存在的时候才会导入)
-    * :code:`workers(int)=24` ：环境并行训练的数量数(需要根据实际计算机的内存/显存来决定)
-    * :code:`gpu-ids(list)=[-1]` ：用于设置GPU的编号，默认为-1，即不使用GPU
-    * :code:`model_type(str)="E2E"` ： 指定当前使用的模型种类，如果用户自主实现了模型可以在此处增加配置。
-    * :code:`save-max(bool)=False` ： 是否保存测试进程reward最大时刻的模型权重，默认为 :code:`False` 即仅保存最后一个时刻的模型权重
-    * :code:`save-model-dir(str)="./models/A3CLSTM_E2E/trained_models/"` ：模型保存的路径
-    * :code:`tensorboard-logger(bool)=True` ：是否使能 :code:`tensorboard` 进行模型的可视化
-    * :code:`log-dir(str)="./models/A3CLSTM_E2E/logs/"` ：如果开启了 :code:`tensorboard` ，log文件存储的位置
+    .. raw:: html
 
-模型实现
-~~~~~~~~~~~~~~~~~~~~~~~~~
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>1. 运行参数：</b>配置系统模式，运行频率，设备等参数
+      </div>
+      </br>
+
+    * :code:`--Mode(int)=1` : 配置运行模式是否为训练模式( :code:`--Mode=1` 是训练模式，:code:`--Mode=0` 是测试模式)
+    * :code:`--workers(int)=24` ：环境并行训练的数量数(需要根据实际计算机的内存/显存来决定)
+    * :code:`--gpu-ids(list)=[-1]` ：用于设置GPU的编号，默认为-1，即不使用GPU
+    * :code:`--Freq(int)=125` ：算法端运行频率(环境端运行频率为500Hz是不可修改的)，因此默认 :code:`--Freq(int)=125` 即环境端运行4步回传一次数据
+    * :code:`--delay(int)=20` : 等待Webots地图加载时长(只有等Webots地图加载完成之后才能够正常开始训练)
+    * :code:`--New_Train(bool)=False` : 是否开启全新的训练，默认为 :code:`--New_Train=False`，则会加载 :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` 预训练权重(如果存在)进行训练，并且tensorboard的曲线也会从上一次训练曲线后加载
+    * :code:`--Port(int)=-1` : 环境端与算法端通信端口，默认 :code:`--Port=-1` 则随机利用一个当前可用的端口，不建议手动修改
 
     .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            模型代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/main.py</code>
-        </div>
-        </br>
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>2. 环境参数：</b>配置选择的环境
+      </div>
+      </br>
 
-    在本工程中提供了两种主干网络，1种是代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>` 中的实现，另外一种是论文 [1]_ 中的网络结构。
+    * :code:`--Scene(str)="citystreet"` : 配置训练/测试环境场景种类，从 :code:`[citystreet,downtown,lake,village,desert,farmland]` 中选择
+    * :code:`--Weather(str)="day"` : 配置训练/测试环境天气种类，从 :code:`[day,night,foggy,snow]` 
+    
+    .. raw:: html
 
-    * 代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>` 中的网络主干见 :code:`A3Clstm` 类
-    * 论文 [1]_ 中的网络结构见 :code:`A3ClstmE2E` 类
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>3. 模型参数：</b>配置模型权重导入和保存相关参数
+      </div>
+      </br>
+    
+    * :code:`--load(bool)=True` ：是否导入现有模型进行进一步的训练(只有当 :code:`--load=True` 以及而且模型权重 :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` 存在的时候才会导入)
+    * :code:`--save-max(bool)=False` ： 是否保存测试进程reward最大时刻的模型权重，默认为 :code:`False` 即仅保存最后一个时刻的模型权重
+    * :code:`--model_type(str)="E2E"` ： 指定当前使用的模型种类，如果用户自主实现了模型可以在此处增加配置。
+    * :code:`--save-model-dir(str)="./models/A3CLSTM_E2E/trained_models/"` ：模型保存的路径
+    * :code:`--Test_Param(str)="CityStreet-d"` : (只有 :code:`--Mode(int)=0` 的时候启用)导入什么权重进行测试，默认为 :code:`--Test_Param="CityStreet-d"`，则会导入权重 :code:`A3CLSTM_E2E/trained_models/CityStreet-d.dat` 进行测试
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>4. 可视化参数：</b>配置可视化文件相关参数
+      </div>
+      </br>
+    
+    * :code:`--tensorboard-logger(bool)=True` ：是否使能 :code:`tensorboard` 进行模型的可视化
+    * :code:`--log-dir(str)="./models/A3CLSTM_E2E/logs/"` ：如果开启了 :code:`tensorboard` ，log文件存储的位置
 
 log文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    本工程提供了两种log记录方式，第一种是直接输出log文件，另外一种是利用tensorboard记录训练过程的性能变化。
+    本工程提供了两种log记录方式，第一种是直接输出log文件(通过 :code:`config.json` 中的 :code:`["Benchmark"]["verbose"]` 进行配置)，另外一种是利用tensorboard记录训练过程的性能变化。
 
     **模式1：直接输出log文件**
 
@@ -174,19 +183,6 @@ log文件
         cd Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs
         tensorboard --logdir Benchmark_training
 
-其他
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    * :code:`train.py` 文件为A3C训练脚本， :code:`test.py` 为测试脚本，而 :code:`player_util.py` 则定义了智能体类别
-    * :code:`shared_optim.py` 定义了优化函数
-
-.. raw:: html
-
-    </br>
-    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-    </br>
-    </br>
-
 Baseline2 CVAT
 ---------------------------------
 
@@ -212,6 +208,6 @@ Baseline3 D-VAT
 
 .. [1] Luo, Wenhan, et al. "End-to-end active object tracking and its real-world deployment via reinforcement learning." IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.
 .. [2] Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. "Enhancing continuous control of mobile robots for end-to-end visual active tracking." Robotics and Autonomous Systems 142 (2021): 103799.
-.. [3] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).
+.. [3] Maalouf, Alaa, et al. "Follow Anything: Open-set detection, tracking, and following in real-time." IEEE Robotics and Automation Letters 9.4 (2024): 3283-3290.
 .. [4] Zhong, Fangwei, et al. "Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking." IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.
 

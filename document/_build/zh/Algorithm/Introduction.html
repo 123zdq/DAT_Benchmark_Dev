@@ -55,7 +55,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#baseline">快速开始(运行baseline算法)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#baseline1-benchenv-multi-a3clstm-e2e">Baseline1: <code class="code docutils literal notranslate"><span class="pre">BenchEnv_Multi</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> 算法</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#baseline2-envs-cvat">Baseline2: <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 算法</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#baseline3-ours-envs-rppo-cl">Baseline3(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> 算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline3-followanything">Baseline3: <code class="code docutils literal notranslate"><span class="pre">FollowAnything</span></code> 算法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline4-ours-envs-rppo-cl">Baseline4(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> 算法</a></li>
 </ul>
 </li>
 </ul>
@@ -167,17 +168,25 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 <section id="baseline2-envs-cvat">
 <h3>Baseline2: <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">CVAT</span></code> 算法<a class="headerlink" href="#baseline2-envs-cvat" title="Link to this heading"></a></h3>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-    环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>
-    算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/</code>
+    环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
+    算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO/</code>
 </div>
 </br><p>可以运行如下代码快速开启算法：</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/
-python<span class="w"> </span>./models/D_VAT/DVAT_main.py
+<span class="c1"># 测试模式</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>citystreet-day.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">0</span>
+<span class="c1"># 新训练模式</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">24</span><span class="w"> </span>-m<span class="w"> </span>citystreet-day.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">1</span><span class="w"> </span>--New_Train
+<span class="c1"># 中断重开训练模式</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">24</span><span class="w"> </span>-m<span class="w"> </span>citystreet-day.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">1</span>
 </pre></div>
 </div>
 </section>
-<section id="baseline3-ours-envs-rppo-cl">
-<h3>Baseline3(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> 算法<a class="headerlink" href="#baseline3-ours-envs-rppo-cl" title="Link to this heading"></a></h3>
+<section id="baseline3-followanything">
+<h3>Baseline3: <code class="code docutils literal notranslate"><span class="pre">FollowAnything</span></code> 算法<a class="headerlink" href="#baseline3-followanything" title="Link to this heading"></a></h3>
+<span style="background-color: yellow;">To do:补充Follow Anything的启动过程</span></section>
+<section id="baseline4-ours-envs-rppo-cl">
+<h3>Baseline4(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> 环境 +  <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> 算法<a class="headerlink" href="#baseline4-ours-envs-rppo-cl" title="Link to this heading"></a></h3>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
     环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
     算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO/</code>

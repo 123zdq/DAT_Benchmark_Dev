@@ -202,6 +202,8 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">auto_start(bool)</span></code> ： 是否自动启动仿真端</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Control_Frequence(int)</span></code> ： 指定系统控制频率</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">reward_type(str)</span></code> ： 指定reward类别(可以选择不同baseline算法的reward)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">verbose(bool)</span></code>: 配置环境是否输出log文件</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">delay(int)</span></code>: 配置系统等待地图加载的时长</p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       2. <code>step</code> ：用于环境的推演
@@ -264,7 +266,10 @@
 <span class="w">        </span><span class="nt">&quot;Other_State&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;CloudPoint&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
 <span class="w">        </span><span class="nt">&quot;RewardParams&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;RewardType&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span>
+<span class="w">        </span><span class="nt">&quot;RewardType&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;delay&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="nt">&quot;LunarLander&quot;</span><span class="p">:{</span>
 <span class="w">        </span><span class="nt">&quot;Need_render&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
@@ -301,6 +306,8 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CloudPoint&quot;</span></code> ：是否启用仿真器端的点云选项</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;RewardParams&quot;</span></code> ：是否启用仿真器端的其他奖励参数选项</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;RewardType&quot;</span></code> ：指定reward类别(可以选择不同baseline算法的reward)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;verbose&quot;(bool)</span></code>: 配置环境是否输出log文件</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;delay&quot;(int)</span></code>: 配置系统等待地图加载的时长</p></li>
 </ul>
 </div></blockquote>
 </br>
@@ -422,7 +429,7 @@
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">n_envs(int)</span></code> ：环境数量</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">rank(int)</span></code> ：当前环境序号</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">gym(bool)</span></code> ： 如果为:code:<cite>True</cite> 则生成gym库的环境； 如果为:code:<cite>False</cite> 则生成gymnasium库的环境</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">gym(bool)</span></code> ： 如果为 <code class="code docutils literal notranslate"><span class="pre">True</span></code> 则生成gym库的环境； 如果为 <code class="code docutils literal notranslate"><span class="pre">False</span></code> 则生成gymnasium库的环境</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">monitor(bool)</span></code> ：是否需要封装成 <code class="code docutils literal notranslate"><span class="pre">stable_baselines3.common.monitor.Monitor</span></code> 类</p></li>
 </ul>
 <p><strong>测试代码：</strong></p>
@@ -455,13 +462,12 @@
 </section>
 <section id="envs">
 <span id="parallel"></span><h2>3 并行环境类(Envs)<a class="headerlink" href="#envs" title="Link to this heading"></a></h2>
-<blockquote>
-<div><div style="background-color: #fce6ea; padding: 15px; border-radius: 5px; border: 2px solid #FF6A6A">
-  &nbsp;&nbsp;&nbsp;&nbsp;上述底层环境类(BenchEnv_Multi)设计目标是<b>多进程异步计算</b>(例如A3C算法)，在单独进程内调用环境类获取数据</br>
-  &nbsp;&nbsp;&nbsp;&nbsp;为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以<b>单进程工作在同步并行的数据流上</b>，引申出本类(Envs)</br>
-  &nbsp;&nbsp;&nbsp;&nbsp;本环境主要适配<b>用户的自主算法设计需求</b>(不使用stable-baselines3等基于Gym环境进行算法实现的情况)
-</div>
-</br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+<ul class="simple">
+<li><p>上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</p></li>
+<li><p>为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</p></li>
+<li><p>本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</p></li>
+</ul>
+<div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
 </div>
 </br><p><strong>数据格式对比：</strong></p>
@@ -475,7 +481,6 @@
 <p>环境重置： <code class="code docutils literal notranslate"><span class="pre">states:ndarray(n,)</span> <span class="pre">=</span> <span class="pre">envs.reset()</span></code></p>
 </li>
 </ul>
-</div></blockquote>
 </section>
 </section>
 
