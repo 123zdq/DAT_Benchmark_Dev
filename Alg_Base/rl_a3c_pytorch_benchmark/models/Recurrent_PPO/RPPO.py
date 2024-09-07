@@ -883,6 +883,11 @@ if __name__ == "__main__":
         ) as file:
             file.write("0")
 
+    if args.train_mode:
+        Load_Model = not args.New_Train
+    else:
+        Load_Model = True
+
     import subprocess, time
 
     # simulator !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -907,7 +912,7 @@ if __name__ == "__main__":
         entropy_coef=0.7,
         gamma=0.01,
         savepath=args.savepath,
-        load=not args.New_Train,
+        load=Load_Model,
     )
 
     if args.tensorboard_port != -1 and args.train_mode:
