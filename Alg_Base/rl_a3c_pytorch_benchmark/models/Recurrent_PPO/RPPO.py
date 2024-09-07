@@ -781,7 +781,7 @@ if __name__ == "__main__":
 
     parse = argparse.ArgumentParser(description="run RPPO")
     parse.add_argument(
-        "-w", "--workers", default=1, type=int, metavar="", help="the number of agents"
+        "-w", "--workers", default=24, type=int, metavar="", help="the number of agents"
     )
     parse.add_argument(
         "-t",
@@ -818,7 +818,7 @@ if __name__ == "__main__":
     parse.add_argument(
         "-tp",
         "--tensorboard_port",
-        default=-1,
+        default=1,
         type=int,
         metavar="",
         help="the port of tensorboard",
@@ -892,7 +892,7 @@ if __name__ == "__main__":
 
     if args.tensorboard_port != -1:
         tb = subprocess.Popen(
-            ["tensorboard --logdir PPO_logs --port=" + str(args.tensorboard_port)],
+            ["tensorboard --logdir PPO_logs"],
             shell=True,
         )
 
