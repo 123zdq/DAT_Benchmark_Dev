@@ -371,6 +371,8 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
         # self.vloss_coef = 0.5
         self.max_grad_norm = 0.5
 
+        self.load = True # Whether load pretrain weight
+
         ##################################
 
         for key, value in kwargs.items():
@@ -379,7 +381,8 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
         self.model = RPPO_E2E_VAT(self.input_channels, self.action_dim).to(self.device)
         # self.model = RPPO_E2E_VAT_CNN(self.input_channels, self.action_dim).to(self.device)
 
-        if os.path.exists(self.savepath):
+        if os.path.exists(self.savepath) and self.load == True:
+            print("Loading Pretrained weight")
             self.model.load_state_dict(torch.load(self.savepath))
 
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, eps=1e-5)
@@ -579,6 +582,8 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
         self.vloss_coef = 0.5
         self.max_grad_norm = 0.5
 
+        self.load = True
+
         ##################################
 
         for key, value in kwargs.items():
@@ -589,7 +594,8 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
                 self.input_channels, self.hidden_width, self.action_dim
             ).to(self.device)
 
-        if os.path.exists(self.savepath):
+        if os.path.exists(self.savepath) and self.load == True:
+            print("Loading Pretrained weight")
             self.model.load_state_dict(torch.load(self.savepath))
 
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=self.lr, eps=1e-5)
@@ -823,6 +829,13 @@ if __name__ == "__main__":
         metavar="",
         help="the port of tensorboard",
     )
+    parse.add_argument(
+        "-N",
+        "--New_Train",
+        action='store_true',
+        default=False,
+        help="Whether restart a new training",
+    )
     args = parse.parse_args()
 
     if args.port == -1:
@@ -864,6 +877,12 @@ if __name__ == "__main__":
     with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
+    if args.New_Train and os.path.exists("./PPO_logs/steps.txt"):
+        with open(
+            "./PPO_logs/steps.txt", "w"
+        ) as file:
+            file.write("0")
+
     import subprocess, time
 
     # simulator !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -888,9 +907,10 @@ if __name__ == "__main__":
         entropy_coef=0.7,
         gamma=0.01,
         savepath=args.savepath,
+        load=not args.New_Train,
     )
 
-    if args.tensorboard_port != -1:
+    if args.tensorboard_port != -1 and args.train_mode:
         tb = subprocess.Popen(
             ["tensorboard --logdir PPO_logs"],
             shell=True,
@@ -913,5 +933,6 @@ agent = UAV_RPPO_discrete(
     num_steps=50,
     model=AC_RPPO_A3ClstmE2E(3, 64, 7).to(torch.device("cuda")),
     K_epochs = 5,
+    load=not args.New_Train,
 )
 """

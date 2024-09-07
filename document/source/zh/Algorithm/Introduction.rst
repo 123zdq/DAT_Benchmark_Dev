@@ -54,7 +54,7 @@
 
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
             本项目提供了<b>3种环境类的实现，以及4种baseline算法</b>，可供用户后续进行算法设计和性能比较
-            环境类详细文档参考: <a href="Environment.rst">环境封装</a> ；算法类详细文档参考： <a href="Model.rst">环境封装</a> 
+            环境类详细文档参考: <a href="Environment.rst">环境封装</a> ；算法类详细文档参考： <a href="Model.rst">模型搭建</a> 
       </div>
       </br>
 
@@ -104,7 +104,7 @@ Baseline2: :code:`Envs` 环境 +  :code:`CVAT` 算法
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     python ./models/D_VAT/DVAT_main.py
 
-Baseline3: :code:`UAV_VAT/UAV_VAT_Gymnasium` 环境 +  :code:`D-VAT` 算法 
+Baseline3(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -123,6 +123,8 @@ Baseline3: :code:`UAV_VAT/UAV_VAT_Gymnasium` 环境 +  :code:`D-VAT` 算法
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     # 测试模式
     python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0
-    # 训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt -tp 6008 --train_mode 1
+    # 新训练模式
+    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    # 中断重开训练模式
+    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
     
