@@ -565,16 +565,20 @@ Pedestrian
 
    行人对象会按照一定的路线和一定的速度行进，同时人体会模仿真人步态进行运动
 
-.. figure:: ../_static/image/PEDESTRIAN.png
-   :alt: PEDESTRIAN                                           
-   :width: 500px                                              
-   :align: center   
+   .. raw:: html
 
-   Pedestrian
-
-.. raw:: html
-
-   <span style="background-color: yellow;">To Do:多截屏几种不同服装颜色的人</span>
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/PEDESTRIAN.png" alt="PEDESTRIAN " style="width: 90%;" />
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/PEDESTRIAN2.png" alt="PEDESTRIAN2" style="width: 90%;" />
+         </figure>
+         <figure style="text-align: center; width: 33%;">
+            <img src="../_static/image/PEDESTRIAN3.png" alt="PEDESTRIAN3" style="width: 90%;" />
+         </figure>
+      </div>
+      <p style="text-align: center;">Pedestrian</p>
 
 
 Wheel Robots
@@ -969,10 +973,11 @@ Legged Robots
 
       无人机坐标系定义
 
+.. raw:: html
+
+   <span style="background-color: yellow;">To Do: 把上面这张坐标系图修改一下</span>
+
 **雷达数据包**
 
-   雷达点云数据。该环境中的跟踪器搭载了RpLidarA2单线雷达，其点云数据将输出一个很长的数组。
+   雷达点云数据。该环境中的跟踪器搭载了RpLidarA2单线雷达，其点云数据将输出一个长度为2000的数组。
 
-   .. raw:: html
-
-      <span style="background-color: yellow;">To Do: 把Webots现有的可以增加的雷达也加入进去吧</span>
