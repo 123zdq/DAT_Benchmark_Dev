@@ -70,8 +70,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.10632283362352368 -0.9716111290457115 0.21134632470138282 5.327698395306926
-  position -460.9982452257519 -189.53599537752115 394.93464686088845
+  orientation -0.2739869745806023 -0.8888909903044647 0.36715656757807896 4.886447226187253
+  position -154.81429852859736 -3.6544292741478888 292.9800070663821
   near 3
 }
 TexturedBackground {
@@ -925,8 +925,11 @@ DEF ORIGIN RangeRoverSportSVRSimple {
 }
 DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
-  maxVehicles 28
+  maxVehicles 40
   step 100
+  port 8888
+  seed 0
+  networkFiles "../../worlds/citystreet_net"
   children [
     Solid {
       translation 196.99 223.18 0

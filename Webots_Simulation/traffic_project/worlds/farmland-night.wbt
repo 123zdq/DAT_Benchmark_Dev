@@ -60,15 +60,15 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.18378899487108621 0.08106434557912445 0.9796173626677428 2.3259083776329583
-  position 483.4817892975009 -512.6444254517062 169.25874739335345
+  orientation -0.3665906583429419 0.15950567788692863 0.9166074557505628 2.382625596373344
+  position 398.08813885912076 -377.3442562052284 185.5703283358186
   near 3
 }
 TexturedBackground {
   skybox FALSE
 }
 TexturedBackgroundLight {
-  luminosity 0.28
+  luminosity 0.5
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -2936,6 +2936,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 28
   step 100
   port 7789
+  networkFiles "../../worlds/farmland_net"
 }
 Robot {
   children [

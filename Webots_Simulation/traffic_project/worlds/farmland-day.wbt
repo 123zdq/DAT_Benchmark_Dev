@@ -2934,6 +2934,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 28
   step 100
   port 7789
+  networkFiles "../../worlds/farmland_net"
 }
 Robot {
   children [

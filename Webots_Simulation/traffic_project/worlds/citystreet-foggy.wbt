@@ -938,6 +938,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 150
   step 100
   seed 100
+  networkFiles "../../worlds/citystreet_net"
   children [
     Solid {
       translation 196.99 223.18 0

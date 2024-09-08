@@ -1,5 +1,5 @@
 {
-    "Simulation_Mode": "train",
+    "Simulation_Mode": "demo",
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
@@ -34,7 +34,7 @@
         "rou_update": true,
         "max_sumo_car": 40,
         "fixed_car_group_num": false,
-        "car_group_num": 5,
+        "car_group_num": 10,
         "car_import_interval": 52.0,
         "car_type": "passenger",
         "fixed_color": false,

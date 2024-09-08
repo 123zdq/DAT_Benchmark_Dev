@@ -80,10 +80,8 @@ DEF land Floor {
   translation 0 0 -0.1
   size 2000 1500
   appearance PBRAppearance {
+    baseColor 0.5 0.51 0.455
     baseColorMap ImageTexture {
-      url [
-        "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/default/worlds/textures/grass.jpg"
-      ]
     }
     roughness 1
     metalness 0
@@ -35924,6 +35922,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 150
   step 100
   seed 76
+  networkFiles "../../worlds/downtown_net"
 }
 Robot {
   children [

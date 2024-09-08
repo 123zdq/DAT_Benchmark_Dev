@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-05 12:52:57
+LastEditTime: 2024-09-08 20:10:58
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -88,7 +88,7 @@ global_init = False
 
 # seperate different simulation modes
 FollowPort = None
-file_path = world_path[:-4] + '_net'
+file_path = world_path[:world_path.find('-')] + '_net'
 car_import_group_num = configData["Sumo_Params"]["car_group_num"]
 
 # clear cache files

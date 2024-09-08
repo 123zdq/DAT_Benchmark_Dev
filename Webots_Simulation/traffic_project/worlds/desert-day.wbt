@@ -2299,6 +2299,7 @@ DEF SUMO_INTERFACE SumoInterface {
   step 100
   port 38711
   seed 0
+  networkFiles "../../worlds/desert_net"
 }
 Robot {
   children [

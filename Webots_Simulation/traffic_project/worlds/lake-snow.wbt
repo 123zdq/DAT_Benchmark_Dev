@@ -14850,6 +14850,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 150
   step 100
   seed 87
+  networkFiles "../../worlds/lake_net"
 }
 Forest {
   translation 25.14 279.8 0

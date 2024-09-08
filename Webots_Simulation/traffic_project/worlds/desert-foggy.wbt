@@ -62,8 +62,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.275620701179308 -0.5069140171573147 0.8167443959347749 5.108508306028451
-  position -316.78853407652093 505.8105174058226 336.42689238283356
+  orientation -0.24749459174156285 -0.4147506669295841 0.8756302366525167 5.08681734682233
+  position -111.08397009371045 174.65285213219425 45.94530551853091
   near 3
 }
 TexturedBackground {
@@ -72,7 +72,8 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 Fog {
-  visibilityRange 1000
+  fogType "EXPONENTIAL"
+  visibilityRange 400
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -2289,6 +2290,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 28
   step 100
   port 7789
+  networkFiles "../../worlds/desert_net"
 }
 Robot {
   children [

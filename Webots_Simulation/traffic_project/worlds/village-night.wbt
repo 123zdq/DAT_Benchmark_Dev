@@ -64,17 +64,17 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.3267355202916202 -0.1110541717746019 0.9385685221182423 3.759202231982935
-  position 831.200884308937 643.8714555712825 830.2617459992123
+  orientation -0.26131264384462954 -0.06745941417808302 0.9628940386177909 3.628870169462807
+  position 517.0203822451224 316.86907633256624 341.3267253029237
   near 3
 }
 TexturedBackground {
   texture "stadium"
-  luminosity 0.1
+  luminosity 0.2
   skybox FALSE
 }
 TexturedBackgroundLight {
-  luminosity 0.05
+  luminosity 0.1
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -3265,6 +3265,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 28
   step 100
   port 7789
+  networkFiles "../../worlds/village_net"
 }
 Robot {
   children [

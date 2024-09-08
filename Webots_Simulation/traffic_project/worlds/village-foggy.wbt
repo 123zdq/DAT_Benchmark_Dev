@@ -64,8 +64,8 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation 0.11594425387604408 0.8240150987444133 -0.5545773589269241 0.49691157374661854
-  position -361.84265778537525 136.51292546395084 118.09432741320074
+  orientation 0.09685849653070305 0.5484638439403932 -0.8305455096139762 0.4189746103587914
+  position -193.9434104815463 96.56005628146171 25.100601225875895
   near 3
 }
 TexturedBackground {
@@ -88,7 +88,7 @@ DEF land Floor {
 }
 Fog {
   fogType "EXPONENTIAL"
-  visibilityRange 300
+  visibilityRange 400
 }
 Crossroad {
   translation -286.901992 66.400601 0.01
@@ -3080,6 +3080,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 28
   step 100
   port 7789
+  networkFiles "../../worlds/village_net"
 }
 Robot {
   children [

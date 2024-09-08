@@ -82,9 +82,6 @@ DEF land Floor {
   appearance PBRAppearance {
     baseColor 0.870588 0.866667 0.854902
     baseColorMap ImageTexture {
-      url [
-        ""
-      ]
     }
     roughness 1
     metalness 0
@@ -35921,6 +35918,7 @@ DEF SUMO_INTERFACE SumoInterface {
   maxVehicles 150
   step 100
   seed 76
+  networkFiles "../../worlds/downtown_net"
 }
 Robot {
   children [
