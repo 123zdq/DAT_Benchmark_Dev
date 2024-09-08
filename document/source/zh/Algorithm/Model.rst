@@ -343,57 +343,57 @@ Baseline4 PPO+CL
 
     * 两阶段地图对照表如下：
 
-        +------------------+------------------+
-        | Origin Map       | Simple Map       |
-        +==================+==================+
-        |citystreet-day    |simpleway-grass   |
-        +------------------+------------------+
-        |citystreet-night  |simpleway-night   |
-        +------------------+------------------+
-        |citystreet-foggy  |simpleway-foggy   |
-        +------------------+------------------+
-        |citystreet-snow   |simpleway-snow    |
-        +------------------+------------------+
-        |desert-day        |simpleway-desert  |
-        +------------------+------------------+
-        |desert-night      | Row 2, Col 2     |
-        +------------------+------------------+
-        |desert-foggy      | Row 2, Col 2     |
-        +------------------+------------------+
-        |desert-snow       | Row 2, Col 2     |
-        +------------------+------------------+
-        |downtown-day      |simpleway-grass   |
-        +------------------+------------------+
-        |downtown-night    |simpleway-night   |
-        +------------------+------------------+
-        |downtown-foggy    |simpleway-foggy   |
-        +------------------+------------------+
-        |downtown-snow     |simpleway-snow    |
-        +------------------+------------------+
-        |farmland-day      |simpleway-farm    |
-        +------------------+------------------+
-        |farmland-night    | Row 2, Col 2     |
-        +------------------+------------------+
-        |farmland-foggy    | Row 2, Col 2     |
-        +------------------+------------------+
-        |farmland-snow     | Row 2, Col 2     |
-        +------------------+------------------+
-        |lake-day          |simpleway-lake    |
-        +------------------+------------------+
-        |lake-night        | Row 2, Col 2     |
-        +------------------+------------------+
-        |lake-foggy        | Row 2, Col 2     |
-        +------------------+------------------+
-        |lake-snow         | Row 2, Col 2     |
-        +------------------+------------------+
-        |village-day       | Row 2, Col 2     |
-        +------------------+------------------+
-        |village-night     | Row 2, Col 2     |
-        +------------------+------------------+
-        |village-foggy     | Row 2, Col 2     |
-        +------------------+------------------+
-        |village-snow      | Row 2, Col 2     |
-        +------------------+------------------+
+        +------------------+-------------------------+
+        | Origin Map       | Simple Map              |
+        +==================+=========================+
+        |citystreet-day    |simpleway-grass_day      |
+        +------------------+-------------------------+
+        |citystreet-night  |simpleway-grass_night    |
+        +------------------+-------------------------+
+        |citystreet-foggy  |simpleway-grass_foggy    |
+        +------------------+-------------------------+
+        |citystreet-snow   |simpleway-city_snow      |
+        +------------------+-------------------------+
+        |desert-day        |simpleway-desert_day     |
+        +------------------+-------------------------+
+        |desert-night      |simpleway-desert_night   |
+        +------------------+-------------------------+
+        |desert-foggy      |simpleway-desert_foggy   |
+        +------------------+-------------------------+
+        |desert-snow       |simpleway-desert_snow    |
+        +------------------+-------------------------+
+        |downtown-day      |simpleway-clinker_day    |
+        +------------------+-------------------------+
+        |downtown-night    |simpleway-clinker_night  |
+        +------------------+-------------------------+
+        |downtown-foggy    |simpleway-clinker_foggy  |
+        +------------------+-------------------------+
+        |downtown-snow     |simpleway-city_snow      |
+        +------------------+-------------------------+
+        |farmland-day      |simpleway-farm_day       |
+        +------------------+-------------------------+
+        |farmland-night    |simpleway-farm_night     |
+        +------------------+-------------------------+
+        |farmland-foggy    |simpleway-farm_foggy     |
+        +------------------+-------------------------+
+        |farmland-snow     |simpleway-farm_snow      |
+        +------------------+-------------------------+
+        |lake-day          |simpleway-lake_day       |
+        +------------------+-------------------------+
+        |lake-night        |simpleway-lake_night     |
+        +------------------+-------------------------+
+        |lake-foggy        |simpleway-lake_foggy     |
+        +------------------+-------------------------+
+        |lake-snow         |simpleway-lake_snow      |
+        +------------------+-------------------------+
+        |village-day       |simpleway-village_day    |
+        +------------------+-------------------------+
+        |village-night     |simpleway-village_night  |
+        +------------------+-------------------------+
+        |village-foggy     |simpleway-village_foggy  |
+        +------------------+-------------------------+
+        |village-snow      |simpleway-village_snow   |
+        +------------------+-------------------------+
 
 log文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~
