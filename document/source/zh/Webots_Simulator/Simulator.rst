@@ -707,131 +707,108 @@ Legged Robots
 
    由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标 :code:`(xf,yf,zf)` 以及 :code:`(xv,yv,zv)` ，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
 
-基本思路
+奖励函数
 ~~~~~~~~~~~~~~~~~~~~
 
-   .. figure:: ../_static/image/GetReward.png
-      :alt: GetReward                                 
-      :width: 600px                                              
+   对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：
+
+   .. math::
+
+      r_{d} = \begin{cases} 
+      1 & t \in I, \\
+      0 & \text{otherwise}. 
+      \end{cases}
+
+   其中 :math:`I` 代表跟踪范围（相机镜头获取的画面范围）， :math:`t` 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。
+
+   第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。
+
+   .. image:: ../_static/image/Continuous_reward.png
+      :alt: Continuous_reward
+      :scale: 32%
       :align: center
+      :name: 跟踪对象连续奖励示意图
 
-      内置Reward获取示意图
+   上图是一个跟踪对象处于相机画面中的示意图，记点 :math:`E_{G_{c}}` 到画面中心点 :math:`I_{cG}` 的距离为 :math:`y_{EI}`，跟踪对象点 :math:`P_{GC}` 到中心点 :math:`I_{cG}` 的距离为 :math:`y_{IP}`，记他们的比例为
 
-   1. 首先， 需要从Webots中读出的参数有：飞机的空间坐标 :math:`[x_f,y_f,z_f]` ，被跟踪小车的空间坐标 :math:`[x_v,y_v,z_v]` ，摄像头Camera的Roll角度 :math:`\alpha` 和Pitch角度 :math:`\gamma` 以及Camera的水平视场fieldOfView :math:`FOV_{hor}`
+   .. math::
 
-   .. raw:: html
+      x = \frac{y_{IP}}{y_{EI}}
 
-      <div style="line-height: 0.1;">
-         <br>
-      </div>
+   那么，密集奖励可以使用下面的表达式获得：
 
-   2. 则可以根据获取图像的分辨率w*h以及Camera的水平视场计算Camera的垂直视场 :math:`FOV_{ver}` ，计算公式为： :math:`FOV_{ver} = 2*\arctan{(\tan(\frac{FOV_{hor}}{2}*\frac{height}{width}))}` ，其中先取tan再取arctan是为了将FOV限制在 :math:`[0,\pi]` 范围内
-   
-   .. raw:: html
+   .. math::
 
-      <div style="line-height: 0.1;">
-         <br>
-      </div>
-   
-   3. 因此，可以计算在当前Camera位姿下，相机FOV对应的实际x方向范围 :math:`[x_{min},x_{max}]` ，以及Camera视场对应的实际距离 :math:`FOV_{height}` ，计算公式如下：
+      r_{c} = \begin{cases} 
+      \tanh\left(\alpha(1-x)^{3}\right), & t \in I, \\
+      0 & \text{otherwise}. 
+      \end{cases}
 
-      * :math:`x_{min} = \frac{z_f}{\tan{(\frac{FOV_{ver}}{2}+\gamma)}}`
+   目标离范围中心点越近时，奖励会越接近1，反之越接近0。 :math:`\alpha` 为常数，建议取值3~5。
 
-      .. raw:: html
+奖励判断
+~~~~~~~~~~~~~~~~~~~~
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
-   
-      * :math:`x_{max} = \frac{z_f}{\tan{(|\gamma-\frac{FOV_{ver}}{2}|)}}`
-      
-      .. raw:: html
+   上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过机器视觉识别或者人工标注的方法提供。而在仿真训练中，为了简化计算，加速算法运行，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   .. image:: ../_static/image/Reward.png
+      :alt: Reward
+      :scale: 15%
+      :align: center
+      :name: 奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立
 
-      * :math:`FOV_{height} = x_{max}-x_{min}`
+原理
+^^^^^^^^^^^^^^^^^^^^
 
-      .. raw:: html
+   首先需要获取仿真中的相机焦距，计算表达式如下：
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   .. math::
 
-      * 因此，可以根据图像中得到的检测点坐标，映射到实际的世界坐标系中
+      f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}
 
-      .. raw:: html
+   其中 :math:`W` 代表相机画面宽度（像素数）， :math:`FoV` 指跟踪器相机视场角，如奖励获取示意图B所示。
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，以便和跟踪对象的坐标对比。如奖励获取示意图C所示，在相机光心建立相机坐标系 :math:`\{c\}`，从而可以获得相机画面4个角点在坐标系 :math:`\{c\}` 下的坐标：
 
-   4. 在上述结果的基础上，可以得到Camera在当前位姿下对应的y方向视场范围 :math:`[y_{min},y_{max}]` ，以及实际距离 :math:`FOV_{width}`
+   .. math::
 
-      * :math:`y_{min} = FOV_{height}*\tan{(|\alpha-\frac{FOV_{ver}}{2}|)}`
+      \text{LU}\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
+      \text{LD}\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
+      \text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
+      \text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
 
-      .. raw:: html
+   并易知光心 :math:`C` 坐标为 :math:`(0,0,0)`。由此可知4个直线方程：
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   .. math::
 
-      * :math:`y_{max} =  FOV_{height}*\tan{(\alpha+\frac{FOV_{ver}}{2})}`
+      \begin{matrix}
+      \text{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
+      \text{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
+      \text{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
+      \text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
+      \end{matrix}
 
-      .. raw:: html
+   在地图中，跟踪对象所处地面均为平面，当地面水平时，可以通过地面高度知道地面的数学表达式为
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   .. math::
 
-      * :math:`FOV_{width} = y_{max}-y_{min}`
+      G_{w}: z = h
 
-      .. raw:: html
+   :math:`\{w\}` 代表世界坐标系， :math:`h` 为地面高度。
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   由于跟踪器云台姿态已知，易得到相机坐标系 :math:`\{c\}` 到世界坐标系 :math:`\{w\}` 的转换关系，也就是得到齐次变换矩阵 :math:`T_{ct}`。
 
-      * 因此可以根据图像中检测点的y坐标映射到实际的坐标系中
+   将平面方程 :math:`G_{w}` 转换到坐标系 :math:`\{c\}` 下，与4个直线方程联立，可求得四个地面交点 :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}`，该4个点组成了跟踪范围 :math:`I` 的4个角点，从而确定跟踪区域 :math:`I`。
 
-      .. raw:: html
+   从仿真环境中读取跟踪对象的坐标点 :math:`p_{vG}`，并转换到坐标系 :math:`\{c\}` 下，得 :math:`p_{vc}`，求得比例 :math:`x`，即可确定跟踪对象是否被成功跟踪。
 
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
+   当地面非水平时计算方法类似。
 
-   5. 因此，在图像中检测到的像素坐标 :code:`[x,y]` 可以被映射为世界坐标系中的坐标点（高度为0） :code:`[x',y',z']`
-
-      .. raw:: html
-
-         <div style="line-height: 0.1;">
-            <br>
-         </div>
-      
-   6. 对于小车在斜坡上的情况，如下图所示：
-
-      .. figure:: ../_static/image/GetReward2.png
-         :alt: GetReward2                               
-         :width: 600px                                              
-         :align: center
-
-         小车在斜坡情况内置Reward获取示意图
-
-      * 依然可以按照之前的方案进行计算，但是斜坡应该仅和x或和y有关，不应该有弯曲的斜坡，否则很难进行判断
-         
-         .. raw:: html
-
-            <div style="line-height: 0.1;">
-               <br>
-            </div>
-         
-      * 实际上，由于webots接口足够完善，只需要知道跟踪器什么时候在观察斜坡即可，斜坡可以有一定的复杂性（但每一段必须是平面，不能是曲面）。
 
 投影可视化
 ~~~~~~~~~~~~~~~~~~~~
 
-   按照上述原理实现之后效果如下视频：
+   按照上述原理实现之后效果如下视频，在仿真中将方块放置到地面与直线计算出来的交点处，就可以实时看到相机画面的范围：
 
    .. raw:: html
 
