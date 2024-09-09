@@ -371,7 +371,7 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
         # self.vloss_coef = 0.5
         self.max_grad_norm = 0.5
 
-        self.load = True # Whether load pretrain weight
+        self.load = True  # Whether load pretrain weight
 
         ##################################
 
@@ -515,10 +515,10 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
             next_done = torch.Tensor(done).to(self.device)
         return next_gru_state, next_state, reward, next_done
 
-    def run(self, train_mode=True):
+    def run(self, train_mode=1):
         next_state = torch.Tensor(self.envs.reset()).to(self.device)
         next_done = torch.zeros(self.num_envs).to(self.device)
-        if train_mode:
+        if train_mode == 1:
             self.model.train()
             next_gru_state = torch.zeros(2, self.num_envs, 256).to(self.device)
             while True:
@@ -549,9 +549,9 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
 
                         df = pd.DataFrame(test_reward_list, columns=["Values"])
                         df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
-                    test_reward = 0
-                else:
-                    test_reward += float(reward[0])
+                        test_reward = 0
+                    else:
+                        test_reward += float(reward[0])
 
 
 class UAV_RPPO_discrete:  # now:  torch base on GPU
@@ -754,7 +754,7 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
             ), torch.Tensor(done).to(self.device)
         return next_lstm_state, next_state, next_done
 
-    def run(self, train_mode=True):
+    def run(self, train_mode=1):
         next_lstm_state = (
             torch.zeros(
                 self.model.lstm.num_layers, self.num_envs, self.model.lstm.hidden_size
@@ -765,7 +765,7 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
         )
         next_state = torch.Tensor(self.envs.reset()).to(self.device)
         next_done = torch.zeros(self.num_envs).to(self.device)
-        if train_mode:
+        if train_mode == 1:
             while True:
                 next_lstm_state, next_state, next_done = self.sample_update(
                     next_lstm_state, next_state, next_done
@@ -785,9 +785,15 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
 if __name__ == "__main__":
     import argparse
 
+    # --------------------------------------------------parameter-----------------------------------------------
     parse = argparse.ArgumentParser(description="run RPPO")
     parse.add_argument(
-        "-w", "--workers", default=24, type=int, metavar="", help="the number of agents"
+        "-w",
+        "--workers",
+        default=24,
+        type=int,
+        metavar="",
+        help="the number of agents, default: 24",
     )
     parse.add_argument(
         "-t",
@@ -795,7 +801,7 @@ if __name__ == "__main__":
         default=1,
         type=int,
         metavar="",
-        help="whether to enable training mode",
+        help="whether to enable training mode, default: 1",
     )
     parse.add_argument(
         "-p",
@@ -803,7 +809,7 @@ if __name__ == "__main__":
         default=-1,
         type=int,
         metavar="",
-        help="the communication port between the algorithm and the simulator",
+        help="the communication port between the algorithm and the simulator, keep this parameter to default -1, it will automatically find an available port.",
     )
     parse.add_argument(
         "-params",
@@ -811,7 +817,7 @@ if __name__ == "__main__":
         default="params.pth",
         type=str,
         metavar="",
-        help="the communication port between the algorithm and the simulator",
+        help="model parameter filename, default: params.pth",
     )
     parse.add_argument(
         "-m",
@@ -824,17 +830,17 @@ if __name__ == "__main__":
     parse.add_argument(
         "-tp",
         "--tensorboard_port",
-        default=1,
+        default=-1,
         type=int,
         metavar="",
-        help="the port of tensorboard",
+        help="the port of tensorboard, recommended: 6006. Default is -1 (TensorBoard disabled). Set to any other value to enable TensorBoard, which will find an available port if needed.",
     )
     parse.add_argument(
         "-N",
         "--New_Train",
-        action='store_true',
+        action="store_true",
         default=False,
-        help="Whether restart a new training",
+        help="whether restart a new training, default: False",
     )
     args = parse.parse_args()
 
@@ -848,28 +854,34 @@ if __name__ == "__main__":
 
     import json
 
+    # ------------------------------env_config.json--------------------------------
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
     ) as file:
         data = json.load(file)
     data["Config_Agen_Num_Port"] = args.port
-    if not args.train_mode:
-        data["Drone_Random_Config"]["direction_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_random"] = False
-        data["Drone_Random_Config"]["verticle_bias_random"] = False
-        data["Sumo_Params"]["fixed_seed"] = True
-        data["Sumo_Params"]["fixed_car_group_num"] = True
-    else:
+    data["Simulation_Mode"] = "train"
+    data["Tracker_Def"] = "DRONE"
+    data["Sumo_Params"]["rou_update"] = True
+    data["Verbose"] = True
+    if args.train_mode == 1:
         data["Drone_Random_Config"]["direction_random"] = True
         data["Drone_Random_Config"]["horizon_bias_random"] = True
         data["Drone_Random_Config"]["verticle_bias_random"] = True
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
+    else:
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Sumo_Params"]["fixed_seed"] = True
+        data["Sumo_Params"]["fixed_car_group_num"] = True
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
         json.dump(data, file, indent=4)
 
+    # ------------------------------config.json--------------------------------
     with open("config.json", "r") as file:
         data = json.load(file)
     data["Benchmark"]["port_process"] = args.port
@@ -878,12 +890,10 @@ if __name__ == "__main__":
         json.dump(data, file, indent=4)
 
     if args.New_Train and os.path.exists("./PPO_logs/steps.txt"):
-        with open(
-            "./PPO_logs/steps.txt", "w"
-        ) as file:
+        with open("./PPO_logs/steps.txt", "w") as file:
             file.write("0")
 
-    if args.train_mode:
+    if args.train_mode == 1:
         Load_Model = not args.New_Train
     else:
         Load_Model = True
@@ -909,13 +919,13 @@ if __name__ == "__main__":
         num_minibatches=1,
         num_steps=50,
         K_epochs=5,
-        entropy_coef=0.7,
-        gamma=0.01,
+        entropy_coef=0.01,
+        gamma=0.9,
         savepath=args.savepath,
         load=Load_Model,
     )
 
-    if args.tensorboard_port != -1 and args.train_mode:
+    if args.tensorboard_port != -1 and args.train_mode == 1:
         tb = subprocess.Popen(
             ["tensorboard --logdir PPO_logs"],
             shell=True,

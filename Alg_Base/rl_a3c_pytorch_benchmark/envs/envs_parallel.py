@@ -69,6 +69,8 @@ def GE(num, env_conf: dict):  # Benchmark
                 auto_start=env_conf["auto_start"],
                 Control_Frequence=env_conf["Control_Frequence"],
                 reward_type=env_conf["RewardType"],
+                verbose=env_conf["verbose"],
+                delay=env_conf["delay"],
             )
         )
     return res
