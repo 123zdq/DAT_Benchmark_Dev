@@ -723,11 +723,12 @@ Legged Robots
 
    第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。
 
-   .. image:: ../_static/image/Continuous_reward.png
+   .. figure:: ../_static/image/Continuous_reward.png
       :alt: Continuous_reward
-      :scale: 32%
+      :width: 600px 
       :align: center
-      :name: 跟踪对象连续奖励示意图
+      
+      跟踪对象连续奖励示意图
 
    上图是一个跟踪对象处于相机画面中的示意图，记点 :math:`E_{G_{c}}` 到画面中心点 :math:`I_{cG}` 的距离为 :math:`y_{EI}`，跟踪对象点 :math:`P_{GC}` 到中心点 :math:`I_{cG}` 的距离为 :math:`y_{IP}`，记他们的比例为
 
@@ -751,11 +752,12 @@ Legged Robots
 
    上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过机器视觉识别或者人工标注的方法提供。而在仿真训练中，为了简化计算，加速算法运行，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。
 
-   .. image:: ../_static/image/Reward.png
+   .. figure:: ../_static/image/Reward.png
       :alt: Reward
-      :scale: 15%
+      :width: 600px 
       :align: center
-      :name: 奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立
+      
+      奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立
 
 原理
 ^^^^^^^^^^^^^^^^^^^^

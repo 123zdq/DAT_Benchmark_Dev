@@ -82,14 +82,15 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#reward">内置Reward</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id16">基本思路</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id17">投影可视化</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id18">如何转化为Reward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">奖励函数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">奖励判断</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id19">投影可视化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">如何转化为Reward</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id19">定制化参数接口</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id21">输入动作</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id22">返回参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">定制化参数接口</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id23">输入动作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id24">返回参数</a></li>
 </ul>
 </li>
 </ul>
@@ -264,14 +265,14 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">Customized_Rewards</span></code> ：是否启用定制化reward参数。用户可以根据定制化reward参数，自行计算reward。</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>定制化Reward参数的详细内容见： <a class="reference internal" href="#id19"><span class="std std-ref">定制化参数接口</span></a></p></li>
+<li><p>定制化Reward参数的详细内容见： <a class="reference internal" href="#id21"><span class="std std-ref">定制化参数接口</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Lidar_Enable</span></code> ：是否启用雷达点云数据。</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>雷达点云数据的详细内容见： <a class="reference internal" href="#id19"><span class="std std-ref">定制化参数接口</span></a></p></li>
+<li><p>雷达点云数据的详细内容见： <a class="reference internal" href="#id21"><span class="std std-ref">定制化参数接口</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -623,30 +624,30 @@
 <blockquote>
 <div><p>统一车型，大型载客车辆</p>
 </div></blockquote>
-<figure class="align-center" id="id23">
+<figure class="align-center" id="id25">
 <a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Bus</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+<p><span class="caption-text">Bus</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>truck</strong></p>
 <blockquote>
 <div><p>统一车型，不带货箱的货车</p>
 </div></blockquote>
-<figure class="align-center" id="id24">
+<figure class="align-center" id="id26">
 <a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Truck</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+<p><span class="caption-text">Truck</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>trailer</strong></p>
 <blockquote>
 <div><p>统一车型，带货箱的货车</p>
 </div></blockquote>
-<figure class="align-center" id="id25">
+<figure class="align-center" id="id27">
 <a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -749,10 +750,10 @@
 <div><ol class="arabic simple">
 <li><p>按照一定标准建立webots使用的描述文件proto文件，其中必须必须开放到场景树的属性包括”translation”，”rotation”，”name”。描述文件存放在 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
-<figure class="align-center" id="id26">
+<figure class="align-center" id="id28">
 <a class="reference internal image-reference" href="../_images/场景树属性包.png"><img alt="场景树属性包" src="../_images/%E5%9C%BA%E6%99%AF%E6%A0%91%E5%B1%9E%E6%80%A7%E5%8C%85.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">场景树属性包</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+<p><span class="caption-text">场景树属性包</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple" start="2">
@@ -772,10 +773,10 @@
    IMPORT PROTO
 </p><ol class="arabic" start="4">
 <li><p>把proto的名称写进安全检查文件 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py</span></code></p>
-<figure class="align-center" id="id27">
+<figure class="align-center" id="id29">
 <a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">安全检查</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+<p><span class="caption-text">安全检查</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -792,97 +793,81 @@
 <div><p>由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标 <code class="code docutils literal notranslate"><span class="pre">(xf,yf,zf)</span></code> 以及 <code class="code docutils literal notranslate"><span class="pre">(xv,yv,zv)</span></code> ，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功</p>
 </div></blockquote>
 <section id="id16">
-<h3>基本思路<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<h3>奖励函数<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
 <blockquote>
-<div><figure class="align-center" id="id28">
-<a class="reference internal image-reference" href="../_images/GetReward.png"><img alt="GetReward" src="../_images/GetReward.png" style="width: 600px;" /></a>
+<div><p>对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r_{d} = \begin{cases}
+1 &amp; t \in I, \\
+0 &amp; \text{otherwise}.
+\end{cases}\end{split}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(I\)</span> 代表跟踪范围（相机镜头获取的画面范围）， <span class="math notranslate nohighlight">\(t\)</span> 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。</p>
+<p>第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。</p>
+<figure class="align-center" id="id30">
+<a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">内置Reward获取示意图</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+<p><span class="caption-text">跟踪对象连续奖励示意图</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<ol class="arabic simple">
-<li><p>首先， 需要从Webots中读出的参数有：飞机的空间坐标 <span class="math notranslate nohighlight">\([x_f,y_f,z_f]\)</span> ，被跟踪小车的空间坐标 <span class="math notranslate nohighlight">\([x_v,y_v,z_v]\)</span> ，摄像头Camera的Roll角度 <span class="math notranslate nohighlight">\(\alpha\)</span> 和Pitch角度 <span class="math notranslate nohighlight">\(\gamma\)</span> 以及Camera的水平视场fieldOfView <span class="math notranslate nohighlight">\(FOV_{hor}\)</span></p></li>
-</ol>
-<div style="line-height: 0.1;">
-   <br>
-</div><ol class="arabic simple" start="2">
-<li><p>则可以根据获取图像的分辨率w*h以及Camera的水平视场计算Camera的垂直视场 <span class="math notranslate nohighlight">\(FOV_{ver}\)</span> ，计算公式为： <span class="math notranslate nohighlight">\(FOV_{ver} = 2*\arctan{(\tan(\frac{FOV_{hor}}{2}*\frac{height}{width}))}\)</span> ，其中先取tan再取arctan是为了将FOV限制在 <span class="math notranslate nohighlight">\([0,\pi]\)</span> 范围内</p></li>
-</ol>
-<div style="line-height: 0.1;">
-   <br>
-</div><ol class="arabic" start="3">
-<li><p>因此，可以计算在当前Camera位姿下，相机FOV对应的实际x方向范围 <span class="math notranslate nohighlight">\([x_{min},x_{max}]\)</span> ，以及Camera视场对应的实际距离 <span class="math notranslate nohighlight">\(FOV_{height}\)</span> ，计算公式如下：</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x_{min} = \frac{z_f}{\tan{(\frac{FOV_{ver}}{2}+\gamma)}}\)</span></p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div><ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x_{max} = \frac{z_f}{\tan{(|\gamma-\frac{FOV_{ver}}{2}|)}}\)</span></p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div><ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(FOV_{height} = x_{max}-x_{min}\)</span></p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div><ul class="simple">
-<li><p>因此，可以根据图像中得到的检测点坐标，映射到实际的世界坐标系中</p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div></li>
-<li><p>在上述结果的基础上，可以得到Camera在当前位姿下对应的y方向视场范围 <span class="math notranslate nohighlight">\([y_{min},y_{max}]\)</span> ，以及实际距离 <span class="math notranslate nohighlight">\(FOV_{width}\)</span></p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(y_{min} = FOV_{height}*\tan{(|\alpha-\frac{FOV_{ver}}{2}|)}\)</span></p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div><ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(y_{max} =  FOV_{height}*\tan{(\alpha+\frac{FOV_{ver}}{2})}\)</span></p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div><ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(FOV_{width} = y_{max}-y_{min}\)</span></p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div><ul class="simple">
-<li><p>因此可以根据图像中检测点的y坐标映射到实际的坐标系中</p></li>
-</ul>
-<div style="line-height: 0.1;">
-   <br>
-</div></li>
-<li><p>因此，在图像中检测到的像素坐标 <code class="code docutils literal notranslate"><span class="pre">[x,y]</span></code> 可以被映射为世界坐标系中的坐标点（高度为0） <code class="code docutils literal notranslate"><span class="pre">[x',y',z']</span></code></p>
-<div style="line-height: 0.1;">
-   <br>
-</div></li>
-<li><p>对于小车在斜坡上的情况，如下图所示：</p>
-<figure class="align-center" id="id29">
-<a class="reference internal image-reference" href="../_images/GetReward2.png"><img alt="GetReward2" src="../_images/GetReward2.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">小车在斜坡情况内置Reward获取示意图</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-<ul>
-<li><p>依然可以按照之前的方案进行计算，但是斜坡应该仅和x或和y有关，不应该有弯曲的斜坡，否则很难进行判断</p>
-<blockquote>
-<div><div style="line-height: 0.1;">
-   <br>
-</div></div></blockquote>
-</li>
-<li><p>实际上，由于webots接口足够完善，只需要知道跟踪器什么时候在观察斜坡即可，斜坡可以有一定的复杂性（但每一段必须是平面，不能是曲面）。</p></li>
-</ul>
-</li>
-</ol>
+<p>上图是一个跟踪对象处于相机画面中的示意图，记点 <span class="math notranslate nohighlight">\(E_{G_{c}}\)</span> 到画面中心点 <span class="math notranslate nohighlight">\(I_{cG}\)</span> 的距离为 <span class="math notranslate nohighlight">\(y_{EI}\)</span>，跟踪对象点 <span class="math notranslate nohighlight">\(P_{GC}\)</span> 到中心点 <span class="math notranslate nohighlight">\(I_{cG}\)</span> 的距离为 <span class="math notranslate nohighlight">\(y_{IP}\)</span>，记他们的比例为</p>
+<div class="math notranslate nohighlight">
+\[x = \frac{y_{IP}}{y_{EI}}\]</div>
+<p>那么，密集奖励可以使用下面的表达式获得：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}r_{c} = \begin{cases}
+\tanh\left(\alpha(1-x)^{3}\right), &amp; t \in I, \\
+0 &amp; \text{otherwise}.
+\end{cases}\end{split}\]</div>
+<p>目标离范围中心点越近时，奖励会越接近1，反之越接近0。 <span class="math notranslate nohighlight">\(\alpha\)</span> 为常数，建议取值3~5。</p>
 </div></blockquote>
 </section>
 <section id="id17">
-<h3>投影可视化<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<h3>奖励判断<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>按照上述原理实现之后效果如下视频：</p>
+<div><p>上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过机器视觉识别或者人工标注的方法提供。而在仿真训练中，为了简化计算，加速算法运行，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。</p>
+<figure class="align-center" id="id31">
+<a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+<section id="id18">
+<h4>原理<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>首先需要获取仿真中的相机焦距，计算表达式如下：</p>
+<div class="math notranslate nohighlight">
+\[f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}\]</div>
+<p>其中 <span class="math notranslate nohighlight">\(W\)</span> 代表相机画面宽度（像素数）， <span class="math notranslate nohighlight">\(FoV\)</span> 指跟踪器相机视场角，如奖励获取示意图B所示。</p>
+<p>然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，以便和跟踪对象的坐标对比。如奖励获取示意图C所示，在相机光心建立相机坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span>，从而可以获得相机画面4个角点在坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 下的坐标：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{LU}\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
+\text{LD}\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
+\text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
+\text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)\end{split}\]</div>
+<p>并易知光心 <span class="math notranslate nohighlight">\(C\)</span> 坐标为 <span class="math notranslate nohighlight">\((0,0,0)\)</span>。由此可知4个直线方程：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{matrix}
+\text{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
+\text{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
+\text{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
+\text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
+\end{matrix}\end{split}\]</div>
+<p>在地图中，跟踪对象所处地面均为平面，当地面水平时，可以通过地面高度知道地面的数学表达式为</p>
+<div class="math notranslate nohighlight">
+\[G_{w}: z = h\]</div>
+<p><span class="math notranslate nohighlight">\(\{w\}\)</span> 代表世界坐标系， <span class="math notranslate nohighlight">\(h\)</span> 为地面高度。</p>
+<p>由于跟踪器云台姿态已知，易得到相机坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 到世界坐标系 <span class="math notranslate nohighlight">\(\{w\}\)</span> 的转换关系，也就是得到齐次变换矩阵 <span class="math notranslate nohighlight">\(T_{ct}\)</span>。</p>
+<p>将平面方程 <span class="math notranslate nohighlight">\(G_{w}\)</span> 转换到坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 下，与4个直线方程联立，可求得四个地面交点 <span class="math notranslate nohighlight">\(LU_{G}, LD_{G}, RU_{G}, RD_{G}\)</span>，该4个点组成了跟踪范围 <span class="math notranslate nohighlight">\(I\)</span> 的4个角点，从而确定跟踪区域 <span class="math notranslate nohighlight">\(I\)</span>。</p>
+<p>从仿真环境中读取跟踪对象的坐标点 <span class="math notranslate nohighlight">\(p_{vG}\)</span>，并转换到坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 下，得 <span class="math notranslate nohighlight">\(p_{vc}\)</span>，求得比例 <span class="math notranslate nohighlight">\(x\)</span>，即可确定跟踪对象是否被成功跟踪。</p>
+<p>当地面非水平时计算方法类似。</p>
+</div></blockquote>
+</section>
+</section>
+<section id="id19">
+<h3>投影可视化<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p>按照上述原理实现之后效果如下视频，在仿真中将方块放置到地面与直线计算出来的交点处，就可以实时看到相机画面的范围：</p>
 <video width="640" height="360" controls>
    <source src="../_static/video/GetReward_Video.mp4" type="video/mp4">
    Your browser does not support the video tag.
@@ -890,8 +875,8 @@
    注意：视场角上限不能超过地平线，否则计算结果没有意义。
 </div></div></blockquote>
 </br></section>
-<section id="id18">
-<h3>如何转化为Reward<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<section id="id20">
+<h3>如何转化为Reward<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
 <ol class="arabic">
 <li><p>用于计算reward共有两个变量：</p>
 <ol class="loweralpha simple">
@@ -900,52 +885,52 @@
 </ol>
 </li>
 <li><p>首要目标是实现跟踪器tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：</p>
-<figure class="align-center" id="id30">
+<figure class="align-center" id="id32">
 <a class="reference internal image-reference" href="../_images/阶跃函数.png"><img alt="阶跃函数" src="../_images/%E9%98%B6%E8%B7%83%E5%87%BD%E6%95%B0.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">阶跃函数示意图</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+<p><span class="caption-text">阶跃函数示意图</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br><ol class="arabic" start="3">
 <li><p>次要目标是跟踪器tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： <span class="math notranslate nohighlight">\(tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\)</span></p>
-<figure class="align-center" id="id31">
+<figure class="align-center" id="id33">
 <a class="reference internal image-reference" href="../_images/双曲正切函数.png"><img alt="双曲正切函数" src="../_images/%E5%8F%8C%E6%9B%B2%E6%AD%A3%E5%88%87%E5%87%BD%E6%95%B0.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">双曲正切函数示意图</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+<p><span class="caption-text">双曲正切函数示意图</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br><ol class="arabic" start="4">
 <li><p>最终的奖励计算框图如下：</p>
-<figure class="align-center" id="id32">
+<figure class="align-center" id="id34">
 <a class="reference internal image-reference" href="../_images/distance奖励框图.png"><img alt="distance奖励框图" src="../_images/distance%E5%A5%96%E5%8A%B1%E6%A1%86%E5%9B%BE.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">distance奖励框图</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+<p><span class="caption-text">distance奖励框图</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</br><figure class="align-center" id="id33">
+</br><figure class="align-center" id="id35">
 <a class="reference internal image-reference" href="../_images/view奖励框图.png"><img alt="view奖励框图" src="../_images/view%E5%A5%96%E5%8A%B1%E6%A1%86%E5%9B%BE.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">view奖励框图</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
+<p><span class="caption-text">view奖励框图</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br></section>
 </section>
-<section id="id19">
-<span id="id20"></span><h2>定制化参数接口<a class="headerlink" href="#id19" title="Link to this heading"></a></h2>
 <section id="id21">
-<h3>输入动作<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<span id="id22"></span><h2>定制化参数接口<a class="headerlink" href="#id21" title="Link to this heading"></a></h2>
+<section id="id23">
+<h3>输入动作<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数</p>
 </div></blockquote>
 </section>
-<section id="id22">
-<h3>返回参数<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id24">
+<h3>返回参数<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>返回参数主要包括三个部分，基础数据包，自定义奖励数据包，雷达数据包</p>
 </div></blockquote>
@@ -989,10 +974,10 @@
 <ul class="simple">
 <li><p>其中，参数 <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> 中跟踪器坐标系定义和姿态角定义如下：</p></li>
 </ul>
-<figure class="align-center" id="id34">
+<figure class="align-center" id="id36">
 <a class="reference internal image-reference" href="../_images/无人机坐标系.png"><img alt="无人机坐标系" src="../_images/%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%9D%90%E6%A0%87%E7%B3%BB.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">无人机坐标系定义</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
+<p><span class="caption-text">无人机坐标系定义</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
