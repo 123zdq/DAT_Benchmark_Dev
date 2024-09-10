@@ -550,8 +550,8 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
                         df = pd.DataFrame(test_reward_list, columns=["Values"])
                         df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
                         test_reward = 0
-                    else:
-                        test_reward += float(reward[0])
+                else:
+                    test_reward += float(reward[0])
 
 
 class UAV_RPPO_discrete:  # now:  torch base on GPU
@@ -830,7 +830,7 @@ if __name__ == "__main__":
     parse.add_argument(
         "-tp",
         "--tensorboard_port",
-        default=-1,
+        default=6006,
         type=int,
         metavar="",
         help="the port of tensorboard, recommended: 6006. Default is -1 (TensorBoard disabled). Set to any other value to enable TensorBoard, which will find an available port if needed.",
@@ -865,17 +865,25 @@ if __name__ == "__main__":
     data["Sumo_Params"]["rou_update"] = True
     data["Verbose"] = True
     if args.train_mode == 1:
-        data["Drone_Random_Config"]["direction_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
         data["Drone_Random_Config"]["verticle_bias_random"] = True
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
+        data["Reward_Config"]["view_range"] = 0.7
     else:
         data["Drone_Random_Config"]["direction_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_random"] = False
-        data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = True
+        data["Drone_Random_Config"]["horizon_bias_random_max"] = 6
+        data["Drone_Random_Config"]["horizon_bias_random_min"] = 4
+        data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Drone_Random_Config"]["verticle_bias_random_max"] = 6
+        data["Drone_Random_Config"]["verticle_bias_random_min"] = 4
+        data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
+        
+        data["Reward_Config"]["view_range"] = 1
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
@@ -933,7 +941,7 @@ if __name__ == "__main__":
 
     with open("config.json", "r") as file:
         data = json.load(file)
-    data["Benchmark"]["auto_start"] = True
+    data["Benchmark"]["auto_start"] = False
     with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
