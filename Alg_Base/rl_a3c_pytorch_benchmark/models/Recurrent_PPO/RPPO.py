@@ -540,7 +540,7 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
                     if test_reward != 0:
                         test_reward_list.append(test_reward)
                         test_episode_num += 1
-                        print(f"episode: {test_episode_num}")
+                        print(f"episode: {test_episode_num} test_reward: {test_reward}")
                     if len(test_reward_list) == 10:
                         test_reward_list.append(
                             f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}"
@@ -549,7 +549,7 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
 
                         df = pd.DataFrame(test_reward_list, columns=["Values"])
                         df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
-                        test_reward = 0
+                    test_reward = 0
                 else:
                     test_reward += float(reward[0])
 
