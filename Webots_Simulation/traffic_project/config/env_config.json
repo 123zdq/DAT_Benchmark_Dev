@@ -3,7 +3,7 @@
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
-    "Config_Agen_Num_Port": 53415,
+    "Config_Agen_Num_Port": 37225,
     "Train_Total_Steps": 1500,
     "Init_No_Done_Steps": 100,
     "No_Reward_Done_Steps": 100,
@@ -37,7 +37,7 @@
         "car_group_num": 10,
         "car_import_interval": 52.0,
         "car_type": "passenger",
-        "fixed_color": false,
+        "fixed_color": true,
         "normalize_color": [
             1,
             0,
