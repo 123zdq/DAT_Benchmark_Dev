@@ -725,9 +725,9 @@ int main(int argc, char **argv)
       
       if (config.get()->customizedReward)
       {
-        double makeReward_list[51] = {};
+        double makeReward_list[57] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
-        for(int i=0;i<51;i++)
+        for(int i=0;i<57;i++)
         {
           if(std::isnan(state_list[i])){
             is_nan = true;
@@ -736,14 +736,14 @@ int main(int argc, char **argv)
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
         if(is_nan == false)
         {
-          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 51, rewardG.makeReward.carTypename);
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 57, rewardG.makeReward.carTypename);
         }
-        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 51)
+        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 57)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
           if(is_nan == false)
           {
-            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 51, rewardG.makeReward.carTypename);
+            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 57, rewardG.makeReward.carTypename);
           }
         }
       }

@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-26 11:17:34
+ * @LastEditTime: 2024-09-12 10:54:25
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -46,7 +46,7 @@ namespace usrPublic{
     }Odometry;
     #pragma pack()
 
-    // make reward data ---- double * 51 + string
+    // make reward data ---- double * 57 + string
     #pragma pack(1)
     typedef struct _rewardData{
         double cameraWidth;// 图像宽度（像素）
@@ -66,6 +66,8 @@ namespace usrPublic{
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
         vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
         vector4 carDronePosOri; // 车辆中心在无人机坐标系下的3D坐标和1D姿态
+        vector3 carDroneVel; // 车辆中心在无人机坐标系下的3D速度
+        vector3 carDroneAcc; // 车辆中心在无人机坐标系下的3D加速度
         double crash; // 无人机是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1前进，2左转，3右转)
         std::string carTypename = std::string("BmwX5Simple");// 对象类型

@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-07 10:12:16
+ * @LastEditTime: 2024-09-12 10:56:53
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -314,10 +314,21 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   makeReward.carMidGlobalPos.y = V_car_of_land(1);
   makeReward.carMidGlobalPos.z = V_car_of_land(2);
   // 得到车辆相对于无人就得坐标和旋转角
+  static double last_carDronePos[3] = {0,0,0};
+  static double carDroneVel[3] = {0,0,0};
+  static double last_carDroneVel[3] = {0,0,0};
+  static double carDroneAcc[3] = {0,0,0};
+  static double last_t = 0;
   const double *T_car_of_camera = trackingCar->getPose(supervisor->getFromDef(droneDef));
   makeReward.carDronePosOri.x = T_car_of_camera[3];
   makeReward.carDronePosOri.y = T_car_of_camera[7];
   makeReward.carDronePosOri.z = T_car_of_camera[11];
+  double t_step = this->supervisor->getTime() - last_t;
+  for(int i(0);i < 3;i++)
+  {
+    carDroneVel[i] = (T_car_of_camera[3+4*i] - last_carDronePos[i]) / t_step;
+    carDroneAcc[i] = (carDroneVel[i] - last_carDroneVel[i]) / t_step;
+  }
   const double *Car_Ori = trackingCar->getField("rotation")->getSFRotation();
   const double *Drone_Ori = supervisor->getFromDef(droneDef)->getField("rotation")->getSFRotation();
   makeReward.carDronePosOri.w = Car_Ori[2] * Car_Ori[3] - Drone_Ori[2] * Drone_Ori[3];
@@ -330,6 +341,11 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   {
     makeReward.carDronePosOri.w += 2 * M_PI;
   }
+  memcpy(last_carDroneVel,carDroneVel,sizeof(last_carDroneVel));
+  last_carDronePos[0] = T_car_of_camera[3];
+  last_carDronePos[1] = T_car_of_camera[7];
+  last_carDronePos[2] = T_car_of_camera[11];
+  last_t = this->supervisor->getTime();
 
   double reward = 0;
   // std::cout << "cameraMid:  x:" << cameraMid(0) << "  y:" << cameraMid(1) << "  z:" << cameraMid(2) << std::endl;
