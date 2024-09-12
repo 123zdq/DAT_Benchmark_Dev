@@ -14,11 +14,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import gymnasium
 
 from envs.gym_envs import make_env,UAV_VAT_Gymnasium
-from envs.async_vecenv import SubprocVectorEnv_TS
+from envs.async_vecenv_ts import SubprocVectorEnv_TS
 import subprocess, time
 import argparse
+from denseMlpPolicy import create_sacd_policy
 
 # if __name__ == "__main__":
 def arg_config():
@@ -80,6 +82,14 @@ def arg_config():
         action="store_true",
         default=False,
         help="whether restart a new training, default: False",
+    )
+
+    parse.add_argument(
+        "-Len",
+        "--observation_buffer_length",
+        type=int,
+        default=3,
+        help="number of frame use for state",
     )
     args = parse.parse_args()
 
@@ -185,6 +195,45 @@ def test_env(args):
                 simulator.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 simulator.kill()
+
+def DVAT(args):
+    settings = {'num_cpu': 6,
+                'n_timesteps': 10000,
+                'batch_size': 64,
+                'buffer_size': 10000,
+                'train_freq': 8,
+                'WandB': False,  # True if you want to use wandb for logging
+                'WandB_project': '<your_wandb_project>',
+                'WandB_entity': '<your_wandb_entity>',
+                'WandB_API_key': '<your_wandb_api_key>',
+                'render': True,  # True to disable black screen
+                'eval_episodes': 20,
+                'eval_mode': True,  # True for model Test - False for Training
+                'ts': 0.05,
+                
+                }
+
+    # make parallel envs
+    tensorboard_logdir = "./models/D_VAT/DVAT_logs"
+    if tensorboard_logdir is None:
+        os.makedirs(tensorboard_logdir)
+    envs = [make_env(n_envs=args.workers,rank=i,gym=False,end_reward=True,log_dir=tensorboard_logdir) for i in range(args.workers)]
+    vector_env = SubprocVectorEnv_TS(envs)
+
+    # load config file
+    import json
+    with open("config.json", "r") as file:
+        data = json.load(file)
+    
+    # make policy
+    actor_obs_space = gymnasium.spaces.Box(
+        low=0,
+        high=1,
+        shape=(args.observation_buffer_length,data["Benchmark"]["State_size"],data["Benchmark"]["State_size"],data["Benchmark"]["State_channel"]),
+        dtype=np.float32
+    )
+    critic_obs_space = gymnasium.spaces.Box(-np.inf, np.inf, shape=(9,), dtype=np.float32)
+    create_sacd_policy(observation_space=actor_obs_space,obs_shape_critic=9,action_shape=7)
 
 if __name__ == "__main__":
     args = arg_config()

@@ -18,14 +18,18 @@ CONF = "./config.json"
 ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
 
 class UAV_VAT(gym.Env):
-    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None) -> None:
+    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=0) -> None:
         super(UAV_VAT,self).__init__()
         conf_json = read_config(conf_path)
         env_conf = conf_json["Benchmark"] # env_conf:dict
 
         self.action_space = spaces.Discrete(int(env_conf["Action_dim"]))
-        self.observation_space = spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
-
+        assert obs_buffer_len >= 0 and isinstance(obs_buffer_len,int)
+        if obs_buffer_len == 0:
+            self.observation_space = spaces.Box(low=0,high=1.0,shape=(env_conf["State_channel"],env_conf["State_size"],env_conf["State_size"]),dtype=np.float32)
+        else:
+            self.observation_space = spaces.Box(low=0,high=1.0,shape=(obs_buffer_len,env_conf["State_channel"],env_conf["State_size"],env_conf["State_size"]),dtype=np.float32)
+        
         self.webots_conf = read_config(env_conf_path)
 
         assert process_idx < arg_worker
@@ -91,13 +95,17 @@ class UAV_VAT(gym.Env):
 
 
 class UAV_VAT_Gymnasium(gymnasium.Env):
-    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None) -> None:
+    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=0) -> None:
         super(UAV_VAT_Gymnasium,self).__init__()
         conf_json = read_config(conf_path)
         env_conf = conf_json["Benchmark"] # env_conf:dict
 
         self.action_space = gymnasium.spaces.Discrete(int(env_conf["Action_dim"]))
-        self.observation_space = gymnasium.spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
+        assert obs_buffer_len >= 0 and isinstance(obs_buffer_len,int)
+        if obs_buffer_len == 0:
+            self.observation_space = gymnasium.spaces.Box(low=0,high=1.0,shape=(env_conf["State_channel"],env_conf["State_size"],env_conf["State_size"]),dtype=np.float32)
+        else:
+            self.observation_space = gymnasium.spaces.Box(low=0,high=1.0,shape=(obs_buffer_len,env_conf["State_channel"],env_conf["State_size"],env_conf["State_size"]),dtype=np.float32)
 
         self.webots_conf = read_config(env_conf_path)
 
@@ -174,13 +182,13 @@ register(
 )
 
 
-def make_env(n_envs,rank,gym=True,monitor=False,end_reward:bool = False,log_dir:str=None):
+def make_env(n_envs,rank,gym=True,monitor=False,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=0):
     def _init():
         if gym:
-            env = UAV_VAT(arg_worker=n_envs,process_idx=rank,end_reward=end_reward,log_dir=log_dir)
+            env = UAV_VAT(arg_worker=n_envs,process_idx=rank,end_reward=end_reward,log_dir=log_dir,obs_buffer_len=obs_buffer_len)
             print("Using Gym Environment")
         else:
-            env = UAV_VAT_Gymnasium(arg_worker=n_envs,process_idx=rank,end_reward=end_reward,log_dir=log_dir)
+            env = UAV_VAT_Gymnasium(arg_worker=n_envs,process_idx=rank,end_reward=end_reward,log_dir=log_dir,obs_buffer_len=obs_buffer_len)
             print("Using Gymnasium Environment")
         if monitor:
             env = Monitor(env)
