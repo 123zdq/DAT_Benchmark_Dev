@@ -945,7 +945,7 @@ Legged Robots
 
    - 其中，参数 :code:`carCameraPosOri` 中跟踪器坐标系定义和姿态角定义如下：
    
-   .. figure:: ../_static/image/无人机坐标系.png
+   .. figure:: ../_static/image/无人机坐标.png
       :alt: 无人机坐标系                                  
       :width: 600px                                              
       :align: center
