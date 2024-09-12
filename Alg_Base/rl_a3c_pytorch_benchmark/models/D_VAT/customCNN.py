@@ -1,16 +1,12 @@
-import time
-
-import gym
-import numpy as np
 import torch
 import torch as th
 import torch.nn as nn
 import torchvision.models as models
 from torchvision import transforms
-from stable_baselines3.common.torch_layers import BaseFeaturesExtractor
+import gymnasium
+import numpy as np
 
-
-class CustomCNN(BaseFeaturesExtractor):
+class CustomCNN(nn.Module):
     """
     :param observation_space: (gym.Space)
     :param features_dim: (int) Number of features extracted.
@@ -18,7 +14,7 @@ class CustomCNN(BaseFeaturesExtractor):
         file originale messo nei modelli di Sistema unreal
     """
 
-    def __init__(self, observation_space: gym.spaces.Box, features_dim: int = 512):
+    def __init__(self, observation_space: gymnasium.spaces.Box, features_dim: int = 512):
         super(CustomCNN, self).__init__(observation_space, features_dim)
         # We assume CxHxW images (channels first)
         # Re-ordering will be done by pre-preprocessing or wrapper
@@ -36,15 +32,10 @@ class CustomCNN(BaseFeaturesExtractor):
         # Compute shape by doing one forward pass
         with th.no_grad():
             print(observation_space.shape)
-
-            target_shape = list(observation_space.shape)
-            target_shape.insert(0,1)
-            print(target_shape)
-            
             dims = self.resnet(
-                th.as_tensor(np.zeros(target_shape)).float()
+                th.as_tensor(np.zeros(observation_space.shape)).float()
             ).shape
-            print(dims)
+
             self.n_flatten = int(np.prod(dims))
             print(self.n_flatten)
 
@@ -53,7 +44,7 @@ class CustomCNN(BaseFeaturesExtractor):
     def forward(self, observations: th.Tensor) -> th.Tensor:
         # Preprocess
         # t = time.time()
-        input_batch = self.preprocess(observations).unsqueeze(1)
+        input_batch = self.preprocess(observations)
 
         b, s, c, w, h = input_batch.shape
         x0 = input_batch.view(-1, c, w, h)
@@ -64,4 +55,3 @@ class CustomCNN(BaseFeaturesExtractor):
         x3 = self.linear(x2)
         # print("Time: ", time.time() - t, observations.shape)
         return x3
-

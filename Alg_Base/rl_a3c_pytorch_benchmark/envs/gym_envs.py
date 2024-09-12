@@ -20,10 +20,11 @@ ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
 class UAV_VAT(gym.Env):
     def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None) -> None:
         super(UAV_VAT,self).__init__()
-        self.action_space = spaces.Discrete(7)
-        self.observation_space = spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
         conf_json = read_config(conf_path)
         env_conf = conf_json["Benchmark"] # env_conf:dict
+
+        self.action_space = spaces.Discrete(int(env_conf["Action_dim"]))
+        self.observation_space = spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
 
         self.webots_conf = read_config(env_conf_path)
 
@@ -82,14 +83,21 @@ class UAV_VAT(gym.Env):
     def close(self):
         pass
 
+    @classmethod
+    def get_action_space(cls):
+        conf_json = read_config(CONF)
+        env_conf = conf_json["Benchmark"]
+        return spaces.Discrete(int(env_conf["Action_dim"]))
+
 
 class UAV_VAT_Gymnasium(gymnasium.Env):
     def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None) -> None:
         super(UAV_VAT_Gymnasium,self).__init__()
-        self.action_space = gymnasium.spaces.Discrete(7)
-        self.observation_space = gymnasium.spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
         conf_json = read_config(conf_path)
         env_conf = conf_json["Benchmark"] # env_conf:dict
+
+        self.action_space = gymnasium.spaces.Discrete(int(env_conf["Action_dim"]))
+        self.observation_space = gymnasium.spaces.Box(low=0,high=255,shape=(3,84,84),dtype=np.uint8)
 
         self.webots_conf = read_config(env_conf_path)
 
@@ -149,6 +157,12 @@ class UAV_VAT_Gymnasium(gymnasium.Env):
 
     def close(self):
         pass
+
+    @classmethod
+    def get_action_space(cls):
+        conf_json = read_config(CONF)
+        env_conf = conf_json["Benchmark"]
+        return gymnasium.spaces.Discrete(int(env_conf["Action_dim"]))
 
 
 
