@@ -870,7 +870,7 @@ if __name__ == "__main__":
         data["Drone_Random_Config"]["verticle_bias_random"] = True
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
-        data["Reward_Config"]["view_range"] = 0.7
+        data["Reward_Config"]["view_range"] = 0.5
     else:
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["horizon_bias_random"] = True
