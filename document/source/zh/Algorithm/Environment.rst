@@ -425,8 +425,8 @@ Part3 Async_SubprocVecEnv
 .. raw:: html
 
   <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>中的<code>ASYNC_SubprocVecEnv</code>类
-      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>中的<code>SubprocVecEnv_TS</code>类
+      具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py </code>中的<code> ASYNC_SubprocVecEnv </code>类
+      具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py </code>中的<code> SubprocVecEnv_TS </code>类
   </div>
   </br>
 
@@ -496,17 +496,20 @@ Part4 调用接口
 
   2. 利用stable-baselines3进行算法测试
 
-   调用上述Async_SubprocVecEnv类
+    调用上述Async_SubprocVecEnv类
 
-  .. code:: python
+    .. code:: python
 
-    stableparallel_test(n_envs=16,gym=False)
+      stableparallel_test(n_envs=16,gym=False)
 
-  或使用SubprocVecEnv_TS类，使用tianshou方案
+  3. 利用tianshou进行算法测试
 
-.. raw:: html
+    调用上述SubprocVecEnv_TS类
 
-    <span style="background-color: yellow;">To Do: 冬青Parallel类书写</span>
+    .. code:: python
+
+      args = arg_config()
+      test_env(args)
 
 .. _Parallel:
 
@@ -527,13 +530,6 @@ Part4 调用接口
 
 Part1 设计方案
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**算法端同步并行 向量化Envs**
-
-设计为与Recurrent PPO算法，RPPO.py配套的环境接口。
-
-  我们的基础环境类，设计目标是A3C算法——多进程异步计算，每个进程中有一个agent，在它的进程内调用环境类，然后取得一条数据，算法端的各个进程互不干扰；
-  为了更好利用显卡并行加速，考虑到仿真端与算法的通信本来就是强制同步并行的，因此将A3C过程做 :strong:`数据同步、同指令并行` ，即实现 :strong:`A2C` ，使算法可以单进程工作在同步并行的数据流上，因此在当前已实现的环境类上再封装一层 :strong:`Envs`
 
 **设计实现方案**
 
@@ -572,7 +568,7 @@ Part2 Envs()
 
     * :code:`env_list` ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可
 
-    * :code:`env_mk env_mk_args` ：环境尚未构造，env_mk是单个环境的构造函数，env_mk_args是参数元组，会自动为每个环境调用env_mk（**env_mk_args）作为构造函数
+    * :code:`env_mk env_mk_args` ：环境尚未构造， :code:`env_mk` 是单个环境的构造函数， :code:`env_mk_args` 是参数元组，会自动为每个环境调用 :code:`env_mk(**env_mk_args)` 作为构造函数
 
   * :code:`logs_show` ：是否在其中一个环境中采集reward数据绘制训练曲线
 

@@ -156,10 +156,10 @@
  </br><p>本项目提供3种形式的Environment(路径： <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code> ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类</p>
 <p>上述3种Environment的关系如下图所示：</p>
 <blockquote>
-<div><figure class="align-center" id="id7">
+<div><figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="3种环境类关系图" src="../_images/Environment3Types.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -429,8 +429,8 @@
 <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
 </div>
 </br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>中的<code>ASYNC_SubprocVecEnv</code>类
-    具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>中的<code>SubprocVecEnv_TS</code>类
+    具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py </code>中的<code> ASYNC_SubprocVecEnv </code>类
+    具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py </code>中的<code> SubprocVecEnv_TS </code>类
 </div>
 </br><p><strong>SubprocVecEnv 存在不足</strong></p>
 <blockquote>
@@ -487,13 +487,22 @@
 </ol>
 <blockquote>
 <div><p>调用上述Async_SubprocVecEnv类</p>
-</div></blockquote>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>或使用SubprocVecEnv_TS类，使用tianshou方案</p>
 </div></blockquote>
-<span style="background-color: yellow;">To Do: 冬青Parallel类书写</span></section>
+<ol class="arabic simple" start="3">
+<li><p>利用tianshou进行算法测试</p></li>
+</ol>
+<blockquote>
+<div><p>调用上述SubprocVecEnv_TS类</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
+<span class="n">test_env</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</section>
 </section>
 <section id="envs">
 <span id="parallel"></span><h2>3 并行环境类(Envs)<a class="headerlink" href="#envs" title="Link to this heading"></a></h2>
@@ -507,12 +516,6 @@
 </div>
 </br><section id="part1">
 <h3>Part1 设计方案<a class="headerlink" href="#part1" title="Link to this heading"></a></h3>
-<p><strong>算法端同步并行 向量化Envs</strong></p>
-<p>设计为与Recurrent PPO算法，RPPO.py配套的环境接口。</p>
-<blockquote>
-<div><p>我们的基础环境类，设计目标是A3C算法——多进程异步计算，每个进程中有一个agent，在它的进程内调用环境类，然后取得一条数据，算法端的各个进程互不干扰；
-为了更好利用显卡并行加速，考虑到仿真端与算法的通信本来就是强制同步并行的，因此将A3C过程做 <strong>数据同步、同指令并行</strong> ，即实现 <strong>A2C</strong> ，使算法可以单进程工作在同步并行的数据流上，因此在当前已实现的环境类上再封装一层 <strong>Envs</strong></p>
-</div></blockquote>
 <p><strong>设计实现方案</strong></p>
 <blockquote>
 <div><p>用Python的 <strong>asyncio</strong> 提供的协程，使用线程池并发地唤起不同 <strong>agent</strong> 对应的 <strong>env</strong> 环境基类的采样方法，且不因等待单个环境的返回值而阻塞主线程，
@@ -537,7 +540,7 @@
 <div><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> or <code class="code docutils literal notranslate"><span class="pre">env_list</span></code></p>
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">env_list</span></code> ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span> <span class="pre">env_mk_args</span></code> ：环境尚未构造，env_mk是单个环境的构造函数，env_mk_args是参数元组，会自动为每个环境调用env_mk（<a href="#id5"><span class="problematic" id="id6">**</span></a>env_mk_args）作为构造函数</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span> <span class="pre">env_mk_args</span></code> ：环境尚未构造， <code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> 是单个环境的构造函数， <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code> 是参数元组，会自动为每个环境调用 <code class="code docutils literal notranslate"><span class="pre">env_mk(**env_mk_args)</span></code> 作为构造函数</p></li>
 </ul>
 </div></blockquote>
 <ul class="simple">

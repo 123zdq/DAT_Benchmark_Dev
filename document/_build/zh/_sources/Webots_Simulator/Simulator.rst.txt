@@ -930,7 +930,7 @@ Legged Robots
       typedef struct _rewardData{
         double cameraWidth;// 图像宽度（像素）
         double cameraHeight;// 图像高度（像素）
-        double cameraFov;// 摄像头视场角（rad）[0,pi`    ]
+        double cameraFov;// 摄像头视场角（rad）[0,pi]
         double cameraF;// 摄像头焦距估算（像素）
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
         double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
@@ -947,7 +947,7 @@ Legged Robots
    
    .. figure:: ../_static/image/无人机坐标.png
       :alt: 无人机坐标系                                  
-      :width: 600px                                              
+      :width: 500px                                              
       :align: center
 
       无人机坐标系定义
