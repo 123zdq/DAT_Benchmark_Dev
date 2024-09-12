@@ -411,7 +411,42 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 * :code:`truncated(bool)` ：是否由于step结束带来的reset(相当于gym环境中的 :code:`info["TimeLimit.truncated"]` )
 
-Part3 调用接口
+Part3 Async_SubprocVecEnv
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. raw:: html
+
+  <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+  <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
+  </div>
+  </br>
+
+.. raw:: html
+
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>中的<code>ASYNC_SubprocVecEnv</code>类
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>中的<code>SubprocVecEnv_TS</code>类
+  </div>
+  </br>
+
+**SubprocVecEnv 存在不足**
+
+  * :strong:`reset` 动作对 :strong:`所有环境` 均执行
+  * :strong:`step` 后即判断是否执行 :strong:`reset` ，会出现 :strong:`step` 与 :strong:`reset` 同一周期执行
+
+**Async_SubprocVecEnv 修改**
+
+  * 将 :strong:`reset` 动作隔离，仅仅对于单个环境进行 :strong:`reset` 操作
+  * 每个动作进行 :strong:`对齐` ，保持各个环境动作的同步
+
+.. raw:: html
+
+  <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
+  <center>Async_SubprocVecEnv修改前后对比</center>
+
+
+Part4 调用接口
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -446,7 +481,7 @@ Part3 调用接口
 
 如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：
 
-1. 单进程(仅使用gym环境)
+  1. 单进程(仅使用gym环境)
 
   .. code:: python
 
@@ -461,10 +496,13 @@ Part3 调用接口
 
   2. 利用stable-baselines3进行算法测试
 
+   调用上述Async_SubprocVecEnv类
+
   .. code:: python
 
     stableparallel_test(n_envs=16,gym=False)
 
+  或使用SubprocVecEnv_TS类，使用tianshou方案
 
 .. raw:: html
 
@@ -487,7 +525,90 @@ Part3 调用接口
   </div>
   </br>
 
-**数据格式对比：**
+Part1 设计方案
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**算法端同步并行 向量化Envs**
+
+设计为与Recurrent PPO算法，RPPO.py配套的环境接口。
+
+  我们的基础环境类，设计目标是A3C算法——多进程异步计算，每个进程中有一个agent，在它的进程内调用环境类，然后取得一条数据，算法端的各个进程互不干扰；
+  为了更好利用显卡并行加速，考虑到仿真端与算法的通信本来就是强制同步并行的，因此将A3C过程做 :strong:`数据同步、同指令并行` ，即实现 :strong:`A2C` ，使算法可以单进程工作在同步并行的数据流上，因此在当前已实现的环境类上再封装一层 :strong:`Envs`
+
+**设计实现方案**
+
+  用Python的 :strong:`asyncio` 提供的协程，使用线程池并发地唤起不同 :strong:`agent` 对应的 :strong:`env` 环境基类的采样方法，且不因等待单个环境的返回值而阻塞主线程，
+  将不同环境给的返回值（状态，奖励，done标记）打包堆叠成向量传给算法端，将算法端给的动作向量解包给不同环境并自动基于done的值判断对应的环境是应该 :strong:`step` 还是 :strong:`reset`
+
+.. raw:: html
+
+  <img src="../_static/image/多线程并行.png" alt="并行环境示意图">
+  <center>并行环境示意图</center>
+
+Part2 Envs()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
+        </div>
+        </br>
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        1. <code>__init__</code> ：初始化Envs并行环境(包括 <code>action_space</code> 和 <code>observation_space</code>的初始化)
+  </div>
+  </br>
+
+
+**输入参数：**
+  * :code:`num_envs` ：表示并发量n
+
+  支持两种初始化方法，
+
+    :code:`env_mk` or :code:`env_list`
+
+    * :code:`env_list` ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可
+
+    * :code:`env_mk env_mk_args` ：环境尚未构造，env_mk是单个环境的构造函数，env_mk_args是参数元组，会自动为每个环境调用env_mk（**env_mk_args）作为构造函数
+
+  * :code:`logs_show` ：是否在其中一个环境中采集reward数据绘制训练曲线
+
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        2. <code>reset</code> ：重置环境,返回初始状态
+  </div>
+  </br>
+
+**返回参数：**
+
+* :code:`states` ：返回各个环境的状态(图像)集合
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        3. <code>step</code> ：环境交互,输入动作，获取状态信息
+  </div>
+  </br>
+
+**输入参数：**
+
+* :code:`actions` ：各个Agent动作
+
+**返回参数：**
+
+* :code:`states` ：返回各个环境的状态(图像)的集合
+* :code:`rewards` ：各个Agent的奖励堆叠
+* :code:`done` ：各个环境是否结束状态
+
+Part3 封装前后数据格式变化
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**封装前后数据格式对比：**
 
 * 封装前(BenchEnv_Multi): 
 
