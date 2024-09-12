@@ -952,9 +952,6 @@ Legged Robots
 
       无人机坐标系定义
 
-.. raw:: html
-
-   <span style="background-color: yellow;">To Do: 把上面这张坐标系图修改一下</span>
 
 **雷达数据包**
 
