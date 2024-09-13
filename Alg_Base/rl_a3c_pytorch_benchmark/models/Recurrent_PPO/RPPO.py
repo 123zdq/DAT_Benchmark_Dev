@@ -372,6 +372,8 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
         self.max_grad_norm = 0.5
 
         self.load = True  # Whether load pretrain weight
+        
+        self.test_Mode = "AR" # Choose test metrics
 
         ##################################
 
@@ -538,9 +540,19 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
                 )
                 if self.num_envs == 1 and next_done:
                     if test_reward != 0:
-                        test_reward_list.append(test_reward)
+                        if self.test_Mode == "TSR":
+                            with open("../../Webots_Simulation/traffic_project/config/env_config.json", "r") as file:
+                                data = json.load(file)
+                            total_step = data["Train_Total_Steps"]
+                            freq = data["Control_Frequence"]
+                            TSR =  test_reward / total_step * (500/freq)
+                            test_reward_list.append(TSR)
+                            print(f"episode: {test_episode_num} tracking success rate: {TSR}")
+                        elif self.test_Mode == "AR":
+                            test_reward_list.append(test_reward)
+                            print(f"episode: {test_episode_num} test_reward: {test_reward}")
                         test_episode_num += 1
-                        print(f"episode: {test_episode_num} test_reward: {test_reward}")
+                        
                     if len(test_reward_list) == 10:
                         test_reward_list.append(
                             f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}"
@@ -842,6 +854,13 @@ if __name__ == "__main__":
         default=False,
         help="whether restart a new training, default: False",
     )
+    parse.add_argument(
+        "-TM",
+        "--Test_Mode",
+        type=str,
+        default="AR",
+        help="Choose Metrics of performence: AR or TSR",
+    )
     args = parse.parse_args()
 
     if args.port == -1:
@@ -870,8 +889,11 @@ if __name__ == "__main__":
         data["Drone_Random_Config"]["verticle_bias_random"] = True
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
+        data["Reward_Config"]["reward_mode"] = "continuous"
         data["Reward_Config"]["view_range"] = 0.5
     else:
+        data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["view_pitch_random"] = False
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["horizon_bias_random"] = True
         data["Drone_Random_Config"]["horizon_bias_random_max"] = 6
@@ -882,8 +904,13 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
-        
-        data["Reward_Config"]["view_range"] = 1
+        if args.Test_Mode == "AR":
+            data["Reward_Config"]["reward_mode"] = "continuous"
+            data["Reward_Config"]["view_range"] = 1
+        if args.Test_Mode == "TSR":
+            data["Reward_Config"]["reward_mode"] = "discrete"
+            data["Reward_Config"]["view_range"] = 1
+
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
@@ -931,6 +958,7 @@ if __name__ == "__main__":
         gamma=0.9,
         savepath=args.savepath,
         load=Load_Model,
+        test_Mode = args.Test_Mode
     )
 
     if args.tensorboard_port != -1 and args.train_mode == 1:

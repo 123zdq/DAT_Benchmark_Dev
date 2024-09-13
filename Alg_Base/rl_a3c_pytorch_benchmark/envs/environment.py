@@ -79,7 +79,7 @@ def Identity(state,env):
         env(BenchEnv_Multi): initialized env
         process_func(Function): partial the process the state frame
 """
-def general_env(env_id,env_conf,arg_worker,process_idx,reward_type="default",asymmetric=False):
+def general_env(env_id,env_conf,arg_worker,process_idx,asymmetric=False):
     if env_id not in ["LunarLander-v2","Benchmark"]:
         print(env_id," is not valid!")
         raise NameError
@@ -96,7 +96,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx,reward_type="default",asy
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
                              scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"],\
-                             reward_type=reward_type,verbose=env_conf["verbose"],delay=env_conf["delay"],asymmetric=asymmetric)
+                             reward_type=env_conf["RewardType"],verbose=env_conf["verbose"],delay=env_conf["delay"],asymmetric=asymmetric)
         process_func = Identity
         return env,process_func
 
