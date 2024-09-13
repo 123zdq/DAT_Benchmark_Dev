@@ -411,7 +411,7 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 * :code:`truncated(bool)` ：是否由于step结束带来的reset(相当于gym环境中的 :code:`info["TimeLimit.truncated"]` )
 
-Part3 Async_SubprocVecEnv
+Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -432,10 +432,15 @@ Part3 Async_SubprocVecEnv
 
 **SubprocVecEnv 存在不足**
 
-  * :strong:`reset` 动作对 :strong:`所有环境` 均执行
-  * :strong:`step` 后即判断是否执行 :strong:`reset` ，会出现 :strong:`step` 与 :strong:`reset` 同一周期执行
+  1.stablebaselines3:
+    * :strong:`reset` 动作对 :strong:`所有环境` 均执行
+    * :strong:`step` 后即判断是否执行 :strong:`reset` ，会出现 :strong:`step` 与 :strong:`reset` 同一周期执行
 
-**Async_SubprocVecEnv 修改**
+  2.tianshou:
+    * :strong:`reset` 动作对 :strong:`所有环境` 均执行
+    * :strong:`step` 后会对 :strong:`所有环境` 执行 :strong:`step`，无法实现 :strong:`step` 与 :strong:`reset` 在同一周期不同环境分别进行
+
+**Async_SubprocVecEnv 与 SubprocVecEnv_TS 修改**
 
   * 将 :strong:`reset` 动作隔离，仅仅对于单个环境进行 :strong:`reset` 操作
   * 每个动作进行 :strong:`对齐` ，保持各个环境动作的同步
@@ -443,7 +448,7 @@ Part3 Async_SubprocVecEnv
 .. raw:: html
 
   <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
-  <center>Async_SubprocVecEnv修改前后对比</center>
+  <center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center>
 
 
 Part4 调用接口
@@ -496,30 +501,42 @@ Part4 调用接口
 
   2. 利用stable-baselines3进行算法测试
 
-    调用上述Async_SubprocVecEnv类
-
     .. code:: python
 
       stableparallel_test(n_envs=16,gym=False)
 
-  3. 利用tianshou进行算法测试
+    .. raw:: html
 
-    调用上述SubprocVecEnv_TS类
+      <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+        调用上述Async_SubprocVecEnv类
+      </div>
+
+  3. 利用tianshou进行算法测试
 
     .. code:: python
 
       args = arg_config()
       test_env(args)
 
+    .. raw:: html
+
+      <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+        调用上述SubprocVecEnv_TS类
+      </div>
+
 .. _Parallel:
 
 
 3 并行环境类(Envs)
 -------------------------------------------------
+.. raw:: html
 
-* 上述底层环境类(BenchEnv_Multi)设计目标是 **多进程异步计算** (例如A3C算法)，在单独进程内调用环境类获取数据
-* 为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 **单进程工作在同步并行的数据流上**，引申出本类(Envs)
-* 本环境主要适配 **用户的自主算法设计需求** (不使用stable-baselines3等基于Gym环境进行算法实现的情况)
+  <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+   <ul style="list-style-type:disc><li><a herf="">上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</a></li></ul>
+   <ul style="list-style-type:disc><li><a herf="">为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</a></li></ul>
+   <ul style="list-style-type:disc><li><a herf="">本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</a></li></ul>
+  </div>
+
 
 .. raw:: html
 
@@ -560,17 +577,17 @@ Part2 Envs()
 
 
 **输入参数：**
-  * :code:`num_envs` ：表示并发量n
+  * :code:`num_envs(int)` ：表示并发量n
 
   支持两种初始化方法，
 
     :code:`env_mk` or :code:`env_list`
 
-    * :code:`env_list` ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可
+    * :code:`env_list(list(env))` ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可
 
-    * :code:`env_mk env_mk_args` ：环境尚未构造， :code:`env_mk` 是单个环境的构造函数， :code:`env_mk_args` 是参数元组，会自动为每个环境调用 :code:`env_mk(**env_mk_args)` 作为构造函数
+    * :code:`env_mk` :code:`env_mk_args` ：环境尚未构造， :code:`env_mk` 是单个环境的构造函数， :code:`env_mk_args` 是参数元组，会自动为每个环境调用 :code:`env_mk(**env_mk_args)` 作为构造函数
 
-  * :code:`logs_show` ：是否在其中一个环境中采集reward数据绘制训练曲线
+  * :code:`logs_show(bool)` ：是否在其中一个环境中采集reward数据绘制训练曲线
 
 
 .. raw:: html

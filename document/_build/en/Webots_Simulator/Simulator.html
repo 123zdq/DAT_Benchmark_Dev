@@ -980,9 +980,70 @@
 </pre></div>
 </div>
 </div></blockquote>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>类别</p></th>
+<th class="head"><p>传感器</p></th>
+<th class="head"><p>参数</p></th>
+<th class="head"><p>类型</p></th>
+<th class="head"><p>描述</p></th>
+<th class="head"><p>潜在任务</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td rowspan="2"><p>Vision</p></td>
+<td><p>Camera</p></td>
+<td><p>Image</p></td>
+<td><p>Mat</p></td>
+<td><p>Images captured by the camera</p></td>
+<td><p>Default sensor</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lidar</p></td>
+<td><p>LidarCloud</p></td>
+<td><p>vector2000</p></td>
+<td><p>Point cloud from RpLidarA2(m)</p></td>
+<td><p>Obstacle avoidance</p></td>
+</tr>
+<tr class="row-even"><td rowspan="6"><p>Motion</p></td>
+<td rowspan="2"><p>GPS</p></td>
+<td><p>Position</p></td>
+<td><p>vector3</p></td>
+<td><p>Position (m)</p></td>
+<td><p>Visual navigation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linear</p></td>
+<td><p>vector3</p></td>
+<td><p>Linear velocity (m/s)</p></td>
+<td><p>Visual navigation</p></td>
+</tr>
+<tr class="row-even"><td><p>Accelerometer</p></td>
+<td><p>Acc</p></td>
+<td><p>vector3</p></td>
+<td><p>Acceleration (m/s^2)</p></td>
+<td><p>Visual navigation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gyroscope</p></td>
+<td><p>Angular</p></td>
+<td><p>vector3</p></td>
+<td><p>Angular velocity (rad/s)</p></td>
+<td><p>Robot posture stabilization</p></td>
+</tr>
+<tr class="row-even"><td rowspan="2"><p>IMU</p></td>
+<td><p>Angle</p></td>
+<td><p>vector3</p></td>
+<td><p>Eular angles (rad)</p></td>
+<td><p>Robot posture stabilization</p></td>
+</tr>
+<tr class="row-odd"><td><p>Orientation</p></td>
+<td><p>vector4</p></td>
+<td><p>Quaternion representation</p></td>
+<td><p>Robot posture stabilization</p></td>
+</tr>
+</tbody>
+</table>
 <p><strong>自定义奖励数据包</strong></p>
 <blockquote>
-<div><p>自定义奖励数据包共51个浮点数+1个字符串，包括以下部分</p>
+<div><p>自定义奖励数据包共57个浮点数+1个字符串，包括以下部分</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_rewardData</span><span class="p">{</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraWidth</span><span class="p">;</span><span class="c1">// 图像宽度（像素）</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// 图像高度（像素）</span>

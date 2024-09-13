@@ -99,8 +99,8 @@ Step2 创建虚拟环境与库安装
 
     .. code:: bash
 
-        conda create -n uav_follow39 python=3.9
-        conda activate uav_follow39
+        conda create -n uav_follow311 python=3.11
+        conda activate uav_follow311
 
     **算法端**
 
@@ -108,6 +108,7 @@ Step2 创建虚拟环境与库安装
 
         ## Alg requirements
         pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
+        pip install numpy==1.25.0
         pip install opencv-python==4.9.0.80
         pip install gym==0.25.1
         pip install setproctitle==1.3.3
@@ -115,11 +116,13 @@ Step2 创建虚拟环境与库安装
         pip install tqdm
         pip install stable-baselines3==2.3.0
         pip install sb3_contrib==2.3.0
-        pip install gymnasium==0.29.1
+        pip install gymnasium
         pip install wandb==0.17.6
         pip install memory_profiler==0.61.0
         pip install psutil==6.0.0
+        pip install pandas
         pip install openpyxl
+        pip install tianshou==1.1.0
 
     **仿真器端**
 
@@ -146,7 +149,7 @@ Step3 修改webots运行python环境
 
     .. code:: bash
 
-        ln -s /root/miniconda3/envs/uav_follow_alg39/bin/python3.9 /usr/bin/python39
+        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
 
     接着进入webots软件，选择 :code:`工具(Tools)` -> :code:`首选项(Preferences)`, 按照如下图将选项 :code:`Python command` 进行修改：
 

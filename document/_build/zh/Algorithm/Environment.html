@@ -62,7 +62,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#gym-uav-vat-uav-vat-gymnasium">2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#part1-uav-vat-gym">Part1 UAV_VAT(适配Gym库)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part2-uav-vat-gymnasium-gymnasium">Part2 UAV_VAT_Gymnasium(适配Gymnasium库)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part3-async-subprocvecenv">Part3 Async_SubprocVecEnv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part3-async-subprocvecenv-subprocvecenv-ts">Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part4">Part4 调用接口</a></li>
 </ul>
 </li>
@@ -423,8 +423,8 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">truncated(bool)</span></code> ：是否由于step结束带来的reset(相当于gym环境中的 <code class="code docutils literal notranslate"><span class="pre">info[&quot;TimeLimit.truncated&quot;]</span></code> )</p></li>
 </ul>
 </section>
-<section id="part3-async-subprocvecenv">
-<h3>Part3 Async_SubprocVecEnv<a class="headerlink" href="#part3-async-subprocvecenv" title="Link to this heading"></a></h3>
+<section id="part3-async-subprocvecenv-subprocvecenv-ts">
+<h3>Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS<a class="headerlink" href="#part3-async-subprocvecenv-subprocvecenv-ts" title="Link to this heading"></a></h3>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
 <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
 </div>
@@ -434,12 +434,20 @@
 </div>
 </br><p><strong>SubprocVecEnv 存在不足</strong></p>
 <blockquote>
-<div><ul class="simple">
+<div><dl class="simple">
+<dt>1.stablebaselines3:</dt><dd><ul class="simple">
 <li><p><strong>reset</strong> 动作对 <strong>所有环境</strong> 均执行</p></li>
 <li><p><strong>step</strong> 后即判断是否执行 <strong>reset</strong> ，会出现 <strong>step</strong> 与 <strong>reset</strong> 同一周期执行</p></li>
 </ul>
+</dd>
+<dt>2.tianshou:</dt><dd><ul class="simple">
+<li><p><strong>reset</strong> 动作对 <strong>所有环境</strong> 均执行</p></li>
+<li><p><strong>step</strong> 后会对 <strong>所有环境</strong> 执行 <strong>step</strong>，无法实现 <strong>step</strong> 与 <strong>reset</strong> 在同一周期不同环境分别进行</p></li>
+</ul>
+</dd>
+</dl>
 </div></blockquote>
-<p><strong>Async_SubprocVecEnv 修改</strong></p>
+<p><strong>Async_SubprocVecEnv 与 SubprocVecEnv_TS 修改</strong></p>
 <blockquote>
 <div><ul class="simple">
 <li><p>将 <strong>reset</strong> 动作隔离，仅仅对于单个环境进行 <strong>reset</strong> 操作</p></li>
@@ -447,7 +455,7 @@
 </ul>
 </div></blockquote>
 <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
-<center>Async_SubprocVecEnv修改前后对比</center></section>
+<center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></section>
 <section id="part4">
 <h3>Part4 调用接口<a class="headerlink" href="#part4" title="Link to this heading"></a></h3>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
@@ -486,32 +494,33 @@
 <li><p>利用stable-baselines3进行算法测试</p></li>
 </ol>
 <blockquote>
-<div><p>调用上述Async_SubprocVecEnv类</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-</div></blockquote>
+<div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+  调用上述Async_SubprocVecEnv类
+</div></div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>利用tianshou进行算法测试</p></li>
 </ol>
 <blockquote>
-<div><p>调用上述SubprocVecEnv_TS类</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
 <span class="n">test_env</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
-</div></blockquote>
+<div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+  调用上述SubprocVecEnv_TS类
+</div></div></blockquote>
 </div></blockquote>
 </section>
 </section>
 <section id="envs">
 <span id="parallel"></span><h2>3 并行环境类(Envs)<a class="headerlink" href="#envs" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</p></li>
-<li><p>为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</p></li>
-<li><p>本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</p></li>
-</ul>
-<div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+<div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+ <ul style="list-style-type:disc><li><a herf="">上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</a></li></ul>
+ <ul style="list-style-type:disc><li><a herf="">为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</a></li></ul>
+ <ul style="list-style-type:disc><li><a herf="">本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</a></li></ul>
+</div><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
 </div>
 </br><section id="part1">
@@ -533,18 +542,18 @@
 </div>
 </br><dl>
 <dt><strong>输入参数：</strong></dt><dd><ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">num_envs</span></code> ：表示并发量n</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">num_envs(int)</span></code> ：表示并发量n</p></li>
 </ul>
 <p>支持两种初始化方法，</p>
 <blockquote>
 <div><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> or <code class="code docutils literal notranslate"><span class="pre">env_list</span></code></p>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_list</span></code> ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span> <span class="pre">env_mk_args</span></code> ：环境尚未构造， <code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> 是单个环境的构造函数， <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code> 是参数元组，会自动为每个环境调用 <code class="code docutils literal notranslate"><span class="pre">env_mk(**env_mk_args)</span></code> 作为构造函数</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">env_list(list(env))</span></code> ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code> ：环境尚未构造， <code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> 是单个环境的构造函数， <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code> 是参数元组，会自动为每个环境调用 <code class="code docutils literal notranslate"><span class="pre">env_mk(**env_mk_args)</span></code> 作为构造函数</p></li>
 </ul>
 </div></blockquote>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">logs_show</span></code> ：是否在其中一个环境中采集reward数据绘制训练曲线</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">logs_show(bool)</span></code> ：是否在其中一个环境中采集reward数据绘制训练曲线</p></li>
 </ul>
 </dd>
 </dl>

@@ -1,19 +1,68 @@
 环境封装
 ============
 
-    本项目提供3种形式的Environment(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类
-    
-    上述3种Environment的关系如下图所示：
+  .. raw:: html
+
+    <style>
+        #language-switch {
+           display: flex; /* Use Flexbox layout */
+           justify-content: center; /* Center buttons horizontally */
+           align-items: center; /* Center buttons vertically */
+           gap: 10px; /* Space between buttons */
+           margin-top: 20px;
+           margin-bottom: 20px;
+       }
+       #language-switch button {
+           width: 180px;
+           height: 40px;
+           font-size: 16px;
+           padding: 10px;
+           margin: 5px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           cursor: pointer;
+           text-align: center;
+           background-color: #f0f0f0;
+           display: flex;
+           align-items: center; /* Center text vertically */
+           justify-content: center; /* Center text horizontally */
+       }
+   </style>
+
+    <!-- Language switch buttons -->
+    <div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
+        <b style="font-size: 18px;">You can choose language by </b>
+        <button onclick="switchLanguage('zh')">中文</button>
+        <button onclick="switchLanguage('en')">English</button>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'zh') {
+                window.location.href = 'Environment.html';
+            } else if (lang === 'en') {
+                window.location.href = '../../en/Algorithm/Environment.html';
+            }
+        }
+    </script>
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+  本项目提供3种形式的Environment(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类
+
+  上述3种Environment的关系如下图所示：
 
     .. figure:: ../_static/image/Environment3Types.png
-      :alt: 3种环境类关系图                                 
-      :width: 600px                                              
+      :alt: 3种环境类关系图
+      :width: 600px
       :align: center
 
       3种环境类示意图
 
 .. _BenchEnv_Multi:
-    
+
 1 底层环境类(BenchEnv_Multi)
 -------------------------------------
 
@@ -27,14 +76,14 @@ Part 1 接口详解
             如果仅调用类进行测试，可以直接跳转至： <a href="#config">配置文件</a>以及<a href="#makeenv">构造函数</a>
       </div>
       </br>
-    
+
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
             具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/environment.py</code>中的<code>BenchEnv_Multi()</code>
         </div>
         </br>
-    
+
 
     .. raw:: html
 
@@ -45,8 +94,8 @@ Part 1 接口详解
 
     * :code:`Action_dim(int)` ：智能体动作维度
     * :code:`action_list(list)` ：用于将离散的动作指令转化成连续的运动指令
-        
-      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CW,CCW]`，即分别代表“前后左右顺逆”的运动指令
+
+      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CCW,CW]`，即分别代表“前后左右逆顺”的运动指令
 
     * :code:`process_state(function)` ：用于对图像进行后处理的函数
     * :code:`arg_worker(int)` ： 系统并行数
@@ -68,14 +117,16 @@ Part 1 接口详解
     * :code:`auto_start(bool)` ： 是否自动启动仿真端
     * :code:`Control_Frequence(int)` ： 指定系统控制频率
     * :code:`reward_type(str)` ： 指定reward类别(可以选择不同baseline算法的reward)
-    
+    * :code:`verbose(bool)`: 配置环境是否输出log文件
+    * :code:`delay(int)`: 配置系统等待地图加载的时长
+
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
             2. <code>step</code> ：用于环境的推演
       </div>
       </br>
-        
+
     **输入参数：**
 
     * :code:`action(numpy.int64)` ： 智能体采取的动作
@@ -106,7 +157,7 @@ Part 1 接口详解
 
     * :code:`image(numpy.ndarray)` ：解释同上
     * :code:`self.SuppleInfo(list)` ：解释同上
-    
+
 .. raw:: html
 
     </br>
@@ -125,7 +176,7 @@ Part 2 配置文件
             上述环境接口较多，因此，为了便于后期的封装调用，<b>本工程提供了配置文件</b>，简化配置流程。配置文件内容如下：
       </div>
       </br>
-    
+
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
@@ -158,7 +209,10 @@ Part 2 配置文件
                 "Other_State":false,
                 "CloudPoint":false,
                 "RewardParams":true,
-                "RewardType":"default"
+                "RewardType":"default",
+                "verbose": false,
+                "delay": 20
+
             },
             "LunarLander":{
                 "Need_render":1,
@@ -193,6 +247,8 @@ Part 2 配置文件
     *  :code:`"CloudPoint"` ：是否启用仿真器端的点云选项
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
+    * :code:`"verbose"(bool)`: 配置环境是否输出log文件
+    * :code:`"delay"(int)`: 配置系统等待地图加载的时长
 
 .. raw:: html
 
@@ -224,7 +280,7 @@ Part 3 构造函数
 
         # 生成单进程的环境(env_conf为config.json的路径)
         env,_ = general_env(env_id="Benchmark",env_conf=env_conf,arg_worker=1,process_idx=0)
-    
+
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
@@ -270,7 +326,7 @@ Part1 UAV_VAT(适配Gym库)
 .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT(gym.Env)</code>类
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT(gym.Env)</code>类
         </div>
         </br>
 
@@ -288,7 +344,7 @@ Part1 UAV_VAT(适配Gym库)
 * :code:`env_conf_path(list)` ：仿真器端配置文件路径
 * :code:`process_idx(list)` ：当前进程序号
 
-.. raw:: html 
+.. raw:: html
 
   <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
         2. <code>reset</code> ：重置环境,返回初始状态
@@ -299,7 +355,7 @@ Part1 UAV_VAT(适配Gym库)
 
 * :code:`state(np.ndarray)` ：返回状态(图像)
 
-.. raw:: html 
+.. raw:: html
 
   <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
         3. <code>step</code> ：环境交互,输入动作，获取状态信息
@@ -324,12 +380,12 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
-        </div>
-        </br>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
+  </div>
+  </br>
 
-.. raw:: html 
+.. raw:: html
 
   <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
         1. <code>reset</code> ：重置环境,返回初始状态
@@ -344,7 +400,7 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 * :code:`reset_info(dict)` ：重置环境信息(默认为空)
 
-.. raw:: html 
+.. raw:: html
 
   <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
         2. <code>step</code> ：环境交互,输入动作，获取状态信息
@@ -355,17 +411,57 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 * :code:`truncated(bool)` ：是否由于step结束带来的reset(相当于gym环境中的 :code:`info["TimeLimit.truncated"]` )
 
-Part3 调用接口
+Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+.. raw:: html
+
+  <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+  <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
+  </div>
+  </br>
+
+.. raw:: html
+
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py </code>中的<code> ASYNC_SubprocVecEnv </code>类
+      具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py </code>中的<code> SubprocVecEnv_TS </code>类
+  </div>
+  </br>
+
+**SubprocVecEnv 存在不足**
+
+  1.stablebaselines3:
+    * :strong:`reset` 动作对 :strong:`所有环境` 均执行
+    * :strong:`step` 后即判断是否执行 :strong:`reset` ，会出现 :strong:`step` 与 :strong:`reset` 同一周期执行
+
+  2.tianshou:
+    * :strong:`reset` 动作对 :strong:`所有环境` 均执行
+    * :strong:`step` 后会对 :strong:`所有环境` 执行 :strong:`step`，无法实现 :strong:`step` 与 :strong:`reset` 在同一周期不同环境分别进行
+
+**Async_SubprocVecEnv 与 SubprocVecEnv_TS 修改**
+
+  * 将 :strong:`reset` 动作隔离，仅仅对于单个环境进行 :strong:`reset` 操作
+  * 每个动作进行 :strong:`对齐` ，保持各个环境动作的同步
+
+.. raw:: html
+
+  <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
+  <center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center>
+
+
+Part4 调用接口
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>make_env()</code>函数
-        </div>
-        </br>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>make_env()</code>函数
+  </div>
+  </br>
 
-.. raw:: html 
+.. raw:: html
 
   <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
         <code>make_env</code> ：初始化多个gym环境
@@ -376,21 +472,21 @@ Part3 调用接口
 
 * :code:`n_envs(int)` ：环境数量
 * :code:`rank(int)` ：当前环境序号
-* :code:`gym(bool)` ： 如果为:code:`True` 则生成gym库的环境； 如果为:code:`False` 则生成gymnasium库的环境
+* :code:`gym(bool)` ： 如果为 :code:`True` 则生成gym库的环境； 如果为 :code:`False` 则生成gymnasium库的环境
 * :code:`monitor(bool)` ：是否需要封装成 :code:`stable_baselines3.common.monitor.Monitor` 类
 
 **测试代码：**
 
 .. raw:: html
 
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
-        </div>
-        </br>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
+  </div>
+  </br>
 
 如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：
 
-1. 单进程(仅使用gym环境)
+  1. 单进程(仅使用gym环境)
 
   .. code:: python
 
@@ -405,18 +501,136 @@ Part3 调用接口
 
   2. 利用stable-baselines3进行算法测试
 
-  .. code:: python
+    .. code:: python
 
-    stableparallel_test(n_envs=16,gym=False)
+      stableparallel_test(n_envs=16,gym=False)
+
+    .. raw:: html
+
+      <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+        调用上述Async_SubprocVecEnv类
+      </div>
+
+  3. 利用tianshou进行算法测试
+
+    .. code:: python
+
+      args = arg_config()
+      test_env(args)
+
+    .. raw:: html
+
+      <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+        调用上述SubprocVecEnv_TS类
+      </div>
+
+.. _Parallel:
+
+
+3 并行环境类(Envs)
+-------------------------------------------------
+.. raw:: html
+
+  <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+   <ul style="list-style-type:disc><li><a herf="">上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</a></li></ul>
+   <ul style="list-style-type:disc><li><a herf="">为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</a></li></ul>
+   <ul style="list-style-type:disc><li><a herf="">本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</a></li></ul>
+  </div>
 
 
 .. raw:: html
 
-    <span style="background-color: yellow;">To Do: 冬青Parallel类书写</span>
+  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
+  </div>
+  </br>
 
-.. _Parallel:
+Part1 设计方案
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-3 并行环境类(Envs)
--------------------------------------------------
+**设计实现方案**
+
+  用Python的 :strong:`asyncio` 提供的协程，使用线程池并发地唤起不同 :strong:`agent` 对应的 :strong:`env` 环境基类的采样方法，且不因等待单个环境的返回值而阻塞主线程，
+  将不同环境给的返回值（状态，奖励，done标记）打包堆叠成向量传给算法端，将算法端给的动作向量解包给不同环境并自动基于done的值判断对应的环境是应该 :strong:`step` 还是 :strong:`reset`
+
+.. raw:: html
+
+  <img src="../_static/image/多线程并行.png" alt="并行环境示意图">
+  <center>并行环境示意图</center>
+
+Part2 Envs()
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
+        </div>
+        </br>
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        1. <code>__init__</code> ：初始化Envs并行环境(包括 <code>action_space</code> 和 <code>observation_space</code>的初始化)
+  </div>
+  </br>
 
 
+**输入参数：**
+  * :code:`num_envs(int)` ：表示并发量n
+
+  支持两种初始化方法，
+
+    :code:`env_mk` or :code:`env_list`
+
+    * :code:`env_list` ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可
+
+    * :code:`env_mk` :code:`env_mk_args` ：环境尚未构造， :code:`env_mk` 是单个环境的构造函数， :code:`env_mk_args` 是参数元组，会自动为每个环境调用 :code:`env_mk(**env_mk_args)` 作为构造函数
+
+  * :code:`logs_show(bool)` ：是否在其中一个环境中采集reward数据绘制训练曲线
+
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        2. <code>reset</code> ：重置环境,返回初始状态
+  </div>
+  </br>
+
+**返回参数：**
+
+* :code:`states` ：返回各个环境的状态(图像)集合
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        3. <code>step</code> ：环境交互,输入动作，获取状态信息
+  </div>
+  </br>
+
+**输入参数：**
+
+* :code:`actions` ：各个Agent动作
+
+**返回参数：**
+
+* :code:`states` ：返回各个环境的状态(图像)的集合
+* :code:`rewards` ：各个Agent的奖励堆叠
+* :code:`done` ：各个环境是否结束状态
+
+Part3 封装前后数据格式变化
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**封装前后数据格式对比：**
+
+* 封装前(BenchEnv_Multi):
+
+  数据采样： :code:`state:ndarray,reward:float,done:float= env.step(action:int)`
+
+  环境重置： :code:`state:ndarray = env.reset()`
+
+* 封装后(Envs),设并行数n：
+
+  数据采样： :code:`states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)= env.step(action:ndarray(n))`
+
+  环境重置： :code:`states:ndarray(n,) = envs.reset()`
