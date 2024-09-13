@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-12 10:56:53
+ * @LastEditTime: 2024-09-13 16:50:17
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -329,6 +329,8 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
     carDroneVel[i] = (T_car_of_camera[3+4*i] - last_carDronePos[i]) / t_step;
     carDroneAcc[i] = (carDroneVel[i] - last_carDroneVel[i]) / t_step;
   }
+  memcpy(&makeReward.carDroneVel,carDroneVel,sizeof(carDroneVel));
+  memcpy(&makeReward.carDroneAcc,carDroneAcc,sizeof(carDroneAcc));
   const double *Car_Ori = trackingCar->getField("rotation")->getSFRotation();
   const double *Drone_Ori = supervisor->getFromDef(droneDef)->getField("rotation")->getSFRotation();
   makeReward.carDronePosOri.w = Car_Ori[2] * Car_Ori[3] - Drone_Ori[2] * Drone_Ori[3];

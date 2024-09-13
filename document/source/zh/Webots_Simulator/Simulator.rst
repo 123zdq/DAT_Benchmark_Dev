@@ -923,7 +923,7 @@ Legged Robots
 
 **自定义奖励数据包**
 
-   自定义奖励数据包共51个浮点数+1个字符串，包括以下部分
+   自定义奖励数据包共57个浮点数+1个字符串，包括以下部分
 
    .. code:: c++
       
@@ -938,6 +938,8 @@ Legged Robots
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
         vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
         vector4 carDronePosOri; // 车辆中心在跟踪器坐标系下的1D姿态+3D坐标（第一个元素是姿态）
+        vector3 carDroneVel; // 车辆中心在无人机坐标系下的3D速度
+        vector3 carDroneAcc; // 车辆中心在无人机坐标系下的3D加速度
         double crash; // 跟踪器是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1直行，2左转，3右转)
         std::string carTypename;// 对象类型

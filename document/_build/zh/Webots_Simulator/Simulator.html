@@ -953,7 +953,7 @@
 </div></blockquote>
 <p><strong>自定义奖励数据包</strong></p>
 <blockquote>
-<div><p>自定义奖励数据包共51个浮点数+1个字符串，包括以下部分</p>
+<div><p>自定义奖励数据包共57个浮点数+1个字符串，包括以下部分</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_rewardData</span><span class="p">{</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraWidth</span><span class="p">;</span><span class="c1">// 图像宽度（像素）</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// 图像高度（像素）</span>
@@ -965,6 +965,8 @@
 <span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carMidGlobalPos</span><span class="p">;</span><span class="c1">// 车辆中心在世界坐标系下的三维坐标</span>
 <span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidPos</span><span class="p">;</span><span class="w"> </span><span class="c1">// 摄像头中心世界坐标系的坐标</span>
 <span class="w">  </span><span class="n">vector4</span><span class="w"> </span><span class="n">carDronePosOri</span><span class="p">;</span><span class="w"> </span><span class="c1">// 车辆中心在跟踪器坐标系下的1D姿态+3D坐标（第一个元素是姿态）</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carDroneVel</span><span class="p">;</span><span class="w"> </span><span class="c1">// 车辆中心在无人机坐标系下的3D速度</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carDroneAcc</span><span class="p">;</span><span class="w"> </span><span class="c1">// 车辆中心在无人机坐标系下的3D加速度</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">crash</span><span class="p">;</span><span class="w"> </span><span class="c1">// 跟踪器是否与建筑物碰撞</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">carDir</span><span class="p">;</span><span class="c1">// 车辆运行方向(0停止，1直行，2左转，3右转)</span>
 <span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">carTypename</span><span class="p">;</span><span class="c1">// 对象类型</span>
