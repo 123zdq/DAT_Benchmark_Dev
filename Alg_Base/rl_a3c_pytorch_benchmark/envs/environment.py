@@ -23,6 +23,7 @@ import json
 
 BASE_PORT = 6000
 ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
+ENV = "./config.json"
 
 global_start_flag = False
 
@@ -78,7 +79,7 @@ def Identity(state,env):
         env(BenchEnv_Multi): initialized env
         process_func(Function): partial the process the state frame
 """
-def general_env(env_id,env_conf,arg_worker,process_idx):
+def general_env(env_id,env_conf,arg_worker,process_idx,reward_type="default",asymmetric=False):
     if env_id not in ["LunarLander-v2","Benchmark"]:
         print(env_id," is not valid!")
         raise NameError
@@ -95,7 +96,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx):
                                           env_conf["Right_Speed"],env_conf["CW_omega"],env_conf["CCW_omega"]],\
                              port_process=env_conf["port_process"],end_reward=env_conf["end_reward"],end_reward_list=env_conf["end_reward_list"],\
                              scene=env_conf["scene"],weather=env_conf["weather"],auto_start=env_conf["auto_start"],Control_Frequence = env_conf["Control_Frequence"],\
-                             reward_type=env_conf["RewardType"],verbose=env_conf["verbose"],delay=env_conf["delay"])
+                             reward_type=reward_type,verbose=env_conf["verbose"],delay=env_conf["delay"],asymmetric=asymmetric)
         process_func = Identity
         return env,process_func
 
@@ -119,7 +120,8 @@ class BenchEnv_Multi():
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
         port_process,end_reward,end_reward_list,scene,weather,auto_start,\
-        Control_Frequence = 500,reward_type="default",verbose=False,delay=20) -> None:
+        Control_Frequence = 500,reward_type="default",verbose=False,\
+        delay=20,asymmetric=False) -> None:
         
         self.Action_dim = Action_dim
         self.process_state = process_state
@@ -246,6 +248,15 @@ class BenchEnv_Multi():
         self.memory_pretect_thread = Thread(target=check_memory_usage, args=(current_pid,0.85,))
         self.memory_pretect_thread.start()
 
+        # config asymmetric type
+        self.asymmetric = asymmetric
+        from utils import read_config
+        config_env = read_config(ENV)["Benchmark"]
+        image_shape = (config_env["State_channel"],config_env["State_size"],config_env["State_size"])
+        if self.asymmetric:
+            self.actual_state = {"image":np.zeros(image_shape, dtype=np.float32),"vector":np.zeros(9, dtype=np.float32)}
+        else:
+            self.actual_state = np.zeros(image_shape, dtype=np.float32)
     """
         step: 
             1. Send an action to server through socket
@@ -414,7 +425,18 @@ class BenchEnv_Multi():
         image = self.recv_image_socket.receive(self.reward_path)
         self.logger.info('Finish receiving image')
         image = self.process_state(image)
-        return image,reward,done,self.SuppleInfo
+        
+        ## Tackle Asymmetric Structure
+        if self.asymmetric:
+            pos_3d = reward_params[-12:-9]
+            vel_3d = reward_params[-9:-6]
+            acc_3d = reward_params[-6:-3]
+            vector = np.concatenate([pos_3d, vel_3d, acc_3d]).astype(np.float32)
+            self.actual_state["image"] = image
+            self.actual_state["vector"] = vector
+        else:
+            self.actual_state = image
+        return self.actual_state,reward,done,self.SuppleInfo
 
     """
         Reset: Receive first State from server through socket
@@ -495,5 +517,16 @@ class BenchEnv_Multi():
                 pass
             os.unlink(self.action_path)
         image = self.process_state(image)
+
+        ## Tackle Asymmetric Structure
+        if self.asymmetric:
+            pos_3d = reward_params[-12:-9]
+            vel_3d = reward_params[-9:-6]
+            acc_3d = reward_params[-6:-3]
+            vector = np.concatenate([pos_3d, vel_3d, acc_3d]).astype(np.float32)
+            self.actual_state["image"] = image
+            self.actual_state["vector"] = vector
+        else:
+            self.actual_state = image
         self.reset_time += 1
-        return image,self.SuppleInfo
+        return self.actual_state,self.SuppleInfo
