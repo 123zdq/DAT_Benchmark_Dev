@@ -55,3 +55,10 @@
 .. raw:: html
 
     <span style="background-color: yellow;">To Do：作一张Visual Active Tracking的示意图+PPT相关内容</span>
+
+.. figure:: ./_static/image/VisualActiveTracking.png
+   :alt: Visual Active Tracking
+   :width: 600px
+   :align: center
+
+   Visual Active Tracking

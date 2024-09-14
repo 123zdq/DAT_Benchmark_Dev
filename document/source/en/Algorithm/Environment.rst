@@ -55,8 +55,8 @@
   上述3种Environment的关系如下图所示：
 
     .. figure:: ../_static/image/Environment3Types.png
-      :alt: 3种环境类关系图
-      :width: 600px
+      :alt: 3种环境类关系图                                 
+      :width: 600px                                              
       :align: center
 
       3种环境类示意图
@@ -76,7 +76,7 @@ Part 1 接口详解
             如果仅调用类进行测试，可以直接跳转至： <a href="#config">配置文件</a>以及<a href="#makeenv">构造函数</a>
       </div>
       </br>
-
+    
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
@@ -95,7 +95,7 @@ Part 1 接口详解
     * :code:`Action_dim(int)` ：智能体动作维度
     * :code:`action_list(list)` ：用于将离散的动作指令转化成连续的运动指令
 
-      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CCW,CW]`，即分别代表“前后左右逆顺”的运动指令
+      * :code:`action_list` 的存储顺序为： :code:`[Forward,Backward,Left,Right,CW,CCW]`，即分别代表“前后左右顺逆”的运动指令
 
     * :code:`process_state(function)` ：用于对图像进行后处理的函数
     * :code:`arg_worker(int)` ： 系统并行数
@@ -117,8 +117,6 @@ Part 1 接口详解
     * :code:`auto_start(bool)` ： 是否自动启动仿真端
     * :code:`Control_Frequence(int)` ： 指定系统控制频率
     * :code:`reward_type(str)` ： 指定reward类别(可以选择不同baseline算法的reward)
-    * :code:`verbose(bool)`: 配置环境是否输出log文件
-    * :code:`delay(int)`: 配置系统等待地图加载的时长
 
     .. raw:: html
 
@@ -209,10 +207,7 @@ Part 2 配置文件
                 "Other_State":false,
                 "CloudPoint":false,
                 "RewardParams":true,
-                "RewardType":"default",
-                "verbose": false,
-                "delay": 20
-
+                "RewardType":"default"
             },
             "LunarLander":{
                 "Need_render":1,
@@ -247,8 +242,6 @@ Part 2 配置文件
     *  :code:`"CloudPoint"` ：是否启用仿真器端的点云选项
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
-    * :code:`"verbose"(bool)`: 配置环境是否输出log文件
-    * :code:`"delay"(int)`: 配置系统等待地图加载的时长
 
 .. raw:: html
 
@@ -326,7 +319,7 @@ Part1 UAV_VAT(适配Gym库)
 .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT(gym.Env)</code>类
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT(gym.Env)</code>类
         </div>
         </br>
 
@@ -380,10 +373,10 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 .. raw:: html
 
-  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/gym_envs.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
-  </div>
-  </br>
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>UAV_VAT_Gymnasium(gymnasium.Env)</code>类
+        </div>
+        </br>
 
 .. raw:: html
 
@@ -472,17 +465,17 @@ Part4 调用接口
 
 * :code:`n_envs(int)` ：环境数量
 * :code:`rank(int)` ：当前环境序号
-* :code:`gym(bool)` ： 如果为 :code:`True` 则生成gym库的环境； 如果为 :code:`False` 则生成gymnasium库的环境
+* :code:`gym(bool)` ： 如果为:code:`True` 则生成gym库的环境； 如果为:code:`False` 则生成gymnasium库的环境
 * :code:`monitor(bool)` ：是否需要封装成 :code:`stable_baselines3.common.monitor.Monitor` 类
 
 **测试代码：**
 
 .. raw:: html
 
-  <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-      具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
-  </div>
-  </br>
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
+        </div>
+        </br>
 
 如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：
 

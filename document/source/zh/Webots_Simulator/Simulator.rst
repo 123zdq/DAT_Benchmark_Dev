@@ -56,7 +56,7 @@
 - 该项目的仿真环境基于开源仿真软件webots搭建，仿真环境的背景是模拟现实生活中在室外场景中的目标追踪问题。为此，设立了包括城市街道、市中心、湖边、乡村、沙漠、农田共六张地图，其中每张地图演化出白天、夜晚、雾天、雪天等，总共24个环境。为了方便模型训练从简单的环境开始，还设置了几张简单的环境地图可供使用。
 - 该项目24个仿真环境示意图：
 
-   .. image:: ../_static/image/环境示意图.png
+   .. image:: ../_static/image/24Scene_Colorful2.png
       :alt: 24个环境示意图
       :width: 600px
       :align: center
@@ -721,7 +721,18 @@ Legged Robots
 
    其中 :math:`I` 代表跟踪范围（相机镜头获取的画面范围）， :math:`t` 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。
 
+   .. _跟踪对象离散奖励示意图:
+
+   .. figure:: ../_static/image/Discrete_reward.png
+      :alt: Discrete_reward
+      :width: 600px
+      :align: center
+
+      跟踪对象离散奖励示意图
+
    第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。
+
+   .. _跟踪对象连续奖励示意图:
 
    .. figure:: ../_static/image/Continuous_reward.png
       :alt: Continuous_reward
@@ -729,6 +740,7 @@ Legged Robots
       :align: center
       
       跟踪对象连续奖励示意图
+
 
    上图是一个跟踪对象处于相机画面中的示意图，记点 :math:`E_{G_{c}}` 到画面中心点 :math:`I_{cG}` 的距离为 :math:`y_{EI}`，跟踪对象点 :math:`P_{GC}` 到中心点 :math:`I_{cG}` 的距离为 :math:`y_{IP}`，记他们的比例为
 
@@ -922,26 +934,152 @@ Legged Robots
       }Odometry;
 
 
-+---------+---------------+-------------+------------+-------------------------------+-----------------------------+
-|  类别   |    传感器     |     参数    |    类型    |             描述              |          潜在任务           |
-+=========+===============+=============+============+===============================+=============================+
-|         |    Camera     |    Image    |    Mat     | Images captured by the camera |       Default sensor        |
-| Vision  +---------------+-------------+------------+-------------------------------+-----------------------------+
-|         |     Lidar     | LidarCloud  | vector2000 | Point cloud from RpLidarA2(m) |     Obstacle avoidance      |
-+---------+---------------+-------------+------------+-------------------------------+-----------------------------+
-|         |               |  Position   |  vector3   |         Position (m)          |      Visual navigation      |
-|         |      GPS      +-------------+------------+-------------------------------+-----------------------------+
-|         |               |   Linear    |  vector3   |     Linear velocity (m/s)     |      Visual navigation      |
-|         +---------------+-------------+------------+-------------------------------+-----------------------------+
-|         | Accelerometer |     Acc     |  vector3   |     Acceleration (m/s^2)      |      Visual navigation      |
-|  Motion +---------------+-------------+------------+-------------------------------+-----------------------------+
-|         |   Gyroscope   |   Angular   |  vector3   |   Angular velocity (rad/s)    | Robot posture stabilization |
-|         +---------------+-------------+------------+-------------------------------+-----------------------------+
-|         |               |    Angle    |  vector3   |      Eular angles (rad)       | Robot posture stabilization |
-|         |      IMU      +-------------+------------+-------------------------------+-----------------------------+
-|         |               | Orientation |  vector4   |   Quaternion representation   | Robot posture stabilization |
-+---------+---------------+-------------+------------+-------------------------------+-----------------------------+
+.. raw:: html
 
+   <html>
+
+   <head>
+
+       <style>
+
+
+           table {
+
+               border-collapse: collapse;
+
+               width: 100%; /* 根据需要设置宽度 */
+
+           }
+
+
+           th {
+
+               border-top: 2px solid black; /* 或者使用你想要的任何颜色和粗细 */
+
+               border-bottom: 2px solid black; /* 底部边框，如果需要的话 */
+
+               padding: 8px; /* 设置内边距以改善可读性 */
+
+           }
+
+
+           td {
+
+               padding: 6px; /* 设置内边距以改善可读性 */
+
+           }
+
+
+           td, th {
+
+               border-left: none;
+
+               border-right: none;
+
+           }
+
+
+           .vision-row {
+
+               background-color: #FFC0CB;
+
+           }
+
+
+
+           .motion-row {
+
+               background-color: #E0FFFF;
+
+           }
+
+
+           .row-line {
+
+               border-bottom: 2px solid black; /* 底部边框，如果需要的话 */
+
+           }
+
+           .merged-cell {
+               text-align: center; /* 水平居中 */
+               vertical-align: middle; /* 垂直居中，虽然对于td来说这通常是默认的 */
+           }
+
+       </style>
+
+   </head>
+
+   <body>
+
+   <table>
+    <tr class="merged-cell">
+        <th>类别</th>
+        <th>传感器</th>
+        <th>参数</th>
+        <th>类型</th>
+        <th>描述</th>
+        <th>潜在任务</th>
+    </tr>
+    <tr class="merged-cell">
+        <td rowspan="2" class="vision-row merged-cell">Vision</td>
+        <td>Camera</td>
+        <td>Image</td>
+        <td>Mat</td>
+        <td>Images captured by the camera</td>
+        <td>Default sensor</td>
+    </tr>
+    <tr class="row-line merged-cell">
+        <td>Lidar</td>
+        <td>LidarCloud</td>
+        <td>vector2000</td>
+        <td>Point cloud from RpLidarA2(m)</td>
+        <td>Obstacle avoidance</td>
+    </tr>
+    <tr class="merged-cell">
+        <td rowspan="6" class="motion-row merged-cell">Motion</td>
+        <td rowspan="2" class="merged-cell">GPS</td>
+        <td>Position</td>
+        <td>vector3</td>
+        <td>Position (m)</td>
+        <td>Visual navigation</td>
+    </tr>
+    <tr class="merged-cell">
+        <td>Linear</td>
+        <td>vector3</td>
+        <td>Linear velocity (m/s)</td>
+        <td>Visual navigation</td>
+    </tr>
+    <tr class="merged-cell">
+        <td>Accelerometer</td>
+        <td>Acc</td>
+        <td>vector3</td>
+        <td>Acceleration (m/s^2)</td>
+        <td>Visual navigation</td>
+    </tr>
+    <tr class="merged-cell">
+        <td>Gyroscope</td>
+        <td>Angular</td>
+        <td>vector3</td>
+        <td>Angular velocity (rad/s)</td>
+        <td>Robot posture stabilization</td>
+    </tr>
+    <tr class="merged-cell">
+        <td rowspan="2" class="merged-cell">IMU</td>
+        <td>Angle</td>
+        <td>vector3</td>
+        <td>Eular angles (rad)</td>
+        <td>Robot posture stabilization</td>
+    </tr>
+    <tr class="row-line merged-cell">
+        <td>Orientation</td>
+        <td>vector4</td>
+        <td>Quaternion representation</td>
+        <td>Robot posture stabilization</td>
+    </tr>
+   </table>
+   </body>
+   </html>
+   </br>
 
 
 **自定义奖励数据包**
@@ -961,6 +1099,8 @@ Legged Robots
         vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
         vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
         vector4 carDronePosOri; // 车辆中心在跟踪器坐标系下的1D姿态+3D坐标（第一个元素是姿态）
+        vector3 carDroneVel; // 车辆中心在无人机坐标系下的3D速度
+        vector3 carDroneAcc; // 车辆中心在无人机坐标系下的3D加速度
         double crash; // 跟踪器是否与建筑物碰撞
         double carDir;// 车辆运行方向(0停止，1直行，2左转，3右转)
         std::string carTypename;// 对象类型

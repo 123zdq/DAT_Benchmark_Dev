@@ -373,6 +373,14 @@ Part1 UAV_VAT(适配Gym库)
 * :code:`done(int)` ：环境是否结束
 * :code:`info(dict)` ：信息，其中包括 :code:`info["TimeLimit.truncated"]` 说明是否由于step结束带来的reset
 
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+
 Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -411,6 +419,15 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 
 * :code:`truncated(bool)` ：是否由于step结束带来的reset(相当于gym环境中的 :code:`info["TimeLimit.truncated"]` )
 
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+
 Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -448,7 +465,15 @@ Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
 .. raw:: html
 
   <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
-  <center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center>
+  <center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></br>
+
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
 
 
 Part4 调用接口
@@ -501,6 +526,8 @@ Part4 调用接口
 
   2. 利用stable-baselines3进行算法测试
 
+    调用上述Async_SubprocVecEnv类
+
     .. code:: python
 
       stableparallel_test(n_envs=16,gym=False)
@@ -513,6 +540,8 @@ Part4 调用接口
 
   3. 利用tianshou进行算法测试
 
+    调用上述SubprocVecEnv_TS类
+
     .. code:: python
 
       args = arg_config()
@@ -522,7 +551,7 @@ Part4 调用接口
 
       <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
         调用上述SubprocVecEnv_TS类
-      </div>
+      </div></br>
 
 .. _Parallel:
 
@@ -532,10 +561,14 @@ Part4 调用接口
 .. raw:: html
 
   <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-   <ul style="list-style-type:disc><li><a herf="">上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</a></li></ul>
-   <ul style="list-style-type:disc><li><a herf="">为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</a></li></ul>
-   <ul style="list-style-type:disc><li><a herf="">本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</a></li></ul>
+    <blockquote>
+    <p>上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</p>
+    <p>为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</p>
+    <p>本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</p>
+    </blockquote>
   </div>
+  </br>
+  </br>
 
 
 .. raw:: html
@@ -557,6 +590,15 @@ Part1 设计方案
 
   <img src="../_static/image/多线程并行.png" alt="并行环境示意图">
   <center>并行环境示意图</center>
+  </br>
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
 
 Part2 Envs()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -618,6 +660,14 @@ Part2 Envs()
 * :code:`rewards` ：各个Agent的奖励堆叠
 * :code:`done` ：各个环境是否结束状态
 
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+
 Part3 封装前后数据格式变化
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -634,3 +684,38 @@ Part3 封装前后数据格式变化
   数据采样： :code:`states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)= env.step(action:ndarray(n))` 
 
   环境重置： :code:`states:ndarray(n,) = envs.reset()`
+
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+Part4 性能评价指标
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**1.累计奖励 CR(Cumulative Reward)**
+
+  此为使用连续奖励，进行累加计算 以评估性能，计算公式如下所示：
+
+.. raw:: html
+
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
+    </br>
+
+上述公式中 :math:`r_{ct}` 代表在步骤 :math:`t` 中的连续奖励值， :math:`E_l` 代表本批次长度。
+连续奖励计算图解见 :ref:`跟踪对象连续奖励示意图`
+
+**2.追踪成功比例 TSR(TrackIng Success Rate)**
+
+  此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：
+
+.. raw:: html
+
+   <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
+   </br>
+
+上述公式中 :math:`r_{dt}` 代表在步骤 :math:`t` 中的离散奖励值， :math:`E_{ml}` 为各个批次中最大的step长度， :math:`E_l` 代表本批次长度。
+离散奖励计算图解见 :ref:`跟踪对象离散奖励示意图`

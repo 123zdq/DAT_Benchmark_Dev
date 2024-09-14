@@ -19,6 +19,7 @@
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/translations.js?v=beaddf03"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -70,6 +71,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#part1">Part1 设计方案</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part2-envs">Part2 Envs()</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part3">Part3 封装前后数据格式变化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">Part4 性能评价指标</a></li>
 </ul>
 </li>
 </ul>
@@ -156,10 +158,10 @@
  </br><p>本项目提供3种形式的Environment(路径： <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code> ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类</p>
 <p>上述3种Environment的关系如下图所示：</p>
 <blockquote>
-<div><figure class="align-center" id="id5">
+<div><figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="3种环境类关系图" src="../_images/Environment3Types.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -395,7 +397,10 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">done(int)</span></code> ：环境是否结束</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">info(dict)</span></code> ：信息，其中包括 <code class="code docutils literal notranslate"><span class="pre">info[&quot;TimeLimit.truncated&quot;]</span></code> 说明是否由于step结束带来的reset</p></li>
 </ul>
-</section>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 <section id="part2-uav-vat-gymnasium-gymnasium">
 <h3>Part2 UAV_VAT_Gymnasium(适配Gymnasium库)<a class="headerlink" href="#part2-uav-vat-gymnasium-gymnasium" title="Link to this heading"></a></h3>
 <blockquote>
@@ -422,7 +427,10 @@
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">truncated(bool)</span></code> ：是否由于step结束带来的reset(相当于gym环境中的 <code class="code docutils literal notranslate"><span class="pre">info[&quot;TimeLimit.truncated&quot;]</span></code> )</p></li>
 </ul>
-</section>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 <section id="part3-async-subprocvecenv-subprocvecenv-ts">
 <h3>Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS<a class="headerlink" href="#part3-async-subprocvecenv-subprocvecenv-ts" title="Link to this heading"></a></h3>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
@@ -455,7 +463,10 @@
 </ul>
 </div></blockquote>
 <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
-<center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></section>
+<center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></br></br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 <section id="part4">
 <h3>Part4 调用接口<a class="headerlink" href="#part4" title="Link to this heading"></a></h3>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
@@ -494,7 +505,8 @@
 <li><p>利用stable-baselines3进行算法测试</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div><p>调用上述Async_SubprocVecEnv类</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
@@ -504,23 +516,28 @@
 <li><p>利用tianshou进行算法测试</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
+<div><p>调用上述SubprocVecEnv_TS类</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
 <span class="n">test_env</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
   调用上述SubprocVecEnv_TS类
-</div></div></blockquote>
+</div></br></div></blockquote>
 </div></blockquote>
 </section>
 </section>
 <section id="envs">
 <span id="parallel"></span><h2>3 并行环境类(Envs)<a class="headerlink" href="#envs" title="Link to this heading"></a></h2>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
- <ul style="list-style-type:disc><li><a herf="">上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</a></li></ul>
- <ul style="list-style-type:disc><li><a herf="">为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</a></li></ul>
- <ul style="list-style-type:disc><li><a herf="">本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</a></li></ul>
-</div><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+  <blockquote>
+  <p>上述底层环境类(BenchEnv_Multi)设计目标是 <strong>多进程异步计算</strong> (例如A3C算法)，在单独进程内调用环境类获取数据</p>
+  <p>为了更好利用显卡并行加速，将上述类数据同步、同指令并行，使算法可以 <strong>单进程工作在同步并行的数据流上</strong>，引申出本类(Envs)</p>
+  <p>本环境主要适配 <strong>用户的自主算法设计需求</strong> (不使用stable-baselines3等基于Gym环境进行算法实现的情况)</p>
+  </blockquote>
+</div>
+</br>
+</br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
 </div>
 </br><section id="part1">
@@ -531,7 +548,11 @@
 将不同环境给的返回值（状态，奖励，done标记）打包堆叠成向量传给算法端，将算法端给的动作向量解包给不同环境并自动基于done的值判断对应的环境是应该 <strong>step</strong> 还是 <strong>reset</strong></p>
 </div></blockquote>
 <img src="../_static/image/多线程并行.png" alt="并行环境示意图">
-<center>并行环境示意图</center></section>
+<center>并行环境示意图</center>
+</br></br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 <section id="part2-envs">
 <h3>Part2 Envs()<a class="headerlink" href="#part2-envs" title="Link to this heading"></a></h3>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
@@ -577,7 +598,10 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">rewards</span></code> ：各个Agent的奖励堆叠</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">done</span></code> ：各个环境是否结束状态</p></li>
 </ul>
-</section>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 <section id="part3">
 <h3>Part3 封装前后数据格式变化<a class="headerlink" href="#part3" title="Link to this heading"></a></h3>
 <p><strong>封装前后数据格式对比：</strong></p>
@@ -591,6 +615,26 @@
 <p>环境重置： <code class="code docutils literal notranslate"><span class="pre">states:ndarray(n,)</span> <span class="pre">=</span> <span class="pre">envs.reset()</span></code></p>
 </li>
 </ul>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
+<section id="id5">
+<h3>Part4 性能评价指标<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p><strong>1.累计奖励 CR(Cumulative Reward)</strong></p>
+<blockquote>
+<div><p>此为使用连续奖励，进行累加计算 以评估性能，计算公式如下所示：</p>
+</div></blockquote>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
+</br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{ct}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的连续奖励值， <span class="math notranslate nohighlight">\(E_l\)</span> 代表本批次长度。
+连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id18"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
+<p><strong>2.追踪成功比例 TSR(TrackIng Success Rate)</strong></p>
+<blockquote>
+<div><p>此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：</p>
+</div></blockquote>
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
+</br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{dt}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的离散奖励值， <span class="math notranslate nohighlight">\(E_{ml}\)</span> 为各个批次中最大的step长度， <span class="math notranslate nohighlight">\(E_l\)</span> 代表本批次长度。
+离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id17"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
 </section>
 </section>
 </section>
