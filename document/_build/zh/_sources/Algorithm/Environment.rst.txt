@@ -526,8 +526,6 @@ Part4 调用接口
 
   2. 利用stable-baselines3进行算法测试
 
-    调用上述Async_SubprocVecEnv类
-
     .. code:: python
 
       stableparallel_test(n_envs=16,gym=False)
@@ -535,12 +533,10 @@ Part4 调用接口
     .. raw:: html
 
       <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-        调用上述Async_SubprocVecEnv类
+        <b>注意：</b>在使用stable-baselines3库并行训练的时候，调用上述<b>Async_SubprocVecEnv</b>类
       </div>
 
   3. 利用tianshou进行算法测试
-
-    调用上述SubprocVecEnv_TS类
 
     .. code:: python
 
@@ -550,7 +546,7 @@ Part4 调用接口
     .. raw:: html
 
       <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-        调用上述SubprocVecEnv_TS类
+        <b>注意：</b>在使用tianshou库并行训练的时候，需要调用上述<b>SubprocVecEnv_TS</b>类
       </div></br>
 
 .. _Parallel:
@@ -698,14 +694,14 @@ Part4 性能评价指标
 
 **1.累计奖励 CR(Cumulative Reward)**
 
-  此为使用连续奖励，进行累加计算 以评估性能，计算公式如下所示：
+  此为使用连续奖励，进行累加计算以评估性能，计算公式如下所示：
 
 .. raw:: html
 
     <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
     </br>
 
-上述公式中 :math:`r_{ct}` 代表在步骤 :math:`t` 中的连续奖励值， :math:`E_l` 代表本批次长度。
+上述公式中 :math:`r_{ct}` 代表在步骤 :math:`t` 中的连续奖励值， :math:`E_l` 代表轨迹长度。
 连续奖励计算图解见 :ref:`跟踪对象连续奖励示意图`
 
 **2.追踪成功比例 TSR(TrackIng Success Rate)**

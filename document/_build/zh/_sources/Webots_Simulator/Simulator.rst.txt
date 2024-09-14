@@ -981,7 +981,7 @@ Legged Robots
 
            .vision-row {
 
-               background-color: #FFC0CB;
+               background-color: #FFC1C1;
 
            }
 
@@ -989,7 +989,7 @@ Legged Robots
 
            .motion-row {
 
-               background-color: #E0FFFF;
+               background-color: #87CEEB;
 
            }
 
