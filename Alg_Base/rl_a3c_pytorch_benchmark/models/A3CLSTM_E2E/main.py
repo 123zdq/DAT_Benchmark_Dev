@@ -277,6 +277,13 @@ parser.add_argument(
     help="use different step size among workers by using a list of step sizes to distributed among workers to use (default: [])",
 )
 
+parser.add_argument(
+    "-TM",
+    "--Test_Mode",
+    type=str,
+    default="AR",
+    help="Choose Metrics of performence: AR or TSR",
+)
 
 
 # Based on
@@ -316,6 +323,14 @@ if __name__ == '__main__':
         data["Drone_Random_Config"]["verticle_bias_random"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
+        if args.Test_Mode == "AR":
+            data["Reward_Config"]["reward_type"] = "view"
+            data["Reward_Config"]["reward_mode"] = "continuous"
+            data["Reward_Config"]["view_range"] = 1
+        elif args.Test_Mode == "TSR":
+            data["Reward_Config"]["reward_type"] = "view"
+            data["Reward_Config"]["reward_mode"] = "discrete"
+            data["Reward_Config"]["view_range"] = 1
     elif MODE == "train":
         data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = True
@@ -323,6 +338,9 @@ if __name__ == '__main__':
         data["Drone_Random_Config"]["verticle_bias_random"] = True
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
+        data["Reward_Config"]["reward_type"] = "view"
+        data["Reward_Config"]["reward_mode"] = "continuous"
+        data["Reward_Config"]["view_range"] = 0.7
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:

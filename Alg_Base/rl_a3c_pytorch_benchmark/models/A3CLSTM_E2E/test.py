@@ -60,6 +60,14 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
         # writer.add_graph(player.model, dummy_input, False)
         writer.close()
 
+    if args.Test_Mode == "TSR":
+        import json
+        with open(
+            "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
+        ) as file:
+            data = json.load(file)
+        highest_score = data["Train_Total_Steps"]/(500/data["Control_Frequence"])
+
     player.state,player.suppleinfo = player.env.reset()
     if args.train_mode == "privilege":
         player.privilegeinfo = player.int2one_hot(int(player.suppleinfo[0][-1]),args.previlege_dim)
@@ -105,7 +113,14 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                 reward_total_sum += reward_sum
                 reward_mean = reward_total_sum / num_tests
                 if not read_num_test:
-                    reward_list.append(reward_sum)
+                    if args.Test_Mode == "AR":
+                        reward_list.append(reward_sum)
+                        print(f"Episode {len(reward_list)} test accumulated reward:{reward_sum}")
+                    elif args.Test_Mode == "TSR":
+                        tsr = reward_sum / highest_score
+                        reward_list.append(tsr)
+                        print(f"Episode {len(reward_list)} test tacking success rate:{tsr}")
+                        print(f"check: {highest_score}")
                     if len(reward_list) == TEST_NUM:
                         mean,std = get_mean_std(reward_list)
                         if not EXCEL:
