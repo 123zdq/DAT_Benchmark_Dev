@@ -56,20 +56,32 @@
 - 该项目的仿真环境基于开源仿真软件webots搭建，仿真环境的背景是模拟现实生活中在室外场景中的目标追踪问题。为此，设立了包括城市街道、市中心、湖边、乡村、沙漠、农田共六张地图，其中每张地图演化出白天、夜晚、雾天、雪天等，总共24个环境。为了方便模型训练从简单的环境开始，还设置了几张简单的环境地图可供使用。
 - 该项目24个仿真环境示意图：
 
-   .. image:: ../_static/image/24Scene_Colorful2.png
-      :alt: 24个环境示意图
-      :width: 600px
-      :align: center
+.. image:: ../_static/image/24Scene_Colorful2.png
+   :alt: 24个环境示意图
+   :width: 700px
+   :align: center
+
+.. raw:: html
+
+   </br>
+
 
 .. _运行流程:
 
 运行流程
 ----------
 
-   .. image:: ../_static/image/运行流程.png
-      :alt: 仿真环境运行流程示意图
-      :width: 600px
-      :align: center
+.. raw:: html
+
+   <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+      为适配训练，调试等不同需求，本工程提供了<b>3种不同的运行模式</b>。
+   </div>
+   </br>
+
+.. image:: ../_static/image/运行流程.png
+   :alt: 仿真环境运行流程示意图
+   :width: 700px
+   :align: center
 
 demo模式
 ~~~~~~~~~
@@ -91,7 +103,18 @@ train模式
 参数配置
 -----------
 
-   仿真环境的配置文件为 :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/config/env_config.json`。
+   .. raw:: html
+
+      <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+         本工程仿真环境部分的所有设置可以利用<b>1个JSON文件</b>进行高效配置。
+      </div>
+      </br>
+
+   .. raw:: html
+
+    <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+        仿真环境的配置文件为: <code>Webots_Simulation/traffic_project/config/env_config.json</code>。
+    </div>
 
 基础参数
 ~~~~~~~~~~~
@@ -705,10 +728,22 @@ Legged Robots
 内置Reward
 --------------------
 
-   由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标 :code:`(xf,yf,zf)` 以及 :code:`(xv,yv,zv)` ，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
+   .. raw:: html
+
+      <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+            本工程提供了<b>离散型和连续型</b>两种奖励函数，可用于设计不同的智能体评价指标。
+      </div>
+      </br>
 
 奖励函数
 ~~~~~~~~~~~~~~~~~~~~
+
+   .. raw:: html
+
+      <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
+        由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标(x_f,y_f,z_f)以及(x_v,y_v,z_v)，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
+      </div>
+      </br>
 
    对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：
 
@@ -734,6 +769,8 @@ Legged Robots
 
    .. _跟踪对象连续奖励示意图:
 
+   .. _figcontr:
+
    .. figure:: ../_static/image/Continuous_reward.png
       :alt: Continuous_reward
       :width: 600px 
@@ -753,11 +790,18 @@ Legged Robots
    .. math::
 
       r_{c} = \begin{cases} 
-      \tanh\left(\alpha(1-x)^{3}\right), & t \in I, \\
+      \tanh\left(\alpha(1-x)^{3}\right), & t \in I_{clip}, \\
       0 & \text{otherwise}. 
       \end{cases}
 
    目标离范围中心点越近时，奖励会越接近1，反之越接近0。 :math:`\alpha` 为常数，建议取值3~5。
+   此外， :math:`I_{clip}` 为有效reward判定范围(如上图 :ref:`figcontr` 中红色方框所示)，其边长 :math:`W_{I_clip}` 与原图边长 :math:`W_{I}` 的比值可以用 :math:`\lambda_{clip}` 表示如下。
+
+   .. math::
+
+      \lambda_{clip} = \frac{W_{I_clip}}{W_{I}}
+
+   根据上述定义式， :math:`\lambda_{clip}` 的合理范围为： :math:`[0,1]` ，在实际训练中，建议参数为 :math:`\lambda_{clip}=0.7` 。 
 
 奖励判断
 ~~~~~~~~~~~~~~~~~~~~
@@ -904,6 +948,13 @@ Legged Robots
 
 定制化参数接口
 --------------------
+
+.. raw:: html
+
+   <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+         本工程提供了常用的<b>6种传感器数据</b>，可以用于后续的多传感器协同任务设计。
+   </div>
+   </br>
 
 输入动作
 ~~~~~~~~~~~~~~~~~~~~
