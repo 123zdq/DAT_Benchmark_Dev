@@ -155,7 +155,7 @@ class BenchEnv_Multi():
         
         with open(ENV_CONF, "r") as file:
             data = json.load(file)
-            Tracker_Mode = data["Tracker_Def"]
+        Tracker_Mode = data["Tracker_Def"]
         ## Specify the File Path of each system path
         ## To do: CHANGE ABSOLUTE PATH TO RELATIVE PATH
         self.action_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_AlgAction.txt"
@@ -320,17 +320,13 @@ class BenchEnv_Multi():
 
         ## Read Other_State/RewardParams/CloudPoint According to flag
         if self.Other_State:
-            self.logger.info('Start Getting other_state')
             self.SuppleInfo.append(other_state)
             self.logger.info('Get other_state:  '+str(other_state))
         if self.RewardParams:
-            self.logger.info('Start Getting reward_params')
             reward_params = self.recv_reward_params.read()
             self.logger.info('Get Reward Params:  '+str(reward_params))
-            self.logger.info(f'delta y: {reward_params[-5]-reward_params[-8]} delta x: {reward_params[-4]-reward_params[-7]} delta z: {reward_params[-3]-reward_params[-6]}')
             self.SuppleInfo.append(reward_params)
         if self.CloudPoint:
-            self.logger.info('Start Getting point_cloud')
             point_cloud = self.recv_point_cloud.read()
             self.logger.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
@@ -339,14 +335,12 @@ class BenchEnv_Multi():
 
         self.logger.info(f'Get Crash of the car: {reward_params[-3]}')
 
-        self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-6]} y-{reward_params[-5]} z-{reward_params[-4]} w-{reward_params[-7]}')
-
-        ori_w = reward_params[-7]
-        pos_x = reward_params[-6]
-        pos_y = reward_params[-5]
-        pos_z = reward_params[-4]
-        camera_xw = reward_params[-10]
-        camera_xg = reward_params[-16]
+        ori_w = reward_params[-13]
+        pos_x = reward_params[-12]
+        pos_y = reward_params[-11]
+        pos_z = reward_params[-10]
+        camera_xw = reward_params[-16]
+        camera_xg = reward_params[-22]
         crash = int(reward_params[-3])
         Afov = reward_params[2]
 
@@ -369,10 +363,7 @@ class BenchEnv_Multi():
             norm = np.linalg.norm(dynamics - prob_np)
             norm = float(norm)
             self.logger.info(f'Norm between dynamics and predict is {norm}')
-        
-
-        self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
-
+    
         """
             Done Management:
                 1. Open done detection in the early stage of episode
@@ -387,17 +378,28 @@ class BenchEnv_Multi():
             self.d_curr = camera_xg - camera_xw
         
         if self.reward_type == "default":
-            pass
+            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
         elif self.reward_type == "E2E":
+            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
             reward = get_E2E_reward(x=pos_y,y=pos_x,w=ori_w,w_0=self.oriw_0,d_curr=self.d_curr)
         elif self.reward_type == "DVAT":
-            reward = get_DVAT_reward(A_fov=Afov,d_cmd=self.d_curr,x=pos_x,y=pos_y,z = pos_z,v=[0,0,0],u=[0,0,0],end_done=crash,discrete=True)
+            ## first we get d_cmd from env_config.json
+            with open(ENV_CONF, "r") as file:
+                data = json.load(file)
+            pitch_angle = data["Drone_Random_Config"]["view_pitch_fixed"]
+            real_height = data["Drone_Random_Config"]["height_fixed"]
+            d_real = real_height/math.tan(pitch_angle)
+            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]} height:{real_height} pitch_rangle:{pitch_angle} d_real:{d_real}')
+            reward = get_DVAT_reward(A_fov=Afov,d_cmd=d_real,x=pos_x,y=pos_y,z = pos_z,v=[0,0,0],u=[0,0,0],crash=crash,discrete=True)
         elif self.reward_type == "ENHANCE":
+            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
             rho = math.sqrt(math.pow(pos_x,2)+math.pow(pos_y,2))
             theta = ori_w
             rho_cmd = self.d_curr
             theta_cmd = self.oriw_0
             reward = get_ENHANCE_reward(rho=rho,theta=theta,rho_cmd=rho_cmd,theta_cmd=theta_cmd)
+
+        self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
         if done:
             if self.done_flag:

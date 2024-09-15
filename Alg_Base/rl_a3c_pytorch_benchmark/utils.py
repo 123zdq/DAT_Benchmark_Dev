@@ -85,13 +85,13 @@ def get_E2E_reward(x:float,y:float,w:float,w_0:float,d_curr:float)->float:
     reward of baseline method: DVAT
         reward = re-k_v*rv-ku*ru
 """
-def get_DVAT_reward(A_fov:float,d_cmd:float,x:float,y:float,z:float,v:list,u:list,end_done:bool,discrete=True):
+def get_DVAT_reward(A_fov:float,d_cmd:float,x:float,y:float,z:float,v:list,u:list,crash:bool,discrete=True):
     ## Hyperparams
-    beta = 1
+    beta = 1/3
     k_v = 0
     k_u = 0
-    k_c = 20
-    if not end_done:
+    k_c = 10
+    if crash:
         return -k_c
     else:
         ## get reward
