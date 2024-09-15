@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-05-10 11:32:26
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-07 10:20:26
+ * @LastEditTime: 2024-09-15 23:04:16
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
  * @Description: 
  * 
@@ -34,6 +34,7 @@ typedef struct _configData_s{
     double controlFreq = 10;
     bool lidarEnable = false;
     bool cameraEnable = true;
+    std::string trackingObject = "SUMO_VEHICLE";
     bool verbose = false;
     struct _droneRange{
         double maxHeight = 50;
@@ -188,6 +189,7 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.controlFreq = config.at("Control_Frequence");
     configData.customizedReward = config.at("Customized_Rewards");
     configData.lidarEnable = config.at("Lidar_Enable");
+    configData.trackingObject = config.at("Tracking_Object");
     configData.verbose = config.at("Verbose");
 
     configData.droneRange.maxHeight = config.at("Done_Range").at("max_height");

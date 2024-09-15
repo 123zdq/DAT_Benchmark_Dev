@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-12 10:54:25
+ * @LastEditTime: 2024-09-15 23:13:15
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -53,6 +53,8 @@ namespace usrPublic{
         double cameraHeight;// 图像高度（像素）
         double cameraFov;// 摄像头视场角 （rad）
         double cameraF;// 摄像头焦距估算（像素）
+        double cameraPitch;// 摄像头俯仰角 (rad)
+        double trackerHeight;// 跟踪器高度 (m) 
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
         // vector3 BMW;// 车辆的长宽高
         // vector3 Citroen;

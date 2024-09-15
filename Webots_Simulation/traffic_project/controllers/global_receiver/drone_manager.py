@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-02 16:49:31
+LastEditTime: 2024-09-15 23:10:57
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -216,7 +216,12 @@ class droneManager:
             transScale = self.configData["Drone_Random_Config"]["height_fixed"]
         else:
             transScale = random.uniform(self.configData["Drone_Random_Config"]["height_random_min"],self.configData["Drone_Random_Config"]["height_random_max"])
-        transVector = [-math.tan(abs(1.5708-self.camera_pitch))*transScale-1+verticle_bias, horizon_bias, transScale]
+        
+        # 如果是车辆，则中心需要平移
+        if self.configData["Tracking_Object"] == str("SUMO_VEHICLE"):
+            transVector = [-math.tan(abs(1.5708-self.camera_pitch))*transScale-1+verticle_bias, horizon_bias, transScale]
+        else:
+            transVector = [-math.tan(abs(1.5708-self.camera_pitch))*transScale+verticle_bias, horizon_bias, transScale]
         
         if self.configData["Drone_Random_Config"]["direction_random"] == False:
             rotateAngle = self.configData["Drone_Random_Config"]["direction_fixed"]

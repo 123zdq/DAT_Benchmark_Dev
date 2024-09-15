@@ -523,7 +523,7 @@ int main(int argc, char **argv)
     }
     if(t > 0.1)
     {
-      state.reward = rewardG.getReward(config.get()->simulationMode, config.get()->rewardConfig.rewardMode, config.get()->rewardConfig.rewardType, error[4], error[5]);
+      state.reward = rewardG.getReward(config.get()->trackingObject, config.get()->simulationMode, config.get()->rewardConfig.rewardMode, config.get()->rewardConfig.rewardType, error[4], error[5]);
     }
     if (config.get()->simulationMode == string("demo"))
     {
@@ -564,6 +564,9 @@ int main(int argc, char **argv)
       cmdCb(aCtrl.att2ctrl, motor1, motor2, motor3, motor4);
     }
     gcmdCb(gCtrl.gbl2ctrl, camera_roll_motor, camera_pitch_motor, camera_yaw_motor,config.get()->droneSupervisorCtrl,robot);
+
+    rewardG.makeReward.trackerHeight = jCtrl.cmd_pos_(2);
+    rewardG.makeReward.cameraPitch = gimbal_cmd.y;
 
     if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
@@ -725,9 +728,9 @@ int main(int argc, char **argv)
       
       if (config.get()->customizedReward)
       {
-        double makeReward_list[57] = {};
+        double makeReward_list[59] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
-        for(int i=0;i<57;i++)
+        for(int i=0;i<59;i++)
         {
           if(std::isnan(state_list[i])){
             is_nan = true;
@@ -736,14 +739,14 @@ int main(int argc, char **argv)
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
         if(is_nan == false)
         {
-          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 57, rewardG.makeReward.carTypename);
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 59, rewardG.makeReward.carTypename);
         }
-        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 57)
+        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 59)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
           if(is_nan == false)
           {
-            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 57, rewardG.makeReward.carTypename);
+            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 59, rewardG.makeReward.carTypename);
           }
         }
       }

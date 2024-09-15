@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-13 16:50:17
+ * @LastEditTime: 2024-09-15 23:23:34
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -31,7 +31,7 @@ public:
   void locateCamera(double _width, double _height, double _fov);
   void updateTrackingCar();
   void setTrackingCar(string _carDef);
-  double getReward(string _run_mode, string _reward_mode, string _reward_type, double trackWidth = -1, double trackHeight = -1);
+  double getReward(string _trackingObj, string _run_mode, string _reward_mode, string _reward_type, double trackWidth = -1, double trackHeight = -1);
   void checkCarDirection(double stop_threshold, double turn_threshold);
   uint8_t isTrackingCarDisp = 0; // 标志初始态
   usrPublic::rewardData makeReward = {};
@@ -279,7 +279,7 @@ inline void rewardGenerator::setTrackingCar(string _carDef)
  * @param {double} trackHeight
  * @return {*}
  */
-inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, string _reward_type, double trackWidth, double trackHeight)
+inline double rewardGenerator::getReward(string _trackingObj, string _run_mode, string _reward_mode, string _reward_type, double trackWidth, double trackHeight)
 {
   // 获取被指定跟踪车辆在世界中的坐标
   const double *T_car_of_land = trackingCar->getPose(land_node);
@@ -289,6 +289,10 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   if (_run_mode == string("demo"))
   {
     V_car_comp << 1, 0, 0;
+  }
+  if (_trackingObj != string("SUMO_VEHICLE"))
+  {
+    V_car_comp << 0, 0, 0;
   }
   Matrix3d M_car_of_land;
   Vector3d V_car_of_land;
@@ -314,19 +318,22 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
   makeReward.carMidGlobalPos.y = V_car_of_land(1);
   makeReward.carMidGlobalPos.z = V_car_of_land(2);
   // 得到车辆相对于无人就得坐标和旋转角
-  static double last_carDronePos[3] = {0,0,0};
+  static Vector3d last_carDronePos = Vector3d::Zero();
   static double carDroneVel[3] = {0,0,0};
   static double last_carDroneVel[3] = {0,0,0};
   static double carDroneAcc[3] = {0,0,0};
   static double last_t = 0;
   const double *T_car_of_camera = trackingCar->getPose(supervisor->getFromDef(droneDef));
-  makeReward.carDronePosOri.x = T_car_of_camera[3];
-  makeReward.carDronePosOri.y = T_car_of_camera[7];
-  makeReward.carDronePosOri.z = T_car_of_camera[11];
+  Vector3d V_car_of_drone;
+  V_car_of_drone << T_car_of_camera[3], T_car_of_camera[7], T_car_of_camera[11];
+  V_car_of_drone = V_car_of_drone + M_car_of_land * V_car_comp;
+  makeReward.carDronePosOri.x = V_car_of_drone(0);
+  makeReward.carDronePosOri.y = V_car_of_drone(1);
+  makeReward.carDronePosOri.z = V_car_of_drone(2);
   double t_step = this->supervisor->getTime() - last_t;
   for(int i(0);i < 3;i++)
   {
-    carDroneVel[i] = (T_car_of_camera[3+4*i] - last_carDronePos[i]) / t_step;
+    carDroneVel[i] = (V_car_of_drone(i) - last_carDronePos(i)) / t_step;
     carDroneAcc[i] = (carDroneVel[i] - last_carDroneVel[i]) / t_step;
   }
   memcpy(&makeReward.carDroneVel,carDroneVel,sizeof(carDroneVel));
@@ -344,9 +351,7 @@ inline double rewardGenerator::getReward(string _run_mode, string _reward_mode, 
     makeReward.carDronePosOri.w += 2 * M_PI;
   }
   memcpy(last_carDroneVel,carDroneVel,sizeof(last_carDroneVel));
-  last_carDronePos[0] = T_car_of_camera[3];
-  last_carDronePos[1] = T_car_of_camera[7];
-  last_carDronePos[2] = T_car_of_camera[11];
+  last_carDronePos = V_car_of_drone;
   last_t = this->supervisor->getTime();
 
   double reward = 0;
