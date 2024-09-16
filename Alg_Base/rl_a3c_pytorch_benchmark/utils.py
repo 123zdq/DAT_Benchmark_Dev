@@ -68,7 +68,7 @@ def clip_to_range(x, min_value=0, max_value=1):
 
 """
     reward of baseline method: End-to-end
-        reward = A - (sqrt(x^2+(y-d)^2)/c+lambda|w-w_0|)
+        reward = A - (sqrt((x-d)^2+y^2)/c+lambda|w-w_0|)
 """
 def get_E2E_reward(x:float,y:float,w:float,w_0:float,d_curr:float)->float:
     ## Hyperparams(Need to be determined after test)
@@ -76,10 +76,11 @@ def get_E2E_reward(x:float,y:float,w:float,w_0:float,d_curr:float)->float:
     c = 1
     lamb = 1
     ## get reward
-    dist = math.sqrt(math.pow(x,2)+math.pow(y-d_curr,2))
+    dist = math.sqrt(math.pow(x-d_curr,2)+math.pow(y,2))
     w_abs = abs(w-w_0)
     reward = A-(dist/c+lamb*w_abs)
-    return reward
+    reward = clip_to_range(reward)
+    return reward,dist,w_abs
 
 """
     reward of baseline method: DVAT
@@ -109,13 +110,13 @@ def get_DVAT_reward(A_fov:float,d_cmd:float,x:float,y:float,z:float,v:list,u:lis
         u_norm = math.sqrt(math.pow(u[0],2)+math.pow(u[1],2)+math.pow(u[2],2))
         ru = u_norm/(1+u_norm)
         reward = re-k_v*rv-k_u*ru
-        return reward
+        return reward,rx,ry
 
 """
-    reward of baseline method: ENHANCE
+    reward of baseline method: CVAT
         reward = A*r_rho*r_theta
 """
-def get_ENHANCE_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->float:
+def get_CVAT_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->float:
     ## Hyperparams
     rho_max = 6 # determined after test
     theta_max = 0.785 # determined after test(90 degree)
@@ -124,7 +125,7 @@ def get_ENHANCE_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->flo
     r_rho = max(0,1-abs(rho-rho_cmd)/rho_max)
     r_theta = max(0,1-abs(theta-theta_cmd)/theta_max)
     reward = A*r_rho*r_theta
-    return reward
+    return reward,r_rho,r_theta
 
 def check_memory_usage(target_pid:int,threshold:float=0.85)->float:
     while True:

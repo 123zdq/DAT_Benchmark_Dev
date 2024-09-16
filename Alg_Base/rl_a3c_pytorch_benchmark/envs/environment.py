@@ -14,7 +14,7 @@ from communication.sendSocket import SendActionSocket
 import time
 from logger_cfg import create_logger
 import copy
-from utils import get_E2E_reward,get_DVAT_reward,get_ENHANCE_reward,check_memory_usage
+from utils import get_E2E_reward,get_DVAT_reward,get_CVAT_reward,check_memory_usage
 import math
 from threading import Thread
 from logs.Empty_Log import Empty_Logger
@@ -235,8 +235,8 @@ class BenchEnv_Multi():
         self.end_reward_list = end_reward_list
 
         # reward type
-        if reward_type not in ["default","E2E","DVAT","ENHANCE"]:
-            raise AttributeError(f"reward_type: {reward_type} is not legal! Legal ones: ['default','E2E','DVAT','ENHANCE']")
+        if reward_type not in ["default","E2E","DVAT","CVAT"]:
+            raise AttributeError(f"reward_type: {reward_type} is not legal! Legal ones: ['default','E2E','DVAT','CVAT']")
         else:
             self.reward_type = reward_type
 
@@ -335,14 +335,6 @@ class BenchEnv_Multi():
 
         self.logger.info(f'Get Crash of the car: {reward_params[-3]}')
 
-        ori_w = reward_params[-13]
-        pos_x = reward_params[-12]
-        pos_y = reward_params[-11]
-        pos_z = reward_params[-10]
-        camera_xw = reward_params[-16]
-        camera_xg = reward_params[-22]
-        crash = int(reward_params[-3])
-        Afov = reward_params[2]
 
         ###### Test Cheat
         if prob is not None:
@@ -363,7 +355,7 @@ class BenchEnv_Multi():
             norm = np.linalg.norm(dynamics - prob_np)
             norm = float(norm)
             self.logger.info(f'Norm between dynamics and predict is {norm}')
-    
+
         """
             Done Management:
                 1. Open done detection in the early stage of episode
@@ -374,30 +366,45 @@ class BenchEnv_Multi():
             self.logger.info('Step_curr:{} self.Set_Done_Step:{} Open Done Flag'.format(step_curr,self.Set_Done_Step))
             self.done_flag = True
             self.last_done_flag = 0
-            self.oriw_0 = ori_w
-            self.d_curr = camera_xg - camera_xw
         
+
+        ### Reward Management
+        # 1. get necessary params of reward
+        if not self.reward_type == "default":
+            # get w,x,y,z
+            ori_w = -reward_params[-13]
+            pos_x = reward_params[-12]
+            pos_y = reward_params[-11]
+            pos_z = reward_params[-10]
+            
+            # get ori_w_0
+            with open(
+                "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
+            ) as file:
+                data = json.load(file)
+            ori_w_0 = data["Drone_Random_Config"]["direction_fixed"]
+
+            ## Get real pitch angle and real height
+            pitch_angle = reward_params[4]
+            real_height = reward_params[5]
+            d_real = real_height/math.tan(pitch_angle)
         if self.reward_type == "default":
             self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
         elif self.reward_type == "E2E":
-            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
-            reward = get_E2E_reward(x=pos_y,y=pos_x,w=ori_w,w_0=self.oriw_0,d_curr=self.d_curr)
+            reward,dist,w_abs = get_E2E_reward(x=pos_x,y=pos_y,w=ori_w,w_0=ori_w_0,d_curr=d_real)
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} d_real-{d_real} w-{ori_w} w_real:{ori_w_0} dist:{dist} w_abs:{w_abs} r:{reward}')
         elif self.reward_type == "DVAT":
-            ## first we get d_cmd from env_config.json
-            with open(ENV_CONF, "r") as file:
-                data = json.load(file)
-            pitch_angle = data["Drone_Random_Config"]["view_pitch_fixed"]
-            real_height = data["Drone_Random_Config"]["height_fixed"]
-            d_real = real_height/math.tan(pitch_angle)
-            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]} height:{real_height} pitch_rangle:{pitch_angle} d_real:{d_real}')
-            reward = get_DVAT_reward(A_fov=Afov,d_cmd=d_real,x=pos_x,y=pos_y,z = pos_z,v=[0,0,0],u=[0,0,0],crash=crash,discrete=True)
-        elif self.reward_type == "ENHANCE":
-            self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
+            crash = int(reward_params[-3])
+            Afov = reward_params[2]
+            reward,rx,ry = get_DVAT_reward(A_fov=Afov,d_cmd=d_real,x=pos_x,y=pos_y,z = pos_z,v=[0,0,0],u=[0,0,0],crash=crash,discrete=True)
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} w-{ori_w} height:{real_height} pitch_rangle:{pitch_angle} d_real:{d_real} w_0_real:{ori_w_0} r_x:{rx} r_y:{ry} r:{reward}')
+        elif self.reward_type == "CVAT":
             rho = math.sqrt(math.pow(pos_x,2)+math.pow(pos_y,2))
             theta = ori_w
-            rho_cmd = self.d_curr
-            theta_cmd = self.oriw_0
-            reward = get_ENHANCE_reward(rho=rho,theta=theta,rho_cmd=rho_cmd,theta_cmd=theta_cmd)
+            rho_cmd = d_real
+            theta_cmd = ori_w_0
+            reward,r_rho,r_theta = get_CVAT_reward(rho=rho,theta=theta,rho_cmd=rho_cmd,theta_cmd=theta_cmd)
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} height:{real_height} pitch_rangle:{pitch_angle} rho:{rho} rho_cmd:{d_real} theta:{ori_w} theta_cmd:{ori_w_0} r_rho:{r_rho} r_theta:{r_theta} r:{reward}')
 
         self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
@@ -450,11 +457,6 @@ class BenchEnv_Multi():
     def reset(self): 
         self.logger.info("\n")
         self.logger.info('<----- !!!!!Reset Function!!!!! ----->')
-
-        ## reset ori_w command and ori_y command
-        self.oriw_0 = 0
-        self.d_curr = 0
-
 
         ## If Reward still exist when entering reset function,DELETE REWARD FILE!!!
         if os.path.exists(self.reward_path):

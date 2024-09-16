@@ -16,8 +16,6 @@ from utils import read_config
 from envs.environment import general_env
 from envs.gym_envs import CONF,ENV_CONF
 
-# To-DO: 要让我们的Gymnasium环境适配两种的state(Actor和Critic)
-
 class DVAT_ENV(gymnasium.Env):
     def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3) -> None:
         super(DVAT_ENV,self).__init__()
