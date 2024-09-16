@@ -53,7 +53,7 @@
     .. raw:: html
 
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-            本项目提供了<b>3种环境类的实现，以及5种baseline算法</b>，可供用户后续进行算法设计和性能比较
+            本项目提供了<b>3种环境类的实现，以及4种baseline算法</b>，可供用户后续进行算法设计和性能比较
             环境类详细文档参考: <a href="Environment.rst">环境封装</a> ；算法类详细文档参考： <a href="Model.rst">模型搭建</a> 
       </div>
       </br>
@@ -115,16 +115,8 @@ Baseline2: :code:`Envs` 环境 +  :code:`CVAT` 算法
     # 中断重开训练模式
     python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
 
-Baseline3: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-    <span style="background-color: yellow;">To do:复现完成后补充一下过程</span>
-
-
-Baseline4: :code:`FollowAnything` 算法 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Baseline3: :code:`FollowAnything` 算法 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
 
@@ -132,7 +124,7 @@ Baseline4: :code:`FollowAnything` 算法
 
 
 
-Baseline5(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
+Baseline4(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html

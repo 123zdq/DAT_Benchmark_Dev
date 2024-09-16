@@ -55,42 +55,42 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">仿真器部分</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">仿真环境</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id2">环境介绍</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">运行流程</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">运行流程</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#demo">demo模式</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#video">video模式</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#train">train模式</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">参数配置</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id6">基础参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">参数配置</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">基础参数</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#done">跟踪器（仅无人机有效）产生done的物理范围参数配置</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reward-reward-1">内置reward的参数配置（仅无人机有效，车默认返回reward=1）</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#sumo">SUMO交通系统参数配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id7">其他对象追踪的参数配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id8">输出视频的参数配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">跟踪器控制的参数配置</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">部分配置参数建议</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">其他对象追踪的参数配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">输出视频的参数配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">跟踪器控制的参数配置</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">部分配置参数建议</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">跟踪对象</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id12">跟踪对象</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#sumo-vehicle">SUMO_VEHICLE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#motorcycle">motorcycle</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pedestrian">Pedestrian</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#wheel-robots">Wheel Robots</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#legged-robots">Legged Robots</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id14">自定义对象</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">自定义对象</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#reward">内置Reward</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id16">奖励函数</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id19">奖励判断</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id21">投影可视化</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id22">如何转化为Reward</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id17">奖励函数</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id20">奖励判断</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id22">投影可视化</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id23">如何转化为Reward</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id23">定制化参数接口</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id25">输入动作</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id26">返回参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id24">定制化参数接口</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id26">输入动作</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id27">返回参数</a></li>
 </ul>
 </li>
 </ul>
@@ -175,19 +175,21 @@
 </br>
 </br></div></blockquote>
 <section id="id2">
-<h2>环境介绍<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
-<ul class="simple">
+<span id="id3"></span><h2>环境介绍<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<ul>
 <li><p>该项目的仿真环境基于开源仿真软件webots搭建，仿真环境的背景是模拟现实生活中在室外场景中的目标追踪问题。为此，设立了包括城市街道、市中心、湖边、乡村、沙漠、农田共六张地图，其中每张地图演化出白天、夜晚、雾天、雪天等，总共24个环境。为了方便模型训练从简单的环境开始，还设置了几张简单的环境地图可供使用。</p></li>
-<li><p>该项目24个仿真环境示意图：</p></li>
+<li><p>该项目24个仿真环境示意图：</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
+</div></blockquote>
+</li>
 </ul>
-<a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 700px;" /></a>
-</br></section>
-<section id="id3">
-<span id="id4"></span><h2>运行流程<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
-<div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-   为适配训练，调试等不同需求，本工程提供了<b>3种不同的运行模式</b>。
-</div>
-</br><a class="reference internal image-reference" href="../_images/运行流程.png"><img alt="仿真环境运行流程示意图" class="align-center" src="../_images/%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" style="width: 700px;" /></a>
+</section>
+<section id="id4">
+<span id="id5"></span><h2>运行流程<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/运行流程.png"><img alt="仿真环境运行流程示意图" class="align-center" src="../_images/%E8%BF%90%E8%A1%8C%E6%B5%81%E7%A8%8B.png" style="width: 600px;" /></a>
+</div></blockquote>
 <section id="demo">
 <h3>demo模式<a class="headerlink" href="#demo" title="Link to this heading"></a></h3>
 <blockquote>
@@ -211,17 +213,13 @@
 </div></blockquote>
 </section>
 </section>
-<section id="id5">
-<h2>参数配置<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
-<blockquote>
-<div><div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-   本工程仿真环境部分的所有设置可以利用<b>1个JSON文件</b>进行高效配置。
-</div>
-</br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    仿真环境的配置文件为: <code>Webots_Simulation/traffic_project/config/env_config.json</code>。
-</div></div></blockquote>
 <section id="id6">
-<h3>基础参数<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<h2>参数配置<a class="headerlink" href="#id6" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>仿真环境的配置文件为 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/env_config.json</span></code>。</p>
+</div></blockquote>
+<section id="id7">
+<h3>基础参数<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="w">   </span><span class="nt">&quot;Simulation_Mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;demo&quot;</span><span class="p">,</span>
 <span class="w">   </span><span class="nt">&quot;Tracker_Def&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DRONE&quot;</span><span class="p">,</span>
@@ -248,7 +246,7 @@
 <li><p>demo会在地图中生成一个跟踪器，支持键盘直接控制，同时默认追踪地图中一辆静置车辆Bmx，可以通过该模式浏览地图或者调试reward参数。</p></li>
 <li><p>video模式是视频拍摄模式，在该模式下跟踪器会自动跟踪目标对象，导出视频图像和标签。</p></li>
 <li><p>train是训练模式，仿真端与算法端进行交互，对跟踪器的追踪算法进行训练。</p></li>
-<li><p>完整系统运行流程图见： <a class="reference internal" href="#id3"><span class="std std-ref">运行流程</span></a></p></li>
+<li><p>完整系统运行流程图见： <a class="reference internal" href="#id4"><span class="std std-ref">运行流程</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -267,21 +265,21 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">Customized_Rewards</span></code> ：是否启用定制化reward参数。用户可以根据定制化reward参数，自行计算reward。</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>定制化Reward参数的详细内容见： <a class="reference internal" href="#id23"><span class="std std-ref">定制化参数接口</span></a></p></li>
+<li><p>定制化Reward参数的详细内容见： <a class="reference internal" href="#id24"><span class="std std-ref">定制化参数接口</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Lidar_Enable</span></code> ：是否启用雷达点云数据。</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>雷达点云数据的详细内容见： <a class="reference internal" href="#id23"><span class="std std-ref">定制化参数接口</span></a></p></li>
+<li><p>雷达点云数据的详细内容见： <a class="reference internal" href="#id24"><span class="std std-ref">定制化参数接口</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Tracking_Object</span></code> ：被跟踪对象设置（默认SUMO_VEHICLE）。可以使用示例跟踪对象，包括“SUMO_VEHICLE”、“Pedestrian”、“Shrimp”、“Create”、“Sojourner”、“Mantis”等等。也可以自定义跟踪对象。项目说明书</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>追踪对象类型的具体描述见： <a class="reference internal" href="#id11"><span class="std std-ref">跟踪对象</span></a></p></li>
+<li><p>追踪对象类型的具体描述见： <a class="reference internal" href="#id12"><span class="std std-ref">跟踪对象</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -419,8 +417,8 @@
 </ul>
 </div></blockquote>
 </section>
-<section id="id7">
-<h3>其他对象追踪的参数配置<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="id8">
+<h3>其他对象追踪的参数配置<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
 <p>只有 <code class="code docutils literal notranslate"><span class="pre">Tracking_Object</span></code> 非“SUMO_VEHICLE”时生效。</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;Other_Params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">     </span><span class="nt">&quot;max_obj_num&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
@@ -448,8 +446,8 @@
 </ul>
 </div></blockquote>
 </section>
-<section id="id8">
-<h3>输出视频的参数配置<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id9">
+<h3>输出视频的参数配置<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <p>只有 <code class="code docutils literal notranslate"><span class="pre">Simulation_Mode</span></code> 非“video”时生效。</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;Out_Video&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">     </span><span class="nt">&quot;channels&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
@@ -487,8 +485,8 @@
 </ul>
 </div></blockquote>
 </section>
-<section id="id9">
-<h3>跟踪器控制的参数配置<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id10">
+<h3>跟踪器控制的参数配置<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>此组参数用于随机化跟踪器自身的跟踪属性。</p>
 </div></blockquote>
@@ -570,21 +568,21 @@
 </ul>
 </div></blockquote>
 </section>
-<section id="id10">
-<h3>部分配置参数建议<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<section id="id11">
+<h3>部分配置参数建议<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>仿真器部分的参数配置建议请参考文档： <a class="reference internal" href="Configuration.html"><span class="doc">仿真环境参数配置建议</span></a>。</p>
 </div></blockquote>
 <span style="background-color: yellow;">To Do</span></section>
 </section>
-<section id="id11">
-<span id="id12"></span><h2>跟踪对象<a class="headerlink" href="#id11" title="Link to this heading"></a></h2>
+<section id="id12">
+<span id="id13"></span><h2>跟踪对象<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
 <blockquote>
 <div><div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
       本工程提供了18种共24个预定义的跟踪目标，并提供即插即用的接口，支持用户利用自主设计的模型和控制器。
 </div></div></blockquote>
 <section id="sumo-vehicle">
-<span id="id13"></span><h3>SUMO_VEHICLE<a class="headerlink" href="#sumo-vehicle" title="Link to this heading"></a></h3>
+<span id="id14"></span><h3>SUMO_VEHICLE<a class="headerlink" href="#sumo-vehicle" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>SUMO_VEHICLE由SUMO交通管理系统控制地图中的交通状态，使载具在地图上按照规划的路径行驶。其中，载具的类型可以进行指定。</p>
 </div></blockquote>
@@ -626,30 +624,30 @@
 <blockquote>
 <div><p>统一车型，大型载客车辆</p>
 </div></blockquote>
-<figure class="align-center" id="id27">
+<figure class="align-center" id="id28">
 <a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Bus</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+<p><span class="caption-text">Bus</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>truck</strong></p>
 <blockquote>
 <div><p>统一车型，不带货箱的货车</p>
 </div></blockquote>
-<figure class="align-center" id="id28">
+<figure class="align-center" id="id29">
 <a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Truck</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+<p><span class="caption-text">Truck</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>trailer</strong></p>
 <blockquote>
 <div><p>统一车型，带货箱的货车</p>
 </div></blockquote>
-<figure class="align-center" id="id29">
+<figure class="align-center" id="id30">
 <a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -744,18 +742,18 @@
    </figure>
 </div></div></blockquote>
 </section>
-<section id="id14">
-<h3>自定义对象<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id15">
+<h3>自定义对象<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>该工程支持自定义被跟踪对象，实现步骤如下：</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>按照一定标准建立webots使用的描述文件proto文件，其中必须必须开放到场景树的属性包括”translation”，”rotation”，”name”。描述文件存放在 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
-<figure class="align-center" id="id30">
+<figure class="align-center" id="id31">
 <a class="reference internal image-reference" href="../_images/场景树属性包.png"><img alt="场景树属性包" src="../_images/%E5%9C%BA%E6%99%AF%E6%A0%91%E5%B1%9E%E6%80%A7%E5%8C%85.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">场景树属性包</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+<p><span class="caption-text">场景树属性包</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple" start="2">
@@ -775,10 +773,10 @@
    IMPORT PROTO
 </p><ol class="arabic" start="4">
 <li><p>把proto的名称写进安全检查文件 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py</span></code></p>
-<figure class="align-center" id="id31">
+<figure class="align-center" id="id32">
 <a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">安全检查</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+<p><span class="caption-text">安全检查</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -790,36 +788,31 @@
 </section>
 </section>
 <section id="reward">
-<span id="id15"></span><h2>内置Reward<a class="headerlink" href="#reward" title="Link to this heading"></a></h2>
+<span id="id16"></span><h2>内置Reward<a class="headerlink" href="#reward" title="Link to this heading"></a></h2>
 <blockquote>
-<div><div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-      本工程提供了<b>离散型和连续型</b>两种奖励函数，可用于设计不同的智能体评价指标。
-</div>
-</br></div></blockquote>
-<section id="id16">
-<h3>奖励函数<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<div><p>由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标 <code class="code docutils literal notranslate"><span class="pre">(xf,yf,zf)</span></code> 以及 <code class="code docutils literal notranslate"><span class="pre">(xv,yv,zv)</span></code> ，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功</p>
+</div></blockquote>
+<section id="id17">
+<h3>奖励函数<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
 <blockquote>
-<div><div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-  由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标(x_f,y_f,z_f)以及(x_v,y_v,z_v)，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
-</div>
-</br><p>对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：</p>
+<div><p>对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}r_{d} = \begin{cases}
 1 &amp; t \in I, \\
 0 &amp; \text{otherwise}.
 \end{cases}\end{split}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(I\)</span> 代表跟踪范围（相机镜头获取的画面范围）， <span class="math notranslate nohighlight">\(t\)</span> 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。</p>
-<figure class="align-center" id="id32">
-<span id="id17"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
+<figure class="align-center" id="id33">
+<span id="id18"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">跟踪对象离散奖励示意图</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+<p><span class="caption-text">跟踪对象离散奖励示意图</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。</p>
-<figure class="align-center" id="id33">
-<span id="figcontr"></span><span id="id18"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
+<figure class="align-center" id="id34">
+<span id="id19"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">跟踪对象连续奖励示意图</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
+<p><span class="caption-text">跟踪对象连续奖励示意图</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>上图是一个跟踪对象处于相机画面中的示意图，记点 <span class="math notranslate nohighlight">\(E_{G_{c}}\)</span> 到画面中心点 <span class="math notranslate nohighlight">\(I_{cG}\)</span> 的距离为 <span class="math notranslate nohighlight">\(y_{EI}\)</span>，跟踪对象点 <span class="math notranslate nohighlight">\(P_{GC}\)</span> 到中心点 <span class="math notranslate nohighlight">\(I_{cG}\)</span> 的距离为 <span class="math notranslate nohighlight">\(y_{IP}\)</span>，记他们的比例为</p>
@@ -828,29 +821,25 @@
 <p>那么，密集奖励可以使用下面的表达式获得：</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}r_{c} = \begin{cases}
-\tanh\left(\alpha(1-x)^{3}\right), &amp; t \in I_{clip}, \\
+\tanh\left(\alpha(1-x)^{3}\right), &amp; t \in I, \\
 0 &amp; \text{otherwise}.
 \end{cases}\end{split}\]</div>
-<p>目标离范围中心点越近时，奖励会越接近1，反之越接近0。 <span class="math notranslate nohighlight">\(\alpha\)</span> 为常数，建议取值3~5。
-此外， <span class="math notranslate nohighlight">\(I_{clip}\)</span> 为有效reward判定范围(如上图 <a class="reference internal" href="#figcontr"><span class="std std-ref">跟踪对象连续奖励示意图</span></a> 中红色方框所示)，其边长 <span class="math notranslate nohighlight">\(W_{I_clip}\)</span> 与原图边长 <span class="math notranslate nohighlight">\(W_{I}\)</span> 的比值可以用 <span class="math notranslate nohighlight">\(\lambda_{clip}\)</span> 表示如下。</p>
-<div class="math notranslate nohighlight">
-\[\lambda_{clip} = \frac{W_{I_clip}}{W_{I}}\]</div>
-<p>根据上述定义式， <span class="math notranslate nohighlight">\(\lambda_{clip}\)</span> 的合理范围为： <span class="math notranslate nohighlight">\([0,1]\)</span> ，在实际训练中，建议参数为 <span class="math notranslate nohighlight">\(\lambda_{clip}=0.7\)</span> 。</p>
+<p>目标离范围中心点越近时，奖励会越接近1，反之越接近0。 <span class="math notranslate nohighlight">\(\alpha\)</span> 为常数，建议取值3~5。</p>
 </div></blockquote>
 </section>
-<section id="id19">
-<h3>奖励判断<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<section id="id20">
+<h3>奖励判断<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过机器视觉识别或者人工标注的方法提供。而在仿真训练中，为了简化计算，加速算法运行，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。</p>
-<figure class="align-center" id="id34">
+<figure class="align-center" id="id35">
 <a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
+<p><span class="caption-text">奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
-<section id="id20">
-<h4>原理<a class="headerlink" href="#id20" title="Link to this heading"></a></h4>
+<section id="id21">
+<h4>原理<a class="headerlink" href="#id21" title="Link to this heading"></a></h4>
 <blockquote>
 <div><p>首先需要获取仿真中的相机焦距，计算表达式如下：</p>
 <div class="math notranslate nohighlight">
@@ -881,8 +870,8 @@
 </div></blockquote>
 </section>
 </section>
-<section id="id21">
-<h3>投影可视化<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<section id="id22">
+<h3>投影可视化<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>按照上述原理实现之后效果如下视频，在仿真中将方块放置到地面与直线计算出来的交点处，就可以实时看到相机画面的范围：</p>
 <video width="640" height="360" controls>
@@ -892,8 +881,8 @@
    注意：视场角上限不能超过地平线，否则计算结果没有意义。
 </div></div></blockquote>
 </br></section>
-<section id="id22">
-<h3>如何转化为Reward<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id23">
+<h3>如何转化为Reward<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
 <ol class="arabic">
 <li><p>用于计算reward共有两个变量：</p>
 <ol class="loweralpha simple">
@@ -902,55 +891,52 @@
 </ol>
 </li>
 <li><p>首要目标是实现跟踪器tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：</p>
-<figure class="align-center" id="id35">
+<figure class="align-center" id="id36">
 <a class="reference internal image-reference" href="../_images/阶跃函数.png"><img alt="阶跃函数" src="../_images/%E9%98%B6%E8%B7%83%E5%87%BD%E6%95%B0.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">阶跃函数示意图</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
+<p><span class="caption-text">阶跃函数示意图</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br><ol class="arabic" start="3">
 <li><p>次要目标是跟踪器tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： <span class="math notranslate nohighlight">\(tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\)</span></p>
-<figure class="align-center" id="id36">
+<figure class="align-center" id="id37">
 <a class="reference internal image-reference" href="../_images/双曲正切函数.png"><img alt="双曲正切函数" src="../_images/%E5%8F%8C%E6%9B%B2%E6%AD%A3%E5%88%87%E5%87%BD%E6%95%B0.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">双曲正切函数示意图</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
+<p><span class="caption-text">双曲正切函数示意图</span><a class="headerlink" href="#id37" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br><ol class="arabic" start="4">
 <li><p>最终的奖励计算框图如下：</p>
-<figure class="align-center" id="id37">
+<figure class="align-center" id="id38">
 <a class="reference internal image-reference" href="../_images/distance奖励框图.png"><img alt="distance奖励框图" src="../_images/distance%E5%A5%96%E5%8A%B1%E6%A1%86%E5%9B%BE.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">distance奖励框图</span><a class="headerlink" href="#id37" title="Link to this image"></a></p>
+<p><span class="caption-text">distance奖励框图</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</br><figure class="align-center" id="id38">
+</br><figure class="align-center" id="id39">
 <a class="reference internal image-reference" href="../_images/view奖励框图.png"><img alt="view奖励框图" src="../_images/view%E5%A5%96%E5%8A%B1%E6%A1%86%E5%9B%BE.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">view奖励框图</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
+<p><span class="caption-text">view奖励框图</span><a class="headerlink" href="#id39" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br></section>
 </section>
-<section id="id23">
-<span id="id24"></span><h2>定制化参数接口<a class="headerlink" href="#id23" title="Link to this heading"></a></h2>
-<div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-      本工程提供了常用的<b>6种传感器数据</b>，可以用于后续的多传感器协同任务设计。
-</div>
-</br><section id="id25">
-<h3>输入动作<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<section id="id24">
+<span id="id25"></span><h2>定制化参数接口<a class="headerlink" href="#id24" title="Link to this heading"></a></h2>
+<section id="id26">
+<h3>输入动作<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数</p>
 </div></blockquote>
 </section>
-<section id="id26">
-<h3>返回参数<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<section id="id27">
+<h3>返回参数<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>返回参数主要包括三个部分，基础数据包，自定义奖励数据包，雷达数据包</p>
 </div></blockquote>
@@ -1016,7 +1002,7 @@
 
         .vision-row {
 
-            background-color: #FFC1C1;
+            background-color: #FFC0CB;
 
         }
 
@@ -1024,7 +1010,7 @@
 
         .motion-row {
 
-            background-color: #87CEEB;
+            background-color: #E0FFFF;
 
         }
 
@@ -1122,8 +1108,6 @@
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// 图像高度（像素）</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraFov</span><span class="p">;</span><span class="c1">// 摄像头视场角（rad）[0,pi]</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraF</span><span class="p">;</span><span class="c1">// 摄像头焦距估算（像素）</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraPitch</span><span class="p">;</span><span class="c1">// 摄像头俯仰角 (rad)</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">trackerHeight</span><span class="p">;</span><span class="c1">// 跟踪器高度 (m)</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_ct</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// 摄像头相对于世界坐标系的齐次变换矩阵</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_tw</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// 车辆相对于世界坐标系的齐次变换矩阵</span>
 <span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidGlobalPos</span><span class="p">;</span><span class="c1">// 摄像头中心映射到地面在世界坐标系下的三维坐标</span>
@@ -1141,10 +1125,10 @@
 <ul class="simple">
 <li><p>其中，参数 <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> 中跟踪器坐标系定义和姿态角定义如下：</p></li>
 </ul>
-<figure class="align-center" id="id39">
+<figure class="align-center" id="id40">
 <a class="reference internal image-reference" href="../_images/无人机坐标.png"><img alt="无人机坐标系" src="../_images/%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%9D%90%E6%A0%87.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">无人机坐标系定义</span><a class="headerlink" href="#id39" title="Link to this image"></a></p>
+<p><span class="caption-text">无人机坐标系定义</span><a class="headerlink" href="#id40" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>

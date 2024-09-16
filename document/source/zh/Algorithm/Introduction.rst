@@ -115,7 +115,7 @@ Baseline2: :code:`Envs` 环境 +  :code:`CVAT` 算法
     # 中断重开训练模式
     python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
 
-Baseline3: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法 
+Baseline3: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -123,7 +123,7 @@ Baseline3: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
     <span style="background-color: yellow;">To do:复现完成后补充一下过程</span>
 
 
-Baseline4: :code:`FollowAnything` 算法 
+Baseline4: :code:`FollowAnything` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html

@@ -50,6 +50,8 @@
         </br>
         </br>
 
+.. _环境介绍:
+
 环境介绍
 ----------
 
@@ -801,7 +803,7 @@ Legged Robots
 
       \lambda_{clip} = \frac{W_{I_clip}}{W_{I}}
 
-   根据上述定义式， :math:`\lambda_{clip}` 的合理范围为： :math:`[0,1]` ，在实际训练中，建议参数为 :math:`\lambda_{clip}=0.7` 。 
+   根据上述定义式， :math:`\lambda_{clip}` 的合理范围为： :math:`[0,1]` ，在实际训练中，建议参数为 :math:`\lambda_{clip}=0.7` 。
 
 奖励判断
 ~~~~~~~~~~~~~~~~~~~~
@@ -1144,8 +1146,6 @@ Legged Robots
         double cameraHeight;// 图像高度（像素）
         double cameraFov;// 摄像头视场角（rad）[0,pi]
         double cameraF;// 摄像头焦距估算（像素）
-        double cameraPitch;// 摄像头俯仰角 (rad)
-        double trackerHeight;// 跟踪器高度 (m) 
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
         double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标

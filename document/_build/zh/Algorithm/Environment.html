@@ -505,22 +505,24 @@
 <li><p>利用stable-baselines3进行算法测试</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div><p>调用上述Async_SubprocVecEnv类</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">stableparallel_test</span><span class="p">(</span><span class="n">n_envs</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span><span class="n">gym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-  <b>注意：</b>在使用stable-baselines3库并行训练的时候，调用上述<b>Async_SubprocVecEnv</b>类
+  调用上述Async_SubprocVecEnv类
 </div></div></blockquote>
 <ol class="arabic simple" start="3">
 <li><p>利用tianshou进行算法测试</p></li>
 </ol>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
+<div><p>调用上述SubprocVecEnv_TS类</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">args</span> <span class="o">=</span> <span class="n">arg_config</span><span class="p">()</span>
 <span class="n">test_env</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 </pre></div>
 </div>
 <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-  <b>注意：</b>在使用tianshou库并行训练的时候，需要调用上述<b>SubprocVecEnv_TS</b>类
+  调用上述SubprocVecEnv_TS类
 </div></br></div></blockquote>
 </div></blockquote>
 </section>
@@ -621,18 +623,18 @@
 <h3>Part4 性能评价指标<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
 <p><strong>1.累计奖励 CR(Cumulative Reward)</strong></p>
 <blockquote>
-<div><p>此为使用连续奖励，进行累加计算以评估性能，计算公式如下所示：</p>
+<div><p>此为使用连续奖励，进行累加计算 以评估性能，计算公式如下所示：</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
-</br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{ct}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的连续奖励值， <span class="math notranslate nohighlight">\(E_l\)</span> 代表轨迹长度。
-连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id18"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
+</br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{ct}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的连续奖励值， <span class="math notranslate nohighlight">\(E_l\)</span> 代表本批次长度。
+连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id19"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
 <p><strong>2.追踪成功比例 TSR(TrackIng Success Rate)</strong></p>
 <blockquote>
 <div><p>此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
 </br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{dt}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的离散奖励值， <span class="math notranslate nohighlight">\(E_{ml}\)</span> 为各个批次中最大的step长度， <span class="math notranslate nohighlight">\(E_l\)</span> 代表本批次长度。
-离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id17"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
+离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id18"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
 </section>
 </section>
 </section>

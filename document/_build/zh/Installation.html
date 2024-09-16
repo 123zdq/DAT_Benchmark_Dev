@@ -250,14 +250,13 @@ gedit<span class="w"> </span>~/.bashrc
 <h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p><strong>虚拟环境创建</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow39<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+conda<span class="w"> </span>activate<span class="w"> </span>uav_follow39
 </pre></div>
 </div>
 <p><strong>算法端</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Alg requirements</span>
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.17.0<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.25.0
 pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="o">==</span><span class="m">4</span>.9.0.80
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gym</span><span class="o">==</span><span class="m">0</span>.25.1
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">setproctitle</span><span class="o">==</span><span class="m">1</span>.3.3
@@ -265,13 +264,8 @@ pip<span class="w"> </span>install<span class="w"> </span>tensorboard
 pip<span class="w"> </span>install<span class="w"> </span>tqdm
 pip<span class="w"> </span>install<span class="w"> </span>stable-baselines3<span class="o">==</span><span class="m">2</span>.3.0
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">sb3_contrib</span><span class="o">==</span><span class="m">2</span>.3.0
-pip<span class="w"> </span>install<span class="w"> </span>gymnasium
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gymnasium</span><span class="o">==</span><span class="m">0</span>.29.1
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">wandb</span><span class="o">==</span><span class="m">0</span>.17.6
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">memory_profiler</span><span class="o">==</span><span class="m">0</span>.61.0
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">psutil</span><span class="o">==</span><span class="m">6</span>.0.0
-pip<span class="w"> </span>install<span class="w"> </span>pandas
-pip<span class="w"> </span>install<span class="w"> </span>openpyxl
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tianshou</span><span class="o">==</span><span class="m">1</span>.1.0
 </pre></div>
 </div>
 <p><strong>仿真器端</strong></p>
@@ -279,7 +273,7 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tians
       1. python库安装
 </div>
 </br><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simulator requirements</span>
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
+conda<span class="w"> </span>activate<span class="w"> </span>uav_follow39
 pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>pyproj<span class="w"> </span>shapely<span class="w"> </span>webcolors<span class="w"> </span>configparser<span class="w"> </span>--user
 pip<span class="w"> </span>install<span class="w"> </span>transform3d
 </pre></div>
