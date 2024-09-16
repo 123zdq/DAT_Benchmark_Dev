@@ -19,7 +19,6 @@
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/translations.js?v=beaddf03"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
@@ -50,30 +49,14 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">概述</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">1 问题定义与描述</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#vat">VAT 工作定义</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">现有VAT方案局限</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rlvat">基于RL实现VAT的本项目工作特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1 主动视觉跟踪</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vat">VAT 任务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">VAT 方案</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#benchmark">2 Benchmark呈现</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id4">复杂多样仿真环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#state">State可配置</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#reward">Reward构建</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">3 实验方法与初步结果</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#experiment-setting">Experiment Setting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#baseline-methods">Baseline Methods</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ours-cl-ppo">Ours: CL+PPO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">初步实验结果</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">4 未来工作展望</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id8">时序决策</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id9">智能体场景与域泛化性</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id10">多传感器融合与多智能体协同</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id11">实机部署与迁移</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#state">State多样性</a></li>
 </ul>
 </li>
 </ul>
@@ -155,18 +138,18 @@
  <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
  </br>
  </br><section id="id2">
-<h2>1 问题定义与描述<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<h2>1 主动视觉跟踪<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
 <section id="vat">
-<h3>VAT 工作定义<a class="headerlink" href="#vat" title="Link to this heading"></a></h3>
+<h3>VAT 任务<a class="headerlink" href="#vat" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>现实任务</strong>：现实视觉任务，目标具有高动态特性，主动控制相机以提升视觉准确率是主要挑战。</p></li>
-<li><p><strong>现有方法</strong>：现有 <strong>PVT</strong> (<em>Passive Visual Tracking</em>)方法基于目标在预设镜头内的假设，仅在视频维度进行跟踪。</p></li>
-<li><p><strong>VAT任务</strong>： <strong>VAT</strong> (<em>Visual Active Tracking</em>)同时建模视觉跟踪和控制，做到主动控制相机以追踪动态目标，更具现实意义。</p></li>
+<li><p><strong>现有方法</strong>：现有 <em>PVT</em> (<em>Passive Visual Tracking</em>)方法基于目标在预设镜头内的假设，仅在视频维度进行跟踪。</p></li>
+<li><p><strong>VAT任务</strong>： <em>VAT</em> (<em>Visual Active Tracking</em>)同时建模视觉跟踪和控制，做到主动控制相机以追踪动态目标，更具现实意义。</p></li>
 </ul>
-<figure class="align-center" id="id12">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>VAT</strong> (<em>Visual Active Tracking</em>) 任务与 <strong>PVT</strong> (<em>Passive Visual Tracking</em>) 任务工作流</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+<p><span class="caption-text"><strong>VAT</strong> 任务与 <strong>PVT</strong> 设定区别</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </br>
@@ -174,57 +157,39 @@
 </br>
 </br></section>
 <section id="id3">
-<h3>现有VAT方案局限<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<h3>VAT 方案<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <ul>
-<li><p><strong>现有VAT方案</strong>: 直接串联VT模型与控制模型进行VAT，比如(<em>siamask+PID</em>)</p></li>
-<li><p><strong>局限性</strong>：</p>
+<li><p><strong>现有VAT方案</strong>: 直接串联VT模型与控制模型进行 <em>VAT</em>，比如(<em>siamask+PID</em>)</p>
 <blockquote>
-<div><p><strong>1.模型串联输入延迟</strong>: VT模型的延迟导致控制输入的滞后，甚至导致控制器发散</p>
-<p><strong>2.控制模型参数敏感</strong>: 控制模型对于参数敏感，需要对于每个不同场景进行参数微调</p>
+<div><p><strong>局限1</strong>: 视觉模型需要大量人力进行标签批注</p>
+<p><strong>局限2</strong>: 控制模型对于参数敏感，需要对于每个不同场景进行参数微调</p>
+</div></blockquote>
+</li>
+<li><p><strong>本项目 VAT 方案</strong>: 利用 <em>MDP</em> (<em>Markov Decision Process</em>)同时对于视觉与控制任务进行建模，用单模型解决视觉与控制任务</p>
+<blockquote>
+<div><p><strong>优势</strong>：端到端RL效率更高、更适合跨场景任务</p>
 </div></blockquote>
 </li>
 </ul>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="rlvat">
-<h3>基于RL实现VAT的本项目工作特点<a class="headerlink" href="#rlvat" title="Link to this heading"></a></h3>
-<ul>
-<li><p><strong>RL实现VAT项目特点</strong>：在本次项目中使用 <strong>RL模型</strong> 代替原有的VT与控制模型串联，基于方针实现模型训练，具备以下特点：</p>
-<blockquote>
-<div><p><strong>1.RL模型替代</strong>：利用 <strong>MDP</strong> (<em>Markov Decision Process</em>)同时对于视觉与控制任务进行建模，用单模型解决视觉与控制任务</p>
-<p><strong>2.仿真环境</strong>：由于RL现实环境试错与数据采集的高昂成本，构建具备多样性(<em>多场景，多种tracker和target，多传感器</em>)、复杂性(<em>场景元素，target行为以及tracker动力学具复杂性</em>)的仿真环境进行RL训练</p>
-</div></blockquote>
-</li>
-</ul>
-<figure class="align-center" id="id13">
-<a class="reference internal image-reference" href="_images/Method_Compare.png"><img alt="Method_Compare" src="_images/Method_Compare.png" style="width: 600px;" /></a>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/VAT_model.png"><img alt="VAT Model" src="_images/VAT_model.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">不同方法仿真环境特征对比</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-text">VT串联控制模型 与 单RL模型 实现 VAT 示意图</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="benchmark">
 <h2>2 Benchmark呈现<a class="headerlink" href="#benchmark" title="Link to this heading"></a></h2>
-<p>本项目特点如下：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>仿真环境复杂多样</p></li>
-<li><p>State可配置</p></li>
-<li><p>Reward构建改进</p></li>
-</ul>
-</div></blockquote>
 <section id="id4">
 <h3>复杂多样仿真环境<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong>多样性</strong>：</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>场景多样</strong>：具备 <strong>6种场景</strong> <strong>4种天气</strong> 共计 <strong>24</strong> 种环境的测试、训练场景，用于测试模型的 <em>泛化</em> 能力与 <em>域泛化</em> 能力</p></li>
+<li><p><strong>场景多样</strong>：具备 <strong>6种场景</strong> <strong>4种天气</strong> 共计 <strong>24</strong> 种环境</p></li>
 <li><p><strong>Target多样</strong>：预设 <strong>24种</strong> 可选target,支持自主模型接入</p></li>
-<li><p><strong>任务多样</strong>：具备多传感器，可执行多种任务</p></li>
+<li><p><strong>任务多样</strong>：具备 <strong>6种</strong> 常见视觉和运动传感器</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -232,7 +197,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>场景元素复杂</strong>：场景元素复杂，覆盖包括树遮挡, 隧道,红绿灯,人行道等常见场景元素</p></li>
-<li><p><strong>动力学模型复杂</strong>：利用 <strong>webots</strong> 高度仿真的动力学引擎，实现仿真环境中的复杂动力学模拟</p></li>
+<li><p><strong>动力学模型复杂</strong>：利用 <strong>webots</strong> 高度仿真的动力学引擎，实现仿真环境中的动力学模拟</p></li>
 <li><p><strong>Target行为管理复杂</strong>：接入交通仿真器 <strong>SUMO</strong> 以统一管理车辆， 确保环境中的 Target 动作的 <strong>真实性</strong> 和 <strong>随机性</strong></p></li>
 </ul>
 </div></blockquote>
@@ -240,16 +205,16 @@
 </ul>
 <p>场景详见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id2"><span class="std std-ref">环境介绍</span></a>
 追踪目标对象详见：<a class="reference internal" href="Webots_Simulator/Simulator.html#id12"><span class="std std-ref">跟踪对象</span></a></p>
-<figure class="align-center" id="id14">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">6种场景+4种天气构成的24种 Scenes</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-text">24个复杂场景例图</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id15">
+<figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="_images/24Target.png"><img alt="24 Targets" src="_images/24Target.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">24种不同的Targets</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+<p><span class="caption-text">24种不同的Targets</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </br>
@@ -257,169 +222,20 @@
 </br>
 </br></section>
 <section id="state">
-<h3>State可配置<a class="headerlink" href="#state" title="Link to this heading"></a></h3>
-<ul>
+<h3>State多样性<a class="headerlink" href="#state" title="Link to this heading"></a></h3>
+<ul class="simple">
 <li><p><strong>多样性</strong>：状态提供了现实中常见的传感器，如IMU，加速度计，陀螺仪，激光雷达等进行配置</p></li>
-<li><p><strong>便捷性</strong>：通过JSON文件快速配置</p>
-<blockquote>
-<div><figure class="align-center" id="id16">
-<a class="reference internal image-reference" href="_images/ParametersOfUATBenchmark.png"><img alt="ParametersOfUATBenchmark" src="_images/ParametersOfUATBenchmark.png" style="width: 600px;" /></a>
+</ul>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="_images/sensor_list.png"><img alt="Sensor list" src="_images/sensor_list.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">可配置参数列表</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
+<p><span class="caption-text">6种不同传感器</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</div></blockquote>
-</li>
-</ul>
 </br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
-<section id="reward">
-<h3>Reward构建<a class="headerlink" href="#reward" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p><strong>现有方法</strong>：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>利用 Target 相对于 Tracker 坐标直接构建 Reward， 如 <span class="math notranslate nohighlight">\(r=A-\left (  \frac{1}{c}\sqrt{x^{2}+\left ( y-d \right )^{2}}+\lambda \left | \omega  \right |   \right )\)</span></p></li>
-</ul>
-<figure class="align-center" id="id17">
-<a class="reference internal image-reference" href="_images/previsous_method.png"><img alt="previsous_method" src="_images/previsous_method.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">现有方法reward图解</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-</div></blockquote>
-<p><strong>现有方法局限性</strong>：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>利用了现实中不可获取的变量，在 <strong>Ｓim2Real</strong> 过程中难以对于现实场景微调</p></li>
-</ul>
-</div></blockquote>
-<dl>
-<dt><strong>本文方法</strong>：</dt><dd><ul class="simple">
-<li><p>仅在图像层面构建 <strong>reward</strong>， 如下所示情景，构建reward依照 <span class="math notranslate nohighlight">\(r=tanh(\alpha(1-x)^{2}),x=\frac{l_{IP}}{l_{IE}}\)</span></p></li>
-</ul>
-<figure class="align-center" id="id18">
-<a class="reference internal image-reference" href="_images/Continuous_reward.png"><img alt="Continuous_reward" src="_images/Continuous_reward.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">跟踪对象连续奖励示意图</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-</dd>
-</dl>
-<p>详见： <a class="reference internal" href="Webots_Simulator/Simulator.html#reward"><span class="std std-ref">内置Reward</span></a></p>
-</div></blockquote>
-</section>
-</section>
-<section id="id5">
-<h2>3 实验方法与初步结果<a class="headerlink" href="#id5" title="Link to this heading"></a></h2>
-<section id="experiment-setting">
-<h3>Experiment Setting<a class="headerlink" href="#experiment-setting" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p><strong>普通实验</strong>：比较Agent的训练和迁移性能</p>
-<p><strong>模拟Sim2Real实验</strong>：利用DR在原场景中训练直接迁移 <em>vs</em> 在原场景训练+新场景微调 (说明reward可行性)</p>
-<figure class="align-center" id="id19">
-<a class="reference internal image-reference" href="_images/stage_compare.png"><img alt="stage_compare" src="_images/stage_compare.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">Stages示意图</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-</div></blockquote>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="baseline-methods">
-<h3>Baseline Methods<a class="headerlink" href="#baseline-methods" title="Link to this heading"></a></h3>
-<p><strong>Backbone</strong>:</p>
-<blockquote>
-<div><p><strong>CNN+LSTM+A3C</strong> 实现算法骨架</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>问题1</strong>:A3C算法的异步更新机制会导致算法快速收敛到单一动作分布，停止探索</p></li>
-<li><p><strong>问题2</strong>:One Stage的RL训练，智能体难理解任务</p></li>
-</ul>
-</div></blockquote>
-</div></blockquote>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="ours-cl-ppo">
-<h3>Ours: CL+PPO<a class="headerlink" href="#ours-cl-ppo" title="Link to this heading"></a></h3>
-<blockquote>
-<div><p>CL：两阶段课程学习，第一阶段在视觉简单的情况下训练Agent的任务理解，第二阶段在任务理解的基础上泛化复杂视觉能力。</p>
-</div></blockquote>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="id6">
-<h3>初步实验结果<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
-<blockquote>
-<div><figure class="align-center" id="id20">
-<a class="reference internal image-reference" href="_images/normal_experiment_result.png"><img alt="normal_experiment_result" src="_images/normal_experiment_result.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">初步实验结果</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-</div></blockquote>
-</section>
-</section>
-<section id="id7">
-<h2>4 未来工作展望<a class="headerlink" href="#id7" title="Link to this heading"></a></h2>
-<section id="id8">
-<h3>时序决策<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>未来状态推演</strong>：智能体在跟踪全过程对目标未来状态进行演化</p></li>
-<li><p><strong>目标</strong>：克服遮挡干扰，提升可解释性</p></li>
-</ul>
-<figure class="align-center" id="id21">
-<a class="reference internal image-reference" href="_images/future_work.jpg"><img alt="future_work" src="_images/future_work.jpg" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">时序决策初步构想</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-</div></blockquote>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="id9">
-<h3>智能体场景与域泛化性<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>场景与域泛化</strong>：智能体在跟踪全过程对目标未来状态进行演化</p></li>
-<li><p><strong>目标</strong>：克服遮挡干扰，提升可解释性</p></li>
-</ul>
-</div></blockquote>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="id10">
-<h3>多传感器融合与多智能体协同<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>未来状态推演</strong>：智能体实现直接的跨场景泛化和跨天气情况(域)的泛化</p></li>
-<li><p><strong>目标</strong>：提升跨场景跨域性能，TTA+强化学习</p></li>
-</ul>
-</div></blockquote>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="id11">
-<h3>实机部署与迁移<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>真机迁移</strong>：在真实的多场景多天气状况验证智能体的鲁棒性</p></li>
-<li><p><strong>目标</strong>：简化Sim2Real流程，适配多飞控部署</p></li>
-</ul>
-</div></blockquote>
-</section>
 </section>
 </section>
 
