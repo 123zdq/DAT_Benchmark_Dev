@@ -55,8 +55,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#benchmark">2 Benchmark呈现</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">复杂多样仿真环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#state">State多样性</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">多样仿真场景</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">多样跟踪目标</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">多样化任务</a></li>
 </ul>
 </li>
 </ul>
@@ -143,53 +144,48 @@
 <h3>VAT 任务<a class="headerlink" href="#vat" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><strong>现实任务</strong>：现实视觉任务，目标具有高动态特性，主动控制相机以提升视觉准确率是主要挑战。</p></li>
-<li><p><strong>现有方法</strong>：现有 <em>PVT</em> (<em>Passive Visual Tracking</em>)方法基于目标在预设镜头内的假设，仅在视频维度进行跟踪。</p></li>
-<li><p><strong>VAT任务</strong>： <em>VAT</em> (<em>Visual Active Tracking</em>)同时建模视觉跟踪和控制，做到主动控制相机以追踪动态目标，更具现实意义。</p></li>
+<li><p><strong>现有方法</strong>：现有 PVT(Passive Visual Tracking)方法基于目标在预设镜头内的假设，仅在视频维度进行跟踪。</p></li>
+<li><p><strong>VAT任务</strong>：VAT(Visual Active Tracking)同时建模视觉跟踪和控制，做到主动控制相机以追踪动态目标，更具现实意义。</p></li>
 </ul>
-<figure class="align-center" id="id5">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text"><strong>VAT</strong> 任务与 <strong>PVT</strong> 设定区别</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">VAT任务与PVT设定区别</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
 </br></section>
 <section id="id3">
 <h3>VAT 方案<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <ul>
-<li><p><strong>现有VAT方案</strong>: 直接串联VT模型与控制模型进行 <em>VAT</em>，比如(<em>siamask+PID</em>)</p>
+<li><p><strong>现有VAT方案</strong>: 直接串联VT模型与控制模型进行VAT(如：siamask+PID)</p>
 <blockquote>
 <div><p><strong>局限1</strong>: 视觉模型需要大量人力进行标签批注</p>
 <p><strong>局限2</strong>: 控制模型对于参数敏感，需要对于每个不同场景进行参数微调</p>
 </div></blockquote>
 </li>
-<li><p><strong>本项目 VAT 方案</strong>: 利用 <em>MDP</em> (<em>Markov Decision Process</em>)同时对于视觉与控制任务进行建模，用单模型解决视觉与控制任务</p>
+<li><p><strong>本项目 VAT 方案</strong>: 利用MDP(Markov Decision Process)同时对于视觉与控制任务进行建模，用单模型解决视觉与控制任务</p>
 <blockquote>
 <div><p><strong>优势</strong>：端到端RL效率更高、更适合跨场景任务</p>
 </div></blockquote>
 </li>
 </ul>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="_images/VAT_model.png"><img alt="VAT Model" src="_images/VAT_model.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">VT串联控制模型 与 单RL模型 实现 VAT 示意图</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">单阶段与两阶段VAT方案示意图</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="benchmark">
 <h2>2 Benchmark呈现<a class="headerlink" href="#benchmark" title="Link to this heading"></a></h2>
-<section id="id4">
-<h3>复杂多样仿真环境<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul>
 <li><p><strong>多样性</strong>：</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>场景多样</strong>：具备 <strong>6种场景</strong> <strong>4种天气</strong> 共计 <strong>24</strong> 种环境</p></li>
-<li><p><strong>Target多样</strong>：预设 <strong>24种</strong> 可选target,支持自主模型接入</p></li>
-<li><p><strong>任务多样</strong>：具备 <strong>6种</strong> 常见视觉和运动传感器</p></li>
+<li><p><strong>场景多样</strong>：具备6种场景4种天气共计24种环境</p></li>
+<li><p><strong>Target多样</strong>：预设24种可选target,支持自主模型接入</p></li>
+<li><p><strong>任务多样</strong>：具备6种常见视觉和运动传感器</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -197,45 +193,45 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>场景元素复杂</strong>：场景元素复杂，覆盖包括树遮挡, 隧道,红绿灯,人行道等常见场景元素</p></li>
-<li><p><strong>动力学模型复杂</strong>：利用 <strong>webots</strong> 高度仿真的动力学引擎，实现仿真环境中的动力学模拟</p></li>
-<li><p><strong>Target行为管理复杂</strong>：接入交通仿真器 <strong>SUMO</strong> 以统一管理车辆， 确保环境中的 Target 动作的 <strong>真实性</strong> 和 <strong>随机性</strong></p></li>
+<li><p><strong>动力学模型复杂</strong>：利用webots高度仿真的动力学引擎，实现仿真环境中的动力学模拟</p></li>
+<li><p><strong>Target行为管理复杂</strong>：接入交通仿真器SUMO以统一管理车辆， 确保环境中的Target动作的真实性和随机性</p></li>
 </ul>
 </div></blockquote>
 </li>
 </ul>
-<p>场景详见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id2"><span class="std std-ref">环境介绍</span></a>
-追踪目标对象详见：<a class="reference internal" href="Webots_Simulator/Simulator.html#id12"><span class="std std-ref">跟踪对象</span></a></p>
-<figure class="align-center" id="id7">
+<section id="id4">
+<h3>多样仿真场景<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<p>场景详见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id2"><span class="std std-ref">环境介绍</span></a></p>
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">24个复杂场景例图</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">24个复杂场景例图</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<figure class="align-center" id="id8">
+</section>
+<section id="id5">
+<h3>多样跟踪目标<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>跟踪目标对象详见：<a class="reference internal" href="Webots_Simulator/Simulator.html#id12"><span class="std std-ref">跟踪对象</span></a></p>
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="_images/24Target.png"><img alt="24 Targets" src="_images/24Target.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">24种不同的Targets</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text">24种不同的Targets</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="state">
-<h3>State多样性<a class="headerlink" href="#state" title="Link to this heading"></a></h3>
+</section>
+<section id="id6">
+<h3>多样化任务<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><strong>多样性</strong>：状态提供了现实中常见的传感器，如IMU，加速度计，陀螺仪，激光雷达等进行配置</p></li>
+<li><p><strong>任务多样性</strong>：状态提供了现实中常见的传感器，如IMU，加速度计，陀螺仪，激光雷达等。</p></li>
 </ul>
-<figure class="align-center" id="id9">
+<p>多样化任务配置见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id24"><span class="std std-ref">定制化参数接口</span></a></p>
+<figure class="align-center" id="id11">
 <a class="reference internal image-reference" href="_images/sensor_list.png"><img alt="Sensor list" src="_images/sensor_list.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">6种不同传感器</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">6种常用传感器</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
+</section>
 </section>
 </section>
 

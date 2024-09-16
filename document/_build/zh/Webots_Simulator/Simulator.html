@@ -1116,12 +1116,14 @@
 </html>
 </br><p><strong>自定义奖励数据包</strong></p>
 <blockquote>
-<div><p>自定义奖励数据包共57个浮点数+1个字符串，包括以下部分</p>
+<div><p>自定义奖励数据包共59个浮点数+1个字符串，包括以下部分</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_rewardData</span><span class="p">{</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraWidth</span><span class="p">;</span><span class="c1">// 图像宽度（像素）</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// 图像高度（像素）</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraFov</span><span class="p">;</span><span class="c1">// 摄像头视场角（rad）[0,pi]</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraF</span><span class="p">;</span><span class="c1">// 摄像头焦距估算（像素）</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraPitch</span><span class="p">;</span><span class="c1">// 摄像头俯仰角 (rad)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">trackerHeight</span><span class="p">;</span><span class="c1">// 跟踪器高度 (m)</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_ct</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// 摄像头相对于世界坐标系的齐次变换矩阵</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_tw</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// 车辆相对于世界坐标系的齐次变换矩阵</span>
 <span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidGlobalPos</span><span class="p">;</span><span class="c1">// 摄像头中心映射到地面在世界坐标系下的三维坐标</span>

@@ -1137,7 +1137,7 @@ Legged Robots
 
 **自定义奖励数据包**
 
-   自定义奖励数据包共57个浮点数+1个字符串，包括以下部分
+   自定义奖励数据包共59个浮点数+1个字符串，包括以下部分
 
    .. code:: c++
       
@@ -1146,6 +1146,8 @@ Legged Robots
         double cameraHeight;// 图像高度（像素）
         double cameraFov;// 摄像头视场角（rad）[0,pi]
         double cameraF;// 摄像头焦距估算（像素）
+        double cameraPitch;// 摄像头俯仰角 (rad)
+        double trackerHeight;// 跟踪器高度 (m)
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
         double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
