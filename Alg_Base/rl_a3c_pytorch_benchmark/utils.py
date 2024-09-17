@@ -93,7 +93,7 @@ def get_DVAT_reward(A_fov:float,d_cmd:float,x:float,y:float,z:float,v:list,u:lis
     k_u = 0
     k_c = 10
     if crash:
-        return -k_c
+        return -k_c,None,None
     else:
         ## get reward
         rx = max(0,1-abs(x-d_cmd))

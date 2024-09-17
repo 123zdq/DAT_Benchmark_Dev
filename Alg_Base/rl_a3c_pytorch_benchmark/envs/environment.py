@@ -378,11 +378,7 @@ class BenchEnv_Multi():
             pos_z = reward_params[-10]
             
             # get ori_w_0
-            with open(
-                "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
-            ) as file:
-                data = json.load(file)
-            ori_w_0 = data["Drone_Random_Config"]["direction_fixed"]
+            ori_w_0 = reward_params[6]
 
             ## Get real pitch angle and real height
             pitch_angle = reward_params[4]
