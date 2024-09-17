@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>安装 &mdash; UAV_VAT 1.0 文档</title>
+  <title>Installation &mdash; UAV_VAT 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
@@ -49,17 +49,17 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">安装</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#linux-ubuntu22-04">Linux(Ubuntu22.04)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#step1-webots">Step1 安装webots仿真软件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step2">Step2 创建虚拟环境与库安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step3-webotspython">Step3 修改webots运行python环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step1-install-the-webots-simulation-software">Step1 Install the Webots simulation software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step2-creating-a-virtual-environment-and-installing-libraries">Step2 Creating a Virtual Environment and Installing Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step3-modify-the-python-environment-for-running-webots">Step3 Modify the Python environment for running Webots</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#windows">Windows</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">Step1 安装webots仿真软件</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">Step2 创建虚拟环境与库安装</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">Step3 修改webots运行python环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step1-install-webots-simulation-software">Step1 Install Webots Simulation Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step2-create-virtual-environment-and-install-libraries">Step2 Create Virtual Environment and Install Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Step3 Modify the Python environment for running Webots</a></li>
 </ul>
 </li>
 </ul>
@@ -82,7 +82,7 @@
           <div role="navigation" aria-label="页面导航">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">安装</li>
+      <li class="breadcrumb-item active">Installation</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/Installation.rst.txt" rel="nofollow"> 查看页面源码</a>
       </li>
@@ -92,53 +92,92 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="id1">
-<h1>安装<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
-<div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-    本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)以及<code>Windows</code>系统下的工程安装指引
+  <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+ <style>
+     #language-switch {
+        display: flex; /* Use Flexbox layout */
+        justify-content: center; /* Center buttons horizontally */
+        align-items: center; /* Center buttons vertically */
+        gap: 10px; /* Space between buttons */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #language-switch button {
+        width: 180px;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center; /* Center text vertically */
+        justify-content: center; /* Center text horizontally */
+    }
+</style>
+
+ <!-- Language switch buttons -->
+ <div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
+     <b style="font-size: 18px;">You can choose language by </b>
+     <button onclick="switchLanguage('zh')">中文</button>
+     <button onclick="switchLanguage('en')">English</button>
+ </div>
+
+ <script>
+     function switchLanguage(lang) {
+         if (lang === 'zh') {
+             window.location.href = '../zh/Installation.html';
+         } else if (lang === 'en') {
+             window.location.href = '../en/Installation.html';
+         }
+     }
+ </script>
+ </br>
+ <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+ </br>
+ </br><div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+    This document primarily provides installation guidance for projects on both <code>Linux</code> systems (<code>Ubuntu22.04</code>) and <code>Windows</code> systems.
 </div>
 </br><section id="linux-ubuntu22-04">
 <h2>Linux(Ubuntu22.04)<a class="headerlink" href="#linux-ubuntu22-04" title="Link to this heading"></a></h2>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      选择<code>Ubuntu22.04</code>是由于我们使用的仿真引擎<code>webots2023b</code>适配的Linux系统版本为<code>Ubuntu22.04</code>
-      如果安装了其他版本的Linux系统，可以参考 <a href="https://github.com/cyberbotics/webots">webots</a>的代码仓库下载配置合适的版本
+      The reason for choosing <code>Ubuntu22.04</code> is that the simulation engine we use, <code>webots2023b</code>, is compatible with the Linux system version <code>Ubuntu22.04</code>.
+      If you have installed another version of Linux, you can refer to the <a href="https://github.com/cyberbotics/webots">webots</a> code repository to download and configure the appropriate version.
 </div>
-</br><section id="step1-webots">
-<h3>Step1 安装webots仿真软件<a class="headerlink" href="#step1-webots" title="Link to this heading"></a></h3>
+</br><section id="step1-install-the-webots-simulation-software">
+<h3>Step1 Install the Webots simulation software<a class="headerlink" href="#step1-install-the-webots-simulation-software" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本软件(例如： <code class="code docutils literal notranslate"><span class="pre">webots-R2023b-x86-64.tar.bz2</span></code> )和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )，可以用如下命令解压和安装</p>
-<p><strong>webots解压与安装</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## unpack</span>
-sudo<span class="w"> </span>tar<span class="w"> </span>-jxvf<span class="w"> </span>webots-R2023b-x86-64.tar.bz2<span class="w"> </span>-C<span class="w"> </span>/opt
-
-<span class="c1">## config</span>
-gedit<span class="w"> </span>~/.bashrc
-<span class="nb">export</span><span class="w"> </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span><span class="nv">$LD_LIBRARY_PATH</span>:/opt/webots/lib/webots
+<div><p>Download the deb package of webots 2023b version (e.g., <code class="code docutils literal notranslate"><span class="pre">webots-R2023b-x86-64.deb</span></code>) and the asset files (<code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code>) from <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a>, and install them using the following command:</p>
+<p><strong>Webots Installation</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## install</span>
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>webots-R2023b-x86-64.deb
 
 <span class="c1">## run</span>
-<span class="nb">cd</span><span class="w"> </span>/opt/webot/bin
-./webots-bin
+webots
 </pre></div>
 </div>
-<p><strong>assets解压</strong></p>
+<p><strong>Asset Decompression</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>~/Downloads/assets-R2023b.zip<span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
 
 <span class="c1">## unzip</span>
-<span class="nb">cd</span><span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
-unzip<span class="w"> </span>./assets-R2023b.zip
+<span class="nb">cd</span><span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>unzip<span class="w"> </span>./assets-R2023b.zip
 </pre></div>
 </div>
 </div></blockquote>
 </section>
-<section id="step2">
-<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#step2" title="Link to this heading"></a></h3>
+<section id="step2-creating-a-virtual-environment-and-installing-libraries">
+<h3>Step2 Creating a Virtual Environment and Installing Libraries<a class="headerlink" href="#step2-creating-a-virtual-environment-and-installing-libraries" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p><strong>虚拟环境创建</strong></p>
+<div><p><strong>Virtual Environment Creation</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
 conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
 </pre></div>
 </div>
-<p><strong>算法端</strong></p>
+<p><strong>Algorithm Side</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Alg requirements</span>
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.17.0<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.25.0
@@ -158,36 +197,36 @@ pip<span class="w"> </span>install<span class="w"> </span>openpyxl
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tianshou</span><span class="o">==</span><span class="m">1</span>.1.0
 </pre></div>
 </div>
-<p><strong>仿真器端</strong></p>
+<p><strong>Simulator Side</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simulator requirements</span>
 sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libeigen3-dev
 sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>nlohmann-json3-dev
 
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>sumo<span class="w"> </span>sumo-tools<span class="w"> </span>sumo-doc
 pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>pyproj<span class="w"> </span>shapely<span class="w"> </span>webcolors<span class="w"> </span>configparser<span class="w"> </span>--user
-pip<span class="w"> </span>install<span class="w"> </span>transform3d
+pip<span class="w"> </span>install<span class="w"> </span>transforms3d
 
 <span class="c1">## config</span>
 gedit<span class="w"> </span>~/.bashrc
 <span class="c1"># Change dir according to your installation</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">SUMO_HOME</span><span class="o">=</span>/usr/share/sumo
-<span class="nb">export</span><span class="w"> </span><span class="nv">WEBOTS_HOME</span><span class="o">=</span>/opt/webots
+<span class="nb">export</span><span class="w"> </span><span class="nv">WEBOTS_HOME</span><span class="o">=</span>/usr/local/webots
 </pre></div>
 </div>
 </div></blockquote>
 </section>
-<section id="step3-webotspython">
-<h3>Step3 修改webots运行python环境<a class="headerlink" href="#step3-webotspython" title="Link to this heading"></a></h3>
+<section id="step3-modify-the-python-environment-for-running-webots">
+<h3>Step3 Modify the Python environment for running Webots<a class="headerlink" href="#step3-modify-the-python-environment-for-running-webots" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>由于我们使用的环境与webots本身默认的python环境不相同，因此需要为我们新的环境创建软链接并进行配置</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow_alg39/bin/python3.9<span class="w"> </span>/usr/bin/python39
+<div><p>Since the environment we are using is different from Webots’ default Python environment, we need to create symbolic links for our new environment and configure it.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow311/bin/python3.11<span class="w"> </span>/usr/bin/python311
 </pre></div>
 </div>
-<p>接着进入webots软件，选择 <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, 按照如下图将选项 <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> 进行修改：</p>
-<figure class="align-center" id="id6">
+<p>Next, open the webots software, go to <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, and modify the option <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> as shown in the following image:</p>
+<figure class="align-center" id="id3">
 <a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">Python command config</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -196,28 +235,29 @@ gedit<span class="w"> </span>~/.bashrc
 <section id="windows">
 <h2>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h2>
 <div style="border-left: 4px solid #FA8072; padding-left: 10px; margin-left: 0;">
-    <b>注意：</b>虽然本工程经过测试能够在Windows系统下运行，但由于相关cpp库的编译安装流程相对复杂，因此<b>不建议</b>使用Windows系统！
+    <b>Note:</b> Although this project has been tested and can run on Windows systems, due to the relatively complex compilation and installation process of related cpp libraries, it is <b>not recommended</b> to use Windows systems!
 </div>
-</br><section id="id2">
-<h3>Step1 安装webots仿真软件<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+</br><section id="step1-install-webots-simulation-software">
+<h3>Step1 Install Webots Simulation Software<a class="headerlink" href="#step1-install-webots-simulation-software" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本安装器( <code class="code docutils literal notranslate"><span class="pre">.exe</span></code> 文件)和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )。</p></li>
-<li><p>将资产复制到指定路径： <code class="code docutils literal notranslate"><span class="pre">C:/Users/&lt;USER&gt;/AppData/Local/Cyberbotics/Webots/cache/assets</span></code> 接着打开webots，如果新用户在tour guide阶段能正常显示环境，则说明安装完成。</p></li>
+<li><p>Download the webots 2023b version installer ( <code class="code docutils literal notranslate"><span class="pre">.exe</span></code> file) and the asset file ( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> ) from <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a>.</p></li>
+<li><p>Copy the assets to the specified path: <code class="code docutils literal notranslate"><span class="pre">C:/Users/&lt;USER&gt;/AppData/Local/Cyberbotics/Webots/cache/assets</span></code> Then open Webots. If the environment displays correctly during the tour guide stage for new users, the installation is complete.</p></li>
 </ol>
 </div></blockquote>
 </section>
-<section id="id4">
-<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="step2-create-virtual-environment-and-install-libraries">
+<h3>Step2 Create Virtual Environment and Install Libraries<a class="headerlink" href="#step2-create-virtual-environment-and-install-libraries" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p><strong>虚拟环境创建</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow39<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow39
+<div><p><strong>Virtual Environment Creation</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
+conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
 </pre></div>
 </div>
-<p><strong>算法端</strong></p>
+<p><strong>Algorithm Side</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Alg requirements</span>
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.17.0<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.25.0
 pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="o">==</span><span class="m">4</span>.9.0.80
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gym</span><span class="o">==</span><span class="m">0</span>.25.1
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">setproctitle</span><span class="o">==</span><span class="m">1</span>.3.3
@@ -225,39 +265,42 @@ pip<span class="w"> </span>install<span class="w"> </span>tensorboard
 pip<span class="w"> </span>install<span class="w"> </span>tqdm
 pip<span class="w"> </span>install<span class="w"> </span>stable-baselines3<span class="o">==</span><span class="m">2</span>.3.0
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">sb3_contrib</span><span class="o">==</span><span class="m">2</span>.3.0
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gymnasium</span><span class="o">==</span><span class="m">0</span>.29.1
+pip<span class="w"> </span>install<span class="w"> </span>gymnasium
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">wandb</span><span class="o">==</span><span class="m">0</span>.17.6
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">memory_profiler</span><span class="o">==</span><span class="m">0</span>.61.0
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">psutil</span><span class="o">==</span><span class="m">6</span>.0.0
+pip<span class="w"> </span>install<span class="w"> </span>pandas
+pip<span class="w"> </span>install<span class="w"> </span>openpyxl
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tianshou</span><span class="o">==</span><span class="m">1</span>.1.0
 </pre></div>
 </div>
-<p><strong>仿真器端</strong></p>
+<p><strong>Emulator Side</strong></p>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      1. python库安装
+      1. Installation of Python libraries
 </div>
 </br><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simulator requirements</span>
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow39
+conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
 pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>pyproj<span class="w"> </span>shapely<span class="w"> </span>webcolors<span class="w"> </span>configparser<span class="w"> </span>--user
 pip<span class="w"> </span>install<span class="w"> </span>transform3d
 </pre></div>
 </div>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      2. <code>Eigen3</code> 库安装
+      2. C++ Library Installation (If recompilation of the C++ code is not needed, this can be ignored)
 </div>
 </br><ul class="simple">
-<li><p>首先在 <a class="reference external" href="https://eigen.tuxfamily.org/index.php?title=Main_Page">eigen</a> 官网下在最新版本的 <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> 库</p></li>
+<li><p>First, download the latest version of the <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> library from the official website <a class="reference external" href="https://eigen.tuxfamily.org/index.php?title=Main_Page">eigen</a>.</p></li>
+<li><p>Download and install the latest version of the <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> library. <a class="reference external" href="https://eigen.tuxfamily.org/index.php?title=Main_Page">Eigen download link</a></p></li>
+<li><p>Download and install the latest version of the <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> library. <a class="reference external" href="https://github.com/nlohmann/json/tree/develop">nlohmann-json3 download link</a></p></li>
 </ul>
-<span style="background-color: yellow;">To Do：补充eigen库的编译过程</span><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      3. <code>nlohmann-json3</code> 库安装
-</div>
-</br><ul class="simple">
-<li><p>首先在 <a class="reference external" href="https://github.com/nlohmann/json/tree/develop">nlohmann-json3</a> 官方仓库下载 <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> 库</p></li>
-</ul>
-<span style="background-color: yellow;">To Do：补充nlohmann-json3库的编译过程</span><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      4. webots的<code>makefile</code>配置
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+      3. Webots' <code>makefile</code> configuration (can be ignored if the C++ part does not need to be recompiled)
 </div>
 </br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    makefile文件路径为 <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+    Paths of makefile files that need to be modified include:
+    <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+    <code>Webots_Simulation/traffic_project/controllers/simpleCar_ctrl/Makefile</code>
 </div>
-</br><p>由于linux系统一般不需要设置包含路径，因此做了windows系统的判断，如果是windows系统需要手动修改drone_ctrl2控制器的makefile，添加eigen以及nlohmann_json的包含路径</p>
+</br><p>Since the Linux system generally does not require additional settings for include paths, a check for the Windows system has been made. If it is a Windows system, you need to manually modify the makefile of the drone_ctrl2 and simpleCar_ctrl controllers, adding the include paths for eigen and nlohmann_json.</p>
 <blockquote>
 <div><div class="highlight-make notranslate"><div class="highlight"><pre><span></span><span class="nv">null</span><span class="w"> </span><span class="o">:=</span>
 <span class="nv">space</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">$(</span>null<span class="k">)</span><span class="w"> </span><span class="k">$(</span>null<span class="k">)</span>
@@ -270,27 +313,60 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>其中， <code class="code docutils literal notranslate"><span class="pre">INCLUDE</span> <span class="pre">+=</span> <span class="pre">-I</span> <span class="pre">D:/cppLibrary/include/Eigen3/include/eigen3</span></code> 需要配置成 <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> 库的路径</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">INCLUDE</span> <span class="pre">+=</span> <span class="pre">-I</span> <span class="pre">D:/cppLibrary/include/nlohmann_json/include</span></code> 需要配置成 <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> 库的路径</p></li>
+<li><p>Among them, <code class="code docutils literal notranslate"><span class="pre">INCLUDE</span> <span class="pre">+=</span> <span class="pre">-I</span> <span class="pre">D:/cppLibrary/include/Eigen3/include/eigen3</span></code> needs to be configured as the path to the <code class="code docutils literal notranslate"><span class="pre">Eigen3</span></code> library.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">INCLUDE</span> <span class="pre">+=</span> <span class="pre">-I</span> <span class="pre">D:/cppLibrary/include/nlohmann_json/include</span></code> needs to be configured to the path of the <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> library.</p></li>
+<li><p>After completing the above modifications, you can open the controller in the Webots editor and recompile it.</p></li>
 </ul>
 </div></blockquote>
-<span style="background-color: yellow;">配置完之后需要重新编译吧？</span><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      5. 安装 <code>sumo</code>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+      4. Install <code>sumo</code>
 </div>
 </br><ul class="simple">
-<li><p>按照文档 <a class="reference external" href="https://github.com/cyberbotics/webots/blob/master/docs/automobile/sumo-interface.md">sumo-interface.md</a> 进行安装即可</p></li>
+<li><p>Follow the instructions in the <a class="reference external" href="https://github.com/cyberbotics/webots/blob/master/docs/automobile/sumo-interface.md">sumo-interface.md</a> document for installation.</p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      6. <code>webots</code> 和 <code>sumo</code> 环境变量配置
+      5. <code>webots</code> and <code>sumo</code> environment variable configuration
 </div>
-</br><span style="background-color: yellow;">To Do：补充环境变量配置图文</span></div></blockquote>
-</section>
-<section id="id5">
-<h3>Step3 修改webots运行python环境<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+</br><ul>
+<li><p>First, press <code class="code docutils literal notranslate"><span class="pre">WIN+R</span></code> to bring up the Run window, then type <code class="code docutils literal notranslate"><span class="pre">sysdm.cpl</span></code> to open the System Properties page. Next, select “Advanced” -&gt; “Environment Variables” -&gt; “System variables” -&gt; “New”.</p></li>
+<li><p>Insert <code class="code docutils literal notranslate"><span class="pre">SUMO_HOME</span></code> configured as shown in the following figure:</p>
 <blockquote>
-<div><p>Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中</p>
-<span style="background-color: yellow;">To Do：补充环境变量配置图文</span></div></blockquote>
-<span style="background-color: yellow;">To Do：Finish Windows Version Configuration</span></section>
+<div><figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/SUMO_HOME.png"><img alt="SUMO_HOME configuration" src="_images/SUMO_HOME.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">SUMO_HOME Configuration</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+<li><p>Insert <code class="code docutils literal notranslate"><span class="pre">WEBOTS_HOME</span></code> and configure it as shown in the figure below:</p>
+<blockquote>
+<div><figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="_images/WEBOTS_HOME.png"><img alt="WEBOTS_HOME configuration" src="_images/WEBOTS_HOME.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">WEBOTS_HOME configuration</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+<section id="id2">
+<h3>Step3 Modify the Python environment for running Webots<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>In Linux systems, the issue is resolved by adding a symbolic link, while in Windows, the running path is directly inserted into webots.</p></li>
+<li><p>Enter the webots software, select <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, and modify the <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> option as shown in the figure below:</p></li>
+</ul>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="_images/Python_CommandWIN.png"><img alt="Python_CommandWIN configuration" src="_images/Python_CommandWIN.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Python_Command(Windows) configuration</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</div></blockquote>
+</section>
 </section>
 </section>
 

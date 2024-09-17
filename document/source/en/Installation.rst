@@ -1,10 +1,59 @@
-安装
+Installation
 =============
 
 .. raw:: html
 
+    <style>
+        #language-switch {
+           display: flex; /* Use Flexbox layout */
+           justify-content: center; /* Center buttons horizontally */
+           align-items: center; /* Center buttons vertically */
+           gap: 10px; /* Space between buttons */
+           margin-top: 20px;
+           margin-bottom: 20px;
+       }
+       #language-switch button {
+           width: 180px;
+           height: 40px;
+           font-size: 16px;
+           padding: 10px;
+           margin: 5px;
+           border: 1px solid #ccc;
+           border-radius: 5px;
+           cursor: pointer;
+           text-align: center;
+           background-color: #f0f0f0;
+           display: flex;
+           align-items: center; /* Center text vertically */
+           justify-content: center; /* Center text horizontally */
+       }
+   </style>
+
+    <!-- Language switch buttons -->
+    <div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
+        <b style="font-size: 18px;">You can choose language by </b>
+        <button onclick="switchLanguage('zh')">中文</button>
+        <button onclick="switchLanguage('en')">English</button>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'zh') {
+                window.location.href = '../zh/Installation.html';
+            } else if (lang === 'en') {
+                window.location.href = '../en/Installation.html';
+            }
+        }
+    </script>
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+.. raw:: html
+
     <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-        本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)以及<code>Windows</code>系统下的工程安装指引
+        This document primarily provides installation guidance for projects on both <code>Linux</code> systems (<code>Ubuntu22.04</code>) and <code>Windows</code> systems.
     </div>
     </br>
 
@@ -14,52 +63,46 @@ Linux(Ubuntu22.04)
 .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            选择<code>Ubuntu22.04</code>是由于我们使用的仿真引擎<code>webots2023b</code>适配的Linux系统版本为<code>Ubuntu22.04</code>
-            如果安装了其他版本的Linux系统，可以参考 <a href="https://github.com/cyberbotics/webots">webots</a>的代码仓库下载配置合适的版本
+            The reason for choosing <code>Ubuntu22.04</code> is that the simulation engine we use, <code>webots2023b</code>, is compatible with the Linux system version <code>Ubuntu22.04</code>.
+            If you have installed another version of Linux, you can refer to the <a href="https://github.com/cyberbotics/webots">webots</a> code repository to download and configure the appropriate version.
       </div>
       </br>
 
-Step1 安装webots仿真软件
+Step1 Install the Webots simulation software
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    从 `webots <https://github.com/cyberbotics/webots>`_ 下载webots2023b版本软件(例如： :code:`webots-R2023b-x86-64.tar.bz2` )和资产文件( :code:`assets-R2023b.zip` )，可以用如下命令解压和安装
+    Download the deb package of webots 2023b version (e.g., :code:`webots-R2023b-x86-64.deb`) and the asset files (:code:`assets-R2023b.zip`) from `webots <https://github.com/cyberbotics/webots>`_, and install them using the following command:
 
-    **webots解压与安装**
+    **Webots Installation**
 
     .. code:: bash
         
-        ## unpack
-        sudo tar -jxvf webots-R2023b-x86-64.tar.bz2 -C /opt
-        
-        ## config
-        gedit ~/.bashrc
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/webots/lib/webots
+        ## install
+        sudo dpkg -i webots-R2023b-x86-64.deb
 
         ## run
-        cd /opt/webot/bin
-        ./webots-bin
+        webots
 
-    **assets解压**
+    **Asset Decompression**
 
     .. code:: bash
         
         cp ~/Downloads/assets-R2023b.zip ~/.cache/Cyberbotics/Webots/assets/
         
         ## unzip
-        cd ~/.cache/Cyberbotics/Webots/assets/
-        unzip ./assets-R2023b.zip
+        cd ~/.cache/Cyberbotics/Webots/assets/ && unzip ./assets-R2023b.zip
 
-Step2 创建虚拟环境与库安装
+Step2 Creating a Virtual Environment and Installing Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    **虚拟环境创建**
+    **Virtual Environment Creation**
 
     .. code:: bash
 
         conda create -n uav_follow311 python=3.11
         conda activate uav_follow311
 
-    **算法端**
+    **Algorithm Side**
 
     .. code:: bash
 
@@ -81,7 +124,7 @@ Step2 创建虚拟环境与库安装
         pip install openpyxl
         pip install tianshou==1.1.0
 
-    **仿真器端**
+    **Simulator Side**
 
     .. code:: bash
 
@@ -91,31 +134,31 @@ Step2 创建虚拟环境与库安装
 
         sudo apt install sumo sumo-tools sumo-doc
         pip install lxml pyproj shapely webcolors configparser --user
-        pip install transform3d
+        pip install transforms3d
 
         ## config
         gedit ~/.bashrc
         # Change dir according to your installation
         export SUMO_HOME=/usr/share/sumo
-        export WEBOTS_HOME=/opt/webots
+        export WEBOTS_HOME=/usr/local/webots
 
-Step3 修改webots运行python环境
+Step3 Modify the Python environment for running Webots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    由于我们使用的环境与webots本身默认的python环境不相同，因此需要为我们新的环境创建软链接并进行配置
+    Since the environment we are using is different from Webots' default Python environment, we need to create symbolic links for our new environment and configure it.
 
     .. code:: bash
 
-        ln -s /root/miniconda3/envs/uav_follow_alg39/bin/python3.9 /usr/bin/python39
+        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
 
-    接着进入webots软件，选择 :code:`Tools` -> :code:`Preferences`, 按照如下图将选项 :code:`Python command` 进行修改：
+    Next, open the webots software, go to :code:`Tools` -> :code:`Preferences`, and modify the option :code:`Python command` as shown in the following image:
 
     .. figure:: _static/image/Python_Command.png
       :alt: Python command配置                               
       :width: 600px                                              
       :align: center
 
-      Python command配置  
+      Python command config  
 
 
 Windows
@@ -124,33 +167,35 @@ Windows
 .. raw:: html
 
     <div style="border-left: 4px solid #FA8072; padding-left: 10px; margin-left: 0;">
-        <b>注意：</b>虽然本工程经过测试能够在Windows系统下运行，但由于相关cpp库的编译安装流程相对复杂，因此<b>不建议</b>使用Windows系统！
+        <b>Note:</b> Although this project has been tested and can run on Windows systems, due to the relatively complex compilation and installation process of related cpp libraries, it is <b>not recommended</b> to use Windows systems!
     </div>
     </br>
 
-Step1 安装webots仿真软件
+Step1 Install Webots Simulation Software
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    1. 从 `webots <https://github.com/cyberbotics/webots>`_ 下载webots2023b版本安装器( :code:`.exe` 文件)和资产文件( :code:`assets-R2023b.zip` )。
+    1. Download the webots 2023b version installer ( :code:`.exe` file) and the asset file ( :code:`assets-R2023b.zip` ) from `webots <https://github.com/cyberbotics/webots>`_.
     
-    2. 将资产复制到指定路径： :code:`C:/Users/<USER>/AppData/Local/Cyberbotics/Webots/cache/assets` 接着打开webots，如果新用户在tour guide阶段能正常显示环境，则说明安装完成。
+    2. Copy the assets to the specified path: :code:`C:/Users/<USER>/AppData/Local/Cyberbotics/Webots/cache/assets` Then open Webots. If the environment displays correctly during the tour guide stage for new users, the installation is complete.
 
-Step2 创建虚拟环境与库安装
+Step2 Create Virtual Environment and Install Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    **虚拟环境创建**
+    **Virtual Environment Creation**
+
 
     .. code:: bash
 
-        conda create -n uav_follow39 python=3.9
-        conda activate uav_follow39
+        conda create -n uav_follow311 python=3.11
+        conda activate uav_follow311
 
-    **算法端**
+    **Algorithm Side**
 
     .. code:: bash
 
         ## Alg requirements
         pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
+        pip install numpy==1.25.0
         pip install opencv-python==4.9.0.80
         pip install gym==0.25.1
         pip install setproctitle==1.3.3
@@ -158,57 +203,46 @@ Step2 创建虚拟环境与库安装
         pip install tqdm
         pip install stable-baselines3==2.3.0
         pip install sb3_contrib==2.3.0
-        pip install gymnasium==0.29.1
+        pip install gymnasium
         pip install wandb==0.17.6
+        pip install memory_profiler==0.61.0
+        pip install psutil==6.0.0
+        pip install pandas
+        pip install openpyxl
+        pip install tianshou==1.1.0
 
-    **仿真器端**
+    **Emulator Side**
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            1. python库安装
+            1. Installation of Python libraries
       </div>
       </br>
 
     .. code:: bash
 
         ## Simulator requirements
-        conda activate uav_follow39
+        conda activate uav_follow311
         pip install lxml pyproj shapely webcolors configparser --user
         pip install transform3d
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            2. <code>Eigen3</code> 库安装
+            2. C++ Library Installation (If recompilation of the C++ code is not needed, this can be ignored)
       </div>
       </br>
 
     
-    * 首先在 `eigen <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_ 官网下在最新版本的 :code:`Eigen3` 库
-
-    .. raw:: html
-
-        <span style="background-color: yellow;">To Do：补充eigen库的编译过程</span>
-
-    .. raw:: html
-
-      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            3. <code>nlohmann-json3</code> 库安装
-      </div>
-      </br>
-
-
-    * 首先在 `nlohmann-json3 <https://github.com/nlohmann/json/tree/develop>`_ 官方仓库下载 :code:`nlohmann-json3` 库
-
-    .. raw:: html
-
-        <span style="background-color: yellow;">To Do：补充nlohmann-json3库的编译过程</span>
+    * First, download the latest version of the :code:`Eigen3` library from the official website `eigen <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_.
+    * Download and install the latest version of the :code:`Eigen3` library. `Eigen download link <https://eigen.tuxfamily.org/index.php?title=Main_Page>`_
+    * Download and install the latest version of the :code:`nlohmann-json3` library. `nlohmann-json3 download link <https://github.com/nlohmann/json/tree/develop>`_
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            4. webots的<code>makefile</code>配置
+            3. Webots' <code>makefile</code> configuration (can be ignored if the C++ part does not need to be recompiled)
       </div>
       </br>
     
@@ -216,11 +250,13 @@ Step2 创建虚拟环境与库安装
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            makefile文件路径为 <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+            Paths of makefile files that need to be modified include:
+            <code>Webots_Simulation/traffic_project/controllers/drone_ctrl2/Makefile</code>
+            <code>Webots_Simulation/traffic_project/controllers/simpleCar_ctrl/Makefile</code>
         </div>
         </br>
         
-    由于linux系统一般不需要设置包含路径，因此做了windows系统的判断，如果是windows系统需要手动修改drone_ctrl2控制器的makefile，添加eigen以及nlohmann_json的包含路径
+    Since the Linux system generally does not require additional settings for include paths, a check for the Windows system has been made. If it is a Windows system, you need to manually modify the makefile of the drone_ctrl2 and simpleCar_ctrl controllers, adding the include paths for eigen and nlohmann_json.
 
         .. code:: make
 
@@ -233,44 +269,56 @@ Step2 创建虚拟环境与库安装
             endif
             include $(WEBOTS_HOME_PATH)/resources/Makefile.include
 
-        * 其中， :code:`INCLUDE += -I D:/cppLibrary/include/Eigen3/include/eigen3` 需要配置成 :code:`Eigen3` 库的路径
-        *  :code:`INCLUDE += -I D:/cppLibrary/include/nlohmann_json/include` 需要配置成 :code:`nlohmann-json3` 库的路径
-
-    .. raw:: html
-
-        <span style="background-color: yellow;">配置完之后需要重新编译吧？</span>
-
-    .. raw:: html
-
-      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            5. 安装 <code>sumo</code>
-      </div>
-      </br>
-
-
-    * 按照文档 `sumo-interface.md <https://github.com/cyberbotics/webots/blob/master/docs/automobile/sumo-interface.md>`_ 进行安装即可
+        * Among them, :code:`INCLUDE += -I D:/cppLibrary/include/Eigen3/include/eigen3` needs to be configured as the path to the :code:`Eigen3` library.
+        * :code:`INCLUDE += -I D:/cppLibrary/include/nlohmann_json/include` needs to be configured to the path of the :code:`nlohmann-json3` library.
+        * After completing the above modifications, you can open the controller in the Webots editor and recompile it.
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            6. <code>webots</code> 和 <code>sumo</code> 环境变量配置
+            4. Install <code>sumo</code>
       </div>
       </br>
 
+
+    * Follow the instructions in the `sumo-interface.md <https://github.com/cyberbotics/webots/blob/master/docs/automobile/sumo-interface.md>`_ document for installation.
+
     .. raw:: html
 
-        <span style="background-color: yellow;">To Do：补充环境变量配置图文</span>
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            5. <code>webots</code> and <code>sumo</code> environment variable configuration
+      </div>
+      </br>
 
-Step3 修改webots运行python环境
+    * First, press :code:`WIN+R` to bring up the Run window, then type :code:`sysdm.cpl` to open the System Properties page. Next, select "Advanced" -> "Environment Variables" -> "System variables" -> "New".
+    * Insert :code:`SUMO_HOME` configured as shown in the following figure:
+
+        .. figure:: _static/image/SUMO_HOME.png
+            :alt: SUMO_HOME configuration                               
+            :width: 600px                                              
+            :align: center
+
+            SUMO_HOME Configuration
+
+    * Insert :code:`WEBOTS_HOME` and configure it as shown in the figure below:
+
+        .. figure:: _static/image/WEBOTS_HOME.png
+            :alt: WEBOTS_HOME configuration                               
+            :width: 600px                                              
+            :align: center
+
+            WEBOTS_HOME configuration
+
+Step3 Modify the Python environment for running Webots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中
+    * In Linux systems, the issue is resolved by adding a symbolic link, while in Windows, the running path is directly inserted into webots.
 
-    .. raw:: html
+    * Enter the webots software, select :code:`Tools` -> :code:`Preferences`, and modify the :code:`Python command` option as shown in the figure below:
 
-        <span style="background-color: yellow;">To Do：补充环境变量配置图文</span>
+    .. figure:: _static/image/Python_CommandWIN.png
+        :alt: Python_CommandWIN configuration                               
+        :width: 600px                                              
+        :align: center
 
-
-.. raw:: html
-
-    <span style="background-color: yellow;">To Do：Finish Windows Version Configuration</span>
+        Python_Command(Windows) configuration
