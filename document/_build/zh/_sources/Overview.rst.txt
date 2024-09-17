@@ -85,7 +85,7 @@ VAT 方案
 
    **优势**：端到端RL效率更高、更适合跨场景任务
 
-.. figure:: ./_static/image/VAT_model.png
+.. figure:: ./_static/image/1_2stages.png
    :alt: VAT Model
    :width: 600px
    :align: center

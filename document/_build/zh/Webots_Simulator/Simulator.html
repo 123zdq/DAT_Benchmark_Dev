@@ -946,7 +946,7 @@
 </br><section id="id26">
 <h3>输入动作<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数</p>
+<div><p>输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进/后退，左移/右移，上移/下移，顺时针/逆时针旋转，加上reset数据共5个浮点数</p>
 </div></blockquote>
 </section>
 <section id="id27">
@@ -1116,7 +1116,7 @@
 </html>
 </br><p><strong>自定义奖励数据包</strong></p>
 <blockquote>
-<div><p>自定义奖励数据包共59个浮点数+1个字符串，包括以下部分</p>
+<div><p>自定义奖励数据包共60个浮点数+1个字符串，包括以下部分</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_rewardData</span><span class="p">{</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraWidth</span><span class="p">;</span><span class="c1">// 图像宽度（像素）</span>
 <span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// 图像高度（像素）</span>

@@ -69,7 +69,7 @@ Linux(Ubuntu22.04)
       </br>
 
 Step1 Install the Webots simulation software
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Download the deb package of webots 2023b version (e.g., :code:`webots-R2023b-x86-64.deb`) and the asset files (:code:`assets-R2023b.zip`) from `webots <https://github.com/cyberbotics/webots>`_, and install them using the following command:
 
@@ -93,7 +93,7 @@ Step1 Install the Webots simulation software
         cd ~/.cache/Cyberbotics/Webots/assets/ && unzip ./assets-R2023b.zip
 
 Step2 Creating a Virtual Environment and Installing Libraries
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     **Virtual Environment Creation**
 
@@ -143,7 +143,7 @@ Step2 Creating a Virtual Environment and Installing Libraries
         export WEBOTS_HOME=/usr/local/webots
 
 Step3 Modify the Python environment for running Webots
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     Since the environment we are using is different from Webots' default Python environment, we need to create symbolic links for our new environment and configure it.
 
@@ -172,14 +172,14 @@ Windows
     </br>
 
 Step1 Install Webots Simulation Software
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     1. Download the webots 2023b version installer ( :code:`.exe` file) and the asset file ( :code:`assets-R2023b.zip` ) from `webots <https://github.com/cyberbotics/webots>`_.
     
     2. Copy the assets to the specified path: :code:`C:/Users/<USER>/AppData/Local/Cyberbotics/Webots/cache/assets` Then open Webots. If the environment displays correctly during the tour guide stage for new users, the installation is complete.
 
 Step2 Create Virtual Environment and Install Libraries
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     **Virtual Environment Creation**
 
@@ -310,7 +310,7 @@ Step2 Create Virtual Environment and Install Libraries
             WEBOTS_HOME configuration
 
 Step3 Modify the Python environment for running Webots
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     * In Linux systems, the issue is resolved by adding a symbolic link, while in Windows, the running path is directly inserted into webots.
 

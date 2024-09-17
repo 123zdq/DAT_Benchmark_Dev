@@ -53,7 +53,7 @@ Simulation Environment
 .. _Environment Introduction:
 
 Environment Introduction
-----------
+----------------------------------------
 
 - The simulation environment of this project is built based on the open-source simulation software Webots. The background of the simulation environment simulates the target tracking problem in outdoor scenes in real life. For this purpose, six maps have been set up, including city streets, city center, lakeside, countryside, desert, and farmland, each of which evolves into various conditions such as day, night, foggy, and snowy, making a total of 24 environments. To facilitate model training from simple environments, several simple environment maps are also available for use.
 - Schematic diagrams of 24 simulation environments in the project:
@@ -71,7 +71,7 @@ Environment Introduction
 .. _Operation Flow:
 
 Operation Flow
-----------
+------------------------------
 
 .. raw:: html
 
@@ -86,24 +86,24 @@ Operation Flow
    :align: center
 
 demo mode
-~~~~~~~~~
+~~~~~~~~~~~~~~~~~~
 
    This mode generates a tracker in the map. The tracker can fly through the map by keyboard operation, allowing you to browse the map. Meanwhile, the tracker by default tracks a BmwX5 vehicle near its initial position and outputs the reward parameters in real time on the Console status bar. This object can be used to test whether the built-in reward parameters are reasonable for debugging purposes.
 
 video mode
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
    - This mode is mainly used to record the behavior of the tracked object. The environment will automatically schedule the tracker error tracking object and export video images according to the simulation time and configuration parameters, while generating labels corresponding to each image.
    - The data is stored in: :code:`./Webots_Simulation/traffic_project/droneVideos/DRONEX/episodeX`, with the image format as jpeg and the labels in the :code:`mark.json` file.
    - At the same time, you can generate multiple sets of video image file structure descriptions through the script by directly executing the :code:`./Webots_Simulation/traffic_project/fileStruct.py` script, which will generate the description file :code:`dir_info.json` in the same directory.
 
 training mode
-~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
    This mode is used for algorithm training. You can choose to manually open the Webots simulation first and then run the training script, or you can choose to modify the algorithm configuration file to achieve one-click full startup of the algorithm.
 
 Parameter Configuration
------------
+---------------------------------
 
    .. raw:: html
 
@@ -119,7 +119,7 @@ Parameter Configuration
     </div>
 
 Basic Parameters
-~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
@@ -184,7 +184,7 @@ Basic Parameters
       * :code:`doneState` : The reason for generating done, including "height" (unreasonable tracker height), "distance" (the error between the tracker's target position and the actual position is too large), "velocity" (unreasonable tracker movement speed), "yaw velocity" (unreasonable tracker rotational speed around the vertical axis), "pitch or yaw angle" (unreasonable tracker attitude).
 
 Tracker (only effective for drones) generates a physical range parameter configuration of done
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
@@ -209,7 +209,7 @@ Tracker (only effective for drones) generates a physical range parameter configu
    - :code:`distance_error` ：Maximum error between the tracker's desired position and current position (m).
 
 Built-in reward parameter configuration (valid for drones only, cars return reward=1 by default)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
@@ -238,7 +238,7 @@ Built-in reward parameter configuration (valid for drones only, cars return rewa
    - :code:`view_range` : The view range for generating rewards. This parameter is used to scale the quadrilateral used for reward calculation, i.e., the size of the quadrilateral box in the camera view. Generally, the range is set to [0,1].
 
 SUMO Traffic System Parameter Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
@@ -285,7 +285,7 @@ SUMO Traffic System Parameter Configuration
    - :code:`random_seed` : The fixed random seed.
 
 Other object tracking parameter configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Only effective when :code:`Tracking_Object` is not "SUMO_VEHICLE".
 
 .. code:: json
