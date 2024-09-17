@@ -165,7 +165,7 @@ Basic Parameters
       * For more details on lidar point cloud data, see: :ref:`定制化参数接口`
    * :code:`Tracking_Object`: The tracked object setting (default is SUMO_VEHICLE). Example tracking objects include "SUMO_VEHICLE", "Pedestrian", "Shrimp", "Create", "Sojourner", "Mantis", etc. Custom tracking objects are also supported. See the project manual.
 
-      * For detailed descriptions of tracking object types, see: :ref:`追踪对象`
+      * For detailed descriptions of tracking object types, see: :ref:`Tracked Objects`
 
    * :code:`Verbose`: Enable log recording. If set to true, some important parameters will be printed in the Webots terminal window for users to observe. Additionally, program run logs will be generated in the :code:`Webots_Simulation/traffic_project/logs` folder, mainly for debugging the simulation environment.
 
