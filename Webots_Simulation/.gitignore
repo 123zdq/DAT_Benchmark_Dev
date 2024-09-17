@@ -4,5 +4,5 @@ traffic_project/controllers/global_receiver/__pycache__/*
 traffic_project/Files2Alg/*.txt
 traffic_project/Files2Alg/*.jpeg
 traffic_project/logs/*.log
-traffic_project/droneVideos/*
-!traffic_project/droneVideos/README.md
+traffic_project/Videos/*
+!traffic_project/Videos/README.md

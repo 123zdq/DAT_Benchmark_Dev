@@ -210,6 +210,7 @@ int main(int argc, char **argv)
   bool is_video_warmUp = false;
   int random_number = -1;
   dataDisplay<6> dispData(disp);
+  double initParams[2] = {1.,0};
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -346,24 +347,26 @@ int main(int argc, char **argv)
     if (config.get()->simulationMode == string("train"))
     {
       drone_fly = true;
-      string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
-      if (pitchAngle == string("error"))
-      {
-        gimbal_cmd.y = 1.;
-      }
-      else
-      {
-        try
-        {
-          gimbal_cmd.y = std::stod(pitchAngle);
-        }
-        catch (const std::exception &e)
-        {
-          std::cerr << "Error: " << e.what() << std::endl;
-          gimbal_cmd.y = 1.;
-        }
-      }
-      gimbal_cmd.y = CLAMP(gimbal_cmd.y, 0.5, 1.5);
+      // string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
+      // if (pitchAngle == string("error"))
+      // {
+      //   gimbal_cmd.y = 1.;
+      // }
+      // else
+      // {
+      //   try
+      //   {
+      //     gimbal_cmd.y = std::stod(pitchAngle);
+      //   }
+      //   catch (const std::exception &e)
+      //   {
+      //     std::cerr << "Error: " << e.what() << std::endl;
+      //     gimbal_cmd.y = 1.;
+      //   }
+      // }
+      Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 2);
+      gimbal_cmd.y = CLAMP(initParams[0], 0.5, 1.5);
+      rewardG.makeReward.initDirection = initParams[1];
       // 获取action数据
       Txt_Input("../../cache/" + droneDef + "_Global2Ctrl.txt", action, 5);
       if (t < 0.1)
@@ -453,24 +456,26 @@ int main(int argc, char **argv)
     if (config.get()->simulationMode == string("video"))
     {
       drone_fly = true;
-      string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
-      if (pitchAngle == string("error"))
-      {
-        gimbal_cmd.y = 1.;
-      }
-      else
-      {
-        try
-        {
-          gimbal_cmd.y = std::stod(pitchAngle);
-        }
-        catch (const std::exception &e)
-        {
-          std::cerr << "Error: " << e.what() << std::endl;
-          gimbal_cmd.y = 1.;
-        }
-      }
-      gimbal_cmd.y = CLAMP(gimbal_cmd.y, 0.5, 1.5);
+      // string pitchAngle = Txt_Input("../../cache/" + droneDef + "_PitchAngle.txt");
+      // if (pitchAngle == string("error"))
+      // {
+      //   gimbal_cmd.y = 1.;
+      // }
+      // else
+      // {
+      //   try
+      //   {
+      //     gimbal_cmd.y = std::stod(pitchAngle);
+      //   }
+      //   catch (const std::exception &e)
+      //   {
+      //     std::cerr << "Error: " << e.what() << std::endl;
+      //     gimbal_cmd.y = 1.;
+      //   }
+      // }
+      Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 2);
+      gimbal_cmd.y = CLAMP(initParams[0], 0.5, 1.5);
+      rewardG.makeReward.initDirection = initParams[1];
       // video mode self count
       if(rewardG.carDef != string("ORIGIN"))
       {
@@ -728,9 +733,9 @@ int main(int argc, char **argv)
       
       if (config.get()->customizedReward)
       {
-        double makeReward_list[59] = {};
+        double makeReward_list[60] = {};
         memcpy(makeReward_list, &rewardG.makeReward, sizeof(rewardG.makeReward) - sizeof(rewardG.makeReward.carTypename));
-        for(int i=0;i<59;i++)
+        for(int i=0;i<60;i++)
         {
           if(std::isnan(state_list[i])){
             is_nan = true;
@@ -739,14 +744,14 @@ int main(int argc, char **argv)
         file_create("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::out);
         if(is_nan == false)
         {
-          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 59, rewardG.makeReward.carTypename);
+          Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 60, rewardG.makeReward.carTypename);
         }
-        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 59)
+        while (get_file_size("../../cache/" + droneDef + "_Ctrl2GlobalR.txt") < 60)
         {
           delete_file("../../cache/" + droneDef + "_Ctrl2GlobalR.txt");
           if(is_nan == false)
           {
-            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 59, rewardG.makeReward.carTypename);
+            Txt_Output("../../cache/" + droneDef + "_Ctrl2GlobalR.txt", ios::app, makeReward_list, 60, rewardG.makeReward.carTypename);
           }
         }
       }

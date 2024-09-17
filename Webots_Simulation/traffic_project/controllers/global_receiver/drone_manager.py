@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-15 23:10:57
+LastEditTime: 2024-09-17 16:24:54
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -191,7 +191,6 @@ class droneManager:
             self.camera_pitch = self.configData["Drone_Random_Config"]["view_pitch_fixed"]
         else:
             self.camera_pitch = random.uniform(self.configData["Drone_Random_Config"]["view_pitch_random_min"],self.configData["Drone_Random_Config"]["view_pitch_random_max"])
-        self.updatePitchAngle()
         
         if self.configData["Drone_Random_Config"]["horizon_bias_random"] == False:
             horizon_bias = self.configData["Drone_Random_Config"]["horizon_bias_fixed"]
@@ -230,6 +229,8 @@ class droneManager:
                 rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
             else:
                 rotateAngle = random.choice([1,-1]) * random.uniform(abs(self.configData["Drone_Random_Config"]["direction_random_min"]),abs(self.configData["Drone_Random_Config"]["direction_random_max"]))
+                
+        self.updateInitParams(self.camera_pitch, rotateAngle)
         
         if self.configData["Sumo_Params"]["fixed_color"] is True and self.configData["Sumo_Params"]["car_type"] != "motorcycle" and self.configData["Tracking_Object"] == "SUMO_VEHICLE":
             colorList = list(self.configData["Sumo_Params"]["normalize_color"])
@@ -262,9 +263,9 @@ class droneManager:
     param {*} filePath: the path to write files
     return {*}
     '''
-    def updatePitchAngle(self, filePath:str=None):
-        with open("../../cache/" + self.droneDef + "_PitchAngle.txt", "w") as f:
-            f.write(str(self.camera_pitch))
+    def updateInitParams(self, cameraPitch, direction):
+        with open("../../cache/" + self.droneDef + "_InitParams.txt", "w") as f:
+            f.write(str(cameraPitch) + "\n" + str(direction) + "\n")
             f.close()
             
         

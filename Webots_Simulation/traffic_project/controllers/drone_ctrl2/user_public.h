@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-09 11:41:54
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-15 23:13:15
+ * @LastEditTime: 2024-09-17 16:33:48
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/user_public.h
  * @Description: 
  * 
@@ -46,7 +46,7 @@ namespace usrPublic{
     }Odometry;
     #pragma pack()
 
-    // make reward data ---- double * 57 + string
+    // make reward data ---- double * 60 + string
     #pragma pack(1)
     typedef struct _rewardData{
         double cameraWidth;// 图像宽度（像素）
@@ -55,6 +55,7 @@ namespace usrPublic{
         double cameraF;// 摄像头焦距估算（像素）
         double cameraPitch;// 摄像头俯仰角 (rad)
         double trackerHeight;// 跟踪器高度 (m) 
+        double initDirection;// 初始跟踪角度 (rad)
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
         // vector3 BMW;// 车辆的长宽高
         // vector3 Citroen;

@@ -1148,6 +1148,7 @@ Legged Robots
         double cameraF;// 摄像头焦距估算（像素）
         double cameraPitch;// 摄像头俯仰角 (rad)
         double trackerHeight;// 跟踪器高度 (m)
+        double initDirection;// 初始跟踪角度 (rad)
         double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
         double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
         vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
