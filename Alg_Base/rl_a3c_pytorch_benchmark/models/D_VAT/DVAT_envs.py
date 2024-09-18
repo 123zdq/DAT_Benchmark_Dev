@@ -123,6 +123,19 @@ class DVAT_ENV(gymnasium.Env):
         env_conf = conf_json["Benchmark"]
         return gymnasium.spaces.Discrete(int(env_conf["Action_dim"]))
     
+    @classmethod
+    def get_obs_space(cls,obs_buffer_len:int=3):
+        conf_json = read_config(CONF)
+        env_conf = conf_json["Benchmark"]
+        image_shape = (env_conf["State_channel"], env_conf["State_size"], env_conf["State_size"])
+        assert obs_buffer_len >= 0 and isinstance(obs_buffer_len,int)
+        
+        obs_space = gymnasium.spaces.Dict({
+            "actor_obs":gymnasium.spaces.Box(low=0,high=1.0,shape=(obs_buffer_len,)+image_shape,dtype=np.float32),
+            "critic_obs":gymnasium.spaces.Box(low=-np.inf, high=np.inf, shape=(9,), dtype=np.float32),
+        })
+        return obs_space
+    
 def make_env(n_envs,rank,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3):
     def _init():
         env = DVAT_ENV(

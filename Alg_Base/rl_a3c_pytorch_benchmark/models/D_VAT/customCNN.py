@@ -15,7 +15,7 @@ class CustomCNN(nn.Module):
     """
 
     def __init__(self, observation_space: gymnasium.spaces.Box, features_dim: int = 512):
-        super(CustomCNN, self).__init__(observation_space, features_dim)
+        super(CustomCNN, self).__init__()
         # We assume CxHxW images (channels first)
         # Re-ordering will be done by pre-preprocessing or wrapper
 
@@ -25,25 +25,27 @@ class CustomCNN(nn.Module):
         for param in self.resnet.parameters():
             param.requires_grad = True
 
+        # get device
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
         self.preprocess = transforms.Compose([
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ])
 
         # Compute shape by doing one forward pass
         with th.no_grad():
-            print(observation_space.shape)
             dims = self.resnet(
                 th.as_tensor(np.zeros(observation_space.shape)).float()
             ).shape
 
             self.n_flatten = int(np.prod(dims))
-            print(self.n_flatten)
 
         self.linear = nn.Sequential(nn.Flatten(), nn.Linear(self.n_flatten, features_dim), nn.ReLU())
 
-    def forward(self, observations: th.Tensor) -> th.Tensor:
+    def forward(self, observations: np.ndarray) -> th.Tensor:
         # Preprocess
         # t = time.time()
+        observations = th.tensor(observations).to(self.device) # ndarray2tensor
         input_batch = self.preprocess(observations)
 
         b, s, c, w, h = input_batch.shape

@@ -7,6 +7,7 @@ sys.path.append(current_dir)
 sys.path.append(parent_dir)
 sys.path.append(grandparent_dir)
 
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -30,7 +31,12 @@ class DenseMlp(nn.Module):
         self.output_layer = nn.Linear(hidden_dim, output_dim)
         self.output_activation = nn.Softmax(dim=-1) if squash_output else nn.Identity()
 
-    def forward(self, x):
+        # get device
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    def forward(self, x:np.ndarray):
+        if isinstance(x,np.ndarray):
+            x = torch.tensor(x).to(self.device)
         out_1 = F.relu(self.layer_1(x))
         # input_2 = th.cat([out_1, input_tensor], dim=1)
         out_2 = F.relu(self.layer_2(out_1))
@@ -64,27 +70,17 @@ class CustomDiscreteCritic(nn.Module):
         q_values = self.net(obs)
         return q_values
 
-from dataclasses import dataclass
 from typing import Any, TypeVar, cast
 import numpy as np
 import torch
-from overrides import override
 from torch.distributions import Categorical
 
+from tianshou.policy.modelfree.discrete_sac import TDiscreteSACTrainingStats,DiscreteSACTrainingStats
 from tianshou.data import Batch, ReplayBuffer, to_torch
 from tianshou.data.types import ObsBatchProtocol, RolloutBatchProtocol
 from tianshou.policy.base import TLearningRateScheduler
 from tianshou.policy.modelfree.sac import SACTrainingStats
 from tianshou.utils.net.discrete import Actor, Critic
-
-
-@dataclass
-class DiscreteSACTrainingStats(SACTrainingStats):
-    pass
-
-
-TDiscreteSACTrainingStats = TypeVar("TDiscreteSACTrainingStats", bound=DiscreteSACTrainingStats)
-
 
 
 class DVAT_SACDPolicy(DiscreteSACPolicy):
@@ -144,11 +140,6 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
             gamma=gamma,
             alpha=alpha,
             estimation_step=estimation_step,
-            # Note: inheriting from continuous sac reduces code duplication,
-            # but continuous stuff has to be disabled
-            exploration_noise=None,
-            action_scaling=False,
-            action_bound_method=None,
             observation_space=observation_space,
             lr_scheduler=lr_scheduler,
         )
@@ -181,9 +172,9 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
         )
         return target_q.sum(dim=-1) + self.alpha * dist.entropy()
 
-    def learn(self, batch: RolloutBatchProtocol, *args: Any, **kwargs: Any) -> TDiscreteSACTrainingStats:  # type: ignore
+    def learn(self, batch: RolloutBatchProtocol,target_q:torch.Tensor,*args: Any, **kwargs: Any) -> TDiscreteSACTrainingStats:  # type: ignore
         weight = batch.pop("weight", 1.0)
-        target_q = batch.returns.flatten()
+        target_q = target_q
         act = to_torch(batch.act[:, np.newaxis], device=target_q.device, dtype=torch.long)
 
         # critic 1
@@ -192,7 +183,7 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
         critic1_loss = (td1.pow(2) * weight).mean()
 
         self.critic_optim.zero_grad()
-        critic1_loss.backward()
+        critic1_loss.backward(retain_graph=True)
         self.critic_optim.step()
 
         # critic 2
@@ -237,18 +228,23 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
             alpha=self.alpha.item() if isinstance(self.alpha, torch.Tensor) else self.alpha,
             alpha_loss=None if not self.is_auto_alpha else alpha_loss.item(),
         )
+    
+
 
 # To DO:修改成能够兼容非对称的版本
-def create_sacd_policy(observation_space:gymnasium.spaces.Box, obs_shape_critic:int, action_shape:int, lr=3e-4, gamma=0.99, tau=0.005, alpha=0.2)->DiscreteSACPolicy:
+def create_sacd_policy(actor_obs_space:gymnasium.spaces.Box,action_space:gymnasium.spaces.Box,obs_shape_critic:int, action_shape:int, lr=3e-4, gamma=0.99, tau=0.005, alpha=0.2)->DVAT_SACDPolicy:
     # check variable type
-    assert isinstance(observation_space,gymnasium.spaces.Box)
+    assert isinstance(actor_obs_space,gymnasium.spaces.Box)
     assert isinstance(obs_shape_critic,int)
     assert isinstance(action_shape,int)
 
+    # get device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
     # actor,critic1,critic2
-    actor = CustomDiscreteActor(observation_space, action_shape)
-    critic1 = CustomDiscreteCritic(obs_shape_critic, action_shape)
-    critic2 = CustomDiscreteCritic(obs_shape_critic, action_shape)
+    actor = CustomDiscreteActor(actor_obs_space, action_shape).to(device)
+    critic1 = CustomDiscreteCritic(obs_shape_critic, action_shape).to(device)
+    critic2 = CustomDiscreteCritic(obs_shape_critic, action_shape).to(device)
 
     # 定义优化器
     actor_optim = Adam(actor.parameters(), lr=lr)
@@ -259,8 +255,9 @@ def create_sacd_policy(observation_space:gymnasium.spaces.Box, obs_shape_critic:
     sacd_policy = DVAT_SACDPolicy(
         actor=actor,
         actor_optim=actor_optim,
-        critic1=critic1,
-        critic1_optim=critic1_optim,
+        critic=critic1,
+        critic_optim=critic1_optim,
+        action_space=action_space,
         critic2=critic2,
         critic2_optim=critic2_optim,
         tau=tau,

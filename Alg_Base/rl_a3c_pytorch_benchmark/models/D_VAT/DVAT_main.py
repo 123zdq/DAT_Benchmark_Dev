@@ -30,7 +30,7 @@ def arg_config():
     parse.add_argument(
         "-w",
         "--workers",
-        default=10,
+        default=2,
         type=int,
         metavar="",
         help="the number of agents, default: 24",
@@ -195,6 +195,11 @@ def test_env(args):
             actions = np.random.randint(0, action_space.n, size=args.workers)
             results = vector_env.step(actions) # results.tuple:len(results) = 
             obs, reward, done, trunc, info = results
+            ## Test done/reward
+            # print(type(done)) #<class 'numpy.ndarray'>
+            # print(type(reward)) #<class 'numpy.ndarray'>
+            print(f"done: {done} reward: {reward}")
+
             ## Test Correctness of image
             # test_obs = obs[0]["actor_obs"]
             # if np.array_equal(test_obs_last1,test_obs[1]) and np.array_equal(test_obs_last2,test_obs[2]):
@@ -219,47 +224,88 @@ def test_env(args):
                 simulator.kill()
 
 def DVAT(args):
-    settings = {'num_cpu': 6,
-                'n_timesteps': 10000,
-                'batch_size': 64,
-                'buffer_size': 10000,
-                'train_freq': 8,
-                'WandB': False,  # True if you want to use wandb for logging
-                'WandB_project': '<your_wandb_project>',
-                'WandB_entity': '<your_wandb_entity>',
-                'WandB_API_key': '<your_wandb_api_key>',
-                'render': True,  # True to disable black screen
-                'eval_episodes': 20,
-                'eval_mode': True,  # True for model Test - False for Training
-                'ts': 0.05,
-                
-                }
 
-    # make parallel envs
+    simulator = subprocess.Popen(
+        ["webots --no-rendering --mode=fast ../../Webots_Simulation/traffic_project/worlds/" + args.map],
+        shell=True,
+    )
+    time.sleep(13)
+
+    settings = {
+        'n_timesteps': 1000000,
+        'batch_size': 64,
+        'buffer_size': 10000,
+        'train_freq': 8,
+    }
+
+    # create parallel envs
     tensorboard_logdir = "./models/D_VAT/DVAT_logs"
     if tensorboard_logdir is None:
         os.makedirs(tensorboard_logdir)
-    envs = [make_env(n_envs=args.workers,rank=i,gym=False,end_reward=True,log_dir=tensorboard_logdir) for i in range(args.workers)]
+    envs = [make_env(n_envs=args.workers,rank=i,end_reward=True,log_dir=tensorboard_logdir) for i in range(args.workers)]
     vector_env = SubprocVectorEnv_TS(envs)
 
-    # load config file
-    import json
-    with open("config.json", "r") as file:
-        data = json.load(file)
+    ## create policy
+    action_space = DVAT_ENV.get_action_space()
+    obs_space = DVAT_ENV.get_obs_space()
+    actor_obs_space = obs_space["actor_obs"]
+    critic_obs_space = obs_space["critic_obs"]
     
-    # make policy
-    actor_obs_space = gymnasium.spaces.Box(
-        low=0,
-        high=1,
-        shape=(args.observation_buffer_length,data["Benchmark"]["State_size"],data["Benchmark"]["State_size"],data["Benchmark"]["State_channel"]),
-        dtype=np.float32
-    )
-    critic_obs_space = gymnasium.spaces.Box(-np.inf, np.inf, shape=(9,), dtype=np.float32)
-    create_sacd_policy(observation_space=actor_obs_space,obs_shape_critic=9,action_shape=7)
+    sacd_policy = create_sacd_policy(actor_obs_space=actor_obs_space,action_space=action_space,obs_shape_critic=critic_obs_space.shape[0],action_shape=int(action_space.n))
+    
+    ## create buffer
+    from tianshou.data import VectorReplayBuffer
+    buffer = VectorReplayBuffer(total_size=settings["buffer_size"],buffer_num=args.workers)
+
+    ## create collector
+    from tianshou.data import Collector
+    collector = Collector(sacd_policy, vector_env, buffer)
+    collected_steps = 0
+
+    # get device
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    result = collector.collect(n_step=settings["train_freq"],reset_before_collect=True)
+    # 训练循环，直到总步数达到 total_steps
+    while collected_steps < settings["n_timesteps"]:
+        try:
+            # sample data from env
+            result = collector.collect(n_step=settings["train_freq"])
+            collected_steps += settings["train_freq"]
+
+            # 从 buffer 中采样并更新策略
+            batch_buffer,batch_indices = collector.buffer.sample(settings["batch_size"])
+
+            # print(type(batch_buffer["act"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["done"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["terminated"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["truncated"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["obs"])) #<class 'tianshou.data.batch.Batch'>
+            # print(type(batch_buffer["obs_next"])) #<class 'tianshou.data.batch.Batch'>
+            # print(type(batch_buffer["rew"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["obs"]["actor_obs"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["obs"]["critic_obs"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["obs_next"]["actor_obs"])) #<class 'numpy.ndarray'>
+            # print(type(batch_buffer["obs_next"]["critic_obs"])) #<class 'numpy.ndarray'>
+
+            batch_buffer.act = torch.tensor(batch_buffer.act).to(device) if isinstance(batch_buffer.act, np.ndarray) else batch_buffer.act
+            batch_buffer.obs = {k: torch.tensor(v).to(device) if isinstance(v, np.ndarray) else v for k, v in batch_buffer.obs.items()}
+            batch_buffer.obs_next = {k: torch.tensor(v).to(device) if isinstance(v, np.ndarray) else v for k, v in batch_buffer.obs_next.items()}
+            batch_buffer.rew = torch.tensor(batch_buffer.rew).to(device) if isinstance(batch_buffer.rew, np.ndarray) else batch_buffer.rew
+
+            target_q = sacd_policy._target_q(collector.buffer, indices=batch_indices)
+            losses = sacd_policy.learn(batch=batch_buffer,target_q=target_q)
+
+        finally:
+            simulator.terminate()
+            try:
+                simulator.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                simulator.kill()
 
 if __name__ == "__main__":
     args = arg_config()
-    test_env(args)
+    # test_env(args)
+    DVAT(args)
 
 
 
