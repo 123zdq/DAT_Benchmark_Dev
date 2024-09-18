@@ -233,7 +233,7 @@ Built-in reward parameter configuration (valid for drones only, cars return rewa
 
    * :code:`view_scale` : View scale. This parameter is only effective in continuous mode and view type, controlling the decay rate of the reward due to deviation from the view center.
       
-      * For specific parameter meanings, see: :ref:`内置Reward`
+      * For specific parameter meanings, see: :ref:`Built-in Reward`
    
    - :code:`view_range` : The view range for generating rewards. This parameter is used to scale the quadrilateral used for reward calculation, i.e., the size of the quadrilateral box in the camera view. Generally, the range is set to [0,1].
 

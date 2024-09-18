@@ -49,7 +49,17 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#active-visual-tracking">1 Active Visual Tracking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vat-task">VAT Task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vat-scheme">VAT Scheme</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#benchmark-presentation">2 Benchmark Presentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#diverse-simulation-scenarios">Diverse Simulation Scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diverse-tracking-targets">Diverse Tracking Targets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diverse-tasks">Diverse Tasks</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation</a></li>
@@ -83,23 +93,137 @@
              
   <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
-<!-- Language switch buttons -->
-<div id="language-switch">
-    <button onclick="switchLanguage('zh')">中文</button>
-    <button onclick="switchLanguage('en')">English</button>
-</div>
-
-<script>
-    function switchLanguage(lang) {
-        if (lang === 'zh') {
-            window.location.href = 'index.html';
-        } else if (lang === 'en') {
-            window.location.href = 'index_en.html';
-        }
+ <style>
+     #language-switch {
+        display: flex; /* Use Flexbox layout */
+        justify-content: center; /* Center buttons horizontally */
+        align-items: center; /* Center buttons vertically */
+        gap: 10px; /* Space between buttons */
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
-</script><span style="background-color: yellow;">To Do</span></section>
+    #language-switch button {
+        width: 180px;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center; /* Center text vertically */
+        justify-content: center; /* Center text horizontally */
+    }
+</style>
+
+ <!-- Language switch buttons -->
+ <div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
+     <b style="font-size: 18px;">You can choose language by </b>
+     <button onclick="switchLanguage('zh')">中文</button>
+     <button onclick="switchLanguage('en')">English</button>
+ </div>
+
+ <script>
+     function switchLanguage(lang) {
+         if (lang === 'zh') {
+             window.location.href = '../zh/Overview.html';
+         } else if (lang === 'en') {
+             window.location.href = '../en/Overview.html';
+         }
+     }
+ </script>
+ </br>
+ <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+ </br>
+ </br><section id="active-visual-tracking">
+<h2>1 Active Visual Tracking<a class="headerlink" href="#active-visual-tracking" title="Link to this heading"></a></h2>
+<section id="vat-task">
+<h3>VAT Task<a class="headerlink" href="#vat-task" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Real-world Task</strong>: A real-world visual task where the target exhibits high dynamic characteristics. The main challenge is actively controlling the camera to improve visual accuracy.</p></li>
+<li><p><strong>Existing Methods</strong>: Existing PVT (Passive Visual Tracking) methods are based on the assumption that the target remains within a preset frame, only tracking in the video dimension.</p></li>
+<li><p><strong>VAT Task</strong>: VAT (Visual Active Tracking) simultaneously models visual tracking and control, achieving active camera control to track dynamic targets, making it more realistic.</p></li>
+</ul>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" /></a>
+</figure>
+</br></section>
+<section id="vat-scheme">
+<h3>VAT Scheme<a class="headerlink" href="#vat-scheme" title="Link to this heading"></a></h3>
+<ul>
+<li><p><strong>Existing VAT Scheme</strong>: Directly connect the VT model and the control model for VAT (e.g., siamask+PID)</p>
+<blockquote>
+<div><p><strong>Limitation 1</strong>: The visual model requires a lot of manual labeling</p>
+<p><strong>Limitation 2</strong>: The control model is sensitive to parameters and requires parameter fine-tuning for each different scenario</p>
+</div></blockquote>
+</li>
+<li><p><strong>This Project’s VAT Scheme</strong>: Use MDP (Markov Decision Process) to model both visual and control tasks simultaneously, solving visual and control tasks with a single model</p>
+<blockquote>
+<div><p><strong>Advantage</strong>: End-to-end RL is more efficient and better suited for cross-scenario tasks</p>
+</div></blockquote>
+</li>
+</ul>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">Single-Stage and Two-Stage VAT Scheme Illustration</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="benchmark-presentation">
+<h2>2 Benchmark Presentation<a class="headerlink" href="#benchmark-presentation" title="Link to this heading"></a></h2>
+<ul>
+<li><p><strong>Diversity</strong>：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Scenario Diversity</strong>: Equipped with 6 scenarios and 4 weather conditions, totaling 24 environments</p></li>
+<li><p><strong>Target Diversity</strong>: Preset 24 selectable targets, supporting the integration of custom models</p></li>
+<li><p><strong>Task Diversity</strong>: Equipped with 6 common vision and motion sensors</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Complexity</strong>：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Complex Scene Elements</strong>: The scene elements are complex, covering common elements such as tree occlusion, tunnels, traffic lights, sidewalks, etc.</p></li>
+<li><p><strong>Complex Dynamic Models</strong>: Utilizing Webots’ highly realistic dynamic engine to achieve dynamic simulation in the virtual environment</p></li>
+<li><p><strong>Complex Target Behavior Management</strong>: Integrating the traffic simulator SUMO for unified vehicle management, ensuring the realism and randomness of Target actions in the environment</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<section id="diverse-simulation-scenarios">
+<h3>Diverse Simulation Scenarios<a class="headerlink" href="#diverse-simulation-scenarios" title="Link to this heading"></a></h3>
+<p>For detailed scenarios, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#environment-introduction"><span class="std std-ref">Environment Introduction</span></a></p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
+</figure>
+</section>
+<section id="diverse-tracking-targets">
+<h3>Diverse Tracking Targets<a class="headerlink" href="#diverse-tracking-targets" title="Link to this heading"></a></h3>
+<p>For details on tracking target objects, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#tracked-objects"><span class="std std-ref">Tracked Objects</span></a></p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/24Target.png"><img alt="24 Targets" src="_images/24Target.png" style="width: 600px;" /></a>
+</figure>
+</section>
+<section id="diverse-tasks">
+<h3>Diverse Tasks<a class="headerlink" href="#diverse-tasks" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Task Diversity</strong>: The state provides sensors commonly found in real-world scenarios, such as IMU, accelerometer, gyroscope, LiDAR, etc.</p></li>
+</ul>
+<p>For diverse task configurations, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#customized-parameter-interface"><span class="std std-ref">Customized Parameter Interface</span></a></p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/sensor_list.png"><img alt="Sensor list" src="_images/sensor_list.png" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text">6 Common Sensors</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
 </section>
 
 
