@@ -51,7 +51,7 @@ Overview
     </br>
 
 
-1 Active Visual Tracking
+1 Visual Active Tracking
 ------------------------------------
 
 VAT Task
