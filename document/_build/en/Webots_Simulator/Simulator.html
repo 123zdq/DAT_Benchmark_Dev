@@ -81,16 +81,16 @@
 <li class="toctree-l4"><a class="reference internal" href="#custom-objects">Custom Objects</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#reward">内置Reward</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id6">奖励函数</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">奖励判断</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id11">投影可视化</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id12">如何转化为Reward</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#built-in-reward">Built-in Reward</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reward-function">Reward Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reward-judgment">Reward Judgment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#projection-visualization">Projection Visualization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-convert-to-reward">How to Convert to Reward</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id13">定制化参数接口</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id15">输入动作</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id16">返回参数</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customized-parameter-interface">Customized Parameter Interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#input-actions">Input Actions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#return-parameters">Return Parameters</a></li>
 </ul>
 </li>
 </ul>
@@ -267,14 +267,14 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">Customized_Rewards</span></code>: Whether to enable the customized reward parameter. Users can calculate rewards based on the customized reward parameter.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>For more details on the customized reward parameter, see: <a class="reference internal" href="#id13"><span class="std std-ref">定制化参数接口</span></a></p></li>
+<li><p>For more details on the customized reward parameter, see: <a class="reference internal" href="#customized-parameter-interface"><span class="std std-ref">Customized Parameter Interface</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Lidar_Enable</span></code>: Whether to enable lidar point cloud data.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>For more details on lidar point cloud data, see: <a class="reference internal" href="#id13"><span class="std std-ref">定制化参数接口</span></a></p></li>
+<li><p>For more details on lidar point cloud data, see: <a class="reference internal" href="#customized-parameter-interface"><span class="std std-ref">Customized Parameter Interface</span></a></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -355,7 +355,7 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">view_scale</span></code> : View scale. This parameter is only effective in continuous mode and view type, controlling the decay rate of the reward due to deviation from the view center.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>For specific parameter meanings, see: <a class="reference internal" href="#reward"><span class="std std-ref">内置Reward</span></a></p></li>
+<li><p>For specific parameter meanings, see: <span class="xref std std-ref">内置Reward</span></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -626,30 +626,30 @@
 <blockquote>
 <div><p>Unified model, large passenger vehicles</p>
 </div></blockquote>
-<figure class="align-center" id="id17">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Bus</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
+<p><span class="caption-text">Bus</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>truck</strong></p>
 <blockquote>
 <div><p>Unified vehicle type, truck without cargo box</p>
 </div></blockquote>
-<figure class="align-center" id="id18">
+<figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Truck</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
+<p><span class="caption-text">Truck</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>trailer</strong></p>
 <blockquote>
 <div><p>Unified model, truck with cargo box</p>
 </div></blockquote>
-<figure class="align-center" id="id19">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
+<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -752,10 +752,10 @@
 <div><ol class="arabic simple">
 <li><p>Create a proto file for Webots following certain standards. The attributes that must be exposed to the scene tree include “translation”, “rotation”, and “name”. The description file should be stored in <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
-<figure class="align-center" id="id20">
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="../_images/场景树属性包.png"><img alt="场景树属性包" src="../_images/%E5%9C%BA%E6%99%AF%E6%A0%91%E5%B1%9E%E6%80%A7%E5%8C%85.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Scenario Tree Attribute Pack</span><a class="headerlink" href="#id20" title="Link to this image"></a></p>
+<p><span class="caption-text">Scenario Tree Attribute Pack</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple" start="2">
@@ -775,10 +775,10 @@
    IMPORT PROTO
 </p><ol class="arabic" start="4">
 <li><p>Write the name of the proto into the safety check file <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py</span></code></p>
-<figure class="align-center" id="id21">
+<figure class="align-center" id="id11">
 <a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Security Check</span><a class="headerlink" href="#id21" title="Link to this image"></a></p>
+<p><span class="caption-text">Security Check</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -789,80 +789,80 @@
 </div></blockquote>
 </section>
 </section>
-<section id="reward">
-<span id="id5"></span><h2>内置Reward<a class="headerlink" href="#reward" title="Link to this heading"></a></h2>
+<section id="built-in-reward">
+<span id="id5"></span><h2>Built-in Reward<a class="headerlink" href="#built-in-reward" title="Link to this heading"></a></h2>
 <blockquote>
 <div><div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-      本工程提供了<b>离散型和连续型</b>两种奖励函数，可用于设计不同的智能体评价指标。
+      This project provides both <b>discrete and continuous</b> reward functions, which can be used to design different agent evaluation metrics.
 </div>
 </br></div></blockquote>
-<section id="id6">
-<h3>奖励函数<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="reward-function">
+<h3>Reward Function<a class="headerlink" href="#reward-function" title="Link to this heading"></a></h3>
 <blockquote>
 <div><div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-  由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标(x_f,y_f,z_f)以及(x_v,y_v,z_v)，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
+  Due to the existence of the super intelligent agent in Webots, we can obtain the coordinates of the aircraft and the tracked car at each moment, (x_f, y_f, z_f) and (x_v, y_v, z_v), and directly determine whether the tracking is successful based on the actual pitch angle of the camera and the set camera FOV.
 </div>
-</br><p>对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：</p>
+</br><p>For the tracker (drone), there are two options for the reward function. The first option is sparse rewards, where rewards are given when the tracked object enters the tracking range, and no rewards are given when it leaves the range (the reward is 0). The mathematical expression is as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}r_{d} = \begin{cases}
 1 &amp; t \in I, \\
 0 &amp; \text{otherwise}.
 \end{cases}\end{split}\]</div>
-<p>其中 <span class="math notranslate nohighlight">\(I\)</span> 代表跟踪范围（相机镜头获取的画面范围）， <span class="math notranslate nohighlight">\(t\)</span> 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。</p>
-<figure class="align-center" id="id22">
-<span id="id7"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
+<p>Where <span class="math notranslate nohighlight">\(I\)</span> represents the tracking range (the area captured by the camera lens), and <span class="math notranslate nohighlight">\(t\)</span> represents the position of the tracked object within the tracking range (the area captured by the camera lens).</p>
+<figure class="align-center" id="id12">
+<span id="schematic-diagram-of-discrete-rewards-for-tracking-objects"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">跟踪对象离散奖励示意图</span><a class="headerlink" href="#id22" title="Link to this image"></a></p>
+<p><span class="caption-text">Discrete Reward Diagram of the Tracking Object</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。</p>
-<figure class="align-center" id="id23">
-<span id="figcontr"></span><span id="id8"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
+<p>The second type is dense reward, which gives a reward that decreases as the distance increases by evaluating the position of the tracking object relative to the center of the tracking range. The higher the reward, the closer the target is to the center point of the range, and vice versa.</p>
+<figure class="align-center" id="id13">
+<span id="figcontr"></span><span id="continuous-reward-diagram-of-the-tracking-object"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">跟踪对象连续奖励示意图</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+<p><span class="caption-text">Continuous Reward Diagram for Object Tracking</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>上图是一个跟踪对象处于相机画面中的示意图，记点 <span class="math notranslate nohighlight">\(E_{G_{c}}\)</span> 到画面中心点 <span class="math notranslate nohighlight">\(I_{cG}\)</span> 的距离为 <span class="math notranslate nohighlight">\(y_{EI}\)</span>，跟踪对象点 <span class="math notranslate nohighlight">\(P_{GC}\)</span> 到中心点 <span class="math notranslate nohighlight">\(I_{cG}\)</span> 的距离为 <span class="math notranslate nohighlight">\(y_{IP}\)</span>，记他们的比例为</p>
+<p>The figure above is a schematic of a tracking object within the camera frame, where the distance from point <span class="math notranslate nohighlight">\(E_{G_{c}}\)</span> to the center point of the frame <span class="math notranslate nohighlight">\(I_{cG}\)</span> is denoted as <span class="math notranslate nohighlight">\(y_{EI}\)</span>, and the distance from the tracking object point <span class="math notranslate nohighlight">\(P_{GC}\)</span> to the center point <span class="math notranslate nohighlight">\(I_{cG}\)</span> is denoted as <span class="math notranslate nohighlight">\(y_{IP}\)</span>. Their ratio is represented as</p>
 <div class="math notranslate nohighlight">
 \[x = \frac{y_{IP}}{y_{EI}}\]</div>
-<p>那么，密集奖励可以使用下面的表达式获得：</p>
+<p>Then, the dense reward can be obtained using the following expression:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}r_{c} = \begin{cases}
 \tanh\left(\alpha(1-x)^{3}\right), &amp; t \in I_{clip}, \\
 0 &amp; \text{otherwise}.
 \end{cases}\end{split}\]</div>
-<p>目标离范围中心点越近时，奖励会越接近1，反之越接近0。 <span class="math notranslate nohighlight">\(\alpha\)</span> 为常数，建议取值3~5。
-此外， <span class="math notranslate nohighlight">\(I_{clip}\)</span> 为有效reward判定范围(如上图 <a class="reference internal" href="#figcontr"><span class="std std-ref">跟踪对象连续奖励示意图</span></a> 中红色方框所示)，其边长 <span class="math notranslate nohighlight">\(W_{I_clip}\)</span> 与原图边长 <span class="math notranslate nohighlight">\(W_{I}\)</span> 的比值可以用 <span class="math notranslate nohighlight">\(\lambda_{clip}\)</span> 表示如下。</p>
+<p>The closer the target is to the center of the range, the closer the reward is to 1; conversely, the farther away, the closer the reward is to 0. <span class="math notranslate nohighlight">\(\alpha\)</span> is a constant, and a recommended value is between 3 and 5.
+In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is the effective reward determination range (as shown in the red box in the figure above <a class="reference internal" href="#figcontr"><span class="std std-ref">Continuous Reward Diagram for Object Tracking</span></a>), and the ratio of its side length <span class="math notranslate nohighlight">\(W_{I_clip}\)</span> to the original image side length <span class="math notranslate nohighlight">\(W_{I}\)</span> can be expressed by <span class="math notranslate nohighlight">\(\lambda_{clip}\)</span> as follows.</p>
 <div class="math notranslate nohighlight">
 \[\lambda_{clip} = \frac{W_{I_clip}}{W_{I}}\]</div>
-<p>根据上述定义式， <span class="math notranslate nohighlight">\(\lambda_{clip}\)</span> 的合理范围为： <span class="math notranslate nohighlight">\([0,1]\)</span> ，在实际训练中，建议参数为 <span class="math notranslate nohighlight">\(\lambda_{clip}=0.7\)</span> 。</p>
+<p>According to the above definition, the reasonable range of <span class="math notranslate nohighlight">\(\lambda_{clip}\)</span> is <span class="math notranslate nohighlight">\([0,1]\)</span>, and in actual training, it is recommended to set the parameter as <span class="math notranslate nohighlight">\(\lambda_{clip}=0.7\)</span>.</p>
 </div></blockquote>
 </section>
-<section id="id9">
-<h3>奖励判断<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="reward-judgment">
+<h3>Reward Judgment<a class="headerlink" href="#reward-judgment" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过机器视觉识别或者人工标注的方法提供。而在仿真训练中，为了简化计算，加速算法运行，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。</p>
-<figure class="align-center" id="id24">
+<div><p>The acquisition of the above reward function is based on the judgment of the tracked object’s position. In practice, the position of the tracked object in the camera image can be provided through machine vision recognition or manual annotation. However, in simulation training, in order to simplify the calculation and speed up the algorithm, we directly use the coordinates of the tracked object to determine whether it has entered the tracking range.</p>
+<figure class="align-center" id="id14">
 <a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+<p><span class="caption-text">Schematic diagram of reward acquisition, A is the mapping of the camera image to the ground, B is the schematic of pinhole imaging, C is the establishment of the camera coordinate system</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
-<section id="id10">
-<h4>原理<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
+<section id="principle">
+<h4>Principle<a class="headerlink" href="#principle" title="Link to this heading"></a></h4>
 <blockquote>
-<div><p>首先需要获取仿真中的相机焦距，计算表达式如下：</p>
+<div><p>First, the camera focal length in the simulation needs to be obtained, and the expression is calculated as follows:</p>
 <div class="math notranslate nohighlight">
 \[f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}\]</div>
-<p>其中 <span class="math notranslate nohighlight">\(W\)</span> 代表相机画面宽度（像素数）， <span class="math notranslate nohighlight">\(FoV\)</span> 指跟踪器相机视场角，如奖励获取示意图B所示。</p>
-<p>然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，以便和跟踪对象的坐标对比。如奖励获取示意图C所示，在相机光心建立相机坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span>，从而可以获得相机画面4个角点在坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 下的坐标：</p>
+<p>Where <span class="math notranslate nohighlight">\(W\)</span> represents the width of the camera image (in pixels), and <span class="math notranslate nohighlight">\(FoV\)</span> refers to the field of view of the tracker camera, as shown in Figure B of the reward acquisition illustration.</p>
+<p>Next, we need to project the corners of the camera image onto the spatial plane where the tracked object is located, as shown in Figure A of the reward acquisition illustration, so that they can be compared with the coordinates of the tracked object. As shown in Figure C of the reward acquisition illustration, the camera coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> is established at the optical center of the camera, and the coordinates of the four corners of the camera image in the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> can be obtained:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\text{LU}\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
 \text{LD}\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
 \text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
 \text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)\end{split}\]</div>
-<p>并易知光心 <span class="math notranslate nohighlight">\(C\)</span> 坐标为 <span class="math notranslate nohighlight">\((0,0,0)\)</span>。由此可知4个直线方程：</p>
+<p>And it is easy to know that the coordinates of the optical center <span class="math notranslate nohighlight">\(C\)</span> are <span class="math notranslate nohighlight">\((0,0,0)\)</span>. Therefore, the four straight line equations are:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{matrix}
 \text{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
@@ -870,103 +870,103 @@
 \text{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
 \text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
 \end{matrix}\end{split}\]</div>
-<p>在地图中，跟踪对象所处地面均为平面，当地面水平时，可以通过地面高度知道地面的数学表达式为</p>
+<p>In the map, the ground where the tracking object is located is all flat. When the ground is level, the mathematical expression of the ground can be known through the ground height as</p>
 <div class="math notranslate nohighlight">
 \[G_{w}: z = h\]</div>
-<p><span class="math notranslate nohighlight">\(\{w\}\)</span> 代表世界坐标系， <span class="math notranslate nohighlight">\(h\)</span> 为地面高度。</p>
-<p>由于跟踪器云台姿态已知，易得到相机坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 到世界坐标系 <span class="math notranslate nohighlight">\(\{w\}\)</span> 的转换关系，也就是得到齐次变换矩阵 <span class="math notranslate nohighlight">\(T_{ct}\)</span>。</p>
-<p>将平面方程 <span class="math notranslate nohighlight">\(G_{w}\)</span> 转换到坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 下，与4个直线方程联立，可求得四个地面交点 <span class="math notranslate nohighlight">\(LU_{G}, LD_{G}, RU_{G}, RD_{G}\)</span>，该4个点组成了跟踪范围 <span class="math notranslate nohighlight">\(I\)</span> 的4个角点，从而确定跟踪区域 <span class="math notranslate nohighlight">\(I\)</span>。</p>
-<p>从仿真环境中读取跟踪对象的坐标点 <span class="math notranslate nohighlight">\(p_{vG}\)</span>，并转换到坐标系 <span class="math notranslate nohighlight">\(\{c\}\)</span> 下，得 <span class="math notranslate nohighlight">\(p_{vc}\)</span>，求得比例 <span class="math notranslate nohighlight">\(x\)</span>，即可确定跟踪对象是否被成功跟踪。</p>
-<p>当地面非水平时计算方法类似。</p>
+<p><span class="math notranslate nohighlight">\(\{w\}\)</span> represents the world coordinate system, and <span class="math notranslate nohighlight">\(h\)</span> is the ground height.</p>
+<p>Since the pose of the tracker gimbal is known, it is easy to obtain the transformation relationship from the camera coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> to the world coordinate system <span class="math notranslate nohighlight">\(\{w\}\)</span>, which is the homogeneous transformation matrix <span class="math notranslate nohighlight">\(T_{ct}\)</span>.</p>
+<p>By transforming the plane equation <span class="math notranslate nohighlight">\(G_{w}\)</span> to the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span>, and solving it together with the four line equations, the four ground intersection points <span class="math notranslate nohighlight">\(LU_{G}, LD_{G}, RU_{G}, RD_{G}\)</span> can be obtained. These four points form the four corner points of the tracking range <span class="math notranslate nohighlight">\(I\)</span>, thus determining the tracking area <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>The coordinates of the tracking object are read from the simulation environment as <span class="math notranslate nohighlight">\(p_{vG}\)</span> and then transformed to the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> to obtain <span class="math notranslate nohighlight">\(p_{vc}\)</span>. By calculating the ratio <span class="math notranslate nohighlight">\(x\)</span>, it is possible to determine whether the tracking object has been successfully tracked.</p>
+<p>The calculation method is similar when the ground is not horizontal.</p>
 </div></blockquote>
 </section>
 </section>
-<section id="id11">
-<h3>投影可视化<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<section id="projection-visualization">
+<h3>Projection Visualization<a class="headerlink" href="#projection-visualization" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>按照上述原理实现之后效果如下视频，在仿真中将方块放置到地面与直线计算出来的交点处，就可以实时看到相机画面的范围：</p>
+<div><p>After implementing the above principle, the effect is as shown in the following video. By placing the block at the intersection point of the ground and the calculated line in the simulation, the camera’s view range can be seen in real time:</p>
 <video width="640" height="360" controls>
    <source src="../_static/video/GetReward_Video.mp4" type="video/mp4">
    Your browser does not support the video tag.
 </video><div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-   注意：视场角上限不能超过地平线，否则计算结果没有意义。
+   Note: The upper limit of the field of view cannot exceed the horizon, otherwise the calculation results will be meaningless.
 </div></div></blockquote>
 </br></section>
-<section id="id12">
-<h3>如何转化为Reward<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<section id="how-to-convert-to-reward">
+<h3>How to Convert to Reward<a class="headerlink" href="#how-to-convert-to-reward" title="Link to this heading"></a></h3>
 <ol class="arabic">
-<li><p>用于计算reward共有两个变量：</p>
+<li><p>There are two variables used to calculate the reward:</p>
 <ol class="loweralpha simple">
-<li><p>仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P1</p></li>
-<li><p>仿真环境中跟踪器摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P2</p></li>
+<li><p>The actual position of the target being tracked in the ground coordinate system in the simulation environment, obtained by the Supervisor, denoted as P1.</p></li>
+<li><p>The expected tracking point on the tracker camera’s viewing plane in the simulation environment, projected onto the 2D position in the ground coordinate system, denoted as P2.</p></li>
 </ol>
 </li>
-<li><p>首要目标是实现跟踪器tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：</p>
-<figure class="align-center" id="id25">
+<li><p>The primary goal is to achieve tracker tracking. Correct tracking is the prerequisite for receiving a reward. If P1 and P2 meet the basic tracking requirements, the reward value is 1; otherwise, all rewards are eliminated, and the reward output is 0. This is implemented using a step function:</p>
+<figure class="align-center" id="id15">
 <a class="reference internal image-reference" href="../_images/阶跃函数.png"><img alt="阶跃函数" src="../_images/%E9%98%B6%E8%B7%83%E5%87%BD%E6%95%B0.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">阶跃函数示意图</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+<p><span class="caption-text">Step Function Diagram</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br><ol class="arabic" start="3">
-<li><p>次要目标是跟踪器tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： <span class="math notranslate nohighlight">\(tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\)</span></p>
-<figure class="align-center" id="id26">
+<li><p>The secondary goal is to improve tracking. Therefore, the proximity between P1 and P2 can be used as a penalty term for the reward. The further the proximity, the larger the penalty. The penalty term is implemented using the hyperbolic tangent function: <span class="math notranslate nohighlight">\(tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\)</span></p>
+<figure class="align-center" id="id16">
 <a class="reference internal image-reference" href="../_images/双曲正切函数.png"><img alt="双曲正切函数" src="../_images/%E5%8F%8C%E6%9B%B2%E6%AD%A3%E5%88%87%E5%87%BD%E6%95%B0.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">双曲正切函数示意图</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+<p><span class="caption-text">Schematic diagram of the hyperbolic tangent function</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br><ol class="arabic" start="4">
-<li><p>最终的奖励计算框图如下：</p>
-<figure class="align-center" id="id27">
+<li><p>The final reward calculation block diagram is as follows:</p>
+<figure class="align-center" id="id17">
 <a class="reference internal image-reference" href="../_images/distance奖励框图.png"><img alt="distance奖励框图" src="../_images/distance%E5%A5%96%E5%8A%B1%E6%A1%86%E5%9B%BE.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">distance奖励框图</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+<p><span class="caption-text">Distance Reward Boxplot</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</br><figure class="align-center" id="id28">
+</br><figure class="align-center" id="id18">
 <a class="reference internal image-reference" href="../_images/view奖励框图.png"><img alt="view奖励框图" src="../_images/view%E5%A5%96%E5%8A%B1%E6%A1%86%E5%9B%BE.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">view奖励框图</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+<p><span class="caption-text">view reward chart</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
 </ol>
 </br></section>
 </section>
-<section id="id13">
-<span id="id14"></span><h2>定制化参数接口<a class="headerlink" href="#id13" title="Link to this heading"></a></h2>
+<section id="customized-parameter-interface">
+<span id="id6"></span><h2>Customized Parameter Interface<a class="headerlink" href="#customized-parameter-interface" title="Link to this heading"></a></h2>
 <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-      本工程提供了常用的<b>6种传感器数据</b>，可以用于后续的多传感器协同任务设计。
+      This project provides common <b>6 types of sensor data</b>, which can be used for subsequent multi-sensor collaborative task design.
 </div>
-</br><section id="id15">
-<h3>输入动作<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+</br><section id="input-actions">
+<h3>Input Actions<a class="headerlink" href="#input-actions" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数</p>
+<div><p>The input actions are used to control the movement of the tracker. Currently, the tracker has four actions: move forward, move backward, move left, move right, plus the reset data, totaling 5 floating-point numbers.</p>
 </div></blockquote>
 </section>
-<section id="id16">
-<h3>返回参数<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<section id="return-parameters">
+<h3>Return Parameters<a class="headerlink" href="#return-parameters" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>返回参数主要包括三个部分，基础数据包，自定义奖励数据包，雷达数据包</p>
+<div><p>The return parameters mainly include three parts: the basic data packet, the custom reward data packet, and the radar data packet.</p>
 </div></blockquote>
-<p><strong>基础数据包</strong></p>
+<p><strong>Basic Data Packet</strong></p>
 <blockquote>
-<div><p>基础数据包共22个浮点数，如下所示：</p>
+<div><p>The basic data packet consists of 22 floating-point numbers, as shown below:</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_Odometry</span><span class="p">{</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">;</span><span class="c1">// 仿真步数（不是仿真时间）</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">position</span><span class="p">;</span><span class="c1">//三轴位置m</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">linear</span><span class="p">;</span><span class="c1">//三轴线速度m/s</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">acc</span><span class="p">;</span><span class="c1">//三轴加速度m/s^2</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">angular</span><span class="p">;</span><span class="c1">//三轴角速度rad</span>
-<span class="w">  </span><span class="n">vector4</span><span class="w"> </span><span class="n">orientation</span><span class="p">;</span><span class="c1">//四元数</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">angle</span><span class="p">;</span><span class="c1">//欧拉角</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">reward</span><span class="p">;</span><span class="c1">//reward</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">done</span><span class="p">;</span><span class="c1">//是否结束仿真</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">t</span><span class="p">;</span><span class="c1">// simulation steps (not simulation time)</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">position</span><span class="p">;</span><span class="c1">// three-axis position m</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">linear</span><span class="p">;</span><span class="c1">// three-axis linear velocity m/s</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">acc</span><span class="p">;</span><span class="c1">// three-axis acceleration m/s^2</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">angular</span><span class="p">;</span><span class="c1">// three-axis angular velocity rad</span>
+<span class="w">  </span><span class="n">vector4</span><span class="w"> </span><span class="n">orientation</span><span class="p">;</span><span class="c1">// quaternion</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">angle</span><span class="p">;</span><span class="c1">// Euler angles</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">reward</span><span class="p">;</span><span class="c1">// reward</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">done</span><span class="p">;</span><span class="c1">// whether simulation ends</span>
 <span class="p">}</span><span class="n">Odometry</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -1048,12 +1048,12 @@
 
 <table>
  <tr class="merged-cell">
-     <th>类别</th>
-     <th>传感器</th>
-     <th>参数</th>
-     <th>类型</th>
-     <th>描述</th>
-     <th>潜在任务</th>
+     <th>Category</th>
+     <th>Sensor</th>
+     <th>Parameter</th>
+     <th>Type</th>
+     <th>Description</th>
+     <th>Potential Tasks</th>
  </tr>
  <tr class="merged-cell">
      <td rowspan="2" class="vision-row merged-cell">Vision</td>
@@ -1114,43 +1114,43 @@
 </table>
 </body>
 </html>
-</br><p><strong>自定义奖励数据包</strong></p>
+</br><p><strong>Custom Reward Data Packet</strong></p>
 <blockquote>
-<div><p>自定义奖励数据包共59个浮点数+1个字符串，包括以下部分</p>
+<div><p>The custom reward data packet consists of 59 floating point numbers + 1 string, including the following parts</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">typedef</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">_rewardData</span><span class="p">{</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraWidth</span><span class="p">;</span><span class="c1">// 图像宽度（像素）</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// 图像高度（像素）</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraFov</span><span class="p">;</span><span class="c1">// 摄像头视场角（rad）[0,pi]</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraF</span><span class="p">;</span><span class="c1">// 摄像头焦距估算（像素）</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraPitch</span><span class="p">;</span><span class="c1">// 摄像头俯仰角 (rad)</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">trackerHeight</span><span class="p">;</span><span class="c1">// 跟踪器高度 (m)</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_ct</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// 摄像头相对于世界坐标系的齐次变换矩阵</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_tw</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// 车辆相对于世界坐标系的齐次变换矩阵</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidGlobalPos</span><span class="p">;</span><span class="c1">// 摄像头中心映射到地面在世界坐标系下的三维坐标</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carMidGlobalPos</span><span class="p">;</span><span class="c1">// 车辆中心在世界坐标系下的三维坐标</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidPos</span><span class="p">;</span><span class="w"> </span><span class="c1">// 摄像头中心世界坐标系的坐标</span>
-<span class="w">  </span><span class="n">vector4</span><span class="w"> </span><span class="n">carDronePosOri</span><span class="p">;</span><span class="w"> </span><span class="c1">// 车辆中心在跟踪器坐标系下的1D姿态+3D坐标（第一个元素是姿态）</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carDroneVel</span><span class="p">;</span><span class="w"> </span><span class="c1">// 车辆中心在无人机坐标系下的3D速度</span>
-<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carDroneAcc</span><span class="p">;</span><span class="w"> </span><span class="c1">// 车辆中心在无人机坐标系下的3D加速度</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">crash</span><span class="p">;</span><span class="w"> </span><span class="c1">// 跟踪器是否与建筑物碰撞</span>
-<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">carDir</span><span class="p">;</span><span class="c1">// 车辆运行方向(0停止，1直行，2左转，3右转)</span>
-<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">carTypename</span><span class="p">;</span><span class="c1">// 对象类型</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraWidth</span><span class="p">;</span><span class="c1">// Image width (pixels)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraHeight</span><span class="p">;</span><span class="c1">// Image height (pixels)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraFov</span><span class="p">;</span><span class="c1">// Camera field of view (rad) [0,pi]</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraF</span><span class="p">;</span><span class="c1">// Camera focal length estimate (pixels)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">cameraPitch</span><span class="p">;</span><span class="c1">// Camera pitch angle (rad)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">trackerHeight</span><span class="p">;</span><span class="c1">// Tracker height (m)</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_ct</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// Homogeneous transformation matrix from camera to world coordinate system</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">T_tw</span><span class="p">[</span><span class="mi">16</span><span class="p">];</span><span class="c1">// Homogeneous transformation matrix from vehicle to world coordinate system</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidGlobalPos</span><span class="p">;</span><span class="c1">// 3D coordinates of the camera center mapped to the ground in the world coordinate system</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carMidGlobalPos</span><span class="p">;</span><span class="c1">// 3D coordinates of the vehicle center in the world coordinate system</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">cameraMidPos</span><span class="p">;</span><span class="w"> </span><span class="c1">// Camera center coordinates in the world coordinate system</span>
+<span class="w">  </span><span class="n">vector4</span><span class="w"> </span><span class="n">carDronePosOri</span><span class="p">;</span><span class="w"> </span><span class="c1">// 1D pose + 3D coordinates of the vehicle center in the tracker coordinate system (the first element is the pose)</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carDroneVel</span><span class="p">;</span><span class="w"> </span><span class="c1">// 3D velocity of the vehicle center in the drone coordinate system</span>
+<span class="w">  </span><span class="n">vector3</span><span class="w"> </span><span class="n">carDroneAcc</span><span class="p">;</span><span class="w"> </span><span class="c1">// 3D acceleration of the vehicle center in the drone coordinate system</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">crash</span><span class="p">;</span><span class="w"> </span><span class="c1">// Whether the tracker has collided with a building</span>
+<span class="w">  </span><span class="kt">double</span><span class="w"> </span><span class="n">carDir</span><span class="p">;</span><span class="c1">// Vehicle running direction (0 stop, 1 straight, 2 left turn, 3 right turn)</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="w"> </span><span class="n">carTypename</span><span class="p">;</span><span class="c1">// Object type</span>
 <span class="p">}</span><span class="n">rewardData</span><span class="p">;</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>其中，参数 <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> 中跟踪器坐标系定义和姿态角定义如下：</p></li>
+<li><p>Among them, the parameter <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> defines the tracker coordinate system and pose angles as follows:</p></li>
 </ul>
-<figure class="align-center" id="id29">
+<figure class="align-center" id="id19">
 <a class="reference internal image-reference" href="../_images/无人机坐标.png"><img alt="无人机坐标系" src="../_images/%E6%97%A0%E4%BA%BA%E6%9C%BA%E5%9D%90%E6%A0%87.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">无人机坐标系定义</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+<p><span class="caption-text">Definition of Drone Coordinate System</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
-<p><strong>雷达数据包</strong></p>
+<p><strong>Radar Data Packet</strong></p>
 <blockquote>
-<div><p>雷达点云数据。该环境中的跟踪器搭载了RpLidarA2单线雷达，其点云数据将输出一个长度为2000的数组。</p>
+<div><p>Radar point cloud data. The tracker in this environment is equipped with RpLidarA2 single-line radar, and its point cloud data will output an array with a length of 2000.</p>
 </div></blockquote>
 </section>
 </section>

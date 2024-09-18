@@ -159,10 +159,10 @@ Basic Parameters
 
    * :code:`Customized_Rewards`: Whether to enable the customized reward parameter. Users can calculate rewards based on the customized reward parameter.
 
-      * For more details on the customized reward parameter, see: :ref:`定制化参数接口`
+      * For more details on the customized reward parameter, see: :ref:`Customized Parameter Interface`
    * :code:`Lidar_Enable`: Whether to enable lidar point cloud data.
 
-      * For more details on lidar point cloud data, see: :ref:`定制化参数接口`
+      * For more details on lidar point cloud data, see: :ref:`Customized Parameter Interface`
    * :code:`Tracking_Object`: The tracked object setting (default is SUMO_VEHICLE). Example tracking objects include "SUMO_VEHICLE", "Pedestrian", "Shrimp", "Create", "Sojourner", "Mantis", etc. Custom tracking objects are also supported. See the project manual.
 
       * For detailed descriptions of tracking object types, see: :ref:`Tracked Objects`
@@ -725,29 +725,29 @@ Custom Objects
       5. Modify the description of :code:`Tracking_Object` in the json configuration file so that its description matches the proto name.
       6. After the above steps, you can use the tracker to track custom objects.
 
-.. _内置Reward:
+.. _built-in Reward:
 
-内置Reward
+Built-in Reward
 --------------------
 
    .. raw:: html
 
       <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-            本工程提供了<b>离散型和连续型</b>两种奖励函数，可用于设计不同的智能体评价指标。
+            This project provides both <b>discrete and continuous</b> reward functions, which can be used to design different agent evaluation metrics.
       </div>
       </br>
 
-奖励函数
+Reward Function
 ~~~~~~~~~~~~~~~~~~~~
 
    .. raw:: html
 
       <div style="border-left: 4px solid #FFC1C1; padding-left: 10px; margin-left: 0;">
-        由于Webots中超级智能体的存在，我们可以在每个时刻获取飞机以及被跟踪小车的坐标(x_f,y_f,z_f)以及(x_v,y_v,z_v)，并根据实际摄像头的Pitch角度以及设定的摄像头FOV可以直接判断出跟踪是否成功
+        Due to the existence of the super intelligent agent in Webots, we can obtain the coordinates of the aircraft and the tracked car at each moment, (x_f, y_f, z_f) and (x_v, y_v, z_v), and directly determine whether the tracking is successful based on the actual pitch angle of the camera and the set camera FOV.
       </div>
       </br>
 
-   对于跟踪器（无人机），奖励函数有2种选择，第一种选择是稀疏奖励，当跟踪对象进入跟踪范围时给予奖励，离开范围时不给予奖励（奖励为0），数学表达式如下：
+   For the tracker (drone), there are two options for the reward function. The first option is sparse rewards, where rewards are given when the tracked object enters the tracking range, and no rewards are given when it leaves the range (the reward is 0). The mathematical expression is as follows:
 
    .. math::
 
@@ -756,20 +756,20 @@ Custom Objects
       0 & \text{otherwise}. 
       \end{cases}
 
-   其中 :math:`I` 代表跟踪范围（相机镜头获取的画面范围）， :math:`t` 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。
+   Where :math:`I` represents the tracking range (the area captured by the camera lens), and :math:`t` represents the position of the tracked object within the tracking range (the area captured by the camera lens).
 
-   .. _跟踪对象离散奖励示意图:
+   .. _schematic_diagram_of_discrete_rewards_for_tracking_objects:
 
    .. figure:: ../_static/image/Discrete_reward.png
       :alt: Discrete_reward
       :width: 600px
       :align: center
 
-      跟踪对象离散奖励示意图
+      Discrete Reward Diagram of the Tracking Object
 
-   第二种是密集奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。
+   The second type is dense reward, which gives a reward that decreases as the distance increases by evaluating the position of the tracking object relative to the center of the tracking range. The higher the reward, the closer the target is to the center point of the range, and vice versa.
 
-   .. _跟踪对象连续奖励示意图:
+   .. _Continuous Reward Diagram of the Tracking Object:
 
    .. _figcontr:
 
@@ -778,16 +778,16 @@ Custom Objects
       :width: 600px 
       :align: center
       
-      跟踪对象连续奖励示意图
+      Continuous Reward Diagram for Object Tracking
 
 
-   上图是一个跟踪对象处于相机画面中的示意图，记点 :math:`E_{G_{c}}` 到画面中心点 :math:`I_{cG}` 的距离为 :math:`y_{EI}`，跟踪对象点 :math:`P_{GC}` 到中心点 :math:`I_{cG}` 的距离为 :math:`y_{IP}`，记他们的比例为
+   The figure above is a schematic of a tracking object within the camera frame, where the distance from point :math:`E_{G_{c}}` to the center point of the frame :math:`I_{cG}` is denoted as :math:`y_{EI}`, and the distance from the tracking object point :math:`P_{GC}` to the center point :math:`I_{cG}` is denoted as :math:`y_{IP}`. Their ratio is represented as
 
    .. math::
 
       x = \frac{y_{IP}}{y_{EI}}
 
-   那么，密集奖励可以使用下面的表达式获得：
+   Then, the dense reward can be obtained using the following expression:
 
    .. math::
 
@@ -796,39 +796,39 @@ Custom Objects
       0 & \text{otherwise}. 
       \end{cases}
 
-   目标离范围中心点越近时，奖励会越接近1，反之越接近0。 :math:`\alpha` 为常数，建议取值3~5。
-   此外， :math:`I_{clip}` 为有效reward判定范围(如上图 :ref:`figcontr` 中红色方框所示)，其边长 :math:`W_{I_clip}` 与原图边长 :math:`W_{I}` 的比值可以用 :math:`\lambda_{clip}` 表示如下。
+   The closer the target is to the center of the range, the closer the reward is to 1; conversely, the farther away, the closer the reward is to 0. :math:`\alpha` is a constant, and a recommended value is between 3 and 5.
+   In addition, :math:`I_{clip}` is the effective reward determination range (as shown in the red box in the figure above :ref:`figcontr`), and the ratio of its side length :math:`W_{I_clip}` to the original image side length :math:`W_{I}` can be expressed by :math:`\lambda_{clip}` as follows.
 
    .. math::
 
       \lambda_{clip} = \frac{W_{I_clip}}{W_{I}}
 
-   根据上述定义式， :math:`\lambda_{clip}` 的合理范围为： :math:`[0,1]` ，在实际训练中，建议参数为 :math:`\lambda_{clip}=0.7` 。
+   According to the above definition, the reasonable range of :math:`\lambda_{clip}` is :math:`[0,1]`, and in actual training, it is recommended to set the parameter as :math:`\lambda_{clip}=0.7`.
 
-奖励判断
+Reward Judgment
 ~~~~~~~~~~~~~~~~~~~~
 
-   上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过机器视觉识别或者人工标注的方法提供。而在仿真训练中，为了简化计算，加速算法运行，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。
+   The acquisition of the above reward function is based on the judgment of the tracked object's position. In practice, the position of the tracked object in the camera image can be provided through machine vision recognition or manual annotation. However, in simulation training, in order to simplify the calculation and speed up the algorithm, we directly use the coordinates of the tracked object to determine whether it has entered the tracking range.
 
    .. figure:: ../_static/image/Reward.png
       :alt: Reward
       :width: 600px 
       :align: center
       
-      奖励获取示意图，A为相机画面映射到地面，B为小孔成像示意，C为相机坐标系建立
+      Schematic diagram of reward acquisition, A is the mapping of the camera image to the ground, B is the schematic of pinhole imaging, C is the establishment of the camera coordinate system
 
-原理
+Principle
 ^^^^^^^^^^^^^^^^^^^^
 
-   首先需要获取仿真中的相机焦距，计算表达式如下：
+   First, the camera focal length in the simulation needs to be obtained, and the expression is calculated as follows:
 
    .. math::
 
       f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}
 
-   其中 :math:`W` 代表相机画面宽度（像素数）， :math:`FoV` 指跟踪器相机视场角，如奖励获取示意图B所示。
+   Where :math:`W` represents the width of the camera image (in pixels), and :math:`FoV` refers to the field of view of the tracker camera, as shown in Figure B of the reward acquisition illustration.
 
-   然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，以便和跟踪对象的坐标对比。如奖励获取示意图C所示，在相机光心建立相机坐标系 :math:`\{c\}`，从而可以获得相机画面4个角点在坐标系 :math:`\{c\}` 下的坐标：
+   Next, we need to project the corners of the camera image onto the spatial plane where the tracked object is located, as shown in Figure A of the reward acquisition illustration, so that they can be compared with the coordinates of the tracked object. As shown in Figure C of the reward acquisition illustration, the camera coordinate system :math:`\{c\}` is established at the optical center of the camera, and the coordinates of the four corners of the camera image in the coordinate system :math:`\{c\}` can be obtained:
 
    .. math::
 
@@ -837,7 +837,7 @@ Custom Objects
       \text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
       \text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
 
-   并易知光心 :math:`C` 坐标为 :math:`(0,0,0)`。由此可知4个直线方程：
+   And it is easy to know that the coordinates of the optical center :math:`C` are :math:`(0,0,0)`. Therefore, the four straight line equations are:
 
    .. math::
 
@@ -848,27 +848,27 @@ Custom Objects
       \text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
       \end{matrix}
 
-   在地图中，跟踪对象所处地面均为平面，当地面水平时，可以通过地面高度知道地面的数学表达式为
+   In the map, the ground where the tracking object is located is all flat. When the ground is level, the mathematical expression of the ground can be known through the ground height as
 
    .. math::
 
       G_{w}: z = h
 
-   :math:`\{w\}` 代表世界坐标系， :math:`h` 为地面高度。
+   :math:`\{w\}` represents the world coordinate system, and :math:`h` is the ground height.
 
-   由于跟踪器云台姿态已知，易得到相机坐标系 :math:`\{c\}` 到世界坐标系 :math:`\{w\}` 的转换关系，也就是得到齐次变换矩阵 :math:`T_{ct}`。
+   Since the pose of the tracker gimbal is known, it is easy to obtain the transformation relationship from the camera coordinate system :math:`\{c\}` to the world coordinate system :math:`\{w\}`, which is the homogeneous transformation matrix :math:`T_{ct}`.
 
-   将平面方程 :math:`G_{w}` 转换到坐标系 :math:`\{c\}` 下，与4个直线方程联立，可求得四个地面交点 :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}`，该4个点组成了跟踪范围 :math:`I` 的4个角点，从而确定跟踪区域 :math:`I`。
+   By transforming the plane equation :math:`G_{w}` to the coordinate system :math:`\{c\}`, and solving it together with the four line equations, the four ground intersection points :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}` can be obtained. These four points form the four corner points of the tracking range :math:`I`, thus determining the tracking area :math:`I`.
 
-   从仿真环境中读取跟踪对象的坐标点 :math:`p_{vG}`，并转换到坐标系 :math:`\{c\}` 下，得 :math:`p_{vc}`，求得比例 :math:`x`，即可确定跟踪对象是否被成功跟踪。
+   The coordinates of the tracking object are read from the simulation environment as :math:`p_{vG}` and then transformed to the coordinate system :math:`\{c\}` to obtain :math:`p_{vc}`. By calculating the ratio :math:`x`, it is possible to determine whether the tracking object has been successfully tracked.
 
-   当地面非水平时计算方法类似。
+   The calculation method is similar when the ground is not horizontal.
 
 
-投影可视化
+Projection Visualization
 ~~~~~~~~~~~~~~~~~~~~
 
-   按照上述原理实现之后效果如下视频，在仿真中将方块放置到地面与直线计算出来的交点处，就可以实时看到相机画面的范围：
+   After implementing the above principle, the effect is as shown in the following video. By placing the block at the intersection point of the ground and the calculated line in the simulation, the camera's view range can be seen in real time:
 
    .. raw:: html
 
@@ -880,7 +880,7 @@ Custom Objects
    .. raw:: html
 
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-         注意：视场角上限不能超过地平线，否则计算结果没有意义。
+         Note: The upper limit of the field of view cannot exceed the horizon, otherwise the calculation results will be meaningless.
       </div>
 
 .. raw:: html
@@ -888,48 +888,48 @@ Custom Objects
    </br>
 
 
-如何转化为Reward
+How to Convert to Reward
 ~~~~~~~~~~~~~~~~~~~~
 
-1. 用于计算reward共有两个变量：
+1. There are two variables used to calculate the reward:
 
-   a. 仿真环境中被跟踪目标在地面坐标系中的实际位置，由Supervisor获得，记为P1
-   b. 仿真环境中跟踪器摄像头视平面的期望跟踪点，投影到地面坐标系的二维位置，记为P2
+   a. The actual position of the target being tracked in the ground coordinate system in the simulation environment, obtained by the Supervisor, denoted as P1.
+   b. The expected tracking point on the tracker camera’s viewing plane in the simulation environment, projected onto the 2D position in the ground coordinate system, denoted as P2.
 
-2. 首要目标是实现跟踪器tracking，是否正确tracking是获得奖励的前提。若P1与P2满足最基本的tracking要求，即可获得奖励值1，否则，直接消除所有奖励，输出奖励0。使用阶跃函数实现：
+2. The primary goal is to achieve tracker tracking. Correct tracking is the prerequisite for receiving a reward. If P1 and P2 meet the basic tracking requirements, the reward value is 1; otherwise, all rewards are eliminated, and the reward output is 0. This is implemented using a step function:
 
    .. figure:: ../_static/image/阶跃函数.png
       :alt: 阶跃函数                                  
       :width: 600px                                              
       :align: center
 
-      阶跃函数示意图
+      Step Function Diagram
 
 .. raw:: html
 
    </br>
 
-3. 次要目标是跟踪器tracking得更好。因此P1与P2之间的接近程度可以作为奖励的惩罚项。接近程度越低惩罚越大。惩罚项使用正切双曲线函数实现： :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
+3. The secondary goal is to improve tracking. Therefore, the proximity between P1 and P2 can be used as a penalty term for the reward. The further the proximity, the larger the penalty. The penalty term is implemented using the hyperbolic tangent function: :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
 
    .. figure:: ../_static/image/双曲正切函数.png
       :alt: 双曲正切函数                                  
       :width: 600px                                              
       :align: center
 
-      双曲正切函数示意图
+      Schematic diagram of the hyperbolic tangent function
 
 .. raw:: html
 
    </br> 
 
-4. 最终的奖励计算框图如下：
+4. The final reward calculation block diagram is as follows:
 
    .. figure:: ../_static/image/distance奖励框图.png
       :alt: distance奖励框图                                  
       :width: 600px                                              
       :align: center
 
-      distance奖励框图 
+      Distance Reward Boxplot 
 
    .. raw:: html
 
@@ -940,50 +940,50 @@ Custom Objects
       :width: 600px                                              
       :align: center
 
-      view奖励框图 
+      view reward chart
 
 .. raw:: html
 
    </br>
 
-.. _定制化参数接口:
+.. _Customized Parameter Interface:
 
-定制化参数接口
+Customized Parameter Interface
 --------------------
 
 .. raw:: html
 
    <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-         本工程提供了常用的<b>6种传感器数据</b>，可以用于后续的多传感器协同任务设计。
+         This project provides common <b>6 types of sensor data</b>, which can be used for subsequent multi-sensor collaborative task design.
    </div>
    </br>
 
-输入动作
+Input Actions
 ~~~~~~~~~~~~~~~~~~~~
 
-   输入动作用于控制跟踪器的运动，目前跟踪器有四个动作，前进，后退，左移，右移，加上reset数据共5个浮点数
+   The input actions are used to control the movement of the tracker. Currently, the tracker has four actions: move forward, move backward, move left, move right, plus the reset data, totaling 5 floating-point numbers.
 
-返回参数
+Return Parameters
 ~~~~~~~~~~~~~~~~~~~~
 
-   返回参数主要包括三个部分，基础数据包，自定义奖励数据包，雷达数据包
+   The return parameters mainly include three parts: the basic data packet, the custom reward data packet, and the radar data packet.
 
-**基础数据包**
+**Basic Data Packet**
 
-   基础数据包共22个浮点数，如下所示：
+   The basic data packet consists of 22 floating-point numbers, as shown below:
 
    .. code:: c++
-      
+
       typedef struct _Odometry{
-        double t;// 仿真步数（不是仿真时间）
-        vector3 position;//三轴位置m
-        vector3 linear;//三轴线速度m/s
-        vector3 acc;//三轴加速度m/s^2
-        vector3 angular;//三轴角速度rad
-        vector4 orientation;//四元数
-        vector3 angle;//欧拉角
-        double reward;//reward
-        double done;//是否结束仿真
+        double t;// simulation steps (not simulation time)
+        vector3 position;// three-axis position m
+        vector3 linear;// three-axis linear velocity m/s
+        vector3 acc;// three-axis acceleration m/s^2
+        vector3 angular;// three-axis angular velocity rad
+        vector4 orientation;// quaternion
+        vector3 angle;// Euler angles
+        double reward;// reward
+        double done;// whether simulation ends
       }Odometry;
 
 
@@ -1066,12 +1066,12 @@ Custom Objects
 
    <table>
     <tr class="merged-cell">
-        <th>类别</th>
-        <th>传感器</th>
-        <th>参数</th>
-        <th>类型</th>
-        <th>描述</th>
-        <th>潜在任务</th>
+        <th>Category</th>
+        <th>Sensor</th>
+        <th>Parameter</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Potential Tasks</th>
     </tr>
     <tr class="merged-cell">
         <td rowspan="2" class="vision-row merged-cell">Vision</td>
@@ -1135,43 +1135,43 @@ Custom Objects
    </br>
 
 
-**自定义奖励数据包**
+**Custom Reward Data Packet**
 
-   自定义奖励数据包共59个浮点数+1个字符串，包括以下部分
+   The custom reward data packet consists of 59 floating point numbers + 1 string, including the following parts
 
    .. code:: c++
       
       typedef struct _rewardData{
-        double cameraWidth;// 图像宽度（像素）
-        double cameraHeight;// 图像高度（像素）
-        double cameraFov;// 摄像头视场角（rad）[0,pi]
-        double cameraF;// 摄像头焦距估算（像素）
-        double cameraPitch;// 摄像头俯仰角 (rad)
-        double trackerHeight;// 跟踪器高度 (m)
-        double T_ct[16];// 摄像头相对于世界坐标系的齐次变换矩阵
-        double T_tw[16];// 车辆相对于世界坐标系的齐次变换矩阵
-        vector3 cameraMidGlobalPos;// 摄像头中心映射到地面在世界坐标系下的三维坐标
-        vector3 carMidGlobalPos;// 车辆中心在世界坐标系下的三维坐标
-        vector3 cameraMidPos; // 摄像头中心世界坐标系的坐标
-        vector4 carDronePosOri; // 车辆中心在跟踪器坐标系下的1D姿态+3D坐标（第一个元素是姿态）
-        vector3 carDroneVel; // 车辆中心在无人机坐标系下的3D速度
-        vector3 carDroneAcc; // 车辆中心在无人机坐标系下的3D加速度
-        double crash; // 跟踪器是否与建筑物碰撞
-        double carDir;// 车辆运行方向(0停止，1直行，2左转，3右转)
-        std::string carTypename;// 对象类型
+        double cameraWidth;// Image width (pixels)
+        double cameraHeight;// Image height (pixels)
+        double cameraFov;// Camera field of view (rad) [0,pi]
+        double cameraF;// Camera focal length estimate (pixels)
+        double cameraPitch;// Camera pitch angle (rad)
+        double trackerHeight;// Tracker height (m)
+        double T_ct[16];// Homogeneous transformation matrix from camera to world coordinate system
+        double T_tw[16];// Homogeneous transformation matrix from vehicle to world coordinate system
+        vector3 cameraMidGlobalPos;// 3D coordinates of the camera center mapped to the ground in the world coordinate system
+        vector3 carMidGlobalPos;// 3D coordinates of the vehicle center in the world coordinate system
+        vector3 cameraMidPos; // Camera center coordinates in the world coordinate system
+        vector4 carDronePosOri; // 1D pose + 3D coordinates of the vehicle center in the tracker coordinate system (the first element is the pose)
+        vector3 carDroneVel; // 3D velocity of the vehicle center in the drone coordinate system
+        vector3 carDroneAcc; // 3D acceleration of the vehicle center in the drone coordinate system
+        double crash; // Whether the tracker has collided with a building
+        double carDir;// Vehicle running direction (0 stop, 1 straight, 2 left turn, 3 right turn)
+        std::string carTypename;// Object type
       }rewardData;
 
-   - 其中，参数 :code:`carCameraPosOri` 中跟踪器坐标系定义和姿态角定义如下：
+   - Among them, the parameter :code:`carCameraPosOri` defines the tracker coordinate system and pose angles as follows:
    
    .. figure:: ../_static/image/无人机坐标.png
       :alt: 无人机坐标系                                  
       :width: 500px                                              
       :align: center
 
-      无人机坐标系定义
+      Definition of Drone Coordinate System
 
 
-**雷达数据包**
+**Radar Data Packet**
 
-   雷达点云数据。该环境中的跟踪器搭载了RpLidarA2单线雷达，其点云数据将输出一个长度为2000的数组。
+   Radar point cloud data. The tracker in this environment is equipped with RpLidarA2 single-line radar, and its point cloud data will output an array with a length of 2000.
 
