@@ -80,8 +80,8 @@ Operation Flow
    </div>
    </br>
 
-.. image:: ../_static/image/运行流程.png
-   :alt: 仿真环境运行流程示意图
+.. image:: ../_static/image/ExampleImage.png
+   :alt: Example Image
    :width: 700px
    :align: center
 
@@ -866,7 +866,7 @@ Principle
 
 
 Projection Visualization
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    After implementing the above principle, the effect is as shown in the following video. By placing the block at the intersection point of the ground and the calculated line in the simulation, the camera's view range can be seen in real time:
 
@@ -889,7 +889,7 @@ Projection Visualization
 
 
 How to Convert to Reward
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. There are two variables used to calculate the reward:
 
@@ -949,7 +949,7 @@ How to Convert to Reward
 .. _Customized Parameter Interface:
 
 Customized Parameter Interface
---------------------
+----------------------------------------
 
 .. raw:: html
 

@@ -61,12 +61,13 @@ VAT Task
 * **Existing Methods**: Existing PVT (Passive Visual Tracking) methods are based on the assumption that the target remains within a preset frame, only tracking in the video dimension.
 * **VAT Task**: VAT (Visual Active Tracking) simultaneously models visual tracking and control, achieving active camera control to track dynamic targets, making it more realistic.
 
+
 .. figure:: ./_static/image/VisualActiveTracking.png
    :alt: Visual Active Tracking
    :width: 600px
    :align: center
 
-    Differences between VAT Tasks and PVT Settings
+   Differences between VAT Tasks and PVT Settings
 
 .. raw:: html
 
@@ -116,25 +117,28 @@ Diverse Simulation Scenarios
 
 For detailed scenarios, see: :ref:`Environment Introduction`
 
+
 .. figure:: ./_static/image/24Scene_Colorful2.png
    :alt: 24 Scenes
    :width: 600px
    :align: center
 
-    24 Complex Scene Examples
+   24 Complex Scene Examples
 
 
 Diverse Tracking Targets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
 For details on tracking target objects, see: :ref:`Tracked Objects`
+
 
 .. figure:: ./_static/image/24Target.png
    :alt: 24 Targets
    :width: 600px
    :align: center
 
-    24 Different Targets
+   24 Different Targets
 
 Diverse Tasks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

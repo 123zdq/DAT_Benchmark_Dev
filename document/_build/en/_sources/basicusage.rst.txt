@@ -35,7 +35,7 @@ See :ref:`usage` for detailed usage instructions.
 Images
 ------
 
-.. image:: _static/image/运行流程.png
+.. image:: _static/image/ExampleImage.png
    :alt: Example Image
    :width: 200px
    :align: center
