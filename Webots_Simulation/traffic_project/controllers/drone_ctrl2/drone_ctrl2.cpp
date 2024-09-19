@@ -770,7 +770,8 @@ int main(int argc, char **argv)
       //           << "  z: " << rewardG.makeReward.carDronePosOri.z
       //           << "  reward: " << state.reward << std::endl;
       std::cout << "reward: " << state.reward << std::endl;
-      // double Ddata[6] = {state.linear.x,state.linear.y,state.linear.z,state.angular.x,state.angular.y,state.angular.z};
+      // double Ddata[6] = {rewardG.makeReward.carDroneVel.x,rewardG.makeReward.carDroneVel.y,rewardG.makeReward.carDroneVel.z,
+      //                     rewardG.makeReward.carDroneAcc.x,rewardG.makeReward.carDroneAcc.y,rewardG.makeReward.carDroneAcc.z};
       // dispData.sendCtrl(Ddata);
       if (config.get()->droneSupervisorCtrl == true)
       {

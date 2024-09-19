@@ -12,7 +12,7 @@ namespace mM {
 
     template <class T>
     class myMatrices {
-    /* 锟斤拷元锟斤拷锟斤拷 */
+    /* 閿熸枻鎷峰厓閿熸枻鎷烽敓鏂ゆ嫹 */
         // template<class T>
         // friend myMatrices<T> rowCombine(myMatrices<T>& A, myMatrices<T>& B);
         // template<class T, class... Args>
@@ -28,13 +28,13 @@ namespace mM {
         T* data;
 
     public:
-        /* 锟斤拷锟叫癸拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鍙櫢鎷烽敓鏂ゆ嫹 */
         myMatrices(uint16_t rows, uint16_t cols) : rows(rows), cols(cols)
         {
             data = new T[rows * cols];
             clear(0);
         }
-        /* 锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
         myMatrices(uint16_t n) : rows(n), cols(n)
         {
             data = new T[rows * cols];
@@ -45,7 +45,7 @@ namespace mM {
             // delete data;
         }
 
-        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷值统一锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鍊肩粺涓€閿熸枻鎷� */
         void clear(T num)
         {
             if (rows > 0 && cols > 0)
@@ -60,7 +60,7 @@ namespace mM {
             }
         }
 
-        /* 锟斤拷位锟斤拷锟斤拷 */
+        /* 閿熸枻鎷蜂綅閿熸枻鎷烽敓鏂ゆ嫹 */
         void eye()
         {
             if ((rows > 0) && (cols > 0) && (rows == cols))
@@ -72,27 +72,27 @@ namespace mM {
             }
         }
         
-        /* 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟� */
+        /* 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿燂拷 */
         uint16_t getRows() const {
             return rows;
         }
 
-        /* 锟斤拷取锟斤拷锟斤拷锟斤拷锟斤拷锟� */
+        /* 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿燂拷 */
         uint16_t getCols() const {
             return cols;
         }
         
-        /* 锟斤拷取锟斤拷锟斤拷锟斤拷锟截讹拷位锟矫碉拷元锟斤拷 */
+        /* 閿熸枻鎷峰彇閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鎴鎷蜂綅閿熺煫纰夋嫹鍏冮敓鏂ゆ嫹 */
         T getElement(uint16_t row, uint16_t col) const {
             return data[row * cols + col];
         }
         
-        /* 锟斤拷锟矫撅拷锟斤拷锟斤拷锟截讹拷位锟矫碉拷元锟斤拷 */
+        /* 閿熸枻鎷烽敓鐭拝鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鎴鎷蜂綅閿熺煫纰夋嫹鍏冮敓鏂ゆ嫹 */
         void setElement(uint16_t row, uint16_t col, T value) {
             data[row * cols + col] = value;
         }
 
-        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹 */
         void setArray(const T* array, uint16_t length)
         {
             if (rows == length / cols)
@@ -104,60 +104,60 @@ namespace mM {
             }
         }
         
-        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
         void setRowArray(const T* _array, uint16_t _row)
         {
             if (_row < rows)
             {
                 for (int i = 0; i < cols; i++)
                 {
-                    data[cols * _row + i] = _array[i];//取锟斤拷锟斤拷应锟斤拷锟斤拷锟较碉拷每一锟斤拷元锟斤拷
+                    data[cols * _row + i] = _array[i];//鍙栭敓鏂ゆ嫹閿熸枻鎷峰簲閿熸枻鎷烽敓鏂ゆ嫹閿熻緝纰夋嫹姣忎竴閿熸枻鎷峰厓閿熸枻鎷�
                 }
             }
         }
         
-        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
         void setColArray(const T* _array, uint16_t _col)
         {
             if (_col < cols)
             {
                 for (int i = 0; i < rows; i++)
                 {
-                    data[i * cols + _col] = _array[i];//取锟斤拷锟斤拷应锟斤拷锟斤拷锟较碉拷每一锟斤拷元锟斤拷
+                    data[i * cols + _col] = _array[i];//鍙栭敓鏂ゆ嫹閿熸枻鎷峰簲閿熸枻鎷烽敓鏂ゆ嫹閿熻緝纰夋嫹姣忎竴閿熸枻鎷峰厓閿熸枻鎷�
                 }
             }
         }
         
-        /* 锟斤拷锟斤拷默锟斤拷锟斤拷锟斤拷锟斤拷锟酵碉拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹榛橀敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓閰电鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
         const T* getArray() {
             return data;
         }
         
-        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
         void getRowArray(T* _dst, uint16_t _row)
         {
             if (_row < rows)
             {
                 for (int i = 0; i < cols; i++)
                 {
-                    _dst[i] = data[cols * _row + i];//取锟斤拷锟斤拷应锟斤拷锟斤拷锟较碉拷每一锟斤拷元锟斤拷
+                    _dst[i] = data[cols * _row + i];//鍙栭敓鏂ゆ嫹閿熸枻鎷峰簲閿熸枻鎷烽敓鏂ゆ嫹閿熻緝纰夋嫹姣忎竴閿熸枻鎷峰厓閿熸枻鎷�
                 }
             }
         }
         
-        /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+        /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
         void getColArray(T* _dst, uint16_t _col)
         {
             if (_col < cols)
             {
                 for (int i = 0; i < rows; i++)
                 {
-                    _dst[i] = data[i * cols + _col];//取锟斤拷锟斤拷应锟斤拷锟斤拷锟较碉拷每一锟斤拷元锟斤拷
+                    _dst[i] = data[i * cols + _col];//鍙栭敓鏂ゆ嫹閿熸枻鎷峰簲閿熸枻鎷烽敓鏂ゆ嫹閿熻緝纰夋嫹姣忎竴閿熸枻鎷峰厓閿熸枻鎷�
                 }
             }
         }
         
-        /* 锟斤拷印锟斤拷锟斤拷 */
+        /* 閿熸枻鎷峰嵃閿熸枻鎷烽敓鏂ゆ嫹 */
         void print() const {
             for (uint16_t i = 0; i < rows; i++) {
                 for (uint16_t j = 0; j < cols; j++) {
@@ -168,30 +168,30 @@ namespace mM {
             std::cout << std::endl;
         }
 
-        //锟斤拷锟斤拷臃锟�
+        //閿熸枻鎷烽敓鏂ゆ嫹鑷冮敓锟�
         myMatrices<T> operator+(const myMatrices<T>& other) const;
-        // 锟斤拷锟斤拷锟斤拷锟�
+        // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟�
         myMatrices<T> operator-(const myMatrices<T>& other) const;
-        // 锟斤拷锟斤拷朔锟�
+        // 閿熸枻鎷烽敓鏂ゆ嫹鏈旈敓锟�
         myMatrices<T> operator*(const myMatrices<T>& other) const;
         myMatrices<T> operator*(const T other) const;
-        // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷式
+        // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷峰紡
         T determinant() const;
-        // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞�
+        // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺粸锟�
         myMatrices<T> getCofactorMatrix(uint16_t rowToRemove, uint16_t colToRemove) const;
-        // 锟斤拷锟斤拷转锟斤拷
+        // 閿熸枻鎷烽敓鏂ゆ嫹杞敓鏂ゆ嫹
         myMatrices<T> transpose() const;
-        // 锟斤拷锟斤拷锟斤拷锟斤拷
+        // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
         myMatrices<T> inverse() const;
-        // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+        // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
         void rowExpansion(myMatrices<T> other);
-        // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷
+        // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�
         void colExpansion(myMatrices<T> other);
     };
 
 
 
-    /* 锟斤拷锟斤拷臃锟� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹鑷冮敓锟� */
     template<class T>
     myMatrices<T> myMatrices<T>::operator+(const myMatrices<T>& other) const {
 
@@ -212,7 +212,7 @@ namespace mM {
         return result;
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓锟� */
     template<class T>
     myMatrices<T> myMatrices<T>::operator-(const myMatrices<T>& other) const {
 
@@ -234,7 +234,7 @@ namespace mM {
         return result;
     }
 
-    /* 锟斤拷锟斤拷朔锟� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹鏈旈敓锟� */
     template<class T>
     myMatrices<T> myMatrices<T>::operator*(const myMatrices<T>& other) const {
 
@@ -259,7 +259,7 @@ namespace mM {
         return result;
     }
 
-    /* 锟斤拷锟斤拷锟诫常锟斤拷锟斤拷锟� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熻甯搁敓鏂ゆ嫹閿熸枻鎷烽敓锟� */
     template<class T>
     myMatrices<T> myMatrices<T>::operator*(const T other) const {
         myMatrices<T> result(rows, cols);
@@ -273,7 +273,7 @@ namespace mM {
         return result;
     }
  
-    /* 锟斤拷锟斤拷转锟斤拷 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹杞敓鏂ゆ嫹 */
     template<class T>
     myMatrices<T> myMatrices<T>::transpose() const {
         myMatrices<T> result(cols, rows);
@@ -287,7 +287,7 @@ namespace mM {
         return result;
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹 */
     template<class T>
     myMatrices<T> myMatrices<T>::inverse() const {
 
@@ -306,11 +306,11 @@ namespace mM {
 
         for (uint16_t i = 0; i < rows; i++) {
             for (uint16_t j = 0; j < cols; j++) {
-                // 锟斤拷锟斤拷(i, j)位锟矫的达拷锟斤拷锟斤拷锟斤拷式
+                // 閿熸枻鎷烽敓鏂ゆ嫹(i, j)浣嶉敓鐭殑杈炬嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷峰紡
                 myMatrices<T> cofactorMatrix = getCofactorMatrix(i, j);
                 double cofactor = cofactorMatrix.determinant();
 
-                // 使锟矫帮拷锟斤拷锟斤拷锟斤拷(i, j)位锟矫存储锟斤拷锟斤拷锟斤拷锟斤拷式
+                // 浣块敓鐭府鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹(i, j)浣嶉敓鐭瓨鍌ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷峰紡
                 adj.setElement(i, j, cofactor);
             }
         }
@@ -318,7 +318,7 @@ namespace mM {
         return adj * (1. / det);
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷式 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹寮� */
     template<class T>
     T myMatrices<T>::determinant() const {
         if (rows != cols) {
@@ -331,22 +331,22 @@ namespace mM {
         }
 
         if (rows == 2) {
-            // 锟斤拷锟斤拷2x2锟斤拷锟斤拷锟斤拷锟斤拷式锟斤拷锟姐公式为 ad - bc
+            // 閿熸枻鎷烽敓鏂ゆ嫹2x2閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹寮忛敓鏂ゆ嫹閿熷鍏紡涓� ad - bc
             return getElement(0, 0) * getElement(1, 1) - getElement(0, 1) * getElement(1, 0);
         }
 
         double det = 0;
         for (uint16_t i = 0; i < cols; i++) {
-            // 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞斤拷锟街�
+            // 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓缁炴枻鎷烽敓琛楋拷
             double cofactor = getElement(0, i) * getCofactorMatrix(0, i).determinant();
-            // 使锟矫递癸拷锟斤拷锟斤拷锟斤拷锟绞�
+            // 浣块敓鐭€掔櫢鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺粸锟�
             det += (i % 2 == 0 ? 1 : -1) * cofactor;
         }
 
         return det;
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷式 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹寮� */
     template<class T>
     myMatrices<T> myMatrices<T>::getCofactorMatrix(uint16_t rowToRemove, uint16_t colToRemove) const {
 
@@ -360,13 +360,13 @@ namespace mM {
         uint16_t cofactorRow = 0;
         for (uint16_t i = 0; i < rows; i++) {
             if (i == rowToRemove) {
-                continue; // 锟斤拷锟斤拷要锟狡筹拷锟斤拷锟斤拷
+                continue; // 閿熸枻鎷烽敓鏂ゆ嫹瑕侀敓鐙＄鎷烽敓鏂ゆ嫹閿熸枻鎷�
             }
 
             uint16_t cofactorCol = 0;
             for (uint16_t j = 0; j < cols; j++) {
                 if (j == colToRemove) {
-                    continue; // 锟斤拷锟斤拷要锟狡筹拷锟斤拷锟斤拷
+                    continue; // 閿熸枻鎷烽敓鏂ゆ嫹瑕侀敓鐙＄鎷烽敓鏂ゆ嫹閿熸枻鎷�
                 }
 
                 cofactor.setElement(cofactorRow, cofactorCol, getElement(i, j));
@@ -379,7 +379,7 @@ namespace mM {
         return cofactor;
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
     template<class T>
     void myMatrices<T>::rowExpansion(myMatrices<T> other)
     {
@@ -388,16 +388,16 @@ namespace mM {
         }
         else
         {
-            T* p = data;//锟斤拷取原锟斤拷锟节达拷锟街�
-            data = new T[(rows + other.rows) * cols];//锟斤拷锟铰凤拷锟斤拷锟节达拷
-            memcpy(data, p, sizeof(T)*rows*cols);//锟斤拷原锟斤拷锟斤拷copy
-            memcpy(data+(rows * cols), other.getArray(), sizeof(T) * other.rows * other.cols);//copy锟斤拷锟斤拷锟斤拷锟斤拷
-            rows = rows + other.rows;//锟斤拷锟斤拷锟斤拷锟斤拷
-            delete p;//删锟斤拷原锟斤拷锟斤拷锟节达拷
+            T* p = data;//閿熸枻鎷峰彇鍘熼敓鏂ゆ嫹閿熻妭杈炬嫹閿熻锟�
+            data = new T[(rows + other.rows) * cols];//閿熸枻鎷烽敓閾板嚖鎷烽敓鏂ゆ嫹閿熻妭杈炬嫹
+            memcpy(data, p, sizeof(T)*rows*cols);//閿熸枻鎷峰師閿熸枻鎷烽敓鏂ゆ嫹copy
+            memcpy(data+(rows * cols), other.getArray(), sizeof(T) * other.rows * other.cols);//copy閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+            rows = rows + other.rows;//閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+            delete p;//鍒犻敓鏂ゆ嫹鍘熼敓鏂ゆ嫹閿熸枻鎷烽敓鑺傝揪鎷�
         }
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
     template<class T>
     void myMatrices<T>::colExpansion(myMatrices<T> other)
     {
@@ -406,20 +406,20 @@ namespace mM {
         }
         else
         {
-            T* p = data;//锟斤拷取原锟斤拷锟节达拷锟街�
-            data = new T[rows * (cols + other.cols)];//锟斤拷锟铰凤拷锟斤拷锟节达拷
+            T* p = data;//閿熸枻鎷峰彇鍘熼敓鏂ゆ嫹閿熻妭杈炬嫹閿熻锟�
+            data = new T[rows * (cols + other.cols)];//閿熸枻鎷烽敓閾板嚖鎷烽敓鏂ゆ嫹閿熻妭杈炬嫹
             uint16_t n = cols + other.cols;
             for (uint16_t i = 0; i < rows; i++)
             {
-                memcpy(data + i*n, p + i*cols, sizeof(T) * cols);//锟斤拷原锟斤拷锟斤拷copy
-                memcpy(data + i * n + cols, other.getArray() + i * other.cols, sizeof(T) * other.cols);//copy锟斤拷锟斤拷锟斤拷锟斤拷
+                memcpy(data + i*n, p + i*cols, sizeof(T) * cols);//閿熸枻鎷峰師閿熸枻鎷烽敓鏂ゆ嫹copy
+                memcpy(data + i * n + cols, other.getArray() + i * other.cols, sizeof(T) * other.cols);//copy閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
             }
-            cols = cols + other.cols;//锟斤拷锟斤拷锟斤拷锟斤拷
-            delete p;//删锟斤拷原锟斤拷锟斤拷锟节达拷  
+            cols = cols + other.cols;//閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
+            delete p;//鍒犻敓鏂ゆ嫹鍘熼敓鏂ゆ嫹閿熸枻鎷烽敓鑺傝揪鎷�  
         }
     }
 
-    /* 锟斤拷锟斤拷 Kronecker 锟剿伙拷锟斤拷锟轿匡拷matlab锟斤拷kron锟斤拷锟斤拷锟斤拷 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹 Kronecker 閿熷壙浼欐嫹閿熸枻鎷烽敓杞垮尅鎷穖atlab閿熸枻鎷穔ron閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷� */
     template <class T>
     myMatrices<T> kron(myMatrices<T>& A, myMatrices<T>& B) {
         uint16_t m = A.getRows();
@@ -464,7 +464,7 @@ namespace mM {
         return kron(result, rest...);
     }
 
-    /* 锟斤拷锟斤拷锟皆角匡拷锟斤拷锟� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熺殕瑙掑尅鎷烽敓鏂ゆ嫹閿燂拷 */
     template <class T>
     myMatrices<T> blkdiag(const myMatrices<T>& A, const myMatrices<T>& B) {
 
@@ -523,7 +523,7 @@ namespace mM {
         return blkdiag(result, rest...);
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷锟� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿燂拷 */
     template<class T>
     myMatrices<T> zeros(uint16_t n)
     {
@@ -537,7 +537,7 @@ namespace mM {
         return result;
     }
 
-    /* 锟斤拷锟斤拷锟斤拷位锟皆斤拷锟斤拷 */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷蜂綅閿熺殕鏂ゆ嫹閿熸枻鎷� */
     template<class T>
     myMatrices<T> eye(uint16_t n)
     {
@@ -549,7 +549,7 @@ namespace mM {
         return result;
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷喜锟斤拷锟斤拷胁锟斤拷锟斤拷斜洌� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鍠滈敓鏂ゆ嫹閿熸枻鎷疯儊閿熸枻鎷烽敓鏂ゆ嫹鏂滄磳锟� */
     template<class T>
     myMatrices<T> rowCombine(myMatrices<T>& A,myMatrices<T>& B)
     {
@@ -560,8 +560,8 @@ namespace mM {
         }
         else
         {
-            memcpy(result.data, A.getArray(), sizeof(T) * A.getRows() * A.getCols());//锟斤拷原锟斤拷锟斤拷copy
-            memcpy(result.data + (A.getRows() * A.getCols()), B.getArray(), sizeof(T) * B.getRows() * B.getCols());//copy锟斤拷锟斤拷锟斤拷锟斤拷
+            memcpy(result.data, A.getArray(), sizeof(T) * A.getRows() * A.getCols());//閿熸枻鎷峰師閿熸枻鎷烽敓鏂ゆ嫹copy
+            memcpy(result.data + (A.getRows() * A.getCols()), B.getArray(), sizeof(T) * B.getRows() * B.getCols());//copy閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
             return result;
         }
     }
@@ -576,13 +576,13 @@ namespace mM {
         }
         else
         {
-            memcpy(result.data, A.getArray(), sizeof(T) * A.getRows() * A.getCols());//锟斤拷原锟斤拷锟斤拷copy
-            memcpy(result.data + (A.getRows() * A.getCols()), B.getArray(), sizeof(T) * B.getRows() * B.getCols());//copy锟斤拷锟斤拷锟斤拷锟斤拷
+            memcpy(result.data, A.getArray(), sizeof(T) * A.getRows() * A.getCols());//閿熸枻鎷峰師閿熸枻鎷烽敓鏂ゆ嫹copy
+            memcpy(result.data + (A.getRows() * A.getCols()), B.getArray(), sizeof(T) * B.getRows() * B.getCols());//copy閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
             return rowCombine(result,rest...);
         }
     }
 
-    /* 锟斤拷锟斤拷锟斤拷锟斤拷喜锟斤拷锟斤拷斜锟斤拷胁锟斤拷洌� */
+    /* 閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鍠滈敓鏂ゆ嫹閿熸枻鎷锋枩閿熸枻鎷疯儊閿熸枻鎷锋磳锟� */
     template<class T>
     myMatrices<T> colCombine(myMatrices<T>& A, myMatrices<T>& B)
     {
@@ -596,8 +596,8 @@ namespace mM {
             uint16_t n = A.getCols() + B.getCols();
             for (uint16_t i = 0; i < A.getRows(); i++)
             {
-                memcpy(result.data + i * n, A.getArray() + i * A.getCols(), sizeof(T) * A.getCols());//锟斤拷原锟斤拷锟斤拷copy
-                memcpy(result.data + i * n + A.getCols(), B.getArray() + i * B.getCols(), sizeof(T) * B.getCols());//copy锟斤拷锟斤拷锟斤拷锟斤拷
+                memcpy(result.data + i * n, A.getArray() + i * A.getCols(), sizeof(T) * A.getCols());//閿熸枻鎷峰師閿熸枻鎷烽敓鏂ゆ嫹copy
+                memcpy(result.data + i * n + A.getCols(), B.getArray() + i * B.getCols(), sizeof(T) * B.getCols());//copy閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
             }
             return result;
         }
@@ -616,8 +616,8 @@ namespace mM {
             uint16_t n = A.getCols() + B.getCols();
             for (uint16_t i = 0; i < A.getRows(); i++)
             {
-                memcpy(result.data + i * n, A.getArray() + i * A.getCols(), sizeof(T) * A.getCols());//锟斤拷原锟斤拷锟斤拷copy
-                memcpy(result.data + i * n + A.getCols(), B.getArray() + i * B.getCols(), sizeof(T) * B.getCols());//copy锟斤拷锟斤拷锟斤拷锟斤拷
+                memcpy(result.data + i * n, A.getArray() + i * A.getCols(), sizeof(T) * A.getCols());//閿熸枻鎷峰師閿熸枻鎷烽敓鏂ゆ嫹copy
+                memcpy(result.data + i * n + A.getCols(), B.getArray() + i * B.getCols(), sizeof(T) * B.getCols());//copy閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹
             }
             return colCombine(result,rest...);
         }
