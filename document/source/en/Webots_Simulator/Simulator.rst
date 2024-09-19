@@ -758,7 +758,7 @@ Reward Function
 
    Where :math:`I` represents the tracking range (the area captured by the camera lens), and :math:`t` represents the position of the tracked object within the tracking range (the area captured by the camera lens).
 
-   .. _schematic_diagram_of_discrete_rewards_for_tracking_objects:
+   .. _Discrete Reward Diagram for Tracking Object:
 
    .. figure:: ../_static/image/Discrete_reward.png
       :alt: Discrete_reward
@@ -769,7 +769,7 @@ Reward Function
 
    The second type is dense reward, which gives a reward that decreases as the distance increases by evaluating the position of the tracking object relative to the center of the tracking range. The higher the reward, the closer the target is to the center point of the range, and vice versa.
 
-   .. _Continuous Reward Diagram of the Tracking Object:
+   .. _Continuous Reward Diagram for Tracking Object:
 
    .. _figcontr:
 

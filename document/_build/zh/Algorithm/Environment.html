@@ -252,39 +252,41 @@
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/config.json</code>
 </div>
 </br><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;Benchmark&quot;</span><span class="p">:{</span>
-<span class="w">        </span><span class="nt">&quot;Need_render&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Action_dim&quot;</span><span class="p">:</span><span class="mi">7</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;State_size&quot;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;State_channel&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Norm_Type&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Forward_Speed&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Backward_Speed&quot;</span><span class="p">:</span><span class="mi">-40</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Left_Speed&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Right_Speed&quot;</span><span class="p">:</span><span class="mi">-40</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;CW_omega&quot;</span><span class="p">:</span><span class="mf">0.2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;CCW_omega&quot;</span><span class="p">:</span><span class="mf">-0.2</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Control_Frequence&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;port_process&quot;</span><span class="p">:</span><span class="mi">7789</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;end_reward&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;end_reward_list&quot;</span><span class="p">:[</span><span class="mi">-20</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span>
-<span class="w">        </span><span class="nt">&quot;scene&quot;</span><span class="p">:</span><span class="s2">&quot;farmland&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;weather&quot;</span><span class="p">:</span><span class="s2">&quot;day&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;auto_start&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Other_State&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;CloudPoint&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;RewardParams&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;RewardType&quot;</span><span class="p">:</span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;delay&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
-
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="nt">&quot;LunarLander&quot;</span><span class="p">:{</span>
-<span class="w">        </span><span class="nt">&quot;Need_render&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Action_dim&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;State_size&quot;</span><span class="p">:</span><span class="mi">84</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;State_channel&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span>
-<span class="w">        </span><span class="nt">&quot;Norm_Type&quot;</span><span class="p">:</span><span class="mi">0</span>
+<span class="nt">&quot;Benchmark&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;Need_render&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Action_dim&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;State_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;State_channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Norm_Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Forward_Speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Backward_Speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-40</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Left_Speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Right_Speed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-40</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CW_omega&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CCW_omega&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Control_Frequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;port_process&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">39945</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;end_reward&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;end_reward_list&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="mi">-20</span><span class="p">,</span>
+<span class="w">        </span><span class="mi">20</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">&quot;scene&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;citystreet&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;weather&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;day&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;auto_start&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Other_State&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;CloudPoint&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;RewardParams&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;RewardType&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;delay&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span>
+<span class="p">},</span>
+<span class="w">    </span><span class="nt">&quot;LunarLander&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;Need_render&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Action_dim&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;State_size&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">84</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;State_channel&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;Norm_Type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

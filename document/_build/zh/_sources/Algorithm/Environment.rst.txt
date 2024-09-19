@@ -187,39 +187,41 @@ Part 2 配置文件
     .. code:: json
 
         {
-            "Benchmark":{
-                "Need_render":0,
-                "Action_dim":7,
-                "State_size":84,
-                "State_channel":3,
-                "Norm_Type":0,
-                "Forward_Speed":40,
-                "Backward_Speed":-40,
-                "Left_Speed":40,
-                "Right_Speed":-40,
-                "CW_omega":0.2,
-                "CCW_omega":-0.2,
-                "Control_Frequence":100,
-                "port_process":7789,
-                "end_reward":false,
-                "end_reward_list":[-20,20],
-                "scene":"farmland",
-                "weather":"day",
-                "auto_start":false,
-                "Other_State":false,
-                "CloudPoint":false,
-                "RewardParams":true,
-                "RewardType":"default",
-                "verbose": false,
-                "delay": 20
-                
-            },
-            "LunarLander":{
-                "Need_render":1,
-                "Action_dim":4,
-                "State_size":84,
-                "State_channel":3,
-                "Norm_Type":0
+        "Benchmark": {
+            "Need_render": 0,
+            "Action_dim": 7,
+            "State_size": 84,
+            "State_channel": 3,
+            "Norm_Type": 0,
+            "Forward_Speed": 40,
+            "Backward_Speed": -40,
+            "Left_Speed": 40,
+            "Right_Speed": -40,
+            "CW_omega": 2,
+            "CCW_omega": -2,
+            "Control_Frequence": 125,
+            "port_process": 39945,
+            "end_reward": false,
+            "end_reward_list": [
+                -20,
+                20
+            ],
+            "scene": "citystreet",
+            "weather": "day",
+            "auto_start": true,
+            "Other_State": false,
+            "CloudPoint": false,
+            "RewardParams": true,
+            "RewardType": "default",
+            "verbose": false,
+            "delay": 20
+        },
+            "LunarLander": {
+                "Need_render": 1,
+                "Action_dim": 4,
+                "State_size": 84,
+                "State_channel": 3,
+                "Norm_Type": 0
             }
         }
 
