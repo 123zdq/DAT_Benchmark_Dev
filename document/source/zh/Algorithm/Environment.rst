@@ -63,7 +63,7 @@
 
 .. _BenchEnv_Multi:
     
-1 底层环境类(BenchEnv_Multi)
+1 底层环境类
 -------------------------------------
 
 Part 1 接口详解
@@ -140,7 +140,7 @@ Part 1 接口详解
     * :code:`image(numpy.ndarray)` ：返回的下一时刻图像(已经利用 :code:`process_state` 进行后处理)
     * :code:`reward(float)` ：当前时间步奖励
     * :code:`done(bool)` ： 当前环境是否结束
-    * :code:`self.SuppleInfo(list)` ：补充信息(如果启用了:code:`Other_State` 或 :code:`CloudPoint` 或 :code:`RewardParams` ，就在此取出)
+    * :code:`self.SuppleInfo(list)` ：补充信息(如果启用了 :code:`Other_State` 或 :code:`CloudPoint` 或 :code:`RewardParams` ，就在此取出)
 
     .. raw:: html
 
@@ -247,6 +247,9 @@ Part 2 配置文件
     *  :code:`"CloudPoint"` ：是否启用仿真器端的点云选项
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
+
+      *  包括 :code:`"default","E2E","CVAT","DVAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ , [3]_
+
     * :code:`"verbose"(bool)`: 配置环境是否输出log文件
     * :code:`"delay"(int)`: 配置系统等待地图加载的时长
 
@@ -308,7 +311,7 @@ Part 3 构造函数
 .. _Gymnasium_Gym:
 
 
-2 Gym环境类(UAV_VAT/UAV_VAT_Gymnasium)
+2 Gym环境类
 -------------------------------------------------
 
   考虑到用户常常基于 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 环境接口搭建强化学习算法，或利用如 `stable-baselines3 <https://github.com/DLR-RM/stable-baselines3>`_ 库进行算法验证，本工程将上述底层环境类进行封装，提供完全适配 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 的环境类
@@ -551,8 +554,7 @@ Part4 调用接口
 
 .. _Parallel:
 
-
-3 并行环境类(Envs)
+3 并行环境类
 -------------------------------------------------
 .. raw:: html
 
@@ -715,3 +717,18 @@ Part4 性能评价指标
 
 上述公式中 :math:`r_{dt}` 代表在步骤 :math:`t` 中的离散奖励值， :math:`E_{ml}` 为各个批次中最大的step长度， :math:`E_l` 代表本批次长度。
 离散奖励计算图解见 :ref:`跟踪对象离散奖励示意图`
+
+
+.. raw:: html
+
+  </br>
+  <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+  </br>
+  </br>
+
+
+引用：
+
+.. [1] Luo, Wenhan, et al. "End-to-end active object tracking and its real-world deployment via reinforcement learning." IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.
+.. [2] Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. "Enhancing continuous control of mobile robots for end-to-end visual active tracking." Robotics and Autonomous Systems 142 (2021): 103799.
+.. [3] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).

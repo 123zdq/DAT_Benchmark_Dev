@@ -1,68 +1,84 @@
 模型搭建
 ==================
 
-    .. raw:: html
+.. raw:: html
 
-        <style>
-            #language-switch {
-            display: flex; /* Use Flexbox layout */
-            justify-content: center; /* Center buttons horizontally */
-            align-items: center; /* Center buttons vertically */
-            gap: 10px; /* Space between buttons */
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
-        #language-switch button {
-            width: 180px;
-            height: 40px;
-            font-size: 16px;
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            cursor: pointer;
-            text-align: center;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center; /* Center text vertically */
-            justify-content: center; /* Center text horizontally */
-        }
-        </style>
+    <style>
+        #language-switch {
+        display: flex; /* Use Flexbox layout */
+        justify-content: center; /* Center buttons horizontally */
+        align-items: center; /* Center buttons vertically */
+        gap: 10px; /* Space between buttons */
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    #language-switch button {
+        width: 180px;
+        height: 40px;
+        font-size: 16px;
+        padding: 10px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        background-color: #f0f0f0;
+        display: flex;
+        align-items: center; /* Center text vertically */
+        justify-content: center; /* Center text horizontally */
+    }
+    </style>
 
-        <!-- Language switch buttons -->
-        <div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
-            <b style="font-size: 18px;">You can choose language by </b>
-            <button onclick="switchLanguage('zh')">中文</button>
-            <button onclick="switchLanguage('en')">English</button>
-        </div>
+    <!-- Language switch buttons -->
+    <div id="language-switch" style="background-color: #fae3e3; padding: 15px; border-radius: 5px; border: 2px solid #cb7474;">
+        <b style="font-size: 18px;">You can choose language by </b>
+        <button onclick="switchLanguage('zh')">中文</button>
+        <button onclick="switchLanguage('en')">English</button>
+    </div>
 
-        <script>
-            function switchLanguage(lang) {
-                if (lang === 'zh') {
-                    window.location.href = 'Model.html';
-                } else if (lang === 'en') {
-                    window.location.href = '../../en/Algorithm/Model.html';
-                }
+    <script>
+        function switchLanguage(lang) {
+            if (lang === 'zh') {
+                window.location.href = 'Model.html';
+            } else if (lang === 'en') {
+                window.location.href = '../../en/Algorithm/Model.html';
             }
-        </script>  
-        </br>
-        <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-        </br>
-        </br>
+        }
+    </script> 
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
 
 
-    本工程提供了4种baseline方法的算法实现，分别是 :code:`A3CLSTM-E2E` [1]_ , :code:`CVAT` [2]_ , :code:`FollowAnything` [3]_ 以及PPO+CL(Ours)
+.. raw:: html
 
-    其中，上述baseline方法中 [1]_ [2]_ 分别调用了本工程实现的2种环境 :doc:`Environment` ，为不同需求的算法实现提供了模板(Gym环境接口可由用户自主对接算法)
-    
-    *  :code:`A3CLSTM-E2E` 环境调用了底层环境类 :ref:`BenchEnv_Multi` 
-    *  :code:`CVAT` 环境调用了并行环境类( :code:`Envs` :ref:`Parallel` )
-    *  :code:`FollowAnything` 
+    <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 2px solid #CD6839;">
+        本工程提供了3种baseline方法的算法实现，分别是 <code>A3CLSTM-E2E</code> [1] , <code>DVAT</code> [2] , 以及 <code>RPPO+CL(Ours)</code>
+    </div>
+    </br>
+
+
+其中，上述baseline方法中 [1]_ [2]_ 和 :code:`RPPO+CL(Ours)` 分别调用了本工程实现的3种环境 :doc:`Environment` ，为不同需求的算法实现提供了模板。
+
+*  :code:`A3CLSTM-E2E` 算法调用了底层环境类( :ref:`BenchEnv_Multi` )
+*  :code:`DVAT` 算法调用了Gym环境类( :ref:`Gymnasium_Gym` )
+*  :code:`RPPO+CL` 算法调用了并行环境类( :ref:`Parallel` )
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
 
 Baseline1 A3CLSTM-E2E
 ---------------------------------
 
-本工程对于 :code:`A3CLSTM-E2E` 方法的复现参考了论文 :code:`AD-VAT+` [4]_ 基于代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>`_ 的复现方式。
+本工程对于 :code:`A3CLSTM-E2E` 方法的复现参考了论文 :code:`AD-VAT+` [3]_ 基于代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>`_ 的复现方式。
 
 .. raw:: html
 
@@ -190,7 +206,24 @@ log文件
     </br>
     </br>
 
-Baseline2 CVAT
+Baseline2 DVAT
+---------------------------------
+
+.. raw:: html
+
+    <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT</code>文件夹
+    </div>
+    </br>
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+Baseline3 PPO+CL
 ---------------------------------
 
 .. raw:: html
@@ -199,7 +232,6 @@ Baseline2 CVAT
         具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code>文件夹
     </div>
     </br>
-
 
 快速运行程序
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -214,12 +246,10 @@ Baseline2 CVAT
     # 中断重开训练模式
     python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
 
-.. _cvatParams:
-
 程序入口
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :code:`RPPO.py.py` 为整个程序的入口,同样提供训练和测试模式(具体配置见下方参数配置即可)
+    :code:`RPPO.py` 为整个程序的入口,同样提供训练和测试模式(具体配置见下方参数配置即可)
 
     .. raw:: html
 
@@ -260,70 +290,9 @@ Baseline2 CVAT
 
     * :code:`--tensorboard_port(int)=1` : 是否使用tensorboard-logger, :code:`--tensorboard_port(int)!=-1` 则随机分配可用端口，否则不启用(测试状态不启用)
 
-.. _cvatLog:
 
-log文件
+课程学习
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    .. raw:: html
-
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/PPO_logs</code>
-        </div>
-        </br>
-
-    * 在模型训练的过程中，只要参数 :code:`--tensorboard_port(int)!=-1` ，那么启动程序时会自动启动tensorboard-logger
-    * 但如果希望手动启动tensorboard，也可以使用以下的命令：
-
-    .. code:: bash
-
-        cd Alg_Base/rl_a3c_pytorch_benchmark/
-        tensorboard --logdir PPO_logs
-
-.. raw:: html
-
-    </br>
-    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-    </br>
-    </br>
-
-Baseline3 FollowAnything
----------------------------------
-
-.. raw:: html
-
-    </br>
-    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-    </br>
-    </br>
-
-Baseline4 PPO+CL
----------------------------------
-
-.. raw:: html
-
-    <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code>文件夹
-    </div>
-    </br>
-
-快速运行程序
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: bash
-
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
-    # 测试模式
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0
-    # 新训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
-    # 中断重开训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
-
-程序入口
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    PPO+CL的程序入口和参数配置与 :ref:`cvatParams` 一致
 
     * 我们的方法在RPPO的基础上增加了课程学习方法，而课程学习的第一阶段，智能体在简单的设定下进行任务理解
     * 为了便于操作，我们见简单的设定抽离成地图，即 :code:`./Webots_Simulation/traffic_project/worlds/simpleway-*.wbt` 地图
@@ -398,7 +367,20 @@ Baseline4 PPO+CL
 log文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    PPO+CL的log文件说明 :ref:`cvatLog` 一致
+    .. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/PPO_logs</code>
+        </div>
+        </br>
+
+    * 在模型训练的过程中，只要参数 :code:`--tensorboard_port(int)!=-1` ，那么启动程序时会自动启动tensorboard-logger
+    * 但如果希望手动启动tensorboard，也可以使用以下的命令：
+
+    .. code:: bash
+
+        cd Alg_Base/rl_a3c_pytorch_benchmark/
+        tensorboard --logdir PPO_logs
 
 .. raw:: html
 
@@ -411,7 +393,8 @@ log文件
 引用：
 
 .. [1] Luo, Wenhan, et al. "End-to-end active object tracking and its real-world deployment via reinforcement learning." IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.
-.. [2] Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. "Enhancing continuous control of mobile robots for end-to-end visual active tracking." Robotics and Autonomous Systems 142 (2021): 103799.
-.. [3] Maalouf, Alaa, et al. "Follow Anything: Open-set detection, tracking, and following in real-time." IEEE Robotics and Automation Letters 9.4 (2024): 3283-3290.
-.. [4] Zhong, Fangwei, et al. "Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking." IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.
+.. [2] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).
+.. [3] Zhong, Fangwei, et al. "Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking." IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.
+
+
 
