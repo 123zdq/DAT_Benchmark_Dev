@@ -74,6 +74,7 @@ from typing import Any, TypeVar, cast
 import numpy as np
 import torch
 from torch.distributions import Categorical
+import time 
 
 from tianshou.policy.modelfree.discrete_sac import TDiscreteSACTrainingStats,DiscreteSACTrainingStats
 from tianshou.data import Batch, ReplayBuffer, to_torch
@@ -128,6 +129,7 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
         observation_space: gymnasium.Space | None = None,
         lr_scheduler: TLearningRateScheduler | None = None,
     ) -> None:
+        self.start_time = time.time()
         super().__init__(
             actor=actor,
             actor_optim=actor_optim,
@@ -174,7 +176,6 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
 
     def learn(self, batch: RolloutBatchProtocol,target_q:torch.Tensor,*args: Any, **kwargs: Any) -> TDiscreteSACTrainingStats:  # type: ignore
         weight = batch.pop("weight", 1.0)
-        target_q = target_q
         act = to_torch(batch.act[:, np.newaxis], device=target_q.device, dtype=torch.long)
 
         # critic 1
@@ -221,7 +222,10 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
         if self.is_auto_alpha:
             self.alpha = cast(torch.Tensor, self.alpha)
 
+        train_time = time.time()-self.start_time
+
         return DiscreteSACTrainingStats(  # type: ignore[return-value]
+            train_time=train_time,
             actor_loss=actor_loss.item(),
             critic1_loss=critic1_loss.item(),
             critic2_loss=critic2_loss.item(),

@@ -17,145 +17,10 @@ import numpy as np
 import gymnasium
 
 from DVAT_envs import make_env,DVAT_ENV
-from envs.async_vecenv_ts import SubprocVectorEnv_TS
+from envs.async_vecenv_ts import SubprocVectorEnv_TS,TS_Collector
 import subprocess, time
 import argparse
 from denseMlpPolicy import create_sacd_policy
-
-# if __name__ == "__main__":
-def arg_config():
-
-    # --------------------------------------------------parameter-----------------------------------------------
-    parse = argparse.ArgumentParser(description="run RPPO")
-    parse.add_argument(
-        "-w",
-        "--workers",
-        default=2,
-        type=int,
-        metavar="",
-        help="the number of agents, default: 24",
-    )
-    parse.add_argument(
-        "-t",
-        "--train_mode",
-        default=1,
-        type=int,
-        metavar="",
-        help="whether to enable training mode, default: 1",
-    )
-    parse.add_argument(
-        "-p",
-        "--port",
-        default=-1,
-        type=int,
-        metavar="",
-        help="the communication port between the algorithm and the simulator, keep this parameter to default -1, it will automatically find an available port.",
-    )
-    parse.add_argument(
-        "-params",
-        "--savepath",
-        default="params.pth",
-        type=str,
-        metavar="",
-        help="model parameter filename, default: params.pth",
-    )
-    parse.add_argument(
-        "-m",
-        "--map",
-        default="simpleway-grass_day.wbt",
-        type=str,
-        metavar="",
-        help="the filename of map, default: citystreet-day.wbt",
-    )
-    parse.add_argument(
-        "-tp",
-        "--tensorboard_port",
-        default=6006,
-        type=int,
-        metavar="",
-        help="the port of tensorboard, recommended: 6006. Default is -1 (TensorBoard disabled). Set to any other value to enable TensorBoard, which will find an available port if needed.",
-    )
-
-    parse.add_argument(
-        "-N",
-        "--New_Train",
-        action="store_true",
-        default=False,
-        help="whether restart a new training, default: False",
-    )
-
-    parse.add_argument(
-        "-Len",
-        "--observation_buffer_length",
-        type=int,
-        default=3,
-        help="number of frame use for state",
-    )
-    args = parse.parse_args()
-
-    if args.port == -1:
-        import socket
-
-        sock = socket.socket()
-        sock.bind(("", 0))
-        _, args.port = sock.getsockname()
-        sock.close()
-
-    import json
-
-    # ------------------------------env_config.json--------------------------------
-    with open(
-        "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
-    ) as file:
-        data = json.load(file)
-    data["Config_Agen_Num_Port"] = args.port
-    data["Simulation_Mode"] = "train"
-    data["Tracker_Def"] = "DRONE"
-    data["Sumo_Params"]["rou_update"] = True
-    data["Verbose"] = False
-    if args.train_mode == 1:
-        data["Drone_Random_Config"]["direction_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
-        data["Drone_Random_Config"]["verticle_bias_random"] = True
-        data["Sumo_Params"]["fixed_seed"] = False
-        data["Sumo_Params"]["fixed_car_group_num"] = False
-        data["Reward_Config"]["view_range"] = 0.7
-    else:
-        data["Drone_Random_Config"]["direction_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random_max"] = 6
-        data["Drone_Random_Config"]["horizon_bias_random_min"] = 4
-        data["Drone_Random_Config"]["verticle_bias_random"] = True
-        data["Drone_Random_Config"]["verticle_bias_random_max"] = 6
-        data["Drone_Random_Config"]["verticle_bias_random_min"] = 4
-        data["Sumo_Params"]["fixed_color"] = False
-        data["Sumo_Params"]["fixed_seed"] = True
-        data["Sumo_Params"]["fixed_car_group_num"] = True
-        
-        data["Reward_Config"]["view_range"] = 1
-    with open(
-        "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
-    ) as file:
-        json.dump(data, file, indent=4)
-
-    # ------------------------------config.json--------------------------------
-    with open("config.json", "r") as file:
-        data = json.load(file)
-    data["Benchmark"]["port_process"] = args.port
-    data["Benchmark"]["auto_start"] = False
-    with open("config.json", "w") as file:
-        json.dump(data, file, indent=4)
-
-    if args.New_Train and os.path.exists("./PPO_logs/steps.txt"):
-        with open("./PPO_logs/steps.txt", "w") as file:
-            file.write("0")
-
-    if args.train_mode == 1:
-        Load_Model = not args.New_Train
-    else:
-        Load_Model = True
-
-    return args
 
 def test_env(args):
 
@@ -254,12 +119,10 @@ def DVAT(args):
     sacd_policy = create_sacd_policy(actor_obs_space=actor_obs_space,action_space=action_space,obs_shape_critic=critic_obs_space.shape[0],action_shape=int(action_space.n))
     
     ## create buffer
-    from tianshou.data import VectorReplayBuffer
     buffer = VectorReplayBuffer(total_size=settings["buffer_size"],buffer_num=args.workers)
 
     ## create collector
-    from tianshou.data import Collector
-    collector = Collector(sacd_policy, vector_env, buffer)
+    collector = TS_Collector(sacd_policy, vector_env, buffer)
     collected_steps = 0
 
     # get device
@@ -294,7 +157,7 @@ def DVAT(args):
 
             target_q = sacd_policy._target_q(collector.buffer, indices=batch_indices)
             losses = sacd_policy.learn(batch=batch_buffer,target_q=target_q)
-
+            # print(f"losses:{losses}")
         finally:
             simulator.terminate()
             try:
@@ -303,7 +166,139 @@ def DVAT(args):
                 simulator.kill()
 
 if __name__ == "__main__":
-    args = arg_config()
+    # --------------------------------------------------parameter-----------------------------------------------
+    parse = argparse.ArgumentParser(description="run DVAT")
+    parse.add_argument(
+        "-w",
+        "--workers",
+        default=2,
+        type=int,
+        metavar="",
+        help="the number of agents, default: 24",
+    )
+    parse.add_argument(
+        "-t",
+        "--train_mode",
+        default=1,
+        type=int,
+        metavar="",
+        help="whether to enable training mode, default: 1",
+    )
+    parse.add_argument(
+        "-p",
+        "--port",
+        default=-1,
+        type=int,
+        metavar="",
+        help="the communication port between the algorithm and the simulator, keep this parameter to default -1, it will automatically find an available port.",
+    )
+    parse.add_argument(
+        "-params",
+        "--savepath",
+        default="params.pth",
+        type=str,
+        metavar="",
+        help="model parameter filename, default: params.pth",
+    )
+    parse.add_argument(
+        "-m",
+        "--map",
+        default="simpleway-grass_day.wbt",
+        type=str,
+        metavar="",
+        help="the filename of map, default: citystreet-day.wbt",
+    )
+    parse.add_argument(
+        "-tp",
+        "--tensorboard_port",
+        default=6006,
+        type=int,
+        metavar="",
+        help="the port of tensorboard, recommended: 6006. Default is -1 (TensorBoard disabled). Set to any other value to enable TensorBoard, which will find an available port if needed.",
+    )
+
+    parse.add_argument(
+        "-N",
+        "--New_Train",
+        action="store_true",
+        default=False,
+        help="whether restart a new training, default: False",
+    )
+
+    parse.add_argument(
+        "-Len",
+        "--observation_buffer_length",
+        type=int,
+        default=3,
+        help="number of frame use for state",
+    )
+    args = parse.parse_args()
+
+    if args.port == -1:
+        import socket
+
+        sock = socket.socket()
+        sock.bind(("", 0))
+        _, args.port = sock.getsockname()
+        sock.close()
+
+    import json
+
+    # ------------------------------env_config.json--------------------------------
+    with open(
+        "../../Webots_Simulation/traffic_project/config/env_config.json", "r"
+    ) as file:
+        data = json.load(file)
+    data["Config_Agen_Num_Port"] = args.port
+    data["Simulation_Mode"] = "train"
+    data["Tracker_Def"] = "DRONE"
+    data["Sumo_Params"]["rou_update"] = True
+    data["Verbose"] = False
+    if args.train_mode == 1:
+        data["Drone_Random_Config"]["direction_random"] = True
+        data["Drone_Random_Config"]["height_random"] = True
+        data["Drone_Random_Config"]["horizon_bias_random"] = True
+        data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Sumo_Params"]["fixed_seed"] = False
+        data["Sumo_Params"]["fixed_car_group_num"] = False
+        data["Reward_Config"]["view_range"] = 0.7
+    else:
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = True
+        data["Drone_Random_Config"]["horizon_bias_random_max"] = 6
+        data["Drone_Random_Config"]["horizon_bias_random_min"] = 4
+        data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Drone_Random_Config"]["verticle_bias_random_max"] = 6
+        data["Drone_Random_Config"]["verticle_bias_random_min"] = 4
+        data["Sumo_Params"]["fixed_color"] = False
+        data["Sumo_Params"]["fixed_seed"] = True
+        data["Sumo_Params"]["fixed_car_group_num"] = True
+        
+        data["Reward_Config"]["view_range"] = 1
+    with open(
+        "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
+    ) as file:
+        json.dump(data, file, indent=4)
+
+    # ------------------------------config.json--------------------------------
+    with open("config.json", "r") as file:
+        data = json.load(file)
+    data["Benchmark"]["port_process"] = args.port
+    data["Benchmark"]["auto_start"] = False
+    data["Benchmark"]["RewardType"] = "DVAT"
+    with open("config.json", "w") as file:
+        json.dump(data, file, indent=4)
+
+    if args.New_Train and os.path.exists("./PPO_logs/steps.txt"):
+        with open("./PPO_logs/steps.txt", "w") as file:
+            file.write("0")
+
+    if args.train_mode == 1:
+        Load_Model = not args.New_Train
+    else:
+        Load_Model = True
+
     # test_env(args)
     DVAT(args)
 

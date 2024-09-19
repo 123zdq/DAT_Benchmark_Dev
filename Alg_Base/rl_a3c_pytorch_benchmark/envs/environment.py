@@ -14,7 +14,7 @@ from communication.sendSocket import SendActionSocket
 import time
 from logger_cfg import create_logger
 import copy
-from utils import get_E2E_reward,get_DVAT_reward,get_CVAT_reward,check_memory_usage
+from utils import get_E2E_reward,get_DVAT_reward,get_CVAT_reward,check_memory_usage,judge_vel_eff
 import math
 from threading import Thread
 from logs.Empty_Log import Empty_Logger
@@ -435,8 +435,12 @@ class BenchEnv_Multi():
         if self.asymmetric:
             pos_3d = reward_params[-12:-9]
             vel_3d = reward_params[-9:-6]
-            acc_3d = reward_params[-6:-3]
-            vector = np.concatenate([pos_3d, vel_3d, acc_3d]).astype(np.float32)
+            vel_3d_norm = judge_vel_eff(vel_3d)
+            # acc_3d = reward_params[-6:-3]
+            acc_3d = [0,0,0]
+            vector = np.concatenate([pos_3d, vel_3d_norm, acc_3d]).astype(np.float32)
+            # if self.process_id == 0:
+            #     print(f"environment---vector:{vector}")
             self.actual_state["image"] = image
             self.actual_state["vector"] = vector
         else:
@@ -522,8 +526,10 @@ class BenchEnv_Multi():
         if self.asymmetric:
             pos_3d = reward_params[-12:-9]
             vel_3d = reward_params[-9:-6]
-            acc_3d = reward_params[-6:-3]
-            vector = np.concatenate([pos_3d, vel_3d, acc_3d]).astype(np.float32)
+            vel_3d_norm = judge_vel_eff(vel_3d)
+            # acc_3d = reward_params[-6:-3]
+            acc_3d = [0,0,0]
+            vector = np.concatenate([pos_3d, vel_3d_norm, acc_3d]).astype(np.float32)
             self.actual_state["image"] = image
             self.actual_state["vector"] = vector
         else:

@@ -143,6 +143,25 @@ def check_memory_usage(target_pid:int,threshold:float=0.85)->float:
         
         time.sleep(5)
 
+def judge_vel_eff(vel:list,thresholdx:float=50.0,thresholdy:float=50.0,maxx:float=40.0,maxy:float=40.0)->list:
+    vel_norm = [0.0,0.0,0.0]
+    if abs(vel[0])>=thresholdx:
+        vel_norm[0] = sign(vel[0])*maxx
+    else:
+        vel_norm[0] = vel[0]
+    if abs(vel[1])>=thresholdy:
+        vel_norm[1] = sign(vel[1])*maxy
+    else:
+        vel_norm[1] = vel[1]
+    vel_norm[2] = vel[2]
+    return vel_norm
+
+def sign(num:float):
+    if num >= 0:
+        return 1
+    else:
+        return -1
+
 def get_mean_std(reward_list:list):
     mean = np.mean(reward_list)
     std = np.std(reward_list)
