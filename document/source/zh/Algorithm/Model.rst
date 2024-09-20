@@ -94,7 +94,10 @@ Baseline1 A3CLSTM-E2E
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     # 测试模式
-    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d"
+    # 使用 累计奖励 CR 进行测试
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode AR
+    # 使用 追踪成功比例 TSR 进行测试
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode TSR
     # 新训练模式
     python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
     # 中断重开训练模式
@@ -216,12 +219,99 @@ Baseline2 DVAT
     </div>
     </br>
 
+
+快速运行程序
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    # 测试模式
+    # 使用 累计奖励 CR 进行测试
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    # 使用 追踪成功比例 TSR 进行测试
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    # 新训练模式
+    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    # 中断重开训练模式
+    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1
+
+程序入口
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    :code:`DVAT_main.py` 为整个程序的入口,同样提供训练和测试模式(具体配置见下方参数配置即可)
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>1. 运行参数：</b>配置系统模式，运行频率，设备等参数
+      </div>
+      </br>
+
+    * :code:`--workers(int)=24` : 环境并行训练的数量数(需要根据实际计算机的内存/显存来决定)
+    * :code:`--train_mode(int)=1` : 配置运行模式是否为训练模式( :code:`--train_mode=1` 是训练模式，:code:`--train_mode=0` 是测试模式)
+    * :code:`--port(int)=-1` : 环境端与算法端通信端口，默认 :code:`--port=-1` 则随机利用一个当前可用的端口，不建议手动修改
+    * :code:`--New_Train(bool)=False` : 是否开启全新的训练，默认为 :code:`--New_Train=False`，则会加载 :code:`params.pth` 预训练权重(如果存在)进行训练，并且tensorboard的曲线也会从上一次训练曲线后加载
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>2. 环境参数：</b>配置选择的环境
+      </div>
+      </br>
+
+    * :code:`--map(str)="citystreet-day.wbt"` : 配置训练/测试环境场景种类，从 :code:`./Webots_Simulation/traffic_project/worlds/*.wbt` 中选择
+    
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>3. 模型参数：</b>配置模型权重导入和保存相关参数
+      </div>
+      </br>
+
+    * :code:`--savepath(str)="params.pth"` : 模型保存的路径
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>4. 可视化参数：</b>配置可视化文件相关参数
+      </div>
+      </br>
+
+    * :code:`--tensorboard_port(int)=1` : 是否使用tensorboard-logger, :code:`--tensorboard_port(int)!=-1` 则随机分配可用端口，否则不启用(测试状态不启用)
+
+
+代码封装与改动细节
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+log文件
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_logs</code>
+        </div>
+        </br>
+
+    * 在模型训练的过程中，只要参数 :code:`--tensorboard_port(int)!=-1` ，那么启动程序时会自动启动tensorboard-logger
+    * 但如果希望手动启动tensorboard，也可以使用以下的命令：
+
+    .. code:: bash
+
+        cd Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/
+        tensorboard --logdir DVAT_logs
+
+
 .. raw:: html
 
     </br>
     <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
     </br>
     </br>
+
 
 Baseline3 PPO+CL
 ---------------------------------
@@ -240,7 +330,10 @@ Baseline3 PPO+CL
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     # 测试模式
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0
+    # 使用 累计奖励 CR 进行测试
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    # 使用 追踪成功比例 TSR 进行测试
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # 新训练模式
     python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
     # 中断重开训练模式
