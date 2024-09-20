@@ -70,14 +70,14 @@ def clip_to_range(x, min_value=0, max_value=1):
     reward of baseline method: End-to-end
         reward = A - (sqrt((x-d)^2+y^2)/c+lambda|w-w_0|)
 """
-def get_E2E_reward(x:float,y:float,w:float,w_0:float,d_curr:float)->float:
+def get_E2E_reward(x:float,y:float,w:float,d_curr:float)->float:
     ## Hyperparams(Need to be determined after test)
     A = 1
     c = 1
     lamb = 1
     ## get reward
     dist = math.sqrt(math.pow(x-d_curr,2)+math.pow(y,2))
-    w_abs = abs(w-w_0)
+    w_abs = abs(w)
     reward = A-(dist/c+lamb*w_abs)
     reward = clip_to_range(reward)
     return reward,dist,w_abs

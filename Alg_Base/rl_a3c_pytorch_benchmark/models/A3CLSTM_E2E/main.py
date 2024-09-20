@@ -319,8 +319,19 @@ if __name__ == '__main__':
     if MODE == "test":
         data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False
+
+        data["Drone_Random_Config"]["view_pitch_random"] = False
+        data["Drone_Random_Config"]["view_pitch_fixed"] = 1.37
+
+        data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["height_fixed"] = 22
+
         data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 5
+
         data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 5
+
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
         if args.Test_Mode == "AR":
@@ -333,14 +344,24 @@ if __name__ == '__main__':
             data["Reward_Config"]["view_range"] = 1
     elif MODE == "train":
         data["Simulation_Mode"]="train"
-        data["Drone_Random_Config"]["direction_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
-        data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["direction_fixed"] = 0
+
+        data["Drone_Random_Config"]["view_pitch_random"] = False
+        data["Drone_Random_Config"]["view_pitch_fixed"] = 1.37
+
+        data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["height_fixed"] = 22
+
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
+
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 0
+
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
-        data["Reward_Config"]["reward_type"] = "view"
-        data["Reward_Config"]["reward_mode"] = "continuous"
-        data["Reward_Config"]["view_range"] = 0.7
+
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
@@ -357,6 +378,12 @@ if __name__ == '__main__':
     data["Benchmark"]["port_process"] = args.Port
     data["Benchmark"]["Control_Frequence"] = args.Freq
     data["Benchmark"]["delay"] = args.delay
+    
+    # Set the reward type
+    if MODE == "train":
+        data["Benchmark"]["RewardType"] = "E2E"
+    elif MODE == "test":
+        data["Benchmark"]["RewardType"] = "default"
 
     with open(
         "./config.json", "w"

@@ -255,22 +255,25 @@ if __name__ == "__main__":
     data["Sumo_Params"]["rou_update"] = True
     data["Verbose"] = False
     if args.train_mode == 1:
-        data["Drone_Random_Config"]["direction_random"] = True
-        data["Drone_Random_Config"]["height_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
-        data["Drone_Random_Config"]["verticle_bias_random"] = True
+        data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
+        
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
         data["Reward_Config"]["view_range"] = 0.7
     else:
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["height_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random_max"] = 6
-        data["Drone_Random_Config"]["horizon_bias_random_min"] = 4
-        data["Drone_Random_Config"]["verticle_bias_random"] = True
-        data["Drone_Random_Config"]["verticle_bias_random_max"] = 6
-        data["Drone_Random_Config"]["verticle_bias_random_min"] = 4
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 5
+
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 5
+
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
