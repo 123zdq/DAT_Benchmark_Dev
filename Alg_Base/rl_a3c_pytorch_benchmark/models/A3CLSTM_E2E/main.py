@@ -340,6 +340,7 @@ if __name__ == '__main__':
         data["Drone_Random_Config"]["verticle_bias_random"] = False
         data["Drone_Random_Config"]["verticle_bias_fixed"] = 5
 
+        data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
         if args.Test_Mode == "AR":
@@ -367,6 +368,7 @@ if __name__ == '__main__':
         data["Drone_Random_Config"]["verticle_bias_random"] = False
         data["Drone_Random_Config"]["verticle_bias_fixed"] = 0
 
+        data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
 

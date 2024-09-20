@@ -855,6 +855,20 @@ if __name__ == "__main__":
         help="whether restart a new training, default: False",
     )
     parse.add_argument(
+        "-ver",
+        "--verbose",
+        action='store_true',
+        default=False,
+        help="Whether need verbose",
+    )
+    parse.add_argument(
+        "-D",
+        "--delay",
+        type=int,
+        default=20,
+        help="Delay after webots start",
+    )
+    parse.add_argument(
         "-TM",
         "--Test_Mode",
         type=str,
@@ -882,25 +896,25 @@ if __name__ == "__main__":
     data["Simulation_Mode"] = "train"
     data["Tracker_Def"] = "DRONE"
     data["Sumo_Params"]["rou_update"] = True
-    data["Verbose"] = False
+    data["Verbose"] = args.verbose
     if args.train_mode == 1:
+        data["Drone_Random_Config"]["height_random"] = True
+        data["Drone_Random_Config"]["view_pitch_random"] = True
         data["Drone_Random_Config"]["direction_random"] = True
         data["Drone_Random_Config"]["horizon_bias_random"] = True
         data["Drone_Random_Config"]["verticle_bias_random"] = True
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
         data["Reward_Config"]["reward_mode"] = "continuous"
-        data["Reward_Config"]["view_range"] = 0.5
+        data["Reward_Config"]["view_range"] = 0.7
     else:
         data["Drone_Random_Config"]["height_random"] = False
         data["Drone_Random_Config"]["view_pitch_random"] = False
         data["Drone_Random_Config"]["direction_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_random"] = True
-        data["Drone_Random_Config"]["horizon_bias_random_max"] = 6
-        data["Drone_Random_Config"]["horizon_bias_random_min"] = 4
-        data["Drone_Random_Config"]["verticle_bias_random"] = True
-        data["Drone_Random_Config"]["verticle_bias_random_max"] = 6
-        data["Drone_Random_Config"]["verticle_bias_random_min"] = 4
+        data["Drone_Random_Config"]["horizon_bias_random"] = False
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 5
+        data["Drone_Random_Config"]["verticle_bias_random"] = False
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 5
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
@@ -921,6 +935,9 @@ if __name__ == "__main__":
         data = json.load(file)
     data["Benchmark"]["port_process"] = args.port
     data["Benchmark"]["auto_start"] = False
+    data["Benchmark"]["verbose"] = args.verbose
+    data["Benchmark"]["RewardType"] = "default"
+
     with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
@@ -940,7 +957,7 @@ if __name__ == "__main__":
         ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
         shell=True,
     )
-    time.sleep(13)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    time.sleep(args.delay)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     from envs.envs_parallel import Envs, GE
 
