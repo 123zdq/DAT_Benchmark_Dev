@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-17 16:24:54
+LastEditTime: 2024-09-20 13:30:55
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -199,8 +199,8 @@ class droneManager:
                 horizon_bias = random.uniform(self.configData["Drone_Random_Config"]["horizon_bias_random_min"],self.configData["Drone_Random_Config"]["horizon_bias_random_max"])
             else:
                 horizon_side = random.choice([1,-1])
-                horizon_bias = horizon_side * random.uniform(abs(self.configData["Drone_Random_Config"]["horizon_bias_random_min"]),abs(self.configData["Drone_Random_Config"]["horizon_bias_random_max"]))
-                
+                horizon_bias = horizon_side * random.uniform(abs(self.configData["Drone_Random_Config"]["horizon_bias_random_min"]),abs(self.configData["Drone_Random_Config"]["horizon_bias_random_max"]))    
+        
         if self.configData["Drone_Random_Config"]["verticle_bias_random"] == False:
             verticle_bias = self.configData["Drone_Random_Config"]["verticle_bias_fixed"]
         else:

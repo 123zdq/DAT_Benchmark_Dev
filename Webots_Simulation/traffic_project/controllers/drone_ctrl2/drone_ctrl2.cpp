@@ -646,10 +646,10 @@ int main(int argc, char **argv)
                 << "  doneState:" << pCtrl.done_state << std::endl;
       } 
       // std::cout << "id: " << droneDef
-      //           << "  x: " << rewardG.makeReward.cameraMidGlobalPos.x
-      //           << "  y: " << rewardG.makeReward.cameraMidGlobalPos.y
-      //           << "  z: " << rewardG.makeReward.cameraMidGlobalPos.z
-      //           // << "  w: " << rewardG.makeReward.carDronePosOri.w
+      //           << "  x: " << rewardG.makeReward.carDronePosOri.x
+      //           << "  y: " << rewardG.makeReward.carDronePosOri.y
+      //           << "  z: " << rewardG.makeReward.carDronePosOri.z
+      //           << "  w: " << rewardG.makeReward.carDronePosOri.w
       //           << std::endl;
       if(pCtrl.done_state == string("distance") || pCtrl.done_state == string("yaw velocity"))
       {

@@ -2,7 +2,7 @@
  * @Author: lu 2231625449@qq.com
  * @Date: 2024-04-30 16:07:19
  * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-15 23:23:34
+ * @LastEditTime: 2024-09-20 13:43:51
  * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
  * @Description:
  *
@@ -323,10 +323,18 @@ inline double rewardGenerator::getReward(string _trackingObj, string _run_mode, 
   static double last_carDroneVel[3] = {0,0,0};
   static double carDroneAcc[3] = {0,0,0};
   static double last_t = 0;
-  const double *T_car_of_camera = trackingCar->getPose(supervisor->getFromDef(droneDef));
+  const double *T_car_of_drone = trackingCar->getPose(supervisor->getFromDef(droneDef));
   Vector3d V_car_of_drone;
-  V_car_of_drone << T_car_of_camera[3], T_car_of_camera[7], T_car_of_camera[11];
-  V_car_of_drone = V_car_of_drone + M_car_of_land * V_car_comp;
+  Matrix3d M_car_of_drone;
+  for (int i = 0; i < 3; i++)
+  {
+    V_car_of_drone(i) = T_car_of_drone[3 + i * 4];
+    for (int j = 0; j < 3; j++)
+    {
+      M_car_of_drone(i, j) = T_car_of_drone[j + i * 4];
+    }
+  }
+  V_car_of_drone = V_car_of_drone + M_car_of_drone * V_car_comp;
   makeReward.carDronePosOri.x = V_car_of_drone(0);
   makeReward.carDronePosOri.y = V_car_of_drone(1);
   makeReward.carDronePosOri.z = V_car_of_drone(2);
