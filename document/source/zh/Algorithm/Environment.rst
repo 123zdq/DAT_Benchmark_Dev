@@ -545,8 +545,7 @@ Part4 调用接口
 
     .. code:: python
 
-      args = arg_config()
-      test_env(args)
+      test_tianshou_env(args)
 
     .. raw:: html
 

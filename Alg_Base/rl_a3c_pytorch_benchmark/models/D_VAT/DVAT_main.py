@@ -22,7 +22,7 @@ import subprocess, time
 import argparse
 from denseMlpPolicy import create_sacd_policy
 
-def test_env(args):
+def test_tianshou_env(args):
 
     # simulator !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     simulator = subprocess.Popen(
@@ -109,6 +109,13 @@ def DVAT(args):
         os.makedirs(tensorboard_logdir)
     envs = [make_env(n_envs=args.workers,rank=i,end_reward=True,log_dir=tensorboard_logdir) for i in range(args.workers)]
     vector_env = SubprocVectorEnv_TS(envs)
+
+    # create tb_logger
+    if args.tensorboard_port != -1 and args.train_mode == 1:
+        tb = subprocess.Popen(
+            ["tensorboard --logdir "+tensorboard_logdir],
+            shell=True,
+        )
 
     ## create policy
     action_space = DVAT_ENV.get_action_space()
@@ -293,8 +300,8 @@ if __name__ == "__main__":
     with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
-    if args.New_Train and os.path.exists("./PPO_logs/steps.txt"):
-        with open("./PPO_logs/steps.txt", "w") as file:
+    if args.New_Train and os.path.exists("./models/D_VAT/DVAT_logs/steps.txt"):
+        with open("./models/D_VAT/DVAT_logs/steps.txt", "w") as file:
             file.write("0")
 
     if args.train_mode == 1:
@@ -302,7 +309,7 @@ if __name__ == "__main__":
     else:
         Load_Model = True
 
-    # test_env(args)
+    # test_tianshou_env(args)
     DVAT(args)
 
 
