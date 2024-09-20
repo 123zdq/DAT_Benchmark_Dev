@@ -343,6 +343,7 @@ if __name__ == '__main__':
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
+        
         if args.Test_Mode == "AR":
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "continuous"
@@ -372,6 +373,9 @@ if __name__ == '__main__':
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
 
+        data["Reward_Config"]["view_range"] = 1
+
+        data["No_Reward_Done_Steps"] = 10000 # forbid no reward done setting
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:

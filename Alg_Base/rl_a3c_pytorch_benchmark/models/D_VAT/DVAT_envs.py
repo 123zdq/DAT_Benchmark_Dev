@@ -17,7 +17,7 @@ from envs.environment import general_env
 from envs.gym_envs import CONF,ENV_CONF
 
 class DVAT_ENV(gymnasium.Env):
-    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3) -> None:
+    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3,use_tb:bool=True) -> None:
         super(DVAT_ENV,self).__init__()
 
         ## Read Json files
@@ -55,12 +55,16 @@ class DVAT_ENV(gymnasium.Env):
                 with open(self.num_test,"r") as file:
                     data = file.read()
                     print(f"Read: {data}")
-                file.close()
                 self.reward_idx = int(data)
             else:
                 self.reward_idx = 0
             self.init_reward_idx = deepcopy(self.reward_idx)
-            self.tb_logger = SummaryWriter(log_dir=log_dir)
+
+            ## tb logger
+            self.use_tb = use_tb
+            if self.use_tb:
+                assert log_dir != None
+                self.tb_logger = SummaryWriter(log_dir=log_dir)
             self.total_reward = 0
     
     def reset(self,seed=None):
@@ -75,14 +79,13 @@ class DVAT_ENV(gymnasium.Env):
 
         ## Update tb_logger and num_test.txt file
         if self.end_reward:
-            if self.reward_idx != self.init_reward_idx:
+            if self.reward_idx != self.init_reward_idx and self.use_tb:
                 self.tb_logger.add_scalar('Reward', self.total_reward, self.reward_idx)
                 self.total_reward = 0
             self.reward_idx += 1
             with open(self.num_test,"w") as file:
                 file.write(str(self.reward_idx))
                 print(f"Write: {self.reward_idx}")
-            file.close()
         return self.actual_state,reset_info
     
     def step(self, action):
@@ -136,13 +139,14 @@ class DVAT_ENV(gymnasium.Env):
         })
         return obs_space
     
-def make_env(n_envs,rank,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3):
+def make_env(n_envs,rank,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3,use_tb:bool=False):
     def _init():
         env = DVAT_ENV(
             arg_worker=n_envs,
             process_idx=rank,
             end_reward=end_reward,
             log_dir=log_dir,
-            obs_buffer_len=obs_buffer_len)
+            obs_buffer_len=obs_buffer_len,
+            use_tb=use_tb)
         return env
     return _init

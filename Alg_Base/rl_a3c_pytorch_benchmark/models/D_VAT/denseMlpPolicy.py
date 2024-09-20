@@ -271,3 +271,15 @@ def create_sacd_policy(actor_obs_space:gymnasium.spaces.Box,action_space:gymnasi
 
     return sacd_policy
 
+
+## Get action from single state
+def get_action(sacd_policy:DVAT_SACDPolicy, state):
+    # turn state into Batch
+    state_batch = Batch(obs=state)
+    
+    # get action by sacd_policy.forward
+    sacd_policy.deterministic_eval = True # use deterministic action instead of sample
+    result = sacd_policy.forward(state_batch)
+    
+    # return action
+    return result.act

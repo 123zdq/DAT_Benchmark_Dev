@@ -20,7 +20,7 @@ from DVAT_envs import make_env,DVAT_ENV
 from envs.async_vecenv_ts import SubprocVectorEnv_TS,TS_Collector
 import subprocess, time
 import argparse
-from denseMlpPolicy import create_sacd_policy
+from denseMlpPolicy import create_sacd_policy,get_action
 
 def test_tianshou_env(args):
 
@@ -88,7 +88,7 @@ def test_tianshou_env(args):
             except subprocess.TimeoutExpired:
                 simulator.kill()
 
-def DVAT(args):
+def DVAT_train(args):
 
     simulator = subprocess.Popen(
         ["webots --no-rendering --mode=fast ../../Webots_Simulation/traffic_project/worlds/" + args.map],
@@ -104,19 +104,25 @@ def DVAT(args):
     }
 
     # create parallel envs
-    tensorboard_logdir = "./models/D_VAT/DVAT_logs"
-    if tensorboard_logdir is None:
-        os.makedirs(tensorboard_logdir)
-    envs = [make_env(n_envs=args.workers,rank=i,end_reward=True,log_dir=tensorboard_logdir) for i in range(args.workers)]
-    vector_env = SubprocVectorEnv_TS(envs)
-
-    # create tb_logger
-    if args.tensorboard_port != -1 and args.train_mode == 1:
+    if args.New_Train:
+        end_reward = False
+    else:
+        end_reward = True
+    
+    if args.tensorboard_port != -1:
+        # create tb_logger
+        tensorboard_logdir = "./models/D_VAT/DVAT_logs"
+        if tensorboard_logdir is None:
+            os.makedirs(tensorboard_logdir)
+        envs = [make_env(n_envs=args.workers,rank=i,end_reward=end_reward,log_dir=tensorboard_logdir,use_tb=True) for i in range(args.workers)]
         tb = subprocess.Popen(
             ["tensorboard --logdir "+tensorboard_logdir],
             shell=True,
         )
+    else:
+        envs = [make_env(n_envs=args.workers,rank=i,end_reward=end_reward,log_dir=tensorboard_logdir,use_tb=False) for i in range(args.workers)]
 
+    vector_env = SubprocVectorEnv_TS(envs)
     ## create policy
     action_space = DVAT_ENV.get_action_space()
     obs_space = DVAT_ENV.get_obs_space()
@@ -125,6 +131,20 @@ def DVAT(args):
     
     sacd_policy = create_sacd_policy(actor_obs_space=actor_obs_space,action_space=action_space,obs_shape_critic=critic_obs_space.shape[0],action_shape=int(action_space.n))
     
+    ## load model
+    Load_Model = not args.New_Train
+
+    if Load_Model:
+        if os.path.exists(args.savepath):
+            try:
+                sacd_policy.load_state_dict(torch.load(args.savepath))
+                print(f"Load pretrained weight success!")
+            except Exception as e:
+                print(f"Load pretrain weight failed: {e}")
+        else:
+            print(f"weight path {args.savepath} not exists!")
+
+
     ## create buffer
     buffer = VectorReplayBuffer(total_size=settings["buffer_size"],buffer_num=args.workers)
 
@@ -135,6 +155,8 @@ def DVAT(args):
     # get device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     result = collector.collect(n_step=settings["train_freq"],reset_before_collect=True)
+    
+    save_interval = 10
     # 训练循环，直到总步数达到 total_steps
     while collected_steps < settings["n_timesteps"]:
         try:
@@ -144,6 +166,7 @@ def DVAT(args):
 
             # 从 buffer 中采样并更新策略
             batch_buffer,batch_indices = collector.buffer.sample(settings["batch_size"])
+            collected_steps += 1
 
             # print(type(batch_buffer["act"])) #<class 'numpy.ndarray'>
             # print(type(batch_buffer["done"])) #<class 'numpy.ndarray'>
@@ -165,12 +188,62 @@ def DVAT(args):
             target_q = sacd_policy._target_q(collector.buffer, indices=batch_indices)
             losses = sacd_policy.learn(batch=batch_buffer,target_q=target_q)
             # print(f"losses:{losses}")
+            ## save model
+            if collected_steps % save_interval == 0:
+                torch.save(sacd_policy.state_dict(),args.savepath)
         finally:
             simulator.terminate()
             try:
                 simulator.wait(timeout=5)
             except subprocess.TimeoutExpired:
                 simulator.kill()
+
+def DVAT_test(args):
+    env = DVAT_ENV(arg_worker=1, process_idx=0, end_reward=False, log_dir=None, obs_buffer_len=3)
+
+    # create sacd policy
+    sacd_policy = create_sacd_policy(
+        actor_obs_space=env.observation_space['actor_obs'],
+        action_space=env.action_space,
+        obs_shape_critic=env.observation_space['critic_obs'].shape[0],
+        action_shape=int(env.action_space.n)
+    )
+    
+    # load model state dict
+    if not os.path.exists(args.savepath):
+        raise FileNotFoundError(f"weight path: {args.savepath} not exists!")
+    sacd_policy.load_state_dict(torch.load(args.savepath))
+    print(f"Load pretrained weight success!")
+
+    # set policy as evaluation mode
+    sacd_policy.eval()
+
+    # reset env and get init state
+    state, _ = env.reset()
+
+    total_reward_list = []
+    episode_reward = 0
+    done = False
+
+    # run test
+    while len(total_reward_list) < args.test_length:
+        if not done:
+            action = get_action(sacd_policy,state)  # 通过模型选择动作
+            state, reward, done, truncated, info = env.step(action)
+            episode_reward += reward
+        if done and episode_reward != 0:
+            total_reward_list.append(episode_reward)
+            episode_reward = 0
+            state, _ = env.reset()
+
+    # output xlsx file
+    total_reward_list.append(
+        f"{np.mean(total_reward_list):.3f}±{np.std(total_reward_list):.3f}"
+    )
+    import pandas as pd
+    df = pd.DataFrame(total_reward_list, columns=["Values"])
+    map_name = args.map.rsplit('.', 1)[0]
+    df.to_excel(f"./models/D_VAT/DVAT_logs/test_{map_name}.xlsx", index=False)
 
 if __name__ == "__main__":
     # --------------------------------------------------parameter-----------------------------------------------
@@ -202,10 +275,10 @@ if __name__ == "__main__":
     parse.add_argument(
         "-params",
         "--savepath",
-        default="params.pth",
+        default="./models/D_VAT/params.pth",
         type=str,
         metavar="",
-        help="model parameter filename, default: params.pth",
+        help="model parameter filename, default: ./models/D_VAT/params.pth",
     )
     parse.add_argument(
         "-m",
@@ -221,7 +294,7 @@ if __name__ == "__main__":
         default=6006,
         type=int,
         metavar="",
-        help="the port of tensorboard, recommended: 6006. Default is -1 (TensorBoard disabled). Set to any other value to enable TensorBoard, which will find an available port if needed.",
+        help="the port of tensorboard, default: 6006. (if -1 TensorBoard disabled). Set to any other value to enable TensorBoard, which will find an available port if needed.",
     )
 
     parse.add_argument(
@@ -238,6 +311,14 @@ if __name__ == "__main__":
         type=int,
         default=3,
         help="number of frame use for state",
+    )
+
+    parse.add_argument(
+        "-tl",
+        "--test_length",
+        type=int,
+        default=10,
+        help="number of episodes for test",
     )
     args = parse.parse_args()
 
@@ -271,7 +352,9 @@ if __name__ == "__main__":
         
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
-        data["Reward_Config"]["view_range"] = 0.7
+        data["Reward_Config"]["view_range"] = 1
+
+        data["No_Reward_Done_Steps"] = 10000 # forbid no reward done setting
     else:
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["height_random"] = False
@@ -284,8 +367,16 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
-        
-        data["Reward_Config"]["view_range"] = 1
+
+        if args.Test_Mode == "AR":
+            data["Reward_Config"]["reward_type"] = "view"
+            data["Reward_Config"]["reward_mode"] = "continuous"
+            data["Reward_Config"]["view_range"] = 1
+        elif args.Test_Mode == "TSR":
+            data["Reward_Config"]["reward_type"] = "view"
+            data["Reward_Config"]["reward_mode"] = "discrete"
+            data["Reward_Config"]["view_range"] = 1
+
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:
@@ -296,7 +387,10 @@ if __name__ == "__main__":
         data = json.load(file)
     data["Benchmark"]["port_process"] = args.port
     data["Benchmark"]["auto_start"] = False
-    data["Benchmark"]["RewardType"] = "DVAT"
+    if args.train_mode == 1:
+        data["Benchmark"]["RewardType"] = "DVAT"
+    else:
+        data["Benchmark"]["RewardType"] = "default"
     with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
@@ -304,13 +398,11 @@ if __name__ == "__main__":
         with open("./models/D_VAT/DVAT_logs/steps.txt", "w") as file:
             file.write("0")
 
-    if args.train_mode == 1:
-        Load_Model = not args.New_Train
-    else:
-        Load_Model = True
-
     # test_tianshou_env(args)
-    DVAT(args)
+    if args.train_mode == 1:
+        DVAT_train(args)
+    if args.train_mode == 0:
+        DVAT_test(args)
 
 
 

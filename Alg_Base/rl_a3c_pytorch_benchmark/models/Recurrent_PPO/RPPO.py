@@ -907,6 +907,7 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_car_group_num"] = False
         data["Reward_Config"]["reward_mode"] = "continuous"
         data["Reward_Config"]["view_range"] = 0.7
+        data["No_Reward_Done_Steps"] = 100
     else:
         data["Drone_Random_Config"]["height_random"] = False
         data["Drone_Random_Config"]["view_pitch_random"] = False
