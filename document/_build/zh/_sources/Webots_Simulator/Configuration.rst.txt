@@ -53,17 +53,6 @@
 
     由于本项目构建地图大小并不一致，因此，建议容纳的智能体数量也不一致。为避免因追踪目标数量过多而出现的智能体学习困难，本文档为用户提供参考的参数配置建议。
 
-simpleway
------------------------
-
-关于 simpleway 地图配置设置，只需更改一些参数。
-    根据以下配置，将
-
-    * :code:`"fixed_color": false` 改为 :code:`"fixed_color": ture`,
-
-    * :code:`"start_time_bias_ms": 1510`, 改为 :code:`"start_time_bias_ms": 510`,
-
-    * :code:`"Drone_Random_Config":1510`, 改为 :code:`"Drone_Random_Config":510`
 
 cityStreet
 -----------------------
@@ -71,19 +60,19 @@ cityStreet
     .. code:: json
 
             {
-        "Simulation_Mode": "train",
-        "Tracker_Def": "DRONE",
-        "Drone_Supervisor_Ctrl": true,
-        "Socket_Ip": "127.0.0.1",
-        "Config_Agen_Num_Port": 35531,
-        "Train_Total_Steps": 1500,
-        "Init_No_Done_Steps": 100,
-        "No_Reward_Done_Steps": 100,
-        "Control_Frequence": 125,
-        "Customized_Rewards": true,
-        "Lidar_Enable": false,
-        "Tracking_Object": "SUMO_VEHICLE",
-        "Verbose": false,
+            "Simulation_Mode": "train",
+            "Tracker_Def": "DRONE",
+            "Drone_Supervisor_Ctrl": true,
+            "Socket_Ip": "127.0.0.1",
+            "Config_Agen_Num_Port": 35531,
+            "Train_Total_Steps": 1500,
+            "Init_No_Done_Steps": 100,
+            "No_Reward_Done_Steps": 100,
+            "Control_Frequence": 125,
+            "Customized_Rewards": true,
+            "Lidar_Enable": false,
+            "Tracking_Object": "SUMO_VEHICLE",
+            "Verbose": false,
         "Done_Range": {
             "max_height": 50,
             "min_height": 2,
@@ -176,3 +165,18 @@ cityStreet
             "verticle_bias_random_min": 2.5
         }
         }
+
+simpleway
+-----------------------
+
+关于 simpleway 地图配置设置，只需更改一些参数。
+    根据以下配置，将
+
+    * :code:`"fixed_color": false` 改为 :code:`"fixed_color": ture`,
+
+    * :code:`"start_time_bias_ms": 1510`, 改为 :code:`"start_time_bias_ms": 510`,
+
+    * :code:`"Drone_Random_Config":1510`, 改为 :code:`"Drone_Random_Config":510`
+
+参考： `两阶段地图对照表 <../Algorithm/Model.html#table-cf>`_
+

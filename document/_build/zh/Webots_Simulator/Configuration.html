@@ -53,8 +53,8 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">仿真器部分</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Simulator.html">仿真环境</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">仿真环境参数配置建议</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#simpleway">simpleway</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#citystreet">cityStreet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#simpleway">simpleway</a></li>
 </ul>
 </li>
 </ul>
@@ -136,35 +136,23 @@
 </br>
 </br><p>由于本项目构建地图大小并不一致，因此，建议容纳的智能体数量也不一致。为避免因追踪目标数量过多而出现的智能体学习困难，本文档为用户提供参考的参数配置建议。</p>
 </div></blockquote>
-<section id="simpleway">
-<h2>simpleway<a class="headerlink" href="#simpleway" title="Link to this heading"></a></h2>
-<dl class="simple">
-<dt>关于 simpleway 地图配置设置，只需更改一些参数。</dt><dd><p>根据以下配置，将</p>
-<ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;fixed_color&quot;:</span> <span class="pre">false</span></code> 改为 <code class="code docutils literal notranslate"><span class="pre">&quot;fixed_color&quot;:</span> <span class="pre">ture</span></code>,</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;start_time_bias_ms&quot;:</span> <span class="pre">1510</span></code>, 改为 <code class="code docutils literal notranslate"><span class="pre">&quot;start_time_bias_ms&quot;:</span> <span class="pre">510</span></code>,</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Drone_Random_Config&quot;:1510</span></code>, 改为 <code class="code docutils literal notranslate"><span class="pre">&quot;Drone_Random_Config&quot;:510</span></code></p></li>
-</ul>
-</dd>
-</dl>
-</section>
 <section id="citystreet">
 <h2>cityStreet<a class="headerlink" href="#citystreet" title="Link to this heading"></a></h2>
 <blockquote>
 <div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p">{</span>
-<span class="nt">&quot;Simulation_Mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
-<span class="nt">&quot;Tracker_Def&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DRONE&quot;</span><span class="p">,</span>
-<span class="nt">&quot;Drone_Supervisor_Ctrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="nt">&quot;Socket_Ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
-<span class="nt">&quot;Config_Agen_Num_Port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">35531</span><span class="p">,</span>
-<span class="nt">&quot;Train_Total_Steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span>
-<span class="nt">&quot;Init_No_Done_Steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-<span class="nt">&quot;No_Reward_Done_Steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
-<span class="nt">&quot;Control_Frequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span>
-<span class="nt">&quot;Customized_Rewards&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="nt">&quot;Lidar_Enable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="nt">&quot;Tracking_Object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SUMO_VEHICLE&quot;</span><span class="p">,</span>
-<span class="nt">&quot;Verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Simulation_Mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;train&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Tracker_Def&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;DRONE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Drone_Supervisor_Ctrl&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Socket_Ip&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;127.0.0.1&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Config_Agen_Num_Port&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">35531</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Train_Total_Steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1500</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Init_No_Done_Steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;No_Reward_Done_Steps&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Control_Frequence&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">125</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Customized_Rewards&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Lidar_Enable&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Tracking_Object&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SUMO_VEHICLE&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;Verbose&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
 <span class="nt">&quot;Done_Range&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nt">&quot;max_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
 <span class="w">    </span><span class="nt">&quot;min_height&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
@@ -260,6 +248,19 @@
 </pre></div>
 </div>
 </div></blockquote>
+</section>
+<section id="simpleway">
+<h2>simpleway<a class="headerlink" href="#simpleway" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>关于 simpleway 地图配置设置，只需更改一些参数。</dt><dd><p>根据以下配置，将</p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;fixed_color&quot;:</span> <span class="pre">false</span></code> 改为 <code class="code docutils literal notranslate"><span class="pre">&quot;fixed_color&quot;:</span> <span class="pre">ture</span></code>,</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;start_time_bias_ms&quot;:</span> <span class="pre">1510</span></code>, 改为 <code class="code docutils literal notranslate"><span class="pre">&quot;start_time_bias_ms&quot;:</span> <span class="pre">510</span></code>,</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Drone_Random_Config&quot;:1510</span></code>, 改为 <code class="code docutils literal notranslate"><span class="pre">&quot;Drone_Random_Config&quot;:510</span></code></p></li>
+</ul>
+</dd>
+</dl>
+<p>参考： <a class="reference external" href="../Algorithm/Model.html#table-cf">两阶段地图对照表</a></p>
 </section>
 </section>
 

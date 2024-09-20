@@ -472,6 +472,7 @@ Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
   <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
   <center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></br>
 
+  同理，我们参考Tianshou的 <code>TS_Collector</code>类，封装了自己的Collector类。
 
 .. raw:: html
 

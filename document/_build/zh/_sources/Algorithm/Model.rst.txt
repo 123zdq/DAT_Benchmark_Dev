@@ -68,6 +68,12 @@
 *  :code:`DVAT` 算法调用了Gym环境类( :ref:`Gymnasium_Gym` )
 *  :code:`RPPO+CL` 算法调用了并行环境类( :ref:`Parallel` )
 
+.. figure:: ../_static/image/classes.png
+    :alt: 3种环境类关系图                                 
+    :width: 600px                                              
+    :align: center
+
+
 .. raw:: html
 
     </br>
@@ -284,6 +290,52 @@ Baseline2 DVAT
 代码封装与改动细节
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+    DVAT采用Actor-Critic非对称框架，Actor-Critic对称架构和非对称架构的示意图如下：
+
+    .. figure:: ../_static/image/Asymmetric_and_Symmetrical_Structure.jpg
+        :alt: Asymmetric_and_Symmetrical_Structure
+        :width: 700px
+        :align: center
+
+        Actor-Critic对称架构和非对称架构的示意图
+
+
+    DVAT代码主要有下述实现：
+
+    1. 自主实现环境类
+
+    环境类仿照 `Gym环境类 <Environment.html#gym>`_ 自主实现 :code:`DVAT_ENV` 环境类，具体代码见 :code:`Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_envs.py` 。
+
+    为支持Actor-Critic非对称架构， :code:`DVAT_ENV` 环境类状态空间包括 :code:`actor_obs` 部分和 :code:`critic_obs` 两部分：
+
+    .. code:: python
+
+        self.observation_space = gymnasium.spaces.Dict({
+            "actor_obs": gymnasium.spaces.Box(low=0, high=1.0, shape=(obs_buffer_len,)+image_shape, dtype=np.float32),
+            "critic_obs": gymnasium.spaces.Box(low=-np.inf, high=np.inf, shape=(9,), dtype=np.float32),
+        })
+
+    而原gymnasium环境中，actor与critic共用相同的状态空间：
+
+    .. code:: python
+
+        if obs_buffer_len == 0:
+            self.observation_space = spaces.Box(low=0, high=1.0, shape=(env_conf["State_channel"], env_conf["State_size"], env_conf["State_size"]), dtype=np.float32)
+        else:
+            self.observation_space = spaces.Box(low=0, high=1.0, shape=(obs_buffer_len, env_conf["State_channel"], env_conf["State_size"], env_conf["State_size"]), dtype=np.float32)
+
+
+
+    2. 自主实现的Policy
+
+    为支持Actor-Critic非对称架构，继承 **Tianshou** 中 :code:`DiscreteSACPolicy` 实现了 :code:`DVAT_SACDPolicy`。
+
+    3. 自主实现并行类与Collector
+    
+    参考 `Async_SubprocVecEnv & SubprocVecEnv_TS <Environment.html#part3-async-subprocvecenv-subprocvecenv-ts>`_ 实现了自定义的并行环境类和collector。
+
+
+
 
 
 log文件
@@ -403,7 +455,9 @@ Baseline3 PPO+CL
         # 测试模式
         python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0
 
-    * 两阶段地图对照表如下：
+.. _table-cf:
+
+      * 两阶段地图对照表如下：
 
         +------------------+-------------------------+
         | Origin Map       | Simple Map              |

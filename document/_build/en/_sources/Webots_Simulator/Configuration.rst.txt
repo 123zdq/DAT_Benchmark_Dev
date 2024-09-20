@@ -53,18 +53,6 @@ Simulation parameter configuration recommendations
 
     Since the map sizes constructed in this project are not consistent, it is recommended that the number of agents accommodated should also vary. To avoid the difficulty of agent learning due to tracking too many targets, this document provides users with recommended parameter configurations for reference.
 
-simpleway
------------------------
-
-As for the simpleway map config setting, just change some parameters.
-    Liking the following config, for the simpleway change the
-
-    * :code:`"fixed_color": false` into :code:`"fixed_color": ture`,
-
-    * :code:`"start_time_bias_ms": 1510`, into :code:`"start_time_bias_ms": 510`,
-
-    * :code:`"Drone_Random_Config":1510`, into :code:`"Drone_Random_Config":510`
-
 
 cityStreet
 -----------------------
@@ -72,19 +60,19 @@ cityStreet
 .. code:: json
 
     {
-            "Simulation_Mode": "train",
-            "Tracker_Def": "DRONE",
-            "Drone_Supervisor_Ctrl": true,
-            "Socket_Ip": "127.0.0.1",
-            "Config_Agen_Num_Port": 35531,
-            "Train_Total_Steps": 1500,
-            "Init_No_Done_Steps": 100,
-            "No_Reward_Done_Steps": 100,
-            "Control_Frequence": 125,
-            "Customized_Rewards": true,
-            "Lidar_Enable": false,
-            "Tracking_Object": "SUMO_VEHICLE",
-            "Verbose": false,
+                "Simulation_Mode": "train",
+                "Tracker_Def": "DRONE",
+                "Drone_Supervisor_Ctrl": true,
+                "Socket_Ip": "127.0.0.1",
+                "Config_Agen_Num_Port": 35531,
+                "Train_Total_Steps": 1500,
+                "Init_No_Done_Steps": 100,
+                "No_Reward_Done_Steps": 100,
+                "Control_Frequence": 125,
+                "Customized_Rewards": true,
+                "Lidar_Enable": false,
+                "Tracking_Object": "SUMO_VEHICLE",
+                "Verbose": false,
             "Done_Range": {
                 "max_height": 50,
                 "min_height": 2,
@@ -178,3 +166,14 @@ cityStreet
             }
         }
         
+simpleway
+-----------------------
+
+As for the simpleway map config setting, just change some parameters.
+    Liking the following config, for the simpleway change the
+
+    * :code:`"fixed_color": false` into :code:`"fixed_color": ture`,
+
+    * :code:`"start_time_bias_ms": 1510`, into :code:`"start_time_bias_ms": 510`,
+
+    * :code:`"Drone_Random_Config":1510`, into :code:`"Drone_Random_Config":510`
