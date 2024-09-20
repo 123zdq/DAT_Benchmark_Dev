@@ -67,6 +67,12 @@ Among these baseline methods, [1]_ [2]_ and :code:`RPPO+CL(Ours)` respectively c
 *  The :code:`DVAT` algorithm calls the Gym environment class ( :ref:`Gymnasium_Gym` )
 *  The :code:`RPPO+CL` algorithm calls the parallel environment class ( :ref:`Parallel` )
 
+.. figure:: ../_static/image/classes.png
+    :alt: 3种环境类关系图                                 
+    :width: 600px                                              
+    :align: center
+
+
 .. raw:: html
 
     </br>
@@ -77,121 +83,124 @@ Among these baseline methods, [1]_ [2]_ and :code:`RPPO+CL(Ours)` respectively c
 Baseline1 A3CLSTM-E2E
 ---------------------------------
 
-本工程对于 :code:`A3CLSTM-E2E` 方法的复现参考了论文 :code:`AD-VAT+` [3]_ 基于代码仓库 `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>`_ 的复现方式。
+This project refers to the paper :code:`AD-VAT+` [3]_ for reproducing the :code:`A3CLSTM-E2E` method based on the repository `rl_a3c_pytorch <https://github.com/dgriff777/rl_a3c_pytorch>`_.
 
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code>文件夹
+        The specific code can be found in the <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code> folder
     </div>
     </br>
 
-快速运行程序
+Quick-Start
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
-    # 测试模式
-    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d"
-    # 新训练模式
+    # Test mode
+    # Testing with Cumulative Reward (CR)
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode CR
+    # Testing with Tracking Success Rate (TSR)
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode TSR
+    # New training mode
     python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
-    # 中断重开训练模式
+    # Resumed training mode
     python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
-程序入口
+Program entry point
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :code:`main.py` 为整个程序的入口，主要提供两种运行模式：:code:`train` 和 :code:`test` 。
+    :code:`main.py` is the entry point of the entire program, primarily providing two operating modes: :code:`train` and :code:`test`.
         
-        * 其中， :code:`train` 模式下同样提供了测试进程(例如程序以24进程运行，那么最后一位进程编号23对应的进程为测试进程)， 该进程主要用于训练过程的 :code:`tensorboard` 可视化
-        * 而 :code:`test` 模式主要为已经完成训练的模型权重进行测试，该模式同样可以多进程运行，同时对多个模型权重进行测试。
-        * 上述模式的配置变量为 :code:`MODE` 变量
+        * In :code:`train` mode, a testing process is also provided (e.g., if the program runs with 24 processes, the last process with ID 23 will be used for testing). This process is mainly used for :code:`tensorboard` visualization during the training process.
+        * The :code:`test` mode is mainly used to test the model weights after training is completed. This mode can also be run in multiple processes, allowing testing of multiple model weights simultaneously.
+        * The configuration variable for the above modes is the :code:`MODE` variable.
 
-    此外， :code:`main.py` 文件还接收用户的参数配置，参数的含义与默认值如下：
+    In addition, the :code:`main.py` file also accepts user parameter configurations, with the meanings and default values of the parameters as follows:
     
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>1. 运行参数：</b>配置系统模式，运行频率，设备等参数
+            <b>1. Runtime parameters:</b> Configure system mode, runtime frequency, device settings, etc.
       </div>
       </br>
 
-    * :code:`--Mode(int)=1` : 配置运行模式是否为训练模式( :code:`--Mode=1` 是训练模式，:code:`--Mode=0` 是测试模式)
-    * :code:`--workers(int)=24` ：环境并行训练的数量数(需要根据实际计算机的内存/显存来决定)
-    * :code:`--gpu-ids(list)=[-1]` ：用于设置GPU的编号，默认为-1，即不使用GPU
-    * :code:`--Freq(int)=125` ：算法端运行频率(环境端运行频率为500Hz是不可修改的)，因此默认 :code:`--Freq(int)=125` 即环境端运行4步回传一次数据
-    * :code:`--delay(int)=20` : 等待Webots地图加载时长(只有等Webots地图加载完成之后才能够正常开始训练)
-    * :code:`--New_Train(bool)=False` : 是否开启全新的训练，默认为 :code:`--New_Train=False`，则会加载 :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` 预训练权重(如果存在)进行训练，并且tensorboard的曲线也会从上一次训练曲线后加载
-    * :code:`--Port(int)=-1` : 环境端与算法端通信端口，默认 :code:`--Port=-1` 则随机利用一个当前可用的端口，不建议手动修改
+    * :code:`--Mode(int)=1` : Configure whether the running mode is training mode (:code:`--Mode=1` for training mode, :code:`--Mode=0` for testing mode)
+    * :code:`--workers(int)=24` : The number of parallel training processes in the environment (should be determined based on the actual memory/GPU capacity of the computer)
+    * :code:`--gpu-ids(list)=[-1]` : Used to set the GPU IDs, default is -1, which means no GPU will be used
+    * :code:`--Freq(int)=125` : The running frequency of the algorithm side (the environment side runs at 500Hz and is unchangeable), so the default :code:`--Freq(int)=125` means the environment side transmits data back every 4 steps
+    * :code:`--delay(int)=20` : Waiting time for Webots map to load (training can only start normally after the Webots map has been fully loaded)
+    * :code:`--New_Train(bool)=False` : Whether to start a new training session, default is :code:`--New_Train=False`, which will load the pre-trained weights from :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` (if available) for training, and the tensorboard curves will continue from the last training session
+    * :code:`--Port(int)=-1` : The communication port between the environment side and the algorithm side, default :code:`--Port=-1` will randomly use an available port, and manual modification is not recommended
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>2. 环境参数：</b>配置选择的环境
+            <b>2. Environment parameters:</b> Configure the selected environment
       </div>
       </br>
 
-    * :code:`--Scene(str)="citystreet"` : 配置训练/测试环境场景种类，从 :code:`[citystreet,downtown,lake,village,desert,farmland]` 中选择
-    * :code:`--Weather(str)="day"` : 配置训练/测试环境天气种类，从 :code:`[day,night,foggy,snow]` 
+    * :code:`--Scene(str)="citystreet"` : Configure the training/testing environment scene type, choose from :code:`[citystreet,downtown,lake,village,desert,farmland]`
+    * :code:`--Weather(str)="day"` : Configure the training/testing environment weather type, choose from :code:`[day,night,foggy,snow]`
     
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>3. 模型参数：</b>配置模型权重导入和保存相关参数
+            <b>3. Model parameters:</b> Configure parameters related to model weight loading and saving
       </div>
       </br>
     
-    * :code:`--load(bool)=True` ：是否导入现有模型进行进一步的训练(只有当 :code:`--load=True` 以及而且模型权重 :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` 存在的时候才会导入)
-    * :code:`--save-max(bool)=False` ： 是否保存测试进程reward最大时刻的模型权重，默认为 :code:`False` 即仅保存最后一个时刻的模型权重
-    * :code:`--model_type(str)="E2E"` ： 指定当前使用的模型种类，如果用户自主实现了模型可以在此处增加配置。
-    * :code:`--save-model-dir(str)="./models/A3CLSTM_E2E/trained_models/"` ：模型保存的路径
-    * :code:`--Test_Param(str)="CityStreet-d"` : (只有 :code:`--Mode(int)=0` 的时候启用)导入什么权重进行测试，默认为 :code:`--Test_Param="CityStreet-d"`，则会导入权重 :code:`A3CLSTM_E2E/trained_models/CityStreet-d.dat` 进行测试
+    * :code:`--load(bool)=True` : Whether to load an existing model for further training (only when :code:`--load=True` and the model weights :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` exist will the model be loaded)
+    * :code:`--save-max(bool)=False` : Whether to save the model weights when the testing process reaches the highest reward, default is :code:`False`, meaning only the model weights at the last moment will be saved
+    * :code:`--model_type(str)="E2E"` : Specify the type of model currently being used, if the user implements their own model, they can add the configuration here
+    * :code:`--save-model-dir(str)="./models/A3CLSTM_E2E/trained_models/"` : The path for saving the model
+    * :code:`--Test_Param(str)="CityStreet-d"` : (only enabled when :code:`--Mode(int)=0`) Specifies which weights to load for testing, default is :code:`--Test_Param="CityStreet-d"`, which will load the weights :code:`A3CLSTM_E2E/trained_models/CityStreet-d.dat` for testing
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>4. 可视化参数：</b>配置可视化文件相关参数
+            <b>4. Visualization parameters:</b> Configure parameters related to visualization files
       </div>
       </br>
     
-    * :code:`--tensorboard-logger(bool)=True` ：是否使能 :code:`tensorboard` 进行模型的可视化
-    * :code:`--log-dir(str)="./models/A3CLSTM_E2E/logs/"` ：如果开启了 :code:`tensorboard` ，log文件存储的位置
+    * :code:`--tensorboard-logger(bool)=True` : Whether to enable :code:`tensorboard` for model visualization
+    * :code:`--log-dir(str)="./models/A3CLSTM_E2E/logs/"` : If :code:`tensorboard` is enabled, the location to store the log files
 
-log文件
+log files
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    本工程提供了两种log记录方式，第一种是直接输出log文件(通过 :code:`config.json` 中的 :code:`["Benchmark"]["verbose"]` 进行配置)，另外一种是利用tensorboard记录训练过程的性能变化。
+    This project provides two types of log recording methods. The first is to directly output log files (configured through :code:`config.json` in :code:`["Benchmark"]["verbose"]`), and the second is to use TensorBoard to record performance changes during the training process.
 
-    **模式1：直接输出log文件**
-
-    .. raw:: html
-
-        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            log文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/logs</code>
-        </div>
-        </br>
-
-    * 本模式主要用于程序的调试和数据传输验证，相当于是终端 :code:`print` 函数的替代
-    * 在上述文件夹主要包含两种类型的log文件： :code:`Agent_train${n}.log` 和 :code:`Agent${n}.log`
-    *  :code:`Agent_train${n}.log` 主要保存训练过程中的参数情况，例如用于希望观测gae值变化，则可以在 :code:`Agent_train${n}.log` 进行观测
-    *  :code:`Agent${n}.log` 主要用于保存环境端传输的数据，例如希望观测环境端获取的自定义奖励参数 :code:`RewardParams` ，则可以在该文件观测
-
-    **模式2：直接输出tensorboard-logger文件**
+    **Mode 1: Directly output log files**
 
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
+            Log files can be found in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/logs</code>
         </div>
         </br>
 
-    * :code:`tensorboard` 是神经网络训练过程中的常用可视化平台，因此，本工程也提供了相应的支持
-    * 本工程在进行多进程训练的时候会预留一个进程进行测试，例如：用户选择并行智能体数量为24,则实际训练的过程中会有23个训练进程以及1个测试进程，测试进程在每条Episode开始的时候同步shared_model的权值，并进行测试。
-    * 而 :code:`tensorboard-logger` 文件中记录的就是测试进程的数据，主要是训练过程中的 :code:`value` ，用于评估智能体训练的情况
-    * 此外，如果程序因为外部原因中断，本工程提供了 :code:`tensorboard-logger` 不中断功能，利用 :code:`num_test.txt` 存储当前数据条目数，并在新训练开始时继续进行记录。
-    * **注意：** 如果用户希望重新记录训练曲线，需要将 :code:`num_test.txt` 中的数据手动写为0,或者直接删除 :code:`num_test.txt` 文件。
-    * 完成所有配置之后，直接运行如下代码，即可在 :code:`localhost:xxxx` 查看 :code:`tensorboard` 可视化记录
+    * This mode is mainly used for program debugging and data transmission verification, essentially replacing the terminal :code:`print` function.
+    * The folder contains two main types of log files: :code:`Agent_train${n}.log` and :code:`Agent${n}.log`
+    *  :code:`Agent_train${n}.log` primarily stores parameter information during the training process. For example, if you want to observe the change in the gae value, you can do so in :code:`Agent_train${n}.log`.
+    *  :code:`Agent${n}.log` is mainly used to save the data transmitted from the environment. For example, if you want to observe the custom reward parameters :code:`RewardParams` obtained from the environment, you can view them in this file.
+
+    **Mode 2: Directly output tensorboard-logger files**
+
+    .. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            TensorBoard-logger files can be found in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
+        </div>
+        </br>
+
+    * :code:`TensorBoard` is a commonly used visualization platform during the training process of neural networks. Therefore, this project also provides corresponding support.
+    * During multi-process training, this project reserves one process for testing. For example, if the user selects 24 parallel agents, then during the actual training, there will be 23 training processes and 1 testing process. The testing process synchronizes the weights of the shared_model at the beginning of each episode and conducts tests.
+    * The data recorded in the :code:`tensorboard-logger` file is from the testing process, mainly the :code:`value` during training, which is used to evaluate the training status of the agents.
+    * Additionally, if the program is interrupted due to external reasons, this project provides an uninterrupted :code:`tensorboard-logger` function. It uses :code:`num_test.txt` to store the current data entry count and continues recording when a new training session starts.
+    * **Note:** If the user wishes to re-record the training curve, they need to manually set the data in :code:`num_test.txt` to 0 or directly delete the :code:`num_test.txt` file.
+    * After completing all configurations, simply run the following code to view the :code:`TensorBoard` visualization records on :code:`localhost:xxxx`.
     
     .. code:: bash
 
@@ -211,9 +220,141 @@ Baseline2 DVAT
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT</code>文件夹
+        The specific code can be found in the <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT</code> folder.
     </div>
     </br>
+
+
+Quick-Start
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    # Test mode
+    # Test using Cumulative Reward (CR)
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    # Test using Tracking Success Rate (TSR)
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    # New training mode
+    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    # Resume training mode after interruption
+    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1
+
+Program Entry
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    :code:`DVAT_main.py` is the entry point of the entire program, providing both training and testing modes (specific configurations can be found in the parameters section below).
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>1. Run Parameters:</b> Configure system mode, run frequency, device, and other parameters.
+      </div>
+      </br>
+
+    * :code:`--workers(int)=24` : The number of parallel training environments (this should be decided based on the actual memory/GPU of the computer).
+    * :code:`--train_mode(int)=1` : Configure whether the operation mode is training mode (:code:`--train_mode=1` is training mode, :code:`--train_mode=0` is testing mode).
+    * :code:`--port(int)=-1` : Communication port between the environment and algorithm end. By default, :code:`--port=-1` uses a randomly available port. Manual modification is not recommended.
+    * :code:`--New_Train(bool)=False` : Whether to start a new training session. The default is :code:`--New_Train=False`, which will load :code:`params.pth` pretrained weights (if available) for training, and the tensorboard curve will also load from the last training session.
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>2. Environment Parameters:</b> Configure the selected environment.
+      </div>
+      </br>
+
+    * :code:`--map(str)="citystreet-day.wbt"` : Configure the training/testing environment scene type, selected from :code:`./Webots_Simulation/traffic_project/worlds/*.wbt`.
+    
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>3. Model Parameters:</b> Configure parameters related to model weight import and saving.
+      </div>
+      </br>
+
+    * :code:`--savepath(str)="params.pth"` : Path where the model will be saved.
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>4. Visualization Parameters:</b> Configure parameters related to visualization files.
+      </div>
+      </br>
+
+    * :code:`--tensorboard_port(int)=1` : Whether to use tensorboard-logger. If :code:`--tensorboard_port(int)!=-1`, a random available port will be assigned; otherwise, it will not be enabled (not enabled in testing mode).
+
+
+Code Encapsulation and Modification Details
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    DVAT adopts an Actor-Critic asymmetric framework. The schematic diagrams of the Actor-Critic symmetric and asymmetric architectures are as follows:
+
+    .. figure:: ../_static/image/Asymmetric_and_Symmetrical_Structure.jpg
+        :alt: Asymmetric_and_Symmetrical_Structure
+        :width: 700px
+        :align: center
+
+        Schematic diagrams of the Actor-Critic symmetric and asymmetric architectures
+
+
+    The DVAT code mainly implements the following:
+
+    1. Custom Environment Class
+
+    The environment class is custom implemented as the :code:`DVAT_ENV` environment class, modeled after the `Gym environment class <Environment.html#gym>`_. The specific code can be found in :code:`Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_envs.py` .
+
+    To support the Actor-Critic asymmetric framework, the state space of the :code:`DVAT_ENV` environment class includes two parts: :code:`actor_obs` and :code:`critic_obs`:
+
+    .. code:: python
+
+        self.observation_space = gymnasium.spaces.Dict({
+            "actor_obs": gymnasium.spaces.Box(low=0, high=1.0, shape=(obs_buffer_len,)+image_shape, dtype=np.float32),
+            "critic_obs": gymnasium.spaces.Box(low=-np.inf, high=np.inf, shape=(9,), dtype=np.float32),
+        })
+
+    In the original gymnasium environment, the actor and critic share the same state space:
+
+    .. code:: python
+
+        if obs_buffer_len == 0:
+            self.observation_space = spaces.Box(low=0, high=1.0, shape=(env_conf["State_channel"], env_conf["State_size"], env_conf["State_size"]), dtype=np.float32)
+        else:
+            self.observation_space = spaces.Box(low=0, high=1.0, shape=(obs_buffer_len, env_conf["State_channel"], env_conf["State_size"], env_conf["State_size"]), dtype=np.float32)
+
+
+
+    2. Custom Implemented Policy
+
+    To support the Actor-Critic asymmetric framework, :code:`DVAT_SACDPolicy` was implemented by inheriting from the :code:`DiscreteSACPolicy` in **Tianshou**.
+
+    3. Custom Implemented Parallel Class and Collector
+    
+    Custom parallel environment classes and collectors were implemented, referencing `Async_SubprocVecEnv & SubprocVecEnv_TS <Environment.html#part3-async-subprocvecenv-subprocvecenv-ts>`_.
+
+
+
+
+
+log file
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    .. raw:: html
+
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            See the tensorboard-logger file in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_logs</code>
+        </div>
+        </br>
+
+    * During the model training process, as long as the parameter :code:`--tensorboard_port(int)!=-1` is set, the tensorboard-logger will automatically start when the program is launched.
+    * However, if you want to manually start tensorboard, you can also use the following command:
+
+    .. code:: bash
+
+        cd Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/
+        tensorboard --logdir DVAT_logs
+
 
 .. raw:: html
 
@@ -222,94 +363,100 @@ Baseline2 DVAT
     </br>
     </br>
 
+
 Baseline3 PPO+CL
 ---------------------------------
 
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code>文件夹
+        For specific code, see <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code> folder
     </div>
     </br>
 
-快速运行程序
+Quick-Start
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
     cd Alg_Base/rl_a3c_pytorch_benchmark/
-    # 测试模式
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0
-    # 新训练模式
+    # Test mode
+    # Test with Cumulative Reward (CR)
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    # Test with Tracking Success Rate (TSR)
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    # New training mode
     python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
-    # 中断重开训练模式
+    # Resume training mode
     python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
 
-程序入口
+Program Entry
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :code:`RPPO.py` 为整个程序的入口,同样提供训练和测试模式(具体配置见下方参数配置即可)
+    :code:`RPPO.py` is the entry point for the entire program, providing both training and testing modes (for specific configurations, refer to the parameter settings below).
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>1. 运行参数：</b>配置系统模式，运行频率，设备等参数
+            <b>1. Runtime Parameters:</b> Configure system mode, execution frequency, device, and other parameters
       </div>
       </br>
 
-    * :code:`--workers(int)=24` : 环境并行训练的数量数(需要根据实际计算机的内存/显存来决定)
-    * :code:`--train_mode(int)=1` : 配置运行模式是否为训练模式( :code:`--train_mode=1` 是训练模式，:code:`--train_mode=0` 是测试模式)
-    * :code:`--port(int)=-1` : 环境端与算法端通信端口，默认 :code:`--port=-1` 则随机利用一个当前可用的端口，不建议手动修改
-    * :code:`--New_Train(bool)=False` : 是否开启全新的训练，默认为 :code:`--New_Train=False`，则会加载 :code:`params.pth` 预训练权重(如果存在)进行训练，并且tensorboard的曲线也会从上一次训练曲线后加载
+    * :code:`--workers(int)=24` : The number of parallel environments for training (should be determined by the actual memory/VRAM of the computer).
+    * :code:`--train_mode(int)=1` : Configure whether the mode is training mode ( :code:`--train_mode=1` is training mode, :code:`--train_mode=0` is testing mode).
+    * :code:`--port(int)=-1` : Communication port between environment and algorithm, default :code:`--port=-1` will randomly use an available port, manual modification is not recommended.
+    * :code:`--New_Train(bool)=False` : Whether to start a completely new training, default is :code:`--New_Train=False`, which loads :code:`params.pth` pre-trained weights (if available) for training, and tensorboard curves will be loaded from the last training session.
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>2. 环境参数：</b>配置选择的环境
+            <b>2. Environment Parameters:</b> Configure the selected environment
       </div>
       </br>
 
-    * :code:`--map(str)="citystreet-day.wbt"` : 配置训练/测试环境场景种类，从 :code:`./Webots_Simulation/traffic_project/worlds/*.wbt` 中选择
-    
-    .. raw:: html
-
-      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>3. 模型参数：</b>配置模型权重导入和保存相关参数
-      </div>
-      </br>
-
-    * :code:`--savepath(str)="params.pth"` : 模型保存的路径
+    * :code:`--map(str)="citystreet-day.wbt"` : Configure the training/testing environment scene type, selected from :code:`./Webots_Simulation/traffic_project/worlds/*.wbt`.
 
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            <b>4. 可视化参数：</b>配置可视化文件相关参数
+            <b>3. Model Parameters:</b> Configure model weight import and save related parameters
       </div>
       </br>
 
-    * :code:`--tensorboard_port(int)=1` : 是否使用tensorboard-logger, :code:`--tensorboard_port(int)!=-1` 则随机分配可用端口，否则不启用(测试状态不启用)
+    * :code:`--savepath(str)="params.pth"` : Path where the model will be saved.
+
+    .. raw:: html
+
+      <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+            <b>4. Visualization Parameters:</b> Configure parameters related to visualization files
+      </div>
+      </br>
+
+    * :code:`--tensorboard_port(int)=1` : Whether to use tensorboard-logger, :code:`--tensorboard_port(int)!=-1` will randomly assign an available port, otherwise it will not be enabled (not enabled in testing mode).
 
 
-课程学习
+Curriculum Learning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * 我们的方法在RPPO的基础上增加了课程学习方法，而课程学习的第一阶段，智能体在简单的设定下进行任务理解
-    * 为了便于操作，我们见简单的设定抽离成地图，即 :code:`./Webots_Simulation/traffic_project/worlds/simpleway-*.wbt` 地图
-    * 因此，任务理解阶段就在对应的  :code:`simpleway-*.wbt` 上进行训练即可
-    * 完成任务理解之后，即可在视觉困难的地图上进行第二阶段训练，学习复杂视觉的特征
-    * 例如，对于地图 :code:`citystreet-day.wbt` 我们两阶段的运行命令如下：
+    * Our method adds curriculum learning based on RPPO, and in the first stage of curriculum learning, the agent understands the task under simple settings.
+    * For convenience, we extracted the simple settings as maps, i.e. :code:`./Webots_Simulation/traffic_project/worlds/simpleway-*.wbt` maps.
+    * Therefore, the task understanding stage is trained on the corresponding :code:`simpleway-*.wbt`.
+    * After completing task understanding, the second stage of training can be conducted on visually challenging maps to learn complex visual features.
+    * For example, for the map :code:`citystreet-day.wbt`, the commands for the two stages are as follows:
 
     .. code:: bash
 
         cd Alg_Base/rl_a3c_pytorch_benchmark/
-        # Stage1:任务理解
+        # Stage1: Task Understanding
         python ./models/Recurrent_PPO/RPPO.py -w 24 -m simpleway-grass.wbt --train_mode 1 --New_Train
-        # Stage2:视觉泛化
+        # Stage2: Visual Generalization
         python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
-        # 测试模式
+        # Testing Mode
         python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0
 
-    * 两阶段地图对照表如下：
+.. _table-cf:
+
+      * The comparison table of the two-stage maps is as follows:
 
         +------------------+-------------------------+
         | Origin Map       | Simple Map              |
@@ -363,18 +510,18 @@ Baseline3 PPO+CL
         |village-snow      |simpleway-village_snow   |
         +------------------+-------------------------+
 
-log文件
+log file
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/PPO_logs</code>
+            The tensorboard-logger file can be found in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/PPO_logs</code>
         </div>
         </br>
 
-    * 在模型训练的过程中，只要参数 :code:`--tensorboard_port(int)!=-1` ，那么启动程序时会自动启动tensorboard-logger
-    * 但如果希望手动启动tensorboard，也可以使用以下的命令：
+    * During the model training process, as long as the parameter :code:`--tensorboard_port(int)!=-1` is set, the tensorboard-logger will automatically start when the program is launched.
+    * However, if you wish to start tensorboard manually, you can use the following command:
 
     .. code:: bash
 
@@ -389,7 +536,7 @@ log文件
     </br>
 
 
-引用：
+Reference:
 
 .. [1] Luo, Wenhan, et al. "End-to-end active object tracking and its real-world deployment via reinforcement learning." IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.
 .. [2] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).

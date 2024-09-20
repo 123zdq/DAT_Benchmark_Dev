@@ -177,3 +177,5 @@ As for the simpleway map config setting, just change some parameters.
     * :code:`"start_time_bias_ms": 1510`, into :code:`"start_time_bias_ms": 510`,
 
     * :code:`"Drone_Random_Config":1510`, into :code:`"Drone_Random_Config":510`
+
+See: `The comparison table of the two-stage maps <../Algorithm/Model.html#table-cf>`_
