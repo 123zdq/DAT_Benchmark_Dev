@@ -89,8 +89,9 @@ def get_E2E_reward(x:float,y:float,w:float,d_curr:float)->float:
 def get_DVAT_reward(A_fov:float,d_cmd:float,x:float,y:float,z:float,v:list,u:list,crash:bool,discrete=True):
     ## Hyperparams
     beta = 1/3
+    # k_v = 0.4
     k_v = 0
-    k_u = 0
+    k_u = 0.4
     k_c = 10
     if crash:
         return -k_c,None,None

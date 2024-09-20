@@ -161,6 +161,14 @@ parser.add_argument(
 )
 
 parser.add_argument(
+    "-ver",
+    "--verbose",
+    action='store_true',
+    default=False,
+    help="Whether need verbose",
+)
+
+parser.add_argument(
     "-l", "--lr", type=float, default=0.0001, help="learning rate (default: 0.0001)"
 )
 parser.add_argument(
@@ -378,7 +386,8 @@ if __name__ == '__main__':
     data["Benchmark"]["port_process"] = args.Port
     data["Benchmark"]["Control_Frequence"] = args.Freq
     data["Benchmark"]["delay"] = args.delay
-    
+    data["Benchmark"]["verbose"] = args.verbose
+
     # Set the reward type
     if MODE == "train":
         data["Benchmark"]["RewardType"] = "E2E"

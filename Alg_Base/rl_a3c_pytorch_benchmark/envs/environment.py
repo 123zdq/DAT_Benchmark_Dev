@@ -379,28 +379,42 @@ class BenchEnv_Multi():
             
             # get ori_w_0
             ori_w_0 = reward_params[6]
-
-            ## Get real pitch angle and real height
+            
+            ## get self.d_real for e2e and dvat
+            if self.first_step:
+                self.d_real = reward_params[-12]
+                self.first_step = False
             pitch_angle = reward_params[4]
             real_height = reward_params[5]
-            d_real = real_height/math.tan(pitch_angle)
+            # d_real = real_height/math.tan(pitch_angle)
         if self.reward_type == "default":
             self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
         elif self.reward_type == "E2E":
-            reward,dist,w_abs = get_E2E_reward(x=pos_x,y=pos_y,w=ori_w,d_curr=d_real)
-            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} d_real-{d_real} w-{ori_w} dist:{dist} w_abs:{w_abs} r:{reward}')
+            reward,dist,w_abs = get_E2E_reward(x=pos_x,y=pos_y,w=ori_w,d_curr=self.d_real)
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} d_real-{self.d_real} w-{ori_w} dist:{dist} w_abs:{w_abs} r:{reward}')
         elif self.reward_type == "DVAT":
             crash = int(reward_params[-3])
             Afov = reward_params[2]
-            reward,rx,ry = get_DVAT_reward(A_fov=Afov,d_cmd=d_real,x=pos_x,y=pos_y,z = pos_z,v=[0,0,0],u=[0,0,0],crash=crash,discrete=True)
-            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} w-{ori_w} height:{real_height} pitch_rangle:{pitch_angle} d_real:{d_real} w_0_real:{ori_w_0} r_x:{rx} r_y:{ry} r:{reward}')
+            if action == 0:
+                linear_v = [self.Forward,0,0]
+            elif action == 1:
+                linear_v = [self.Backward,0,0]
+            elif action == 2:
+                linear_v = [0,self.Left,0]
+            elif action == 3:
+                linear_v = [0,self.Right,0]
+            else:
+                linear_v = [0,0,0] 
+            
+            reward,rx,ry = get_DVAT_reward(A_fov=Afov,d_cmd=self.d_real,x=pos_x,y=pos_y,z = pos_z,v=linear_v,u=[0,0,0],crash=crash,discrete=True)
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} w-{ori_w} height:{real_height} pitch_rangle:{pitch_angle} d_real:{self.d_real} linear_v:{linear_v} w_0_real:{ori_w_0} r_x:{rx} r_y:{ry} r:{reward}')
         elif self.reward_type == "CVAT":
             rho = math.sqrt(math.pow(pos_x,2)+math.pow(pos_y,2))
             theta = ori_w
-            rho_cmd = d_real
+            rho_cmd = self.d_real
             theta_cmd = ori_w_0
             reward,r_rho,r_theta = get_CVAT_reward(rho=rho,theta=theta,rho_cmd=rho_cmd,theta_cmd=theta_cmd)
-            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} height:{real_height} pitch_rangle:{pitch_angle} rho:{rho} rho_cmd:{d_real} theta:{ori_w} theta_cmd:{ori_w_0} r_rho:{r_rho} r_theta:{r_theta} r:{reward}')
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} height:{real_height} pitch_rangle:{pitch_angle} rho:{rho} rho_cmd:{self.d_real} theta:{ori_w} theta_cmd:{ori_w_0} r_rho:{r_rho} r_theta:{r_theta} r:{reward}')
 
         self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
@@ -502,6 +516,9 @@ class BenchEnv_Multi():
             point_cloud = self.recv_point_cloud.read()
             self.logger.info('Get point_cloud:  '+str(point_cloud))
             self.SuppleInfo.append(point_cloud)
+
+        ## reset the first step flag
+        self.first_step = True
 
         ## Begin to read image
         self.logger.info('Begin to receive image in reset')
