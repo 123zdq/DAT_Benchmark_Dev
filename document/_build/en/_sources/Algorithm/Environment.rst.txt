@@ -1,4 +1,4 @@
-Environment Packing
+Environment Wrapping
 ==============================
 
   .. raw:: html
@@ -39,7 +39,7 @@ Environment Packing
     <script>
         function switchLanguage(lang) {
             if (lang === 'zh') {
-                window.location.href = 'Environment.html';
+                window.location.href = '../../zh/Algorithm/Environment.html';
             } else if (lang === 'en') {
                 window.location.href = '../../en/Algorithm/Environment.html';
             }
