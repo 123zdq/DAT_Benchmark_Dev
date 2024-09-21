@@ -29,7 +29,7 @@ def test_tianshou_env(args):
         ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
         shell=True,
     )
-    time.sleep(13)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    time.sleep(args.delay)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
     tensorboard_logdir = "./models/D_VAT/DVAT_logs"
@@ -94,7 +94,7 @@ def DVAT_train(args):
         ["webots --no-rendering --mode=fast ../../Webots_Simulation/traffic_project/worlds/" + args.map],
         shell=True,
     )
-    time.sleep(13)
+    time.sleep(args.delay)
 
     settings = {
         'n_timesteps': 1000000,
@@ -192,10 +192,13 @@ def DVAT_train(args):
             if collected_steps % save_interval == 0:
                 torch.save(sacd_policy.state_dict(),args.savepath)
         finally:
+            tb.terminate()
             simulator.terminate()
             try:
+                tb.wait(timeout=5)
                 simulator.wait(timeout=5)
             except subprocess.TimeoutExpired:
+                tb.kill()
                 simulator.kill()
 
 def DVAT_test(args):
@@ -320,6 +323,20 @@ if __name__ == "__main__":
         default=10,
         help="number of episodes for test",
     )
+    parse.add_argument(
+        "-D",
+        "--delay",
+        type=int,
+        default=20,
+        help="Delay after webots start",
+    )
+    parse.add_argument(
+        "-ver",
+        "--verbose",
+        action='store_true',
+        default=False,
+        help="Whether need verbose",
+    )
     args = parse.parse_args()
 
     if args.port == -1:
@@ -341,23 +358,41 @@ if __name__ == "__main__":
     data["Simulation_Mode"] = "train"
     data["Tracker_Def"] = "DRONE"
     data["Sumo_Params"]["rou_update"] = True
-    data["Verbose"] = False
+    data["Verbose"] = args.verbose
     if args.train_mode == 1:
         data["Drone_Random_Config"]["direction_random"] = False
+        data["Drone_Random_Config"]["direction_fixed"] = 0
+
+        data["Drone_Random_Config"]["view_pitch_random"] = False
+        data["Drone_Random_Config"]["view_pitch_fixed"] = 1.37
+
         data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["height_fixed"] = 22
+
         data["Drone_Random_Config"]["horizon_bias_random"] = False
         data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
+
         data["Drone_Random_Config"]["verticle_bias_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
-        
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 0
+
+        data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = False
         data["Sumo_Params"]["fixed_car_group_num"] = False
+
         data["Reward_Config"]["view_range"] = 1
 
         data["No_Reward_Done_Steps"] = 10000 # forbid no reward done setting
+
     else:
+        data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False
+
+        data["Drone_Random_Config"]["view_pitch_random"] = False
+        data["Drone_Random_Config"]["view_pitch_fixed"] = 1.37
+
         data["Drone_Random_Config"]["height_random"] = False
+        data["Drone_Random_Config"]["height_fixed"] = 22
+
         data["Drone_Random_Config"]["horizon_bias_random"] = False
         data["Drone_Random_Config"]["horizon_bias_fixed"] = 5
 
@@ -367,7 +402,7 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
-
+        
         if args.Test_Mode == "AR":
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "continuous"
@@ -387,6 +422,7 @@ if __name__ == "__main__":
         data = json.load(file)
     data["Benchmark"]["port_process"] = args.port
     data["Benchmark"]["auto_start"] = False
+    data["Benchmark"]["verbose"] = args.verbose
     if args.train_mode == 1:
         data["Benchmark"]["RewardType"] = "DVAT"
     else:

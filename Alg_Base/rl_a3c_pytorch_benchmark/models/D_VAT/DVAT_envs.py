@@ -46,18 +46,23 @@ class DVAT_ENV(gymnasium.Env):
         self.state = None
         
         ## Config 
-        self.end_reward = end_reward and process_idx == arg_worker-1
-        if self.end_reward:
+        self.end_reward = end_reward
+        self.test_agent = process_idx == arg_worker-1
+        if self.test_agent:
             assert log_dir != None
             self.num_test_dir = os.path.dirname(log_dir)
             self.num_test = f"{self.num_test_dir}/num_test.txt"
-            if os.path.exists(self.num_test):
-                with open(self.num_test,"r") as file:
-                    data = file.read()
-                    print(f"Read: {data}")
-                self.reward_idx = int(data)
+            if self.end_reward:
+                if os.path.exists(self.num_test):
+                    with open(self.num_test,"r") as file:
+                        data = file.read()
+                        print(f"Loading log from iteration: {data}")
+                    self.reward_idx = int(data)
             else:
+                print(f"Start New train!")
                 self.reward_idx = 0
+                with open(self.num_test,"w") as file:
+                    file.write("0")
             self.init_reward_idx = deepcopy(self.reward_idx)
 
             ## tb logger
@@ -78,14 +83,14 @@ class DVAT_ENV(gymnasium.Env):
         self.actual_state = {"actor_obs":self.actor_obs,"critic_obs":self.critic_obs}
 
         ## Update tb_logger and num_test.txt file
-        if self.end_reward:
+        if self.test_agent:
             if self.reward_idx != self.init_reward_idx and self.use_tb:
                 self.tb_logger.add_scalar('Reward', self.total_reward, self.reward_idx)
                 self.total_reward = 0
             self.reward_idx += 1
             with open(self.num_test,"w") as file:
                 file.write(str(self.reward_idx))
-                print(f"Write: {self.reward_idx}")
+            print(f"Write: {self.reward_idx}")
         return self.actual_state,reset_info
     
     def step(self, action):
@@ -109,7 +114,7 @@ class DVAT_ENV(gymnasium.Env):
             truncated = False
         
         ## Manage total reward for tensorboard logger
-        if self.end_reward and not done:
+        if self.test_agent and not done:
             self.total_reward += reward
         
         return self.actual_state,reward,done,truncated,info
