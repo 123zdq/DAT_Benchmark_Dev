@@ -63,15 +63,18 @@
 <li class="toctree-l3"><a class="reference internal" href="#gym">2 Gym环境类</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#part1-uav-vat-gym">Part1 UAV_VAT(适配Gym库)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part2-uav-vat-gymnasium-gymnasium">Part2 UAV_VAT_Gymnasium(适配Gymnasium库)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part3-async-subprocvecenv-subprocvecenv-ts">Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part3">Part3 并行环境类</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part4">Part4 调用接口</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#parallel">3 并行环境类</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#part1">Part1 设计方案</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part2-envs">Part2 Envs()</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part3">Part3 封装前后数据格式变化</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">Part4 性能评价指标</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part1-envs">Part1 Envs()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part2">Part2 封装前后数据格式变化</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4 性能评价指标</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cr-cumulative-reward">1.累计奖励 CR(Cumulative Reward)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tsr-tracking-success-rate">2.追踪成功比例 TSR(TrackIng Success Rate)</a></li>
 </ul>
 </li>
 </ul>
@@ -440,8 +443,8 @@
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
-<section id="part3-async-subprocvecenv-subprocvecenv-ts">
-<h3>Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS<a class="headerlink" href="#part3-async-subprocvecenv-subprocvecenv-ts" title="Link to this heading"></a></h3>
+<section id="part3">
+<h3>Part3 并行环境类<a class="headerlink" href="#part3" title="Link to this heading"></a></h3>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
 <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
 </div>
@@ -449,32 +452,18 @@
     具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py </code>中的<code> ASYNC_SubprocVecEnv </code>类
     具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py </code>中的<code> SubprocVecEnv_TS </code>类
 </div>
-</br><p><strong>SubprocVecEnv 存在不足</strong></p>
-<blockquote>
-<div><dl class="simple">
-<dt>1.stablebaselines3:</dt><dd><ul class="simple">
-<li><p><strong>reset</strong> 动作对 <strong>所有环境</strong> 均执行</p></li>
-<li><p><strong>step</strong> 后即判断是否执行 <strong>reset</strong> ，会出现 <strong>step</strong> 与 <strong>reset</strong> 同一周期执行</p></li>
-</ul>
-</dd>
-<dt>2.tianshou:</dt><dd><ul class="simple">
-<li><p><strong>reset</strong> 动作对 <strong>所有环境</strong> 均执行</p></li>
-<li><p><strong>step</strong> 后会对 <strong>所有环境</strong> 执行 <strong>step</strong>，无法实现 <strong>step</strong> 与 <strong>reset</strong> 在同一周期不同环境分别进行</p></li>
-</ul>
-</dd>
-</dl>
-</div></blockquote>
-<p><strong>Async_SubprocVecEnv 与 SubprocVecEnv_TS 修改</strong></p>
+</br><p><strong>现有强化学习库并行类特性与本工程修改</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>将 <strong>reset</strong> 动作隔离，仅仅对于单个环境进行 <strong>reset</strong> 操作</p></li>
-<li><p>每个动作进行 <strong>对齐</strong> ，保持各个环境动作的同步</p></li>
+<li><p>现有直接适配gym环境的强化学习库，如 <code class="code docutils literal notranslate"><span class="pre">stable-baselines3</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">tianshou</span></code> 库提供并行环境类 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 供给用户直接将gym环境封装成并行环境</p></li>
+<li><p>上述 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 环境类在运行 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 后立即判断是否执行 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> ，会导致 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 与 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> 同一周期执行的现象。</p></li>
+<li><p>本工程修改：每个动作进行对齐，保持各个环境动作的同步。</p></li>
+<li><p>将stable-baselines3库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类修改成 <code class="code docutils literal notranslate"><span class="pre">Async_SubprocVecEnv</span></code> 类，将tianshou库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">Collector</span></code> 类分别修改成 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv_TS</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">TS_Collector</span></code> 类</p></li>
+<li><p>修改前后的区别见下图所示。</p></li>
 </ul>
 </div></blockquote>
-<img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
-<center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></br>
-
-同理，我们参考Tianshou的 <code>TS_Collector</code>类，封装了自己的Collector类。</br>
+<img src="../_static/image/subprovecenv.png" alt="Async_SubprocVecEnv修改前后对比">
+<center>SubprocVecEnv修改前后对比示意图</center></br></br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
@@ -548,21 +537,8 @@
 </br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
 </div>
-</br><section id="part1">
-<h3>Part1 设计方案<a class="headerlink" href="#part1" title="Link to this heading"></a></h3>
-<p><strong>设计实现方案</strong></p>
-<blockquote>
-<div><p>用Python的 <strong>asyncio</strong> 提供的协程，使用线程池并发地唤起不同 <strong>agent</strong> 对应的 <strong>env</strong> 环境基类的采样方法，且不因等待单个环境的返回值而阻塞主线程，
-将不同环境给的返回值（状态，奖励，done标记）打包堆叠成向量传给算法端，将算法端给的动作向量解包给不同环境并自动基于done的值判断对应的环境是应该 <strong>step</strong> 还是 <strong>reset</strong></p>
-</div></blockquote>
-<img src="../_static/image/多线程并行.png" alt="并行环境示意图">
-<center>并行环境示意图</center>
-</br></br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="part2-envs">
-<h3>Part2 Envs()<a class="headerlink" href="#part2-envs" title="Link to this heading"></a></h3>
+</br><section id="part1-envs">
+<h3>Part1 Envs()<a class="headerlink" href="#part1-envs" title="Link to this heading"></a></h3>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>Envs</code>类
 </div>
@@ -610,8 +586,8 @@
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
-<section id="part3">
-<h3>Part3 封装前后数据格式变化<a class="headerlink" href="#part3" title="Link to this heading"></a></h3>
+<section id="part2">
+<h3>Part2 封装前后数据格式变化<a class="headerlink" href="#part2" title="Link to this heading"></a></h3>
 <p><strong>封装前后数据格式对比：</strong></p>
 <ul>
 <li><p>封装前(BenchEnv_Multi):</p>
@@ -627,16 +603,20 @@
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
+</section>
 <section id="id10">
-<h3>Part4 性能评价指标<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
-<p><strong>1.累计奖励 CR(Cumulative Reward)</strong></p>
+<h2>4 性能评价指标<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<section id="cr-cumulative-reward">
+<h3>1.累计奖励 CR(Cumulative Reward)<a class="headerlink" href="#cr-cumulative-reward" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>此为使用连续奖励，进行累加计算以评估性能，计算公式如下所示：</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
 </br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{ct}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的连续奖励值， <span class="math notranslate nohighlight">\(E_l\)</span> 代表轨迹长度。
 连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id19"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
-<p><strong>2.追踪成功比例 TSR(TrackIng Success Rate)</strong></p>
+</section>
+<section id="tsr-tracking-success-rate">
+<h3>2.追踪成功比例 TSR(TrackIng Success Rate)<a class="headerlink" href="#tsr-tracking-success-rate" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：</p>
 </div></blockquote>

@@ -433,7 +433,7 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
     </br>
 
 
-Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
+Part3 并行环境类
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -452,27 +452,19 @@ Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
   </div>
   </br>
 
-**SubprocVecEnv 存在不足**
+**现有强化学习库并行类特性与本工程修改**
 
-  1.stablebaselines3:
-    * :strong:`reset` 动作对 :strong:`所有环境` 均执行
-    * :strong:`step` 后即判断是否执行 :strong:`reset` ，会出现 :strong:`step` 与 :strong:`reset` 同一周期执行
-
-  2.tianshou:
-    * :strong:`reset` 动作对 :strong:`所有环境` 均执行
-    * :strong:`step` 后会对 :strong:`所有环境` 执行 :strong:`step`，无法实现 :strong:`step` 与 :strong:`reset` 在同一周期不同环境分别进行
-
-**Async_SubprocVecEnv 与 SubprocVecEnv_TS 修改**
-
-  * 将 :strong:`reset` 动作隔离，仅仅对于单个环境进行 :strong:`reset` 操作
-  * 每个动作进行 :strong:`对齐` ，保持各个环境动作的同步
+    * 现有直接适配gym环境的强化学习库，如 :code:`stable-baselines3` 和 :code:`tianshou` 库提供并行环境类 :code:`SubprocVecEnv` 供给用户直接将gym环境封装成并行环境
+    * 上述 :code:`SubprocVecEnv` 环境类在运行 :code:`step` 后立即判断是否执行 :code:`reset` ，会导致 :code:`step` 与 :code:`reset` 同一周期执行的现象。
+    * 本工程修改：每个动作进行对齐，保持各个环境动作的同步。
+    * 将stable-baselines3库中的 :code:`SubprocVecEnv` 类修改成 :code:`Async_SubprocVecEnv` 类，将tianshou库中的 :code:`SubprocVecEnv` 类和 :code:`Collector` 类分别修改成 :code:`SubprocVecEnv_TS` 类和 :code:`TS_Collector` 类 
+    * 修改前后的区别见下图所示。
 
 .. raw:: html
 
-  <img src="../_static/image/async_subprocvecenv.png" alt="Async_SubprocVecEnv修改前后对比">
-  <center>Async_SubprocVecEnv 和 SubprocVecEnv_TS 修改后对比 baselines3 和 tianshou 方法</center></br>
+  <img src="../_static/image/subprovecenv.png" alt="Async_SubprocVecEnv修改前后对比">
+  <center>SubprocVecEnv修改前后对比示意图</center></br>
 
-  同理，我们参考Tianshou的 <code>TS_Collector</code>类，封装了自己的Collector类。
 
 .. raw:: html
 
@@ -578,29 +570,7 @@ Part4 调用接口
   </div>
   </br>
 
-Part1 设计方案
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**设计实现方案**
-
-  用Python的 :strong:`asyncio` 提供的协程，使用线程池并发地唤起不同 :strong:`agent` 对应的 :strong:`env` 环境基类的采样方法，且不因等待单个环境的返回值而阻塞主线程，
-  将不同环境给的返回值（状态，奖励，done标记）打包堆叠成向量传给算法端，将算法端给的动作向量解包给不同环境并自动基于done的值判断对应的环境是应该 :strong:`step` 还是 :strong:`reset`
-
-.. raw:: html
-
-  <img src="../_static/image/多线程并行.png" alt="并行环境示意图">
-  <center>并行环境示意图</center>
-  </br>
-
-.. raw:: html
-
-    </br>
-    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-    </br>
-    </br>
-
-
-Part2 Envs()
+Part1 Envs()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -668,7 +638,7 @@ Part2 Envs()
     </br>
 
 
-Part3 封装前后数据格式变化
+Part2 封装前后数据格式变化
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **封装前后数据格式对比：**
@@ -693,10 +663,11 @@ Part3 封装前后数据格式变化
     </br>
     </br>
 
-Part4 性能评价指标
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4 性能评价指标
+---------------------------------------------
 
-**1.累计奖励 CR(Cumulative Reward)**
+1.累计奖励 CR(Cumulative Reward)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   此为使用连续奖励，进行累加计算以评估性能，计算公式如下所示：
 
@@ -708,7 +679,8 @@ Part4 性能评价指标
 上述公式中 :math:`r_{ct}` 代表在步骤 :math:`t` 中的连续奖励值， :math:`E_l` 代表轨迹长度。
 连续奖励计算图解见 :ref:`跟踪对象连续奖励示意图`
 
-**2.追踪成功比例 TSR(TrackIng Success Rate)**
+2.追踪成功比例 TSR(TrackIng Success Rate)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：
 

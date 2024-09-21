@@ -292,7 +292,7 @@ Baseline2 DVAT
 
     DVAT采用Actor-Critic非对称框架，Actor-Critic对称架构和非对称架构的示意图如下：
 
-    .. figure:: ../_static/image/Asymmetric_and_Symmetrical_Structure.jpg
+    .. figure:: ../_static/image/sym_asym.png
         :alt: Asymmetric_and_Symmetrical_Structure
         :width: 700px
         :align: center
