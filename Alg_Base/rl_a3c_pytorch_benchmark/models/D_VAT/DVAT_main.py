@@ -409,7 +409,7 @@ if __name__ == "__main__":
     data["Simulation_Mode"] = "train"
     data["Tracker_Def"] = "DRONE"
     data["Sumo_Params"]["rou_update"] = True
-    data["Verbose"] = args.verbose
+    data["Verbose"] = False
     if args.train_mode == 1:
         data["Drone_Random_Config"]["direction_random"] = False
         data["Drone_Random_Config"]["direction_fixed"] = 0

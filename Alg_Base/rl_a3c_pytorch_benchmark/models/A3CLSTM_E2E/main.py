@@ -324,6 +324,7 @@ if __name__ == '__main__':
         data = json.load(file)
     data["Config_Agen_Num_Port"] = args.Port
     data["Control_Frequence"] = args.Freq
+    data["Verbose"] = False
     if MODE == "test":
         data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False

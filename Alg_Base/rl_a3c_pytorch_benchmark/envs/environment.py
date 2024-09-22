@@ -391,7 +391,7 @@ class BenchEnv_Multi():
         elif self.reward_type == "E2E":
             Afov = reward_params[2]
             reward,dist,w_abs = get_E2E_reward(x=pos_x,y=pos_y,w=ori_w,d_curr=self.d_real,Fov=Afov)
-            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} d_real-{self.d_real} w-{ori_w} dist:{dist} w_abs:{w_abs} r:{reward}')
+            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} d_real-{self.d_real} w-{ori_w} Afov-{Afov} r_dist:{dist} r_angle:{w_abs} r_total:{reward}')
         elif self.reward_type == "DVAT":
             crash = int(reward_params[-3])
             Afov = reward_params[2]

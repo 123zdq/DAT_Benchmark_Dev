@@ -73,12 +73,12 @@ def clip_to_range(x, min_value=0, max_value=1):
 def get_E2E_reward(x:float,y:float,w:float,d_curr:float,Fov:float)->float:
     ## Hyperparams(Need to be determined after test)
     A = 1
-    c = 200
+    c = 7
     lamb = 2/Fov
     ## get reward
-    dist = math.sqrt(math.pow(x-d_curr,2)+math.pow(y,2))
-    w_abs = abs(w)
-    reward = A-(dist/c+lamb*w_abs)
+    dist = math.sqrt(math.pow(x-d_curr,2)+math.pow(y,2))/c
+    w_abs = lamb*abs(w)
+    reward = A-(dist+w_abs)
     reward = clip_to_range(reward,min_value=-1,max_value=1)
     return reward,dist,w_abs
 
