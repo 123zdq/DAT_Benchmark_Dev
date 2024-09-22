@@ -595,6 +595,70 @@ Part 1 Envs()
 
     * :code:`env_mk` :code:`env_mk_args`: Environments have not been constructed; :
 
+  * :code:`logs_show(bool)` ：Whether to collect reward data in one of the environments to draw a training curve
+
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        2. <code>reset</code> ：reset environment, and return to the init environment
+  </div>
+  </br>
+
+**Return Parameters：**
+
+* :code:`states` ：Returns a collection of states (images) for each environment
+
+.. raw:: html
+
+  <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        3. <code>step</code> ：Environment interaction, input action, get status information
+  </div>
+  </br>
+
+**Input Parameters：**
+
+* :code:`actions` ：Each Agent action
+
+**Return Parameters：**
+
+* :code:`states` ：Returns a collection of states (images) for each environment
+* :code:`rewards` ：The reward stack for each Agent
+* :code:`done` ：Whether each environment is in the end state
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
+
+Part2 Data format changes before and after encapsulation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Comparison of data formats before and after encapsulation：**
+
+* Pre-package(BenchEnv_Multi):
+
+  Data sampling： :code:`state:ndarray,reward:float,done:float= env.step(action:int)`
+
+  Environment reset： :code:`state:ndarray = env.reset()`
+
+* After packaging(Envs), set the parallel number n：
+
+  Data sampling： :code:`states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)= env.step(action:ndarray(n))`
+
+  Environment reset： :code:`states:ndarray(n,) = envs.reset()`
+
+
+.. raw:: html
+
+    </br>
+    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+    </br>
+    </br>
+
 4 Performance Evaluation Metrics
 ------------------------------------------------------------------------------------------
 

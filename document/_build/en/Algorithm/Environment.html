@@ -69,6 +69,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#parallel-environment-classes">3 Parallel Environment Classes</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#part-1-envs">Part 1 Envs()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part2-data-format-changes-before-and-after-encapsulation">Part2 Data format changes before and after encapsulation</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#performance-evaluation-metrics">4 Performance Evaluation Metrics</a><ul>
@@ -535,9 +536,52 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code>: Environments have not been constructed; :</p></li>
 </ul>
 </div></blockquote>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">logs_show(bool)</span></code> ：Whether to collect reward data in one of the environments to draw a training curve</p></li>
+</ul>
 </dd>
 </dl>
-</section>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+      2. <code>reset</code> ：reset environment, and return to the init environment
+</div>
+</br><p><strong>Return Parameters：</strong></p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">states</span></code> ：Returns a collection of states (images) for each environment</p></li>
+</ul>
+<div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+      3. <code>step</code> ：Environment interaction, input action, get status information
+</div>
+</br><p><strong>Input Parameters：</strong></p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">actions</span></code> ：Each Agent action</p></li>
+</ul>
+<p><strong>Return Parameters：</strong></p>
+<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">states</span></code> ：Returns a collection of states (images) for each environment</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">rewards</span></code> ：The reward stack for each Agent</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">done</span></code> ：Whether each environment is in the end state</p></li>
+</ul>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
+<section id="part2-data-format-changes-before-and-after-encapsulation">
+<h3>Part2 Data format changes before and after encapsulation<a class="headerlink" href="#part2-data-format-changes-before-and-after-encapsulation" title="Link to this heading"></a></h3>
+<p><strong>Comparison of data formats before and after encapsulation：</strong></p>
+<ul>
+<li><p>Pre-package(BenchEnv_Multi):</p>
+<p>Data sampling： <code class="code docutils literal notranslate"><span class="pre">state:ndarray,reward:float,done:float=</span> <span class="pre">env.step(action:int)</span></code></p>
+<p>Environment reset： <code class="code docutils literal notranslate"><span class="pre">state:ndarray</span> <span class="pre">=</span> <span class="pre">env.reset()</span></code></p>
+</li>
+<li><p>After packaging(Envs), set the parallel number n：</p>
+<p>Data sampling： <code class="code docutils literal notranslate"><span class="pre">states:ndarray(n,),rewards:ndarray(n),done:ndarray(n)=</span> <span class="pre">env.step(action:ndarray(n))</span></code></p>
+<p>Environment reset： <code class="code docutils literal notranslate"><span class="pre">states:ndarray(n,)</span> <span class="pre">=</span> <span class="pre">envs.reset()</span></code></p>
+</li>
+</ul>
+</br>
+<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
+</br>
+</br></section>
 </section>
 <section id="performance-evaluation-metrics">
 <h2>4 Performance Evaluation Metrics<a class="headerlink" href="#performance-evaluation-metrics" title="Link to this heading"></a></h2>
