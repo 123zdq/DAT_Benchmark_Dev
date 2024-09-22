@@ -316,7 +316,7 @@ Part 3 Constructor
 2 Gym Environment class
 -------------------------------------------------
 
-Considering that users often build reinforcement learning algorithms based on Gym <https://github.com/openai/gym>_ and Gymnasium <https://github.com/openai/gym>_ environment interfaces, or utilize libraries such as stable-baselines3 <https://github.com/DLR-RM/stable-baselines3>_ for algorithm validation, this project encapsulates the aforementioned base environment class to provide fully compatible environment classes for Gym <https://github.com/openai/gym>_ and Gymnasium <https://github.com/openai/gym>_.
+Considering that users often build reinforcement learning algorithms based on `Gym <https://github.com/openai/gym>`_ and `Gymnasium <https://github.com/openai/gym>`_ environment interfaces, or utilize libraries such as `stable-baselines3 <https://github.com/DLR-RM/stable-baselines3>`_ for algorithm validation, this project encapsulates the aforementioned base environment class to provide fully compatible environment classes for `Gym <https://github.com/openai/gym>`_ and `Gymnasium <https://github.com/openai/gym>`_.
 
 .. raw:: html
 
@@ -424,8 +424,9 @@ Return Parameters:
     </br>
     </br>
 
+.. _SubprovecEnv:
 
-Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
+Part3 Parallel Environment Encapsulation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -443,27 +444,22 @@ Part3 Async_SubprocVecEnv & SubprocVecEnv_TS
   </div>
   </br>
 
-**Limitations of SubprocVecEnv**
+**Existing Reinforcement Learning Library Parallel Class Features and Modifications in This Project**
 
-  1. Stable Baselines3:
+  * Existing reinforcement learning libraries directly compatible with gym environments, such as the :code:`stable-baselines3` and :code:`tianshou` libraries, provide the parallel environment class :code:`SubprocVecEnv` , allowing users to directly encapsulate gym environments into parallel environments.
+  
+  * The above-mentioned :code:`SubprocVecEnv` environment class checks whether to execute ``reset`` immediately after executing ``step``, which may cause the ``step`` and :code:`reset` to be executed in the same cycle.
 
-    * The :strong:`reset` action is executed for :strong:`all environments`.
-    * After :strong:`step`, it determines whether to perform :strong:`reset`, which may result in :strong:`step` and :strong:`reset` being executed in the same cycle.
+  * Modification in this project: Align each action to maintain synchronization of actions across environments.
 
-  2. Tianshou:
+  * The :code:`SubprocVecEnv` class from the ``stable-baselines3`` library is modified to the ``Async_SubprocVecEnv`` class, and the ``SubprocVecEnv`` and ``Collector`` classes from the ``tianshou`` library are modified to ``SubprocVecEnv_TS`` and ``TS_Collector`` classes, respectively.
 
-    * The :strong:`reset` action is executed for :strong:`all environments`.
-    * After :strong:`step`, it will execute :strong:`step` for :strong:`all environments`, making it impossible to perform :strong:`step` and :strong:`reset` in different environments during the same cycle.
-
-**Modifications in Async_SubprocVecEnv and SubprocVecEnv_TS**
-
-  * Isolated the :strong:`reset` action, only performing :strong:`reset` for a single environment.
-  * Aligned each action to maintain synchronization of actions across environments.
+  * The differences between the original and modified implementations are shown in the figure below.
 
 .. raw:: html
 
-  <img src="../_static/image/async_subprocvecenv.png" alt="Comparison of Async_SubprocVecEnv before and after modifications">
-  <center>Comparison of Async_SubprocVecEnv and SubprocVecEnv_TS after modifications compared to baselines3 and tianshou methods</center></br>
+  <img src="../_static/image/subprovecenv.png" alt="Comparison of Async_SubprocVecEnv before and after modifications">
+  <center>comparison diagram of SubprocVecEnv before and after modification</center></br>
 
 
 .. raw:: html
@@ -571,28 +567,7 @@ If you want to quickly test whether the modifications to the above environment c
   </div>
   </br>
 
-Part 1 Design Plan
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**Design Implementation Plan**
-
-  Using Python's :strong:`asyncio` provided coroutine, concurrently invoking the sampling methods of the respective :strong:`env` environment base classes for different :strong:`agents` using a thread pool, without blocking the main thread while waiting for the return values from individual environments. The return values (states, rewards, done flags) from different environments are packaged into vectors and sent to the algorithm side, while unpacking the action vectors provided by the algorithm side to different environments and automatically determining based on the done value whether the corresponding environment should perform :strong:`step` or :strong:`reset`.
-
-.. raw:: html
-
-  <img src="../_static/image/多线程并行.png" alt="Parallel Environment Illustration">
-  <center>Illustration of Parallel Environments</center>
-  </br>
-
-.. raw:: html
-
-    </br>
-    <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-    </br>
-    </br>
-
-
-Part 2 Envs()
+Part 1 Envs()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -620,10 +595,11 @@ Part 2 Envs()
 
     * :code:`env_mk` :code:`env_mk_args`: Environments have not been constructed; :
 
-Part 4 Performance Evaluation Metrics
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4 Performance Evaluation Metrics
+------------------------------------------------------------------------------------------
 
-**1. Cumulative Reward CR**
+1. Cumulative Reward CR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This metric uses cumulative rewards to assess performance, calculated using the following formula:
 
@@ -635,7 +611,8 @@ Part 4 Performance Evaluation Metrics
 In the above formula, :math:`r_{ct}` represents the continuous reward value at step :math:`t`, and :math:`E_l` represents the trajectory length.
 For a graphical representation of continuous reward calculation, see :ref:`Continuous Reward Diagram for Tracking Object`.
 
-**2. Tracking Success Rate TSR**
+2. Tracking Success Rate TSR
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   This metric uses discrete rewards to evaluate the proportion of successful tracking, calculated using the following formula:
 

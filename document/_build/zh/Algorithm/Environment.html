@@ -63,7 +63,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#gym">2 Gym环境类</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#part1-uav-vat-gym">Part1 UAV_VAT(适配Gym库)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part2-uav-vat-gymnasium-gymnasium">Part2 UAV_VAT_Gymnasium(适配Gymnasium库)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part3">Part3 并行环境类</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part3">Part3 并行环境封装</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part4">Part4 调用接口</a></li>
 </ul>
 </li>
@@ -444,7 +444,7 @@
 </br>
 </br></section>
 <section id="part3">
-<h3>Part3 并行环境类<a class="headerlink" href="#part3" title="Link to this heading"></a></h3>
+<h3>Part3 并行环境封装<a class="headerlink" href="#part3" title="Link to this heading"></a></h3>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
 <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
 </div>
@@ -458,7 +458,7 @@
 <li><p>现有直接适配gym环境的强化学习库，如 <code class="code docutils literal notranslate"><span class="pre">stable-baselines3</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">tianshou</span></code> 库提供并行环境类 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 供给用户直接将gym环境封装成并行环境</p></li>
 <li><p>上述 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 环境类在运行 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 后立即判断是否执行 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> ，会导致 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 与 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> 同一周期执行的现象。</p></li>
 <li><p>本工程修改：每个动作进行对齐，保持各个环境动作的同步。</p></li>
-<li><p>将stable-baselines3库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类修改成 <code class="code docutils literal notranslate"><span class="pre">Async_SubprocVecEnv</span></code> 类，将tianshou库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">Collector</span></code> 类分别修改成 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv_TS</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">TS_Collector</span></code> 类</p></li>
+<li><p>将 <code class="docutils literal notranslate"><span class="pre">stable-baselines3</span></code> 库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类修改成 <code class="code docutils literal notranslate"><span class="pre">Async_SubprocVecEnv</span></code> 类，将 <code class="docutils literal notranslate"><span class="pre">tianshou</span></code> 库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">Collector</span></code> 类分别修改成 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv_TS</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">TS_Collector</span></code> 类</p></li>
 <li><p>修改前后的区别见下图所示。</p></li>
 </ul>
 </div></blockquote>

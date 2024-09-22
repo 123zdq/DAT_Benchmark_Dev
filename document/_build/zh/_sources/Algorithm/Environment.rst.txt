@@ -433,7 +433,7 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
     </br>
 
 
-Part3 并行环境类
+Part3 并行环境封装
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -457,7 +457,7 @@ Part3 并行环境类
     * 现有直接适配gym环境的强化学习库，如 :code:`stable-baselines3` 和 :code:`tianshou` 库提供并行环境类 :code:`SubprocVecEnv` 供给用户直接将gym环境封装成并行环境
     * 上述 :code:`SubprocVecEnv` 环境类在运行 :code:`step` 后立即判断是否执行 :code:`reset` ，会导致 :code:`step` 与 :code:`reset` 同一周期执行的现象。
     * 本工程修改：每个动作进行对齐，保持各个环境动作的同步。
-    * 将stable-baselines3库中的 :code:`SubprocVecEnv` 类修改成 :code:`Async_SubprocVecEnv` 类，将tianshou库中的 :code:`SubprocVecEnv` 类和 :code:`Collector` 类分别修改成 :code:`SubprocVecEnv_TS` 类和 :code:`TS_Collector` 类 
+    * 将 ``stable-baselines3`` 库中的 :code:`SubprocVecEnv` 类修改成 :code:`Async_SubprocVecEnv` 类，将 ``tianshou`` 库中的 :code:`SubprocVecEnv` 类和 :code:`Collector` 类分别修改成 :code:`SubprocVecEnv_TS` 类和 :code:`TS_Collector` 类 
     * 修改前后的区别见下图所示。
 
 .. raw:: html

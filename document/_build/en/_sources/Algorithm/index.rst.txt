@@ -39,7 +39,7 @@ Algorithm
     <script>
         function switchLanguage(lang) {
             if (lang === 'zh') {
-                window.location.href = '../..//Algorithm/index.html';
+                window.location.href = '../../zh/Algorithm/index.html';
             } else if (lang === 'en') {
                 window.location.href = '../../en/Algorithm/index.html';
             }

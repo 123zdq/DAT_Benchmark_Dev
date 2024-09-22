@@ -287,11 +287,11 @@ Program Entry
 
 
 Code Encapsulation and Modification Details
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     DVAT adopts an Actor-Critic asymmetric framework. The schematic diagrams of the Actor-Critic symmetric and asymmetric architectures are as follows:
 
-    .. figure:: ../_static/image/Asymmetric_and_Symmetrical_Structure.jpg
+    .. figure:: ../_static/image/sym_asym.png
         :alt: Asymmetric_and_Symmetrical_Structure
         :width: 700px
         :align: center
@@ -299,7 +299,7 @@ Code Encapsulation and Modification Details
         Schematic diagrams of the Actor-Critic symmetric and asymmetric architectures
 
 
-    The DVAT code mainly implements the following:
+    **The DVAT code mainly implements the following:**
 
     1. Custom Environment Class
 
@@ -331,10 +331,7 @@ Code Encapsulation and Modification Details
 
     3. Custom Implemented Parallel Class and Collector
     
-    Custom parallel environment classes and collectors were implemented, referencing `Async_SubprocVecEnv & SubprocVecEnv_TS <Environment.html#part3-async-subprocvecenv-subprocvecenv-ts>`_.
-
-
-
+    Custom parallel environment classes and collectors were implemented, referencing :ref:`SubprovecEnv` .
 
 
 log file

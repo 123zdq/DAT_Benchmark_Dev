@@ -63,14 +63,17 @@
 <li class="toctree-l3"><a class="reference internal" href="#gym-environment-class">2 Gym Environment class</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#part1-uav-vat-adapting-to-gym-library">Part1 UAV_VAT (Adapting to Gym Library)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part-2-uav-vat-gymnasium-adapting-to-gymnasium-library">Part 2 UAV_VAT_Gymnasium (Adapting to Gymnasium Library)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part3-async-subprocvecenv-subprocvecenv-ts">Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part3-parallel-environment-encapsulation">Part3 Parallel Environment Encapsulation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#part-4-interface-invocation">Part 4 Interface Invocation</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#parallel-environment-classes">3 Parallel Environment Classes</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#part-1-design-plan">Part 1 Design Plan</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-2-envs">Part 2 Envs()</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#part-4-performance-evaluation-metrics">Part 4 Performance Evaluation Metrics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#part-1-envs">Part 1 Envs()</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#performance-evaluation-metrics">4 Performance Evaluation Metrics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cumulative-reward-cr">1. Cumulative Reward CR</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tracking-success-rate-tsr">2. Tracking Success Rate TSR</a></li>
 </ul>
 </li>
 </ul>
@@ -157,10 +160,10 @@
  </br><p>This project provides three forms of Environment (Path: <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code>): the base Environment class, the Environment class wrapped by OpenAI Gym (Gynasium), and the Environment class we independently implemented in an asynchronous parallel framework.</p>
 </div></blockquote>
 <p>The relationships among these three Environment types are shown in the figure below:</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="Relationship diagram of three types of environment classes" src="../_images/Environment3Types.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Diagram of the three environment classes</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">Diagram of the three environment classes</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <section id="base-environment-class">
@@ -312,7 +315,7 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;RewardParams&quot;</span></code>: Whether to enable additional reward parameters options on the simulator side.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;RewardType&quot;</span></code>: Specifies the type of reward (can choose different baseline algorithms for reward).</p>
 <ul>
-<li><p>Includes <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,</span> <span class="pre">&quot;E2E&quot;,</span> <span class="pre">&quot;CVAT&quot;,</span> <span class="pre">&quot;DVAT&quot;</span></code>, corresponding to <a class="reference internal" href="../Webots_Simulator/Simulator.html#built-in-reward"><span class="std std-ref">Built-in Reward</span></a>, <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+<li><p>Includes <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,</span> <span class="pre">&quot;E2E&quot;,</span> <span class="pre">&quot;CVAT&quot;,</span> <span class="pre">&quot;DVAT&quot;</span></code>, corresponding to <a class="reference internal" href="../Webots_Simulator/Simulator.html#built-in-reward"><span class="std std-ref">Built-in Reward</span></a>, <a class="footnote-reference brackets" href="#id6" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id7" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id8" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
 </ul>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;verbose&quot;(bool)</span></code>: Configures whether the environment outputs log files.</p></li>
@@ -354,7 +357,7 @@
 </section>
 <section id="gym-environment-class">
 <span id="gymnasium-gym"></span><h2>2 Gym Environment class<a class="headerlink" href="#gym-environment-class" title="Link to this heading"></a></h2>
-<p>Considering that users often build reinforcement learning algorithms based on Gym &lt;<a class="reference external" href="https://github.com/openai/gym">https://github.com/openai/gym</a>&gt;_ and Gymnasium &lt;<a class="reference external" href="https://github.com/openai/gym">https://github.com/openai/gym</a>&gt;_ environment interfaces, or utilize libraries such as stable-baselines3 &lt;<a class="reference external" href="https://github.com/DLR-RM/stable-baselines3">https://github.com/DLR-RM/stable-baselines3</a>&gt;_ for algorithm validation, this project encapsulates the aforementioned base environment class to provide fully compatible environment classes for Gym &lt;<a class="reference external" href="https://github.com/openai/gym">https://github.com/openai/gym</a>&gt;_ and Gymnasium &lt;<a class="reference external" href="https://github.com/openai/gym">https://github.com/openai/gym</a>&gt;_.</p>
+<p>Considering that users often build reinforcement learning algorithms based on <a class="reference external" href="https://github.com/openai/gym">Gym</a> and <a class="reference external" href="https://github.com/openai/gym">Gymnasium</a> environment interfaces, or utilize libraries such as <a class="reference external" href="https://github.com/DLR-RM/stable-baselines3">stable-baselines3</a> for algorithm validation, this project encapsulates the aforementioned base environment class to provide fully compatible environment classes for <a class="reference external" href="https://github.com/openai/gym">Gym</a> and <a class="reference external" href="https://github.com/openai/gym">Gymnasium</a>.</p>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
   See the specific code in <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
 </div>
@@ -417,8 +420,8 @@
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
-<section id="part3-async-subprocvecenv-subprocvecenv-ts">
-<h3>Part3 Async_SubprocVecEnv &amp; SubprocVecEnv_TS<a class="headerlink" href="#part3-async-subprocvecenv-subprocvecenv-ts" title="Link to this heading"></a></h3>
+<section id="part3-parallel-environment-encapsulation">
+<span id="subprovecenv"></span><h3>Part3 Parallel Environment Encapsulation<a class="headerlink" href="#part3-parallel-environment-encapsulation" title="Link to this heading"></a></h3>
 <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
 <b>Stacked environment for parallel computation</b>, enabling multiple environments to interact with multiple agents.
 </div>
@@ -426,36 +429,18 @@
     For specific code, see the <code>ASYNC_SubprocVecEnv</code> class in <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py</code>.
     Also, see the <code>SubprocVecEnv_TS</code> class in <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py</code>.
 </div>
-</br><p><strong>Limitations of SubprocVecEnv</strong></p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Stable Baselines3:</p></li>
-</ol>
+</br><p><strong>Existing Reinforcement Learning Library Parallel Class Features and Modifications in This Project</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The <strong>reset</strong> action is executed for <strong>all environments</strong>.</p></li>
-<li><p>After <strong>step</strong>, it determines whether to perform <strong>reset</strong>, which may result in <strong>step</strong> and <strong>reset</strong> being executed in the same cycle.</p></li>
+<li><p>Existing reinforcement learning libraries directly compatible with gym environments, such as the <code class="code docutils literal notranslate"><span class="pre">stable-baselines3</span></code> and <code class="code docutils literal notranslate"><span class="pre">tianshou</span></code> libraries, provide the parallel environment class <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> , allowing users to directly encapsulate gym environments into parallel environments.</p></li>
+<li><p>The above-mentioned <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> environment class checks whether to execute <code class="docutils literal notranslate"><span class="pre">reset</span></code> immediately after executing <code class="docutils literal notranslate"><span class="pre">step</span></code>, which may cause the <code class="docutils literal notranslate"><span class="pre">step</span></code> and <code class="code docutils literal notranslate"><span class="pre">reset</span></code> to be executed in the same cycle.</p></li>
+<li><p>Modification in this project: Align each action to maintain synchronization of actions across environments.</p></li>
+<li><p>The <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> class from the <code class="docutils literal notranslate"><span class="pre">stable-baselines3</span></code> library is modified to the <code class="docutils literal notranslate"><span class="pre">Async_SubprocVecEnv</span></code> class, and the <code class="docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> and <code class="docutils literal notranslate"><span class="pre">Collector</span></code> classes from the <code class="docutils literal notranslate"><span class="pre">tianshou</span></code> library are modified to <code class="docutils literal notranslate"><span class="pre">SubprocVecEnv_TS</span></code> and <code class="docutils literal notranslate"><span class="pre">TS_Collector</span></code> classes, respectively.</p></li>
+<li><p>The differences between the original and modified implementations are shown in the figure below.</p></li>
 </ul>
 </div></blockquote>
-<ol class="arabic simple" start="2">
-<li><p>Tianshou:</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><p>The <strong>reset</strong> action is executed for <strong>all environments</strong>.</p></li>
-<li><p>After <strong>step</strong>, it will execute <strong>step</strong> for <strong>all environments</strong>, making it impossible to perform <strong>step</strong> and <strong>reset</strong> in different environments during the same cycle.</p></li>
-</ul>
-</div></blockquote>
-</div></blockquote>
-<p><strong>Modifications in Async_SubprocVecEnv and SubprocVecEnv_TS</strong></p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Isolated the <strong>reset</strong> action, only performing <strong>reset</strong> for a single environment.</p></li>
-<li><p>Aligned each action to maintain synchronization of actions across environments.</p></li>
-</ul>
-</div></blockquote>
-<img src="../_static/image/async_subprocvecenv.png" alt="Comparison of Async_SubprocVecEnv before and after modifications">
-<center>Comparison of Async_SubprocVecEnv and SubprocVecEnv_TS after modifications compared to baselines3 and tianshou methods</center></br></br>
+<img src="../_static/image/subprovecenv.png" alt="Comparison of Async_SubprocVecEnv before and after modifications">
+<center>comparison diagram of SubprocVecEnv before and after modification</center></br></br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br></section>
@@ -530,20 +515,8 @@
 </br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     For specific code, see the <code>Envs</code> class in <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>.
 </div>
-</br><section id="part-1-design-plan">
-<h3>Part 1 Design Plan<a class="headerlink" href="#part-1-design-plan" title="Link to this heading"></a></h3>
-<p><strong>Design Implementation Plan</strong></p>
-<blockquote>
-<div><p>Using Python’s <strong>asyncio</strong> provided coroutine, concurrently invoking the sampling methods of the respective <strong>env</strong> environment base classes for different <strong>agents</strong> using a thread pool, without blocking the main thread while waiting for the return values from individual environments. The return values (states, rewards, done flags) from different environments are packaged into vectors and sent to the algorithm side, while unpacking the action vectors provided by the algorithm side to different environments and automatically determining based on the done value whether the corresponding environment should perform <strong>step</strong> or <strong>reset</strong>.</p>
-</div></blockquote>
-<img src="../_static/image/多线程并行.png" alt="Parallel Environment Illustration">
-<center>Illustration of Parallel Environments</center>
-</br></br>
-<hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
-</br>
-</br></section>
-<section id="part-2-envs">
-<h3>Part 2 Envs()<a class="headerlink" href="#part-2-envs" title="Link to this heading"></a></h3>
+</br><section id="part-1-envs">
+<h3>Part 1 Envs()<a class="headerlink" href="#part-1-envs" title="Link to this heading"></a></h3>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     For specific code, see the <code>Envs</code> class in <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>.
 </div>
@@ -565,16 +538,20 @@
 </dd>
 </dl>
 </section>
-<section id="part-4-performance-evaluation-metrics">
-<h3>Part 4 Performance Evaluation Metrics<a class="headerlink" href="#part-4-performance-evaluation-metrics" title="Link to this heading"></a></h3>
-<p><strong>1. Cumulative Reward CR</strong></p>
+</section>
+<section id="performance-evaluation-metrics">
+<h2>4 Performance Evaluation Metrics<a class="headerlink" href="#performance-evaluation-metrics" title="Link to this heading"></a></h2>
+<section id="cumulative-reward-cr">
+<h3>1. Cumulative Reward CR<a class="headerlink" href="#cumulative-reward-cr" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>This metric uses cumulative rewards to assess performance, calculated using the following formula:</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
 </br><p>In the above formula, <span class="math notranslate nohighlight">\(r_{ct}\)</span> represents the continuous reward value at step <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(E_l\)</span> represents the trajectory length.
 For a graphical representation of continuous reward calculation, see <a class="reference internal" href="../Webots_Simulator/Simulator.html#continuous-reward-diagram-for-tracking-object"><span class="std std-ref">Continuous Reward Diagram for Object Tracking</span></a>.</p>
-<p><strong>2. Tracking Success Rate TSR</strong></p>
+</section>
+<section id="tracking-success-rate-tsr">
+<h3>2. Tracking Success Rate TSR<a class="headerlink" href="#tracking-success-rate-tsr" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>This metric uses discrete rewards to evaluate the proportion of successful tracking, calculated using the following formula:</p>
 </div></blockquote>
@@ -586,15 +563,15 @@ For a graphical representation of discrete reward calculation, see <a class="ref
 </br>
 </br><p>Reference:</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id4" role="doc-footnote">
+<aside class="footnote brackets" id="id6" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
-<aside class="footnote brackets" id="id5" role="doc-footnote">
+<aside class="footnote brackets" id="id7" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
 </aside>
-<aside class="footnote brackets" id="id6" role="doc-footnote">
+<aside class="footnote brackets" id="id8" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
 </aside>
