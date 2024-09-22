@@ -352,6 +352,8 @@ if __name__ == '__main__':
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "discrete"
             data["Reward_Config"]["view_range"] = 1
+        else:
+            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['AR','TSR']")
     elif MODE == "train":
         data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False

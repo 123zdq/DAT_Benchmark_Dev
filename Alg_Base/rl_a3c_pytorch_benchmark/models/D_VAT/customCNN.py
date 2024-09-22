@@ -47,7 +47,8 @@ class CustomCNN(nn.Module):
         # t = time.time()
         observations = th.tensor(observations).to(self.device) # ndarray2tensor
         input_batch = self.preprocess(observations)
-
+        if input_batch.dim() == 4:  # expand dim=0 when test mode
+            input_batch = input_batch.unsqueeze(0)
         b, s, c, w, h = input_batch.shape
         x0 = input_batch.view(-1, c, w, h)
 

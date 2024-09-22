@@ -922,10 +922,11 @@ if __name__ == "__main__":
         if args.Test_Mode == "AR":
             data["Reward_Config"]["reward_mode"] = "continuous"
             data["Reward_Config"]["view_range"] = 1
-        if args.Test_Mode == "TSR":
+        elif args.Test_Mode == "TSR":
             data["Reward_Config"]["reward_mode"] = "discrete"
             data["Reward_Config"]["view_range"] = 1
-
+        else:
+            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['AR','TSR']")
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:

@@ -21,6 +21,8 @@ from envs.async_vecenv_ts import SubprocVectorEnv_TS,TS_Collector
 import subprocess, time
 import argparse
 from denseMlpPolicy import create_sacd_policy,get_action
+from envs.gym_envs import ENV_CONF
+
 
 def test_tianshou_env(args):
 
@@ -131,6 +133,11 @@ def DVAT_train(args):
     
     sacd_policy = create_sacd_policy(actor_obs_space=actor_obs_space,action_space=action_space,obs_shape_critic=critic_obs_space.shape[0],action_shape=int(action_space.n))
     
+    # check structure of sacd_policy
+    # print(sacd_policy.actor)  # actor
+    # print(sacd_policy.critic)  # critic1
+    # print(sacd_policy.critic2)  # critic2
+
     ## load model
     Load_Model = not args.New_Train
 
@@ -179,7 +186,7 @@ def DVAT_train(args):
             # print(type(batch_buffer["obs"]["critic_obs"])) #<class 'numpy.ndarray'>
             # print(type(batch_buffer["obs_next"]["actor_obs"])) #<class 'numpy.ndarray'>
             # print(type(batch_buffer["obs_next"]["critic_obs"])) #<class 'numpy.ndarray'>
-
+                
             batch_buffer.act = torch.tensor(batch_buffer.act).to(device) if isinstance(batch_buffer.act, np.ndarray) else batch_buffer.act
             batch_buffer.obs = {k: torch.tensor(v).to(device) if isinstance(v, np.ndarray) else v for k, v in batch_buffer.obs.items()}
             batch_buffer.obs_next = {k: torch.tensor(v).to(device) if isinstance(v, np.ndarray) else v for k, v in batch_buffer.obs_next.items()}
@@ -202,7 +209,15 @@ def DVAT_train(args):
                 simulator.kill()
 
 def DVAT_test(args):
-    env = DVAT_ENV(arg_worker=1, process_idx=0, end_reward=False, log_dir=None, obs_buffer_len=3)
+
+    simulator = subprocess.Popen(
+        ["webots --no-rendering --mode=fast ../../Webots_Simulation/traffic_project/worlds/" + args.map],
+        shell=True,
+    )
+    time.sleep(args.delay)
+
+    # test mode test 1 agent per time
+    env = DVAT_ENV(arg_worker=1, process_idx=0, end_reward=False, log_dir=None, obs_buffer_len=3,train=False)
 
     # create sacd policy
     sacd_policy = create_sacd_policy(
@@ -230,14 +245,43 @@ def DVAT_test(args):
 
     # run test
     while len(total_reward_list) < args.test_length:
-        if not done:
-            action = get_action(sacd_policy,state)  # 通过模型选择动作
-            state, reward, done, truncated, info = env.step(action)
-            episode_reward += reward
-        if done and episode_reward != 0:
-            total_reward_list.append(episode_reward)
-            episode_reward = 0
-            state, _ = env.reset()
+        try:
+            if not done:
+                action = get_action(sacd_policy,state)  # 通过模型选择动作
+                state, reward, done, _, _ = env.step(action)
+                episode_reward += reward
+            if done:
+                if episode_reward != 0:
+                    if args.Test_Mode == "AR":
+                        total_reward_list.append(episode_reward)
+                        real_matrics = episode_reward
+                    elif args.Test_Mode == "TSR":
+                        with open(
+                            ENV_CONF, "r"
+                        ) as file:
+                            data_env = json.load(file)
+                        total_steps = data_env["Train_Total_Steps"]
+                        control_freq = data_env["Control_Frequence"]
+                        max_reward = total_steps*control_freq/500
+                        real_matrics = episode_reward/max_reward
+                        total_reward_list.append(real_matrics)
+                    print(f"finish episode:{len(total_reward_list)} episode_reward:{episode_reward} reward:{real_matrics}")
+                    episode_reward = 0
+                    done=False
+                    state, _ = env.reset()
+                else:
+                    state, _ = env.reset()
+                    episode_reward = 0
+                    done=False
+        except Exception as e:
+            print(f"An error Occur:{e}")
+        finally:
+            simulator.terminate()
+            try:
+                simulator.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                simulator.kill()
+
 
     # output xlsx file
     total_reward_list.append(
@@ -337,6 +381,13 @@ if __name__ == "__main__":
         default=False,
         help="Whether need verbose",
     )
+    parse.add_argument(
+        "-TM",
+        "--Test_Mode",
+        type=str,
+        default="AR",
+        help="Choose Metrics of performence: AR or TSR",
+    )
     args = parse.parse_args()
 
     if args.port == -1:
@@ -403,6 +454,7 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
         
+        data["No_Reward_Done_Steps"] = 100
         if args.Test_Mode == "AR":
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "continuous"
@@ -411,7 +463,9 @@ if __name__ == "__main__":
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "discrete"
             data["Reward_Config"]["view_range"] = 1
-
+        else:
+            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['AR','TSR']")
+        
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:

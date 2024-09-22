@@ -234,8 +234,6 @@ class DVAT_SACDPolicy(DiscreteSACPolicy):
         )
     
 
-
-# To DO:修改成能够兼容非对称的版本
 def create_sacd_policy(actor_obs_space:gymnasium.spaces.Box,action_space:gymnasium.spaces.Box,obs_shape_critic:int, action_shape:int, lr=3e-4, gamma=0.99, tau=0.005, alpha=0.2)->DVAT_SACDPolicy:
     # check variable type
     assert isinstance(actor_obs_space,gymnasium.spaces.Box)
@@ -277,6 +275,9 @@ def get_action(sacd_policy:DVAT_SACDPolicy, state):
     # turn state into Batch
     state_batch = Batch(obs=state)
     
+    # add info to Batch object
+    if "info" not in state_batch:
+        state_batch.info = {}
     # get action by sacd_policy.forward
     sacd_policy.deterministic_eval = True # use deterministic action instead of sample
     result = sacd_policy.forward(state_batch)

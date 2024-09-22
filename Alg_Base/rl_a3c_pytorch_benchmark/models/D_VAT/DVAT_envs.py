@@ -17,7 +17,7 @@ from envs.environment import general_env
 from envs.gym_envs import CONF,ENV_CONF
 
 class DVAT_ENV(gymnasium.Env):
-    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3,use_tb:bool=True) -> None:
+    def __init__(self,arg_worker:int=1,conf_path:str=CONF,env_conf_path:str=ENV_CONF,process_idx:int=0,end_reward:bool = False,log_dir:str=None,obs_buffer_len:int=3,use_tb:bool=True,train:bool=True) -> None:
         super(DVAT_ENV,self).__init__()
 
         ## Read Json files
@@ -47,7 +47,8 @@ class DVAT_ENV(gymnasium.Env):
         
         ## Config 
         self.end_reward = end_reward
-        self.test_agent = process_idx == arg_worker-1
+        self.test_agent = (process_idx == arg_worker-1) and train
+        # only in train mode:read num_step.txt and open tb_logger
         if self.test_agent:
             assert log_dir != None
             self.num_test_dir = os.path.dirname(log_dir)
@@ -64,6 +65,7 @@ class DVAT_ENV(gymnasium.Env):
                 with open(self.num_test,"w") as file:
                     file.write("0")
             self.init_reward_idx = deepcopy(self.reward_idx)
+            self.episode_steps = 0
 
             ## tb logger
             self.use_tb = use_tb
@@ -84,19 +86,24 @@ class DVAT_ENV(gymnasium.Env):
 
         ## Update tb_logger and num_test.txt file
         if self.test_agent:
+            self.reward_idx += self.episode_steps
             if self.reward_idx != self.init_reward_idx and self.use_tb:
                 self.tb_logger.add_scalar('Reward', self.total_reward, self.reward_idx)
                 self.total_reward = 0
-            self.reward_idx += 1
             with open(self.num_test,"w") as file:
                 file.write(str(self.reward_idx))
             print(f"Write: {self.reward_idx}")
+            self.episode_steps = 0
         return self.actual_state,reset_info
     
     def step(self, action):
         info = {}
         self.state,reward,done,SuppleInfo = self.env.step(action=action)
         
+        ## update episode steps
+        if self.test_agent:
+            self.episode_steps += 1
+
         ## Manage Actor/Critic Observation
         curr_img = self.state["image"]
         curr_vec = self.state["vector"]
