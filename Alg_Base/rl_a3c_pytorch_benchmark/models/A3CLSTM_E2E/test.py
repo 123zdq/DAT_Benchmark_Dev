@@ -107,7 +107,7 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
             num_step += 1
             reward_sum += player.reward
             if player.done:
-                num_tests += num_step*args.workers
+                num_tests += num_step
                 num_episode += 1
                 print(f"num_episode: {num_episode}")
                 reward_total_sum += reward_sum
