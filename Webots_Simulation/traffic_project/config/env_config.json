@@ -3,7 +3,7 @@
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
-    "Config_Agen_Num_Port": 51419,
+    "Config_Agen_Num_Port": 60489,
     "Train_Total_Steps": 1500,
     "Init_No_Done_Steps": 100,
     "No_Reward_Done_Steps": 10000,
@@ -94,12 +94,12 @@
         "direction_random_min": -3.1415926535,
         "horizon_bias_random": false,
         "horizon_bias_multilateral": true,
-        "horizon_bias_fixed": 5,
+        "horizon_bias_fixed": 0,
         "horizon_bias_random_max": 4.5,
         "horizon_bias_random_min": 2.5,
         "verticle_bias_random": false,
         "verticle_bias_multilateral": true,
-        "verticle_bias_fixed": 5,
+        "verticle_bias_fixed": 0,
         "verticle_bias_random_max": 4.5,
         "verticle_bias_random_min": 2.5
     }
