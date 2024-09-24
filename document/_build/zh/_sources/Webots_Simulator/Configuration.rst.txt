@@ -165,6 +165,11 @@ cityStreet
             "verticle_bias_random_min": 2.5
         }
         }
+    
+
+    注意对于有些的地图，部分参数需要修改。
+        * village-day: :code:`"start_time_bias_ms": 510` 改为 :code:`"start_time_bias_ms": 1510`,
+        * desert-day: :code:`"start_time_bias_ms": 510` 改为 :code:`"start_time_bias_ms": 1510`
 
 simpleway
 -----------------------
