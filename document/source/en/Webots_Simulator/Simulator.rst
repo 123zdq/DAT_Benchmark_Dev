@@ -350,7 +350,7 @@ Effective only when :code:`Simulation_Mode` is not “video”.
    - :code:`cw_omega` ：Clockwise rotation speed of the tracker’s random action (rad/s).
    - :code:`ccw_omega` ：Counterclockwise rotation speed of the tracker’s random action (rad/s).
 
-Tracker Control Parameter Configuration
+Tracker control parameter configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    This set of parameters is used to randomize the tracking properties of the tracker itself.
@@ -413,6 +413,43 @@ Tracker Control Parameter Configuration
 
    - :code:`horizon_bias_random` : Horizontal offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts to the left; if negative, the object shifts to the right. Other parameters are the same as above.
    - :code:`verticle_bias_random` : Vertical offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts upward; if negative, the object shifts downward. Other parameters are the same as above.
+
+Environment parameters configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: json
+
+   "Env_Params": {
+        "background_luminosity_random": false,
+        "bgl_incremental": 0,
+        "bgl_random_max": 1,
+        "bgl_random_min": 0,
+        "backgroundLight_luminosity_random": false,
+        "bgLl_incremental": 0,
+        "bgLl_random_max": 1,
+        "bgLl_random_min": 0,
+        "foggy_use_default": true,
+        "foggy_visibility_range_random": false,
+        "foggy_visibility_range_fixed": 400,
+        "foggy_visibility_range_max": 1000,
+        "foggy_visibility_range_min": 300
+   }
+
+**参数说明**
+
+   - :code:`background_luminosity_random` : Randomization of the background luminosity.
+   - :code:`bgl_incremental` : If the above parameter is false, add this value to the brightness in the original environment. (incremental value)
+   - :code:`bgl_random_max` : Maximum background luminosity. The parameter range is limited to :math:`[0,1]`
+   - :code:`bgl_random_min` : Minimum background luminosity. The parameter range is limited to :math:`[0,1]`
+   - :code:`backgroundLight_luminosity_random` : Randomization of the background light luminosity。
+   - :code:`bgLl_incremental` : If the above parameter is false, add this value to the brightness in the original environment. (incremental value)
+   - :code:`bgLl_random_max` : Maximum background light luminosity. The parameter range is limited to :math:`[0,1]`
+   - :code:`bgLl_random_min` : Minimum background light luminosity. The parameter range is limited to :math:`[0,1]`
+   - :code:`foggy_use_default` : Usage of default visibility range。If the above parameter is true, none of the following parameters take effect, the map's default visibility is used.
+   - :code:`foggy_visibility_range_random` : Randomization of the foggy visibility range。(Only works on foggy property maps)
+   - :code:`foggy_visibility_range_fixed` : If the above parameter is false, set the visibility range to this fixed value.
+   - :code:`foggy_visibility_range_max` : Maximum foggy visibility range. The parameter range is limited to :math:`[0,inf]`
+   - :code:`foggy_visibility_range_min` : Minimum foggy visibility range. The parameter range is limited to :math:`[0,inf]`
 
 Configuration Parameter Recommendations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -78,13 +78,13 @@ Viewpoint {
   position 105.76947845836163 105.35328930504288 73.10395556277496
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
   skybox FALSE
   skyColor [
     0.752941 0.74902 0.737255
   ]
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -100,7 +100,7 @@ DEF land Floor {
     metalness 0
   }
 }
-Fog {
+DEF fog Fog {
   fogType "EXPONENTIAL"
   visibilityRange 400
 }

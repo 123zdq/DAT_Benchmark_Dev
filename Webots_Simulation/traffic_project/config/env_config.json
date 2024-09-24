@@ -1,5 +1,5 @@
 {
-    "Simulation_Mode": "train",
+    "Simulation_Mode": "demo",
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",
@@ -31,7 +31,7 @@
         "view_range": 1
     },
     "Sumo_Params": {
-        "rou_update": true,
+        "rou_update": false,
         "max_sumo_car": 40,
         "fixed_car_group_num": false,
         "car_group_num": 10,
@@ -100,7 +100,22 @@
         "verticle_bias_random": false,
         "verticle_bias_multilateral": true,
         "verticle_bias_fixed": 0,
-        "verticle_bias_random_max": 4.5,
-        "verticle_bias_random_min": 2.5
+        "verticle_bias_random_max": 5.5,
+        "verticle_bias_random_min": 3.5
+    },
+    "Env_Params": {
+        "background_luminosity_random": false,
+        "bgl_incremental": 0,
+        "bgl_random_max": 1,
+        "bgl_random_min": 0,
+        "backgroundLight_luminosity_random": false,
+        "bgLl_incremental": 0,
+        "bgLl_random_max": 1,
+        "bgLl_random_min": 0,
+        "foggy_use_default": true,
+        "foggy_visibility_range_random": false,
+        "foggy_visibility_range_fixed": 400,
+        "foggy_visibility_range_max": 1000,
+        "foggy_visibility_range_min": 300
     }
 }

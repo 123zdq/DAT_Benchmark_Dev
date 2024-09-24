@@ -61,12 +61,12 @@ Viewpoint {
   position 1378.857101447196 2410.3867005158413 1165.396901690098
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
   texture "empty_office"
   luminosity 0.3
   skybox FALSE
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
   luminosity 0.3
 }
 DEF land Floor {

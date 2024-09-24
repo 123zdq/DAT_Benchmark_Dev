@@ -61,17 +61,17 @@ Viewpoint {
   position 91.66134124804395 96.24957135667063 23.44367504775672
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
   texture "noon_stormy_empty"
   skybox FALSE
   skyColor [
     0.752941 0.74902 0.737255
   ]
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
   texture "noon_stormy_empty"
 }
-Fog {
+DEF fog Fog {
   fogType "EXPONENTIAL"
   visibilityRange 500
 }

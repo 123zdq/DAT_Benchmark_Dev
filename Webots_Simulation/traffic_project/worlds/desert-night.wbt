@@ -66,11 +66,11 @@ Viewpoint {
   position 185.78678186513676 278.73852270165514 143.2919117251536
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
   texture "dawn_cloudy_empty"
   luminosity 0.3
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
   texture "dusk"
   luminosity 0.7
 }

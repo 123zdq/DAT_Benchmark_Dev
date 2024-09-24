@@ -61,12 +61,12 @@ Viewpoint {
   position 861.3311021824501 669.6431548954204 436.5872152274163
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
   texture "stadium"
   luminosity 0.2
   skybox FALSE
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
   luminosity 0.1
 }
 DEF land Floor {

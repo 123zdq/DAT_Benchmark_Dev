@@ -61,11 +61,11 @@ Viewpoint {
   position 86.41196865663476 43.70271323406333 32.27752812814747
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
 }
-Fog {
+DEF fog Fog {
   fogType "EXPONENTIAL"
   visibilityRange 400
 }

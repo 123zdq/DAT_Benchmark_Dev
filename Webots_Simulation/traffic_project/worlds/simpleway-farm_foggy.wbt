@@ -61,9 +61,9 @@ Viewpoint {
   position 115.28428696435223 121.12998150390366 81.83270966483151
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
 }
 DEF land Floor {
   translation 0 0 -0.1
@@ -1649,7 +1649,7 @@ Robot {
   customData "local"
   supervisor TRUE
 }
-Fog {
+DEF fog Fog {
   fogType "EXPONENTIAL"
   visibilityRange 400
 }

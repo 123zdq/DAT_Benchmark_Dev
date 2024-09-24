@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-08 20:10:58
+LastEditTime: 2024-09-24 18:20:41
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -35,7 +35,6 @@ System = platform.system()
 
 # create the Robot instance.
 robot = Supervisor()
-run_mode = robot.getCustomData()
 
 # get complete path of world file
 world_path = robot.getWorldPath()
@@ -47,6 +46,30 @@ with open('../../config/env_config.json', 'r') as file:
 with open('../../config/env_config_backup.json', 'r') as file:
     configData_backup = json.load(file)
     file.close()
+    
+# config env params
+if configData["Sumo_Params"]["fixed_seed"] == True:
+    random.seed(configData["Sumo_Params"]["random_seed"])
+weatherType = world_path[world_path.find("-")+1:]
+if weatherType == "foggy.wbt" and configData["Env_Params"]["foggy_use_default"] == False:
+    if configData["Env_Params"]["foggy_visibility_range_random"] == True:
+        visible_range = random.uniform(configData["Env_Params"]["foggy_visibility_range_min"],configData["Env_Params"]["foggy_visibility_range_min"])
+    else:
+        visible_range = configData["Env_Params"]["foggy_visibility_range_fixed"]
+    robot.getFromDef("fog").getField("visibilityRange").setSFFloat(float(visible_range))
+    
+if configData["Env_Params"]["background_luminosity_random"] == True:
+    bgl = random.uniform(configData["Env_Params"]["bgl_random_min"],configData["Env_Params"]["bgl_random_max"])
+else:
+    bgl = robot.getFromDef("tbg").getField("luminosity").getSFFloat() + configData["Env_Params"]["bgl_incremental"]
+robot.getFromDef("tbg").getField("luminosity").setSFFloat(float(bgl))
+
+if configData["Env_Params"]["backgroundLight_luminosity_random"] == True:
+    bgLl = random.uniform(configData["Env_Params"]["bgLl_random_min"],configData["Env_Params"]["bgLl_random_max"])
+else:
+    bgLl = robot.getFromDef("tbgl").getField("luminosity").getSFFloat() + configData["Env_Params"]["bgLl_incremental"]
+robot.getFromDef("tbgl").getField("luminosity").setSFFloat(float(bgLl))
+    
     
 # safety check
 if configData["Sumo_Params"]["rou_update"] == False:

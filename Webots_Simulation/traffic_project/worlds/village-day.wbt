@@ -68,9 +68,9 @@ Viewpoint {
   position -628.7764025406374 438.0664772734688 368.50481934250854
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
 }
 DEF land Floor {
   translation 0 0 -0.1

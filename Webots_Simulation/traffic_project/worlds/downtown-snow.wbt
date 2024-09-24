@@ -68,13 +68,13 @@ Viewpoint {
   position -420.8718496950652 1144.944411697925 1173.7277522196755
   near 3
 }
-TexturedBackground {
+DEF tbg TexturedBackground {
   skybox FALSE
   skyColor [
     0.6 0.756863 0.945098
   ]
 }
-TexturedBackgroundLight {
+DEF tbgl TexturedBackgroundLight {
 }
 DEF land Floor {
   translation 0 0 -0.1
