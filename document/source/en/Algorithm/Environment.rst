@@ -50,7 +50,7 @@ Environment Wrapping
     </br>
     </br>
 
-  This project provides three forms of Environment (Path: :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs`): the base Environment class, the Environment class wrapped by OpenAI Gym (Gynasium), and the Environment class we independently implemented in an asynchronous parallel framework.
+  This project provides three forms of Environment (Path: :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs`): the base Environment class, the Environment class wrapped by OpenAI Gym (Gynasium), and our own implementation of the parallel Environment class.
 
 The relationships among these three Environment types are shown in the figure below:
 
@@ -101,11 +101,11 @@ Part 1 Interface Details
     * :code:`process_state(function)`: Function for post-processing the images
     * :code:`arg_worker(int)`: System parallelism count
     * :code:`process_idx(int)`: Current environment's parallel index
-    * :code:`Other_State(bool)`: Whether to enable additional state options on the simulator side: :code:`Other_State`
-    * :code:`CloudPoint(bool)`: Whether to enable the point cloud option on the simulator side: :code:`CloudPoint`
-    * :code:`RewardParams(bool)`: Whether to enable additional reward parameters options on the simulator side: :code:`RewardParams`
+    * :code:`Other_State(bool)`: Whether to enable additional state options on the simulator side: :code:`Other_State`, detail see: :ref:`Parameter configuration of the simulation environment`
+    * :code:`CloudPoint(bool)`: Whether to enable the point cloud option on the simulator side: :code:`CloudPoint`, detail see: :ref:`Parameter configuration of the simulation environment`
+    * :code:`RewardParams(bool)`: Whether to enable additional reward parameters options on the simulator side: :code:`RewardParams`, detail see: :ref:`Parameter configuration of the simulation environment`
     * :code:`port_process(int)`: Port specified for data transmission between processes
-    * :code:`end_reward(bool)`: Whether to enable additional end rewards
+    * :code:`end_reward(bool)`: Whether to enable additional end rewards(additional penalties if end reward is 0; additional rewards if end reward is not 0)
     * :code:`end_reward_list(list)`: Additional end rewards list (valid only when :code:`end_reward` is enabled)
     * :code:`scene(str)`: Determines the current experimental scene (valid only when :code:`auto_start` is enabled)
 
@@ -116,8 +116,10 @@ Part 1 Interface Details
       * Valid weathers include: :code:`["day", "night", "foggy", "snow", None]`
 
     * :code:`auto_start(bool)`: Whether to automatically start the simulator
+    * :code:`delay(int)`: Configure how long the system waits for the map to load, only works if :code:`auto_start(bool)` is enabled.
     * :code:`Control_Frequence(int)`: Specifies the system control frequency
     * :code:`reward_type(str)`: Specifies the type of reward (can choose different baseline algorithms for reward)
+    * :code:`verbose(bool)`: Configure the environment to output log files or not
 
     .. raw:: html
 
@@ -233,13 +235,13 @@ Part 2 Configuration File
     * :code:`"State_size"`: Size of the images output by the environment.
     * :code:`"State_channel"`: Number of channels in the images output by the environment (=3 for RGB images, =1 for grayscale images).
     * :code:`"Norm_Type"`: Normalization method for the images (default normalization to :code:`[0,1]`).
-    * :code:`"Forward_Speed"`: Speed corresponding to the agent's forward action (m/s).
-    * :code:`"Backward_Speed"`: Speed corresponding to the agent's backward action (m/s).
-    * :code:`"Left_Speed"`: Speed corresponding to the agent's left movement action (m/s).
-    * :code:`"Right_Speed"`: Speed corresponding to the agent's right movement action (m/s).
-    * :code:`"CW_omega"`: Speed corresponding to the agent's clockwise action (rad/s).
-    * :code:`"CCW_omega"`: Speed corresponding to the agent's counterclockwise action (rad/s).
-    * :code:`"Control_Frequence"`: Frequency at which the agent operates (the simulator runs at 500 Hz, while the algorithm side generally runs at 50/100 Hz).
+    * :code:`"Forward_Speed"`: Speed corresponding to the agent's forward action ( :math:`m/s`).
+    * :code:`"Backward_Speed"`: Speed corresponding to the agent's backward action ( :math:`m/s`).
+    * :code:`"Left_Speed"`: Speed corresponding to the agent's left movement action ( :math:`m/s`).
+    * :code:`"Right_Speed"`: Speed corresponding to the agent's right movement action ( :math:`m/s`).
+    * :code:`"CW_omega"`: Speed corresponding to the agent's clockwise action ( :math:`rad/s`).
+    * :code:`"CCW_omega"`: Speed corresponding to the agent's counterclockwise action ( :math:`rad/s`).
+    * :code:`"Control_Frequence"`: Frequency at which the agent operates (the simulator runs at 500 Hz, while the algorithm side generally runs at 125 Hz).
     * :code:`"port_process"`: Port specified for data transmission between processes.
     * :code:`"end_reward"`: Whether to enable additional end rewards.
     * :code:`"end_reward_list"`: List of additional end rewards (valid only when :code:`end_reward` is enabled).
@@ -251,7 +253,7 @@ Part 2 Configuration File
     * :code:`"RewardParams"`: Whether to enable additional reward parameters options on the simulator side.
     * :code:`"RewardType"`: Specifies the type of reward (can choose different baseline algorithms for reward).
 
-      * Includes :code:`"default", "E2E", "CVAT", "DVAT"`, corresponding to :ref:`Built-in Reward`, [1]_, [2]_, [3]_
+      * Includes :code:`"default", "E2E", "CVAT", "DVAT"`, corresponding to :ref:`Built-in Reward`, [1]_, [2]_, [3]_ reward setting
 
     * :code:`"verbose"(bool)`: Configures whether the environment outputs log files.
     * :code:`"delay"(int)`: Configures the duration the system waits for the map to load.
@@ -448,9 +450,9 @@ Part3 Parallel Environment Encapsulation
 
   * Existing reinforcement learning libraries directly compatible with gym environments, such as the :code:`stable-baselines3` and :code:`tianshou` libraries, provide the parallel environment class :code:`SubprocVecEnv` , allowing users to directly encapsulate gym environments into parallel environments.
   
-  * The above-mentioned :code:`SubprocVecEnv` environment class checks whether to execute ``reset`` immediately after executing ``step``, which may cause the ``step`` and :code:`reset` to be executed in the same cycle.
+  * The above-mentioned :code:`SubprocVecEnv` environment class checks whether to execute ``reset`` immediately after executing ``step``, which may cause the ``step`` and :code:`reset` to be executed in the same cycle.(Not strictly aligned with :code:`step` and :code:`reset` as required by the project environment.)
 
-  * Modification in this project: Align each action to maintain synchronization of actions across environments.
+  * Modification in this project: Strictly align :code:`step` with :code:`reset` to keep individual environment operations synchronized.
 
   * The :code:`SubprocVecEnv` class from the ``stable-baselines3`` library is modified to the ``Async_SubprocVecEnv`` class, and the ``SubprocVecEnv`` and ``Collector`` classes from the ``tianshou`` library are modified to ``SubprocVecEnv_TS`` and ``TS_Collector`` classes, respectively.
 
@@ -503,7 +505,7 @@ Part 4 Interface Invocation
   </div>
   </br>
 
-If you want to quickly test whether the modifications to the above environment classes are successful, you can use the following code:
+If you wish to quickly test whether the implementation of the above environment class is correct, you can use the following code:
 
   1. Single process (using only gym environment)
 
@@ -587,13 +589,7 @@ Part 1 Envs()
 **Input Parameters:**
   * :code:`num_envs(int)`: Represents the concurrency level n.
 
-  Supports two initialization methods:
-
-    :code:`env_mk` or :code:`env_list`
-
-    * :code:`env_list(list(env))`: Already constructed n individual environments, stored in a list, passed to env_list; to obtain a list of our default environments, pass it to env_list using the GE(n) function defined in the same code file.
-
-    * :code:`env_mk` :code:`env_mk_args`: Environments have not been constructed; :
+  * :code:`env_list(list(env))`: Initialize the list returned by the :code:`GE(n)` function by storing a number of pre-constructed environment classes in the list
 
   * :code:`logs_show(bool)` ：Whether to collect reward data in one of the environments to draw a training curve
 
@@ -665,14 +661,14 @@ Part2 Data format changes before and after encapsulation
 1. Cumulative Reward CR
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  This metric uses cumulative rewards to assess performance, calculated using the following formula:
+    The cumulative reward uses continuous rewards, and a cumulative calculation is performed to evaluate the performance of the intelligent body in keeping the target at the center of the image, as shown in the following formula:
 
 .. raw:: html
 
     <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
     </br>
 
-In the above formula, :math:`r_{ct}` represents the continuous reward value at step :math:`t`, and :math:`E_l` represents the trajectory length.
+In the above formula, :math:`r_{ct}` represents the continuous reward value at step :math:`t`, :math:`E_{ml}` represents the maximum trajectory length, and :math:`E_t` represents the length of this trajectory.
 For a graphical representation of continuous reward calculation, see :ref:`Continuous Reward Diagram for Tracking Object`.
 
 2. Tracking Success Rate TSR
@@ -685,7 +681,7 @@ For a graphical representation of continuous reward calculation, see :ref:`Conti
    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
    </br>
 
-In the above formula, :math:`r_{dt}` represents the discrete reward value at step :math:`t`, :math:`E_{ml}` is the maximum step length across batches, and :math:`E_l` represents the length of the current batch.
+In the above formula, :math:`r_{dt}` represents the discrete reward value at step :math:`t`, :math:`E_{ml}` is the maximum step length across batches, and :math:`E_l` represents the length of the current batch. Detail parameters see: :ref:`Built-in reward parameter configuration`
 For a graphical representation of discrete reward calculation, see :ref:`Discrete Reward Diagram for Tracking Object`.
 
 .. raw:: html

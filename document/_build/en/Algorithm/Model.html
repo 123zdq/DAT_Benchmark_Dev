@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Model Construction &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
@@ -67,7 +67,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#log-file">log file</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#baseline3-ppo-cl">Baseline3 PPO+CL</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#baseline3-rppo-cl">Baseline3 RPPO+CL</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id5">Quick-Start</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id6">Program Entry</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#curriculum-learning">Curriculum Learning</a></li>
@@ -155,7 +155,7 @@
 </br><div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 2px solid #CD6839;">
     This project provides algorithm implementations of three baseline methods, namely <code>A3CLSTM-E2E</code> [1], <code>DVAT</code> [2], and <code>RPPO+CL(Ours)</code>.
 </div>
-</br><p>Among these baseline methods, <a class="footnote-reference brackets" href="#id8" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id9" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> and <code class="code docutils literal notranslate"><span class="pre">RPPO+CL(Ours)</span></code> respectively call the three environments implemented in this project <a class="reference internal" href="Environment.html"><span class="doc">Environment Wrapping</span></a>, providing templates for different algorithm implementation needs.</p>
+</br><p>Among these baseline methods, <a class="footnote-reference brackets" href="#id8" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id9" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> and <code class="code docutils literal notranslate"><span class="pre">RPPO+CL(Ours)</span></code> respectively call the three environments implemented in this project( <a class="reference internal" href="Environment.html"><span class="doc">Environment Wrapping</span></a> ), providing templates for different algorithm implementation needs.</p>
 <ul class="simple">
 <li><p>The <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> algorithm calls the underlying environment class ( <a class="reference internal" href="Environment.html#benchenv-multi"><span class="std std-ref">1 Base Environment Class</span></a> )</p></li>
 <li><p>The <code class="code docutils literal notranslate"><span class="pre">DVAT</span></code> algorithm calls the Gym environment class ( <a class="reference internal" href="Environment.html#gymnasium-gym"><span class="std std-ref">2 Gym Environment class</span></a> )</p></li>
@@ -195,7 +195,7 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 <blockquote>
 <div><ul class="simple">
 <li><p>In <code class="code docutils literal notranslate"><span class="pre">train</span></code> mode, a testing process is also provided (e.g., if the program runs with 24 processes, the last process with ID 23 will be used for testing). This process is mainly used for <code class="code docutils literal notranslate"><span class="pre">tensorboard</span></code> visualization during the training process.</p></li>
-<li><p>The <code class="code docutils literal notranslate"><span class="pre">test</span></code> mode is mainly used to test the model weights after training is completed. This mode can also be run in multiple processes, allowing testing of multiple model weights simultaneously.</p></li>
+<li><p>The <code class="code docutils literal notranslate"><span class="pre">test</span></code> mode is mainly used to test the model weights after training is completed. This mode runs in a single process and tests the weights of individual models.</p></li>
 <li><p>The configuration variable for the above modes is the <code class="code docutils literal notranslate"><span class="pre">MODE</span></code> variable.</p></li>
 </ul>
 </div></blockquote>
@@ -210,7 +210,7 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 <li><p><code class="code docutils literal notranslate"><span class="pre">--Freq(int)=125</span></code> : The running frequency of the algorithm side (the environment side runs at 500Hz and is unchangeable), so the default <code class="code docutils literal notranslate"><span class="pre">--Freq(int)=125</span></code> means the environment side transmits data back every 4 steps</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">--delay(int)=20</span></code> : Waiting time for Webots map to load (training can only start normally after the Webots map has been fully loaded)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">--New_Train(bool)=False</span></code> : Whether to start a new training session, default is <code class="code docutils literal notranslate"><span class="pre">--New_Train=False</span></code>, which will load the pre-trained weights from <code class="code docutils literal notranslate"><span class="pre">A3CLSTM_E2E/trained_models/Benchmark.dat</span></code> (if available) for training, and the tensorboard curves will continue from the last training session</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">--Port(int)=-1</span></code> : The communication port between the environment side and the algorithm side, default <code class="code docutils literal notranslate"><span class="pre">--Port=-1</span></code> will randomly use an available port, and manual modification is not recommended</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">--Port(int)=-1</span></code> : The communication port between the environment side and the algorithm side, default <code class="code docutils literal notranslate"><span class="pre">--Port=-1</span></code> will randomly use an available port, and manual <strong>modification is not recommended</strong></p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       <b>2. Environment parameters:</b> Configure the selected environment
@@ -227,7 +227,7 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 <li><p><code class="code docutils literal notranslate"><span class="pre">--save-max(bool)=False</span></code> : Whether to save the model weights when the testing process reaches the highest reward, default is <code class="code docutils literal notranslate"><span class="pre">False</span></code>, meaning only the model weights at the last moment will be saved</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">--model_type(str)=&quot;E2E&quot;</span></code> : Specify the type of model currently being used, if the user implements their own model, they can add the configuration here</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">--save-model-dir(str)=&quot;./models/A3CLSTM_E2E/trained_models/&quot;</span></code> : The path for saving the model</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">--Test_Param(str)=&quot;CityStreet-d&quot;</span></code> : (only enabled when <code class="code docutils literal notranslate"><span class="pre">--Mode(int)=0</span></code>) Specifies which weights to load for testing, default is <code class="code docutils literal notranslate"><span class="pre">--Test_Param=&quot;CityStreet-d&quot;</span></code>, which will load the weights <code class="code docutils literal notranslate"><span class="pre">A3CLSTM_E2E/trained_models/CityStreet-d.dat</span></code> for testing</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">--Test_Param(str)=&quot;CityStreet-d&quot;</span></code> : Specifies which weights to load for testing(only enabled when <code class="code docutils literal notranslate"><span class="pre">--Mode(int)=0</span></code>), default is <code class="code docutils literal notranslate"><span class="pre">--Test_Param=&quot;CityStreet-d&quot;</span></code>, which will load the weights <code class="code docutils literal notranslate"><span class="pre">A3CLSTM_E2E/trained_models/CityStreet-d.dat</span></code> for testing</p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       <b>4. Visualization parameters:</b> Configure parameters related to visualization files
@@ -248,8 +248,6 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 </div>
 </br><ul class="simple">
 <li><p>This mode is mainly used for program debugging and data transmission verification, essentially replacing the terminal <code class="code docutils literal notranslate"><span class="pre">print</span></code> function.</p></li>
-<li><p>The folder contains two main types of log files: <code class="code docutils literal notranslate"><span class="pre">Agent_train${n}.log</span></code> and <code class="code docutils literal notranslate"><span class="pre">Agent${n}.log</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Agent_train${n}.log</span></code> primarily stores parameter information during the training process. For example, if you want to observe the change in the gae value, you can do so in <code class="code docutils literal notranslate"><span class="pre">Agent_train${n}.log</span></code>.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Agent${n}.log</span></code> is mainly used to save the data transmitted from the environment. For example, if you want to observe the custom reward parameters <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code> obtained from the environment, you can view them in this file.</p></li>
 </ul>
 <p><strong>Mode 2: Directly output tensorboard-logger files</strong></p>
@@ -261,7 +259,7 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 <li><p>During multi-process training, this project reserves one process for testing. For example, if the user selects 24 parallel agents, then during the actual training, there will be 23 training processes and 1 testing process. The testing process synchronizes the weights of the shared_model at the beginning of each episode and conducts tests.</p></li>
 <li><p>The data recorded in the <code class="code docutils literal notranslate"><span class="pre">tensorboard-logger</span></code> file is from the testing process, mainly the <code class="code docutils literal notranslate"><span class="pre">value</span></code> during training, which is used to evaluate the training status of the agents.</p></li>
 <li><p>Additionally, if the program is interrupted due to external reasons, this project provides an uninterrupted <code class="code docutils literal notranslate"><span class="pre">tensorboard-logger</span></code> function. It uses <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> to store the current data entry count and continues recording when a new training session starts.</p></li>
-<li><p><strong>Note:</strong> If the user wishes to re-record the training curve, they need to manually set the data in <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> to 0 or directly delete the <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> file.</p></li>
+<li><p><strong>Note:</strong> If the user wishes to re-record the training curve, they need to add <strong>– New_Train</strong> to the command that starts the training.</p></li>
 <li><p>After completing all configurations, simply run the following code to view the <code class="code docutils literal notranslate"><span class="pre">TensorBoard</span></code> visualization records on <code class="code docutils literal notranslate"><span class="pre">localhost:xxxx</span></code>.</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs
@@ -386,8 +384,8 @@ tensorboard<span class="w"> </span>--logdir<span class="w"> </span>DVAT_logs
 </br>
 </br></section>
 </section>
-<section id="baseline3-ppo-cl">
-<h2>Baseline3 PPO+CL<a class="headerlink" href="#baseline3-ppo-cl" title="Link to this heading"></a></h2>
+<section id="baseline3-rppo-cl">
+<h2>Baseline3 RPPO+CL<a class="headerlink" href="#baseline3-rppo-cl" title="Link to this heading"></a></h2>
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     For specific code, see <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code> folder
 </div>
@@ -443,19 +441,22 @@ python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </s
 <h3>Curriculum Learning<a class="headerlink" href="#curriculum-learning" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>Our method adds curriculum learning based on RPPO, and in the first stage of curriculum learning, the agent understands the task under simple settings.</p></li>
+<li><p>Our method adds curriculum learning based on RPPO, and in the first and second stages of curriculum learning, the intelligent experience tracks monochrome and colored cars respectively under simple settings (unobstructed situation, car only travels straight)</p></li>
 <li><p>For convenience, we extracted the simple settings as maps, i.e. <code class="code docutils literal notranslate"><span class="pre">./Webots_Simulation/traffic_project/worlds/simpleway-*.wbt</span></code> maps.</p></li>
-<li><p>Therefore, the task understanding stage is trained on the corresponding <code class="code docutils literal notranslate"><span class="pre">simpleway-*.wbt</span></code>.</p></li>
-<li><p>After completing task understanding, the second stage of training can be conducted on visually challenging maps to learn complex visual features.</p></li>
-<li><p>For example, for the map <code class="code docutils literal notranslate"><span class="pre">citystreet-day.wbt</span></code>, the commands for the two stages are as follows:</p></li>
+<li><p>Therefore, the third stage is trained on the corresponding <code class="code docutils literal notranslate"><span class="pre">simpleway-*.wbt</span></code>.</p></li>
+<li><p>After completing task understanding, the third stage of training can be conducted on visually challenging maps to learn complex visual features.</p></li>
+<li><p>For example, for the map <code class="code docutils literal notranslate"><span class="pre">citystreet-day.wbt</span></code>, the commands for the third stages are as follows:</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/
-<span class="c1"># Stage1: Task Understanding</span>
-python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">24</span><span class="w"> </span>-m<span class="w"> </span>simpleway-grass.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">1</span><span class="w"> </span>--New_Train
-<span class="c1"># Stage2: Visual Generalization</span>
-python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">24</span><span class="w"> </span>-m<span class="w"> </span>citystreet-day.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">1</span>
+<span class="c1"># Stage2: Task Understanding</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">35</span><span class="w"> </span>-m<span class="w"> </span>simpleway-grass.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">1</span><span class="w"> </span>--New_Train
+<span class="c1"># Stage3: Visual Generalization</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">35</span><span class="w"> </span>-m<span class="w"> </span>citystreet-day.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">1</span>
 <span class="c1"># Testing Mode</span>
-python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>citystreet-night.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">0</span>
+<span class="c1"># Test with Cumulative Reward (CR)</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>citystreet-night.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">0</span><span class="w"> </span>--Test_Mode<span class="w"> </span>AR
+<span class="c1"># Test with Tracking Success Rate (TSR)</span>
+python<span class="w"> </span>./models/Recurrent_PPO/RPPO.py<span class="w"> </span>-w<span class="w"> </span><span class="m">1</span><span class="w"> </span>-m<span class="w"> </span>citystreet-night.wbt<span class="w"> </span>--train_mode<span class="w"> </span><span class="m">0</span><span class="w"> </span>--Test_Mode<span class="w"> </span>TSR
 </pre></div>
 </div>
 </div></blockquote>
@@ -567,15 +568,15 @@ tensorboard<span class="w"> </span>--logdir<span class="w"> </span>PPO_logs
 </br>
 </br><p>Reference:</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id8" role="doc-footnote">
+<aside class="footnote brackets" id="id8" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
-<aside class="footnote brackets" id="id9" role="doc-footnote">
+<aside class="footnote brackets" id="id9" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
 </aside>
-<aside class="footnote brackets" id="id10" role="doc-footnote">
+<aside class="footnote brackets" id="id10" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>Zhong, Fangwei, et al. “Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking.” IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.</p>
 </aside>

@@ -50,7 +50,7 @@
     </br>
     </br>
 
-  本项目提供3种形式的Environment(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类
+  本项目提供3种形式的Environment(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的并行Environment类
   
   上述3种Environment的关系如下图所示：
 
@@ -99,12 +99,12 @@ Part 1 接口详解
 
     * :code:`process_state(function)` ：用于对图像进行后处理的函数
     * :code:`arg_worker(int)` ： 系统并行数
-    * :code:`process_idx(int)` ：当前环境的并行编号
-    * :code:`Other_State(bool)` ：是否启用仿真器端的其他状态选项 :code:`Other_State`
-    * :code:`CloudPoint(bool)` ： 是否启用仿真器端的点云选项 :code:`CloudPoint`
-    * :code:`RewardParams(bool)` ： 是否启用仿真器端的其他奖励参数选项 :code:`RewardParams`
+    * :code:`process_idx(int)` ：当前环境的并行索引号
+    * :code:`Other_State(bool)` ：是否启用仿真器端的其他状态选项 :code:`Other_State` 具体数据详见:ref:`仿真环境参数配置`
+    * :code:`CloudPoint(bool)` ： 是否启用仿真器端的点云选项 :code:`CloudPoint` 具体数据详见:ref:`仿真环境参数配置`
+    * :code:`RewardParams(bool)` ： 是否启用仿真器端的其他奖励参数选项 :code:`RewardParams` 具体数据详见:ref:`仿真环境参数配置`
     * :code:`port_process(int)` ： 指定用于传输进程数的端口
-    * :code:`end_reward(bool)` ： 是否开启追加结束奖励
+    * :code:`end_reward(bool)` ： 是否开启追加结束奖励(若末尾reward为0,则追加惩罚；若末尾reward不为0,则追加奖励)
     * :code:`end_reward_list(list)` ： 追加结束奖励列表（在 :code:`end_reward` 开启时才有效）
     * :code:`scene(str)` ： 确定当前的实验场景(在 :code:`auto_start` 开启时才有效)
 
@@ -115,10 +115,11 @@ Part 1 接口详解
       * 合法天气包括： :code:`["day","night","foggy","snow",None]`
 
     * :code:`auto_start(bool)` ： 是否自动启动仿真端
+    * :code:`delay(int)`: 配置系统等待地图加载的时长，仅当 :code:`auto_start(bool)` 启用时生效
     * :code:`Control_Frequence(int)` ： 指定系统控制频率
     * :code:`reward_type(str)` ： 指定reward类别(可以选择不同baseline算法的reward)
     * :code:`verbose(bool)`: 配置环境是否输出log文件
-    * :code:`delay(int)`: 配置系统等待地图加载的时长
+
     
     .. raw:: html
 
@@ -231,14 +232,14 @@ Part 2 配置文件
     *  :code:`"Action_dim"` ：智能体动作空间维度
     *  :code:`"State_size"` ：环境输出的图像大小
     *  :code:`"State_channel"` ：环境输出的图像通道数目(=3:RGB图，=1:灰度图)
-    *  :code:`"Norm_Type"` ：图像归一化方式(默认归一化到 :code:`[0,1]``)
-    *  :code:`"Forward_Speed"` ：智能体输出前进动作时对应的速度(m/s)
-    *  :code:`"Backward_Speed"` ：智能体输出后退动作时对应的速度(m/s)
-    *  :code:`"Left_Speed"` ：智能体输出左移动作时对应的速度(m/s)
-    *  :code:`"Right_Speed"` ：智能体输出右移动作时对应的速度(m/s)
-    *  :code:`"CW_omega"` ：智能体输出顺时针动作时对应的速度(rad/s)
-    *  :code:`"CCW_omega"` ：智能体输出逆时针动作时对应的速度(rad/s)
-    *  :code:`"Control_Frequence"` ：智能体运行的频率(仿真器以500Hz运行，算法端一般以50/100Hz运行)
+    *  :code:`"Norm_Type"` ：图像归一化方式(默认归一化到 :code:`[0,1]`)
+    *  :code:`"Forward_Speed"` ：智能体输出前进动作时对应的速度( :math:`m/s`)
+    *  :code:`"Backward_Speed"` ：智能体输出后退动作时对应的速度( :math:`m/s`)
+    *  :code:`"Left_Speed"` ：智能体输出左移动作时对应的速度( :math:`m/s`)
+    *  :code:`"Right_Speed"` ：智能体输出右移动作时对应的速度( :math:`m/s`)
+    *  :code:`"CW_omega"` ：智能体输出顺时针动作时对应的速度( :math:`rad/s`)
+    *  :code:`"CCW_omega"` ：智能体输出逆时针动作时对应的速度( :math:`rad/s`)
+    *  :code:`"Control_Frequence"` ：智能体运行的频率(仿真器以500Hz运行，算法端一般以125Hz运行)
     *  :code:`"port_process"` ：指定用于传输进程数的端口
     *  :code:`"end_reward"` ：是否开启追加结束奖励
     *  :code:`"end_reward_list"` ：追加结束奖励列表（在 :code:`end_reward` 开启时才有效）
@@ -250,7 +251,7 @@ Part 2 配置文件
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
 
-      *  包括 :code:`"default","E2E","CVAT","DVAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ , [3]_
+      *  包括 :code:`"default","E2E","CVAT","DVAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ , [3]_ 中的reward设置
 
     * :code:`"verbose"(bool)`: 配置环境是否输出log文件
     * :code:`"delay"(int)`: 配置系统等待地图加载的时长
@@ -455,8 +456,8 @@ Part3 并行环境封装
 **现有强化学习库并行类特性与本工程修改**
 
     * 现有直接适配gym环境的强化学习库，如 :code:`stable-baselines3` 和 :code:`tianshou` 库提供并行环境类 :code:`SubprocVecEnv` 供给用户直接将gym环境封装成并行环境
-    * 上述 :code:`SubprocVecEnv` 环境类在运行 :code:`step` 后立即判断是否执行 :code:`reset` ，会导致 :code:`step` 与 :code:`reset` 同一周期执行的现象。
-    * 本工程修改：每个动作进行对齐，保持各个环境动作的同步。
+    * 上述 :code:`SubprocVecEnv` 环境类在运行 :code:`step` 后立即判断是否执行 :code:`reset` ，会导致 :code:`step` 与 :code:`reset` 同一周期执行的现象。(与本工程环境要求 :code:`step` 与 :code:`reset` 严格对齐不符)
+    * 本工程修改：将 :code:`step` 与 :code:`reset` 严格对齐，保持各个环境操作的同步。
     * 将 ``stable-baselines3`` 库中的 :code:`SubprocVecEnv` 类修改成 :code:`Async_SubprocVecEnv` 类，将 ``tianshou`` 库中的 :code:`SubprocVecEnv` 类和 :code:`Collector` 类分别修改成 :code:`SubprocVecEnv_TS` 类和 :code:`TS_Collector` 类 
     * 修改前后的区别见下图所示。
 
@@ -507,7 +508,7 @@ Part4 调用接口
   </div>
   </br>
 
-如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：
+如果希望快速测试对上述环境类的实现是否正确，可以用如下的代码：
 
   1. 单进程(仅使用gym环境)
 
@@ -591,13 +592,8 @@ Part1 Envs()
 **输入参数：**
   * :code:`num_envs(int)` ：表示并发量n
 
-  支持两种初始化方法，
+  * :code:`env_list(list(env))` ： 通过 :code:`GE(n)` 函数返回的列表，将已预构造完成的若干个环境类存入列表中，进行初始化
 
-    :code:`env_mk` or :code:`env_list`
-
-    * :code:`env_list(list(env))` ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可
-
-    * :code:`env_mk` :code:`env_mk_args` ：环境尚未构造， :code:`env_mk` 是单个环境的构造函数， :code:`env_mk_args` 是参数元组，会自动为每个环境调用 :code:`env_mk(**env_mk_args)` 作为构造函数
 
   * :code:`logs_show(bool)` ：是否在其中一个环境中采集reward数据绘制训练曲线
 
@@ -669,7 +665,7 @@ Part2 封装前后数据格式变化
 1.累计奖励 CR(Cumulative Reward)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  此为使用连续奖励，进行累加计算以评估性能，计算公式如下所示：
+  累积奖励使用连续奖励，进行累加计算以评估智能体将目标保持在图像中心的性能，计算公式如下所示：
 
 .. raw:: html
 
@@ -679,17 +675,17 @@ Part2 封装前后数据格式变化
 上述公式中 :math:`r_{ct}` 代表在步骤 :math:`t` 中的连续奖励值， :math:`E_l` 代表轨迹长度。
 连续奖励计算图解见 :ref:`跟踪对象连续奖励示意图`
 
-2.追踪成功比例 TSR(TrackIng Success Rate)
+2.追踪成功率 TSR(TrackIng Success Rate)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：
+  追踪成功率使用离散奖励，对智能体将目标保持在视野范围的能力进行评估，计算公式如下所示：
 
 .. raw:: html
 
    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
    </br>
 
-上述公式中 :math:`r_{dt}` 代表在步骤 :math:`t` 中的离散奖励值， :math:`E_{ml}` 为各个批次中最大的step长度， :math:`E_l` 代表本批次长度。
+上述公式中 :math:`r_{dt}` 代表在步骤 :math:`t` 中的离散奖励值， :math:`E_{ml}` 为最大轨迹长度， :math:`E_t` 代表本轨迹长度。参数配置详见： :ref:`内置reward参数配置`
 离散奖励计算图解见 :ref:`跟踪对象离散奖励示意图`
 
 

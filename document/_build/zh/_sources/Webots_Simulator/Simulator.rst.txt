@@ -129,6 +129,8 @@ train模式
 
    该模式用于算法的训练和测试，可以选择先手动打开webots仿真软件，再运行训练脚本，也可以选择通过修改算法端配置文件实现仿真环境和算法一键启动。
 
+.. _仿真环境参数配置:
+
 参数配置
 -----------
 
@@ -234,6 +236,8 @@ train模式
    - :code:`roll` ：跟踪器最大飞行roll角度( :math:`rad`)。
    - :code:`pitch` ：跟踪器最大飞行pitch角度( :math:`rad`)。
    - :code:`distance_error` ：跟踪器期望位置和当前位置的最大误差( :math:`m`)。
+
+.. _内置reward参数配置:
 
 内置reward的参数配置（仅无人机有效，车默认返回reward=1）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -432,7 +436,7 @@ SUMO交通系统参数配置
    - :code:`view_pitch_random_max` ：最大摄像头俯角。
    - :code:`view_pitch_random_min` ：最小摄像头俯角。
    - :code:`height_random` ：跟踪器飞行高度随机化。其余参数意义同上。
-   - :code:`direction_random` ：初始视角跟踪器跟随对象方向随机化，范围 :code:`[-pi,pi](rad)`
+   - :code:`direction_random` ：初始视角跟踪器跟随对象方向随机化，范围 :math:`[-pi,pi](rad)`
 
    * :code:`direction_random_multilateral` ：是否启用双边随机化配置。
       
@@ -440,43 +444,6 @@ SUMO交通系统参数配置
 
    - :code:`horizon_bias_random` ：初始视角跟踪器跟踪对象水平偏移位置。如果后续参数为正，则对象向左偏移，如果后续参数为负，则对象向右偏移。其余参数同上。
    - :code:`verticle_bias_random` ：初始视角跟踪器跟踪对象竖直偏移位置。如果后续参数为正，则对象向上偏移，如果后续参数为负，则对象向下偏移。其余参数同上。
-
-背景环境的参数配置
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: json
-
-   "Env_Params": {
-        "background_luminosity_random": false,
-        "bgl_incremental": 0,
-        "bgl_random_max": 1,
-        "bgl_random_min": 0,
-        "backgroundLight_luminosity_random": false,
-        "bgLl_incremental": 0,
-        "bgLl_random_max": 1,
-        "bgLl_random_min": 0,
-        "foggy_use_default": true,
-        "foggy_visibility_range_random": false,
-        "foggy_visibility_range_fixed": 400,
-        "foggy_visibility_range_max": 1000,
-        "foggy_visibility_range_min": 300
-   }
-
-**参数说明**
-
-   - :code:`background_luminosity_random` : 是否对背景亮度随机化。
-   - :code:`bgl_incremental` : 若上述参数为 :code:`false`, 则会在原环境中亮度的基础上加上该值（增量值）。
-   - :code:`bgl_random_max` : 最大背景亮度。该参数范围限制在 :math:`[0,1]`
-   - :code:`bgl_random_min` : 最小背景亮度。该参数范围限制在 :math:`[0,1]`
-   - :code:`backgroundLight_luminosity_random` : 是否对背景光线亮度随机化。
-   - :code:`bgLl_incremental` : 若上述参数为 :code:`false`, 则会在原环境中光线亮度的基础上加上该值（增量值）。
-   - :code:`bgLl_random_max` : 最大背景光线亮度。该参数范围限制在 :math:`[0,1]`
-   - :code:`bgLl_random_min` : 最小背景光线亮度。该参数范围限制在 :math:`[0,1]`
-   - :code:`foggy_use_default` : 是否使用默认能见度。若该参数为 :code:`true`, 则下面参数均不生效，使用地图默认能见度。
-   - :code:`foggy_visibility_range_random` : 是否对雾天能见读随机化。（只对foggy属性地图生效）
-   - :code:`foggy_visibility_range_fixed` : 若上述参数为 :code:`false`, 则设置能见度为该固定值。
-   - :code:`foggy_visibility_range_max` : 最大雾天能见度。该参数范围限制在 :math:`[0,inf]`
-   - :code:`foggy_visibility_range_min` : 最小雾天能见度。该参数范围限制在 :math:`[0,inf]`
 
 部分配置参数建议
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -55,7 +55,7 @@ Simulation Environment
 Environment Introduction
 ----------------------------------------
 
-- The simulation environment of this project is built based on the open-source simulation software Webots. The background of the simulation environment simulates the target tracking problem in outdoor scenes in real life. For this purpose, six maps have been set up, including city streets, city center, lakeside, countryside, desert, and farmland, each of which evolves into various conditions such as day, night, foggy, and snowy, making a total of 24 environments. To facilitate model training from simple environments, several simple environment maps are also available for use.
+- The simulation environment of this project is built based on the open-source simulation software `webots <https://cyberbotics.com/>`_. The background of the simulation environment simulates the target tracking problem in outdoor scenes in real life. For this purpose, six maps have been set up, including city streets, city center, lakeside, countryside, desert, and farmland, each of which evolves into various conditions such as day, night, foggy, and snowy, making a total of 24 environments. To facilitate model training from simple environments, several simple environment maps are also available for use.
 - Schematic diagrams of 24 simulation environments in the project:
 
 .. image:: ../_static/image/24Scene_Colorful2.png
@@ -90,6 +90,31 @@ demo mode
 
    This mode generates a tracker in the map. The tracker can fly through the map by keyboard operation, allowing you to browse the map. Meanwhile, the tracker by default tracks a BmwX5 vehicle near its initial position and outputs the reward parameters in real time on the Console status bar. This object can be used to test whether the built-in reward parameters are reasonable for debugging purposes.
 
+      * :code:`up`: Drone forward
+
+      * :code:`down`: Move the drone backward.
+
+      * :code:`left`: Drone rotates vertically counterclockwise.
+
+      * :code:`right`: Drone rotates vertically clockwise.
+
+      * :code:`w` :code:`s` :code:`a` :code:`d`: Controls the rotation of the camera head up, down, left, right, and center.
+
+      * :code:`shift` + :code:`up`: Raise the drone.
+
+      * :code:`shift` + :code:`down`: Drop the drone.
+
+      * :code:`shift` + :code:`left`: Drone pans left.
+
+      * :code:`shift` + :code:`right`: Drone pans right.
+
+.. raw:: html
+
+   <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+      Note: At this point, rewards include both continuous and discrete rewards, see :ref:`built-in Reward` for details.
+   </div>
+   </br>
+
 video mode
 ~~~~~~~~~~~~~~~~~~~
 
@@ -101,6 +126,8 @@ training mode
 ~~~~~~~~~~~~~~~~~~~
 
    This mode is used for algorithm training. You can choose to manually open the Webots simulation first and then run the training script, or you can choose to modify the algorithm configuration file to achieve one-click full startup of the algorithm.
+
+.. _Parameter configuration of the simulation environment:
 
 Parameter Configuration
 ---------------------------------
@@ -200,13 +227,15 @@ Tracker (only effective for drones) generates a physical range parameter configu
 
 **Parameter Description**
 
-   - :code:`max_height` ：Tracker maximum flight altitude (m).
-   - :code:`min_height` ：Tracker minimum flight altitude (m).
-   - :code:`velocity` ：Tracker maximum flight velocity (m/s).
-   - :code:`omiga` ：Tracker maximum angular velocity (rad/s).
-   - :code:`roll` ：Tracker maximum roll angle (rad).
-   - :code:`pitch` ：Tracker maximum pitch angle (rad).
-   - :code:`distance_error` ：Maximum error between the tracker's desired position and current position (m).
+   - :code:`max_height` ：Tracker maximum flight altitude ( :math:`m`).
+   - :code:`min_height` ：Tracker minimum flight altitude ( :math:`m`).
+   - :code:`velocity` ：Tracker maximum flight velocity ( :math:`m/s`).
+   - :code:`omiga` ：Tracker maximum angular velocity ( :math:`rad/s`).
+   - :code:`roll` ：Tracker maximum roll angle ( :math:`rad`).
+   - :code:`pitch` ：Tracker maximum pitch angle ( :math:`rad`).
+   - :code:`distance_error` ：Maximum error between the tracker's desired position and current position ( :math:`m`).
+
+.. _Built-in reward parameter configuration:
 
 Built-in reward parameter configuration (valid for drones only, cars return reward=1 by default)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -338,19 +367,19 @@ Effective only when :code:`Simulation_Mode` is not “video”.
 
    - :code:`channels` ：Number of video channels, which corresponds to the number of trackers in the imported map.
    - :code:`fps` ：Frames per second calculated based on simulation time (video frames are exported at this frame rate).
-   - :code:`start_time` ：Simulation time (s) at which video export begins.
-   - :code:`total_time` ：Duration of the video in simulation time (s).
+   - :code:`start_time` ：Simulation time ( :math:`s`) at which video export begins.
+   - :code:`total_time` ：Duration of the video in simulation time ( :math:`s`).
    - :code:`warm_up_steps` ：The number of steps after reset during which no data is output. Note that each step has a cycle of 2ms.
    - :code:`output_car_dir` ：Whether to output the vehicle direction. If enabled, only the vehicle movement direction is output; otherwise, reward and action are output (Vehicle directions: 0 stop, 1 forward, 2 left turn, 3 right turn).
    - :code:`random_action` ：Whether the tracker uses random actions. If enabled, random actions are output based on Control_Frequency. Otherwise, the tracker will precisely follow the vehicle, and the action output will be -1 (meaningless).
-   - :code:`forward_speed` ：Forward speed of the tracker’s random action (m/s).
-   - :code:`backward_speed` ：Backward speed of the tracker’s random action (m/s).
-   - :code:`left_speed` ：Leftward speed of the tracker’s random action (m/s).
-   - :code:`right_speed` ：Rightward speed of the tracker’s random action (m/s).
-   - :code:`cw_omega` ：Clockwise rotation speed of the tracker’s random action (rad/s).
-   - :code:`ccw_omega` ：Counterclockwise rotation speed of the tracker’s random action (rad/s).
+   - :code:`forward_speed` ：Forward speed of the tracker’s random action ( :math:`m/s`).
+   - :code:`backward_speed` ：Backward speed of the tracker’s random action ( :math:`m/s`).
+   - :code:`left_speed` ：Leftward speed of the tracker’s random action ( :math:`m/s`).
+   - :code:`right_speed` ：Rightward speed of the tracker’s random action ( :math:`m/s`).
+   - :code:`cw_omega` ：Clockwise rotation speed of the tracker’s random action ( :math:`rad/s`).
+   - :code:`ccw_omega` ：Counterclockwise rotation speed of the tracker’s random action ( :math:`rad/s`).
 
-Tracker control parameter configuration
+Tracker Control Parameter Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    This set of parameters is used to randomize the tracking properties of the tracker itself.
@@ -400,56 +429,19 @@ Tracker control parameter configuration
    * :code:`view_pitch_fixed` : If the above parameter is false, the angle defined by this parameter will be used.
 
       * If the angle is greater than 0, it is a downward pitch; otherwise, it is an upward pitch.
-      * In practical usage, a downward pitch is common. Therefore, the parameter range in the simulation environment is limited to :code:`[0.5, 1.57](rad)`.
+      * In practical usage, a downward pitch is common. Therefore, the parameter range in the simulation environment is limited to :math:`[0.5, 1.57](rad)`.
 
    - :code:`view_pitch_random_max` : Maximum camera downward pitch.
    - :code:`view_pitch_random_min` : Minimum camera downward pitch.
    - :code:`height_random` : Randomization of tracker flight height. Other parameter meanings are the same as above.
-   - :code:`direction_random` : Randomization of the tracker’s initial view direction following the object, with a range of :code:`[-pi,pi](rad)`.
+   - :code:`direction_random` : Randomization of the tracker’s initial view direction following the object, with a range of :math:`[-pi,pi](rad)`.
 
    * :code:`direction_random_multilateral` : Whether to enable bilateral randomization configuration.
       
-      * false, :code:`[min, max]` ; true, :code:`[-max, -min] ∪ [min, max]`
+      * :code:`false`, :math:`[min, max]` ; :code:`true`, :math:`[-max, -min] ∪ [min, max]`
 
    - :code:`horizon_bias_random` : Horizontal offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts to the left; if negative, the object shifts to the right. Other parameters are the same as above.
    - :code:`verticle_bias_random` : Vertical offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts upward; if negative, the object shifts downward. Other parameters are the same as above.
-
-Environment parameters configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: json
-
-   "Env_Params": {
-        "background_luminosity_random": false,
-        "bgl_incremental": 0,
-        "bgl_random_max": 1,
-        "bgl_random_min": 0,
-        "backgroundLight_luminosity_random": false,
-        "bgLl_incremental": 0,
-        "bgLl_random_max": 1,
-        "bgLl_random_min": 0,
-        "foggy_use_default": true,
-        "foggy_visibility_range_random": false,
-        "foggy_visibility_range_fixed": 400,
-        "foggy_visibility_range_max": 1000,
-        "foggy_visibility_range_min": 300
-   }
-
-**参数说明**
-
-   - :code:`background_luminosity_random` : Randomization of the background luminosity.
-   - :code:`bgl_incremental` : If the above parameter is false, add this value to the brightness in the original environment. (incremental value)
-   - :code:`bgl_random_max` : Maximum background luminosity. The parameter range is limited to :math:`[0,1]`
-   - :code:`bgl_random_min` : Minimum background luminosity. The parameter range is limited to :math:`[0,1]`
-   - :code:`backgroundLight_luminosity_random` : Randomization of the background light luminosity。
-   - :code:`bgLl_incremental` : If the above parameter is false, add this value to the brightness in the original environment. (incremental value)
-   - :code:`bgLl_random_max` : Maximum background light luminosity. The parameter range is limited to :math:`[0,1]`
-   - :code:`bgLl_random_min` : Minimum background light luminosity. The parameter range is limited to :math:`[0,1]`
-   - :code:`foggy_use_default` : Usage of default visibility range。If the above parameter is true, none of the following parameters take effect, the map's default visibility is used.
-   - :code:`foggy_visibility_range_random` : Randomization of the foggy visibility range。(Only works on foggy property maps)
-   - :code:`foggy_visibility_range_fixed` : If the above parameter is false, set the visibility range to this fixed value.
-   - :code:`foggy_visibility_range_max` : Maximum foggy visibility range. The parameter range is limited to :math:`[0,inf]`
-   - :code:`foggy_visibility_range_min` : Minimum foggy visibility range. The parameter range is limited to :math:`[0,inf]`
 
 Configuration Parameter Recommendations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -723,7 +715,7 @@ Custom Objects
 
    This project supports custom tracked objects, and the steps are as follows:
 
-      1. Create a proto file for Webots following certain standards. The attributes that must be exposed to the scene tree include "translation", "rotation", and "name". The description file should be stored in :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
+      1. Create a proto file for Webots following `webots wiki <https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.>`_ . The attributes that must be exposed to the scene tree include "translation", "rotation", and "name". The description file should be stored in :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
       
       .. figure:: ../_static/image/场景树属性包.png
          :alt: 场景树属性包                                  

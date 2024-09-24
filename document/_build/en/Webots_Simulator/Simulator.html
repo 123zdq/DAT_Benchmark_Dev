@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simulation Environment &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
@@ -68,8 +68,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#sumo-traffic-system-parameter-configuration">SUMO Traffic System Parameter Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#other-object-tracking-parameter-configuration">Other object tracking parameter configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#output-video-parameter-configuration">Output video parameter configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tracker-control-parameter-configuration">Tracker control parameter configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#environment-parameters-configuration">Environment parameters configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tracker-control-parameter-configuration">Tracker Control Parameter Configuration</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#configuration-parameter-recommendations">Configuration Parameter Recommendations</a></li>
 </ul>
 </li>
@@ -178,7 +177,7 @@
 <section id="environment-introduction">
 <span id="id1"></span><h2>Environment Introduction<a class="headerlink" href="#environment-introduction" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>The simulation environment of this project is built based on the open-source simulation software Webots. The background of the simulation environment simulates the target tracking problem in outdoor scenes in real life. For this purpose, six maps have been set up, including city streets, city center, lakeside, countryside, desert, and farmland, each of which evolves into various conditions such as day, night, foggy, and snowy, making a total of 24 environments. To facilitate model training from simple environments, several simple environment maps are also available for use.</p></li>
+<li><p>The simulation environment of this project is built based on the open-source simulation software <a class="reference external" href="https://cyberbotics.com/">webots</a>. The background of the simulation environment simulates the target tracking problem in outdoor scenes in real life. For this purpose, six maps have been set up, including city streets, city center, lakeside, countryside, desert, and farmland, each of which evolves into various conditions such as day, night, foggy, and snowy, making a total of 24 environments. To facilitate model training from simple environments, several simple environment maps are also available for use.</p></li>
 <li><p>Schematic diagrams of 24 simulation environments in the project:</p></li>
 </ul>
 <a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 700px;" /></a>
@@ -193,8 +192,24 @@
 <h3>demo mode<a class="headerlink" href="#demo-mode" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>This mode generates a tracker in the map. The tracker can fly through the map by keyboard operation, allowing you to browse the map. Meanwhile, the tracker by default tracks a BmwX5 vehicle near its initial position and outputs the reward parameters in real time on the Console status bar. This object can be used to test whether the built-in reward parameters are reasonable for debugging purposes.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">up</span></code>: Drone forward</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">down</span></code>: Move the drone backward.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">left</span></code>: Drone rotates vertically counterclockwise.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">right</span></code>: Drone rotates vertically clockwise.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">w</span></code> <code class="code docutils literal notranslate"><span class="pre">s</span></code> <code class="code docutils literal notranslate"><span class="pre">a</span></code> <code class="code docutils literal notranslate"><span class="pre">d</span></code>: Controls the rotation of the camera head up, down, left, right, and center.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">shift</span></code> + <code class="code docutils literal notranslate"><span class="pre">up</span></code>: Raise the drone.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">shift</span></code> + <code class="code docutils literal notranslate"><span class="pre">down</span></code>: Drop the drone.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">shift</span></code> + <code class="code docutils literal notranslate"><span class="pre">left</span></code>: Drone pans left.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">shift</span></code> + <code class="code docutils literal notranslate"><span class="pre">right</span></code>: Drone pans right.</p></li>
+</ul>
 </div></blockquote>
-</section>
+</div></blockquote>
+<div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
+   Note: At this point, rewards include both continuous and discrete rewards, see :ref:`built-in Reward` for details.
+</div>
+</br></section>
 <section id="video-mode">
 <h3>video mode<a class="headerlink" href="#video-mode" title="Link to this heading"></a></h3>
 <blockquote>
@@ -213,7 +228,7 @@
 </section>
 </section>
 <section id="parameter-configuration">
-<h2>Parameter Configuration<a class="headerlink" href="#parameter-configuration" title="Link to this heading"></a></h2>
+<span id="parameter-configuration-of-the-simulation-environment"></span><h2>Parameter Configuration<a class="headerlink" href="#parameter-configuration" title="Link to this heading"></a></h2>
 <blockquote>
 <div><div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
    All settings for the simulation environment in this project can be efficiently configured using <b>1 JSON file</b>.
@@ -320,18 +335,18 @@
 <p><strong>Parameter Description</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">max_height</span></code> ：Tracker maximum flight altitude (m).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">min_height</span></code> ：Tracker minimum flight altitude (m).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">velocity</span></code> ：Tracker maximum flight velocity (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">omiga</span></code> ：Tracker maximum angular velocity (rad/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">roll</span></code> ：Tracker maximum roll angle (rad).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">pitch</span></code> ：Tracker maximum pitch angle (rad).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">distance_error</span></code> ：Maximum error between the tracker’s desired position and current position (m).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">max_height</span></code> ：Tracker maximum flight altitude ( <span class="math notranslate nohighlight">\(m\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">min_height</span></code> ：Tracker minimum flight altitude ( <span class="math notranslate nohighlight">\(m\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">velocity</span></code> ：Tracker maximum flight velocity ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">omiga</span></code> ：Tracker maximum angular velocity ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">roll</span></code> ：Tracker maximum roll angle ( <span class="math notranslate nohighlight">\(rad\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">pitch</span></code> ：Tracker maximum pitch angle ( <span class="math notranslate nohighlight">\(rad\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">distance_error</span></code> ：Maximum error between the tracker’s desired position and current position ( <span class="math notranslate nohighlight">\(m\)</span>).</p></li>
 </ul>
 </div></blockquote>
 </section>
 <section id="built-in-reward-parameter-configuration-valid-for-drones-only-cars-return-reward-1-by-default">
-<h3>Built-in reward parameter configuration (valid for drones only, cars return reward=1 by default)<a class="headerlink" href="#built-in-reward-parameter-configuration-valid-for-drones-only-cars-return-reward-1-by-default" title="Link to this heading"></a></h3>
+<span id="built-in-reward-parameter-configuration"></span><h3>Built-in reward parameter configuration (valid for drones only, cars return reward=1 by default)<a class="headerlink" href="#built-in-reward-parameter-configuration-valid-for-drones-only-cars-return-reward-1-by-default" title="Link to this heading"></a></h3>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;Reward_Config&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">     </span><span class="nt">&quot;reward_type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;view&quot;</span><span class="p">,</span>
 <span class="w">     </span><span class="nt">&quot;reward_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;continuous&quot;</span><span class="p">,</span>
@@ -474,22 +489,22 @@
 <div><ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">channels</span></code> ：Number of video channels, which corresponds to the number of trackers in the imported map.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">fps</span></code> ：Frames per second calculated based on simulation time (video frames are exported at this frame rate).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">start_time</span></code> ：Simulation time (s) at which video export begins.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">total_time</span></code> ：Duration of the video in simulation time (s).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">start_time</span></code> ：Simulation time ( <span class="math notranslate nohighlight">\(s\)</span>) at which video export begins.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">total_time</span></code> ：Duration of the video in simulation time ( <span class="math notranslate nohighlight">\(s\)</span>).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">warm_up_steps</span></code> ：The number of steps after reset during which no data is output. Note that each step has a cycle of 2ms.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">output_car_dir</span></code> ：Whether to output the vehicle direction. If enabled, only the vehicle movement direction is output; otherwise, reward and action are output (Vehicle directions: 0 stop, 1 forward, 2 left turn, 3 right turn).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">random_action</span></code> ：Whether the tracker uses random actions. If enabled, random actions are output based on Control_Frequency. Otherwise, the tracker will precisely follow the vehicle, and the action output will be -1 (meaningless).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">forward_speed</span></code> ：Forward speed of the tracker’s random action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">backward_speed</span></code> ：Backward speed of the tracker’s random action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">left_speed</span></code> ：Leftward speed of the tracker’s random action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">right_speed</span></code> ：Rightward speed of the tracker’s random action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">cw_omega</span></code> ：Clockwise rotation speed of the tracker’s random action (rad/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">ccw_omega</span></code> ：Counterclockwise rotation speed of the tracker’s random action (rad/s).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">forward_speed</span></code> ：Forward speed of the tracker’s random action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">backward_speed</span></code> ：Backward speed of the tracker’s random action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">left_speed</span></code> ：Leftward speed of the tracker’s random action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">right_speed</span></code> ：Rightward speed of the tracker’s random action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">cw_omega</span></code> ：Clockwise rotation speed of the tracker’s random action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">ccw_omega</span></code> ：Counterclockwise rotation speed of the tracker’s random action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
 </ul>
 </div></blockquote>
 </section>
 <section id="tracker-control-parameter-configuration">
-<h3>Tracker control parameter configuration<a class="headerlink" href="#tracker-control-parameter-configuration" title="Link to this heading"></a></h3>
+<h3>Tracker Control Parameter Configuration<a class="headerlink" href="#tracker-control-parameter-configuration" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>This set of parameters is used to randomize the tracking properties of the tracker itself.</p>
 </div></blockquote>
@@ -545,7 +560,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>If the angle is greater than 0, it is a downward pitch; otherwise, it is an upward pitch.</p></li>
-<li><p>In practical usage, a downward pitch is common. Therefore, the parameter range in the simulation environment is limited to <code class="code docutils literal notranslate"><span class="pre">[0.5,</span> <span class="pre">1.57](rad)</span></code>.</p></li>
+<li><p>In practical usage, a downward pitch is common. Therefore, the parameter range in the simulation environment is limited to <span class="math notranslate nohighlight">\([0.5, 1.57](rad)\)</span>.</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -554,13 +569,13 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">view_pitch_random_max</span></code> : Maximum camera downward pitch.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">view_pitch_random_min</span></code> : Minimum camera downward pitch.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">height_random</span></code> : Randomization of tracker flight height. Other parameter meanings are the same as above.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">direction_random</span></code> : Randomization of the tracker’s initial view direction following the object, with a range of <code class="code docutils literal notranslate"><span class="pre">[-pi,pi](rad)</span></code>.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">direction_random</span></code> : Randomization of the tracker’s initial view direction following the object, with a range of <span class="math notranslate nohighlight">\([-pi,pi](rad)\)</span>.</p></li>
 </ul>
 <ul>
 <li><p><code class="code docutils literal notranslate"><span class="pre">direction_random_multilateral</span></code> : Whether to enable bilateral randomization configuration.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>false, <code class="code docutils literal notranslate"><span class="pre">[min,</span> <span class="pre">max]</span></code> ; true, <code class="code docutils literal notranslate"><span class="pre">[-max,</span> <span class="pre">-min]</span> <span class="pre">∪</span> <span class="pre">[min,</span> <span class="pre">max]</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">false</span></code>, <span class="math notranslate nohighlight">\([min, max]\)</span> ; <code class="code docutils literal notranslate"><span class="pre">true</span></code>, <span class="math notranslate nohighlight">\([-max, -min] ∪ [min, max]\)</span></p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -568,44 +583,6 @@
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">horizon_bias_random</span></code> : Horizontal offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts to the left; if negative, the object shifts to the right. Other parameters are the same as above.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">verticle_bias_random</span></code> : Vertical offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts upward; if negative, the object shifts downward. Other parameters are the same as above.</p></li>
-</ul>
-</div></blockquote>
-</section>
-<section id="environment-parameters-configuration">
-<h3>Environment parameters configuration<a class="headerlink" href="#environment-parameters-configuration" title="Link to this heading"></a></h3>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;Env_Params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="nt">&quot;background_luminosity_random&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;bgl_incremental&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;bgl_random_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;bgl_random_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;backgroundLight_luminosity_random&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;bgLl_incremental&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;bgLl_random_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;bgLl_random_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;foggy_use_default&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;foggy_visibility_range_random&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;foggy_visibility_range_fixed&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;foggy_visibility_range_max&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
-<span class="w">     </span><span class="nt">&quot;foggy_visibility_range_min&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">300</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p><strong>参数说明</strong></p>
-<blockquote>
-<div><ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">background_luminosity_random</span></code> : Randomization of the background luminosity.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">bgl_incremental</span></code> : If the above parameter is false, add this value to the brightness in the original environment. (incremental value)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">bgl_random_max</span></code> : Maximum background luminosity. The parameter range is limited to <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">bgl_random_min</span></code> : Minimum background luminosity. The parameter range is limited to <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">backgroundLight_luminosity_random</span></code> : Randomization of the background light luminosity。</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">bgLl_incremental</span></code> : If the above parameter is false, add this value to the brightness in the original environment. (incremental value)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">bgLl_random_max</span></code> : Maximum background light luminosity. The parameter range is limited to <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">bgLl_random_min</span></code> : Minimum background light luminosity. The parameter range is limited to <span class="math notranslate nohighlight">\([0,1]\)</span></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">foggy_use_default</span></code> : Usage of default visibility range。If the above parameter is true, none of the following parameters take effect, the map’s default visibility is used.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">foggy_visibility_range_random</span></code> : Randomization of the foggy visibility range。(Only works on foggy property maps)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">foggy_visibility_range_fixed</span></code> : If the above parameter is false, set the visibility range to this fixed value.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">foggy_visibility_range_max</span></code> : Maximum foggy visibility range. The parameter range is limited to <span class="math notranslate nohighlight">\([0,inf]\)</span></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">foggy_visibility_range_min</span></code> : Minimum foggy visibility range. The parameter range is limited to <span class="math notranslate nohighlight">\([0,inf]\)</span></p></li>
 </ul>
 </div></blockquote>
 </section>
@@ -789,7 +766,7 @@
 <div><p>This project supports custom tracked objects, and the steps are as follows:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Create a proto file for Webots following certain standards. The attributes that must be exposed to the scene tree include “translation”, “rotation”, and “name”. The description file should be stored in <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
+<li><p>Create a proto file for Webots following <a class="reference external" href="https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.">webots wiki</a> . The attributes that must be exposed to the scene tree include “translation”, “rotation”, and “name”. The description file should be stored in <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
 <figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="../_images/场景树属性包.png"><img alt="场景树属性包" src="../_images/%E5%9C%BA%E6%99%AF%E6%A0%91%E5%B1%9E%E6%80%A7%E5%8C%85.png" style="width: 600px;" /></a>

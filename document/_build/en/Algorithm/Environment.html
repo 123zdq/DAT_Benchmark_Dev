@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Environment Wrapping &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
@@ -158,7 +158,7 @@
  </br>
  <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
  </br>
- </br><p>This project provides three forms of Environment (Path: <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code>): the base Environment class, the Environment class wrapped by OpenAI Gym (Gynasium), and the Environment class we independently implemented in an asynchronous parallel framework.</p>
+ </br><p>This project provides three forms of Environment (Path: <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code>): the base Environment class, the Environment class wrapped by OpenAI Gym (Gynasium), and our own implementation of the parallel Environment class.</p>
 </div></blockquote>
 <p>The relationships among these three Environment types are shown in the figure below:</p>
 <figure class="align-center" id="id9">
@@ -192,11 +192,11 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">process_state(function)</span></code>: Function for post-processing the images</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">arg_worker(int)</span></code>: System parallelism count</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">process_idx(int)</span></code>: Current environment’s parallel index</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Other_State(bool)</span></code>: Whether to enable additional state options on the simulator side: <code class="code docutils literal notranslate"><span class="pre">Other_State</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">CloudPoint(bool)</span></code>: Whether to enable the point cloud option on the simulator side: <code class="code docutils literal notranslate"><span class="pre">CloudPoint</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">RewardParams(bool)</span></code>: Whether to enable additional reward parameters options on the simulator side: <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Other_State(bool)</span></code>: Whether to enable additional state options on the simulator side: <code class="code docutils literal notranslate"><span class="pre">Other_State</span></code>, detail see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#parameter-configuration-of-the-simulation-environment"><span class="std std-ref">Parameter Configuration</span></a></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CloudPoint(bool)</span></code>: Whether to enable the point cloud option on the simulator side: <code class="code docutils literal notranslate"><span class="pre">CloudPoint</span></code>, detail see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#parameter-configuration-of-the-simulation-environment"><span class="std std-ref">Parameter Configuration</span></a></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">RewardParams(bool)</span></code>: Whether to enable additional reward parameters options on the simulator side: <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code>, detail see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#parameter-configuration-of-the-simulation-environment"><span class="std std-ref">Parameter Configuration</span></a></p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">port_process(int)</span></code>: Port specified for data transmission between processes</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">end_reward(bool)</span></code>: Whether to enable additional end rewards</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">end_reward(bool)</span></code>: Whether to enable additional end rewards(additional penalties if end reward is 0; additional rewards if end reward is not 0)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">end_reward_list(list)</span></code>: Additional end rewards list (valid only when <code class="code docutils literal notranslate"><span class="pre">end_reward</span></code> is enabled)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">scene(str)</span></code>: Determines the current experimental scene (valid only when <code class="code docutils literal notranslate"><span class="pre">auto_start</span></code> is enabled)</p>
 <ul>
@@ -209,8 +209,10 @@
 </ul>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">auto_start(bool)</span></code>: Whether to automatically start the simulator</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">delay(int)</span></code>: Configure how long the system waits for the map to load, only works if <code class="code docutils literal notranslate"><span class="pre">auto_start(bool)</span></code> is enabled.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Control_Frequence(int)</span></code>: Specifies the system control frequency</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">reward_type(str)</span></code>: Specifies the type of reward (can choose different baseline algorithms for reward)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">verbose(bool)</span></code>: Configure the environment to output log files or not</p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       2. <code>step</code>: Used for the environment's simulation
@@ -298,13 +300,13 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;State_size&quot;</span></code>: Size of the images output by the environment.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;State_channel&quot;</span></code>: Number of channels in the images output by the environment (=3 for RGB images, =1 for grayscale images).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Norm_Type&quot;</span></code>: Normalization method for the images (default normalization to <code class="code docutils literal notranslate"><span class="pre">[0,1]</span></code>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Forward_Speed&quot;</span></code>: Speed corresponding to the agent’s forward action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Backward_Speed&quot;</span></code>: Speed corresponding to the agent’s backward action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Left_Speed&quot;</span></code>: Speed corresponding to the agent’s left movement action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Right_Speed&quot;</span></code>: Speed corresponding to the agent’s right movement action (m/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CW_omega&quot;</span></code>: Speed corresponding to the agent’s clockwise action (rad/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CCW_omega&quot;</span></code>: Speed corresponding to the agent’s counterclockwise action (rad/s).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Control_Frequence&quot;</span></code>: Frequency at which the agent operates (the simulator runs at 500 Hz, while the algorithm side generally runs at 50/100 Hz).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Forward_Speed&quot;</span></code>: Speed corresponding to the agent’s forward action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Backward_Speed&quot;</span></code>: Speed corresponding to the agent’s backward action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Left_Speed&quot;</span></code>: Speed corresponding to the agent’s left movement action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Right_Speed&quot;</span></code>: Speed corresponding to the agent’s right movement action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CW_omega&quot;</span></code>: Speed corresponding to the agent’s clockwise action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CCW_omega&quot;</span></code>: Speed corresponding to the agent’s counterclockwise action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Control_Frequence&quot;</span></code>: Frequency at which the agent operates (the simulator runs at 500 Hz, while the algorithm side generally runs at 125 Hz).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;port_process&quot;</span></code>: Port specified for data transmission between processes.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;end_reward&quot;</span></code>: Whether to enable additional end rewards.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;end_reward_list&quot;</span></code>: List of additional end rewards (valid only when <code class="code docutils literal notranslate"><span class="pre">end_reward</span></code> is enabled).</p></li>
@@ -316,7 +318,7 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;RewardParams&quot;</span></code>: Whether to enable additional reward parameters options on the simulator side.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;RewardType&quot;</span></code>: Specifies the type of reward (can choose different baseline algorithms for reward).</p>
 <ul>
-<li><p>Includes <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,</span> <span class="pre">&quot;E2E&quot;,</span> <span class="pre">&quot;CVAT&quot;,</span> <span class="pre">&quot;DVAT&quot;</span></code>, corresponding to <a class="reference internal" href="../Webots_Simulator/Simulator.html#built-in-reward"><span class="std std-ref">Built-in Reward</span></a>, <a class="footnote-reference brackets" href="#id6" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id7" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id8" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+<li><p>Includes <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,</span> <span class="pre">&quot;E2E&quot;,</span> <span class="pre">&quot;CVAT&quot;,</span> <span class="pre">&quot;DVAT&quot;</span></code>, corresponding to <a class="reference internal" href="../Webots_Simulator/Simulator.html#built-in-reward"><span class="std std-ref">Built-in Reward</span></a>, <a class="footnote-reference brackets" href="#id6" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id7" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, <a class="footnote-reference brackets" href="#id8" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> reward setting</p></li>
 </ul>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;verbose&quot;(bool)</span></code>: Configures whether the environment outputs log files.</p></li>
@@ -434,8 +436,8 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Existing reinforcement learning libraries directly compatible with gym environments, such as the <code class="code docutils literal notranslate"><span class="pre">stable-baselines3</span></code> and <code class="code docutils literal notranslate"><span class="pre">tianshou</span></code> libraries, provide the parallel environment class <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> , allowing users to directly encapsulate gym environments into parallel environments.</p></li>
-<li><p>The above-mentioned <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> environment class checks whether to execute <code class="docutils literal notranslate"><span class="pre">reset</span></code> immediately after executing <code class="docutils literal notranslate"><span class="pre">step</span></code>, which may cause the <code class="docutils literal notranslate"><span class="pre">step</span></code> and <code class="code docutils literal notranslate"><span class="pre">reset</span></code> to be executed in the same cycle.</p></li>
-<li><p>Modification in this project: Align each action to maintain synchronization of actions across environments.</p></li>
+<li><p>The above-mentioned <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> environment class checks whether to execute <code class="docutils literal notranslate"><span class="pre">reset</span></code> immediately after executing <code class="docutils literal notranslate"><span class="pre">step</span></code>, which may cause the <code class="docutils literal notranslate"><span class="pre">step</span></code> and <code class="code docutils literal notranslate"><span class="pre">reset</span></code> to be executed in the same cycle.(Not strictly aligned with <code class="code docutils literal notranslate"><span class="pre">step</span></code> and <code class="code docutils literal notranslate"><span class="pre">reset</span></code> as required by the project environment.)</p></li>
+<li><p>Modification in this project: Strictly align <code class="code docutils literal notranslate"><span class="pre">step</span></code> with <code class="code docutils literal notranslate"><span class="pre">reset</span></code> to keep individual environment operations synchronized.</p></li>
 <li><p>The <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> class from the <code class="docutils literal notranslate"><span class="pre">stable-baselines3</span></code> library is modified to the <code class="docutils literal notranslate"><span class="pre">Async_SubprocVecEnv</span></code> class, and the <code class="docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> and <code class="docutils literal notranslate"><span class="pre">Collector</span></code> classes from the <code class="docutils literal notranslate"><span class="pre">tianshou</span></code> library are modified to <code class="docutils literal notranslate"><span class="pre">SubprocVecEnv_TS</span></code> and <code class="docutils literal notranslate"><span class="pre">TS_Collector</span></code> classes, respectively.</p></li>
 <li><p>The differences between the original and modified implementations are shown in the figure below.</p></li>
 </ul>
@@ -464,7 +466,7 @@
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     For specific code, see the <code>gym_test()</code> function and <code>stableparallel_test()</code> function in <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>.
 </div>
-</br><p>If you want to quickly test whether the modifications to the above environment classes are successful, you can use the following code:</p>
+</br><p>If you wish to quickly test whether the implementation of the above environment class is correct, you can use the following code:</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>Single process (using only gym environment)</p></li>
@@ -524,19 +526,10 @@
 </br><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       1. <code>__init__</code>: Initializes the Envs parallel environment (including the initialization of <code>action_space</code> and <code>observation_space</code>).
 </div>
-</br><dl>
+</br><dl class="simple">
 <dt><strong>Input Parameters:</strong></dt><dd><ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">num_envs(int)</span></code>: Represents the concurrency level n.</p></li>
-</ul>
-<p>Supports two initialization methods:</p>
-<blockquote>
-<div><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> or <code class="code docutils literal notranslate"><span class="pre">env_list</span></code></p>
-<ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_list(list(env))</span></code>: Already constructed n individual environments, stored in a list, passed to env_list; to obtain a list of our default environments, pass it to env_list using the GE(n) function defined in the same code file.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code>: Environments have not been constructed; :</p></li>
-</ul>
-</div></blockquote>
-<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">env_list(list(env))</span></code>: Initialize the list returned by the <code class="code docutils literal notranslate"><span class="pre">GE(n)</span></code> function by storing a number of pre-constructed environment classes in the list</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">logs_show(bool)</span></code> ：Whether to collect reward data in one of the environments to draw a training curve</p></li>
 </ul>
 </dd>
@@ -588,10 +581,10 @@
 <section id="cumulative-reward-cr">
 <h3>1. Cumulative Reward CR<a class="headerlink" href="#cumulative-reward-cr" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>This metric uses cumulative rewards to assess performance, calculated using the following formula:</p>
+<div><p>The cumulative reward uses continuous rewards, and a cumulative calculation is performed to evaluate the performance of the intelligent body in keeping the target at the center of the image, as shown in the following formula:</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
-</br><p>In the above formula, <span class="math notranslate nohighlight">\(r_{ct}\)</span> represents the continuous reward value at step <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(E_l\)</span> represents the trajectory length.
+</br><p>In the above formula, <span class="math notranslate nohighlight">\(r_{ct}\)</span> represents the continuous reward value at step <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(E_{ml}\)</span> represents the maximum trajectory length, and <span class="math notranslate nohighlight">\(E_t\)</span> represents the length of this trajectory.
 For a graphical representation of continuous reward calculation, see <a class="reference internal" href="../Webots_Simulator/Simulator.html#continuous-reward-diagram-for-tracking-object"><span class="std std-ref">Continuous Reward Diagram for Object Tracking</span></a>.</p>
 </section>
 <section id="tracking-success-rate-tsr">
@@ -600,22 +593,22 @@ For a graphical representation of continuous reward calculation, see <a class="r
 <div><p>This metric uses discrete rewards to evaluate the proportion of successful tracking, calculated using the following formula:</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
-</br><p>In the above formula, <span class="math notranslate nohighlight">\(r_{dt}\)</span> represents the discrete reward value at step <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(E_{ml}\)</span> is the maximum step length across batches, and <span class="math notranslate nohighlight">\(E_l\)</span> represents the length of the current batch.
+</br><p>In the above formula, <span class="math notranslate nohighlight">\(r_{dt}\)</span> represents the discrete reward value at step <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(E_{ml}\)</span> is the maximum step length across batches, and <span class="math notranslate nohighlight">\(E_l\)</span> represents the length of the current batch. Detail parameters see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#built-in-reward-parameter-configuration"><span class="std std-ref">Built-in reward parameter configuration (valid for drones only, cars return reward=1 by default)</span></a>
 For a graphical representation of discrete reward calculation, see <a class="reference internal" href="../Webots_Simulator/Simulator.html#discrete-reward-diagram-for-tracking-object"><span class="std std-ref">Discrete Reward Diagram of the Tracking Object</span></a>.</p>
 </br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br><p>Reference:</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id6" role="doc-footnote">
+<aside class="footnote brackets" id="id6" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
-<aside class="footnote brackets" id="id7" role="doc-footnote">
+<aside class="footnote brackets" id="id7" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
 <p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
 </aside>
-<aside class="footnote brackets" id="id8" role="doc-footnote">
+<aside class="footnote brackets" id="id8" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
 <p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
 </aside>

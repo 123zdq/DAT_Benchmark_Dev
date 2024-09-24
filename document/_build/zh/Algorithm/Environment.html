@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>环境封装 &mdash; UAV_VAT 1.0 文档</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
@@ -74,7 +74,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#id10">4 性能评价指标</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cr-cumulative-reward">1.累计奖励 CR(Cumulative Reward)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#tsr-tracking-success-rate">2.追踪成功比例 TSR(TrackIng Success Rate)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tsr-tracking-success-rate">2.追踪成功率 TSR(TrackIng Success Rate)</a></li>
 </ul>
 </li>
 </ul>
@@ -158,7 +158,7 @@
  </br>
  <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
  </br>
- </br><p>本项目提供3种形式的Environment(路径： <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code> ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的异步并行框架Environment类</p>
+ </br><p>本项目提供3种形式的Environment(路径： <code class="code docutils literal notranslate"><span class="pre">Alg_Base/rl_a3c_pytorch_benchmark/envs</span></code> ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的并行Environment类</p>
 <p>上述3种Environment的关系如下图所示：</p>
 <blockquote>
 <div><figure class="align-center" id="id14">
@@ -193,12 +193,12 @@
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">process_state(function)</span></code> ：用于对图像进行后处理的函数</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">arg_worker(int)</span></code> ： 系统并行数</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">process_idx(int)</span></code> ：当前环境的并行编号</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Other_State(bool)</span></code> ：是否启用仿真器端的其他状态选项 <code class="code docutils literal notranslate"><span class="pre">Other_State</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">CloudPoint(bool)</span></code> ： 是否启用仿真器端的点云选项 <code class="code docutils literal notranslate"><span class="pre">CloudPoint</span></code></p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">RewardParams(bool)</span></code> ： 是否启用仿真器端的其他奖励参数选项 <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">process_idx(int)</span></code> ：当前环境的并行索引号</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Other_State(bool)</span></code> ：是否启用仿真器端的其他状态选项 <code class="code docutils literal notranslate"><span class="pre">Other_State</span></code> 具体数据详见:ref:<cite>仿真环境参数配置</cite></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">CloudPoint(bool)</span></code> ： 是否启用仿真器端的点云选项 <code class="code docutils literal notranslate"><span class="pre">CloudPoint</span></code> 具体数据详见:ref:<cite>仿真环境参数配置</cite></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">RewardParams(bool)</span></code> ： 是否启用仿真器端的其他奖励参数选项 <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code> 具体数据详见:ref:<cite>仿真环境参数配置</cite></p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">port_process(int)</span></code> ： 指定用于传输进程数的端口</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">end_reward(bool)</span></code> ： 是否开启追加结束奖励</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">end_reward(bool)</span></code> ： 是否开启追加结束奖励(若末尾reward为0,则追加惩罚；若末尾reward不为0,则追加奖励)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">end_reward_list(list)</span></code> ： 追加结束奖励列表（在 <code class="code docutils literal notranslate"><span class="pre">end_reward</span></code> 开启时才有效）</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">scene(str)</span></code> ： 确定当前的实验场景(在 <code class="code docutils literal notranslate"><span class="pre">auto_start</span></code> 开启时才有效)</p>
 <ul>
@@ -211,10 +211,10 @@
 </ul>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">auto_start(bool)</span></code> ： 是否自动启动仿真端</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">delay(int)</span></code>: 配置系统等待地图加载的时长，仅当 <code class="code docutils literal notranslate"><span class="pre">auto_start(bool)</span></code> 启用时生效</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Control_Frequence(int)</span></code> ： 指定系统控制频率</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">reward_type(str)</span></code> ： 指定reward类别(可以选择不同baseline算法的reward)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">verbose(bool)</span></code>: 配置环境是否输出log文件</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">delay(int)</span></code>: 配置系统等待地图加载的时长</p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       2. <code>step</code> ：用于环境的推演
@@ -301,14 +301,14 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Action_dim&quot;</span></code> ：智能体动作空间维度</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;State_size&quot;</span></code> ：环境输出的图像大小</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;State_channel&quot;</span></code> ：环境输出的图像通道数目(=3:RGB图，=1:灰度图)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Norm_Type&quot;</span></code> ：图像归一化方式(默认归一化到 <code class="code docutils literal notranslate"><span class="pre">[0,1]`</span></code>)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Forward_Speed&quot;</span></code> ：智能体输出前进动作时对应的速度(m/s)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Backward_Speed&quot;</span></code> ：智能体输出后退动作时对应的速度(m/s)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Left_Speed&quot;</span></code> ：智能体输出左移动作时对应的速度(m/s)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Right_Speed&quot;</span></code> ：智能体输出右移动作时对应的速度(m/s)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CW_omega&quot;</span></code> ：智能体输出顺时针动作时对应的速度(rad/s)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CCW_omega&quot;</span></code> ：智能体输出逆时针动作时对应的速度(rad/s)</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Control_Frequence&quot;</span></code> ：智能体运行的频率(仿真器以500Hz运行，算法端一般以50/100Hz运行)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Norm_Type&quot;</span></code> ：图像归一化方式(默认归一化到 <code class="code docutils literal notranslate"><span class="pre">[0,1]</span></code>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Forward_Speed&quot;</span></code> ：智能体输出前进动作时对应的速度( <span class="math notranslate nohighlight">\(m/s\)</span>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Backward_Speed&quot;</span></code> ：智能体输出后退动作时对应的速度( <span class="math notranslate nohighlight">\(m/s\)</span>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Left_Speed&quot;</span></code> ：智能体输出左移动作时对应的速度( <span class="math notranslate nohighlight">\(m/s\)</span>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Right_Speed&quot;</span></code> ：智能体输出右移动作时对应的速度( <span class="math notranslate nohighlight">\(m/s\)</span>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CW_omega&quot;</span></code> ：智能体输出顺时针动作时对应的速度( <span class="math notranslate nohighlight">\(rad/s\)</span>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CCW_omega&quot;</span></code> ：智能体输出逆时针动作时对应的速度( <span class="math notranslate nohighlight">\(rad/s\)</span>)</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Control_Frequence&quot;</span></code> ：智能体运行的频率(仿真器以500Hz运行，算法端一般以125Hz运行)</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;port_process&quot;</span></code> ：指定用于传输进程数的端口</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;end_reward&quot;</span></code> ：是否开启追加结束奖励</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;end_reward_list&quot;</span></code> ：追加结束奖励列表（在 <code class="code docutils literal notranslate"><span class="pre">end_reward</span></code> 开启时才有效）</p></li>
@@ -322,7 +322,7 @@
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li><p>包括 <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,&quot;E2E&quot;,&quot;CVAT&quot;,&quot;DVAT&quot;</span></code> 分别对应 <a class="reference internal" href="../Webots_Simulator/Simulator.html#reward"><span class="std std-ref">内置Reward</span></a> , <a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id12" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id13" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></li>
+<li><p>包括 <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,&quot;E2E&quot;,&quot;CVAT&quot;,&quot;DVAT&quot;</span></code> 分别对应 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id17"><span class="std std-ref">内置Reward</span></a> , <a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id12" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id13" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 中的reward设置</p></li>
 </ul>
 </div></blockquote>
 <ul class="simple">
@@ -456,8 +456,8 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>现有直接适配gym环境的强化学习库，如 <code class="code docutils literal notranslate"><span class="pre">stable-baselines3</span></code> 和 <code class="code docutils literal notranslate"><span class="pre">tianshou</span></code> 库提供并行环境类 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 供给用户直接将gym环境封装成并行环境</p></li>
-<li><p>上述 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 环境类在运行 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 后立即判断是否执行 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> ，会导致 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 与 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> 同一周期执行的现象。</p></li>
-<li><p>本工程修改：每个动作进行对齐，保持各个环境动作的同步。</p></li>
+<li><p>上述 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 环境类在运行 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 后立即判断是否执行 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> ，会导致 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 与 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> 同一周期执行的现象。(与本工程环境要求 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 与 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> 严格对齐不符)</p></li>
+<li><p>本工程修改：将 <code class="code docutils literal notranslate"><span class="pre">step</span></code> 与 <code class="code docutils literal notranslate"><span class="pre">reset</span></code> 严格对齐，保持各个环境操作的同步。</p></li>
 <li><p>将 <code class="docutils literal notranslate"><span class="pre">stable-baselines3</span></code> 库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类修改成 <code class="code docutils literal notranslate"><span class="pre">Async_SubprocVecEnv</span></code> 类，将 <code class="docutils literal notranslate"><span class="pre">tianshou</span></code> 库中的 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">Collector</span></code> 类分别修改成 <code class="code docutils literal notranslate"><span class="pre">SubprocVecEnv_TS</span></code> 类和 <code class="code docutils literal notranslate"><span class="pre">TS_Collector</span></code> 类</p></li>
 <li><p>修改前后的区别见下图所示。</p></li>
 </ul>
@@ -486,7 +486,7 @@
 <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>中的<code>gym_test()</code>函数和<code>stableparallel_test()</code>函数
 </div>
-</br><p>如果希望快速测试对上述环境类的改写是否成功，可以用如下的代码：</p>
+</br><p>如果希望快速测试对上述环境类的实现是否正确，可以用如下的代码：</p>
 <blockquote>
 <div><ol class="arabic simple">
 <li><p>单进程(仅使用gym环境)</p></li>
@@ -545,19 +545,10 @@
 </br><div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
       1. <code>__init__</code> ：初始化Envs并行环境(包括 <code>action_space</code> 和 <code>observation_space</code>的初始化)
 </div>
-</br><dl>
+</br><dl class="simple">
 <dt><strong>输入参数：</strong></dt><dd><ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">num_envs(int)</span></code> ：表示并发量n</p></li>
-</ul>
-<p>支持两种初始化方法，</p>
-<blockquote>
-<div><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> or <code class="code docutils literal notranslate"><span class="pre">env_list</span></code></p>
-<ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_list(list(env))</span></code> ：已经有了n个构造好的单个环境，将它们存进一个列表，传给env_list，使用同一份代码文件中另外定义的GE(n)函数即可获得我们默认环境的一个列表，传给env_list即可</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code> ：环境尚未构造， <code class="code docutils literal notranslate"><span class="pre">env_mk</span></code> 是单个环境的构造函数， <code class="code docutils literal notranslate"><span class="pre">env_mk_args</span></code> 是参数元组，会自动为每个环境调用 <code class="code docutils literal notranslate"><span class="pre">env_mk(**env_mk_args)</span></code> 作为构造函数</p></li>
-</ul>
-</div></blockquote>
-<ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">env_list(list(env))</span></code> ： 通过 <code class="code docutils literal notranslate"><span class="pre">GE(n)</span></code> 函数返回的列表，将已预构造完成的若干个环境类存入列表中，进行初始化</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">logs_show(bool)</span></code> ：是否在其中一个环境中采集reward数据绘制训练曲线</p></li>
 </ul>
 </dd>
@@ -609,34 +600,34 @@
 <section id="cr-cumulative-reward">
 <h3>1.累计奖励 CR(Cumulative Reward)<a class="headerlink" href="#cr-cumulative-reward" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>此为使用连续奖励，进行累加计算以评估性能，计算公式如下所示：</p>
+<div><p>累积奖励使用连续奖励，进行累加计算以评估智能体将目标保持在图像中心的性能，计算公式如下所示：</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
 </br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{ct}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的连续奖励值， <span class="math notranslate nohighlight">\(E_l\)</span> 代表轨迹长度。
-连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id20"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
+连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id21"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
 </section>
 <section id="tsr-tracking-success-rate">
-<h3>2.追踪成功比例 TSR(TrackIng Success Rate)<a class="headerlink" href="#tsr-tracking-success-rate" title="Link to this heading"></a></h3>
+<h3>2.追踪成功率 TSR(TrackIng Success Rate)<a class="headerlink" href="#tsr-tracking-success-rate" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>此为使用离散奖励，进行 成功追踪的比例 以评估性能，计算公式如下所示：</p>
+<div><p>追踪成功率使用离散奖励，对智能体将目标保持在视野范围的能力进行评估，计算公式如下所示：</p>
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
-</br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{dt}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的离散奖励值， <span class="math notranslate nohighlight">\(E_{ml}\)</span> 为各个批次中最大的step长度， <span class="math notranslate nohighlight">\(E_l\)</span> 代表本批次长度。
-离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id19"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
+</br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{dt}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的离散奖励值， <span class="math notranslate nohighlight">\(E_{ml}\)</span> 为最大轨迹长度， <span class="math notranslate nohighlight">\(E_t\)</span> 代表本轨迹长度。参数配置详见： <a class="reference internal" href="../Webots_Simulator/Simulator.html#reward"><span class="std std-ref">内置reward的参数配置（仅无人机有效，车默认返回reward=1）</span></a>
+离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id20"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
 </br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br><p>引用：</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id11" role="doc-footnote">
+<aside class="footnote brackets" id="id11" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
 <p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
-<aside class="footnote brackets" id="id12" role="doc-footnote">
+<aside class="footnote brackets" id="id12" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
 <p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
 </aside>
-<aside class="footnote brackets" id="id13" role="doc-footnote">
+<aside class="footnote brackets" id="id13" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">3</a><span class="fn-bracket">]</span></span>
 <p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
 </aside>

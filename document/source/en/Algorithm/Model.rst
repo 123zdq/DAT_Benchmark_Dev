@@ -61,7 +61,7 @@ Model Construction
     </div>
     </br>
 
-Among these baseline methods, [1]_ [2]_ and :code:`RPPO+CL(Ours)` respectively call the three environments implemented in this project :doc:`Environment`, providing templates for different algorithm implementation needs.
+Among these baseline methods, [1]_ [2]_ and :code:`RPPO+CL(Ours)` respectively call the three environments implemented in this project( :doc:`Environment` ), providing templates for different algorithm implementation needs.
 
 *  The :code:`A3CLSTM-E2E` algorithm calls the underlying environment class ( :ref:`BenchEnv_Multi` )
 *  The :code:`DVAT` algorithm calls the Gym environment class ( :ref:`Gymnasium_Gym` )
@@ -114,7 +114,7 @@ Program entry point
     :code:`main.py` is the entry point of the entire program, primarily providing two operating modes: :code:`train` and :code:`test`.
         
         * In :code:`train` mode, a testing process is also provided (e.g., if the program runs with 24 processes, the last process with ID 23 will be used for testing). This process is mainly used for :code:`tensorboard` visualization during the training process.
-        * The :code:`test` mode is mainly used to test the model weights after training is completed. This mode can also be run in multiple processes, allowing testing of multiple model weights simultaneously.
+        * The :code:`test` mode is mainly used to test the model weights after training is completed. This mode runs in a single process and tests the weights of individual models.
         * The configuration variable for the above modes is the :code:`MODE` variable.
 
     In addition, the :code:`main.py` file also accepts user parameter configurations, with the meanings and default values of the parameters as follows:
@@ -132,7 +132,7 @@ Program entry point
     * :code:`--Freq(int)=125` : The running frequency of the algorithm side (the environment side runs at 500Hz and is unchangeable), so the default :code:`--Freq(int)=125` means the environment side transmits data back every 4 steps
     * :code:`--delay(int)=20` : Waiting time for Webots map to load (training can only start normally after the Webots map has been fully loaded)
     * :code:`--New_Train(bool)=False` : Whether to start a new training session, default is :code:`--New_Train=False`, which will load the pre-trained weights from :code:`A3CLSTM_E2E/trained_models/Benchmark.dat` (if available) for training, and the tensorboard curves will continue from the last training session
-    * :code:`--Port(int)=-1` : The communication port between the environment side and the algorithm side, default :code:`--Port=-1` will randomly use an available port, and manual modification is not recommended
+    * :code:`--Port(int)=-1` : The communication port between the environment side and the algorithm side, default :code:`--Port=-1` will randomly use an available port, and manual **modification is not recommended**
 
     .. raw:: html
 
@@ -155,7 +155,7 @@ Program entry point
     * :code:`--save-max(bool)=False` : Whether to save the model weights when the testing process reaches the highest reward, default is :code:`False`, meaning only the model weights at the last moment will be saved
     * :code:`--model_type(str)="E2E"` : Specify the type of model currently being used, if the user implements their own model, they can add the configuration here
     * :code:`--save-model-dir(str)="./models/A3CLSTM_E2E/trained_models/"` : The path for saving the model
-    * :code:`--Test_Param(str)="CityStreet-d"` : (only enabled when :code:`--Mode(int)=0`) Specifies which weights to load for testing, default is :code:`--Test_Param="CityStreet-d"`, which will load the weights :code:`A3CLSTM_E2E/trained_models/CityStreet-d.dat` for testing
+    * :code:`--Test_Param(str)="CityStreet-d"` : Specifies which weights to load for testing(only enabled when :code:`--Mode(int)=0`), default is :code:`--Test_Param="CityStreet-d"`, which will load the weights :code:`A3CLSTM_E2E/trained_models/CityStreet-d.dat` for testing
 
     .. raw:: html
 
@@ -182,8 +182,6 @@ log files
         </br>
 
     * This mode is mainly used for program debugging and data transmission verification, essentially replacing the terminal :code:`print` function.
-    * The folder contains two main types of log files: :code:`Agent_train${n}.log` and :code:`Agent${n}.log`
-    *  :code:`Agent_train${n}.log` primarily stores parameter information during the training process. For example, if you want to observe the change in the gae value, you can do so in :code:`Agent_train${n}.log`.
     *  :code:`Agent${n}.log` is mainly used to save the data transmitted from the environment. For example, if you want to observe the custom reward parameters :code:`RewardParams` obtained from the environment, you can view them in this file.
 
     **Mode 2: Directly output tensorboard-logger files**
@@ -199,7 +197,7 @@ log files
     * During multi-process training, this project reserves one process for testing. For example, if the user selects 24 parallel agents, then during the actual training, there will be 23 training processes and 1 testing process. The testing process synchronizes the weights of the shared_model at the beginning of each episode and conducts tests.
     * The data recorded in the :code:`tensorboard-logger` file is from the testing process, mainly the :code:`value` during training, which is used to evaluate the training status of the agents.
     * Additionally, if the program is interrupted due to external reasons, this project provides an uninterrupted :code:`tensorboard-logger` function. It uses :code:`num_test.txt` to store the current data entry count and continues recording when a new training session starts.
-    * **Note:** If the user wishes to re-record the training curve, they need to manually set the data in :code:`num_test.txt` to 0 or directly delete the :code:`num_test.txt` file.
+    * **Note:** If the user wishes to re-record the training curve, they need to add **-- New_Train** to the command that starts the training.
     * After completing all configurations, simply run the following code to view the :code:`TensorBoard` visualization records on :code:`localhost:xxxx`.
     
     .. code:: bash
@@ -361,7 +359,7 @@ log file
     </br>
 
 
-Baseline3 PPO+CL
+Baseline3 RPPO+CL
 ---------------------------------
 
 .. raw:: html
@@ -435,21 +433,24 @@ Program Entry
 Curriculum Learning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * Our method adds curriculum learning based on RPPO, and in the first stage of curriculum learning, the agent understands the task under simple settings.
+    * Our method adds curriculum learning based on RPPO, and in the first and second stages of curriculum learning, the intelligent experience tracks monochrome and colored cars respectively under simple settings (unobstructed situation, car only travels straight)
     * For convenience, we extracted the simple settings as maps, i.e. :code:`./Webots_Simulation/traffic_project/worlds/simpleway-*.wbt` maps.
-    * Therefore, the task understanding stage is trained on the corresponding :code:`simpleway-*.wbt`.
-    * After completing task understanding, the second stage of training can be conducted on visually challenging maps to learn complex visual features.
-    * For example, for the map :code:`citystreet-day.wbt`, the commands for the two stages are as follows:
+    * Therefore, the third stage is trained on the corresponding :code:`simpleway-*.wbt`.
+    * After completing task understanding, the third stage of training can be conducted on visually challenging maps to learn complex visual features.
+    * For example, for the map :code:`citystreet-day.wbt`, the commands for the third stages are as follows:
 
     .. code:: bash
 
         cd Alg_Base/rl_a3c_pytorch_benchmark/
-        # Stage1: Task Understanding
-        python ./models/Recurrent_PPO/RPPO.py -w 24 -m simpleway-grass.wbt --train_mode 1 --New_Train
-        # Stage2: Visual Generalization
-        python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
+        # Stage2: Task Understanding
+        python ./models/Recurrent_PPO/RPPO.py -w 35 -m simpleway-grass.wbt --train_mode 1 --New_Train
+        # Stage3: Visual Generalization
+        python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
         # Testing Mode
-        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0
+        # Test with Cumulative Reward (CR)
+        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode AR
+        # Test with Tracking Success Rate (TSR)
+        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode TSR
 
 .. _table-cf:
 
