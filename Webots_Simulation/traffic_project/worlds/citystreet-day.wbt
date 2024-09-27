@@ -70,9 +70,10 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.16938928838149425 -0.7435124352049385 0.646913075827992 5.60599938269381
-  position -48.92950808706285 34.048395156874655 30.775188482743438
+  orientation -0.24548116911680215 -0.43477159200124127 0.8664367596066975 5.128123007927784
+  position -36.0273164159676 48.49873768751842 34.7359393218547
   near 3
+  followType "Pan and Tilt Shot"
 }
 DEF tbg TexturedBackground {
 }
@@ -927,7 +928,7 @@ DEF SUMO_INTERFACE SumoInterface {
   gui FALSE
   maxVehicles 40
   step 100
-  port 8888
+  port 60489
   seed 0
   networkFiles "../../worlds/citystreet_net"
   children [

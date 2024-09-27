@@ -1,7 +1,7 @@
 {
     "Simulation_Mode": "demo",
     "Tracker_Def": "DRONE",
-    "Drone_Supervisor_Ctrl": true,
+    "Drone_Supervisor_Ctrl": false,
     "Socket_Ip": "127.0.0.1",
     "Config_Agen_Num_Port": 60489,
     "Train_Total_Steps": 1500,
