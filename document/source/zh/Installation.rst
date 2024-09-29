@@ -78,7 +78,7 @@ Step1 安装webots仿真软件
     .. code:: bash
         
         ## install
-        sudo dpkg -i webots-R2023b-x86-64.deb
+        sudo dpkg -i webots_R2023b_amd64.deb
 
         ## run
         webots
@@ -87,6 +87,8 @@ Step1 安装webots仿真软件
 
     .. code:: bash
         
+        mkdir -p ~/.cache/Cyberbotics/Webots/assets/
+
         cp ~/Downloads/assets-R2023b.zip ~/.cache/Cyberbotics/Webots/assets/
         
         ## unzip
@@ -149,7 +151,7 @@ Step3 修改webots运行python环境
 
     .. code:: bash
 
-        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
+        sudo ln -s ~/anaconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
 
     接着进入webots软件，选择 :code:`工具(Tools)` -> :code:`首选项(Preferences)`, 按照如下图将选项 :code:`Python command` 进行修改：
 

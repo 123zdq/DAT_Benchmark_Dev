@@ -154,14 +154,16 @@
 <div><p>从 <a class="reference external" href="https://github.com/cyberbotics/webots">webots</a> 下载webots2023b版本的deb包(例如： <code class="code docutils literal notranslate"><span class="pre">webots-R2023b-x86-64.deb</span></code> )和资产文件( <code class="code docutils literal notranslate"><span class="pre">assets-R2023b.zip</span></code> )，使用如下命令安装:</p>
 <p><strong>webots安装</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## install</span>
-sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>webots-R2023b-x86-64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>webots_R2023b_amd64.deb
 
 <span class="c1">## run</span>
 webots
 </pre></div>
 </div>
 <p><strong>assets解压</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cp<span class="w"> </span>~/Downloads/assets-R2023b.zip<span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
+
+cp<span class="w"> </span>~/Downloads/assets-R2023b.zip<span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/
 
 <span class="c1">## unzip</span>
 <span class="nb">cd</span><span class="w"> </span>~/.cache/Cyberbotics/Webots/assets/<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>unzip<span class="w"> </span>./assets-R2023b.zip
@@ -219,7 +221,7 @@ gedit<span class="w"> </span>~/.bashrc
 <h3>Step3 修改webots运行python环境<a class="headerlink" href="#step3-webotspython" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>由于我们使用的环境与webots本身默认的python环境不相同，因此需要为我们新的环境创建软链接并进行配置</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow311/bin/python3.11<span class="w"> </span>/usr/bin/python311
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ln<span class="w"> </span>-s<span class="w"> </span>~/anaconda3/envs/uav_follow311/bin/python3.11<span class="w"> </span>/usr/bin/python311
 </pre></div>
 </div>
 <p>接着进入webots软件，选择 <code class="code docutils literal notranslate"><span class="pre">工具(Tools)</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">首选项(Preferences)</span></code>, 按照如下图将选项 <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> 进行修改：</p>
