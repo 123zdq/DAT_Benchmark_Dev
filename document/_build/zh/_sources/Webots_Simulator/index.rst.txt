@@ -55,3 +55,4 @@
 
    Simulator
    Configuration
+   Parameters

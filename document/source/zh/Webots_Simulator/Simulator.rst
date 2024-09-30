@@ -1,5 +1,4 @@
- 仿真环境
- 
+仿真环境
 =======================
 
     .. raw:: html
@@ -101,7 +100,7 @@ demo模式
 
       * :code:`w` :code:`s` :code:`a` :code:`d`: 控制相机云台的上下左右旋转
 
-      * :code:`shift` + :code:`up`: 无人机上升
+      * :code:`shift` + :code:`up`: 无人机上升(起飞)
 
       * :code:`shift` + :code:`down`: 无人机下降
 
@@ -170,14 +169,14 @@ train模式
 
 **参数说明**
 
-   * :code:`Simulation_Mode` ：仿真模式有三种:"demo"、"video"、"train"。demo与video模式是仿真端自运行的模式（默认为"train"）。
+   * :code:`Simulation_Mode` ：仿真模式有三种:"demo"、"video"、"train"。demo与video模式是仿真端自动运行的模式（默认为"train"）。
 
       * demo会在地图中生成一个跟踪器，支持键盘直接控制，同时默认追踪地图中一辆静置车辆BmwX5，可以通过该模式浏览地图或者调试reward参数。
       * video模式是视频拍摄模式，在该模式下跟踪器会自动跟踪目标对象，导出视频图像和标签。
       * train是训练模式，仿真端与算法端进行交互，对跟踪器的追踪算法进行训练。
       * 完整系统运行流程图见： :ref:`运行流程` 
 
-   - :code:`Tracker_Def` ：选择跟踪器种类，当前的选择参数有 :code:`DRONE` 以及 :code:`CAR` 。其中，:code:`DRONE`是一个仿真无人机跟踪器，带有物理属性检测和约束，相比之下， :code:`CAR` 被认为是一个理想的跟踪器，不考虑自身物理属性，能够在任何情况下执行任何动作。
+   - :code:`Tracker_Def` ：选择跟踪器种类，当前的选择参数有 :code:`DRONE` 以及 :code:`CAR` 。其中，:code:`DRONE` 是一个仿真无人机跟踪器，带有物理属性检测和约束，相比之下， :code:`CAR` 被认为是一个理想的跟踪器，不考虑自身物理属性，能够在任何情况下执行任何动作。
    - :code:`Drone_Supervisor_Ctrl` ：是否使用supervisor控制跟踪器，supervisor是webots的超级管理员，可以直接控制任何节点。如果为true，则使用supervisor控制跟踪器。如果为false，则使用传统PID控制器(默认无人机控制器 `参考工程 <https://github.com/TaoYibo1866/uav_simulator/tree/master?tab=readme-ov-file>`_ 进行实现)控制跟踪器的运动。该参数仅适用于无人机跟踪器，车跟踪器仅使用supervisor进行控制。
    - :code:`Socket_Ip` ：socket通信的ip地址，如果为本机通信，则设置为 **"127.0.0.1"**。
    - :code:`Config_Agen_Num_Port` ：配置socket通信端口，该端口用于与算法端进行通信，以确定并行智能体数量。
@@ -229,13 +228,13 @@ train模式
 
 **参数说明**
 
-   - :code:`max_height` ：跟踪器最大飞行高度( :math:`m`)。
-   - :code:`min_height` ：跟踪器最小飞行高度( :math:`m`)。
-   - :code:`velocity` ：跟踪器最大飞行速度( :math:`m/s`)。
-   - :code:`omiga` ：跟踪器最大飞行角速度( :math:`rad/s`)。
-   - :code:`roll` ：跟踪器最大飞行roll角度( :math:`rad`)。
-   - :code:`pitch` ：跟踪器最大飞行pitch角度( :math:`rad`)。
-   - :code:`distance_error` ：跟踪器期望位置和当前位置的最大误差( :math:`m`)。
+   - :code:`max_height` ：跟踪器最大飞行高度 (:math:`m`)。
+   - :code:`min_height` ：跟踪器最小飞行高度 (:math:`m`)。
+   - :code:`velocity` ：跟踪器最大飞行速度 (:math:`m/s`)。
+   - :code:`omiga` ：跟踪器最大飞行角速度 (:math:`rad/s`)。
+   - :code:`roll` ：跟踪器最大飞行roll角度 (:math:`rad`)。
+   - :code:`pitch` ：跟踪器最大飞行pitch角度 (:math:`rad`)。
+   - :code:`distance_error` ：跟踪器期望位置和当前位置的最大误差 (:math:`m`)。
 
 .. _内置reward参数配置:
 
@@ -298,7 +297,7 @@ SUMO交通系统参数配置
    - :code:`max_sumo_car` ：地图中最大载具数量。
    - :code:`fixed_car_group_num` ：是否自定义每组加入环境中车辆的数量。
    - :code:`car_group_num` ：自定义每组加入环境中车辆的数量。 **注意：** 在训练和视频模式下如果该参数设置不合理（＜Agent数量*3），系统会自动设置合理的参数（＝Agent数量*3），否则环境无法稳定运行。
-   - :code:`car_import_interval` ：加入地图每组载具的间隔时间( :math:`s` )。
+   - :code:`car_import_interval` ：加入地图每组载具的间隔时间 (:math:`s`)。
 
    * :code:`car_type` ：载具的类型（默认passenger），包括 :code:`[“passenger”、“bus”、“truck”、“trailer”、“motorcycle”]`。
 
@@ -306,11 +305,12 @@ SUMO交通系统参数配置
 
    - :code:`fixed_color` ：是否固定载具颜色。
    - :code:`normalize_color` ：归一化的RGB颜色向量。
-   - :code:`max_car_speed` ：最大载具移动速度( :math:`m/s`)。
-   - :code:`max_car_accel` ：最大载具加速度( :math:`m/s^2`)。
-   - :code:`max_car_decel` ：最大载具减速度( :math:`m/s^2`)。
-   - :code:`max_rou_distance` ：最大路径长度( :math:`m`)。
-   - :code:`min_rou_distance` ：最小路径长度( :math:`m`)。
+
+   - :code:`max_car_speed` ：最大载具移动速度 (:math:`s`)。
+   - :code:`max_car_accel` ：最大载具加速度 (:math:`m/s^2`)。
+   - :code:`max_car_decel` ：最大载具减速度 (:math:`m/s^2`)。
+   - :code:`max_rou_distance` ：最大路径长度 (:math:`m`)。
+   - :code:`min_rou_distance` ：最小路径长度 (:math:`m`)。
    - :code:`route_num` ：路径最大数量（注意是最大， :code:`obj_edge_distribution_multilateral` 实际由于随机化的过程不一定完全成功，会比设置的参数要少）。
    - :code:`fixed_seed` ：是否使用固定的随机种子，如果希望获得稳定的路径和车辆样式，请设置为true。
    - :code:`random_seed` ：固定的随机种子。
@@ -335,13 +335,13 @@ SUMO交通系统参数配置
 **参数说明**
 
    - :code:`max_obj_num` ：最大对象数量。
-   - :code:`obj_import_interval` ：每组对象加入地图的时间间隔( :math:`s`)。
+   - :code:`obj_import_interval` ：每组对象加入地图的时间间隔 (:math:`s`)。
    - :code:`import_group_num` ：每组加入对象的数量。
-   - :code:`obj_edge_distribution_random` ：是否使能对象沿着地图道路两旁随机分布。 :code:`true`，则会在随机路径随机位置的垂直方向随机放置。 :code:`false`，则会在随机路径的随机位置垂直方向固定距离放置。
-   - :code:`obj_edge_distribution_multilateral` ：是否使能双边分布。 :code:`true`，则分布范围为 :code:`[min, max] ∪ [-max, -min]` 。 :code:`false`，则分布范围为 :code:`[min, max]` 。
-   - :code:`obj_edge_distribution_fixed` ：距离道路中心固定的距离( :math:`m`)。
-   - :code:`obj_edge_distribution_max` ：距离道路中心最大的距离( :math:`m`)。
-   - :code:`obj_edge_distribution_min` ：距离道路中心最小的距离( :math:`m`)。
+   - :code:`obj_edge_distribution_random` ：是否使能对象沿着地图道路两旁随机分布。 :code:`true` 则会在随机路径随机位置的垂直方向随机放置。 :code:`false` 则会在随机路径的随机位置垂直方向固定距离放置。
+   - :code:`obj_edge_distribution_multilateral` ：是否使能双边分布。 :code:`true` 则分布范围为 :code:`[min, max] ∪ [-max, -min]` 。 :code:`false` 则分布范围为 :code:`[min, max]` 。
+   - :code:`obj_edge_distribution_fixed` ：距离道路中心固定的距离 (:math:`m`)。
+   - :code:`obj_edge_distribution_max` ：距离道路中心最大的距离 (:math:`m`)。
+   - :code:`obj_edge_distribution_min` ：距离道路中心最小的距离 (:math:`m`)。
 
 输出视频的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -369,17 +369,17 @@ SUMO交通系统参数配置
 
    - :code:`channels` ：视频通道数量，也就是导入地图中的跟踪器数量。
    - :code:`fps` ：根据仿真时间计算的每秒帧数（按照该帧数导出视频图像）。
-   - :code:`start_time` ：视频开始导出的仿真时间( :math:`s`)。
-   - :code:`total_time` ：视频持续的仿真时间( :math:`s`)。
-   - :code:`warm_up_steps` ：reset过后一开始多少个step不输出任何数据。(注意，每个step的周期为 :math:`2ms`)。
+   - :code:`start_time` ：视频开始导出的仿真时间 (:math:`s`)。
+   - :code:`total_time` ：视频持续的仿真时间 (:math:`s`)。
+   - :code:`warm_up_steps` ：reset后开始多少个step不输出数据。(注意，每个step的周期为 :math:`2ms`)。
    - :code:`output_car_dir` ：是否输出车辆方向，如果使能，则只输出车辆运动方向，否则，输出reward和action。（车辆方向：0停止，1直行，2左转，3右转）
    - :code:`random_action` ：跟踪器是否使用随机动作，如果使能，则根据Control_Frequence输出随机动作，否则，跟踪器将无差跟随车辆，此时输出action为-1（无意义）
-   - :code:`forward_speed` ：跟踪器随机动作的前进速度( :math:`m/s`)。
-   - :code:`backward_speed` ：跟踪器随机动作的后退速度( :math:`m/s`)。
-   - :code:`left_speed` ：跟踪器随机动作的左移速度( :math:`m/s`)。
-   - :code:`right_speed` ：跟踪器随机动作的右移速度( :math:`m/s`)。
-   - :code:`cw_omega` ：跟踪器随机动作的顺时针旋转速度( :math:`rad/s`)。
-   - :code:`ccw_omega` ：跟踪器随机动作的逆时针旋转速度( :math:`rad/s`)）。
+   - :code:`forward_speed` ：跟踪器随机动作的前进速度 (:math:`m/s`)。
+   - :code:`backward_speed` ：跟踪器随机动作的后退速度 (:math:`m/s`)。
+   - :code:`left_speed` ：跟踪器随机动作的左移速度 (:math:`m/s`)。
+   - :code:`right_speed` ：跟踪器随机动作的右移速度 (:math:`m/s`)。
+   - :code:`cw_omega` ：跟踪器随机动作的顺时针旋转速度 (:math:`rad/s`)。
+   - :code:`ccw_omega` ：跟踪器随机动作的逆时针旋转速度 (:math:`rad/s`)）。
 
 跟踪器控制的参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -424,7 +424,7 @@ SUMO交通系统参数配置
 
    * :code:`start_time_bias_ms` ：由于环境初始化需要时间，因此设置的智能体越多，初始化的时间会越长，该参数可以整体调整初始化时间的大小。
 
-      * **注意：总的初始化时间会根据智能体的数量的增加而增加，比该参数设置的时间要长。**
+      * **注意：总的初始化时间会根据智能体的数量的增加而增加，长于参数设置时间。**
 
    - :code:`view_pitch_random` ：是否对跟踪器摄像头俯仰角随机化。
 
@@ -436,7 +436,7 @@ SUMO交通系统参数配置
    - :code:`view_pitch_random_max` ：最大摄像头俯角。
    - :code:`view_pitch_random_min` ：最小摄像头俯角。
    - :code:`height_random` ：跟踪器飞行高度随机化。其余参数意义同上。
-   - :code:`direction_random` ：初始视角跟踪器跟随对象方向随机化，范围 :math:`[-pi,pi](rad)`
+   - :code:`direction_random` ：初始视角跟踪器跟随对象方向随机化，范围 :math:`[-\pi, \pi](rad)`
 
    * :code:`direction_random_multilateral` ：是否启用双边随机化配置。
       
@@ -448,7 +448,7 @@ SUMO交通系统参数配置
 部分配置参数建议
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   由于24张场景地图的复杂度/大小并不相同，因而本工程提供了每张地图的建议配置参数，请参考文档： :doc:`Configuration`。
+   由于24张场景地图的复杂度/大小并不相同，因而本工程提供了每张地图的建议配置参数，请参考文档： :doc:`Parameters`。
    
 .. raw:: html
 
@@ -675,6 +675,8 @@ Wheel Robots
 
 Legged Robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   足式机器人
 
    .. raw:: html
 
@@ -920,20 +922,6 @@ Legged Robots
    </br>
 
 
-Reward计算
-~~~~~~~~~~~~~~~~~~~~
-
-.. figure:: ../_static/image/distance奖励框图.png
-   :alt: distance奖励框图                                  
-   :width: 600px                                              
-   :align: center
-
-   distance奖励框图 
-
-.. raw:: html
-
-   </br>
-
 .. _定制化参数接口:
 
 定制化参数接口
@@ -949,7 +937,7 @@ Reward计算
 输入动作
 ~~~~~~~~~~~~~~~~~~~~
 
-   输入动作用于控制跟踪器的运动，目前跟踪器支持离散及连续的动作空间。连续的动作空间为5个浮点数，包括前进/后退、左移/右移、上移/下移、顺/逆时针旋转及是否reset。离散的动作空间包含前进、后退、左平移、右平移、顺时针旋转、逆时针旋转和停止。
+   输入动作用于控制跟踪器的运动，目前跟踪器支持离散及连续的动作空间。连续的动作空间为5个浮点数，包括前进/后退、左移/右移、上移/下移、顺/逆时针旋转及是否reset。离散的动作空间包含前进、后退、左平移、右平移、逆时针旋转、顺时针旋转和停止。
 
 返回参数
 ~~~~~~~~~~~~~~~~~~~~

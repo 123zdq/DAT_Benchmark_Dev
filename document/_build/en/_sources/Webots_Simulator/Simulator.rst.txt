@@ -227,13 +227,13 @@ Tracker (only effective for drones) generates a physical range parameter configu
 
 **Parameter Description**
 
-   - :code:`max_height` ：Tracker maximum flight altitude ( :math:`m`).
-   - :code:`min_height` ：Tracker minimum flight altitude ( :math:`m`).
-   - :code:`velocity` ：Tracker maximum flight velocity ( :math:`m/s`).
-   - :code:`omiga` ：Tracker maximum angular velocity ( :math:`rad/s`).
-   - :code:`roll` ：Tracker maximum roll angle ( :math:`rad`).
-   - :code:`pitch` ：Tracker maximum pitch angle ( :math:`rad`).
-   - :code:`distance_error` ：Maximum error between the tracker's desired position and current position ( :math:`m`).
+   - :code:`max_height` ：Tracker maximum flight altitude (:math:`m`).
+   - :code:`min_height` ：Tracker minimum flight altitude (:math:`m`).
+   - :code:`velocity` ：Tracker maximum flight velocity (:math:`m/s`).
+   - :code:`omiga` ：Tracker maximum angular velocity (:math:`rad/s`).
+   - :code:`roll` ：Tracker maximum roll angle (:math:`rad`).
+   - :code:`pitch` ：Tracker maximum pitch angle (:math:`rad`).
+   - :code:`distance_error` ：Maximum error between the tracker's desired position and current position (:math:`m`).
 
 .. _Built-in reward parameter configuration:
 
@@ -304,11 +304,11 @@ SUMO Traffic System Parameter Configuration
 
    - :code:`fixed_color` : Whether to fix the vehicle color.
    - :code:`normalize_color` : Normalized RGB color vector.
-   - :code:`max_car_speed` : Maximum vehicle speed (m/s).
-   - :code:`max_car_accel` : Maximum vehicle acceleration (m/s^2).
-   - :code:`max_car_decel` : Maximum vehicle deceleration (m/s^2).
-   - :code:`max_rou_distance` : Maximum route length (m).
-   - :code:`min_rou_distance` : Minimum route length (m).
+   - :code:`max_car_speed` : Maximum vehicle speed (:math:`m/s`).
+   - :code:`max_car_accel` : Maximum vehicle acceleration (:math:`m/s^2`).
+   - :code:`max_car_decel` : Maximum vehicle deceleration (:math:`m/s^2`).
+   - :code:`max_rou_distance` : Maximum route length (:math:`m`).
+   - :code:`min_rou_distance` : Minimum route length (:math:`m`).
    - :code:`route_num` : Maximum number of routes (note that this is the maximum, :code:`obj_edge_distribution_multilateral` may actually have fewer routes than the set parameter due to the randomization process).
    - :code:`fixed_seed` : Whether to use a fixed random seed. If you want to obtain stable routes and vehicle styles, set it to true.
    - :code:`random_seed` : The fixed random seed.
@@ -337,9 +337,9 @@ Only effective when :code:`Tracking_Object` is not "SUMO_VEHICLE".
    - :code:`import_group_num` ：Number of objects added per group.
    - :code:`obj_edge_distribution_random` ：Whether to enable random distribution of objects along the sides of the map roads. If true, objects will be randomly placed in a random direction at random positions on a random path. If false, objects will be placed at a fixed distance in the vertical direction at random positions on a random path.
    - :code:`obj_edge_distribution_multilateral` ：Whether to enable bilateral distribution. If true, the distribution range will be :code:`[min, max] ∪ [-max, -min]` . If false, the distribution range will be :code:`[min, max]` .
-   - :code:`obj_edge_distribution_fixed` ：Fixed distance (m) from the center of the road.
-   - :code:`obj_edge_distribution_max` ：Maximum distance (m) from the center of the road.
-   - :code:`obj_edge_distribution_min` ：Minimum distance (m) from the center of the road.
+   - :code:`obj_edge_distribution_fixed` ：Fixed distance (:math:`m`) from the center of the road.
+   - :code:`obj_edge_distribution_max` ：Maximum distance (:math:`m`) from the center of the road.
+   - :code:`obj_edge_distribution_min` ：Minimum distance (:math:`m`) from the center of the road.
 
 Output video parameter configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -367,17 +367,17 @@ Effective only when :code:`Simulation_Mode` is not “video”.
 
    - :code:`channels` ：Number of video channels, which corresponds to the number of trackers in the imported map.
    - :code:`fps` ：Frames per second calculated based on simulation time (video frames are exported at this frame rate).
-   - :code:`start_time` ：Simulation time ( :math:`s`) at which video export begins.
-   - :code:`total_time` ：Duration of the video in simulation time ( :math:`s`).
+   - :code:`start_time` ：Simulation time (:math:`s`) at which video export begins.
+   - :code:`total_time` ：Duration of the video in simulation time (:math:`s`).
    - :code:`warm_up_steps` ：The number of steps after reset during which no data is output. Note that each step has a cycle of 2ms.
    - :code:`output_car_dir` ：Whether to output the vehicle direction. If enabled, only the vehicle movement direction is output; otherwise, reward and action are output (Vehicle directions: 0 stop, 1 forward, 2 left turn, 3 right turn).
    - :code:`random_action` ：Whether the tracker uses random actions. If enabled, random actions are output based on Control_Frequency. Otherwise, the tracker will precisely follow the vehicle, and the action output will be -1 (meaningless).
-   - :code:`forward_speed` ：Forward speed of the tracker’s random action ( :math:`m/s`).
-   - :code:`backward_speed` ：Backward speed of the tracker’s random action ( :math:`m/s`).
-   - :code:`left_speed` ：Leftward speed of the tracker’s random action ( :math:`m/s`).
-   - :code:`right_speed` ：Rightward speed of the tracker’s random action ( :math:`m/s`).
-   - :code:`cw_omega` ：Clockwise rotation speed of the tracker’s random action ( :math:`rad/s`).
-   - :code:`ccw_omega` ：Counterclockwise rotation speed of the tracker’s random action ( :math:`rad/s`).
+   - :code:`forward_speed` ：Forward speed of the tracker’s random action (:math:`m/s`).
+   - :code:`backward_speed` ：Backward speed of the tracker’s random action (:math:`m/s`).
+   - :code:`left_speed` ：Leftward speed of the tracker’s random action (:math:`m/s`).
+   - :code:`right_speed` ：Rightward speed of the tracker’s random action (:math:`m/s`).
+   - :code:`cw_omega` ：Clockwise rotation speed of the tracker’s random action (:math:`rad/s`).
+   - :code:`ccw_omega` ：Counterclockwise rotation speed of the tracker’s random action (:math:`rad/s`).
 
 Tracker Control Parameter Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -410,7 +410,7 @@ Tracker Control Parameter Configuration
         "horizon_bias_fixed": 0,
         "horizon_bias_random_max": 3,
         "horizon_bias_random_min": 0.1,
-        
+
         "verticle_bias_random": false,
         "verticle_bias_multilateral": true,
         "verticle_bias_fixed": 0,
@@ -437,7 +437,7 @@ Tracker Control Parameter Configuration
    - :code:`direction_random` : Randomization of the tracker’s initial view direction following the object, with a range of :math:`[-pi,pi](rad)`.
 
    * :code:`direction_random_multilateral` : Whether to enable bilateral randomization configuration.
-      
+
       * :code:`false`, :math:`[min, max]` ; :code:`true`, :math:`[-max, -min] ∪ [min, max]`
 
    - :code:`horizon_bias_random` : Horizontal offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts to the left; if negative, the object shifts to the right. Other parameters are the same as above.
@@ -446,8 +446,8 @@ Tracker Control Parameter Configuration
 Configuration Parameter Recommendations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   For recommendations on simulator parameter configurations, please refer to the document: :doc:`Configuration`.
-   
+   For recommendations on simulator parameter configurations, please refer to the document: :doc:`Parameters`.
+
 .. raw:: html
 
    <span style="background-color: yellow;">To Do</span>
@@ -482,7 +482,7 @@ SUMO_VEHICLE
             <img src="../_static/image/BMWX5.png" alt="Image 1" style="width: 90%;" />
             <figcaption>BmwX5</figcaption>
          </figure>
-         <figure style="text-align: center; width: 25%;">  
+         <figure style="text-align: center; width: 25%;">
             <img src="../_static/image/CITROENCZero.png" alt="Image 2" style="width: 90%;" />
             <figcaption>CitroenCZero</figcaption>
          </figure>
@@ -514,9 +514,9 @@ SUMO_VEHICLE
       </div>
 
 .. .. figure:: ../_static/image/BMWX5.png
-..    :alt: BMWX5                                            
-..    :width: 500px                                              
-..    :align: center   
+..    :alt: BMWX5
+..    :width: 500px
+..    :align: center
 
 ..    BmwX5
 
@@ -567,9 +567,9 @@ SUMO_VEHICLE
    Unified model, large passenger vehicles
 
 .. figure:: ../_static/image/BUS.png
-   :alt: BUS                                            
-   :width: 500px                                              
-   :align: center   
+   :alt: BUS
+   :width: 500px
+   :align: center
 
    Bus
 
@@ -578,9 +578,9 @@ SUMO_VEHICLE
    Unified vehicle type, truck without cargo box
 
 .. figure:: ../_static/image/TRUCK.png
-   :alt: TRUCK                                            
-   :width: 500px                                              
-   :align: center   
+   :alt: TRUCK
+   :width: 500px
+   :align: center
 
    Truck
 
@@ -589,9 +589,9 @@ SUMO_VEHICLE
    Unified model, truck with cargo box
 
 .. figure:: ../_static/image/TRAILER.png
-   :alt: TRAILER                                            
-   :width: 500px                                              
-   :align: center   
+   :alt: TRAILER
+   :width: 500px
+   :align: center
 
    Trailer
 
@@ -612,7 +612,7 @@ motorcycle
             <figcaption>Motorbike</figcaption>
          </figure>
       </div>
-   
+
 
 Pedestrian
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -656,9 +656,9 @@ Wheel Robots
             <figcaption>Sojourner Rover</figcaption>
          </figure>
       </div>
-   
+
    .. raw:: html
-   
+
       <div style="display: flex; align-items: center; justify-content: space-between;">
          <figure style="text-align: center; width: 50%;">
             <img src="../_static/image/BB_8.png" alt="BB_8" style="width: 90%;" />
@@ -669,7 +669,7 @@ Wheel Robots
             <figcaption>FireBird6</figcaption>
          </figure>
       </div>
-   
+
 
 Legged Robots
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -690,7 +690,7 @@ Legged Robots
             <figcaption>BioloidDog Quadruped Robot</figcaption>
          </figure>
       </div>
-   
+
    .. raw:: html
 
       <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -716,10 +716,10 @@ Custom Objects
    This project supports custom tracked objects, and the steps are as follows:
 
       1. Create a proto file for Webots following `webots wiki <https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.>`_ . The attributes that must be exposed to the scene tree include "translation", "rotation", and "name". The description file should be stored in :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
-      
+
       .. figure:: ../_static/image/场景树属性包.png
-         :alt: 场景树属性包                                  
-         :width: 600px                                              
+         :alt: 场景树属性包
+         :width: 600px
          :align: center
 
          Scenario Tree Attribute Pack
@@ -743,10 +743,10 @@ Custom Objects
          </p>
 
       4. Write the name of the proto into the safety check file :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py`
-      
+
          .. figure:: ../_static/image/SafeCheck.png
-            :alt: SafeCheck                                  
-            :width: 600px                                              
+            :alt: SafeCheck
+            :width: 600px
             :align: center
 
             Security Check
@@ -780,9 +780,9 @@ Reward Function
 
    .. math::
 
-      r_{d} = \begin{cases} 
+      r_{d} = \begin{cases}
       1 & t \in I, \\
-      0 & \text{otherwise}. 
+      0 & \text{otherwise}.
       \end{cases}
 
    Where :math:`I` represents the tracking range (the area captured by the camera lens), and :math:`t` represents the position of the tracked object within the tracking range (the area captured by the camera lens).
@@ -804,9 +804,9 @@ Reward Function
 
    .. figure:: ../_static/image/Continuous_reward.png
       :alt: Continuous_reward
-      :width: 600px 
+      :width: 600px
       :align: center
-      
+
       Continuous Reward Diagram for Object Tracking
 
 
@@ -820,9 +820,9 @@ Reward Function
 
    .. math::
 
-      r_{c} = \begin{cases} 
+      r_{c} = \begin{cases}
       \tanh\left(\alpha(1-x)^{3}\right), & t \in I_{clip}, \\
-      0 & \text{otherwise}. 
+      0 & \text{otherwise}.
       \end{cases}
 
    The closer the target is to the center of the range, the closer the reward is to 1; conversely, the farther away, the closer the reward is to 0. :math:`\alpha` is a constant, and a recommended value is between 3 and 5.
@@ -841,9 +841,9 @@ Reward Judgment
 
    .. figure:: ../_static/image/Reward.png
       :alt: Reward
-      :width: 600px 
+      :width: 600px
       :align: center
-      
+
       Schematic diagram of reward acquisition, A is the mapping of the camera image to the ground, B is the schematic of pinhole imaging, C is the establishment of the camera coordinate system
 
 Principle
@@ -928,8 +928,8 @@ How to Convert to Reward
 2. The primary goal is to achieve tracker tracking. Correct tracking is the prerequisite for receiving a reward. If P1 and P2 meet the basic tracking requirements, the reward value is 1; otherwise, all rewards are eliminated, and the reward output is 0. This is implemented using a step function:
 
    .. figure:: ../_static/image/阶跃函数.png
-      :alt: 阶跃函数                                  
-      :width: 600px                                              
+      :alt: 阶跃函数
+      :width: 600px
       :align: center
 
       Step Function Diagram
@@ -941,32 +941,32 @@ How to Convert to Reward
 3. The secondary goal is to improve tracking. Therefore, the proximity between P1 and P2 can be used as a penalty term for the reward. The further the proximity, the larger the penalty. The penalty term is implemented using the hyperbolic tangent function: :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
 
    .. figure:: ../_static/image/双曲正切函数.png
-      :alt: 双曲正切函数                                  
-      :width: 600px                                              
+      :alt: 双曲正切函数
+      :width: 600px
       :align: center
 
       Schematic diagram of the hyperbolic tangent function
 
 .. raw:: html
 
-   </br> 
+   </br>
 
 4. The final reward calculation block diagram is as follows:
 
    .. figure:: ../_static/image/distance奖励框图.png
-      :alt: distance奖励框图                                  
-      :width: 600px                                              
+      :alt: distance奖励框图
+      :width: 600px
       :align: center
 
-      Distance Reward Boxplot 
+      Distance Reward Boxplot
 
    .. raw:: html
 
       </br>
 
    .. figure:: ../_static/image/view奖励框图.png
-      :alt: view奖励框图                                  
-      :width: 600px                                              
+      :alt: view奖励框图
+      :width: 600px
       :align: center
 
       view reward chart
