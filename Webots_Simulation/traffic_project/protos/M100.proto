@@ -49,7 +49,7 @@ PROTO M100 [
                                          }
                                          DEF DISPLAY Display{
                                          }]
-  field MFNode     cameraSlot          [ Camera { width 1920 height 1080 } ] # Extends the robot with a Camera.
+  field MFNode     cameraSlot          [ Camera { width 320 height 240 } ] # Extends the robot with a Camera.
   field SFFloat    rollAngle           0
   field SFFloat    pitchAngle          0
   field SFFloat    yawAngle            0

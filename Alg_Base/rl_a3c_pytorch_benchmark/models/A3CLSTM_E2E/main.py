@@ -336,10 +336,10 @@ if __name__ == '__main__':
         data["Drone_Random_Config"]["height_fixed"] = 22
 
         data["Drone_Random_Config"]["horizon_bias_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_fixed"] = 5
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
 
         data["Drone_Random_Config"]["verticle_bias_random"] = False
-        data["Drone_Random_Config"]["verticle_bias_fixed"] = 5
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 0
 
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
@@ -355,6 +355,8 @@ if __name__ == '__main__':
             data["Reward_Config"]["view_range"] = 1
         else:
             raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['AR','TSR']")
+        
+        data["No_Reward_Done_Steps"] = 10000
     elif MODE == "train":
         data["Simulation_Mode"]="train"
         data["Drone_Random_Config"]["direction_random"] = False

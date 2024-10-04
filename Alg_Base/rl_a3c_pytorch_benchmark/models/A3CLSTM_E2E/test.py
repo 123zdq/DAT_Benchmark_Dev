@@ -25,7 +25,7 @@ import pandas as pd
         None
 """
 
-TEST_NUM = 50
+TEST_NUM = 10
 EXCEL = True
 
 def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None,num_worker:int=1,process_idx:int=0):
