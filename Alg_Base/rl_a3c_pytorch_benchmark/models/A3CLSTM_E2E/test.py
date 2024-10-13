@@ -107,31 +107,32 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
             num_step += 1
             reward_sum += player.reward
             if player.done:
-                num_tests += num_step
-                num_episode += 1
-                print(f"num_episode: {num_episode}")
-                reward_total_sum += reward_sum
-                reward_mean = reward_total_sum / num_tests
-                if not read_num_test:
-                    if args.Test_Mode == "AR":
-                        reward_list.append(reward_sum)
-                        print(f"Episode {len(reward_list)} test accumulated reward:{reward_sum}")
-                    elif args.Test_Mode == "TSR":
-                        tsr = reward_sum / highest_score
-                        reward_list.append(tsr)
-                        print(f"Episode {len(reward_list)} test tacking success rate:{tsr}")
-                        print(f"check: {highest_score}")
-                    if len(reward_list) == TEST_NUM:
-                        mean,std = get_mean_std(reward_list)
-                        if not EXCEL:
-                            print(f"reward_list for {filename_without_ext}: ")
-                            for reward in reward_list:
-                                print(f"{reward:.3f}")
-                            print(f"{mean:.3f}±{std:.3f}")
-                        else:
-                            reward_list.append(f"{mean:.3f}±{std:.3f}")
-                            df = pd.DataFrame(reward_list, columns=["Values"])
-                            df.to_excel(f"./{filename[:-4]}.xlsx", index=False)
+                if reward_sum != 0:
+                    num_tests += num_step
+                    num_episode += 1
+                    print(f"num_episode: {num_episode}")
+                    reward_total_sum += reward_sum
+                    reward_mean = reward_total_sum / num_tests
+                    if not read_num_test:
+                        if args.Test_Mode == "AR":
+                            reward_list.append(reward_sum)
+                            print(f"Episode {len(reward_list)} test accumulated reward:{reward_sum}")
+                        elif args.Test_Mode == "TSR":
+                            tsr = reward_sum / highest_score
+                            reward_list.append(tsr)
+                            print(f"Episode {len(reward_list)} test tacking success rate:{tsr}")
+                            print(f"check: {highest_score}")
+                        if len(reward_list) == TEST_NUM:
+                            mean,std = get_mean_std(reward_list)
+                            if not EXCEL:
+                                print(f"reward_list for {filename_without_ext}: ")
+                                for reward in reward_list:
+                                    print(f"{reward:.3f}")
+                                print(f"{mean:.3f}±{std:.3f}")
+                            else:
+                                reward_list.append(f"{mean:.3f}±{std:.3f}")
+                                df = pd.DataFrame(reward_list, columns=["Values"])
+                                df.to_excel(f"./{filename[:-4]}.xlsx", index=False)
 
                 # log.info(
                 #     f'Time {time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - start_time))}, episode reward {reward_sum}, episode length {player.eps_len}, reward mean {reward_mean:.4f}'
