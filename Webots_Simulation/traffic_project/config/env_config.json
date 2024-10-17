@@ -1,5 +1,5 @@
 {
-    "Simulation_Mode": "demo",
+    "Simulation_Mode": "train",
     "Tracker_Def": "DRONE",
     "Drone_Supervisor_Ctrl": true,
     "Socket_Ip": "127.0.0.1",

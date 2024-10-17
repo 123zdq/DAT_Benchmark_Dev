@@ -445,16 +445,16 @@ if __name__ == "__main__":
         data["Drone_Random_Config"]["height_fixed"] = 22
 
         data["Drone_Random_Config"]["horizon_bias_random"] = False
-        data["Drone_Random_Config"]["horizon_bias_fixed"] = 5
+        data["Drone_Random_Config"]["horizon_bias_fixed"] = 0
 
         data["Drone_Random_Config"]["verticle_bias_random"] = False
-        data["Drone_Random_Config"]["verticle_bias_fixed"] = 5
+        data["Drone_Random_Config"]["verticle_bias_fixed"] = 0
 
         data["Sumo_Params"]["fixed_color"] = False
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
         
-        data["No_Reward_Done_Steps"] = 100
+        data["No_Reward_Done_Steps"] = 10000
         if args.Test_Mode == "AR":
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "continuous"
