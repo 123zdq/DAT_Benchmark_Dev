@@ -132,7 +132,7 @@ def DVAT_train(args):
     critic_obs_space = obs_space["critic_obs"]
     
     sacd_policy = create_sacd_policy(actor_obs_space=actor_obs_space,action_space=action_space,obs_shape_critic=critic_obs_space.shape[0],action_shape=int(action_space.n))
-    
+    sacd_policy.is_within_training_step = True
     # check structure of sacd_policy
     # print(sacd_policy.actor)  # actor
     # print(sacd_policy.critic)  # critic1
