@@ -156,6 +156,9 @@ class BenchEnv_Multi():
         with open(ENV_CONF, "r") as file:
             data = json.load(file)
         Tracker_Mode = data["Tracker_Def"]
+        self.No_Done_Step = data["Init_No_Done_Steps"]
+        self.Alg_Freq = data["Control_Frequence"]
+
         ## Specify the File Path of each system path
         ## To do: CHANGE ABSOLUTE PATH TO RELATIVE PATH
         self.action_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_AlgAction.txt"
@@ -404,8 +407,9 @@ class BenchEnv_Multi():
             elif action == 3:
                 linear_v = [0,self.Right,0]
             else:
-                linear_v = [0,0,0] 
-            
+                linear_v = [0,0,0]
+            if self.curr_step < self.No_Done_Step+2*(500/self.Alg_Freq):
+                crash = 0
             reward,rx,ry = get_DVAT_reward(A_fov=Afov,d_cmd=self.d_real,x=pos_x,y=pos_y,z = pos_z,v=linear_v,u=[0,0,0],crash=crash,discrete=True)
             self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} w-{ori_w} height:{real_height} pitch_rangle:{pitch_angle} d_real:{self.d_real} linear_v:{linear_v} w_0_real:{ori_w_0} r_x:{rx} r_y:{ry} r:{reward}')
         elif self.reward_type == "CVAT":
