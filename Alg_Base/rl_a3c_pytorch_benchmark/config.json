@@ -12,7 +12,7 @@
         "CW_omega": 2,
         "CCW_omega": -2,
         "Control_Frequence": 125,
-        "port_process": 60489,
+        "port_process": 59491,
         "end_reward": false,
         "end_reward_list": [
             -20,
@@ -20,11 +20,11 @@
         ],
         "scene": "citystreet",
         "weather": "day",
-        "auto_start": true,
+        "auto_start": false,
         "Other_State": false,
         "CloudPoint": false,
         "RewardParams": true,
-        "RewardType": "E2E",
+        "RewardType": "DVAT",
         "verbose": true,
         "delay": 20
     },

@@ -410,6 +410,9 @@ class BenchEnv_Multi():
                 linear_v = [0,0,0]
             if self.curr_step < self.No_Done_Step+2*(500/self.Alg_Freq):
                 crash = 0
+            if crash:
+                done = True
+            # print(f"self.curr_step:{self.curr_step} crash:{crash}")
             reward,rx,ry = get_DVAT_reward(A_fov=Afov,d_cmd=self.d_real,x=pos_x,y=pos_y,z = pos_z,v=linear_v,u=[0,0,0],crash=crash,discrete=True)
             self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} w-{ori_w} height:{real_height} pitch_rangle:{pitch_angle} d_real:{self.d_real} linear_v:{linear_v} w_0_real:{ori_w_0} r_x:{rx} r_y:{ry} r:{reward}')
         elif self.reward_type == "CVAT":
