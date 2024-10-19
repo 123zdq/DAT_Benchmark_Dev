@@ -47,7 +47,7 @@ class CustomDiscreteActor(nn.Module):
     """
     自定义的离散动作空间的Actor网络。
     """
-    def __init__(self, observation_space:gymnasium.spaces.Box, action_dim:int, hidden_sizes=(256,)):
+    def __init__(self, observation_space:gymnasium.spaces.Box, action_dim:int, hidden_sizes=(512,)):
         super().__init__()
         self.feature_extractor = CustomCNN(observation_space)
         feature_dim = self.feature_extractor.linear[-2].out_features
