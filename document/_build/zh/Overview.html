@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>概述 &mdash; UAV_VAT 1.0 文档</title>
+  <title>概述 &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=f115507d"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/translations.js?v=beaddf03"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f115507d"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=beaddf03"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
     <link rel="next" title="安装" href="Installation.html" />
-    <link rel="prev" title="My Project Documentation" href="basicusage.html" /> 
+    <link rel="prev" title="DART documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            UAV_VAT
+            DART
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,9 +43,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">概述</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#id2">1 主动视觉跟踪</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#vat">VAT 任务</a></li>
@@ -55,9 +52,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#benchmark">2 Benchmark呈现</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id4">多样仿真场景</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">多样跟踪目标</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">多样化任务</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">场景复杂多样</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">跟踪器与目标丰富多元</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">任务设置自由灵活</a></li>
 </ul>
 </li>
 </ul>
@@ -73,7 +70,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">UAV_VAT</a>
+          <a href="index.html">DART</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -148,7 +145,8 @@
 <li><p><strong>VAT任务</strong>：VAT(Visual Active Tracking)同时建模视觉跟踪和控制，做到主动控制相机以追踪动态目标，更具现实意义。</p></li>
 </ul>
 <figure class="align-center" id="id7">
-<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">VAT任务与PVT设定区别</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
@@ -170,7 +168,8 @@
 </li>
 </ul>
 <figure class="align-center" id="id8">
-<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">单阶段与两阶段VAT方案示意图</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
@@ -179,56 +178,45 @@
 </section>
 <section id="benchmark">
 <h2>2 Benchmark呈现<a class="headerlink" href="#benchmark" title="Link to this heading"></a></h2>
-<ul>
-<li><p><strong>多样性</strong>：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>场景多样</strong>：具备6种场景4种天气共计24种环境</p></li>
-<li><p><strong>Target多样</strong>：预设24种可选target,支持自主模型接入</p></li>
-<li><p><strong>任务多样</strong>：具备6种常见视觉和运动传感器</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><strong>复杂性</strong>：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>场景元素复杂</strong>：场景元素复杂，覆盖包括树遮挡, 隧道,红绿灯,人行道等常见场景元素</p></li>
-<li><p><strong>动力学模型复杂</strong>：利用webots高度仿真的动力学引擎，实现仿真环境中的动力学模拟</p></li>
-<li><p><strong>Target行为管理复杂</strong>：接入交通仿真器SUMO以统一管理车辆， 确保环境中的Target动作的真实性和随机性</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<section id="id4">
-<h3>多样仿真场景<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<p>场景详见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id1"><span class="std std-ref">环境介绍</span></a></p>
 <figure class="align-center" id="id9">
-<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/statistics.png"><img alt="VAT Model" src="_images/statistics.png" style="width: 600px;" />
+</a>
 <figcaption>
-<p><span class="caption-text">24个复杂场景例图</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">DART 的统计和仿真器组件示意图</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
+<section id="id4">
+<h3>场景复杂多样<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>场景设置多样</strong>：具备6种场景4种天气共计24种环境，场景详见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id2"><span class="std std-ref">环境介绍</span></a></p></li>
+<li><p><strong>场景元素复杂</strong>：从7个方面构建真实场景的复杂性，包含场景面积、建筑物密度、颜色丰富度、道路复杂度、地形复杂度、树木密度和隧道密度。6场景统计信息见上图a所示，困难元素如上图b所示。</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="id5">
-<h3>多样跟踪目标<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<p>跟踪目标对象详见：<a class="reference internal" href="Webots_Simulator/Simulator.html#id17"><span class="std std-ref">跟踪对象</span></a></p>
-<figure class="align-center" id="id10">
-<a class="reference internal image-reference" href="_images/24Target.png"><img alt="24 Targets" src="_images/24Target.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">24种不同的Targets</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
-</figcaption>
-</figure>
+<h3>跟踪器与目标丰富多元<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Tracker多样</strong>：预设地面机器人与无人机作为Tracker，支持地面机器人自主模型接入</p></li>
+<li><p><strong>Target多样</strong>：预设24种可选target,支持自主模型接入，如上图d所示，详见：<a class="reference internal" href="Webots_Simulator/Simulator.html#id14"><span class="std std-ref">跟踪对象</span></a></p></li>
+<li><p><strong>行为管理真实丰富</strong>：接入交通仿真器SUMO以统一管理车辆， 确保环境中的Target动作的真实性和随机性</p></li>
+</ul>
+</div></blockquote>
 </section>
 <section id="id6">
-<h3>多样化任务<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><strong>任务多样性</strong>：状态提供了现实中常见的传感器，如IMU，加速度计，陀螺仪，激光雷达等。</p></li>
+<h3>任务设置自由灵活<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>多传感器</strong>：具备6种常见视觉和运动传感器，如上图c所示</p></li>
+<li><p><strong>任务设置自定义</strong>：任务可拓展性强，附加任务参数自定义设置，多样化任务配置见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id26"><span class="std std-ref">定制化参数接口</span></a></p></li>
 </ul>
-<p>多样化任务配置见： <a class="reference internal" href="Webots_Simulator/Simulator.html#id29"><span class="std std-ref">定制化参数接口</span></a></p>
-<figure class="align-center" id="id11">
-<a class="reference internal image-reference" href="_images/sensor_list.png"><img alt="Sensor list" src="_images/sensor_list.png" style="width: 600px;" /></a>
+</div></blockquote>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" />
+</a>
 <figcaption>
-<p><span class="caption-text">6种常用传感器</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+<p><span class="caption-text">24个开放场景示意图</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -239,7 +227,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="basicusage.html" class="btn btn-neutral float-left" title="My Project Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="DART documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="Installation.html" class="btn btn-neutral float-right" title="安装" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

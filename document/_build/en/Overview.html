@@ -1,29 +1,27 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="./">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Overview &mdash; UAV_VAT 1.0 文档</title>
+  <title>Overview &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=f115507d"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/translations.js?v=beaddf03"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f115507d"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=beaddf03"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
     <link rel="next" title="Installation" href="Installation.html" />
-    <link rel="prev" title="My Project Documentation" href="basicusage.html" /> 
+    <link rel="prev" title="DART documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -35,7 +33,7 @@
           
           
           <a href="index.html" class="icon icon-home">
-            UAV_VAT
+            DART
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -47,7 +45,6 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#visual-active-tracking">1 Visual Active Tracking</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#vat-task">VAT Task</a></li>
@@ -55,9 +52,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#benchmark-presentation">2 Benchmark Presentation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#diverse-simulation-scenarios">Diverse Simulation Scenarios</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#diverse-tracking-targets">Diverse Tracking Targets</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#diverse-tasks">Diverse Tasks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diverse-and-complex-scenarios">Diverse and Complex Scenarios:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rich-and-diverse-trackers-and-targets">Rich and Diverse Trackers and Targets:</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flexible-and-customizable-task-settings">Flexible and Customizable Task Settings:</a></li>
 </ul>
 </li>
 </ul>
@@ -73,7 +70,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">UAV_VAT</a>
+          <a href="index.html">DART</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -148,7 +145,8 @@
 <li><p><strong>VAT Task</strong>: VAT (Visual Active Tracking) simultaneously models visual tracking and control, achieving active camera control to track dynamic targets, making it more realistic.</p></li>
 </ul>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">Differences between VAT Tasks and PVT Settings</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
@@ -163,14 +161,15 @@
 <p><strong>Limitation 2</strong>: The control model is sensitive to parameters and requires parameter fine-tuning for each different scenario</p>
 </div></blockquote>
 </li>
-<li><p><strong>This Project’s VAT Scheme</strong>: Use MDP (Markov Decision Process) to model both visual and control tasks simultaneously, solving visual and control tasks with a single model</p>
+<li><p><strong>This Project's VAT Scheme</strong>: Use MDP (Markov Decision Process) to model both visual and control tasks simultaneously, solving visual and control tasks with a single model</p>
 <blockquote>
 <div><p><strong>Advantage</strong>: End-to-end RL is more efficient and better suited for cross-scenario tasks</p>
 </div></blockquote>
 </li>
 </ul>
 <figure class="align-center" id="id2">
-<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">Single-Stage and Two-Stage VAT Scheme Illustration</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
@@ -179,56 +178,45 @@
 </section>
 <section id="benchmark-presentation">
 <h2>2 Benchmark Presentation<a class="headerlink" href="#benchmark-presentation" title="Link to this heading"></a></h2>
-<ul>
-<li><p><strong>Diversity</strong>：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>Scenario Diversity</strong>: Equipped with 6 scenarios and 4 weather conditions, totaling 24 environments</p></li>
-<li><p><strong>Target Diversity</strong>: Preset 24 selectable targets, supporting the integration of custom models</p></li>
-<li><p><strong>Task Diversity</strong>: Equipped with 6 common vision and motion sensors</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p><strong>Complexity</strong>：</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><strong>Complex Scene Elements</strong>: The scene elements are complex, covering common elements such as tree occlusion, tunnels, traffic lights, sidewalks, etc.</p></li>
-<li><p><strong>Complex Dynamic Models</strong>: Utilizing Webots’ highly realistic dynamic engine to achieve dynamic simulation in the virtual environment</p></li>
-<li><p><strong>Complex Target Behavior Management</strong>: Integrating the traffic simulator SUMO for unified vehicle management, ensuring the realism and randomness of Target actions in the environment</p></li>
-</ul>
-</div></blockquote>
-</li>
-</ul>
-<section id="diverse-simulation-scenarios">
-<h3>Diverse Simulation Scenarios<a class="headerlink" href="#diverse-simulation-scenarios" title="Link to this heading"></a></h3>
-<p>For detailed scenarios, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#environment-introduction"><span class="std std-ref">Environment Introduction</span></a></p>
 <figure class="align-center" id="id3">
-<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/statistics.png"><img alt="VAT Model" src="_images/statistics.png" style="width: 600px;" />
+</a>
 <figcaption>
-<p><span class="caption-text">24 Complex Scene Examples</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">Statistics and simulator component examples of the DART</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-</section>
-<section id="diverse-tracking-targets">
-<h3>Diverse Tracking Targets<a class="headerlink" href="#diverse-tracking-targets" title="Link to this heading"></a></h3>
-<p>For details on tracking target objects, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#tracked-objects"><span class="std std-ref">Tracked Objects</span></a></p>
-<figure class="align-center" id="id4">
-<a class="reference internal image-reference" href="_images/24Target.png"><img alt="24 Targets" src="_images/24Target.png" style="width: 600px;" /></a>
-<figcaption>
-<p><span class="caption-text">24 Different Targets</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
-</figcaption>
-</figure>
-</section>
-<section id="diverse-tasks">
-<h3>Diverse Tasks<a class="headerlink" href="#diverse-tasks" title="Link to this heading"></a></h3>
-<ul class="simple">
-<li><p><strong>Task Diversity</strong>: The state provides sensors commonly found in real-world scenarios, such as IMU, accelerometer, gyroscope, LiDAR, etc.</p></li>
+<section id="diverse-and-complex-scenarios">
+<h3>Diverse and Complex Scenarios:<a class="headerlink" href="#diverse-and-complex-scenarios" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Diverse Scenario Settings</strong>: Featuring a total of 24 environments combining 6 scenarios and 4 weather conditions. For detailed scenarios, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#environment-introduction"><span class="std std-ref">Environment Introduction</span></a></p></li>
+<li><p><strong>Complex Scenario Elements</strong>: The complexity of the real scene is constructed from 7 aspects, including scene area, building density, color richness, road complexity, terrain complexity, tree density, and tunnel density. The scene statistics are shown in Figure a above, and the difficult elements are shown in Figure b above. For detailed scenarios, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#environment-introduction"><span class="std std-ref">Environment Introduction</span></a></p></li>
 </ul>
-<p>For diverse task configurations, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#customized-parameter-interface"><span class="std std-ref">Customized Parameter Interface</span></a></p>
-<figure class="align-center" id="id5">
-<a class="reference internal image-reference" href="_images/sensor_list.png"><img alt="Sensor list" src="_images/sensor_list.png" style="width: 600px;" /></a>
+</div></blockquote>
+</section>
+<section id="rich-and-diverse-trackers-and-targets">
+<h3>Rich and Diverse Trackers and Targets:<a class="headerlink" href="#rich-and-diverse-trackers-and-targets" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Diverse Trackers</strong>: Pre-set ground robots and drones as Trackers, with support for autonomous model integration of ground robots.</p></li>
+<li><p><strong>Diverse Targets</strong>: There are 24 pre-set targets to support autonomous model access, as shown in Figure d above. For details on tracking target objects, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#tracked-objects"><span class="std std-ref">Tracked Objects</span></a></p></li>
+<li><p><strong>Real and Rich Behavior management</strong>: Integrated with the traffic simulator SUMO for unified vehicle management, ensuring the authenticity and randomness of Target movements within the environment.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="flexible-and-customizable-task-settings">
+<h3>Flexible and Customizable Task Settings:<a class="headerlink" href="#flexible-and-customizable-task-settings" title="Link to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Multi-sensor</strong>: Equipped with 6 common visual and motion sensors, as shown in Figure c above.</p></li>
+<li><p><strong>Customizable Task Parameters</strong>: AThe task is highly extensible, and the additional task parameters are customized. For diverse task configurations, see: <a class="reference internal" href="Webots_Simulator/Simulator.html#customized-parameter-interface"><span class="std std-ref">Customized Parameter Interface</span></a></p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" />
+</a>
 <figcaption>
-<p><span class="caption-text">6 Common Sensors</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">Schematic diagram of 24 open scenes</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -239,7 +227,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
-        <a href="basicusage.html" class="btn btn-neutral float-left" title="My Project Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="DART documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
         <a href="Installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

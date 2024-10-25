@@ -196,7 +196,7 @@ Basic Parameters
 
    * :code:`Verbose`: Enable log recording. If set to true, some important parameters will be printed in the Webots terminal window for users to observe. Additionally, program run logs will be generated in the :code:`Webots_Simulation/traffic_project/logs` folder, mainly for debugging the simulation environment.
 
-      .. image:: ../_static/image/webots日志输出.png
+      .. image:: ../_static/image/WebotsLogOutput.png
          :alt: webots日志输出（“train”&“video”）
          :width: 500px
          :align: center
@@ -717,7 +717,7 @@ Custom Objects
 
       1. Create a proto file for Webots following `webots wiki <https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.>`_ . The attributes that must be exposed to the scene tree include "translation", "rotation", and "name". The description file should be stored in :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
 
-      .. figure:: ../_static/image/场景树属性包.png
+      .. figure:: ../_static/image/SceneTreePropertyPack.png
          :alt: 场景树属性包
          :width: 600px
          :align: center
@@ -826,7 +826,7 @@ Reward Function
       \end{cases}
 
    The closer the target is to the center of the range, the closer the reward is to 1; conversely, the farther away, the closer the reward is to 0. :math:`\alpha` is a constant, and a recommended value is between 3 and 5.
-   In addition, :math:`I_{clip}` is the effective reward determination range (as shown in the red box in the figure above :ref:`figcontr`), and the ratio of its side length :math:`W_{I_clip}` to the original image side length :math:`W_{I}` can be expressed by :math:`\lambda_{clip}` as follows.
+   In addition, :math:`I_{clip}` is the effective reward determination range (as shown in the red box in the figure above :ref:`figcontr`), and the ratio of its side length :math:`W_{I_{clip}}` to the original image side length :math:`W_{I}` can be expressed by :math:`\lambda_{clip}` as follows.
 
    .. math::
 
@@ -927,7 +927,7 @@ How to Convert to Reward
 
 2. The primary goal is to achieve tracker tracking. Correct tracking is the prerequisite for receiving a reward. If P1 and P2 meet the basic tracking requirements, the reward value is 1; otherwise, all rewards are eliminated, and the reward output is 0. This is implemented using a step function:
 
-   .. figure:: ../_static/image/阶跃函数.png
+   .. figure:: ../_static/image/StepFunction.png
       :alt: 阶跃函数
       :width: 600px
       :align: center
@@ -940,7 +940,7 @@ How to Convert to Reward
 
 3. The secondary goal is to improve tracking. Therefore, the proximity between P1 and P2 can be used as a penalty term for the reward. The further the proximity, the larger the penalty. The penalty term is implemented using the hyperbolic tangent function: :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
 
-   .. figure:: ../_static/image/双曲正切函数.png
+   .. figure:: ../_static/image/HyperbolicTangentFunction.png
       :alt: 双曲正切函数
       :width: 600px
       :align: center
@@ -953,7 +953,7 @@ How to Convert to Reward
 
 4. The final reward calculation block diagram is as follows:
 
-   .. figure:: ../_static/image/distance奖励框图.png
+   .. figure:: ../_static/image/DistanceRewardBlockDiagram.png
       :alt: distance奖励框图
       :width: 600px
       :align: center
@@ -964,7 +964,7 @@ How to Convert to Reward
 
       </br>
 
-   .. figure:: ../_static/image/view奖励框图.png
+   .. figure:: ../_static/image/ViewRewardBlockDiagram.png
       :alt: view奖励框图
       :width: 600px
       :align: center
@@ -1192,7 +1192,7 @@ Return Parameters
 
    - Among them, the parameter :code:`carCameraPosOri` defines the tracker coordinate system and pose angles as follows:
    
-   .. figure:: ../_static/image/无人机坐标.png
+   .. figure:: ../_static/image/DroneCoordinates.png
       :alt: 无人机坐标系                                  
       :width: 500px                                              
       :align: center

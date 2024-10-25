@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'UAV_VAT'
+project = 'DART'
 copyright = '2024, Haowei Sun'
 author = 'Haowei Sun'
 release = '1.0'

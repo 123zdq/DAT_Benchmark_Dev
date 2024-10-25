@@ -96,26 +96,35 @@ VAT Scheme
 2 Benchmark Presentation
 ------------------------------------
 
-* **Diversity**：
+.. figure:: ./_static/image/statistics.png
+   :alt: VAT Model
+   :width: 600px
+   :align: center
 
-   * **Scenario Diversity**: Equipped with 6 scenarios and 4 weather conditions, totaling 24 environments
+   Statistics and simulator component examples of the DART
 
-   * **Target Diversity**: Preset 24 selectable targets, supporting the integration of custom models
+Diverse and Complex Scenarios:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   * **Task Diversity**: Equipped with 6 common vision and motion sensors
+    * **Diverse Scenario Settings**: Featuring a total of 24 environments combining 6 scenarios and 4 weather conditions. For detailed scenarios, see: :ref:`Environment Introduction`
 
-* **Complexity**：
+    * **Complex Scenario Elements**: The complexity of the real scene is constructed from 7 aspects, including scene area, building density, color richness, road complexity, terrain complexity, tree density, and tunnel density. The scene statistics are shown in Figure a above, and the difficult elements are shown in Figure b above. For detailed scenarios, see: :ref:`Environment Introduction`
 
-   * **Complex Scene Elements**: The scene elements are complex, covering common elements such as tree occlusion, tunnels, traffic lights, sidewalks, etc.
+Rich and Diverse Trackers and Targets:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   * **Complex Dynamic Models**: Utilizing Webots' highly realistic dynamic engine to achieve dynamic simulation in the virtual environment
+    * **Diverse Trackers**: Pre-set ground robots and drones as Trackers, with support for autonomous model integration of ground robots.
 
-   * **Complex Target Behavior Management**: Integrating the traffic simulator SUMO for unified vehicle management, ensuring the realism and randomness of Target actions in the environment
+    * **Diverse Targets**: There are 24 pre-set targets to support autonomous model access, as shown in Figure d above. For details on tracking target objects, see: :ref:`Tracked Objects`
 
-Diverse Simulation Scenarios
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    * **Real and Rich Behavior management**: Integrated with the traffic simulator SUMO for unified vehicle management, ensuring the authenticity and randomness of Target movements within the environment.
 
-For detailed scenarios, see: :ref:`Environment Introduction`
+Flexible and Customizable Task Settings:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Multi-sensor**: Equipped with 6 common visual and motion sensors, as shown in Figure c above.
+
+    * **Customizable Task Parameters**: AThe task is highly extensible, and the additional task parameters are customized. For diverse task configurations, see: :ref:`customized parameter interface`
 
 
 .. figure:: ./_static/image/24Scene_Colorful2.png
@@ -123,33 +132,4 @@ For detailed scenarios, see: :ref:`Environment Introduction`
    :width: 600px
    :align: center
 
-   24 Complex Scene Examples
-
-
-Diverse Tracking Targets
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-For details on tracking target objects, see: :ref:`Tracked Objects`
-
-
-.. figure:: ./_static/image/24Target.png
-   :alt: 24 Targets
-   :width: 600px
-   :align: center
-
-   24 Different Targets
-
-Diverse Tasks
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* **Task Diversity**: The state provides sensors commonly found in real-world scenarios, such as IMU, accelerometer, gyroscope, LiDAR, etc.
-
-For diverse task configurations, see: :ref:`customized parameter interface`
-
-.. figure:: ./_static/image/sensor_list.png
-   :alt: Sensor list
-   :width: 600px
-   :align: center
-
-   6 Common Sensors
+   Schematic diagram of 24 open scenes

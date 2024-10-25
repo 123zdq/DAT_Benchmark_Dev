@@ -1,25 +1,23 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>环境封装 &mdash; UAV_VAT 1.0 文档</title>
+  <title>环境封装 &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f115507d"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/translations.js?v=beaddf03"></script>
-        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f115507d"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -36,7 +34,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            UAV_VAT
+            DART
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -46,9 +44,8 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">目录:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Overview.html">概述</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">安装</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">算法部分</a><ul class="current">
@@ -91,7 +88,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">UAV_VAT</a>
+          <a href="../index.html">DART</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -162,7 +159,8 @@
 <p>上述3种Environment的关系如下图所示：</p>
 <blockquote>
 <div><figure class="align-center" id="id14">
-<a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="3种环境类关系图" src="../_images/Environment3Types.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="3种环境类关系图" src="../_images/Environment3Types.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">3种环境类示意图</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
@@ -322,7 +320,7 @@
 </ul>
 <blockquote>
 <div><ul class="simple">
-<li><p>包括 <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,&quot;E2E&quot;,&quot;CVAT&quot;,&quot;DVAT&quot;</span></code> 分别对应 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id21"><span class="std std-ref">内置Reward</span></a> , <a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id12" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id13" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 中的reward设置</p></li>
+<li><p>包括 <code class="code docutils literal notranslate"><span class="pre">&quot;default&quot;,&quot;E2E&quot;,&quot;CVAT&quot;,&quot;DVAT&quot;</span></code> 分别对应 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id18"><span class="std std-ref">内置Reward</span></a> , <a class="footnote-reference brackets" href="#id11" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id12" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> , <a class="footnote-reference brackets" href="#id13" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> 中的reward设置</p></li>
 </ul>
 </div></blockquote>
 <ul class="simple">
@@ -604,7 +602,7 @@
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>C</mi><mi>R</mi><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>l</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>c</mi><mi>t</mi></mrow></msub></math>
 </br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{ct}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的连续奖励值， <span class="math notranslate nohighlight">\(E_l\)</span> 代表轨迹长度。
-连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id25"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
+连续奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id22"><span class="std std-ref">跟踪对象连续奖励示意图</span></a></p>
 </section>
 <section id="tsr-tracking-success-rate">
 <h3>2.追踪成功率 TSR(TrackIng Success Rate)<a class="headerlink" href="#tsr-tracking-success-rate" title="Link to this heading"></a></h3>
@@ -613,7 +611,7 @@
 </div></blockquote>
 <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>T</mi><mi>S</mi><mi>R</mi><mo>=</mo><mfrac><mn>1</mn><msub><mi>E</mi><mrow><mi>m</mi><mi>l</mi></mrow></msub></mfrac><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>t</mi><mo>=</mo><mn>1</mn></mrow><mrow><msub><mi>E</mi><mi>t</mi></msub></mrow></munderover><msub><mi>r</mi><mrow><mi>d</mi><mi>t</mi></mrow></msub><mo>×</mo><mn>100</mn><mi mathvariant="normal">%</mi></math>
 </br><p>上述公式中 <span class="math notranslate nohighlight">\(r_{dt}\)</span> 代表在步骤 <span class="math notranslate nohighlight">\(t\)</span> 中的离散奖励值， <span class="math notranslate nohighlight">\(E_{ml}\)</span> 为最大轨迹长度， <span class="math notranslate nohighlight">\(E_t\)</span> 代表本轨迹长度。参数配置详见： <a class="reference internal" href="../Webots_Simulator/Simulator.html#reward"><span class="std std-ref">内置reward的参数配置（仅无人机有效，车默认返回reward=1）</span></a>
-离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id24"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
+离散奖励计算图解见 <a class="reference internal" href="../Webots_Simulator/Simulator.html#id21"><span class="std std-ref">跟踪对象离散奖励示意图</span></a></p>
 </br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
@@ -621,15 +619,15 @@
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id11" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
-<p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
+<p>Luo, Wenhan, et al. &quot;End-to-end active object tracking and its real-world deployment via reinforcement learning.&quot; IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
 <aside class="footnote brackets" id="id12" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
-<p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
+<p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. &quot;Enhancing continuous control of mobile robots for end-to-end visual active tracking.&quot; Robotics and Autonomous Systems 142 (2021): 103799.</p>
 </aside>
 <aside class="footnote brackets" id="id13" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">3</a><span class="fn-bracket">]</span></span>
-<p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
+<p>Dionigi, Alberto, et al. &quot;D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.&quot; IEEE Robotics and Automation Letters (2024).</p>
 </aside>
 </aside>
 </section>

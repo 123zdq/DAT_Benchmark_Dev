@@ -80,7 +80,7 @@
    </div>
    </br>
 
-.. image:: ../_static/image/运行流程.png
+.. image:: ../_static/image/RunningProcess.png
    :alt: 仿真环境运行流程示意图
    :width: 700px
    :align: center
@@ -197,7 +197,7 @@ train模式
 
    * :code:`Verbose` ：使能日志记录。如果设置为true，则会在webots终端窗口打印部分重要参数，可供使用者观察。同时在 :code:`Webots_Simulation/traffic_project/logs` 文件夹下产生程序运行日志，这部分多用于调试仿真环境。
 
-      .. image:: ../_static/image/webots日志输出.png
+      .. image:: ../_static/image/WebotsLogOutput.png
          :alt: webots日志输出（“train”&“video”）
          :width: 500px
          :align: center
@@ -722,7 +722,7 @@ Legged Robots
 
       1. 按照 `webots wiki标准 <https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.>`_ ，建立webots使用的描述文件proto文件，其中必须开放到场景树的属性包括"translation"，"rotation"，"name"。描述文件示例格式如下，存放在 :code:`UAV_Follow_Env/Webots_Simulation/traffic_project/protos`
       
-      .. figure:: ../_static/image/场景树属性包.png
+      .. figure:: ../_static/image/SceneTreePropertyPack.png
          :alt: 场景树属性包                                  
          :width: 600px                                              
          :align: center
@@ -831,7 +831,7 @@ Legged Robots
       \end{cases}
 
    目标离范围中心点越近时，奖励会越接近1，反之越接近0。 :math:`\alpha` 为常数，建议取值为3~5。
-   此外， :math:`I_{clip}` 为有效reward判定范围(如 :ref:`figcontr` 中红色方框所示)，其边长 :math:`W_{I_clip}` 与原图边长 :math:`W_{I}` 的比值可以用 :math:`\lambda_{clip}` 表示如下。
+   此外， :math:`I_{clip}` 为有效reward判定范围(如 :ref:`figcontr` 中红色方框所示)，其边长 :math:`W_{I_{clip}}` 与原图边长 :math:`W_{I}` 的比值可以用 :math:`\lambda_{clip}` 表示如下。
 
    .. math::
 
@@ -1140,7 +1140,7 @@ Legged Robots
 
    - 其中，参数 :code:`carCameraPosOri` 中跟踪器坐标系定义和姿态角定义如下：
    
-   .. figure:: ../_static/image/无人机坐标.png
+   .. figure:: ../_static/image/DroneCoordinates.png
       :alt: 无人机坐标系                                  
       :height: 350px                                              
       :align: center

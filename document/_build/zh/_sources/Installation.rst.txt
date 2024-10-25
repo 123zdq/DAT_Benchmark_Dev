@@ -323,3 +323,130 @@ Step3 修改webots运行python环境
         :align: center
 
         Python_Command(Windows)配置
+
+Docker
+------------------------
+
+Step1 下载Webots并创建docker容器并运行gpu
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * 创建工作空间并下载Webots
+
+    .. code:: bash
+
+        ## 创建工作空间
+        mkdir Workspace
+        cd Workspace/
+        git clone https://github.com/cyberbotics/webots-docker.git
+
+    * 创建docker容器并运行gpu
+
+    .. code:: bash
+
+        sudo docker stop ****
+        sudo docker run --gpus "device=0" --privileged=true -p 5900:5900 -p 7787:7787 -p 6006:6006 -it cyberbotics/webots:latest /bin/bash
+        nvidia-smi
+        exit
+        sudo docker ps -a
+        sudo docker restart ****
+        sudo docker ps
+        sudo docker exec -it **** /bin/bash
+
+Step2 配置仿真conda虚拟环境与算法conda虚拟环境
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * 仿真虚拟环境配置与安装：
+
+    .. code:: bash
+
+        conda create -n uav_follow311 python=3.11
+        conda activate uav_follow311
+        pip install opencv-python==4.9.0.80
+        pip uninstall numpy
+        pip install numpy==1.21.0
+
+    * 算法虚拟环境配置与安装：
+
+    .. code:: bash
+
+        conda create -n uav_follow_alg311 python=3.11
+        conda activate uav_follow_alg311
+        pip install torch==1.13.0+cu117 torchvision==0.14.0+cu117 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
+        pip install opencv-python==4.9.0.80
+        pip install gym==0.25.1
+        pip install setproctitle==1.3.3
+        pip install tensorboard
+        pip uninstall numpy
+        pip install numpy==1.21.0
+
+    * 添加python软连接：
+
+    .. code:: bash
+
+        ## 为算法端python创建软连接
+        ln -s /root/miniconda3/envs/uav_follow_alg311/bin/python3.11 /usr/bin/python311
+        ## 建立仿真端python软连接
+        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python3.11
+        mv /usr/bin/python3.10 /usr/
+
+Step3 配置SUMO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * 添加SUMO环境变量
+
+    .. code:: bash
+
+        apt-get install libeigen3-dev
+        apt-get install nlohmann-json3-dev
+        apt install sumo sumo-tools sumo-doc
+
+    * 添加SUMO环境变量
+
+    .. code:: bash
+
+        vim ~/.bashrc
+
+    * 添加环境路径到 :code:`bashrc` 最后一行 :code:`export SUMO_HOME=/usr/share/sumo`
+
+    .. code:: bash
+
+        source ~/.bashrc
+
+Step4 配置项目工作
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * 下载工程项目
+
+    .. code:: bash
+
+        ## clone项目工程
+        mkdir /usr/local/Github_Project
+        cd /usr/local/Github_Project
+        git clone https://github.com/SHWplus/UAV_Follow_Env.git
+
+.. raw:: html
+
+   <span style="background-color: yellow;">To Do</span>
+
+    * 初始化仿真端(初始化完毕后方可进行下一步)
+
+    .. code:: bash
+
+        ## 开启仿真端代码，一定要等程序完成初始化之后再运行下面的步骤
+        conda activate uav_follow311
+        xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
+        ps aux | grep xvfb
+        x11vnc -display :99 -auth ***
+
+    * 算法端配置
+
+    .. code:: bash
+        cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark/
+        python311 ${main_path}
+
+    .. raw:: html
+
+      <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+            此处 ${main_path}路径参考: <a href=".\Algorithm\Introduction.html">算法部分介绍</a>
+      </div>
+      </br>

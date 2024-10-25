@@ -322,3 +322,132 @@ Step3 Modify the Python environment for running Webots
         :align: center
 
         Python_Command(Windows) configuration
+
+
+Docker
+------------------------
+
+Step1 Download Webots and Create Docker Container to Run with GPU
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Create Workspace and Download Webots
+
+    .. code:: bash
+
+        ## Create Workspace
+        mkdir Workspace
+        cd Workspace/
+        git clone https://github.com/cyberbotics/webots-docker.git
+
+    * Create Docker Container and Run with GPU
+
+    .. code:: bash
+
+        sudo docker stop ****
+        sudo docker run --gpus "device=0" --privileged=true -p 5900:5900 -p 7787:7787 -p 6006:6006 -it cyberbotics/webots:latest /bin/bash
+        nvidia-smi
+        exit
+        sudo docker ps -a
+        sudo docker restart ****
+        sudo docker ps
+        sudo docker exec -it **** /bin/bash
+
+Step2 Configure Simulation and Algorithm Conda Environments
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Configure and Install Simulation Environment:
+
+    .. code:: bash
+
+        conda create -n uav_follow311 python=3.11
+        conda activate uav_follow311
+        pip install opencv-python==4.9.0.80
+        pip uninstall numpy
+        pip install numpy==1.21.0
+
+    * Configure and Install Algorithm Environment:
+
+    .. code:: bash
+
+        conda create -n uav_follow_alg311 python=3.11
+        conda activate uav_follow_alg311
+        pip install torch==1.13.0+cu117 torchvision==0.14.0+cu117 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
+        pip install opencv-python==4.9.0.80
+        pip install gym==0.25.1
+        pip install setproctitle==1.3.3
+        pip install tensorboard
+        pip uninstall numpy
+        pip install numpy==1.21.0
+
+    * Add Python Symbolic Links:
+
+    .. code:: bash
+
+        ## Create symbolic link for algorithm side Python
+        ln -s /root/miniconda3/envs/uav_follow_alg311/bin/python3.11 /usr/bin/python311
+        ## Create symbolic link for simulation side Python
+        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
+        mv /usr/bin/python3.10 /usr/
+
+Step3 Configure SUMO
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Add SUMO Environment Variables
+
+    .. code:: bash
+
+        apt-get install libeigen3-dev
+        apt-get install nlohmann-json3-dev
+        apt install sumo sumo-tools sumo-doc
+
+    * Add SUMO Environment Variables
+
+    .. code:: bash
+
+        vim ~/.bashrc
+
+    * Add the environment path to the last line of :code:`bashrc`: :code:`export SUMO_HOME=/usr/share/sumo`
+
+    .. code:: bash
+
+        source ~/.bashrc
+
+Step4 Configure Project Workspace
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * Download Project
+
+    .. code:: bash
+
+        ## Clone project
+        mkdir /usr/local/Github_Project
+        cd /usr/local/Github_Project
+        git clone https://github.com/SHWplus/UAV_Follow_Env.git
+
+    .. raw:: html
+
+        <span style="background-color: yellow;">To Do</span>
+
+    * Initialize Simulation Side (proceed to the next step after initialization)
+
+    .. code:: bash
+
+        ## Run simulation initialization code, ensure the program completes initialization before proceeding
+        conda activate uav_follow311
+        xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
+        ps aux | grep xvfb
+        x11vnc -display :99 -auth ***
+
+    * Configure Algorithm Side
+
+    .. code:: bash
+
+        cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark/
+        python311 ${main_path}
+
+    .. raw:: html
+
+      <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+            Here, the path for ${main_path} can be found in: <a href=".\Algorithm\Introduction.html">Introduction to the Algorithm Section</a>
+      </div>
+      </br>

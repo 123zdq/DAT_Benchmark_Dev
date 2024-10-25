@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3fec8c22-425d-4a0c-a998-89546affc903" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/document/source/en/_static/image/statistics.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/document/source/zh/_static/image/statistics.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/UAV_Follow_Env.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/UAV_Follow_Env.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.buildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/Environment.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/Environment.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/Introduction.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/Introduction.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/Model.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/Model.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Algorithm/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Installation.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Installation.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Overview.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Overview.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/Configuration.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/Configuration.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/Parameters.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/Parameters.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/Simulator.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/Simulator.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/Webots_Simulator/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/basicusage.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/basicusage.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/environment.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/.doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/.doctrees/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Algorithm/Environment.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Algorithm/Environment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Algorithm/Introduction.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Algorithm/Introduction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Algorithm/Model.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Algorithm/Model.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Algorithm/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Algorithm/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Installation.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Installation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/Configuration.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/Configuration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/Parameters.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/Parameters.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/Simulator.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/Simulator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/Webots_Simulator/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_images/24Target.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_images/24Target.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_images/Python_CommandWIN.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_images/Python_CommandWIN.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_images/SUMO_HOME.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_images/SUMO_HOME.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_images/WEBOTS_HOME.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_images/WEBOTS_HOME.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_sources/Installation.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_sources/Installation.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_sources/Overview.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_sources/Overview.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_sources/Webots_Simulator/Parameters.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_sources/Webots_Simulator/Parameters.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_sources/Webots_Simulator/Simulator.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_sources/Webots_Simulator/Simulator.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_sources/index.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/basic.css" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/basic.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/css/badge_only.css" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/css/badge_only.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/css/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/css/theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/doctools.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/doctools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/image/24Target.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/image/24Target.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/image/Python_CommandWIN.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/image/Python_CommandWIN.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/image/SUMO_HOME.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/image/SUMO_HOME.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/image/WEBOTS_HOME.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/image/WEBOTS_HOME.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/language_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/language_data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/_static/searchtools.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/_static/searchtools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/basicusage.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/basicusage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/en/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/en/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.buildinfo" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.buildinfo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/Environment.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/Environment.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/Introduction.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/Introduction.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/Model.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/Model.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Algorithm/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Installation.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Installation.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Overview.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Overview.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/Configuration.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/Configuration.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/Parameters.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/Parameters.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/Simulator.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/Simulator.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/Webots_Simulator/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/basicusage.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/basicusage.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/environment.pickle" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/environment.pickle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/.doctrees/index.doctree" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/.doctrees/index.doctree" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Algorithm/Environment.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Algorithm/Environment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Algorithm/Introduction.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Algorithm/Introduction.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Algorithm/Model.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Algorithm/Model.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Algorithm/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Algorithm/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Installation.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Installation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Overview.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Overview.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/Configuration.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/Configuration.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/Parameters.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/Parameters.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/Simulator.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/Simulator.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/Webots_Simulator/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_sources/Installation.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_sources/Installation.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_sources/Overview.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_sources/Overview.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_sources/Webots_Simulator/Parameters.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_sources/Webots_Simulator/Parameters.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_sources/Webots_Simulator/Simulator.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_sources/Webots_Simulator/Simulator.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_sources/index.rst.txt" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_sources/index.rst.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_static/basic.css" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_static/basic.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_static/css/badge_only.css" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_static/css/badge_only.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_static/css/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_static/css/theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_static/doctools.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_static/doctools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_static/language_data.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_static/language_data.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/_static/searchtools.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/_static/searchtools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/basicusage.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/basicusage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/genindex.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/genindex.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/_build/zh/searchindex.js" beforeDir="false" afterPath="$PROJECT_DIR$/document/_build/zh/searchindex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/Installation.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/Installation.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/Overview.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/Overview.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/Webots_Simulator/Parameters.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/Webots_Simulator/Parameters.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/Webots_Simulator/Simulator.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/Webots_Simulator/Simulator.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/24Target.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/24Target.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/Python_CommandWIN.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/Python_CommandWIN.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/SUMO_HOME.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/SUMO_HOME.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/WEBOTS_HOME.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/WEBOTS_HOME.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/distance奖励框图.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/DistanceRewardBlockDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/view奖励框图.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/ViewRewardBlockDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/webots日志输出.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/WebotsLogOutput.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/三维小孔成像.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/双曲正切函数.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/HyperbolicTangentFunction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/场景树属性包.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/SceneTreePropertyPack.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/多线程并行.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/奖励框图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/小孔成像.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/无人机坐标.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/_static/image/DroneCoordinates.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/无人机坐标系.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/求解三维空间坐标.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/焦距估算.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/_static/image/环境示意图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/basicusage.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/en/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/en/index.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/Installation.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/Installation.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/Overview.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/Overview.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/Webots_Simulator/Parameters.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/Webots_Simulator/Parameters.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/Webots_Simulator/Simulator.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/Webots_Simulator/Simulator.rst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/distance奖励框图.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/_static/image/DistanceRewardBlockDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/view奖励框图.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/_static/image/ViewRewardBlockDiagram.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/webots日志输出.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/_static/image/WebotsLogOutput.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/三维小孔成像.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/双曲正切函数.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/_static/image/HyperbolicTangentFunction.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/场景树属性包.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/_static/image/SceneTreePropertyPack.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/多线程并行.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/小孔成像.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/无人机坐标.png" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/_static/image/DroneCoordinates.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/无人机坐标系.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/求解三维空间坐标.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/焦距估算.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/_static/image/环境示意图.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/basicusage.rst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/conf.py" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/conf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/document/source/zh/index.rst" beforeDir="false" afterPath="$PROJECT_DIR$/document/source/zh/index.rst" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="2nuT5UNlSdmQardWt2TEQJfvtKP" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "New__Main__Stable",
+    "last_opened_file_path": "/home/olives/ATLAS1/Doc/UAV_Follow_Env/document/source/zh/_static/image"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/document/source/zh/_static/image" />
+      <recent name="$PROJECT_DIR$/document/source/en/_static/image" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-0e3be3396995-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23339.19" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="3fec8c22-425d-4a0c-a998-89546affc903" name="更改" comment="" />
+      <created>1729821777349</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729821777349</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -1,24 +1,22 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Model Construction &mdash; UAV_VAT 1.0 文档</title>
+  <title>Model Construction &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f115507d"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/translations.js?v=beaddf03"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f115507d"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=beaddf03"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -35,7 +33,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            UAV_VAT
+            DART
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -47,7 +45,6 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../basicusage.html">My Project Documentation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Algorithm</a><ul class="current">
@@ -87,7 +84,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">UAV_VAT</a>
+          <a href="../index.html">DART</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -162,7 +159,8 @@
 <li><p>The <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> algorithm calls the parallel environment class ( <a class="reference internal" href="Environment.html#parallel"><span class="std std-ref">3 Parallel Environment Classes</span></a> )</p></li>
 </ul>
 <figure class="align-center">
-<a class="reference internal image-reference" href="../_images/classes.png"><img alt="3种环境类关系图" src="../_images/classes.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../_images/classes.png"><img alt="3种环境类关系图" src="../_images/classes.png" style="width: 600px;" />
+</a>
 </figure>
 </br>
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
@@ -259,7 +257,7 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 <li><p>During multi-process training, this project reserves one process for testing. For example, if the user selects 24 parallel agents, then during the actual training, there will be 23 training processes and 1 testing process. The testing process synchronizes the weights of the shared_model at the beginning of each episode and conducts tests.</p></li>
 <li><p>The data recorded in the <code class="code docutils literal notranslate"><span class="pre">tensorboard-logger</span></code> file is from the testing process, mainly the <code class="code docutils literal notranslate"><span class="pre">value</span></code> during training, which is used to evaluate the training status of the agents.</p></li>
 <li><p>Additionally, if the program is interrupted due to external reasons, this project provides an uninterrupted <code class="code docutils literal notranslate"><span class="pre">tensorboard-logger</span></code> function. It uses <code class="code docutils literal notranslate"><span class="pre">num_test.txt</span></code> to store the current data entry count and continues recording when a new training session starts.</p></li>
-<li><p><strong>Note:</strong> If the user wishes to re-record the training curve, they need to add <strong>– New_Train</strong> to the command that starts the training.</p></li>
+<li><p><strong>Note:</strong> If the user wishes to re-record the training curve, they need to add <strong>-- New_Train</strong> to the command that starts the training.</p></li>
 <li><p>After completing all configurations, simply run the following code to view the <code class="code docutils literal notranslate"><span class="pre">TensorBoard</span></code> visualization records on <code class="code docutils literal notranslate"><span class="pre">localhost:xxxx</span></code>.</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs
@@ -330,7 +328,8 @@ python<span class="w"> </span>./models/D_VAT/DVAT_main.py<span class="w"> </span
 <blockquote>
 <div><p>DVAT adopts an Actor-Critic asymmetric framework. The schematic diagrams of the Actor-Critic symmetric and asymmetric architectures are as follows:</p>
 <figure class="align-center" id="id11">
-<a class="reference internal image-reference" href="../_images/sym_asym.png"><img alt="Asymmetric_and_Symmetrical_Structure" src="../_images/sym_asym.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="../_images/sym_asym.png"><img alt="Asymmetric_and_Symmetrical_Structure" src="../_images/sym_asym.png" style="width: 700px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">Schematic diagrams of the Actor-Critic symmetric and asymmetric architectures</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
@@ -570,15 +569,15 @@ tensorboard<span class="w"> </span>--logdir<span class="w"> </span>PPO_logs
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id8" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
+<p>Luo, Wenhan, et al. &quot;End-to-end active object tracking and its real-world deployment via reinforcement learning.&quot; IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
 <aside class="footnote brackets" id="id9" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
+<p>Dionigi, Alberto, et al. &quot;D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.&quot; IEEE Robotics and Automation Letters (2024).</p>
 </aside>
 <aside class="footnote brackets" id="id10" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
-<p>Zhong, Fangwei, et al. “Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking.” IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.</p>
+<p>Zhong, Fangwei, et al. &quot;Ad-vat+: An asymmetric dueling mechanism for learning and understanding visual active tracking.&quot; IEEE transactions on pattern analysis and machine intelligence 43.5 (2019): 1467-1482.</p>
 </aside>
 </aside>
 </section>
