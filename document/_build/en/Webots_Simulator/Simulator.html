@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
@@ -8,20 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Simulation Environment &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f115507d"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../_static/translations.js?v=beaddf03"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f115507d"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="Simulation parameter configuration recommendations" href="Configuration.html" />
+    <link rel="next" title="Parameters Setting" href="Parameters.html" />
     <link rel="prev" title="Simulator Section" href="index.html" /> 
 </head>
 
@@ -92,7 +94,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Configuration.html">Simulation parameter configuration recommendations</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Parameters.html">Parameters Setting</a></li>
 </ul>
 </li>
@@ -178,16 +179,14 @@
 <li><p>The simulation environment of this project is built based on the open-source simulation software <a class="reference external" href="https://cyberbotics.com/">webots</a>. The background of the simulation environment simulates the target tracking problem in outdoor scenes in real life. For this purpose, six maps have been set up, including city streets, city center, lakeside, countryside, desert, and farmland, each of which evolves into various conditions such as day, night, foggy, and snowy, making a total of 24 environments. To facilitate model training from simple environments, several simple environment maps are also available for use.</p></li>
 <li><p>Schematic diagrams of 24 simulation environments in the project:</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 700px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 700px;" /></a>
 </br></section>
 <section id="operation-flow">
 <span id="id2"></span><h2>Operation Flow<a class="headerlink" href="#operation-flow" title="Link to this heading"></a></h2>
 <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
    To accommodate different needs such as training, debugging, etc., this project offers <b>3 different running modes</b>.
 </div>
-</br><a class="reference internal image-reference" href="../_images/ExampleImage.png"><img alt="Example Image" class="align-center" src="../_images/ExampleImage.png" style="width: 700px;" />
-</a>
+</br><a class="reference internal image-reference" href="../_images/ExampleImage.png"><img alt="Example Image" class="align-center" src="../_images/ExampleImage.png" style="width: 700px;" /></a>
 <section id="demo-mode">
 <h3>demo mode<a class="headerlink" href="#demo-mode" title="Link to this heading"></a></h3>
 <blockquote>
@@ -258,7 +257,7 @@
 <p><strong>Parameter Description</strong></p>
 <blockquote>
 <div><ul>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Simulation_Mode</span></code> : There are three simulation modes: &quot;demo&quot;, &quot;video&quot;, and &quot;train&quot;. The demo and video modes are self-running modes of the simulation (default is demo).</p>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Simulation_Mode</span></code> : There are three simulation modes: “demo”, “video”, and “train”. The demo and video modes are self-running modes of the simulation (default is demo).</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>The demo will generate a tracker in the map, which supports direct control via the keyboard. Meanwhile, it will track a stationary vehicle, Bmx, by default. This mode can be used to browse the map or debug the reward parameters.</p></li>
@@ -270,9 +269,9 @@
 </li>
 </ul>
 <ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">Tracker_Def</span></code> : Select the tracker, the current options are drone (&quot;DRONE&quot;) and car (&quot;CAR&quot;). Among them, the drone is a simulated drone tracker with physical property detection and constraints, while the car is considered an ideal tracker that ignores its own physical properties and can perform any action under any circumstances.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Drone_Supervisor_Ctrl</span></code> : Whether to use the supervisor to control the tracker. The supervisor is Webots' super administrator and can directly control any node. If true, the supervisor controls the tracker, and all its actions are real-time and responsive, which simplifies algorithm training. If false, the tracker is controlled using a traditional PID controller. This parameter is only applicable to the drone tracker; the car tracker always uses the supervisor for control.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Socket_Ip</span></code> : The IP address for socket communication, defaults to <strong>&quot;127.0.0.1&quot;</strong> if communicating locally.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Tracker_Def</span></code> : Select the tracker, the current options are drone (“DRONE”) and car (“CAR”). Among them, the drone is a simulated drone tracker with physical property detection and constraints, while the car is considered an ideal tracker that ignores its own physical properties and can perform any action under any circumstances.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Drone_Supervisor_Ctrl</span></code> : Whether to use the supervisor to control the tracker. The supervisor is Webots’ super administrator and can directly control any node. If true, the supervisor controls the tracker, and all its actions are real-time and responsive, which simplifies algorithm training. If false, the tracker is controlled using a traditional PID controller. This parameter is only applicable to the drone tracker; the car tracker always uses the supervisor for control.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Socket_Ip</span></code> : The IP address for socket communication, defaults to <strong>“127.0.0.1”</strong> if communicating locally.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Config_Agen_Num_Port</span></code> : Configures the socket communication port, which is used to communicate with the algorithm end to determine the number of trackers (agents) to be set.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Train_Total_Steps</span></code> : The maximum number of training steps. If the steps exceed this number, the simulation returns done.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Init_No_Done_Steps</span></code> : The number of simulation steps without done status during initialization. This prevents the unstable physical properties of the tracker during initialization from triggering the done status. This parameter should be set to a reasonable value.</p></li>
@@ -294,7 +293,7 @@
 </ul>
 </div></blockquote>
 </li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Tracking_Object</span></code>: The tracked object setting (default is SUMO_VEHICLE). Example tracking objects include &quot;SUMO_VEHICLE&quot;, &quot;Pedestrian&quot;, &quot;Shrimp&quot;, &quot;Create&quot;, &quot;Sojourner&quot;, &quot;Mantis&quot;, etc. Custom tracking objects are also supported. See the project manual.</p>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Tracking_Object</span></code>: The tracked object setting (default is SUMO_VEHICLE). Example tracking objects include “SUMO_VEHICLE”, “Pedestrian”, “Shrimp”, “Create”, “Sojourner”, “Mantis”, etc. Custom tracking objects are also supported. See the project manual.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>For detailed descriptions of tracking object types, see: <a class="reference internal" href="#tracked-objects"><span class="std std-ref">Tracked Objects</span></a></p></li>
@@ -303,8 +302,7 @@
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Verbose</span></code>: Enable log recording. If set to true, some important parameters will be printed in the Webots terminal window for users to observe. Additionally, program run logs will be generated in the <code class="code docutils literal notranslate"><span class="pre">Webots_Simulation/traffic_project/logs</span></code> folder, mainly for debugging the simulation environment.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/WebotsLogOutput.png"><img alt="webots日志输出（“train”&amp;“video”）" class="align-center" src="../_images/WebotsLogOutput.png" style="width: 500px;" />
-</a>
+<div><a class="reference internal image-reference" href="../_images/WebotsLogOutput.png"><img alt="webots日志输出（“train”&amp;“video”）" class="align-center" src="../_images/WebotsLogOutput.png" style="width: 500px;" /></a>
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">id</span></code> : The name of the tracker.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">done</span></code> : Whether to return done.</p></li>
@@ -313,7 +311,7 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">time</span></code> : Simulation time.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">carDir</span></code> : The movement direction of the tracked target.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">pitchAngle</span></code> : The pitch axis angle of the camera.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">doneState</span></code> : The reason for generating done, including &quot;height&quot; (unreasonable tracker height), &quot;distance&quot; (the error between the tracker's target position and the actual position is too large), &quot;velocity&quot; (unreasonable tracker movement speed), &quot;yaw velocity&quot; (unreasonable tracker rotational speed around the vertical axis), &quot;pitch or yaw angle&quot; (unreasonable tracker attitude).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">doneState</span></code> : The reason for generating done, including “height” (unreasonable tracker height), “distance” (the error between the tracker’s target position and the actual position is too large), “velocity” (unreasonable tracker movement speed), “yaw velocity” (unreasonable tracker rotational speed around the vertical axis), “pitch or yaw angle” (unreasonable tracker attitude).</p></li>
 </ul>
 </div></blockquote>
 </li>
@@ -342,7 +340,7 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">omiga</span></code> ：Tracker maximum angular velocity (<span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">roll</span></code> ：Tracker maximum roll angle (<span class="math notranslate nohighlight">\(rad\)</span>).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">pitch</span></code> ：Tracker maximum pitch angle (<span class="math notranslate nohighlight">\(rad\)</span>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">distance_error</span></code> ：Maximum error between the tracker's desired position and current position (<span class="math notranslate nohighlight">\(m\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">distance_error</span></code> ：Maximum error between the tracker’s desired position and current position (<span class="math notranslate nohighlight">\(m\)</span>).</p></li>
 </ul>
 </div></blockquote>
 </section>
@@ -362,8 +360,8 @@
 <p><strong>Parameter Description</strong></p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="code docutils literal notranslate"><span class="pre">reward_type</span></code> : The type of reward (default is view). &quot;View&quot; detects based on the quadrilateral projected onto the ground from the camera's perspective, while &quot;distance&quot; detects based on the distance from the midpoint projection in the camera's view to the target.</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">reward_mode</span></code> : The default mode of reward. &quot;Continuous&quot; produces a continuous floating-point number between [0, 1], while &quot;discrete&quot; produces an integer of 0 or 1.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">reward_type</span></code> : The type of reward (default is view). “View” detects based on the quadrilateral projected onto the ground from the camera’s perspective, while “distance” detects based on the distance from the midpoint projection in the camera’s view to the target.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">reward_mode</span></code> : The default mode of reward. “Continuous” produces a continuous floating-point number between [0, 1], while “discrete” produces an integer of 0 or 1.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">reward_cut_off</span></code> : Reward cut-off. When the obtained reward is less than this value, <code class="code docutils literal notranslate"><span class="pre">No_Reward_Done_Steps</span></code> starts counting.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">distance_scale</span></code> : Distance scale (default is continuous). This parameter is only effective in continuous mode and controls the decay rate of the reward due to distance error.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">distance_range</span></code> : The distance error range for generating rewards.</p></li>
@@ -414,7 +412,7 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">car_import_interval</span></code> : The interval time (s) between each group of vehicles added to the map.</p></li>
 </ul>
 <ul>
-<li><p><code class="code docutils literal notranslate"><span class="pre">car_type</span></code> : The type of vehicle (default is passenger), including &quot;passenger&quot;, &quot;bus&quot;, &quot;truck&quot;, &quot;trailer&quot;, &quot;motorcycle&quot;.</p>
+<li><p><code class="code docutils literal notranslate"><span class="pre">car_type</span></code> : The type of vehicle (default is passenger), including “passenger”, “bus”, “truck”, “trailer”, “motorcycle”.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>All supported vehicle types can be found at: <a class="reference internal" href="#sumo-vehicle"><span class="std std-ref">SUMO_VEHICLE</span></a></p></li>
@@ -438,7 +436,7 @@
 </section>
 <section id="other-object-tracking-parameter-configuration">
 <h3>Other object tracking parameter configuration<a class="headerlink" href="#other-object-tracking-parameter-configuration" title="Link to this heading"></a></h3>
-<p>Only effective when <code class="code docutils literal notranslate"><span class="pre">Tracking_Object</span></code> is not &quot;SUMO_VEHICLE&quot;.</p>
+<p>Only effective when <code class="code docutils literal notranslate"><span class="pre">Tracking_Object</span></code> is not “SUMO_VEHICLE”.</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="nt">&quot;Other_Params&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">     </span><span class="nt">&quot;max_obj_num&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
 <span class="w">     </span><span class="nt">&quot;obj_import_interval&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span>
@@ -644,8 +642,7 @@
 <div><p>Unified model, large passenger vehicles</p>
 </div></blockquote>
 <figure class="align-center" id="id7">
-<a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Bus</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
@@ -655,8 +652,7 @@
 <div><p>Unified vehicle type, truck without cargo box</p>
 </div></blockquote>
 <figure class="align-center" id="id8">
-<a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Truck</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
@@ -666,8 +662,7 @@
 <div><p>Unified model, truck with cargo box</p>
 </div></blockquote>
 <figure class="align-center" id="id9">
-<a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Trailer</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
@@ -770,11 +765,10 @@
 <div><p>This project supports custom tracked objects, and the steps are as follows:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>Create a proto file for Webots following <a class="reference external" href="https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.">webots wiki</a> . The attributes that must be exposed to the scene tree include &quot;translation&quot;, &quot;rotation&quot;, and &quot;name&quot;. The description file should be stored in <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
+<li><p>Create a proto file for Webots following <a class="reference external" href="https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.">webots wiki</a> . The attributes that must be exposed to the scene tree include “translation”, “rotation”, and “name”. The description file should be stored in <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
 <figure class="align-center" id="id10">
-<a class="reference internal image-reference" href="../_images/SceneTreePropertyPack.png"><img alt="场景树属性包" src="../_images/SceneTreePropertyPack.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/SceneTreePropertyPack.png"><img alt="场景树属性包" src="../_images/SceneTreePropertyPack.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Scenario Tree Attribute Pack</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
@@ -797,8 +791,7 @@
 </p><ol class="arabic" start="4">
 <li><p>Write the name of the proto into the safety check file <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py</span></code></p>
 <figure class="align-center" id="id11">
-<a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Security Check</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
@@ -832,16 +825,14 @@
 \end{cases}\end{split}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(I\)</span> represents the tracking range (the area captured by the camera lens), and <span class="math notranslate nohighlight">\(t\)</span> represents the position of the tracked object within the tracking range (the area captured by the camera lens).</p>
 <figure class="align-center" id="id12">
-<span id="discrete-reward-diagram-for-tracking-object"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" />
-</a>
+<span id="discrete-reward-diagram-for-tracking-object"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Discrete Reward Diagram of the Tracking Object</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The second type is dense reward, which gives a reward that decreases as the distance increases by evaluating the position of the tracking object relative to the center of the tracking range. The higher the reward, the closer the target is to the center point of the range, and vice versa.</p>
 <figure class="align-center" id="id13">
-<span id="figcontr"></span><span id="continuous-reward-diagram-for-tracking-object"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" />
-</a>
+<span id="figcontr"></span><span id="continuous-reward-diagram-for-tracking-object"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Continuous Reward Diagram for Object Tracking</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
@@ -865,10 +856,9 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <section id="reward-judgment">
 <h3>Reward Judgment<a class="headerlink" href="#reward-judgment" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>The acquisition of the above reward function is based on the judgment of the tracked object's position. In practice, the position of the tracked object in the camera image can be provided through machine vision recognition or manual annotation. However, in simulation training, in order to simplify the calculation and speed up the algorithm, we directly use the coordinates of the tracked object to determine whether it has entered the tracking range.</p>
+<div><p>The acquisition of the above reward function is based on the judgment of the tracked object’s position. In practice, the position of the tracked object in the camera image can be provided through machine vision recognition or manual annotation. However, in simulation training, in order to simplify the calculation and speed up the algorithm, we directly use the coordinates of the tracked object to determine whether it has entered the tracking range.</p>
 <figure class="align-center" id="id14">
-<a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Schematic diagram of reward acquisition, A is the mapping of the camera image to the ground, B is the schematic of pinhole imaging, C is the establishment of the camera coordinate system</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
@@ -909,7 +899,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <section id="projection-visualization">
 <h3>Projection Visualization<a class="headerlink" href="#projection-visualization" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>After implementing the above principle, the effect is as shown in the following video. By placing the block at the intersection point of the ground and the calculated line in the simulation, the camera's view range can be seen in real time:</p>
+<div><p>After implementing the above principle, the effect is as shown in the following video. By placing the block at the intersection point of the ground and the calculated line in the simulation, the camera’s view range can be seen in real time:</p>
 <video width="640" height="360" controls>
    <source src="../_static/video/GetReward_Video.mp4" type="video/mp4">
    Your browser does not support the video tag.
@@ -928,8 +918,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 </li>
 <li><p>The primary goal is to achieve tracker tracking. Correct tracking is the prerequisite for receiving a reward. If P1 and P2 meet the basic tracking requirements, the reward value is 1; otherwise, all rewards are eliminated, and the reward output is 0. This is implemented using a step function:</p>
 <figure class="align-center" id="id15">
-<a class="reference internal image-reference" href="../_images/StepFunction.png"><img alt="阶跃函数" src="../_images/StepFunction.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/StepFunction.png"><img alt="阶跃函数" src="../_images/StepFunction.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Step Function Diagram</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
@@ -939,8 +928,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 </br><ol class="arabic" start="3">
 <li><p>The secondary goal is to improve tracking. Therefore, the proximity between P1 and P2 can be used as a penalty term for the reward. The further the proximity, the larger the penalty. The penalty term is implemented using the hyperbolic tangent function: <span class="math notranslate nohighlight">\(tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}\)</span></p>
 <figure class="align-center" id="id16">
-<a class="reference internal image-reference" href="../_images/HyperbolicTangentFunction.png"><img alt="双曲正切函数" src="../_images/HyperbolicTangentFunction.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/HyperbolicTangentFunction.png"><img alt="双曲正切函数" src="../_images/HyperbolicTangentFunction.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Schematic diagram of the hyperbolic tangent function</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
@@ -950,15 +938,13 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 </br><ol class="arabic" start="4">
 <li><p>The final reward calculation block diagram is as follows:</p>
 <figure class="align-center" id="id17">
-<a class="reference internal image-reference" href="../_images/DistanceRewardBlockDiagram.png"><img alt="distance奖励框图" src="../_images/DistanceRewardBlockDiagram.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/DistanceRewardBlockDiagram.png"><img alt="distance奖励框图" src="../_images/DistanceRewardBlockDiagram.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Distance Reward Boxplot</span><a class="headerlink" href="#id17" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </br><figure class="align-center" id="id18">
-<a class="reference internal image-reference" href="../_images/ViewRewardBlockDiagram.png"><img alt="view奖励框图" src="../_images/ViewRewardBlockDiagram.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/ViewRewardBlockDiagram.png"><img alt="view奖励框图" src="../_images/ViewRewardBlockDiagram.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">view reward chart</span><a class="headerlink" href="#id18" title="Link to this image"></a></p>
 </figcaption>
@@ -1171,8 +1157,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <li><p>Among them, the parameter <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> defines the tracker coordinate system and pose angles as follows:</p></li>
 </ul>
 <figure class="align-center" id="id19">
-<a class="reference internal image-reference" href="../_images/DroneCoordinates.png"><img alt="无人机坐标系" src="../_images/DroneCoordinates.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/DroneCoordinates.png"><img alt="无人机坐标系" src="../_images/DroneCoordinates.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Definition of Drone Coordinate System</span><a class="headerlink" href="#id19" title="Link to this image"></a></p>
 </figcaption>
@@ -1191,7 +1176,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="index.html" class="btn btn-neutral float-left" title="Simulator Section" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="Configuration.html" class="btn btn-neutral float-right" title="Simulation parameter configuration recommendations" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Parameters.html" class="btn btn-neutral float-right" title="Parameters Setting" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

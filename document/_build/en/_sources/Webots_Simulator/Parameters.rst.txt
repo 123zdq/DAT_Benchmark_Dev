@@ -997,3 +997,6 @@ The parameters located :code:`Alg_Base/rl_a3c_pytorch_benchmark/config.json` fil
                 "Norm_Type": 0
             }
         }
+
+
+See: `The comparison table of the two-stage maps <../Algorithm/Model.html#table-cf>`_

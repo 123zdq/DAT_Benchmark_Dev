@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
@@ -8,20 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>仿真环境 &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f115507d"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../_static/translations.js?v=beaddf03"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f115507d"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
-    <link rel="next" title="仿真环境参数配置建议" href="Configuration.html" />
+    <link rel="next" title="参数设置" href="Parameters.html" />
     <link rel="prev" title="仿真器部分" href="index.html" /> 
 </head>
 
@@ -91,7 +93,6 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Configuration.html">仿真环境参数配置建议</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Parameters.html">参数设置</a></li>
 </ul>
 </li>
@@ -177,16 +178,14 @@
 <li><p>该项目的仿真环境基于开源仿真软件 <a class="reference external" href="https://cyberbotics.com/">webots</a> 搭建，模拟现实中的开放场景主动视觉跟踪问题。为此，设立了包括城市街道、市中心、湖边、乡村、沙漠、农田6种场景，其中每种场景包含白天、夜晚、雾天、雪天等4种天气，总共24张环境地图。</p></li>
 <li><p>该项目24个仿真环境示意图：</p></li>
 </ul>
-<a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 700px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/24Scene_Colorful2.png"><img alt="24个环境示意图" class="align-center" src="../_images/24Scene_Colorful2.png" style="width: 700px;" /></a>
 </br></section>
 <section id="id4">
 <span id="id5"></span><h2>运行流程<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
 <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
    为适配训练，调试等不同需求，本工程提供了<b>3种不同的运行模式</b>。
 </div>
-</br><a class="reference internal image-reference" href="../_images/RunningProcess.png"><img alt="仿真环境运行流程示意图" class="align-center" src="../_images/RunningProcess.png" style="width: 700px;" />
-</a>
+</br><a class="reference internal image-reference" href="../_images/RunningProcess.png"><img alt="仿真环境运行流程示意图" class="align-center" src="../_images/RunningProcess.png" style="width: 700px;" /></a>
 <section id="demo">
 <h3>demo模式<a class="headerlink" href="#demo" title="Link to this heading"></a></h3>
 <blockquote>
@@ -257,7 +256,7 @@
 <p><strong>参数说明</strong></p>
 <blockquote>
 <div><ul>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Simulation_Mode</span></code> ：仿真模式有三种:&quot;demo&quot;、&quot;video&quot;、&quot;train&quot;。demo与video模式是仿真端自动运行的模式（默认为&quot;train&quot;）。</p>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Simulation_Mode</span></code> ：仿真模式有三种:”demo”、”video”、”train”。demo与video模式是仿真端自动运行的模式（默认为”train”）。</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>demo会在地图中生成一个跟踪器，支持键盘直接控制，同时默认追踪地图中一辆静置车辆BmwX5，可以通过该模式浏览地图或者调试reward参数。</p></li>
@@ -271,7 +270,7 @@
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">Tracker_Def</span></code> ：选择跟踪器种类，当前的选择参数有 <code class="code docutils literal notranslate"><span class="pre">DRONE</span></code> 以及 <code class="code docutils literal notranslate"><span class="pre">CAR</span></code> 。其中，<code class="code docutils literal notranslate"><span class="pre">DRONE</span></code> 是一个仿真无人机跟踪器，带有物理属性检测和约束，相比之下， <code class="code docutils literal notranslate"><span class="pre">CAR</span></code> 被认为是一个理想的跟踪器，不考虑自身物理属性，能够在任何情况下执行任何动作。</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Drone_Supervisor_Ctrl</span></code> ：是否使用supervisor控制跟踪器，supervisor是webots的超级管理员，可以直接控制任何节点。如果为true，则使用supervisor控制跟踪器。如果为false，则使用传统PID控制器(默认无人机控制器 <a class="reference external" href="https://github.com/TaoYibo1866/uav_simulator/tree/master?tab=readme-ov-file">参考工程</a> 进行实现)控制跟踪器的运动。该参数仅适用于无人机跟踪器，车跟踪器仅使用supervisor进行控制。</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">Socket_Ip</span></code> ：socket通信的ip地址，如果为本机通信，则设置为 <strong>&quot;127.0.0.1&quot;</strong>。</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">Socket_Ip</span></code> ：socket通信的ip地址，如果为本机通信，则设置为 <strong>“127.0.0.1”</strong>。</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Config_Agen_Num_Port</span></code> ：配置socket通信端口，该端口用于与算法端进行通信，以确定并行智能体数量。</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Train_Total_Steps</span></code> ：训练的最大步长数，如果步长超出则截断轨迹。</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Init_No_Done_Steps</span></code> ：初始化后不返回 <code class="code docutils literal notranslate"><span class="pre">done=True</span></code> 的仿真步数量，为了防止跟踪器在初始化的时候物理属性不稳定导致done状态的触发，因此需设置该参数在合理大小内。</p></li>
@@ -302,8 +301,7 @@
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Verbose</span></code> ：使能日志记录。如果设置为true，则会在webots终端窗口打印部分重要参数，可供使用者观察。同时在 <code class="code docutils literal notranslate"><span class="pre">Webots_Simulation/traffic_project/logs</span></code> 文件夹下产生程序运行日志，这部分多用于调试仿真环境。</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../_images/WebotsLogOutput.png"><img alt="webots日志输出（“train”&amp;“video”）" class="align-center" src="../_images/WebotsLogOutput.png" style="width: 500px;" />
-</a>
+<div><a class="reference internal image-reference" href="../_images/WebotsLogOutput.png"><img alt="webots日志输出（“train”&amp;“video”）" class="align-center" src="../_images/WebotsLogOutput.png" style="width: 500px;" /></a>
 <ul class="simple">
 <li><p><code class="code docutils literal notranslate"><span class="pre">id</span></code> ：跟踪器的名称。</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">done</span></code> ：当前episode是否结束。</p></li>
@@ -643,8 +641,7 @@
 <div><p>统一车型，大型载客车辆</p>
 </div></blockquote>
 <figure class="align-center" id="id30">
-<a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Bus</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
 </figcaption>
@@ -654,8 +651,7 @@
 <div><p>统一车型，不带货箱的货车</p>
 </div></blockquote>
 <figure class="align-center" id="id31">
-<a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Truck</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
 </figcaption>
@@ -665,8 +661,7 @@
 <div><p>统一车型，带货箱的货车</p>
 </div></blockquote>
 <figure class="align-center" id="id32">
-<a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">Trailer</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
 </figcaption>
@@ -770,11 +765,10 @@
 <div><p>该工程支持自定义被跟踪对象，实现步骤如下：</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li><p>按照 <a class="reference external" href="https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.">webots wiki标准</a> ，建立webots使用的描述文件proto文件，其中必须开放到场景树的属性包括&quot;translation&quot;，&quot;rotation&quot;，&quot;name&quot;。描述文件示例格式如下，存放在 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
+<li><p>按照 <a class="reference external" href="https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.">webots wiki标准</a> ，建立webots使用的描述文件proto文件，其中必须开放到场景树的属性包括”translation”，”rotation”，”name”。描述文件示例格式如下，存放在 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
 <figure class="align-center" id="id33">
-<a class="reference internal image-reference" href="../_images/SceneTreePropertyPack.png"><img alt="场景树属性包" src="../_images/SceneTreePropertyPack.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/SceneTreePropertyPack.png"><img alt="场景树属性包" src="../_images/SceneTreePropertyPack.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">场景树属性包</span><a class="headerlink" href="#id33" title="Link to this image"></a></p>
 </figcaption>
@@ -797,8 +791,7 @@
 </p><ol class="arabic" start="4">
 <li><p>把proto的名称写进安全检查文件 <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py</span></code></p>
 <figure class="align-center" id="id34">
-<a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">安全检查</span><a class="headerlink" href="#id34" title="Link to this image"></a></p>
 </figcaption>
@@ -832,16 +825,14 @@
 \end{cases}\end{split}\]</div>
 <p>其中 <span class="math notranslate nohighlight">\(I\)</span> 代表跟踪范围（相机镜头获取的画面范围）， <span class="math notranslate nohighlight">\(t\)</span> 代表跟踪对象在跟踪范围（相机镜头获取的画面范围）内的位置。</p>
 <figure class="align-center" id="id35">
-<span id="id21"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" />
-</a>
+<span id="id21"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">跟踪对象离散奖励示意图</span><a class="headerlink" href="#id35" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>第二种是连续奖励，通过判断跟踪对象相对跟踪范围中心的位置，给予一个随着距离增大而减小的奖励。奖励越高代表目标离范围中心点越近，反之越远。</p>
 <figure class="align-center" id="id36">
-<span id="figcontr"></span><span id="id22"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" />
-</a>
+<span id="figcontr"></span><span id="id22"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">跟踪对象连续奖励示意图</span><a class="headerlink" href="#id36" title="Link to this image"></a></p>
 </figcaption>
@@ -867,8 +858,7 @@
 <blockquote>
 <div><p>上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过视觉识别或者人工标注的方法获取。而在仿真训练中，为了简化获取流程，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。</p>
 <figure class="align-center" id="id37">
-<a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">奖励获取示意图，A为相机画面到地面映射的示意图，B为小孔成像示意，C为相机坐标系示意图</span><a class="headerlink" href="#id37" title="Link to this image"></a></p>
 </figcaption>
@@ -1123,8 +1113,7 @@
 <li><p>其中，参数 <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> 中跟踪器坐标系定义和姿态角定义如下：</p></li>
 </ul>
 <figure class="align-center" id="id38">
-<a class="reference internal image-reference" href="../_images/DroneCoordinates.png"><img alt="无人机坐标系" src="../_images/DroneCoordinates.png" style="height: 350px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/DroneCoordinates.png"><img alt="无人机坐标系" src="../_images/DroneCoordinates.png" style="height: 350px;" /></a>
 <figcaption>
 <p><span class="caption-text">无人机坐标系定义</span><a class="headerlink" href="#id38" title="Link to this image"></a></p>
 </figcaption>
@@ -1143,7 +1132,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
         <a href="index.html" class="btn btn-neutral float-left" title="仿真器部分" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
-        <a href="Configuration.html" class="btn btn-neutral float-right" title="仿真环境参数配置建议" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="Parameters.html" class="btn btn-neutral float-right" title="参数设置" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

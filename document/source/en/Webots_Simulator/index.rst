@@ -54,5 +54,4 @@ Simulator Section
    :maxdepth: 1
 
    Simulator
-   Configuration
    Parameters

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="./">
 <head>
@@ -8,15 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Installation &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=f115507d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=beaddf03"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f115507d"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=beaddf03"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
@@ -222,14 +224,13 @@ gedit<span class="w"> </span>~/.bashrc
 <section id="step3-modify-the-python-environment-for-running-webots">
 <h3>Step3 Modify the Python environment for running Webots<a class="headerlink" href="#step3-modify-the-python-environment-for-running-webots" title="Link to this heading"></a></h3>
 <blockquote>
-<div><p>Since the environment we are using is different from Webots' default Python environment, we need to create symbolic links for our new environment and configure it.</p>
+<div><p>Since the environment we are using is different from Webots’ default Python environment, we need to create symbolic links for our new environment and configure it.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow311/bin/python3.11<span class="w"> </span>/usr/bin/python311
 </pre></div>
 </div>
 <p>Next, open the webots software, go to <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, and modify the option <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> as shown in the following image:</p>
 <figure class="align-center" id="id3">
-<a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Python command config</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
@@ -333,12 +334,11 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
       5. <code>webots</code> and <code>sumo</code> environment variable configuration
 </div>
 </br><ul>
-<li><p>First, press <code class="code docutils literal notranslate"><span class="pre">WIN+R</span></code> to bring up the Run window, then type <code class="code docutils literal notranslate"><span class="pre">sysdm.cpl</span></code> to open the System Properties page. Next, select &quot;Advanced&quot; -&gt; &quot;Environment Variables&quot; -&gt; &quot;System variables&quot; -&gt; &quot;New&quot;.</p></li>
+<li><p>First, press <code class="code docutils literal notranslate"><span class="pre">WIN+R</span></code> to bring up the Run window, then type <code class="code docutils literal notranslate"><span class="pre">sysdm.cpl</span></code> to open the System Properties page. Next, select “Advanced” -&gt; “Environment Variables” -&gt; “System variables” -&gt; “New”.</p></li>
 <li><p>Insert <code class="code docutils literal notranslate"><span class="pre">SUMO_HOME</span></code> configured as shown in the following figure:</p>
 <blockquote>
 <div><figure class="align-center" id="id4">
-<a class="reference internal image-reference" href="_images/SUMO_HOME.png"><img alt="SUMO_HOME configuration" src="_images/SUMO_HOME.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/SUMO_HOME.png"><img alt="SUMO_HOME configuration" src="_images/SUMO_HOME.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">SUMO_HOME Configuration</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
@@ -348,8 +348,7 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>Insert <code class="code docutils literal notranslate"><span class="pre">WEBOTS_HOME</span></code> and configure it as shown in the figure below:</p>
 <blockquote>
 <div><figure class="align-center" id="id5">
-<a class="reference internal image-reference" href="_images/WEBOTS_HOME.png"><img alt="WEBOTS_HOME configuration" src="_images/WEBOTS_HOME.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/WEBOTS_HOME.png"><img alt="WEBOTS_HOME configuration" src="_images/WEBOTS_HOME.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">WEBOTS_HOME configuration</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
@@ -367,8 +366,7 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>Enter the webots software, select <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, and modify the <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> option as shown in the figure below:</p></li>
 </ul>
 <figure class="align-center" id="id6">
-<a class="reference internal image-reference" href="_images/Python_CommandWIN.png"><img alt="Python_CommandWIN configuration" src="_images/Python_CommandWIN.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/Python_CommandWIN.png"><img alt="Python_CommandWIN configuration" src="_images/Python_CommandWIN.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Python_Command(Windows) configuration</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>

@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="../">
 <head>
@@ -8,16 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Environment Wrapping &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
 
   
-      <script src="../_static/jquery.js?v=5d32c60e"></script>
-      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f115507d"></script>
-      <script src="../_static/doctools.js?v=9bcbadda"></script>
-      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="../_static/translations.js?v=beaddf03"></script>
-      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=f115507d"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="索引" href="../genindex.html" />
     <link rel="search" title="搜索" href="../search.html" />
@@ -159,8 +161,7 @@
 </div></blockquote>
 <p>The relationships among these three Environment types are shown in the figure below:</p>
 <figure class="align-center" id="id9">
-<a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="Relationship diagram of three types of environment classes" src="../_images/Environment3Types.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="../_images/Environment3Types.png"><img alt="Relationship diagram of three types of environment classes" src="../_images/Environment3Types.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Diagram of the three environment classes</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
@@ -184,12 +185,12 @@
 <li><p><code class="code docutils literal notranslate"><span class="pre">Action_dim(int)</span></code>: Agent action dimension</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">action_list(list)</span></code>: Used to convert discrete action commands into continuous movement commands</p>
 <ul>
-<li><p>The storage order of <code class="code docutils literal notranslate"><span class="pre">action_list</span></code> is: <code class="code docutils literal notranslate"><span class="pre">[Forward,</span> <span class="pre">Backward,</span> <span class="pre">Left,</span> <span class="pre">Right,</span> <span class="pre">CW,</span> <span class="pre">CCW]</span></code>, representing the movement commands &quot;forward, backward, left, right, clockwise, counterclockwise.&quot;</p></li>
+<li><p>The storage order of <code class="code docutils literal notranslate"><span class="pre">action_list</span></code> is: <code class="code docutils literal notranslate"><span class="pre">[Forward,</span> <span class="pre">Backward,</span> <span class="pre">Left,</span> <span class="pre">Right,</span> <span class="pre">CW,</span> <span class="pre">CCW]</span></code>, representing the movement commands “forward, backward, left, right, clockwise, counterclockwise.”</p></li>
 </ul>
 </li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">process_state(function)</span></code>: Function for post-processing the images</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">arg_worker(int)</span></code>: System parallelism count</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">process_idx(int)</span></code>: Current environment's parallel index</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">process_idx(int)</span></code>: Current environment’s parallel index</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">Other_State(bool)</span></code>: Whether to enable additional state options on the simulator side: <code class="code docutils literal notranslate"><span class="pre">Other_State</span></code>, detail see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#parameter-configuration-of-the-simulation-environment"><span class="std std-ref">Parameter Configuration</span></a></p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">CloudPoint(bool)</span></code>: Whether to enable the point cloud option on the simulator side: <code class="code docutils literal notranslate"><span class="pre">CloudPoint</span></code>, detail see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#parameter-configuration-of-the-simulation-environment"><span class="std std-ref">Parameter Configuration</span></a></p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">RewardParams(bool)</span></code>: Whether to enable additional reward parameters options on the simulator side: <code class="code docutils literal notranslate"><span class="pre">RewardParams</span></code>, detail see: <a class="reference internal" href="../Webots_Simulator/Simulator.html#parameter-configuration-of-the-simulation-environment"><span class="std std-ref">Parameter Configuration</span></a></p></li>
@@ -294,16 +295,16 @@
 <li><p>Among them, <code class="code docutils literal notranslate"><span class="pre">&quot;Benchmark&quot;</span></code>: The corresponding parameters are the configuration parameters for the simulation environment proposed in this project.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;LunarLander&quot;</span></code>: The parameter configuration for the Gym environment <code class="code docutils literal notranslate"><span class="pre">LunarLander</span></code>, used only for compatibility testing.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Need_render&quot;</span></code>: Select rendering mode (Gym environments require a rendering mode; <strong>the default for this project is 0</strong>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Action_dim&quot;</span></code>: Dimension of the agent's action space.</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Action_dim&quot;</span></code>: Dimension of the agent’s action space.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;State_size&quot;</span></code>: Size of the images output by the environment.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;State_channel&quot;</span></code>: Number of channels in the images output by the environment (=3 for RGB images, =1 for grayscale images).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Norm_Type&quot;</span></code>: Normalization method for the images (default normalization to <code class="code docutils literal notranslate"><span class="pre">[0,1]</span></code>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Forward_Speed&quot;</span></code>: Speed corresponding to the agent's forward action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Backward_Speed&quot;</span></code>: Speed corresponding to the agent's backward action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Left_Speed&quot;</span></code>: Speed corresponding to the agent's left movement action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Right_Speed&quot;</span></code>: Speed corresponding to the agent's right movement action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CW_omega&quot;</span></code>: Speed corresponding to the agent's clockwise action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
-<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CCW_omega&quot;</span></code>: Speed corresponding to the agent's counterclockwise action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Forward_Speed&quot;</span></code>: Speed corresponding to the agent’s forward action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Backward_Speed&quot;</span></code>: Speed corresponding to the agent’s backward action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Left_Speed&quot;</span></code>: Speed corresponding to the agent’s left movement action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Right_Speed&quot;</span></code>: Speed corresponding to the agent’s right movement action ( <span class="math notranslate nohighlight">\(m/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CW_omega&quot;</span></code>: Speed corresponding to the agent’s clockwise action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">&quot;CCW_omega&quot;</span></code>: Speed corresponding to the agent’s counterclockwise action ( <span class="math notranslate nohighlight">\(rad/s\)</span>).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;Control_Frequence&quot;</span></code>: Frequency at which the agent operates (the simulator runs at 500 Hz, while the algorithm side generally runs at 125 Hz).</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;port_process&quot;</span></code>: Port specified for data transmission between processes.</p></li>
 <li><p><code class="code docutils literal notranslate"><span class="pre">&quot;end_reward&quot;</span></code>: Whether to enable additional end rewards.</p></li>
@@ -600,15 +601,15 @@ For a graphical representation of discrete reward calculation, see <a class="ref
 <aside class="footnote-list brackets">
 <aside class="footnote brackets" id="id6" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Luo, Wenhan, et al. &quot;End-to-end active object tracking and its real-world deployment via reinforcement learning.&quot; IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
+<p>Luo, Wenhan, et al. “End-to-end active object tracking and its real-world deployment via reinforcement learning.” IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.</p>
 </aside>
 <aside class="footnote brackets" id="id7" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. &quot;Enhancing continuous control of mobile robots for end-to-end visual active tracking.&quot; Robotics and Autonomous Systems 142 (2021): 103799.</p>
+<p>Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. “Enhancing continuous control of mobile robots for end-to-end visual active tracking.” Robotics and Autonomous Systems 142 (2021): 103799.</p>
 </aside>
 <aside class="footnote brackets" id="id8" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
-<p>Dionigi, Alberto, et al. &quot;D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.&quot; IEEE Robotics and Automation Letters (2024).</p>
+<p>Dionigi, Alberto, et al. “D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles.” IEEE Robotics and Automation Letters (2024).</p>
 </aside>
 </aside>
 </section>

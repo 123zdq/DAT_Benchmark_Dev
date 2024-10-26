@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="zh-CN" data-content_root="./">
 <head>
@@ -8,15 +6,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Overview &mdash; DART 1.0 文档</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
 
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=f115507d"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/translations.js?v=beaddf03"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=f115507d"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=beaddf03"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
@@ -145,8 +147,7 @@
 <li><p><strong>VAT Task</strong>: VAT (Visual Active Tracking) simultaneously models visual tracking and control, achieving active camera control to track dynamic targets, making it more realistic.</p></li>
 </ul>
 <figure class="align-center" id="id1">
-<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/VisualActiveTracking.png"><img alt="Visual Active Tracking" src="_images/VisualActiveTracking.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Differences between VAT Tasks and PVT Settings</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
 </figcaption>
@@ -161,15 +162,14 @@
 <p><strong>Limitation 2</strong>: The control model is sensitive to parameters and requires parameter fine-tuning for each different scenario</p>
 </div></blockquote>
 </li>
-<li><p><strong>This Project's VAT Scheme</strong>: Use MDP (Markov Decision Process) to model both visual and control tasks simultaneously, solving visual and control tasks with a single model</p>
+<li><p><strong>This Project’s VAT Scheme</strong>: Use MDP (Markov Decision Process) to model both visual and control tasks simultaneously, solving visual and control tasks with a single model</p>
 <blockquote>
 <div><p><strong>Advantage</strong>: End-to-end RL is more efficient and better suited for cross-scenario tasks</p>
 </div></blockquote>
 </li>
 </ul>
 <figure class="align-center" id="id2">
-<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/1_2stages.png"><img alt="VAT Model" src="_images/1_2stages.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Single-Stage and Two-Stage VAT Scheme Illustration</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
 </figcaption>
@@ -179,8 +179,7 @@
 <section id="benchmark-presentation">
 <h2>2 Benchmark Presentation<a class="headerlink" href="#benchmark-presentation" title="Link to this heading"></a></h2>
 <figure class="align-center" id="id3">
-<a class="reference internal image-reference" href="_images/statistics.png"><img alt="VAT Model" src="_images/statistics.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/statistics.png"><img alt="VAT Model" src="_images/statistics.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Statistics and simulator component examples of the DART</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
@@ -213,8 +212,7 @@
 </ul>
 </div></blockquote>
 <figure class="align-center" id="id4">
-<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/24Scene_Colorful2.png"><img alt="24 Scenes" src="_images/24Scene_Colorful2.png" style="width: 600px;" /></a>
 <figcaption>
 <p><span class="caption-text">Schematic diagram of 24 open scenes</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>

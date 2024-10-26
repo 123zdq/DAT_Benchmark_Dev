@@ -998,3 +998,6 @@ simpleway-desert_day
                 "Norm_Type": 0
             }
         }
+
+
+参考： `两阶段地图对照表 <../Algorithm/Model.html#table-cf>`_
