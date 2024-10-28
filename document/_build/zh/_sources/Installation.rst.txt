@@ -430,23 +430,24 @@ Step4 配置项目工作
 
     * 初始化仿真端(初始化完毕后方可进行下一步)
 
-    .. code:: bash
+.. code:: python
 
-        ## 开启仿真端代码，一定要等程序完成初始化之后再运行下面的步骤
-        conda activate uav_follow311
-        xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
-        ps aux | grep xvfb
-        x11vnc -display :99 -auth ***
+    #开启仿真端代码，一定要等程序完成初始化之后再运行下面的步骤
+    conda activate uav_follow311
+    xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
+    ps aux | grep xvfb
+    x11vnc -display :99 -auth ***
 
-    * 算法端配置
+* 算法端配置
 
-    .. code:: bash
-        cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark/
-        python311 ${main_path}
+.. code:: bash
 
-    .. raw:: html
+    cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark/
+    python311 ${main_path}
 
-      <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-            此处 ${main_path}路径参考: <a href=".\Algorithm\Introduction.html">算法部分介绍</a>
-      </div>
-      </br>
+.. raw:: html
+
+    <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+    此处 ${main_path}路径参考: <a href=".\Algorithm\Introduction.html">算法部分介绍</a>
+    </div>
+    </br>
