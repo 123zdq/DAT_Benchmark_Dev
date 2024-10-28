@@ -174,7 +174,7 @@ Part 2 配置文件
     .. raw:: html
 
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-            上述环境接口较多，因此，为了便于后期的封装调用，<b>本工程提供了配置文件</b>，简化配置流程。配置文件内容如下：
+            上述环境接口较多，因此，为了便于后期的封装调用，<b>本工程提供了配置文件</b>，简化配置流程。配置文件内容如下:
       </div>
       </br>
     
