@@ -53,7 +53,7 @@
 .. raw:: html
 
     <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-        本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)以及<code>Windows</code>系统下的工程安装指引
+        本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)，<code>Windows</code>系统及利用docker容器的工程安装指引
     </div>
     </br>
 
@@ -93,6 +93,8 @@ Step1 安装webots仿真软件
         
         ## unzip
         cd ~/.cache/Cyberbotics/Webots/assets/ && unzip ./assets-R2023b.zip
+
+.. _Linux Conda 与 SUMO 配置:
 
 Step2 创建虚拟环境与库安装
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,7 +245,7 @@ Step2 创建虚拟环境与库安装
     .. raw:: html
 
       <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-            3. webots的<code>makefile</code>配置(如不需要重新编译C++部分代码，可忽略)
+            3. webots的<code>makefile</code>配置(若不需要重新编译C++部分代码，可忽略)
       </div>
       </br>
     
@@ -352,67 +354,12 @@ Step1 下载Webots并创建docker容器并运行gpu
         sudo docker ps
         sudo docker exec -it **** /bin/bash
 
-Step2 配置仿真conda虚拟环境与算法conda虚拟环境
+Step2 配置conda虚拟环境与SUMO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * 仿真虚拟环境配置与安装：
+    参考 :ref:`Linux Conda 与 SUMO 配置`所示
 
-    .. code:: bash
-
-        conda create -n uav_follow311 python=3.11
-        conda activate uav_follow311
-        pip install opencv-python==4.9.0.80
-        pip uninstall numpy
-        pip install numpy==1.21.0
-
-    * 算法虚拟环境配置与安装：
-
-    .. code:: bash
-
-        conda create -n uav_follow_alg311 python=3.11
-        conda activate uav_follow_alg311
-        pip install torch==1.13.0+cu117 torchvision==0.14.0+cu117 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
-        pip install opencv-python==4.9.0.80
-        pip install gym==0.25.1
-        pip install setproctitle==1.3.3
-        pip install tensorboard
-        pip uninstall numpy
-        pip install numpy==1.21.0
-
-    * 添加python软连接：
-
-    .. code:: bash
-
-        ## 为算法端python创建软连接
-        ln -s /root/miniconda3/envs/uav_follow_alg311/bin/python3.11 /usr/bin/python311
-        ## 建立仿真端python软连接
-        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python3.11
-        mv /usr/bin/python3.10 /usr/
-
-Step3 配置SUMO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    * 添加SUMO环境变量
-
-    .. code:: bash
-
-        apt-get install libeigen3-dev
-        apt-get install nlohmann-json3-dev
-        apt install sumo sumo-tools sumo-doc
-
-    * 添加SUMO环境变量
-
-    .. code:: bash
-
-        vim ~/.bashrc
-
-    * 添加环境路径到 :code:`bashrc` 最后一行 :code:`export SUMO_HOME=/usr/share/sumo`
-
-    .. code:: bash
-
-        source ~/.bashrc
-
-Step4 配置项目工作
+Step3 配置项目工作
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     * 下载工程项目

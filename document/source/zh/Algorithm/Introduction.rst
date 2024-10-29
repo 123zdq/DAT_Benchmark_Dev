@@ -53,7 +53,7 @@
     .. raw:: html
 
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-            本项目提供了<b>3种环境类的实现，以及5种baseline算法</b>，可供用户后续进行算法设计和性能比较
+            本项目提供了<b>3种环境类的实现，以及3种baseline算法</b>，可供用户后续进行算法设计和性能比较
             环境类详细文档参考: <a href="Environment.html">环境封装</a> ；算法类详细文档参考： <a href="Model.html">模型搭建</a> 
       </div>
       </br>
@@ -80,13 +80,13 @@ Baseline1: :code:`BenchEnv_Multi` 环境 +  :code:`A3CLSTM-E2E` 算法
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
-    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode AR
+    python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode CR
     # 使用 追踪成功比例 TSR 进行测试
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode TSR
     # 新训练模式
-    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
     # 中断重开训练模式
-    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
 Baseline2: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -106,15 +106,15 @@ Baseline2: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
-    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
     # 使用 追踪成功比例 TSR 进行测试
     python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # 新训练模式
-    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # 中断重开训练模式
-    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1
 
-Baseline3(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
+Baseline3(Ours): :code:`Envs` 环境 +  :code:`RCP` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -133,11 +133,11 @@ Baseline3(Ours): :code:`Envs` 环境 +  :code:`RPPO+CL` 算法
     cd Alg_Base/rl_a3c_pytorch_benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
     # 使用 追踪成功比例 TSR 进行测试
     python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # 新训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # 中断重开训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
     

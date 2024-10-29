@@ -50,9 +50,9 @@
     </br>
     </br>
 
-  本项目提供3种形式的Environment(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层Environment类，OpenAI Gym(Gynasium)封装的Environment类，以及我们自主实现的并行Environment类
+  本项目提供3种形式的环境(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层环境类 :code:`BenchEnv_Multi()`，OpenAI Gym(Gynasium)封装的环境类:code:`gym()`:code:`gynasium()`，以及我们自主实现的并行环境类
   
-  上述3种Environment的关系如下图所示：
+  上述3种环境的关系如下图所示：
 
     .. figure:: ../_static/image/Environment3Types.png
       :alt: 3种环境类关系图                                 
@@ -100,9 +100,9 @@ Part 1 接口详解
     * :code:`process_state(function)` ：用于对图像进行后处理的函数
     * :code:`arg_worker(int)` ： 系统并行数
     * :code:`process_idx(int)` ：当前环境的并行索引号
-    * :code:`Other_State(bool)` ：是否启用仿真器端的其他状态选项 :code:`Other_State` 具体数据详见:ref:`仿真环境参数配置`
-    * :code:`CloudPoint(bool)` ： 是否启用仿真器端的点云选项 :code:`CloudPoint` 具体数据详见:ref:`仿真环境参数配置`
-    * :code:`RewardParams(bool)` ： 是否启用仿真器端的其他奖励参数选项 :code:`RewardParams` 具体数据详见:ref:`仿真环境参数配置`
+    * :code:`Other_State(bool)` ：是否启用仿真器端的其他状态选项 :code:`Other_State` 具体数据详见 :ref:`仿真环境参数配置`
+    * :code:`CloudPoint(bool)` ： 是否启用仿真器端的点云选项 :code:`CloudPoint` 具体数据详见 :ref:`仿真环境参数配置`
+    * :code:`RewardParams(bool)` ： 是否启用仿真器端的其他奖励参数选项 :code:`RewardParams` 具体数据详见 :ref:`仿真环境参数配置`
     * :code:`port_process(int)` ： 指定用于传输进程数的端口
     * :code:`end_reward(bool)` ： 是否开启追加结束奖励(若末尾reward为0,则追加惩罚；若末尾reward不为0,则追加奖励)
     * :code:`end_reward_list(list)` ： 追加结束奖励列表（在 :code:`end_reward` 开启时才有效）
@@ -188,35 +188,35 @@ Part 2 配置文件
     .. code:: json
 
         {
-        "Benchmark": {
-            "Need_render": 0,
-            "Action_dim": 7,
-            "State_size": 84,
-            "State_channel": 3,
-            "Norm_Type": 0,
-            "Forward_Speed": 40,
-            "Backward_Speed": -40,
-            "Left_Speed": 40,
-            "Right_Speed": -40,
-            "CW_omega": 2,
-            "CCW_omega": -2,
-            "Control_Frequence": 125,
-            "port_process": 39945,
-            "end_reward": false,
-            "end_reward_list": [
-                -20,
-                20
-            ],
-            "scene": "citystreet",
-            "weather": "day",
-            "auto_start": true,
-            "Other_State": false,
-            "CloudPoint": false,
-            "RewardParams": true,
-            "RewardType": "default",
-            "verbose": false,
-            "delay": 20
-        },
+            "Benchmark": {
+                "Need_render": 0,
+                "Action_dim": 7,
+                "State_size": 84,
+                "State_channel": 3,
+                "Norm_Type": 0,
+                "Forward_Speed": 40,
+                "Backward_Speed": -40,
+                "Left_Speed": 40,
+                "Right_Speed": -40,
+                "CW_omega": 2,
+                "CCW_omega": -2,
+                "Control_Frequence": 125,
+                "port_process": 33727,
+                "end_reward": false,
+                "end_reward_list": [
+                    -20,
+                    20
+                ],
+                "scene": "citystreet",
+                "weather": "day",
+                "auto_start": false,
+                "Other_State": false,
+                "CloudPoint": false,
+                "RewardParams": true,
+                "RewardType": "DVAT",
+                "verbose": true,
+                "delay": 20
+            },
             "LunarLander": {
                 "Need_render": 1,
                 "Action_dim": 4,
@@ -239,7 +239,7 @@ Part 2 配置文件
     *  :code:`"Right_Speed"` ：智能体输出右移动作时对应的速度( :math:`m/s`)
     *  :code:`"CW_omega"` ：智能体输出顺时针动作时对应的速度( :math:`rad/s`)
     *  :code:`"CCW_omega"` ：智能体输出逆时针动作时对应的速度( :math:`rad/s`)
-    *  :code:`"Control_Frequence"` ：智能体运行的频率(仿真器以500Hz运行，算法端一般以125Hz运行)
+    *  :code:`"Control_Frequence"` ：智能体运行的频率(仿真器以500Hz运行，算法端默认以125Hz运行)
     *  :code:`"port_process"` ：指定用于传输进程数的端口
     *  :code:`"end_reward"` ：是否开启追加结束奖励
     *  :code:`"end_reward_list"` ：追加结束奖励列表（在 :code:`end_reward` 开启时才有效）
@@ -251,7 +251,7 @@ Part 2 配置文件
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
 
-      *  包括 :code:`"default","E2E","CVAT","DVAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ , [3]_ 中的reward设置
+      *  包括 :code:`"default","E2E","DVAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ 中的reward设置
 
     * :code:`"verbose"(bool)`: 配置环境是否输出log文件
     * :code:`"delay"(int)`: 配置系统等待地图加载的时长
@@ -317,7 +317,7 @@ Part 3 构造函数
 2 Gym环境类
 -------------------------------------------------
 
-  考虑到用户常常基于 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 环境接口搭建强化学习算法，或利用如 `stable-baselines3 <https://github.com/DLR-RM/stable-baselines3>`_ 库进行算法验证，本工程将上述底层环境类进行封装，提供完全适配 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 的环境类
+考虑到用户常常基于 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 环境接口搭建强化学习算法，或利用如 `stable-baselines3 <https://github.com/DLR-RM/stable-baselines3>`_ 库或 `tianshou <https://github.com/thu-ml/tianshou>`_ 库进行算法验证，本工程将上述底层环境类进行封装，提供完全适配 `Gym <https://github.com/openai/gym>`_ 和 `Gymnasium <https://github.com/openai/gym>`_ 的环境类
 
 .. raw:: html
 
@@ -390,7 +390,7 @@ Part1 UAV_VAT(适配Gym库)
 Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  Gymnasium环境与Gym环境大体兼容，以下说明与gym环境的 **区别**
+  Gymnasium环境与Gym环境大体兼容，以下仅说明与gym环境的 **区别**
 
 .. raw:: html
 
@@ -437,19 +437,13 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 Part3 并行环境封装
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-.. raw:: html
-
-  <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-  <b>堆叠环境实现并行计算</b>，实现多个环境并行与多个Agent交互
-  </div>
-  </br>
+我们通过**堆叠环境实现并行计算**，实现多个环境并行与多个Agent交互
 
 .. raw:: html
 
   <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-      具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py </code>中的<code> ASYNC_SubprocVecEnv </code>类
-      具体代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py </code>中的<code> SubprocVecEnv_TS </code>类
+      对stable-baseline3库的具体实现代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv.py </code>中的<code> ASYNC_SubprocVecEnv </code>类<br>
+      对tianshou库的具体实现代码见 <code> Alg_Base/rl_a3c_pytorch_benchmark/envs/async_vecenv_ts.py </code>中的<code> SubprocVecEnv_TS </code>类
   </div>
   </br>
 
@@ -700,5 +694,4 @@ Part2 封装前后数据格式变化
 引用：
 
 .. [1] Luo, Wenhan, et al. "End-to-end active object tracking and its real-world deployment via reinforcement learning." IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.
-.. [2] Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. "Enhancing continuous control of mobile robots for end-to-end visual active tracking." Robotics and Autonomous Systems 142 (2021): 103799.
-.. [3] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).
+.. [2] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).

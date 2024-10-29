@@ -61,9 +61,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#step1-webotsdockergpu">Step1 下载Webots并创建docker容器并运行gpu</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step2-condaconda">Step2 配置仿真conda虚拟环境与算法conda虚拟环境</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step3-sumo">Step3 配置SUMO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step4">Step4 配置项目工作</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step2-condasumo">Step2 配置conda虚拟环境与SUMO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step3">Step3 配置项目工作</a></li>
 </ul>
 </li>
 </ul>
@@ -144,7 +143,7 @@
  <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
  </br>
  </br><div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-    本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)以及<code>Windows</code>系统下的工程安装指引
+    本文档主要提供 <code>Linux</code>系统(<code>Ubuntu22.04</code>)，<code>Windows</code>系统及利用docker容器的工程安装指引
 </div>
 </br><section id="linux-ubuntu22-04">
 <h2>Linux(Ubuntu22.04)<a class="headerlink" href="#linux-ubuntu22-04" title="Link to this heading"></a></h2>
@@ -176,7 +175,7 @@ cp<span class="w"> </span>~/Downloads/assets-R2023b.zip<span class="w"> </span>~
 </div></blockquote>
 </section>
 <section id="step2">
-<h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#step2" title="Link to this heading"></a></h3>
+<span id="linux-conda-sumo"></span><h3>Step2 创建虚拟环境与库安装<a class="headerlink" href="#step2" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p><strong>虚拟环境创建</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
@@ -229,11 +228,11 @@ gedit<span class="w"> </span>~/.bashrc
 </pre></div>
 </div>
 <p>接着进入webots软件，选择 <code class="code docutils literal notranslate"><span class="pre">工具(Tools)</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">首选项(Preferences)</span></code>, 按照如下图将选项 <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> 进行修改：</p>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">Python command配置</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -300,7 +299,7 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>下载最新版本的 <code class="code docutils literal notranslate"><span class="pre">nlohmann-json3</span></code> 库并编译安装。 <a class="reference external" href="https://github.com/nlohmann/json/tree/develop">nlohmann-json3下载链接</a></p></li>
 </ul>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-      3. webots的<code>makefile</code>配置(如不需要重新编译C++部分代码，可忽略)
+      3. webots的<code>makefile</code>配置(若不需要重新编译C++部分代码，可忽略)
 </div>
 </br><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
     需要修改的makefile文件路径包括：
@@ -338,22 +337,22 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>首先 <code class="code docutils literal notranslate"><span class="pre">WIN+R</span></code> 调出运行窗,再输入 <code class="code docutils literal notranslate"><span class="pre">sysdm.cpl</span></code> 调出系统属性页面，接着选择“高级”-&gt;“环境变量”-&gt;“系统变量”-&gt;“新建”</p></li>
 <li><p>插入 <code class="code docutils literal notranslate"><span class="pre">SUMO_HOME</span></code> 按照下图方式进行配置：</p>
 <blockquote>
-<div><figure class="align-center" id="id8">
+<div><figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="_images/SUMO_HOME.png"><img alt="SUMO_HOME配置" src="_images/SUMO_HOME.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">SUMO_HOME配置</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text">SUMO_HOME配置</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
 </li>
 <li><p>插入 <code class="code docutils literal notranslate"><span class="pre">WEBOTS_HOME</span></code> 按照下图方式进行配置：</p>
 <blockquote>
-<div><figure class="align-center" id="id9">
+<div><figure class="align-center" id="id11">
 <a class="reference internal image-reference" href="_images/WEBOTS_HOME.png"><img alt="WEBOTS_HOME配置" src="_images/WEBOTS_HOME.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">WEBOTS_HOME配置</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">WEBOTS_HOME配置</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -368,11 +367,11 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>Linux系统下通过添加软链接的方式解决，而在Windows下直接将运行路径插入webots中</p></li>
 <li><p>进入webots软件，选择 <code class="code docutils literal notranslate"><span class="pre">工具(Tools)</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">首选项(Preferences)</span></code>, 按照如下图将选项 <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> 进行修改：</p></li>
 </ul>
-<figure class="align-center" id="id10">
+<figure class="align-center" id="id12">
 <a class="reference internal image-reference" href="_images/Python_CommandWIN.png"><img alt="Python_CommandWIN配置" src="_images/Python_CommandWIN.png" style="width: 600px;" />
 </a>
 <figcaption>
-<p><span class="caption-text">Python_Command(Windows)配置</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+<p><span class="caption-text">Python_Command(Windows)配置</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -407,72 +406,14 @@ sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec<
 </div>
 </div></blockquote>
 </section>
-<section id="step2-condaconda">
-<h3>Step2 配置仿真conda虚拟环境与算法conda虚拟环境<a class="headerlink" href="#step2-condaconda" title="Link to this heading"></a></h3>
+<section id="step2-condasumo">
+<h3>Step2 配置conda虚拟环境与SUMO<a class="headerlink" href="#step2-condasumo" title="Link to this heading"></a></h3>
 <blockquote>
-<div><ul class="simple">
-<li><p>仿真虚拟环境配置与安装：</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
-pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="o">==</span><span class="m">4</span>.9.0.80
-pip<span class="w"> </span>uninstall<span class="w"> </span>numpy
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.21.0
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>算法虚拟环境配置与安装：</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow_alg311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow_alg311
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.13.0+cu117<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.14.0+cu117<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">0</span>.13.0<span class="w"> </span>--extra-index-url<span class="w"> </span>https://download.pytorch.org/whl/cu117
-pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="o">==</span><span class="m">4</span>.9.0.80
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gym</span><span class="o">==</span><span class="m">0</span>.25.1
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">setproctitle</span><span class="o">==</span><span class="m">1</span>.3.3
-pip<span class="w"> </span>install<span class="w"> </span>tensorboard
-pip<span class="w"> </span>uninstall<span class="w"> </span>numpy
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.21.0
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>添加python软连接：</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## 为算法端python创建软连接</span>
-ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow_alg311/bin/python3.11<span class="w"> </span>/usr/bin/python311
-<span class="c1">## 建立仿真端python软连接</span>
-ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow311/bin/python3.11<span class="w"> </span>/usr/bin/python3.11
-mv<span class="w"> </span>/usr/bin/python3.10<span class="w"> </span>/usr/
-</pre></div>
-</div>
+<div><p>参考 :ref:<a href="#id7"><span class="problematic" id="id8">`</span></a>Linux Conda 与 SUMO 配置`所示</p>
 </div></blockquote>
 </section>
-<section id="step3-sumo">
-<h3>Step3 配置SUMO<a class="headerlink" href="#step3-sumo" title="Link to this heading"></a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p>添加SUMO环境变量</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>libeigen3-dev
-apt-get<span class="w"> </span>install<span class="w"> </span>nlohmann-json3-dev
-apt<span class="w"> </span>install<span class="w"> </span>sumo<span class="w"> </span>sumo-tools<span class="w"> </span>sumo-doc
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>添加SUMO环境变量</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim<span class="w"> </span>~/.bashrc
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>添加环境路径到 <code class="code docutils literal notranslate"><span class="pre">bashrc</span></code> 最后一行 <code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">SUMO_HOME=/usr/share/sumo</span></code></p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bashrc
-</pre></div>
-</div>
-</div></blockquote>
-</section>
-<section id="step4">
-<h3>Step4 配置项目工作<a class="headerlink" href="#step4" title="Link to this heading"></a></h3>
+<section id="step3">
+<h3>Step3 配置项目工作<a class="headerlink" href="#step3" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>下载工程项目</p></li>

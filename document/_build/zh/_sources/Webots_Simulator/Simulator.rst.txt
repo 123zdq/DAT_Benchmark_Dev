@@ -152,19 +152,19 @@ train模式
 .. code:: json
 
    {
-      "Simulation_Mode": "demo",
-      "Tracker_Def": "DRONE",
-      "Drone_Supervisor_Ctrl": true,
-      "Socket_Ip": "127.0.0.1",
-      "Config_Agen_Num_Port": 38711,
-      "Train_Total_Steps": 1500,
-      "Init_No_Done_Steps": 100,
-      "No_Reward_Done_Steps": 100,
-      "Control_Frequence": 125,
-      "Customized_Rewards": true,
-      "Lidar_Enable": false,
-      "Tracking_Object": "SUMO_VEHICLE",
-      "Verbose": false
+    "Simulation_Mode": "train",
+    "Tracker_Def": "DRONE",
+    "Drone_Supervisor_Ctrl": true,
+    "Socket_Ip": "127.0.0.1",
+    "Config_Agen_Num_Port": 33727,
+    "Train_Total_Steps": 1500,
+    "Init_No_Done_Steps": 100,
+    "No_Reward_Done_Steps": 10000,
+    "Control_Frequence": 125,
+    "Customized_Rewards": true,
+    "Lidar_Enable": false,
+    "Tracking_Object": "SUMO_VEHICLE",
+    "Verbose": false
    }
 
 **参数说明**
@@ -177,7 +177,7 @@ train模式
       * 完整系统运行流程图见： :ref:`运行流程` 
 
    - :code:`Tracker_Def` ：选择跟踪器种类，当前的选择参数有 :code:`DRONE` 以及 :code:`CAR` 。其中，:code:`DRONE` 是一个仿真无人机跟踪器，带有物理属性检测和约束，相比之下， :code:`CAR` 被认为是一个理想的跟踪器，不考虑自身物理属性，能够在任何情况下执行任何动作。
-   - :code:`Drone_Supervisor_Ctrl` ：是否使用supervisor控制跟踪器，supervisor是webots的超级管理员，可以直接控制任何节点。如果为true，则使用supervisor控制跟踪器。如果为false，则使用传统PID控制器(默认无人机控制器 `参考工程 <https://github.com/TaoYibo1866/uav_simulator/tree/master?tab=readme-ov-file>`_ 进行实现)控制跟踪器的运动。该参数仅适用于无人机跟踪器，车跟踪器仅使用supervisor进行控制。
+   - :code:`Drone_Supervisor_Ctrl` ：是否使用supervisor控制跟踪器，supervisor是webots的超级管理员，可以直接控制任何节点。如果为true，则使用supervisor控制跟踪器。如果为false，则使用传统PID控制器(默认无人机控制器参考 `工程 <https://github.com/TaoYibo1866/uav_simulator/tree/master?tab=readme-ov-file>`_ 进行实现)控制跟踪器的运动。该参数仅适用于无人机跟踪器，车跟踪器仅使用supervisor进行控制。
    - :code:`Socket_Ip` ：socket通信的ip地址，如果为本机通信，则设置为 **"127.0.0.1"**。
    - :code:`Config_Agen_Num_Port` ：配置socket通信端口，该端口用于与算法端进行通信，以确定并行智能体数量。
    - :code:`Train_Total_Steps` ：训练的最大步长数，如果步长超出则截断轨迹。
@@ -209,7 +209,7 @@ train模式
       * :code:`time` ：仿真时间。
       * :code:`carDir` ：被跟踪目标运动方向。
       * :code:`pitchAngle` ：摄像头pitch轴角度。
-      * :code:`doneState` ：产生done的原因，包括“height”（跟踪器高度不合理），“distance”（跟踪器目标位置和实际位置误差过大），“velocity”（跟踪器运动速度不合理），“yaw velocity”（跟踪器绕竖直方向旋转速度不合理），“pitch or yaw angle”（跟踪器姿态不合理）。
+      * :code:`done_state` ：产生done的原因，包括“height”（跟踪器高度不合理），“distance”（跟踪器目标位置和实际位置误差过大），“velocity”（跟踪器运动速度不合理），“yaw velocity”（跟踪器绕竖直方向旋转速度不合理），“pitch or yaw angle”（跟踪器姿态不合理）。
 
 跟踪器（仅无人机有效）产生done的物理范围参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -238,8 +238,8 @@ train模式
 
 .. _内置reward参数配置:
 
-内置reward的参数配置（仅无人机有效，车默认返回reward=1）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+内置reward的参数配置（注：内置reward仅对无人机有效，如使用CAR需利用 :ref:`返回数据参数` 自主设计reward）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: json
 
@@ -293,10 +293,10 @@ SUMO交通系统参数配置
 
 **参数说明**
 
-   - :code:`rou_update` ：交通模拟路径文件是否更新，如果希望获得确定的路径，请设置为false。 **注意：** 该模块的所有参数改动都会导致路径自动刷新。
+   - :code:`rou_update` ：交通仿真路径文件是否更新，如果希望获得确定的路径，请设置为false。 **注意：** 该模块的所有参数改动都会导致路径自动刷新。
    - :code:`max_sumo_car` ：地图中最大载具数量。
    - :code:`fixed_car_group_num` ：是否自定义每组加入环境中车辆的数量。
-   - :code:`car_group_num` ：自定义每组加入环境中车辆的数量。 **注意：** 在训练和视频模式下如果该参数设置不合理（＜Agent数量*3），系统会自动设置合理的参数（＝Agent数量*3），否则环境无法稳定运行。
+   - :code:`car_group_num` ：自定义每组加入环境中车辆的数量。 **注意：** 在训练和视频模式下如果该参数设置不合理（＜Agent数量*3），系统会自动设置合理的参数（＝Agent数量*3），否则环境无法稳定运行, 并且仅当 :code:`fixed_car_group_num` 为 :code:`true` 时有效。
    - :code:`car_import_interval` ：加入地图每组载具的间隔时间 (:math:`s`)。
 
    * :code:`car_type` ：载具的类型（默认passenger），包括 :code:`[“passenger”、“bus”、“truck”、“trailer”、“motorcycle”]`。
@@ -306,7 +306,7 @@ SUMO交通系统参数配置
    - :code:`fixed_color` ：是否固定载具颜色。
    - :code:`normalize_color` ：归一化的RGB颜色向量。
 
-   - :code:`max_car_speed` ：最大载具移动速度 (:math:`s`)。
+   - :code:`max_car_speed` ：最大载具移动速度 (:math:`m/s`)。
    - :code:`max_car_accel` ：最大载具加速度 (:math:`m/s^2`)。
    - :code:`max_car_decel` ：最大载具减速度 (:math:`m/s^2`)。
    - :code:`max_rou_distance` ：最大路径长度 (:math:`m`)。
@@ -444,6 +444,34 @@ SUMO交通系统参数配置
 
    - :code:`horizon_bias_random` ：初始视角跟踪器跟踪对象水平偏移位置。如果后续参数为正，则对象向左偏移，如果后续参数为负，则对象向右偏移。其余参数同上。
    - :code:`verticle_bias_random` ：初始视角跟踪器跟踪对象竖直偏移位置。如果后续参数为正，则对象向上偏移，如果后续参数为负，则对象向下偏移。其余参数同上。
+
+仿真环境的参数配置
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   此组参数用于随机化跟踪器自身的跟踪属性。
+
+.. code:: json
+
+    "Env_Params": {
+            "background_luminosity_random": false,
+            "bgl_incremental": 0,
+            "bgl_random_max": 1,
+            "bgl_random_min": 0,
+            "backgroundLight_luminosity_random": false,
+            "bgLl_incremental": 0,
+            "bgLl_random_max": 1,
+            "bgLl_random_min": 0,
+            "foggy_use_default": true,
+            "foggy_visibility_range_random": false,
+            "foggy_visibility_range_fixed": 400,
+            "foggy_visibility_range_max": 1000,
+            "foggy_visibility_range_min": 300
+        }
+
+**参数说明**
+
+
+
 
 部分配置参数建议
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -655,7 +683,7 @@ Wheel Robots
          </figure>
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/SOJOURNER.png" alt="SOJOURNER" style="width: 90%;" />
-            <figcaption>Sojourner月球车</figcaption>
+            <figcaption>Sojourner</figcaption>
          </figure>
       </div>
 
@@ -664,7 +692,7 @@ Wheel Robots
       <div style="display: flex; align-items: center; justify-content: space-between;">
          <figure style="text-align: center; width: 50%;">
             <img src="../_static/image/BB_8.png" alt="BB_8" style="width: 90%;" />
-            <figcaption>BB-8球形机器人</figcaption>
+            <figcaption>BB-8</figcaption>
          </figure>
          <figure style="text-align: center; width: 50%;">
             <img src="../_static/image/FIREBIRD6.png" alt="FIREBIRD6" style="width: 90%;" />
@@ -683,15 +711,15 @@ Legged Robots
       <div style="display: flex; align-items: center; justify-content: space-between;">
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/MANTIS.png" alt="MANTIS" style="width: 90%;" />
-            <figcaption>Mantis大型六足机器人</figcaption>
+            <figcaption>Mantis</figcaption>
          </figure>
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/AIBOERS7.png" alt="AIBOERS7" style="width: 90%;" />
-            <figcaption>AiboErs7四足机器人</figcaption>
+            <figcaption>AiboErs7</figcaption>
          </figure>
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/BIOLOIDDOG.png" alt="BIOLOIDDOG" style="width: 90%;" />
-            <figcaption>BioloidDog四足机器人</figcaption>
+            <figcaption>BioloidDog</figcaption>
          </figure>
       </div>
    
@@ -700,15 +728,15 @@ Legged Robots
       <div style="display: flex; align-items: center; justify-content: space-between;">
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/SCOUT.png" alt="SCOUT" style="width: 90%;" />
-            <figcaption>Scout双足机器人</figcaption>
+            <figcaption>Scout</figcaption>
          </figure>
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/GHOSTDOG2.png" alt="GHOSTDOG2" style="width: 90%;" />
-            <figcaption>GhostDog四足机器人</figcaption>
+            <figcaption>GhostDog</figcaption>
          </figure>
          <figure style="text-align: center; width: 33%;">
             <img src="../_static/image/HOAP2.png" alt="HOAP2" style="width: 90%;" />
-            <figcaption>Hoap2双足机器人</figcaption>
+            <figcaption>Hoap2</figcaption>
          </figure>
       </div>
 
@@ -807,6 +835,8 @@ Legged Robots
 
    .. _figcontr:
 
+   .. _密集奖励计算公式:
+
    .. figure:: ../_static/image/Continuous_reward.png
       :alt: Continuous_reward
       :width: 600px 
@@ -829,6 +859,8 @@ Legged Robots
       \tanh\left(\alpha(1-x)^{3}\right), & t \in I_{clip}, \\
       0 & \text{otherwise}. 
       \end{cases}
+      :label: 密集奖励计算公式
+
 
    目标离范围中心点越近时，奖励会越接近1，反之越接近0。 :math:`\alpha` 为常数，建议取值为3~5。
    此外， :math:`I_{clip}` 为有效reward判定范围(如 :ref:`figcontr` 中红色方框所示)，其边长 :math:`W_{I_{clip}}` 与原图边长 :math:`W_{I}` 的比值可以用 :math:`\lambda_{clip}` 表示如下。
@@ -894,7 +926,8 @@ Legged Robots
 
    利用 :math:`T_{ct}` 可以将平面方程 :math:`G_{w}` 转换到坐标系 :math:`\{c\}` 下。如图A所示，联立地面方程与4个直线方程，即可求得相机角点在地面的映射坐标 :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}`，该4个点组成了跟踪范围 :math:`I` 的4个角点，从而确定跟踪区域 :math:`I`。
 
-   最后从仿真环境中读取跟踪对象的坐标点 :math:`p_{vG}`，并转换到坐标系 :math:`\{c\}` 下，得到 :math:`p_{vc}`。利用 :math:`p_{vc}` 及图像四角点即可求得比例 :math:`x`，当 :math:`0 \leq x \leq 1` 时对象在图像内，成功跟踪。
+   最后从仿真环境中读取跟踪对象的坐标点 :math:`p_{vG}` ，并将其与图像中心点 :code:`I_{cG}` 转换到坐标系 :math:`\{c\}` 下，得到 :math:`p_{vc}`。利用汽车的坐标 :math:`p_{vc}`，四个交叉点（ :code:`LU_G`、:code:`LD_G` 、:code:`RU_G` 和 :code:`RD_G` ）和图像中心 :code:`I_{cG}` ，
+   利用 :ref:`密集奖励计算公式` ,即可求得比例 :math:`x`，当 :math:`0 \leq x \leq 1` 时对象在图像内，成功跟踪。
 
    当地面非水平时计算方法类似。
 
@@ -938,6 +971,8 @@ Legged Robots
 ~~~~~~~~~~~~~~~~~~~~
 
    输入动作用于控制跟踪器的运动，目前跟踪器支持离散及连续的动作空间。连续的动作空间为5个浮点数，包括前进/后退、左移/右移、上移/下移、顺/逆时针旋转及是否reset。离散的动作空间包含前进、后退、左平移、右平移、逆时针旋转、顺时针旋转和停止。
+
+.. _返回数据参数:
 
 返回参数
 ~~~~~~~~~~~~~~~~~~~~
