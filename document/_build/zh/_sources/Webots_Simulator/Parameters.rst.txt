@@ -590,7 +590,7 @@ lake
                 "ccw_omega": -2
             },
             "Drone_Random_Config": {
-                "start_time_bias_ms": 1510,
+                "start_time_bias_ms": 510,
                 "view_pitch_random": true,
                 "view_pitch_fixed": 1.37,
                 "view_pitch_random_max": 1.38,
