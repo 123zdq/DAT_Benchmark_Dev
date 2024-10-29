@@ -471,6 +471,31 @@ SUMO交通系统参数配置
 **参数说明**
 
 
+    * :code:`background_luminosity_random` ：是否对环境背景光照随机化。
+
+    * :code:`bgl_incremental` ：若上述参数为 :code:`false`，则采用该参数定义固定的环境光照。
+
+    - :code:`bgl_random_max` ：最大环境背景光照。
+
+    - :code:`bgl_random_min` ：最小环境背景光照。
+
+    * :code:`backgroundLight_luminosity_random` ：是否对环境背景光源光照随机化。
+
+    - :code:`bgLl_incremental` ：若上述参数为 :code:`false`，则采用该参数定义固定的环境背景光源光照。
+
+    - :code:`bgLl_random_max` ：最大环境背景光源光照。
+
+    - :code:`bgLl_random_min` ：最小环境背景光源光照。
+
+    * :code:`foggy_use_default` ：是否启用环境雾。
+
+    * :code:`foggy_visibility_range_random` ：是否对环境雾可见度随机化。
+
+    - :code:`foggy_visibility_range_fixed` ：若上述参数为 :code:`false`，则采用该参数定义固定的环境雾可见度。
+
+    - :code:`foggy_visibility_range_max` ：最大环境雾可见度。
+
+    - :code:`foggy_visibility_range_min` ：最小环境雾可见度。
 
 
 部分配置参数建议
