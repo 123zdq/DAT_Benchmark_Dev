@@ -104,6 +104,7 @@
         "verticle_bias_random_min": 3.5
     },
     "Env_Params": {
+        "enable_each_reset": true,
         "background_luminosity_random": false,
         "bgl_incremental": 0,
         "bgl_random_max": 1,

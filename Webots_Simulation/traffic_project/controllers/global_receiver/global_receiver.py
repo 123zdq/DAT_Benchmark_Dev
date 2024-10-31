@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-10 21:18:38
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-24 18:20:41
+LastEditTime: 2024-10-31 20:24:18
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
 Description: 
 
@@ -127,7 +127,7 @@ elif System == "Windows":
     os.system("del /s /q /f ../../cache/*.jpeg")
     
 if configData["Simulation_Mode"] == "demo":
-    drone_manager.droneManager(trackerDef, robot, timestep, 0, [], configData, [], {}, [False])
+    drone_manager.droneManager(trackerDef, robot, timestep, 0, [], configData, [], {}, [False], weatherType)
     data = [0.] * 6
     data[4] = -1 # inited to -1
     data[5] = -1
@@ -168,7 +168,7 @@ elif configData["Simulation_Mode"] == "train":
     sumoDictionary = {}
     sumoGetCarFlag = [False]*multiCom.Number_process
     for i in range(multiCom.Number_process):
-        droneM.append(drone_manager.droneManager(trackerDef, robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag))
+        droneM.append(drone_manager.droneManager(trackerDef, robot, timestep, i, multiCom, configData, sumoList, sumoDictionary, sumoGetCarFlag, weatherType))
 elif configData["Simulation_Mode"] == "video":
     # clear space
     delete_count = 0
@@ -209,7 +209,7 @@ elif configData["Simulation_Mode"] == "video":
     sumoDictionary = {}
     sumoGetCarFlag = [False]*configData["Out_Video"]["channels"]
     for i in range(configData["Out_Video"]["channels"]):
-        droneM.append(drone_manager.droneManager(trackerDef, robot, timestep, i, None, configData, sumoList, sumoDictionary, sumoGetCarFlag))
+        droneM.append(drone_manager.droneManager(trackerDef, robot, timestep, i, None, configData, sumoList, sumoDictionary, sumoGetCarFlag, weatherType))
   
 configData["World_Path"] = world_path
 with open('../../config/env_config_backup.json', 'w') as file:

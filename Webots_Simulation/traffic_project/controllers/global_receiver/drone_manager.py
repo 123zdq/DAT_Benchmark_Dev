@@ -2,7 +2,7 @@
 Author: lu 2231625449@qq.com
 Date: 2024-04-30 19:17:23
 LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-20 13:30:55
+LastEditTime: 2024-10-31 20:29:29
 FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
 Description: 
 
@@ -41,7 +41,7 @@ class droneManager:
     param {*} sumoGetFlag: a list that judges whether the cars are allocated 
     return {*}
     '''    
-    def __init__(self, trackerDef:str, supervisor:Supervisor, timeStep, id, recCtrlPort, configData, sumoList, sumoDict, sumoGetFlag):
+    def __init__(self, trackerDef:str, supervisor:Supervisor, timeStep, id, recCtrlPort, configData, sumoList, sumoDict, sumoGetFlag, weatherType):
         # get supervisor node
         self.supervisor = supervisor
         # get timeStep value
@@ -52,6 +52,8 @@ class droneManager:
         self.id = id
         # get configuration
         self.configData = configData
+        # get wheather type
+        self.weatherType = weatherType
         # define sumoGod
         if configData["Sumo_Params"]["fixed_seed"] == True:
             random.seed(configData["Sumo_Params"]["random_seed"])
@@ -246,6 +248,7 @@ class droneManager:
     def reset(self):
         if self.configData["Verbose"] == True:
             print("\nid:   ",self.id,"    reset: rrrrrrrrrrrrrrrr")
+        self.resetPlugin()
         self.drone.restartController()
         
     '''
@@ -398,3 +401,31 @@ class droneManager:
             pass
         # Threads can be opened for a new run
         self.multi_state = state
+        
+    '''
+    description: Other configurations while reseting agents
+    param {*} self
+    return {*}
+    '''
+    def resetPlugin(self):
+        if self.configData["Env_Params"]["enable_each_reset"] == True:
+            if self.weatherType == "foggy.wbt" and self.configData["Env_Params"]["foggy_use_default"] == False:
+                if self.configData["Env_Params"]["foggy_visibility_range_random"] == True:
+                    visible_range = random.uniform(self.configData["Env_Params"]["foggy_visibility_range_min"],self.configData["Env_Params"]["foggy_visibility_range_min"])
+                else:
+                    visible_range = self.configData["Env_Params"]["foggy_visibility_range_fixed"]
+                self.supervisor.getFromDef("fog").getField("visibilityRange").setSFFloat(float(visible_range))
+                
+            if self.configData["Env_Params"]["background_luminosity_random"] == True:
+                bgl = random.uniform(self.configData["Env_Params"]["bgl_random_min"],self.configData["Env_Params"]["bgl_random_max"])
+            else:
+                bgl = self.supervisor.getFromDef("tbg").getField("luminosity").getSFFloat() + self.configData["Env_Params"]["bgl_incremental"]
+            self.supervisor.getFromDef("tbg").getField("luminosity").setSFFloat(float(bgl))
+
+            if self.configData["Env_Params"]["backgroundLight_luminosity_random"] == True:
+                bgLl = random.uniform(self.configData["Env_Params"]["bgLl_random_min"],self.configData["Env_Params"]["bgLl_random_max"])
+            else:
+                bgLl = self.supervisor.getFromDef("tbgl").getField("luminosity").getSFFloat() + self.configData["Env_Params"]["bgLl_incremental"]
+            self.supervisor.getFromDef("tbgl").getField("luminosity").setSFFloat(float(bgLl))
+        else:
+            pass
