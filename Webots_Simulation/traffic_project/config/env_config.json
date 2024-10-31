@@ -100,8 +100,8 @@
         "verticle_bias_random": false,
         "verticle_bias_multilateral": true,
         "verticle_bias_fixed": 0,
-        "verticle_bias_random_max": 5.5,
-        "verticle_bias_random_min": 3.5
+        "verticle_bias_random_max": 4.5,
+        "verticle_bias_random_min": 2.5
     },
     "Env_Params": {
         "enable_each_reset": true,
