@@ -373,7 +373,7 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
 
         self.load = True  # Whether load pretrain weight
         
-        self.test_Mode = "AR" # Choose test metrics
+        self.test_Mode = "CR" # Choose test metrics
 
         ##################################
 
@@ -548,7 +548,7 @@ class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
                             TSR =  test_reward / total_step * (500/freq)
                             test_reward_list.append(TSR)
                             print(f"episode: {test_episode_num} tracking success rate: {TSR}")
-                        elif self.test_Mode == "AR":
+                        elif self.test_Mode == "CR":
                             test_reward_list.append(test_reward)
                             print(f"episode: {test_episode_num} test_reward: {test_reward}")
                         test_episode_num += 1
@@ -872,8 +872,8 @@ if __name__ == "__main__":
         "-TM",
         "--Test_Mode",
         type=str,
-        default="AR",
-        help="Choose Metrics of performence: AR or TSR",
+        default="CR",
+        help="Choose Metrics of performence: CR or TSR",
     )
     args = parse.parse_args()
 
@@ -920,14 +920,14 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_seed"] = True
         data["Sumo_Params"]["fixed_car_group_num"] = True
         data["No_Reward_Done_Steps"] = 10000
-        if args.Test_Mode == "AR":
+        if args.Test_Mode == "CR":
             data["Reward_Config"]["reward_mode"] = "continuous"
             data["Reward_Config"]["view_range"] = 1
         elif args.Test_Mode == "TSR":
             data["Reward_Config"]["reward_mode"] = "discrete"
             data["Reward_Config"]["view_range"] = 1
         else:
-            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['AR','TSR']")
+            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['CR','TSR']")
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
     ) as file:

@@ -252,7 +252,7 @@ def DVAT_test(args):
                 episode_reward += reward
             if done:
                 if episode_reward != 0:
-                    if args.Test_Mode == "AR":
+                    if args.Test_Mode == "CR":
                         total_reward_list.append(episode_reward)
                         real_matrics = episode_reward
                     elif args.Test_Mode == "TSR":
@@ -385,8 +385,8 @@ if __name__ == "__main__":
         "-TM",
         "--Test_Mode",
         type=str,
-        default="AR",
-        help="Choose Metrics of performence: AR or TSR",
+        default="CR",
+        help="Choose Metrics of performence: CR or TSR",
     )
     args = parse.parse_args()
 
@@ -455,7 +455,7 @@ if __name__ == "__main__":
         data["Sumo_Params"]["fixed_car_group_num"] = True
         
         data["No_Reward_Done_Steps"] = 10000
-        if args.Test_Mode == "AR":
+        if args.Test_Mode == "CR":
             data["Reward_Config"]["reward_type"] = "view"
             data["Reward_Config"]["reward_mode"] = "continuous"
             data["Reward_Config"]["view_range"] = 1
@@ -464,7 +464,7 @@ if __name__ == "__main__":
             data["Reward_Config"]["reward_mode"] = "discrete"
             data["Reward_Config"]["view_range"] = 1
         else:
-            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['AR','TSR']")
+            raise ValueError(f"Invalid Test_Mode: {args.Test_Mode}. Expected one of ['CR','TSR']")
         
     with open(
         "../../Webots_Simulation/traffic_project/config/env_config.json", "w"
