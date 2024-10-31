@@ -340,8 +340,9 @@ class RPPO_E2E_VAT_CNN(nn.Module):
         action = torch.argmax(self.actor1(hidden), dim=1)
         return action, gru_state
 
+# To do: need further modify
 
-class CVAT_RPPO__discrete:  # model: RPPO_E2E_VAT
+class RCP:
     def __init__(self, **kwargs):
 
         ######################################
@@ -964,7 +965,7 @@ if __name__ == "__main__":
 
     from envs.envs_parallel import Envs, GE
 
-    agent = CVAT_RPPO__discrete(
+    agent = RCP(
         envs=Envs(
             num_envs=args.workers,
             env_list=GE(args.workers, data["Benchmark"]),

@@ -14,7 +14,7 @@ from communication.sendSocket import SendActionSocket
 import time
 from logger_cfg import create_logger
 import copy
-from utils import get_E2E_reward,get_DVAT_reward,get_CVAT_reward,check_memory_usage,judge_vel_eff
+from utils import get_E2E_reward,get_DVAT_reward,check_memory_usage,judge_vel_eff
 import math
 from threading import Thread
 from logs.Empty_Log import Empty_Logger
@@ -238,8 +238,8 @@ class BenchEnv_Multi():
         self.end_reward_list = end_reward_list
 
         # reward type
-        if reward_type not in ["default","E2E","DVAT","CVAT"]:
-            raise AttributeError(f"reward_type: {reward_type} is not legal! Legal ones: ['default','E2E','DVAT','CVAT']")
+        if reward_type not in ["default","E2E","DVAT"]:
+            raise AttributeError(f"reward_type: {reward_type} is not legal! Legal ones: ['default','E2E','DVAT']")
         else:
             self.reward_type = reward_type
 
@@ -415,14 +415,7 @@ class BenchEnv_Multi():
             # print(f"self.curr_step:{self.curr_step} crash:{crash}")
             reward,rx,ry = get_DVAT_reward(A_fov=Afov,d_cmd=self.d_real,x=pos_x,y=pos_y,z = pos_z,v=linear_v,u=[0,0,0],crash=crash,discrete=True)
             self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} w-{ori_w} height:{real_height} pitch_rangle:{pitch_angle} d_real:{self.d_real} linear_v:{linear_v} w_0_real:{ori_w_0} r_x:{rx} r_y:{ry} r:{reward}')
-        elif self.reward_type == "CVAT":
-            rho = math.sqrt(math.pow(pos_x,2)+math.pow(pos_y,2))
-            theta = ori_w
-            rho_cmd = self.d_real
-            theta_cmd = ori_w_0
-            reward,r_rho,r_theta = get_CVAT_reward(rho=rho,theta=theta,rho_cmd=rho_cmd,theta_cmd=theta_cmd)
-            self.logger.info(f'Get Pos/Ori of the car: x-{pos_x} y-{pos_y} z-{pos_z} height:{real_height} pitch_rangle:{pitch_angle} rho:{rho} rho_cmd:{self.d_real} theta:{ori_w} theta_cmd:{ori_w_0} r_rho:{r_rho} r_theta:{r_theta} r:{reward}')
-
+ 
         self.logger.info('Curr_reward: '+str(reward)+' Curr_done: '+str(done)+' Curr_step: '+str(step_curr))
 
         if done:

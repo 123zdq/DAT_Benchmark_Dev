@@ -113,21 +113,6 @@ def get_DVAT_reward(A_fov:float,d_cmd:float,x:float,y:float,z:float,v:list,u:lis
         reward = re-k_v*rv-k_u*ru
         return reward,rx,ry
 
-"""
-    reward of baseline method: CVAT
-        reward = A*r_rho*r_theta
-"""
-def get_CVAT_reward(rho:float,theta:float,rho_cmd:float,theta_cmd:float)->float:
-    ## Hyperparams
-    rho_max = 6 # determined after test
-    theta_max = 0.785 # determined after test(90 degree)
-    A = 1 # reward range: [0,1]
-    ## get reward
-    r_rho = max(0,1-abs(rho-rho_cmd)/rho_max)
-    r_theta = max(0,1-abs(theta-theta_cmd)/theta_max)
-    reward = A*r_rho*r_theta
-    return reward,r_rho,r_theta
-
 def check_memory_usage(target_pid:int,threshold:float=0.85)->float:
     while True:
         memory_info = psutil.virtual_memory()
