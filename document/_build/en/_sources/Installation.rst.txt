@@ -78,7 +78,7 @@ Step1 Install the Webots simulation software
     .. code:: bash
         
         ## install
-        sudo dpkg -i webots-R2023b-x86-64.deb
+        sudo dpkg -i webots_2023b_amd64.deb
 
         ## run
         webots
@@ -87,6 +87,8 @@ Step1 Install the Webots simulation software
 
     .. code:: bash
         
+        mkdir -p ~/.cache/Cyberbotics/Webots/assets/
+
         cp ~/Downloads/assets-R2023b.zip ~/.cache/Cyberbotics/Webots/assets/
         
         ## unzip

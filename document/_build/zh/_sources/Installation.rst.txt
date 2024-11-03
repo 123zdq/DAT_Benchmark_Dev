@@ -78,7 +78,7 @@ Step1 安装webots仿真软件
     .. code:: bash
         
         ## install
-        sudo dpkg -i webots_R2023b_amd64.deb
+        sudo dpkg -i webots_2023b_amd64.deb
 
         ## run
         webots
@@ -93,8 +93,6 @@ Step1 安装webots仿真软件
         
         ## unzip
         cd ~/.cache/Cyberbotics/Webots/assets/ && unzip ./assets-R2023b.zip
-
-.. _Linux Conda 与 SUMO 配置:
 
 Step2 创建虚拟环境与库安装
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -357,7 +355,39 @@ Step1 下载Webots并创建docker容器并运行gpu
 Step2 配置conda虚拟环境与SUMO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    参考 :ref:`Linux Conda 与 SUMO 配置`所示
+    * Configure and Install Simulation Environment:
+
+    .. code:: bash
+
+        conda create -n uav_follow311 python=3.11
+        conda activate uav_follow311
+        pip install opencv-python==4.9.0.80
+        pip uninstall numpy
+        pip install numpy==1.21.0
+
+    * Configure and Install Algorithm Environment:
+
+    .. code:: bash
+
+        conda create -n uav_follow_alg311 python=3.11
+        conda activate uav_follow_alg311
+        pip install torch==1.13.0+cu117 torchvision==0.14.0+cu117 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
+        pip install opencv-python==4.9.0.80
+        pip install gym==0.25.1
+        pip install setproctitle==1.3.3
+        pip install tensorboard
+        pip uninstall numpy
+        pip install numpy==1.21.0
+
+    * Add Python Symbolic Links:
+
+    .. code:: bash
+
+        ## Create symbolic link for algorithm side Python
+        ln -s /root/miniconda3/envs/uav_follow_alg311/bin/python3.11 /usr/bin/python311
+        ## Create symbolic link for simulation side Python
+        ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
+        mv /usr/bin/python3.10 /usr/
 
 Step3 配置项目工作
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
