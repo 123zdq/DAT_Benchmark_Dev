@@ -1,5 +1,5 @@
 # DART: the Drone Active Reinforcement Tracking benchmark
-[![Software License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
+[![Software License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 [![Document-en](https://img.shields.io/badge/doc-guide-blue)](document/_build/en/index.html)
 [![Document-zh](https://img.shields.io/badge/文档-指引-blue)](document/_build/zh/index.html)
 [![Website](https://img.shields.io/badge/website-exhibition-blue)](https://vat-benchmark.framer.website/)
