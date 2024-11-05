@@ -1,13 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-04-26 00:25:06
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-04-28 19:13:09
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/imageTransfer.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
 import socket
 import os
 import cv2

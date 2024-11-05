@@ -1,13 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-04-26 03:45:23
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-04-27 01:58:21
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/receiveState.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
 import socket
 import os
 import threading

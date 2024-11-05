@@ -1,15 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-04-10 21:18:38
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-10-31 20:24:18
-FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/global_receiver.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
-"""global_receiver controller."""
-
 # You may need to import some classes of the controller module. Ex:
 #  from controller import Robot, Motor, DistanceSensor
 from controller import Robot

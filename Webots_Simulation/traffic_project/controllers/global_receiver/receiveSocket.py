@@ -1,13 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-04-24 11:42:16
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-04-30 01:01:05
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/receiveSocket.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
 import socket
 import os
 import threading

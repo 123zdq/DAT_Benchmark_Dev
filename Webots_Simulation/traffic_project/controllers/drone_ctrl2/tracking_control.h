@@ -1,13 +1,3 @@
-/*
- * @Author: lu 2231625449@qq.com
- * @Date: 2024-04-14 17:38:55
- * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-04-30 22:58:31
- * @FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/drone_ctrl2/tracking_control.h
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
- */
 #pragma once
 #include <../../libraries/myLibs/Upper_Public.h>
 #include <Eigen/Eigen>

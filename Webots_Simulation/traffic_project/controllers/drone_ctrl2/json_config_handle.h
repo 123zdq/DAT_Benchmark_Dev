@@ -1,13 +1,3 @@
-/*
- * @Author: lu 2231625449@qq.com
- * @Date: 2024-05-10 11:32:26
- * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-15 23:04:16
- * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/drone_ctrl2/json_config_handle.h
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
- */
 #pragma once
 
 #include <iostream>

@@ -1,13 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-04-30 19:17:23
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-10-31 20:29:29
-FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/drone_manager.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
 import sys
 sys.path.append("../../libraries")
 sys.path.append("../SUMOGod")

@@ -16,7 +16,7 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/project
 WorldInfo {
   info [
     "World generated using the Open Street Map to Webots importer"
-    "Author: David Mansolino <david.mansolino@epfl.ch>"
+    "Author: 
   ]
   gpsCoordinateSystem "WGS84"
   gpsReference 26.559064999999997 104.97447500000001 0

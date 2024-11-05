@@ -7,8 +7,8 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'DART'
-copyright = '2024, Haowei Sun'
-author = 'Haowei Sun'
+copyright = '2024, '
+author = ''
 release = '1.0'
 
 # -- General configuration ---------------------------------------------------

@@ -1,13 +1,3 @@
-/*
- * @Author: lu 2231625449@qq.com
- * @Date: 2024-04-29 01:05:51
- * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-08-01 18:14:20
- * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/libraries/myLibs/ALGoutfile.h
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
- */
 #pragma once
 
 #include<stdio.h>

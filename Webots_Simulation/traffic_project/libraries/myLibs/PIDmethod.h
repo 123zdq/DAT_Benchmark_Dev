@@ -1,9 +1,3 @@
-/*! @file PIDmethod.h
- *  @brief PID Algorithm adjusts manipulator robot
- *
- *  This file contains the PIDmethod class and PIDtimer class, which provide ways to run PID.
- *
- */
 #pragma once
 
 #include <iostream>

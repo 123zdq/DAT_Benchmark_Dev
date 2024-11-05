@@ -1,13 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-05-10 11:12:11
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-09-02 16:54:35
-FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/global_receiver/MultiPortRecv.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
 import socket
 import queue
 import threading

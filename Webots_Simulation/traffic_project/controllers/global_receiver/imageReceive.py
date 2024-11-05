@@ -1,13 +1,3 @@
-'''
-Author: lu 2231625449@qq.com
-Date: 2024-04-26 01:00:33
-LastEditors: lu 2231625449@qq.com
-LastEditTime: 2024-04-27 01:59:58
-FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/global_receiver/imageReceive.py
-Description: 
-
-Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
-'''
 # -*- coding: utf-8 -*-
 
 # import socket

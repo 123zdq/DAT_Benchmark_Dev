@@ -1,10 +1,3 @@
-/*! @file	dataDisplay.h
- *  @brief	webots锟斤拷图锟斤拷锟斤拷锟斤拷
- *	@author	zzr
- *  @date	2023.9.21
- *
- *	锟斤拷锟斤拷API锟斤拷锟絯ebots锟劫凤拷锟侥碉拷
- */
 #pragma once
 #include "myMatrices.h"
 #include <webots/Display.hpp>

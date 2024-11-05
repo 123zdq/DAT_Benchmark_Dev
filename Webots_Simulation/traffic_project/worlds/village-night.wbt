@@ -47,7 +47,7 @@ IMPORTABLE EXTERNPROTO "../protos/SimpleRobot.proto"
 WorldInfo {
   info [
     "World generated using the Open Street Map to Webots importer"
-    "Author: David Mansolino <david.mansolino@epfl.ch>"
+    "Author: "
   ]
   basicTimeStep 2
   FPS 30

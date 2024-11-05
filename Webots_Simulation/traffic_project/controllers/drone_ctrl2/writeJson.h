@@ -1,13 +1,3 @@
-/*
- * @Author: lu 2231625449@qq.com
- * @Date: 2024-04-29 00:19:21
- * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-04-29 00:44:24
- * @FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/drone_ctrl2/writeJson.h
- * @Description:
- *
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
- */
 #pragma once
 #include <iostream>
 #include <fstream>

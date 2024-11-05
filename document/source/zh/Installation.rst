@@ -399,7 +399,7 @@ Step3 配置项目工作
         ## clone项目工程
         mkdir /usr/local/Github_Project
         cd /usr/local/Github_Project
-        git clone https://github.com/SHWplus/UAV_Follow_Env.git
+        git clone https://github.com/
 
 .. raw:: html
 

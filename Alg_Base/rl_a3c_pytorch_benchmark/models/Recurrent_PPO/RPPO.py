@@ -790,10 +790,8 @@ class UAV_RPPO_discrete:  # now:  torch base on GPU
                 )
 
 
-# 工作目录： /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark
-# 启动命令： python ./models/Recurrent_PPO/RPPO.py
-# cd /home/zdq/桌面/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark && python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt -tp 6006
 
+# 启动命令： python ./models/Recurrent_PPO/RPPO.py
 
 if __name__ == "__main__":
     import argparse
