@@ -33,7 +33,7 @@ def DVAT_train(args):
     time.sleep(args.delay)
 
     settings = {
-        'n_timesteps': 1000000,
+        'n_timesteps': 10000000,
         'batch_size': 64,
         'buffer_size': 10000,
         'train_freq': 8,
@@ -67,10 +67,6 @@ def DVAT_train(args):
     
     sacd_policy = create_sacd_policy(actor_obs_space=actor_obs_space,action_space=action_space,obs_shape_critic=critic_obs_space.shape[0],action_shape=int(action_space.n))
     sacd_policy.is_within_training_step = True
-    # check structure of sacd_policy
-    # print(sacd_policy.actor)  # actor
-    # print(sacd_policy.critic)  # critic1
-    # print(sacd_policy.critic2)  # critic2
 
     ## load model
     Load_Model = not args.New_Train
@@ -98,28 +94,14 @@ def DVAT_train(args):
     result = collector.collect(n_step=settings["train_freq"],reset_before_collect=True)
     
     save_interval = 10
-    # 训练循环，直到总步数达到 total_steps
     while collected_steps < settings["n_timesteps"]:
         try:
             # sample data from env
             result = collector.collect(n_step=settings["train_freq"])
             collected_steps += settings["train_freq"]
 
-            # 从 buffer 中采样并更新策略
             batch_buffer,batch_indices = collector.buffer.sample(settings["batch_size"])
             collected_steps += 1
-
-            # print(type(batch_buffer["act"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["done"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["terminated"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["truncated"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["obs"])) #<class 'tianshou.data.batch.Batch'>
-            # print(type(batch_buffer["obs_next"])) #<class 'tianshou.data.batch.Batch'>
-            # print(type(batch_buffer["rew"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["obs"]["actor_obs"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["obs"]["critic_obs"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["obs_next"]["actor_obs"])) #<class 'numpy.ndarray'>
-            # print(type(batch_buffer["obs_next"]["critic_obs"])) #<class 'numpy.ndarray'>
                 
             batch_buffer.act = torch.tensor(batch_buffer.act).to(device) if isinstance(batch_buffer.act, np.ndarray) else batch_buffer.act
             batch_buffer.obs = {k: torch.tensor(v).to(device) if isinstance(v, np.ndarray) else v for k, v in batch_buffer.obs.items()}
@@ -128,8 +110,7 @@ def DVAT_train(args):
 
             target_q = sacd_policy._target_q(collector.buffer, indices=batch_indices)
             losses = sacd_policy.learn(batch=batch_buffer,target_q=target_q)
-            # print(f"losses:{losses}")
-            ## save model
+
             if collected_steps % save_interval == 0:
                 torch.save(sacd_policy.state_dict(),args.savepath)
         finally:
@@ -181,7 +162,7 @@ def DVAT_test(args):
     while len(total_reward_list) < args.test_length:
         try:
             if not done:
-                action = get_action(sacd_policy,state)  # 通过模型选择动作
+                action = get_action(sacd_policy,state)
                 state, reward, done, _, _ = env.step(action)
                 episode_reward += reward
             if done:

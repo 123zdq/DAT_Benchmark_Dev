@@ -98,7 +98,7 @@ parser.add_argument(
     "-TP",
     "--Test_Param",
     type=str,
-    default="CityStreet-d",
+    default="Benchmark",
     help="specify train mode(1) or test mode(0)",
 )
 

@@ -62,7 +62,6 @@ class Agent(object):
         else:
             self.state = torch.from_numpy(state).float()
         self.eps_len += 1
-        # self.reward = max(min(self.reward, 1), -1)
         
         self.values.append(value)
         self.log_probs.append(log_prob)
@@ -110,5 +109,4 @@ class Agent(object):
         zero_arr[idx] = 1 # idx range from 0 to num_class-1
         zero_tensor = torch.Tensor(zero_arr)
         zero_tensor = torch.unsqueeze(zero_tensor,0)
-        # print(zero_tensor.shape)
         return zero_tensor

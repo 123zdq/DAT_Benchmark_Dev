@@ -201,7 +201,7 @@ def gym_test():
     observation = env.reset()
 
     for _ in range(10000):
-        action = env.action_space.sample()  # 随机生成一个动作
+        action = env.action_space.sample()
         observation, reward, done, info = env.step(action)
         env.render()
 
@@ -213,7 +213,7 @@ def gym_test():
 def stableparallel_test(n_envs:int,gym=True,end_reward:bool = False,log_dir:str=None):
     from stable_baselines3 import PPO
     
-    # 创建16个并行环境
+    # 16 parallel envs for test
     n_envs = n_envs
     env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank,gym=gym,end_reward=end_reward,log_dir=log_dir) for rank in range(n_envs)])
     tb_logdir = "./envs/PPO_testtb"

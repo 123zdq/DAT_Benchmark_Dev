@@ -248,7 +248,6 @@ class BenchEnv_Multi():
         self.logger.info(f'Get Crash of the car: {reward_params[-3]}')
 
 
-        ###### Test Cheat
         if prob is not None:
             
             cardir = int(reward_params[-2])

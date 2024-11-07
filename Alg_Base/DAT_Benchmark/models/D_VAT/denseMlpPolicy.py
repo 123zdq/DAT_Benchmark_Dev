@@ -38,15 +38,12 @@ class DenseMlp(nn.Module):
         if isinstance(x,np.ndarray):
             x = torch.tensor(x).to(self.device)
         out_1 = F.relu(self.layer_1(x))
-        # input_2 = th.cat([out_1, input_tensor], dim=1)
         out_2 = F.relu(self.layer_2(out_1))
         x = self.output_layer(out_2)
         return self.output_activation(x)
 
 class CustomDiscreteActor(nn.Module):
-    """
-    自定义的离散动作空间的Actor网络。
-    """
+
     def __init__(self, observation_space:gymnasium.spaces.Box, action_dim:int, hidden_sizes=(512,)):
         super().__init__()
         self.feature_extractor = CustomCNN(observation_space)
@@ -59,9 +56,7 @@ class CustomDiscreteActor(nn.Module):
         return logits, state
 
 class CustomDiscreteCritic(nn.Module):
-    """
-    自定义的离散动作空间的Critic网络。
-    """
+
     def __init__(self, obs_shape_critic, action_shape, hidden_sizes=(256,)):
         super().__init__()
         self.net = DenseMlp(obs_shape_critic, action_shape, hidden_dim=hidden_sizes[0])
@@ -248,12 +243,12 @@ def create_sacd_policy(actor_obs_space:gymnasium.spaces.Box,action_space:gymnasi
     critic1 = CustomDiscreteCritic(obs_shape_critic, action_shape).to(device)
     critic2 = CustomDiscreteCritic(obs_shape_critic, action_shape).to(device)
 
-    # 定义优化器
+    # optimizer
     actor_optim = Adam(actor.parameters(), lr=lr)
     critic1_optim = Adam(critic1.parameters(), lr=lr)
     critic2_optim = Adam(critic2.parameters(), lr=lr)
 
-    # 创建离散SAC Policy
+    # Discrete SAC Policy
     sacd_policy = DVAT_SACDPolicy(
         actor=actor,
         actor_optim=actor_optim,

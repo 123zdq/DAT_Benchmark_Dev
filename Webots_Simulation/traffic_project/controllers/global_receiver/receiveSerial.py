@@ -17,13 +17,12 @@ class SerialPort:
         self.ser.open()
         print(self.ser.isOpen())
         
-        # 单独打开一个服务器进行数据转发
         self.server = threading.Thread(target=self.server_loop,args=())
         self.server.start()
         
         self.data_size = int(_data_size)
         
-        ### Set Serial Port#################（这里设置为一个client，必须在server成功创建之后才能够成功创建，否则报错）
+        ### Set Serial Port#################
         self.s = b''
         self.slist = []
         self.data = _init_list
@@ -46,13 +45,11 @@ class SerialPort:
                 data = os.read(self.master, 128)
                 os.write(self.master, data)
         
-    # 更新串口数据线程(不加while循环不会自循环)
     def _serial_update(self):
         while True:
-            self.s = self.ser.readline() #是读一行，以\n结束，要是没有\n就一直读，阻塞。
+            self.s = self.ser.readline() 
             if self.s != b'':
-                self.slist = self.s.decode('utf-8').rstrip().split(',') # 去除最后换行符,并按照逗号分割
-                # 从串口中获取通道数和数据
+                self.slist = self.s.decode('utf-8').rstrip().split(',') 
                 if self.slist[0] != '' and self.slist[1] != '':
                     for i in range(self.data_size):
                         self.data[i] = float(self.slist[i])

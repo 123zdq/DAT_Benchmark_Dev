@@ -25,25 +25,16 @@ class SocketPort:
         self.socket_loop = threading.Thread(target=self._socket_update)
         self.socket_loop.start()
         
-        # 是否收到了数据
         self.is_rec = False
-        # 是否触发一次step
         self.is_step = 0
-        # 是否触发一次reset
         self.is_reset = False
         
-        
-    '''
-    description: socket通信更新
-    param {*} self
-    return {*}
-    '''    
+           
     def _socket_update(self):
         while True:
-            self.s,_=self.udp_socket.recvfrom(1024) # 一次接收
+            self.s,_=self.udp_socket.recvfrom(1024)
             if self.s != b'':
-                self.slist = self.s.decode('utf-8').rstrip().split(',') # 去除最后换行符,并按照逗号分割
-                # 获取通道数和数据
+                self.slist = self.s.decode('utf-8').rstrip().split(',')
                 if self.data_size>1:
                     self.is_rec = (self.slist[0] != '' and self.slist[1] != '')
                 else:
@@ -53,21 +44,14 @@ class SocketPort:
                     for i in range(self.data_size):
                         self.data[i] = float(self.slist[i])
                         self.sdata[i] = self.slist[i]
-                    # 最后一位用于
                     if self.data[self.data_size-1] == 1.0:
                         self.is_step = self.is_step + 1
-                        # print("step2:",self.is_step)
                     elif self.data[self.data_size-1] == 2.0:
                         self.is_reset = True
                         print("fking init state!!!!!!!!!!!!!!!!!!!!!!44")
                         
         self.udp_socket.close()
-        
-    '''
-    description: 缓存内容读取
-    param {*} self
-    return {*}
-    '''    
+          
     def read(self):
         return self.data, self.sdata
 

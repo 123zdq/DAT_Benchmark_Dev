@@ -71,7 +71,6 @@ class A3Clstm(torch.nn.Module):
                 raise TypeError("privilege_info should be Tensor")
             else:
                 x = torch.concat((hx,privilege_info),dim=1)
-                # print(x.shape)
         else:
             x = hx
         
@@ -148,7 +147,6 @@ class A3ClstmE2E(torch.nn.Module):
 ## Test Model Correctness
 if __name__ == "__main__":
     import argparse
-    from torchsummary import summary
     parser = argparse.ArgumentParser(description="A3C")
     parser.add_argument(
         "-hs",
@@ -161,9 +159,7 @@ if __name__ == "__main__":
         "--train-mode",
         type=str,
         help="config training setting",
-        # default="privilege"
         default="Normal"
     )
     args = parser.parse_args()
     model = A3ClstmE2E(num_inputs=3,action_dim=7,args=args)
-    summary(model.cuda(),input_size=(3,84,84))

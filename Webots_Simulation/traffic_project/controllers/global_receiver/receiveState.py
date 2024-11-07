@@ -21,17 +21,11 @@ class SocketPort:
         self.data = [0.] * self.data_size
         self.sdata = ["0"] * self.data_size
         
-        
-    '''
-    description: 缓存内容读取
-    param {*} self
-    return {*}
-    '''    
+           
     def read(self):
-        self.s,_=self.udp_socket.recvfrom(self.data_size * 8) # 一次接收
+        self.s,_=self.udp_socket.recvfrom(self.data_size * 8)
         if self.s != b'':
-            self.slist = self.s.decode('utf-8').strip('(').rstrip(')').split(',') # 去除前后括号,并按照逗号分割
-            # 从串口中获取通道数和数据
+            self.slist = self.s.decode('utf-8').strip('(').rstrip(')').split(',')
             if self.slist[0] != '' and self.slist[1] != '':
                 for i in range(self.data_size):
                     self.data[i] = float(self.slist[i])

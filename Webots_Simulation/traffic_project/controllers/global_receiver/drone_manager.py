@@ -208,7 +208,6 @@ class droneManager:
         else:
             transScale = random.uniform(self.configData["Drone_Random_Config"]["height_random_min"],self.configData["Drone_Random_Config"]["height_random_max"])
         
-        # 如果是车辆，则中心需要平移
         if self.configData["Tracking_Object"] == str("SUMO_VEHICLE"):
             transVector = [-math.tan(abs(1.5708-self.camera_pitch))*transScale-1+verticle_bias, horizon_bias, transScale]
         else:
@@ -349,7 +348,7 @@ class droneManager:
                         with open("../../cache/" + self.droneDef + "_Ctrl2Global.txt", "r") as f:
                             data = f.readline()
                             f.close()
-                        is_reset[self.id] = int(data.rstrip().split(',')[-1]) # 去除最后换行符,并按照逗号分割，读取最后一个reset参数
+                        is_reset[self.id] = int(data.rstrip().split(',')[-1])
                         self.machine_state = 2 # init come to an end and transfer to steps
                 elif self.machine_state == 2:
                     self.sumoGod.ResetSumoDictionary()
@@ -372,7 +371,7 @@ class droneManager:
                                 data = f.readline()
                                 f.close()
                         if len(data)>10:
-                            is_reset[self.id] = int(data.rstrip().split(',')[-1]) # 去除最后换行符,并按照逗号分割，读取最后一个reset参数
+                            is_reset[self.id] = int(data.rstrip().split(',')[-1])
                         # reset step counts that have been actuated
                         is_step[self.id] = 1
                         # complete a step count add one

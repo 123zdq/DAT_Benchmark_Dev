@@ -29,7 +29,7 @@ class getSumoCarNode:
     '''
     def __init__(self, _sumoId, _usedSumoDefList, _sumoDictionary, _sumoGetFlag, _randomSeed = None):
         self.sumoId = _sumoId
-        self.usedSumoDefList = _usedSumoDefList # 创建一个列表，记录已经被分配的sumo车辆的DEF
+        self.usedSumoDefList = _usedSumoDefList # create a list, record sumo vehicles that is already allocated
         # self.usedSumoDefList = []
         self.sumoDictionary = _sumoDictionary
         self.sumoGetFlag = _sumoGetFlag
@@ -229,10 +229,10 @@ class getSumoCarNode:
         '''move a drone to a car while the car is in the map
             return True or False'''
         try:
-            carOr = carNode.getOrientation() # 获取车辆相对于世界坐标系的旋转矩阵
-            carTr = carNode.getPosition() # 获取相对位置
+            carOr = carNode.getOrientation()
+            carTr = carNode.getPosition()
             if carTr[0] < 5000:
-                carOrV = carNode.getField('rotation').getSFRotation() # 四维向量，旋转轴3维，旋转角1维
+                carOrV = carNode.getField('rotation').getSFRotation()
                 carTrV = carNode.getField('translation').getSFVec3f()
                 carOr = np.dot(np.reshape(carOr,(3,3)),tfs.euler.euler2mat(0,0,rotateAngle,"sxyz"))
                 carTr = np.reshape(carTr,(3,1))
@@ -263,13 +263,13 @@ class getSumoCarNode:
         self.rotateAngle = rotateAngle
         is_car_get = False
         while supervisor.step(timeStep) != -1:
-            # 收集所有车辆信息
+            # collect info of all vehicles
             cardictionary = self.CollectSumoCar(supervisor,objName)
-            # 只要有信息，就随机选择一辆
+            # randomly choose one if get
             if cardictionary != {} and is_car_get == False:
-                # 获取必要的list
+                # get necessary list
                 Name_list = self.GetAllCarName(cardictionary)
-                # 创建一个可选择的参数列表
+                # create a param list
                 availableList = []
                 for i in range(len(Name_list)):
                     flag = True
@@ -280,16 +280,16 @@ class getSumoCarNode:
                     if flag == True:
                         availableList.append(i)
                 if len(availableList) > 0:
-                    # 随机抽样一个存在的车辆节点
+                    # randomly sample an existed vehicle node
                     randomChoice = random.randint(1, len(availableList)) - 1
-                    # 修改标志位表示已经得到车辆,不需要再抓车辆
+                    # already get vehicles
                     is_car_get = True
-                    # 得到该车辆的数据
+                    # get info of car
                     carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(cardictionary, Name_list[availableList[randomChoice]],objName)
                     self.currentUseCarNode = carNode
-                    # 把此次得到的车辆DEF装进列表
+                    # put vehicles DEF in
                     self.usedSumoDefList.append(self.carName)
-                    # 更改该车辆的颜色
+                    # change vehicle color
                     if fixedColorList is not None:
                         carNode.getField("children").getMFNode(0).getField("color").setSFVec3f(fixedColorList)
                 
@@ -321,14 +321,10 @@ class getSumoCarNode:
             if self.sumoGetFlag[i] == True:
                 is_dict_get = True
         if is_dict_get == False:
-            # 收集所有车辆信息
             self.sumoDictionary = self.CollectSumoCar(supervisor,objName)
             self.sumoGetFlag[self.sumoId] = True
-        # 只要有信息，就随机选择一辆
         if self.sumoDictionary != {} and is_car_get == False:
-            # 获取必要的list
             Name_list = self.GetAllCarName(self.sumoDictionary)
-            # 创建一个可选择的参数列表
             availableList = []
             for i in range(len(Name_list)):
                 flag = True
@@ -339,16 +335,11 @@ class getSumoCarNode:
                 if flag == True:
                     availableList.append(i)
             if len(availableList) > 0:
-                # 随机抽样一个存在的车辆节点
                 randomChoice = random.randint(1, len(availableList)) - 1
-                # 修改标志位表示已经得到车辆,不需要再抓车辆
                 is_car_get = True
-                # 得到该车辆的数据
                 carNode,carDef,self.carName,carTypeName = self.GetCarInfoByName(self.sumoDictionary, Name_list[availableList[randomChoice]],objName)
                 self.currentUseCarNode = carNode
-                # 把此次得到的车辆DEF装进列表
                 self.usedSumoDefList.append(self.carName)
-                # 更改该车辆的颜色
                 if fixedColorList is not None:
                     carNode.getField("children").getMFNode(0).getField("color").setSFVec3f(fixedColorList)
 
@@ -378,6 +369,3 @@ class getSumoCarNode:
         self.usedSumoDefList.remove(self.carName)
                 
             
-
-
-# Enter here exit cleanup code.
