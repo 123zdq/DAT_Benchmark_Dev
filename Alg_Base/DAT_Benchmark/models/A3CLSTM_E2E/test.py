@@ -14,17 +14,6 @@ from utils import get_mean_std
 import pandas as pd
 
 
-
-"""
-    test: Multi-Process Testing Function
-    Input:
-        args: arguments set by user through argparser
-        shared_model: master model that all the processes are to modify
-        env_conf: Hyper_Parameters configuration to build an Env
-    Output:
-        None
-"""
-
 TEST_NUM = 10
 EXCEL = True
 
@@ -55,9 +44,7 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
         
     if args.tensorboard_logger:
         from torch.utils.tensorboard import SummaryWriter
-        # dummy_input = (torch.zeros(1, 3, 84, 84), torch.zeros(1, args.hidden_size), torch.zeros(1, args.hidden_size),  )
         writer = SummaryWriter(f"models/A3CLSTM_E2E/runs/{args.env}_training")
-        # writer.add_graph(player.model, dummy_input, False)
         writer.close()
 
     if args.Test_Mode == "TSR":
@@ -132,11 +119,8 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                             else:
                                 reward_list.append(f"{mean:.3f}±{std:.3f}")
                                 df = pd.DataFrame(reward_list, columns=["Values"])
-                                df.to_excel(f"./{filename[:-4]}.xlsx", index=False)
+                                df.to_excel(f"./models/A3CLSTM_E2E/{filename[:-4]}.xlsx", index=False)
 
-                # log.info(
-                #     f'Time {time.strftime("%Hh %Mm %Ss", time.gmtime(time.time() - start_time))}, episode reward {reward_sum}, episode length {player.eps_len}, reward mean {reward_mean:.4f}'
-                # )
                 if args.tensorboard_logger:
                     if read_num_test:
                         writer.add_scalar(

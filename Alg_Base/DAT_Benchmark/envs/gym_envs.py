@@ -11,8 +11,6 @@ from torch.utils.tensorboard import SummaryWriter
 import os
 from copy import deepcopy
 import sys
-# for path in sys.path:
-#     print(path)
 
 CONF = "./config.json"
 ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
@@ -214,12 +212,10 @@ def gym_test():
 
 def stableparallel_test(n_envs:int,gym=True,end_reward:bool = False,log_dir:str=None):
     from stable_baselines3 import PPO
-    from stable_baselines3.common.vec_env import SubprocVecEnv
     
     # 创建16个并行环境
     n_envs = n_envs
     env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank,gym=gym,end_reward=end_reward,log_dir=log_dir) for rank in range(n_envs)])
-    # env = SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
     tb_logdir = "./envs/PPO_testtb"
     if not os.path.exists(tb_logdir):
         os.makedirs(tb_logdir)

@@ -27,13 +27,9 @@ def _worker_Async(
                     done = False
                 if not done:
                     observation, reward, terminated, truncated, info = env.step(data)
-                # convert to SB3 VecEnv api
-                # done = terminated or truncated
                     info["TimeLimit.truncated"] = truncated and not terminated
                     done = terminated or truncated
-                # if done:
                 else:
-                    # save final observation where user can get it, then reset
                     info["terminal_observation"] = observation
                     observation, reset_info = env.reset()
                     done = False
@@ -71,9 +67,6 @@ class ASYNC_SubprocVecEnv(SubprocVecEnv,VecEnv):
         n_envs = len(env_fns)
 
         if start_method is None:
-            # Fork is not a thread safe method (see issue #217)
-            # but is more user friendly (does not require to wrap the code in
-            # a `if __name__ == "__main__":`)
             forkserver_available = "forkserver" in mp.get_all_start_methods()
             start_method = "forkserver" if forkserver_available else "spawn"
         ctx = mp.get_context(start_method)
@@ -82,7 +75,6 @@ class ASYNC_SubprocVecEnv(SubprocVecEnv,VecEnv):
         self.processes = []
         for work_remote, remote, env_fn in zip(self.work_remotes, self.remotes, env_fns):
             args = (work_remote, remote, CloudpickleWrapper(env_fn))
-            # daemon=True: if the main process crashes, we should not cause things to hang
             process = ctx.Process(target=_worker_Async, args=args, daemon=True)  # type: ignore[attr-defined]
             process.start()
             self.processes.append(process)

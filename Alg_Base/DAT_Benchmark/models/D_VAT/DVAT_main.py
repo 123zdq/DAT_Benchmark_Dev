@@ -24,72 +24,6 @@ from denseMlpPolicy import create_sacd_policy,get_action
 from envs.gym_envs import ENV_CONF
 
 
-def test_tianshou_env(args):
-
-    # simulator !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    simulator = subprocess.Popen(
-        ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
-        shell=True,
-    )
-    time.sleep(args.delay)  # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
-    tensorboard_logdir = "./models/D_VAT/DVAT_logs"
-    if tensorboard_logdir is None:
-        os.makedirs(tensorboard_logdir)
-
-    if args.New_Train:
-        end_reward = False
-    else:
-        end_reward = True
-        
-    envs = [make_env(n_envs=args.workers,rank=i,end_reward=end_reward,log_dir=tensorboard_logdir) for i in range(args.workers)]
-    vector_env = SubprocVectorEnv_TS(envs)
-
-    action_space = DVAT_ENV.get_action_space()
-    # policy = RandomPolicy(action_space=action_space)
-
-    # buffer = VectorReplayBuffer(total_size=10000,buffer_num=args.workers)
-
-    # collector = Collector(policy, vector_env, buffer)
-    # collector.collect(n_step=1000,reset_before_collect=True)
-
-    obs = vector_env.reset()
-    test_obs_last1 = None
-    test_obs_last2 = None
-    while True:
-        try:
-            actions = np.random.randint(0, action_space.n, size=args.workers)
-            results = vector_env.step(actions) # results.tuple:len(results) = 
-            obs, reward, done, trunc, info = results
-            ## Test done/reward
-            # print(type(done)) #<class 'numpy.ndarray'>
-            # print(type(reward)) #<class 'numpy.ndarray'>
-            print(f"done: {done} reward: {reward}")
-
-            ## Test Correctness of image
-            # test_obs = obs[0]["actor_obs"]
-            # if np.array_equal(test_obs_last1,test_obs[1]) and np.array_equal(test_obs_last2,test_obs[2]):
-            #     print("Pass Test!!!!!!!!!!!!!")
-            # else:
-            #     print("NONONONONONONONONONONONONONONONONONONO")
-            # import matplotlib.pyplot as plt
-            # plt.subplot(1,3,1)
-            # plt.imshow(test_obs[0].reshape(84,84,3))
-            # plt.subplot(1,3,2)
-            # plt.imshow(test_obs[1].reshape(84,84,3))
-            # plt.subplot(1,3,3)
-            # plt.imshow(test_obs[2].reshape(84,84,3))
-            # plt.show()
-            # test_obs_last1 = test_obs[0]
-            # test_obs_last2 = test_obs[1]
-        finally:
-            simulator.terminate()
-            try:
-                simulator.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                simulator.kill()
-
 def DVAT_train(args):
 
     simulator = subprocess.Popen(
@@ -488,7 +422,6 @@ if __name__ == "__main__":
         with open("./models/D_VAT/DVAT_logs/steps.txt", "w") as file:
             file.write("0")
 
-    # test_tianshou_env(args)
     if args.train_mode == 1:
         DVAT_train(args)
     if args.train_mode == 0:

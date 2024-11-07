@@ -75,7 +75,7 @@ class Envs:
                 if self.done > 0.5:
                     self.should_reset = True
 
-    class Env_T:  # need to modify
+    class Env_T: 
         def __init__(self, env):
             self.env = env
             self.state = None
@@ -101,7 +101,7 @@ class Envs:
                 self.rewards += self.reward
 
     def __init__(self, *args, **kwargs):
-        
+
         self.num_envs = kwargs["num_envs"]
         assert self.num_envs > 0
 

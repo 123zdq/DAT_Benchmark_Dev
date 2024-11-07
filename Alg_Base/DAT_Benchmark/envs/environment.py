@@ -19,7 +19,6 @@ import math
 from threading import Thread
 from logs.Empty_Log import Empty_Logger
 import json
-# import matplotlib.pyplot as plt
 
 BASE_PORT = 6000
 ENV_CONF = "../../Webots_Simulation/traffic_project/config/env_config.json"
@@ -39,9 +38,7 @@ def process_frame(state,conf,env=None):
         state_new = (state_new-128.0)/128.0
     state_new = cv2.cvtColor(state_new,cv2.COLOR_BGR2RGB)
     state_new = state_new.reshape((conf["State_channel"],conf["State_size"],conf["State_size"]))
-    # plt.imshow(state_new.reshape(84,84,3))
-    # plt.show()
-    
+
     return state_new
 
 
@@ -84,7 +81,6 @@ class BenchEnv_Multi():
         self.process_id = process_idx
         self.port_list = []
         
-        ## Action_list:[Forward,Backward,Left,Right,CW,CCW]
         self.Forward = action_list[0]
         self.Backward = action_list[1]
         self.Left = action_list[2]
@@ -295,7 +291,6 @@ class BenchEnv_Multi():
                 self.first_step = False
             pitch_angle = reward_params[4]
             real_height = reward_params[5]
-            # d_real = real_height/math.tan(pitch_angle)
         if self.reward_type == "default":
             self.logger.info(f'Get Pos/Ori of the car: x-{reward_params[-12]} y-{reward_params[-11]} z-{reward_params[-10]} w-{reward_params[-13]}')
         elif self.reward_type == "E2E":

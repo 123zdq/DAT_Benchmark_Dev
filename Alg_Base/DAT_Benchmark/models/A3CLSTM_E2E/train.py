@@ -13,38 +13,22 @@ import time
 import logging
 from logs.Empty_Log import Empty_Logger
 
-"""
-    train: Multi-Process Training Function
-    Input:
-        rank: Process ID of Current Function
-        args: arguments set by user through argparser
-        shared_model: master model that all the processes are to modify
-        optimizer: model optimizer
-        env_conf: Hyper_Parameters configuration to build an Env
-    Output:
-        None
-"""
 
 def train(rank, args, shared_model, optimizer, env_conf,log = False):
     if log:
         logger = logging.getLogger(f'train_logger_{rank}')
         logger.setLevel(logging.INFO)
-        # 创建文件处理器
         if os.path.exists(f"./logs/Agent_train{rank}.log"):
             os.unlink(f"./logs/Agent_train{rank}.log")
         file_handler = logging.FileHandler(f"./logs/Agent_train{rank}.log")
         file_handler.setLevel(logging.INFO)
-        # 创建格式化器并将其添加到文件处理器
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         file_handler.setFormatter(formatter)
-        # 将文件处理器添加到日志记录器
-        if not logger.handlers: # 避免重复添加处理器
+        if not logger.handlers:
             logger.addHandler(file_handler)
     else:
         logger = Empty_Logger()
 
-
-    
     episode = 0
     ptitle(f"Train Agent: {rank}")
     gpu_id = args.gpu_ids[rank % len(args.gpu_ids)]
@@ -59,7 +43,6 @@ def train(rank, args, shared_model, optimizer, env_conf,log = False):
         if args.optimizer == 'Adam':
             optimizer = optim.Adam(
                 shared_model.parameters(), lr=args.lr, amsgrad=args.amsgrad)
-    # env.seed(args.seed + rank)
     player = Agent(None, env, args, None,process_func)
     player.gpu_id = gpu_id
     if args.model_type == "Default":
@@ -133,7 +116,6 @@ def train(rank, args, shared_model, optimizer, env_conf,log = False):
                     state.unsqueeze(0), player.hx, player.cx,player.privilegeinfo
                 )
                 
-                # print("The value we receive is:",value)
                 R = value.detach()
             player.values.append(R)
             policy_loss = 0

@@ -85,8 +85,6 @@ class A3ClstmE2E(torch.nn.Module):
         self.conv1 = torch.nn.Conv2d(num_inputs, 16, 8, stride=4)
         self.conv2 = torch.nn.Conv2d(16, 32, 4, stride=2)
 
-
-
         if args.train_mode == "privilege":
             self.privilege_dim = 4
         else:

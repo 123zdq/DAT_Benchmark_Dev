@@ -187,9 +187,6 @@ class TS_Collector(Collector):
                 "Either reset the collector (using reset or reset_env) or pass reset_before_collect=True to collect.",
             )
 
-        # get the first obs to be the current obs in the n_step case as
-        # episodes as a new call to collect does not restart trajectories
-        # (which we also really don't want)
         step_count = 0
         num_collected_episodes = 0
         episode_returns: list[float] = []
@@ -245,8 +242,6 @@ class TS_Collector(Collector):
                 ),
             )
 
-            # TODO: only makes sense if render_mode is human.
-            #  Also, doubtful whether it makes sense at all for true vectorized envs
             if render:
                 self.env.render()
                 if not np.isclose(render, 0):
@@ -263,9 +258,6 @@ class TS_Collector(Collector):
             num_collected_episodes += num_episodes_done_this_iter
             step_count += len(ready_env_ids_R)
 
-            # preparing for the next iteration
-            # obs_next, info and hidden_state will be modified inplace in the code below,
-            # so we copy to not affect the data in the buffer
             last_obs_RO = copy(obs_next_RO)
             last_info_R = copy(info_R)
             last_hidden_state_RH = copy(hidden_state_RH)

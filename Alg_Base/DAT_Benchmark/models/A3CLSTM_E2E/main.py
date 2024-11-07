@@ -20,23 +20,13 @@ from shared_optim import SharedRMSprop, SharedAdam
 import time
 
 parser = argparse.ArgumentParser(description="A3C")
-"""
-    Argument that we need to config：
-        --train_mode
-        --load
-        --workers
-        --gpu-ids
-        --hidden-size
-        --env
-        --model_type
-"""
+
 
 parser.add_argument(
     "-tm",
     "--train-mode",
     type=str,
     help="config training setting",
-    # default="privilege"
     default="Normal"
 )
 
@@ -223,7 +213,6 @@ parser.add_argument(
 parser.add_argument(
     "-sm",
     "--save-max",
-    # action="store_true",
     help="Save model on every test run high score matched or bested",
     default=False
 )
@@ -294,13 +283,6 @@ parser.add_argument(
 )
 
 
-# Based on
-# https://github.com/pytorch/examples/tree/master/mnist_hogwild
-# Training settings
-# Implemented multiprocessing using locks but was not beneficial. Hogwild
-# training was far superior
-            # cv2.imshow("img",imageRead)
-            # cv2.waitKey(0)
 if __name__ == '__main__':
     args = parser.parse_args()
     if args.Mode == 0:
@@ -471,10 +453,7 @@ if __name__ == '__main__':
             p.join()
     else:
         load_path = "./models/A3CLSTM_E2E/trained_models/"
-        # path_list = ["CityStreet-n.dat","CityStreet-s.dat","Downtown-d.dat","Downtown-f.dat","Farmland-d.dat","Farmland-f.dat","Farmland-s.dat","Lake-d.dat","Lake-s.dat","Village-s.dat"]
-        # path_list = ["CityStreet-d.dat","CityStreet-f.dat","Downtown-n.dat","Downtown-s.dat","Farmland-n.dat","Lake-n.dat","Lake-f.dat","Village-d.dat","Village-n.dat","Village-f.dat"]
         path_list = [args.Test_Param+".dat"]
-        # test(args, shared_model, env_conf,read_num_test=False,load_path=load_path)
         processes = []
         for idx,dat in enumerate(path_list):
             p = mp.Process(target=test, args=(args, shared_model, env_conf,False,load_path+dat,len(path_list),idx))
