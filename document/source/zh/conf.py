@@ -6,8 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'DART'
-copyright = '2024, '
+project = 'DAT'
+copyright = ''
 author = ''
 release = '1.0'
 

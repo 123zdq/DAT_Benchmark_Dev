@@ -425,11 +425,8 @@ Step4 Configure Project Workspace
         mkdir /usr/local/Github_Project
         cd /usr/local/Github_Project
         git clone https://github.com/
-    .. raw:: html
 
-        <span style="background-color: yellow;">To Do</span>
-
-    * Initialize Simulation Side (proceed to the next step after initialization)
+    * run webots simulation
 
     .. code:: bash
 
@@ -443,7 +440,7 @@ Step4 Configure Project Workspace
 
     .. code:: bash
 
-        cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark/
+        cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/DAT_Benchmark/
         python311 ${main_path}
 
     .. raw:: html

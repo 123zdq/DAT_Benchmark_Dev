@@ -67,8 +67,8 @@ Baseline1: :code:`BenchEnv_Multi` 环境 +  :code:`A3CLSTM-E2E` 算法
 .. raw:: html
 
     <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-        环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/environment.py</code>
-        算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/</code>
+        环境代码见 <code>Alg_Base/DAT_Benchmark/envs/environment.py</code>
+        算法代码见 <code>Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E/</code>
     </div>
     </br>
 
@@ -77,7 +77,7 @@ Baseline1: :code:`BenchEnv_Multi` 环境 +  :code:`A3CLSTM-E2E` 算法
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode CR
@@ -88,14 +88,14 @@ Baseline1: :code:`BenchEnv_Multi` 环境 +  :code:`A3CLSTM-E2E` 算法
     # 中断重开训练模式
     python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
-Baseline2: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
+Baseline2: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`D-VAT` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
 
     <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-        环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_envs.py</code>
-        算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/</code>
+        环境代码见 <code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_envs.py</code>
+        算法代码见 <code>Alg_Base/DAT_Benchmark/models/D_VAT/</code>
     </div>
     </br>
 
@@ -103,7 +103,7 @@ Baseline2: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
     python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
@@ -114,14 +114,14 @@ Baseline2: :code:`UAV_VAT_Gymnasium` 环境 +  :code:`DVAT` 算法
     # 中断重开训练模式
     python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1
 
-Baseline3(Ours): :code:`Envs` 环境 +  :code:`RCP` 算法
+Baseline3(Ours): :code:`Envs` 环境 +  :code:`R-VAT` 算法
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
 
     <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-        环境代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
-        算法代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO/</code>
+        环境代码见 <code>Alg_Base/DAT_Benchmark/envs/envs_parallel.py</code>
+        算法代码见 <code>Alg_Base/DAT_Benchmark/models/R_VAT/</code>
     </div>
     </br>
 
@@ -130,14 +130,14 @@ Baseline3(Ours): :code:`Envs` 环境 +  :code:`RCP` 算法
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
+    python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
     # 使用 追踪成功比例 TSR 进行测试
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # 新训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # 中断重开训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
+    python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1
     

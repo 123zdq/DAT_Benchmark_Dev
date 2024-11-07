@@ -57,15 +57,15 @@ Model Construction
 .. raw:: html
 
     <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 2px solid #CD6839;">
-        This project provides algorithm implementations of three baseline methods, namely <code>A3CLSTM-E2E</code> [1], <code>DVAT</code> [2], and <code>RPPO+CL(Ours)</code>.
+        This project provides algorithm implementations of three baseline methods, namely <code>A3CLSTM-E2E</code> [1], <code>D-VAT</code> [2], and <code>R-VAT(Ours)</code>.
     </div>
     </br>
 
-Among these baseline methods, [1]_ [2]_ and :code:`RPPO+CL(Ours)` respectively call the three environments implemented in this project( :doc:`Environment` ), providing templates for different algorithm implementation needs.
+Among these baseline methods, [1]_ [2]_ and :code:`R-VAT(Ours)` respectively call the three environments implemented in this project( :doc:`Environment` ), providing templates for different algorithm implementation needs.
 
 *  The :code:`A3CLSTM-E2E` algorithm calls the underlying environment class ( :ref:`BenchEnv_Multi` )
-*  The :code:`DVAT` algorithm calls the Gym environment class ( :ref:`Gymnasium_Gym` )
-*  The :code:`RPPO+CL` algorithm calls the parallel environment class ( :ref:`Parallel` )
+*  The :code:`D-VAT` algorithm calls the Gym environment class ( :ref:`Gymnasium_Gym` )
+*  The :code:`R-VAT` algorithm calls the parallel environment class ( :ref:`Parallel` )
 
 .. figure:: ../_static/image/classes.png
     :alt: 3种环境类关系图                                 
@@ -88,7 +88,7 @@ This project refers to the paper :code:`AD-VAT+` [3]_ for reproducing the :code:
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        The specific code can be found in the <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code> folder
+        The specific code can be found in the <code>Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E</code> folder
     </div>
     </br>
 
@@ -97,7 +97,7 @@ Quick-Start
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # Test mode
     # Testing with Cumulative Reward (CR)
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode CR
@@ -141,8 +141,7 @@ Program entry point
       </div>
       </br>
 
-    * :code:`--Scene(str)="citystreet"` : Configure the training/testing environment scene type, choose from :code:`[citystreet,downtown,lake,village,desert,farmland]`
-    * :code:`--Weather(str)="day"` : Configure the training/testing environment weather type, choose from :code:`[day,night,foggy,snow]`
+    * :code:`--map(str)="citystreet-day.wbt"` : Configure the training/testing environment scene type, choose from :code:`[citystreet-day.wbt,downtown-day.wbt,lake-day.wbt,village-day.wbt,desert-day.wbt,farmland-day.wbt,citystreet-night.wbt,downtown-night.wbt,lake-night.wbt,village-night.wbt,desert-night.wbt,farmland-night.wbt,citystreet-foggy.wbt,downtown-foggy.wbt,lake-foggy.wbt,village-foggy.wbt,desert-foggy.wbt,farmland-foggy.wbt,citystreet-snow.wbt,downtown-snow.wbt,lake-snow.wbt,village-snow.wbt,desert-snow.wbt,farmland-snow.wbt]` 中选择
     
     .. raw:: html
 
@@ -177,7 +176,7 @@ log files
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            Log files can be found in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/logs</code>
+            Log files can be found in the folder <code>Alg_Base/DAT_Benchmark/logs</code>
         </div>
         </br>
 
@@ -189,7 +188,7 @@ log files
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            TensorBoard-logger files can be found in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
+            TensorBoard-logger files can be found in the folder <code>Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
         </div>
         </br>
 
@@ -197,12 +196,12 @@ log files
     * During multi-process training, this project reserves one process for testing. For example, if the user selects 24 parallel agents, then during the actual training, there will be 23 training processes and 1 testing process. The testing process synchronizes the weights of the shared_model at the beginning of each episode and conducts tests.
     * The data recorded in the :code:`tensorboard-logger` file is from the testing process, mainly the :code:`value` during training, which is used to evaluate the training status of the agents.
     * Additionally, if the program is interrupted due to external reasons, this project provides an uninterrupted :code:`tensorboard-logger` function. It uses :code:`num_test.txt` to store the current data entry count and continues recording when a new training session starts.
-    * **Note:** If the user wishes to re-record the training curve, they need to add **-- New_Train** to the command that starts the training.
+    * **Note:** If the user wishes to re-record the training curve, they need to add :code:`-- New_Train` to the command that starts the training.
     * After completing all configurations, simply run the following code to view the :code:`TensorBoard` visualization records on :code:`localhost:xxxx`.
     
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs
+        cd Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E/runs
         tensorboard --logdir Benchmark_training
 
 .. raw:: html
@@ -212,13 +211,13 @@ log files
     </br>
     </br>
 
-Baseline2 DVAT
+Baseline2 D-VAT
 ---------------------------------
 
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        The specific code can be found in the <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT</code> folder.
+        The specific code can be found in the <code>Alg_Base/DAT_Benchmark/models/D_VAT</code> folder.
     </div>
     </br>
 
@@ -228,7 +227,7 @@ Quick-Start
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # Test mode
     # Test using Cumulative Reward (CR)
     python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
@@ -287,7 +286,7 @@ Program Entry
 Code Encapsulation and Modification Details
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    DVAT adopts an Actor-Critic asymmetric framework. The schematic diagrams of the Actor-Critic symmetric and asymmetric architectures are as follows:
+    D-VAT adopts an Actor-Critic asymmetric framework. The schematic diagrams of the Actor-Critic symmetric and asymmetric architectures are as follows:
 
     .. figure:: ../_static/image/sym_asym.png
         :alt: Asymmetric_and_Symmetrical_Structure
@@ -297,13 +296,17 @@ Code Encapsulation and Modification Details
         Schematic diagrams of the Actor-Critic symmetric and asymmetric architectures
 
 
-    **The DVAT code mainly implements the following:**
+    **The D-VAT code mainly implements the following:**
 
     1. Custom Environment Class
 
-    The environment class is custom implemented as the :code:`DVAT_ENV` environment class, modeled after the `Gym environment class <Environment.html#gym>`_. The specific code can be found in :code:`Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_envs.py` .
+    .. raw:: html
 
-    To support the Actor-Critic asymmetric framework, the state space of the :code:`DVAT_ENV` environment class includes two parts: :code:`actor_obs` and :code:`critic_obs`:
+        <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
+            The environment class is modeled after the <a href="./Environment.html#gym">Gym environment class</a> to independently implement the <code>DVAT_ENV</code> environment class, with the specific code seen in <code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_envs.py</code><br>
+            To support the Actor-Critic asymmetric architecture, the state space of the <code>DVAT_ENV</code> environment class includes two parts: <code>actor_obs</code> and <code>critic_obs</code>:
+        </div>
+        </br>
 
     .. code:: python
 
@@ -325,11 +328,11 @@ Code Encapsulation and Modification Details
 
     2. Custom Implemented Policy
 
-    To support the Actor-Critic asymmetric framework, :code:`DVAT_SACDPolicy` was implemented by inheriting from the :code:`DiscreteSACPolicy` in **Tianshou**.
+    To support the Actor-Critic asymmetric architecture, the :code:`DVAT_SACDPolicy` is implemented by inheriting from **Tianshou**'s :code:`DiscreteSACPolicy`.
 
     3. Custom Implemented Parallel Class and Collector
     
-    Custom parallel environment classes and collectors were implemented, referencing :ref:`SubprovecEnv` .
+    Custom parallel environment classes and collectors are implemented by referring to `Async_SubprocVecEnv & SubprocVecEnv_TS <Environment.html#part3-async-subprocvecenv-subprocvecenv-ts>`_.
 
 
 log file
@@ -338,7 +341,7 @@ log file
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            See the tensorboard-logger file in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_logs</code>
+            See the tensorboard-logger file in the folder <code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_logs</code>
         </div>
         </br>
 
@@ -347,7 +350,7 @@ log file
 
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/
+        cd Alg_Base/DAT_Benchmark/models/D_VAT/
         tensorboard --logdir DVAT_logs
 
 
@@ -359,13 +362,13 @@ log file
     </br>
 
 
-Baseline3 RPPO+CL
+Baseline3 R-VAT
 ---------------------------------
 
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        For specific code, see <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code> folder
+        For specific code, see <code>Alg_Base/DAT_Benchmark/models/R_VAT</code> folder
     </div>
     </br>
 
@@ -374,21 +377,21 @@ Quick-Start
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # Test mode
     # Test with Cumulative Reward (CR)
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
     # Test with Tracking Success Rate (TSR)
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # New training mode
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
     # Resume training mode
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1
 
 Program Entry
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :code:`RPPO.py` is the entry point for the entire program, providing both training and testing modes (for specific configurations, refer to the parameter settings below).
+    :code:`RVAT.py` is the entry point for the entire program, providing both training and testing modes (for specific configurations, refer to the parameter settings below).
 
     .. raw:: html
 
@@ -433,7 +436,7 @@ Program Entry
 Curriculum Learning
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * Our method adds curriculum learning based on RPPO, and in the first and second stages of curriculum learning, the intelligent experience tracks monochrome and colored cars respectively under simple settings (unobstructed situation, car only travels straight)
+    * Our method adds curriculum learning based on R-VAT, and in the first and second stages of curriculum learning, the intelligent experience tracks monochrome and colored cars respectively under simple settings (unobstructed situation, car only travels straight)
     * For convenience, we extracted the simple settings as maps, i.e. :code:`./Webots_Simulation/traffic_project/worlds/simpleway-*.wbt` maps.
     * Therefore, the third stage is trained on the corresponding :code:`simpleway-*.wbt`.
     * After completing task understanding, the third stage of training can be conducted on visually challenging maps to learn complex visual features.
@@ -441,16 +444,16 @@ Curriculum Learning
 
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/
+        cd Alg_Base/DAT_Benchmark/
         # Stage2: Task Understanding
-        python ./models/Recurrent_PPO/RPPO.py -w 35 -m simpleway-grass.wbt --train_mode 1 --New_Train
+        python ./models/R_VAT/RVAT.py -w 35 -m simpleway-grass.wbt --train_mode 1 --New_Train
         # Stage3: Visual Generalization
-        python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
+        python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1
         # Testing Mode
         # Test with Cumulative Reward (CR)
-        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode AR
+        python ./models/R_VAT/RVAT.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode AR
         # Test with Tracking Success Rate (TSR)
-        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode TSR
+        python ./models/R_VAT/RVAT.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode TSR
 
 .. _table-cf:
 
@@ -514,7 +517,7 @@ log file
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            The tensorboard-logger file can be found in the folder <code>Alg_Base/rl_a3c_pytorch_benchmark/PPO_logs</code>
+            The tensorboard-logger file can be found in the folder <code>Alg_Base/DAT_Benchmark/PPO_logs</code>
         </div>
         </br>
 
@@ -523,7 +526,7 @@ log file
 
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/
+        cd Alg_Base/DAT_Benchmark/
         tensorboard --logdir PPO_logs
 
 .. raw:: html

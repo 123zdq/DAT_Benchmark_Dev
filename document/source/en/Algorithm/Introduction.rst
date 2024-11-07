@@ -67,8 +67,8 @@ Baseline1: :code:`BenchEnv_Multi` environment +  :code:`A3CLSTM-E2E` algorithm
 .. raw:: html
 
     <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-        Environment code is located at <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/environment.py</code>
-        Algorithm code is located at <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/</code>
+        Environment code is located at <code>Alg_Base/DAT_Benchmark/envs/environment.py</code>
+        Algorithm code is located at <code>Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E/</code>
     </div>
     </br>
 
@@ -77,7 +77,7 @@ You can run the following code to quickly start the algorithm:
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # Test mode
     # Test using Cumulative Reward (CR)
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode AR
@@ -93,7 +93,26 @@ Baseline2: :code:`UAV_VAT_Gymnasium` environment +  :code:`DVAT` algorithm
 
 .. raw:: html
 
-    <span style="background-color: yellow;">To do: Supplement the process after replication is completed</span>
+    <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
+        Environment code can be found at <code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_envs.py</code>
+        Algorithm code can be found at <code>Alg_Base/DAT_Benchmark/models/D_VAT/</code>
+    </div>
+    </br>
+
+You can run the following code to quickly start the algorithm:
+
+.. code:: bash
+
+    cd Alg_Base/DAT_Benchmark/
+    # Test mode
+    # Test using Cumulative Reward (CR)
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
+    # Test using Tracking Success Rate (TSR)
+    python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    # New training mode
+    python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
+    # Resume training mode
+    python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1
 
 Baseline3(Ours): :code:`Envs` Environment +  :code:`RPPO+CL` Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -101,8 +120,8 @@ Baseline3(Ours): :code:`Envs` Environment +  :code:`RPPO+CL` Algorithm
 .. raw:: html
 
     <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
-        Environment code can be found at <code>Alg_Base/rl_a3c_pytorch_benchmark/envs/envs_parallel.py</code>
-        Algorithm code can be found at <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO/</code>
+        Environment code can be found at <code>Alg_Base/DAT_Benchmark/envs/envs_parallel.py</code>
+        Algorithm code can be found at <code>Alg_Base/DAT_Benchmark/models/R_VAT/</code>
     </div>
     </br>
 
@@ -111,14 +130,14 @@ You can run the following code to quickly start the algorithm:
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # Test mode
     # Test using Cumulative Reward (CR)
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
+    python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode AR
     # Test using Tracking Success Rate (TSR)
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # New training mode
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
     # Resume training mode
-    python ./models/Recurrent_PPO/RPPO.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1
     

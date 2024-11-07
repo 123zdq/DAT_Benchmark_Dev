@@ -50,7 +50,7 @@
     </br>
     </br>
 
-  本项目提供3种形式的环境(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层环境类 :code:`BenchEnv_Multi()`，OpenAI Gym(Gynasium)封装的环境类:code:`gym()`:code:`gynasium()`，以及我们自主实现的并行环境类
+  本项目提供3种形式的环境(路径： :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs` ): 底层环境类 :code:`BenchEnv_Multi()`，OpenAI Gym(Gynasium)封装的环境类 :code:`gym()`:code:`gynasium()`，以及我们自主实现的并行环境类
   
   上述3种环境的关系如下图所示：
 
@@ -251,7 +251,7 @@ Part 2 配置文件
     *  :code:`"RewardParams"` ：是否启用仿真器端的其他奖励参数选项
     *  :code:`"RewardType"` ：指定reward类别(可以选择不同baseline算法的reward)
 
-      *  包括 :code:`"default","E2E","DVAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ 中的reward设置
+      *  包括 :code:`"default","E2E","D-VAT"` 分别对应 :ref:`内置Reward` , [1]_ , [2]_ 中的reward设置
 
     * :code:`"verbose"(bool)`: 配置环境是否输出log文件
     * :code:`"delay"(int)`: 配置系统等待地图加载的时长
@@ -437,7 +437,7 @@ Part2 UAV_VAT_Gymnasium(适配Gymnasium库)
 Part3 并行环境封装
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-我们通过**堆叠环境实现并行计算**，实现多个环境并行与多个Agent交互
+我们通过 **堆叠环境实现并行计算** ，实现多个环境并行与多个Agent交互
 
 .. raw:: html
 

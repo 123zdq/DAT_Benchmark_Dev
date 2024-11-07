@@ -1,5 +1,5 @@
 SOURCEDIR = source
-BUILDDIR = _build
+BUILDDIR = build
 
 LANGS = zh en
 

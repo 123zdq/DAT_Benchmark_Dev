@@ -111,7 +111,7 @@ demo mode
 .. raw:: html
 
    <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-      Note: At this point, rewards include both continuous and discrete rewards, see :ref:`built-in Reward` for details.
+      Note: At this point, rewards include both continuous and discrete rewards, see <b>built-in Reward</b> for details.
    </div>
    </br>
 
@@ -443,14 +443,61 @@ Tracker Control Parameter Configuration
    - :code:`horizon_bias_random` : Horizontal offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts to the left; if negative, the object shifts to the right. Other parameters are the same as above.
    - :code:`verticle_bias_random` : Vertical offset of the initial view tracker tracking object. If the subsequent parameter is positive, the object shifts upward; if negative, the object shifts downward. Other parameters are the same as above.
 
+Simulation Environment Parameter Configuration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   This set of parameters is used to randomize the tracking attributes of the tracker itself.
+
+.. code:: json
+
+    "Env_Params": {
+        "background_luminosity_random": false,
+        "bgl_incremental": 0,
+        "bgl_random_max": 1,
+        "bgl_random_min": 0,
+        "backgroundLight_luminosity_random": false,
+        "bgLl_incremental": 0,
+        "bgLl_random_max": 1,
+        "bgLl_random_min": 0,
+        "foggy_use_default": true,
+        "foggy_visibility_range_random": false,
+        "foggy_visibility_range_fixed": 400,
+        "foggy_visibility_range_max": 1000,
+        "foggy_visibility_range_min": 300
+    }
+
+**Parameter Description**
+
+   * :code:`background_luminosity_random`: Whether to randomize the environmental background luminosity.
+
+   * :code:`bgl_incremental`: If the above parameter is :code:`false`, use this parameter to define a fixed environmental luminosity.
+
+   - :code:`bgl_random_max`: Maximum environmental background luminosity.
+
+   - :code:`bgl_random_min`: Minimum environmental background luminosity.
+
+   * :code:`backgroundLight_luminosity_random`: Whether to randomize the environmental background light luminosity.
+
+   - :code:`bgLl_incremental`: If the above parameter is :code:`false`, use this parameter to define a fixed environmental background light luminosity.
+
+   - :code:`bgLl_random_max`: Maximum environmental background light luminosity.
+
+   - :code:`bgLl_random_min`: Minimum environmental background light luminosity.
+
+   * :code:`foggy_use_default`: Whether to enable environmental fog.
+
+   * :code:`foggy_visibility_range_random`: Whether to randomize the visibility range of environmental fog.
+
+   - :code:`foggy_visibility_range_fixed`: If the above parameter is :code:`false`, use this parameter to define a fixed visibility range for environmental fog.
+
+   - :code:`foggy_visibility_range_max`: Maximum visibility range of environmental fog.
+
+   - :code:`foggy_visibility_range_min`: Minimum visibility range of environmental fog.
+
 Configuration Parameter Recommendations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    For recommendations on simulator parameter configurations, please refer to the document: :doc:`Parameters`.
-
-.. raw:: html
-
-   <span style="background-color: yellow;">To Do</span>
 
 
 .. _Tracked Objects:
@@ -802,6 +849,8 @@ Reward Function
 
    .. _figcontr:
 
+   .. _Dense reward calculation formula:
+
    .. figure:: ../_static/image/Continuous_reward.png
       :alt: Continuous_reward
       :width: 600px
@@ -857,7 +906,7 @@ Principle
 
    Where :math:`W` represents the width of the camera image (in pixels), and :math:`FoV` refers to the field of view of the tracker camera, as shown in Figure B of the reward acquisition illustration.
 
-   Next, we need to project the corners of the camera image onto the spatial plane where the tracked object is located, as shown in Figure A of the reward acquisition illustration, so that they can be compared with the coordinates of the tracked object. As shown in Figure C of the reward acquisition illustration, the camera coordinate system :math:`\{c\}` is established at the optical center of the camera, and the coordinates of the four corners of the camera image in the coordinate system :math:`\{c\}` can be obtained:
+   Then, we need to project the corners of the camera image onto the spatial plane where the tracked object is located, as shown in Reward Acquisition Diagram a, to judge the object's coordinates. As shown in Reward Acquisition Diagram c, a camera coordinate system :math:`\{c\}` is established at the camera's optical center, which allows us to obtain the coordinates of the four corners of the camera image in the coordinate system :math:`\{c\}`.
 
    .. math::
 
@@ -866,7 +915,7 @@ Principle
       \text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
       \text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
 
-   And it is easy to know that the coordinates of the optical center :math:`C` are :math:`(0,0,0)`. Therefore, the four straight line equations are:
+   By associating with the optical center :math:`C` :math:`(0,0,0)`, we can obtain four linear equations:
 
    .. math::
 
@@ -877,7 +926,7 @@ Principle
       \text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
       \end{matrix}
 
-   In the map, the ground where the tracking object is located is all flat. When the ground is level, the mathematical expression of the ground can be known through the ground height as
+   Then get the equation for the ground (horizontal):
 
    .. math::
 
@@ -889,7 +938,7 @@ Principle
 
    By transforming the plane equation :math:`G_{w}` to the coordinate system :math:`\{c\}`, and solving it together with the four line equations, the four ground intersection points :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}` can be obtained. These four points form the four corner points of the tracking range :math:`I`, thus determining the tracking area :math:`I`.
 
-   The coordinates of the tracking object are read from the simulation environment as :math:`p_{vG}` and then transformed to the coordinate system :math:`\{c\}` to obtain :math:`p_{vc}`. By calculating the ratio :math:`x`, it is possible to determine whether the tracking object has been successfully tracked.
+   Finally, read the tracking object's coordinate point :math:`p_{vG}` from the simulation environment, and convert it along with the image center point :code:`I_{cG}` to the coordinate system :math:`\{c\}`, obtaining :math:`p_{vc}`. Using the car's coordinates :math:`p_{vc}`, the four intersection points (:code:`LU_G`, :code:`LD_G`, :code:`RU_G`, and :code:`RD_G`), and the image center :code:`I_{cG}`, by utilizing the :ref:`Dense reward calculation formula` , the ratio :math:`x` can be calculated. When :math:`0 \leq x \leq 1`, the object is within the image, indicating successful tracking.
 
    The calculation method is similar when the ground is not horizontal.
 
@@ -916,64 +965,6 @@ Projection Visualization
 
    </br>
 
-
-How to Convert to Reward
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-1. There are two variables used to calculate the reward:
-
-   a. The actual position of the target being tracked in the ground coordinate system in the simulation environment, obtained by the Supervisor, denoted as P1.
-   b. The expected tracking point on the tracker camera’s viewing plane in the simulation environment, projected onto the 2D position in the ground coordinate system, denoted as P2.
-
-2. The primary goal is to achieve tracker tracking. Correct tracking is the prerequisite for receiving a reward. If P1 and P2 meet the basic tracking requirements, the reward value is 1; otherwise, all rewards are eliminated, and the reward output is 0. This is implemented using a step function:
-
-   .. figure:: ../_static/image/StepFunction.png
-      :alt: 阶跃函数
-      :width: 600px
-      :align: center
-
-      Step Function Diagram
-
-.. raw:: html
-
-   </br>
-
-3. The secondary goal is to improve tracking. Therefore, the proximity between P1 and P2 can be used as a penalty term for the reward. The further the proximity, the larger the penalty. The penalty term is implemented using the hyperbolic tangent function: :math:`tanh(x)=\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}`
-
-   .. figure:: ../_static/image/HyperbolicTangentFunction.png
-      :alt: 双曲正切函数
-      :width: 600px
-      :align: center
-
-      Schematic diagram of the hyperbolic tangent function
-
-.. raw:: html
-
-   </br>
-
-4. The final reward calculation block diagram is as follows:
-
-   .. figure:: ../_static/image/DistanceRewardBlockDiagram.png
-      :alt: distance奖励框图
-      :width: 600px
-      :align: center
-
-      Distance Reward Boxplot
-
-   .. raw:: html
-
-      </br>
-
-   .. figure:: ../_static/image/ViewRewardBlockDiagram.png
-      :alt: view奖励框图
-      :width: 600px
-      :align: center
-
-      view reward chart
-
-.. raw:: html
-
-   </br>
 
 .. _Customized Parameter Interface:
 
@@ -1194,7 +1185,7 @@ Return Parameters
    
    .. figure:: ../_static/image/DroneCoordinates.png
       :alt: 无人机坐标系                                  
-      :width: 500px                                              
+      :width: 250px                                              
       :align: center
 
       Definition of Drone Coordinate System

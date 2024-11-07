@@ -112,7 +112,7 @@ demo模式
 .. raw:: html
 
    <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
-      注：此时reward包括连续与离散两种类型的reward，详见 :ref:`内置reward`
+      注：此时reward包括连续与离散两种类型的reward，详见<b>内置Reward</b>。
    </div>
    </br>
 
@@ -502,10 +502,6 @@ SUMO交通系统参数配置
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
    由于24张场景地图的复杂度/大小并不相同，因而本工程提供了每张地图的建议配置参数，请参考文档： :doc:`Parameters`。
-   
-.. raw:: html
-
-   <span style="background-color: yellow;">To Do</span>
 
 
 .. _追踪对象:
@@ -884,8 +880,6 @@ Legged Robots
       \tanh\left(\alpha(1-x)^{3}\right), & t \in I_{clip}, \\
       0 & \text{otherwise}. 
       \end{cases}
-      :label: 密集奖励计算公式
-
 
    目标离范围中心点越近时，奖励会越接近1，反之越接近0。 :math:`\alpha` 为常数，建议取值为3~5。
    此外， :math:`I_{clip}` 为有效reward判定范围(如 :ref:`figcontr` 中红色方框所示)，其边长 :math:`W_{I_{clip}}` 与原图边长 :math:`W_{I}` 的比值可以用 :math:`\lambda_{clip}` 表示如下。
@@ -919,7 +913,7 @@ Legged Robots
 
    其中 :math:`W` 代表相机画面宽度（像素数）， :math:`FoV` 指跟踪器相机视场角，如奖励获取示意图B所示。
 
-   然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，从而跟踪对象坐标进行判断。如奖励获取示意图C所示，在相机光心建立相机坐标系 :math:`\{c\}`，从而可以获得相机画面4个角点在坐标系 :math:`\{c\}` 下的坐标：
+   然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，从而跟踪对象坐标进行判断。如奖励获取示意图c所示，在相机光心建立相机坐标系 :math:`\{c\}`，从而可以获得相机画面4个角点在坐标系 :math:`\{c\}` 下的坐标：
 
    .. math::
 

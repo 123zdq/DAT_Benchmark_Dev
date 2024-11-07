@@ -50,7 +50,7 @@ Environment Wrapping
     </br>
     </br>
 
-  This project provides three forms of Environment (Path: :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs`): the base Environment class, the Environment class wrapped by OpenAI Gym (Gynasium), and our own implementation of the parallel Environment class.
+This project provides three forms of Environment (Path: :code:`Alg_Base/rl_a3c_pytorch_benchmark/envs`): the base Environment class :code:`BenchEnv_Multi()`, the Environment class wrapped by OpenAI Gym (Gynasium) :code:`gym()`:code:`gynasium()`, and our own implementation of the parallel Environment class.
 
 The relationships among these three Environment types are shown in the figure below:
 
@@ -253,7 +253,7 @@ Part 2 Configuration File
     * :code:`"RewardParams"`: Whether to enable additional reward parameters options on the simulator side.
     * :code:`"RewardType"`: Specifies the type of reward (can choose different baseline algorithms for reward).
 
-      * Includes :code:`"default", "E2E", "CVAT", "DVAT"`, corresponding to :ref:`Built-in Reward`, [1]_, [2]_, [3]_ reward setting
+      * Includes :code:`"default", "E2E", "D-VAT"`, corresponding to :ref:`Built-in Reward`, [1]_, [2]_ reward setting
 
     * :code:`"verbose"(bool)`: Configures whether the environment outputs log files.
     * :code:`"delay"(int)`: Configures the duration the system waits for the map to load.
@@ -536,8 +536,7 @@ If you wish to quickly test whether the implementation of the above environment 
 
     .. code:: python
 
-      args = arg_config()
-      test_env(args)
+      test_tianshou_env(args)
 
     .. raw:: html
 
@@ -694,5 +693,4 @@ For a graphical representation of discrete reward calculation, see :ref:`Discret
 Reference:
 
 .. [1] Luo, Wenhan, et al. "End-to-end active object tracking and its real-world deployment via reinforcement learning." IEEE transactions on pattern analysis and machine intelligence 42.6 (2019): 1317-1332.
-.. [2] Devo, Alessandro, Alberto Dionigi, and Gabriele Costante. "Enhancing continuous control of mobile robots for end-to-end visual active tracking." Robotics and Autonomous Systems 142 (2021): 103799.
-.. [3] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).
+.. [2] Dionigi, Alberto, et al. "D-VAT: End-to-End Visual Active Tracking for Micro Aerial Vehicles." IEEE Robotics and Automation Letters (2024).

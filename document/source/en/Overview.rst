@@ -96,36 +96,24 @@ VAT Scheme
 2 Benchmark Presentation
 ------------------------------------
 
+.. _Statistics and simulator component examples of the DAT:
+
 .. figure:: ./_static/image/statistics.png
    :alt: VAT Model
    :width: 600px
    :align: center
 
-   Statistics and simulator component examples of the DART
+   Statistics and simulator component examples of the DAT
 
 Diverse and Complex Scenarios:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * **Diverse Scenario Settings**: Featuring a total of 24 environments combining 6 scenarios and 4 weather conditions. For detailed scenarios, see: :ref:`Environment Introduction`
+    * **Diverse Scenario Settings**: Featuring a total of 24 environments combining 6 scenarios and 4 weather conditions. As shown in Figure :ref:`Schematic diagram of 24 open scenes`
 
-    * **Complex Scenario Elements**: The complexity of the real scene is constructed from 7 aspects, including scene area, building density, color richness, road complexity, terrain complexity, tree density, and tunnel density. The scene statistics are shown in Figure a above, and the difficult elements are shown in Figure b above. For detailed scenarios, see: :ref:`Environment Introduction`
+    * **Complex Scenario Elements**: The complexity of the real scene is constructed from 7 aspects, including scene area(:math:`km^{2}`), building density(:math:`km^{-2}`), color richness, road complexity(:math:`km^{-2}`), terrain complexity(:math:`km^{-2}`), tree density(:math:`km^{-2}`), and tunnel density(:math:`km^{-2}`). The scene statistics are shown in Figure (a) above, and the difficult elements are shown in Figure (b) above. Specifically, scene area refers to the area of ​​the open scene, building density is the ratio of the number of buildings to the scene area, and color richness is the number of dominant colors in the scene. These three aspects mainly describe the complexity of the visual background. Road complexity is measured by evaluating the density of complex elements such as turns, intersections, and crosswalks, while terrain complexity is determined by evaluating the density of special terrain features such as hills in the scene. These two aspects mainly describe the complexity of the tracking target's behavior. In addition, tree and tunnel density are calculated as the ratio of the number of trees and tunnels to the scene area, respectively, and are used to measure the level of visual occlusion in the scene.
 
-Rich and Diverse Trackers and Targets:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * **Diverse Trackers**: Pre-set ground robots and drones as Trackers, with support for autonomous model integration of ground robots.
-
-    * **Diverse Targets**: There are 24 pre-set targets to support autonomous model access, as shown in Figure d above. For details on tracking target objects, see: :ref:`Tracked Objects`
-
-    * **Real and Rich Behavior management**: Integrated with the traffic simulator SUMO for unified vehicle management, ensuring the authenticity and randomness of Target movements within the environment.
-
-Flexible and Customizable Task Settings:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    * **Multi-sensor**: Equipped with 6 common visual and motion sensors, as shown in Figure c above.
-
-    * **Customizable Task Parameters**: AThe task is highly extensible, and the additional task parameters are customized. For diverse task configurations, see: :ref:`customized parameter interface`
-
+.. _Schematic diagram of 24 open scenes:
 
 .. figure:: ./_static/image/24Scene_Colorful2.png
    :alt: 24 Scenes
@@ -133,3 +121,22 @@ Flexible and Customizable Task Settings:
    :align: center
 
    Schematic diagram of 24 open scenes
+
+
+Rich and Diverse Trackers and Targets:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Diverse Trackers**: Pre-set ground robots and drones as Trackers, with support for autonomous model integration of ground robots.
+
+    * **Diverse Targets**: There are 24 pre-set targets to support autonomous model access, as shown in Figure :ref:`Statistics and simulator component examples of the DAT` (d) above. For details on tracking target objects, see: :ref:`Tracked Objects`
+
+    * **Real and Rich Behavior management**: Integrated with the traffic simulator SUMO for unified vehicle management, ensuring the authenticity and randomness of Target movements within the environment.
+
+Flexible and Customizable Task Settings:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    * **Multi-sensor**: Equipped with 6 common visual and motion sensors, as shown in Figure :ref:`Statistics and simulator component examples of the DAT` (c) above.
+
+    * **Customizable Task Parameters**: AThe task is highly extensible, and the additional task parameters are customized. For diverse task configurations, see: :ref:`customized parameter interface`
+
+

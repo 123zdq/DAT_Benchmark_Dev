@@ -3,7 +3,7 @@ setlocal
 
 rem Set variables
 set SOURCEDIR=source
-set BUILDDIR=_build
+set BUILDDIR=build
 
 set LANGS=zh en
 

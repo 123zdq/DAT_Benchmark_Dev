@@ -39,7 +39,7 @@
     <script>
         function switchLanguage(lang) {
             if (lang === 'zh') {
-                window.location.href = 'Installation.html';
+                window.location.href = '../zh/Installation.html';
             } else if (lang === 'en') {
                 window.location.href = '../en/Installation.html';
             }
@@ -71,7 +71,7 @@ Linux(Ubuntu22.04)
 Step1 安装webots仿真软件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    从 `webots <https://github.com/cyberbotics/webots>`_ 下载webots2023b版本的deb包(例如： :code:`webots-R2023b-x86-64.deb` )和资产文件( :code:`assets-R2023b.zip` )，使用如下命令安装:
+    从 `webots <https://github.com/cyberbotics/webots>`_ 下载webots2023b版本的deb包(例如： :code:`webots-2023b-x86-64.deb` )和资产文件( :code:`assets-R2023b.zip` )，使用如下命令安装:
 
     **webots安装**
 
@@ -401,30 +401,26 @@ Step3 配置项目工作
         cd /usr/local/Github_Project
         git clone https://github.com/
 
-.. raw:: html
+    * 启动webots仿真
 
-   <span style="background-color: yellow;">To Do</span>
+    .. code:: python
 
-    * 初始化仿真端(初始化完毕后方可进行下一步)
+        #开启仿真端代码，一定要等程序完成初始化之后再运行下面的步骤
+        conda activate uav_follow311
+        xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
+        ps aux | grep xvfb
+        x11vnc -display :99 -auth ***
 
-.. code:: python
+    * 算法端配置
 
-    #开启仿真端代码，一定要等程序完成初始化之后再运行下面的步骤
-    conda activate uav_follow311
-    xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
-    ps aux | grep xvfb
-    x11vnc -display :99 -auth ***
+    .. code:: bash
 
-* 算法端配置
+        cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/DAT_Benchmark/
+        python311 ${main_path}
 
-.. code:: bash
+    .. raw:: html
 
-    cd /usr/local/Github_Project/UAV_Follow_Env/Alg_Base/rl_a3c_pytorch_benchmark/
-    python311 ${main_path}
-
-.. raw:: html
-
-    <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-    此处 ${main_path}路径参考: <a href=".\Algorithm\Introduction.html">算法部分介绍</a>
-    </div>
-    </br>
+        <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
+        此处 ${main_path}路径参考: <a href=".\Algorithm\Introduction.html">算法部分介绍</a>
+        </div>
+        </br>

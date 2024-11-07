@@ -57,16 +57,16 @@
 .. raw:: html
 
     <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 2px solid #CD6839;">
-        本工程提供了3种baseline方法的算法实现，分别是 <code>A3CLSTM-E2E</code> [1] , <code>DVAT</code> [2] , 以及 <code>RCP</code>
+        本工程提供了3种baseline方法的算法实现，分别是 <code>A3CLSTM-E2E</code> [1] , <code>D-VAT</code> [2] , 以及 <code>R-VAT(Ours)</code>
     </div>
     </br>
 
 
-其中，上述baseline方法中 [1]_ [2]_ 和 :code:`RCP` 分别调用了本工程实现的3种环境( :doc:`Environment` )，为不同需求的算法实现提供了模板。
+其中，上述baseline方法中 [1]_ [2]_ 和 :code:`R-VAT` 分别调用了本工程实现的3种环境( :doc:`Environment` )，为不同需求的算法实现提供了模板。
 
 *  :code:`A3CLSTM-E2E` 算法调用了底层环境类( :ref:`BenchEnv_Multi` )
-*  :code:`DVAT` 算法调用了Gym环境类( :ref:`Gymnasium_Gym` )
-*  :code:`RCP` 算法调用了并行环境类( :ref:`Parallel` )
+*  :code:`D-VAT` 算法调用了Gym环境类( :ref:`Gymnasium_Gym` )
+*  :code:`R-VAT` 算法调用了并行环境类( :ref:`Parallel` )
 
 .. figure:: ../_static/image/classes.png
     :alt: 3种环境类关系图                                 
@@ -89,7 +89,7 @@ Baseline1 A3CLSTM-E2E
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E</code>文件夹
+        具体代码见 <code>Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E</code>文件夹
     </div>
     </br>
 
@@ -98,7 +98,7 @@ Baseline1 A3CLSTM-E2E
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode CR
@@ -182,7 +182,7 @@ log文件
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            log文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/logs</code>
+            log文件见文件夹 <code>Alg_Base/DAT_Benchmark/logs</code>
         </div>
         </br>
 
@@ -195,7 +195,7 @@ log文件
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
+            tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E/runs/Benchmark_training</code>
         </div>
         </br>
 
@@ -203,12 +203,12 @@ log文件
     * 本工程在进行多进程训练的时候会预留一个进程进行测试，例如：用户选择并行智能体数量为35,则实际训练的过程中会有23个训练进程以及1个测试进程，测试进程在每条Episode开始的时候同步shared_model的权值，并进行测试。
     * 而 :code:`tensorboard-logger` 文件中记录的就是测试进程的数据，主要是训练过程中的 :code:`value` ，用于评估智能体训练的情况
     * 此外，如果程序因为外部原因中断，本工程提供了 :code:`tensorboard-logger` 不中断功能，利用 :code:`num_test.txt` 存储当前数据条目数，并在新训练开始时继续进行记录。
-    * **注意：** 如果用户希望重新记录训练曲线，则需要在启动训练的命令中添加 **--New_Train**。
+    * **注意：** 如果用户希望重新记录训练曲线，则需要在启动训练的命令中添加 :code:`--New_Train`。
     * 完成所有配置之后，直接运行如下代码，即可在 :code:`localhost:xxxx` 查看 :code:`tensorboard` 可视化记录
     
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/models/A3CLSTM_E2E/runs
+        cd Alg_Base/DAT_Benchmark/models/A3CLSTM_E2E/runs
         tensorboard --logdir Benchmark_training
 
 .. raw:: html
@@ -218,13 +218,13 @@ log文件
     </br>
     </br>
 
-Baseline2 DVAT
+Baseline2 D-VAT
 ---------------------------------
 
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT</code>文件夹
+        具体代码见 <code>Alg_Base/DAT_Benchmark/models/D_VAT</code>文件夹
     </div>
     </br>
 
@@ -234,7 +234,7 @@ Baseline2 DVAT
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
     python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
@@ -293,7 +293,7 @@ Baseline2 DVAT
 代码封装与改动细节
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    DVAT采用Actor-Critic非对称框架，Actor-Critic对称架构和非对称架构的示意图如下：
+    D-VAT采用Actor-Critic非对称框架，Actor-Critic对称架构和非对称架构的示意图如下：
 
     .. figure:: ../_static/image/sym_asym.png
         :alt: Asymmetric_and_Symmetrical_Structure
@@ -303,14 +303,14 @@ Baseline2 DVAT
         Actor-Critic对称架构和非对称架构的示意图
 
 
-    DVAT代码主要有下述实现：
+    D-VAT代码主要有下述实现：
 
     1. 自主实现环境类
 
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            环境类仿照<a href="./Environment.html#gym">Gym环境类</a>自主实现<code>DVAT_ENV</code>环境类，具体代码见<code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_envs.py</code><br>
+            环境类仿照<a href="./Environment.html#gym">Gym环境类</a>自主实现<code>DVAT_ENV</code>环境类，具体代码见<code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_envs.py</code><br>
             为支持Actor-Critic非对称架构，<code>DVAT_ENV</code>环境类状态空间包括<code>actor_obs</code> 和 <code>critic_obs</code>两部分：
         </div>
         </br>
@@ -340,7 +340,7 @@ log文件
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/DVAT_logs</code>
+            tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_logs</code>
         </div>
         </br>
 
@@ -349,7 +349,7 @@ log文件
 
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/models/D_VAT/
+        cd Alg_Base/DAT_Benchmark/models/D_VAT/
         tensorboard --logdir DVAT_logs
 
 
@@ -361,13 +361,13 @@ log文件
     </br>
 
 
-Baseline3 RCP
+Baseline3 R-VAT
 ---------------------------------
 
 .. raw:: html
 
     <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-        具体代码见 <code>Alg_Base/rl_a3c_pytorch_benchmark/models/Recurrent_PPO</code>文件夹
+        具体代码见 <code>Alg_Base/DAT_Benchmark/models/R_VAT</code>文件夹
     </div>
     </br>
 
@@ -376,21 +376,21 @@ Baseline3 RCP
 
 .. code:: bash
 
-    cd Alg_Base/rl_a3c_pytorch_benchmark/
+    cd Alg_Base/DAT_Benchmark/
     # 测试模式
     # 使用 累计奖励 CR 进行测试
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
+    python ./models/R_VAT/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode CR
     # 使用 追踪成功比例 TSR 进行测试
-    python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
+    python ./models/R_VAT/RPPO.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # 新训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/R_VAT/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # 中断重开训练模式
-    python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
+    python ./models/R_VAT/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
 
 程序入口
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :code:`RPPO.py` 为整个程序的入口,同样提供训练和测试模式(具体配置见下方参数配置即可)
+    :code:`RVAT.py` 为整个程序的入口,同样提供训练和测试模式(具体配置见下方参数配置即可)
 
     .. raw:: html
 
@@ -443,16 +443,16 @@ Baseline3 RCP
 
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/
+        cd Alg_Base/DAT_Benchmark/
         # Stage1:任务理解
-        python ./models/Recurrent_PPO/RPPO.py -w 35 -m simpleway-grass.wbt --train_mode 1 --New_Train
+        python ./models/R_VAT/RPPO.py -w 35 -m simpleway-grass.wbt --train_mode 1 --New_Train
         # Stage2:视觉泛化
-        python ./models/Recurrent_PPO/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
+        python ./models/R_VAT/RPPO.py -w 35 -m citystreet-day.wbt --train_mode 1
         # 测试模式
         # 使用 累计奖励 CR 进行测试
-        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode CR
+        python ./models/R_VAT/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode CR
         # 使用 追踪成功比例 TSR 进行测试
-        python ./models/Recurrent_PPO/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode TSR
+        python ./models/R_VAT/RPPO.py -w 1 -m citystreet-night.wbt --train_mode 0 --Test_Mode TSR
 
 .. _table-cf:
 
@@ -516,7 +516,7 @@ log文件
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/rl_a3c_pytorch_benchmark/PPO_logs</code>
+            tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/PPO_logs</code>
         </div>
         </br>
 
@@ -525,7 +525,7 @@ log文件
 
     .. code:: bash
 
-        cd Alg_Base/rl_a3c_pytorch_benchmark/
+        cd Alg_Base/DAT_Benchmark/
         tensorboard --logdir PPO_logs
 
 .. raw:: html
