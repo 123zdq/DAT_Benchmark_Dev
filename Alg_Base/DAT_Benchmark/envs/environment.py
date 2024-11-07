@@ -12,7 +12,7 @@ sys.path.append(parent_dir)
 from communication.receiveSocket import RecvRewardDoneSocketPort,RecvImgSocketPort,RecvStateMachineSocketPort,RecvPointCloud,RecvRewardParams,is_file_in_use
 from communication.sendSocket import SendActionSocket
 import time
-from logger_cfg import create_logger
+from envs.logger_cfg import create_logger
 import copy
 from utils import get_E2E_reward,get_DVAT_reward,check_memory_usage,judge_vel_eff
 import math
@@ -27,17 +27,7 @@ ENV = "./config.json"
 
 global_start_flag = False
 
-"""
-    process_frame:
-        If choose to run LunarLander-v2 Env,the function will be run outside step()/reset()
-        If choose to run Benchmark Env,the function will be run inside step()/reset()
-    Input:
-        env: env class
-        state: state to be process
-        conf: dict read from config.json
-    Output:
-        state_new: state after process
-"""
+
 def process_frame(state,conf,env=None):
     if conf["Need_render"]:
         state = env.render(mode = "rgb_array")
@@ -54,31 +44,11 @@ def process_frame(state,conf,env=None):
     
     return state_new
 
-"""
-    Identity:
-        To make output identical within general_env function
-    Input:
-        state
-    Output:
-        state
-"""
+
 def Identity(state,env):
     return state
 
-"""
-    general_env:
-    Input:
-        env_id(Str): Name of the desire env
-        env_conf(Dict): dict get from config.json
-        arg_worker(Int): Number of Process the User Choose
-        process_idx(Int): Process Index of the Current Env
-        Other_State(Bool): Whether use other_state or not(default=True)
-        CloudPoint(Bool): Whether use cloudpoint or not(default=True)
-        RewardParams(Bool): Whether use reward params or not(default=True)
-    Output:
-        env(BenchEnv_Multi): initialized env
-        process_func(Function): partial the process the state frame
-"""
+
 def general_env(env_id,env_conf,arg_worker,process_idx,asymmetric=False):
     if env_id not in ["LunarLander-v2","Benchmark"]:
         print(env_id," is not valid!")
@@ -101,22 +71,7 @@ def general_env(env_id,env_conf,arg_worker,process_idx,asymmetric=False):
         return env,process_func
 
 class BenchEnv_Multi():
-    """
-        __init__: 
-            Initialize whole Multi_Process Environment
-        Input:
-            Action_dim(Int): Dimension of Action
-            action_list(List): A list that set specific parameter of each action
-            process_state(Function): A Function that process the raw image(e.g:resize)
-            arg_worker(Int): Number of Process
-            process_idx(Int): Index of Current Process
-            Other_State(Bool): Whether use addition state(default=False)
-            CloudPoint(Bool): Whether use cloudpoint(default=False)
-            RewardParams(Bool): Whether use Reward Parameter(default=False)
-            Control_Frequence(Int): Webots Operating Frequency deciding the skip frame(Default=500:No frame skip)
-        Output:
-            None
-    """
+
     def __init__(self,Action_dim,action_list,process_state,arg_worker,\
         process_idx,Other_State,CloudPoint,RewardParams,\
         port_process,end_reward,end_reward_list,scene,weather,auto_start,\
@@ -140,16 +95,7 @@ class BenchEnv_Multi():
         ## Flag decide whether open done detection
         self.done_flag = True
 
-        """ 
-            Choose Corresponding Port according to process_idx
-            self.port_list: 2D List(Shape:[5,]) contains 5 socket for corresponding port and for all Process
-                Socket 1: Webots Send Image to Client
-                Socket 2: Webots Send State Machine Flag to Client
-                Socket 3: Webots Send Env State , reward and done to Client
-                Socket 4: Client Send Control to Webots(Action or Reset)
-                Socket 5: Webots Send CloudPoint to Client
-                Socket 6: Webots Send Params for Customize Reward
-        """
+
         for i in range(6):
             self.port_list.append(BASE_PORT+6*process_idx+i)
         
@@ -159,8 +105,7 @@ class BenchEnv_Multi():
         self.No_Done_Step = data["Init_No_Done_Steps"]
         self.Alg_Freq = data["Control_Frequence"]
 
-        ## Specify the File Path of each system path
-        ## To do: CHANGE ABSOLUTE PATH TO RELATIVE PATH
+
         self.action_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_AlgAction.txt"
         self.reward_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_Ctrl2Global.txt"
         self.img_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_VideoFrame.jpeg"
@@ -168,14 +113,6 @@ class BenchEnv_Multi():
         self.rewardparam_path = "../../Webots_Simulation/traffic_project/Files2Alg/" + Tracker_Mode + str(process_idx) + "_RewardParams.txt"
         
         self.port_process = port_process
-        """
-            Use Path above to create corresponding socket
-                self.send_socket:
-                self.recv_rewarddone_socket:
-                self.recv_image_socket:
-                self.recv_state_mechine:
-                self.recv_reward_params:
-        """ 
         self.send_socket=SendActionSocket(ip="127.0.0.1",port_action=self.port_list[3],port_control = self.port_list[3],port_process=self.port_process,action_path=self.action_path)
         self.recv_rewarddone_socket=RecvRewardDoneSocketPort(22,id=self.port_list[2],reward_path=self.reward_path)
         self.recv_image_socket=RecvImgSocketPort(320*240*3,id=self.port_list[0],img_path=self.img_path)
@@ -183,8 +120,6 @@ class BenchEnv_Multi():
         self.recv_point_cloud = RecvPointCloud(id=self.port_list[4],pointcloud_path=self.pointcloud_path)
         self.recv_reward_params = RecvRewardParams(id=self.port_list[5],rewardparam_path=self.rewardparam_path)
         
-        ## Start The simulation end
-        # global global_start_flag
         
         if process_idx == 0 and auto_start:
             if scene not in ["citystreet","downtown","lake","village","desert","farmland",None]:
@@ -199,11 +134,7 @@ class BenchEnv_Multi():
                 self.weather = "day"
             webots_path = "../../Webots_Simulation/traffic_project/worlds/"+self.scene+"-"+self.weather+".wbt"
             os.system("webots --no-rendering --batch --mode=fast "+webots_path+" &")
-        #     if self.send_socket.judge_start():
-        #         time.sleep(1)
-        #         global_start_flag = True
-        # while not global_start_flag:
-        #     pass
+
         if auto_start:
             time.sleep(delay)
             
@@ -246,7 +177,6 @@ class BenchEnv_Multi():
         self.curr_step = 0
 
         # Memory Protect
-        # if process_idx == 0:
         current_pid = os.getpid()
         self.memory_pretect_thread = Thread(target=check_memory_usage, args=(current_pid,0.85,))
         self.memory_pretect_thread.start()
@@ -260,25 +190,8 @@ class BenchEnv_Multi():
             self.actual_state = {"image":np.zeros(image_shape, dtype=np.float32),"vector":np.zeros(9, dtype=np.float32)}
         else:
             self.actual_state = np.zeros(image_shape, dtype=np.float32)
-    """
-        step: 
-            1. Send an action to server through socket
-            2. Receive State,reward,done from server through socket
-        Input:
-            action: Action Chosen by Agent and send to server through socket
-                action = 0: Go forward at V = action_list[0]
-                action = 1: Go backward at V = action_list[1]
-                action = 2: Go leftward at V = action_list[2]
-                action = 3: Go rightward at V = action_list[3]
-                action = 4: Turn Clockwise at w = action_list[4]
-                action = 5: Turn CounterClockwise as w = action_list[5]
-                action = 6: Stop Tracking
-        Output:
-            State: Next state received from server through socket
-            Reward: Reward received from server through socket
-            done: Whether the env is done receive from server through socket
-            self.SuppleInfo: Other Sensor data/Reward Params for User to Customize their own State/Reward
-    """
+
+
     def step(self,action,prob=None):
         self.logger.info("\n")
         self.logger.info('<----- Step Function ----->')
@@ -359,12 +272,6 @@ class BenchEnv_Multi():
             norm = float(norm)
             self.logger.info(f'Norm between dynamics and predict is {norm}')
 
-        """
-            Done Management:
-                1. Open done detection in the early stage of episode
-                2. If receive first done, close done detection to avoid re-detection
-                3. If Webots do not receive done flag, open done detection again 
-        """
         if int(step_curr) <= self.Set_Done_Step and self.done_flag == False:
             self.logger.info('Step_curr:{} self.Set_Done_Step:{} Open Done Flag'.format(step_curr,self.Set_Done_Step))
             self.done_flag = True
@@ -450,24 +357,15 @@ class BenchEnv_Multi():
             pos_3d = reward_params[-12:-9]
             vel_3d = reward_params[-9:-6]
             vel_3d_norm = judge_vel_eff(vel_3d)
-            # acc_3d = reward_params[-6:-3]
             acc_3d = [0,0,0]
             vector = np.concatenate([pos_3d, vel_3d_norm, acc_3d]).astype(np.float32)
-            # if self.process_id == 0:
-            #     print(f"environment---vector:{vector}")
+
             self.actual_state["image"] = image
             self.actual_state["vector"] = vector
         else:
             self.actual_state = image
         return self.actual_state,reward,done,self.SuppleInfo
 
-    """
-        Reset: Receive first State from server through socket
-        Input:
-            None
-        Output:
-            State: First state received from server through socket
-    """
     def reset(self): 
         self.logger.info("\n")
         self.logger.info('<----- !!!!!Reset Function!!!!! ----->')

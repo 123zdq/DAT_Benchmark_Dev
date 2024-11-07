@@ -5,38 +5,6 @@ import concurrent.futures
 import time
 import os
 
-"""
-# Conda Environments
-.conda/
-.conda/*
-
-# PPO Model Parameters
-params.pth
-"""
-
-T_ = False  # 屏蔽旋转动作
-
-"""
-def _GE(num):
-    from models.A3CLSTM_E2E.main import parser
-    from envs.environment import general_env
-    from utils import read_config
-    import torch
-
-    args = parser.parse_args()
-    torch.manual_seed(args.seed)
-
-    setup_json = read_config(args.env_config)
-    for i in setup_json.keys():
-        if i in args.env:
-            env_conf = setup_json[i]
-    res = []
-    for _ in range(num):
-        env, process_func = general_env(args.env, env_conf, num, process_idx=_)
-        res.append(env)
-    return res
-"""
-
 
 def GE(num, env_conf: dict):  # Benchmark
     from envs.environment import BenchEnv_Multi, process_frame
@@ -78,12 +46,12 @@ def GE(num, env_conf: dict):  # Benchmark
 
 def train_log_reset():
     try:
-        os.remove("./PPO_logs/steps.txt")
-        print("日志成功初始化")
+        os.remove("./models/R_VAT/RVAT_logs/steps.txt")
+        print("Log initialize success")
     except FileNotFoundError:
-        print("日志无需初始化")
+        print("No Need for log init")
     except Exception as e:
-        print(f"日志初始化失败: {e}")
+        print(f"Log init failed: {e}")
 
 
 class Envs:
@@ -99,8 +67,6 @@ class Envs:
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
-            if T_ and action > 3:
-                action = 6
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
@@ -123,8 +89,6 @@ class Envs:
             self.state, _ = self.env.reset()
 
         def step(self, action: int):
-            if T_ and action > 3:
-                action = 6
             if self.should_reset:
                 self.state, _ = self.env.reset()
                 self.should_reset = False
@@ -137,12 +101,7 @@ class Envs:
                 self.rewards += self.reward
 
     def __init__(self, *args, **kwargs):
-        # num_envs
-        # env_mk
-        # env_mk_args
-        # env_mk or env_list
-        # logs_show
-
+        
         self.num_envs = kwargs["num_envs"]
         assert self.num_envs > 0
 
@@ -164,20 +123,19 @@ class Envs:
         if "logs_show" in kwargs:
             self.logs = kwargs["logs_show"]
             if self.logs > 0:
-                self.SummaryWriter = SummaryWriter("PPO_logs")
+                self.SummaryWriter = SummaryWriter("./models/R_VAT/RVAT_logs")
 
                 for i in range(self.logs):
                     _env = self.env_list[i].env
                     self.env_list[i] = self.Env_T(_env)
 
-                # self.rewards=[]
                 self.steps = 0
 
                 self.st = time.time()
                 self.ts = 0
 
-                if os.path.exists("./PPO_logs/steps.txt"):
-                    with open("./PPO_logs/steps.txt", "r") as file:
+                if os.path.exists("./models/R_VAT/RVAT_logs/steps.txt"):
+                    with open("./models/R_VAT/RVAT_logs/steps.txt", "r") as file:
                         self.steps = int(file.readline().strip())
                 else:
                     self.SummaryWriter.add_scalar("rewards", 0, 0)
@@ -233,43 +191,7 @@ class Envs:
             self.SummaryWriter.add_scalar(
                 "runtime/step (s)", (time.time() - self.st) / self.ts, self.ts
             )
-            with open("./PPO_logs/steps.txt", "w") as file:
+            with open("./models/R_VAT/RVAT_logs/steps.txt", "w") as file:
                 file.write(str(self.steps))
-                
-                
-                # self.SummaryWriter.add_histogram("actions", np.array(self.actions))  ###
-                """
-
-                test_reward = 0
-                test_episode_num = 0
-                test_reward_list = []
-
-                
-
-                if next_done:
-                    if test_reward != 0:
-                        test_reward_list.append(test_reward)
-                        test_episode_num += 1
-                        print(f"episode: {test_episode_num}")
-                    if len(test_reward_list) == 10:
-                        test_reward_list.append(f"{np.mean(test_reward_list):.3f}±{np.std(test_reward_list):.3f}")
-                        import pandas as pd
-                        df = pd.DataFrame(test_reward_list, columns=["Values"])
-                        df.to_excel(f"./Ours_CityStreet_d.xlsx", index=False)
-                    test_reward = 0
-                else:
-                    test_reward += float(reward[0])
-                """
 
         return self.states, self.rewards, self.done
-
-
-"""#
-num = 21
-my = Envs(num_envs=num, env_list=GE(num))
-print("Gen!")
-print(my.reset())
-rng = np.random.default_rng()
-while True:
-    my.step(rng.integers(0, 7, size=num))
-#"""
