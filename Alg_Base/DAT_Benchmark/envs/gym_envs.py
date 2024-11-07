@@ -221,6 +221,8 @@ def stableparallel_test(n_envs:int,gym=True,end_reward:bool = False,log_dir:str=
     env = ASYNC_SubprocVecEnv([make_env(n_envs=n_envs,rank=rank,gym=gym,end_reward=end_reward,log_dir=log_dir) for rank in range(n_envs)])
     # env = SubprocVecEnv([make_env(n_envs=n_envs,rank=rank) for rank in range(n_envs)])
     tb_logdir = "./envs/PPO_testtb"
+    if not os.path.exists(tb_logdir):
+        os.makedirs(tb_logdir)
     model = PPO('MlpPolicy', env, verbose=1,tensorboard_log=tb_logdir,n_steps=16)
     model.learn(total_timesteps=100000,log_interval=10) #,callback=CustomCallback
     env.close()
