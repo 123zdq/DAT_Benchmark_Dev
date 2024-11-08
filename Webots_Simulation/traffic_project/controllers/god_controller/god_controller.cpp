@@ -1,13 +1,3 @@
-/*
- * @Author: lu 2231625449@qq.com
- * @Date: 2024-04-22 15:29:23
- * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-04-30 16:06:31
- * @FilePath: /webots_autodriving_drone/traffic_project_bridge/controllers/god_controller/god_controller.cpp
- * @Description: 
- * 
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved. 
- */
 // File:          god_controller.cpp
 // Date:
 // Description:
@@ -37,7 +27,7 @@ int main(int argc, char **argv) {
   // create the Robot instance.
   Supervisor *robot = new Supervisor();
 
-  // 获取custom字段的runMode
+  // get custom runMode
   std::string run_mode = robot->getCustomData();
 
   // Node *camera_node = robot->getFromDef("m100camera");
@@ -110,15 +100,15 @@ int main(int argc, char **argv) {
     // std::cout<<"positionx: "<<data[0]<<"  positiony: "<<data[1]<<std::endl;
     
 
-    // 坐标系原点在图像的左上角，记为（0，0）
-    // 摄像头的四个角点
+    // The origin of the coordinate system is in the upper left corner of the image, noted as (0, 0)
+    // The four corner points of the camera
     Vector3d locationMid = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(data[2] * 0.5, data[3] * 0.5), T_land_of_camera_M, data[4], Vector2d(data[3],data[2])), T_camera_of_land_M,T_land_of_world_M);
     Vector3d locationLH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, 0), T_land_of_camera_M, data[4], Vector2d(data[3],data[2])), T_camera_of_land_M,T_land_of_world_M);
     Vector3d locationLL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(data[2], 0), T_land_of_camera_M, data[4], Vector2d(data[3],data[2])), T_camera_of_land_M,T_land_of_world_M);
     Vector3d locationRH = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(0, data[3]), T_land_of_camera_M, data[4], Vector2d(data[3],data[2])), T_camera_of_land_M,T_land_of_world_M);
     Vector3d locationRL = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(data[2], data[3]), T_land_of_camera_M, data[4], Vector2d(data[3],data[2])), T_camera_of_land_M,T_land_of_world_M);
     
-    // 实时更新被跟踪的车辆节点
+    // Real-time update of tracked vehicle nodes
     string carDef = Txt_Input(string("../../cache/car.txt"));
     if(carDef != string("error")){
       Node* n = robot->getFromDef(carDef);
@@ -126,7 +116,7 @@ int main(int argc, char **argv) {
         trackingCar = n;
       }
     }
-    // 获取被指定跟踪车辆在世界中的坐标
+    // Get the coordinates of the assigned tracked vehicle in the world.
     const double *T_car_of_land = trackingCar->getPose(land_node);
     Vector3d V_car_of_land;
     for(int i = 0;i < 3;i++){
@@ -141,7 +131,7 @@ int main(int argc, char **argv) {
         // std::cout<<"is_tracking1: "<< reward <<std::endl;
       }
       else{
-        // 目标tracking的坐标
+        // Coordinates of the target tracking
         Vector3d locationTar = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(data[0], data[1]), T_land_of_camera_M, data[4], Vector2d(data[3],data[2])), T_camera_of_land_M,T_land_of_world_M);
         reward = Camera2real.Get_Location_Reward(locationTar, locationMid, V_car_of_land, 4);
         // std::cout<<"is_tracking2: "<< reward <<std::endl;
@@ -164,7 +154,7 @@ int main(int argc, char **argv) {
     // robot->getFromDef("LocationBall6")->getField("translation")->setSFVec3f(locationTar.data());
     
 
-    // std::cout << "\033[2J";//终端清屏
+    // std::cout << "\033[2J";//terminal clearing
   };
 
   // Enter here exit cleanup code.

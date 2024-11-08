@@ -40,9 +40,9 @@ int main(int argc, char **argv) {
 
   // read json config file
   configHandle config("../../config/env_config.json");
-  // 获取本机的DEF描述
+  // get description
   string simpleCarDef = robot->getSelf()->getDef();
-  // 传感器和外设
+  // sensor
   Camera *camera = robot->getCamera("camera");
   camera->enable(timeStep);
   GPS *gps = robot->getGPS("gps");
@@ -59,7 +59,7 @@ int main(int argc, char **argv) {
   Receiver *receiver = robot->getReceiver("receiver");
   receiver->enable(timeStep);
 
-  // 额外的传感器初始化
+  // lidar init
   Lidar *lidar;
   if (config.get()->lidarEnable)
   {
@@ -83,11 +83,11 @@ int main(int argc, char **argv) {
   usrPublic::Odometry state = {};
   usrPublic::vector3 gimbal_angle = {};
   usrPublic::vector3 gimbal_cmd = {};
-  double action[5] = {0}; // 强化学习action参数buff
+  double action[5] = {0}; // rl action data buff
   double step_count = 0;
   bool is_video_warmUp = false;
   int random_number = -1;
-  bool is_nan = false;
+  bool is_nan = false;  dataDisplay<6> dispData(disp);
   rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.distanceRange, config.get()->rewardConfig.viewScale, config.get()->rewardConfig.viewRange);
 
   
@@ -203,7 +203,7 @@ int main(int argc, char **argv) {
         key = keyboard->getKey();
       }
     }
-    // 获取云台目标姿态
+    // get gimbal pose
     if(config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       string pitchAngle = Txt_Input("../../cache/" + simpleCarDef + "_PitchAngle.txt");
@@ -225,15 +225,15 @@ int main(int argc, char **argv) {
       }
       gimbal_cmd.y = CLAMP(gimbal_cmd.y, 0.5, 1.5);
     }
-    // action数据
+    // action
     if (config.get()->simulationMode == string("train"))
     {
       
-      // 获取action数据
+      // get action
       Txt_Input("../../cache/" + simpleCarDef + "_Global2Ctrl.txt", action, 5);
       if (t < 0.1)
       {
-        // 处理action参数
+        // figure action
         simpleCar_cmd.axes[3] = 0;
         simpleCar_cmd.axes[2] = 0;
         simpleCar_cmd.axes[1] = 0;
@@ -242,7 +242,7 @@ int main(int argc, char **argv) {
       }
       else
       {
-        // 处理action参数
+        // figure action
         simpleCar_cmd.axes[3] = action[0];
         simpleCar_cmd.axes[2] = action[1];
         simpleCar_cmd.axes[1] = action[2];
@@ -280,10 +280,10 @@ int main(int argc, char **argv) {
         // use ctrl frequency
         if((step_count == 1) || ((step_count - last_step_count) >= countMax))
         {
-          // 创建随机数引擎
-          std::random_device rd;  // 获取随机数种子
-          std::mt19937 gen(rd());  // 使用梅森旋转算法初始化随机数生成器
-          // 创建均匀分布
+
+          std::random_device rd;  
+          std::mt19937 gen(rd());  
+
           std::uniform_int_distribution<> distrib(0, 5);
           random_number = distrib(gen);
           last_step_count = step_count;
@@ -342,8 +342,8 @@ int main(int argc, char **argv) {
     if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       static bool alreadyDone = false;
-      // 根据追踪车辆情况更新done状态
-      // 根据训练执行步长更新done状态
+      // Update done status based on tracked vehicles
+      // Update the done state according to the training execution step
       if (config.get()->simulationMode == string("video"))
       {
         state.done = (rewardG.isTrackingCarDisp == 2) ? 1 : 0;
@@ -405,7 +405,7 @@ int main(int argc, char **argv) {
                 << "  carDir:" << rewardG.makeReward.carDir
                 << "  pitchAngle:" << std::setprecision(3) << gimbal_cmd.y << std::endl;
       }
-      // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
+      // If using supervisor control mode, then move the drone directly to the target location
       if ((config.get()->simulationMode != string("video") || config.get()->video.randomAction == true) && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
       {
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
@@ -438,7 +438,7 @@ int main(int argc, char **argv) {
         robot->getSelf()->getField("translation")->setSFVec3f(tr_t);
         robot->getSelf()->getField("rotation")->setSFRotation(ro_t);
       }
-      // 发送state,reward,done
+      // send state,reward,done
       state.t = step_count;
       double state_list[22] = {};
       static double state_list_last[22] = {0};
@@ -520,7 +520,7 @@ int main(int argc, char **argv) {
     }
     jCtrl.setInitialized(true);
 
-    // 雷达点云信息和摄像头
+    // lidar and camera
     if (config.get()->simulationMode == string("demo"))
     {
       if ((int)(t * 1000) % (STATE_PERIOD_MS * 10) == 0 && is_nan == false)
@@ -580,8 +580,8 @@ int main(int argc, char **argv) {
         if (videoCount == 0)
         {
           std::ostringstream oss;
-          oss << std::setw(6) << std::setfill('0') << videoCount; // 设置宽度为6，填充字符为'0'
-          std::string formatted = oss.str();                      // 将输出流转换为字符串
+          oss << std::setw(6) << std::setfill('0') << videoCount; 
+          std::string formatted = oss.str();                      
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";
@@ -598,8 +598,8 @@ int main(int argc, char **argv) {
         else if ((t - last_frame_t) >= (1. / static_cast<double>(config.get()->video.fps)))
         {
           std::ostringstream oss;
-          oss << std::setw(6) << std::setfill('0') << videoCount; // 设置宽度为6，填充字符为'0'
-          std::string formatted = oss.str();                      // 将输出流转换为字符串
+          oss << std::setw(6) << std::setfill('0') << videoCount; 
+          std::string formatted = oss.str();                      
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";

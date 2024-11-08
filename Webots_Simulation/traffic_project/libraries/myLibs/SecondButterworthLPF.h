@@ -4,11 +4,11 @@
 
 // #define M_PI 3.141592653589793f
 
-//二阶巴特沃斯低通滤波器
+
 class SecondOrderButterworthLPF {
 public:
     SecondOrderButterworthLPF(){}
-    // 构造函数初始化：截止频率，采样频率
+
     SecondOrderButterworthLPF(double cutoff_freq, double sampling_freq) {
         wc = 2.f * M_PI * cutoff_freq / sampling_freq;
         calculateCoefficients();
@@ -21,7 +21,7 @@ public:
         reset();
     }
 
-    // 对于输入信号进行滤波处理
+
     double f(double input) {
         double output = b0 * input + b1 * x1 + b2 * x2 - a1 * y1 - a2 * y2;
         x2 = x1;
@@ -40,11 +40,11 @@ public:
     }
 
 private:
-    double wc; // 截止频率
+    double wc; 
     double b0, b1, b2, a1, a2;
     double x1, x2, y1, y2;
 
-    // 计算滤波器参数
+
     void calculateCoefficients() {
         // double sqrt2 = sqrtf(2.f);
         double sqrt2wc = sqrtf(2.f) * wc;

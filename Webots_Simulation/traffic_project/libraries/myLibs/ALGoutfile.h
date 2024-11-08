@@ -14,8 +14,7 @@ using namespace std;
 // void Exel_Output(string name, std::ios_base::openmode my_mode, float a[], int j, string discription); //向文件写入数组数据
 // void file_create(string name, std::ios_base::openmode my_mode);//建立文件
 
-//向文件写入数组数据
-//参数1：文件名称，参数2：文件输出模式，参数3：数组，参数4：数组长度，参数5：表头描述
+
 void Exel_Output(string name,std::ios_base::openmode my_mode,float a[],int j,string discription)
 {
 	ofstream outfile(name, my_mode);
@@ -25,12 +24,12 @@ void Exel_Output(string name,std::ios_base::openmode my_mode,float a[],int j,str
 		exit(1);
 	}
 	// cout << name << " ok" << endl;
-    outfile << discription << "\t"; 	//建立表头描述
+    outfile << discription << "\t"; 	
     for (int i = 0; i < j;i++)
 	{
-		outfile<< a[i] <<"\t";			//把数组所有数据写在这一行
+		outfile<< a[i] <<"\t";			
 	}
-    outfile << "\n";					//指针指到下一行
+    outfile << "\n";					
     outfile.close();
 }
 
@@ -48,10 +47,10 @@ void Txt_Output(string name,std::ios_base::openmode my_mode,double a[],int j){
             outfile<< a[i];
         }
         else{
-            outfile<< a[i] <<",";			//把数组所有数据写在这一行
+            outfile<< a[i] <<",";			
         }
 	}
-    outfile << "\n";					//指针指到下一行
+    outfile << "\n";					
     outfile.close();
 }
 
@@ -68,7 +67,7 @@ void Txt_Output(string name,std::ios_base::openmode my_mode,double a[], int j,st
 		outfile << a[i] <<",";
 	}
 	outfile << extraString;
-    outfile << "\n";					//指针指到下一行
+    outfile << "\n";					
     outfile.close();
 }
 
@@ -86,27 +85,27 @@ void Txt_Output(string name,std::ios_base::openmode my_mode,float *a,int j){
             outfile<< a[i];
         }
         else{
-            outfile<< a[i] <<",";			//把数组所有数据写在这一行
+            outfile<< a[i] <<",";			
         }
 	}
-    outfile << "\n";					//指针指到下一行
+    outfile << "\n";					
     outfile.close();
 }
 
 string Txt_Input(string name){
 	ifstream inputFile(name);
-    // 检查文件是否成功打开
+    
     if (!inputFile) {
         std::cerr << "Unable to open file " + name << std::endl;
         return string("error");
     }
     string line;
 	string out;
-    // 逐行读取文件内容并输出到控制台
+    
     while (getline(inputFile, line)) {
 		out += line;
     }
-    // 关闭文件
+    
     inputFile.close();
 	
 	return out;
@@ -114,15 +113,15 @@ string Txt_Input(string name){
 
 void Txt_Input(string name, string *buffer, int size){
 	ifstream inputFile(name);
-    // 检查文件是否成功打开
+    
     if (!inputFile) {
         std::cerr << "Unable to open file " + name << std::endl;
     }
     string line;
 	int count = 0;
-    // 逐行读取文件内容并输出到控制台
+    
     while (getline(inputFile, line)) {
-		// 检查并去除末尾的换行符
+		
 		if (!line.empty() && line[line.length() - 1] == '\n') {
 			line.erase(line.length() - 1);
 		}
@@ -131,21 +130,21 @@ void Txt_Input(string name, string *buffer, int size){
 			break;
 		}
     }
-    // 关闭文件
+    
     inputFile.close();
 }
 
 void Txt_Input(string name, double *buffer, int size){
 	ifstream inputFile(name);
-    // 检查文件是否成功打开
+    
     if (!inputFile) {
         std::cerr << "Unable to open file " + name << std::endl;
     }
     string line;
 	int count = 0;
-    // 逐行读取文件内容并输出到控制台
+    
     while (getline(inputFile, line)) {
-		// 检查并去除末尾的换行符
+		
 		if (!line.empty() && line[line.length() - 1] == '\n') {
 			line.erase(line.length() - 1);
 		}
@@ -154,7 +153,7 @@ void Txt_Input(string name, double *buffer, int size){
 			break;
 		}
     }
-    // 关闭文件
+    
     inputFile.close();
 }
 
@@ -165,7 +164,7 @@ std::streampos get_file_size(std::string file_path) {
         return -1;
     }
     
-    std::streampos file_size = file.tellg(); // 获取文件的大小
+    std::streampos file_size = file.tellg(); 
     file.close();
     return file_size;
 }
@@ -185,25 +184,8 @@ bool delete_file(const std::string file_path) {
     }
 }
 
-//C语言输出文件的方法////////////////////////////////////////////////////////////////////////////
-//void writeExcel(void ) {
-//	
-//	FILE *fp = NULL;
-//	int t;
-//	char ch;
-// 
-//	fp = fopen("E:\\ALG_TEST_FILE\\test.xls", "w");
-//	
-//	for (int i = 0; i < 2; i++) {
-//		printf("please input:");
-//		scanf("%d %c", &t, &ch);
-//		fprintf(fp, "%d\t%c\n", t, ch);
-//	}
-//	fclose(fp);
-// 
-//}
 
-void file_create(string name, std::ios_base::openmode my_mode)//建立文件
+void file_create(string name, std::ios_base::openmode my_mode)
 {
 	ofstream outfile(name, my_mode);
 	if (!outfile)

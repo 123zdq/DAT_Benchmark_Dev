@@ -260,7 +260,7 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     
 }
 
-// 读取JSON文件
+// read JSON file
 nlohmann::json configHandle::read_json_file(const std::string& file_path) {
     std::ifstream file(file_path);
     if (!file.is_open()) {
@@ -275,7 +275,7 @@ nlohmann::json configHandle::read_json_file(const std::string& file_path) {
     return json_obj;
 }
 
-// 写入JSON文件
+// write JSON file
 void configHandle::write_json_file(const std::string& file_path, const nlohmann::json& json_obj) {
     std::ofstream file(file_path);
     if (!file.is_open()) {
@@ -283,7 +283,7 @@ void configHandle::write_json_file(const std::string& file_path, const nlohmann:
         return;
     }
 
-    file << json_obj.dump(4); // 使用4个空格缩进格式化输出
+    file << json_obj.dump(4); // Formatting output using 4 space indentation
     file.close();
 }
 
@@ -314,47 +314,3 @@ bool configHandle::safetyCheck(std::string obj,std::string* safeGroup,int num)
     }
     return false;
 }
-
-
-
-
-// int main() {
-//     // 读取JSON配置文件
-//     std::ifstream ifs("config.json");
-//     if (!ifs.is_open()) {
-//         std::cerr << "Error opening config.json file\n";
-//         return 1;
-//     }
-
-//     json config;
-//     try {
-//         ifs >> config;
-//     } catch (const std::exception& e) {
-//         std::cerr << "Error parsing config.json: " << e.what() << "\n";
-//         return 1;
-//     }
-
-//     // 从JSON对象中获取配置信息
-//     std::string name = config["name"];
-//     int age = config["age"];
-//     bool isStudent = config["isStudent"];
-
-//     std::cout << "Name: " << name << "\n";
-//     std::cout << "Age: " << age << "\n";
-//     std::cout << "Is Student: " << std::boolalpha << isStudent << "\n";
-
-//     // 修改配置信息
-//     config["age"] = 30;
-
-//     // 将修改后的配置信息写入文件
-//     std::ofstream ofs("config_updated.json");
-//     if (!ofs.is_open()) {
-//         std::cerr << "Error opening config_updated.json file\n";
-//         return 1;
-//     }
-
-//     ofs << std::setw(4) << config << std::endl;
-//     std::cout << "Updated config written to config_updated.json\n";
-
-//     return 0;
-// }

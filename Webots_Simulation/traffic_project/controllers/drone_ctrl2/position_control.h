@@ -16,7 +16,7 @@
 #define IV3 0.1
 #define MASS 3.
 #define G 9.8
-#define MAX_TILT M_PI / 5 // 机体倾角限制
+#define MAX_TILT M_PI / 5 // body tilt limit
 // #define MAX_TILT 0
 
 class PositionControl
@@ -24,7 +24,7 @@ class PositionControl
 public:
   PositionControl();
   ~PositionControl();
-  usrPublic::Pose pos2att = {}; // 发送给attitude_control.h的控制量
+  usrPublic::Pose pos2att = {};
   void stateCb(usrPublic::Odometry state,const configData_s *cfg);
   void cmdCb(usrPublic::Joy msg);
   bool done = false;
@@ -118,23 +118,23 @@ bool PositionControl::done_check(usrPublic::Odometry state, Eigen::Vector3d _pos
     double dist_err = pos_err.norm();
     Eigen::Vector2d Vxy(state.linear.x,state.linear.y);
     double v = Vxy.norm();
-    // 高度
+    // height
     if((state.position.z < cfg->droneRange.minHeight) || (state.position.z > cfg->droneRange.maxHeight)){
       _done = true;
       done_state = "height";
-    }// 距离误差
+    }// distance error
     else if(dist_err > cfg->droneRange.distanceError){
       _done = true;
       done_state = "distance";
-    }// 速度误差
+    }// speed error
     else if(v >= cfg->droneRange.velocity){
       _done = true;
       done_state = "velocity";
-    }// yaw角速度
+    }// yaw velocity
     else if(abs(state.angular.z) > cfg->droneRange.omiga){
       _done = true;
       done_state = "yaw velocity";
-    }// pitch和roll
+    }// pitch and roll
     else if((abs(state.angle.x) > cfg->droneRange.roll) || (abs(state.angle.y) > cfg->droneRange.pitch)){
       _done = true;
       done_state = "pitch or yaw angle";

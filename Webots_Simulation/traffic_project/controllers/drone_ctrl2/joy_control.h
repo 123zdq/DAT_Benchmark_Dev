@@ -11,7 +11,7 @@ class JoyControl
 public:
   JoyControl(double _state_period);
   ~JoyControl();
-  usrPublic::Joy joy2pos = {}; // 发送给attitude_control.h的控制量
+  usrPublic::Joy joy2pos = {}; // control data sent to attitude_control.h
   void joyCb(usrPublic::Joy msg);
   void stateCb(usrPublic::Odometry msg);
   void setMode(uint8_t _mode){

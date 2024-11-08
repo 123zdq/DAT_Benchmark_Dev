@@ -1,12 +1,12 @@
 #pragma once
 
-/*lqr线性拟合参数*/
+
 typedef struct _Fit_Params
 {
-    double a = 0;//三次项
-    double b = 0;//二次项
-    double c = 0;//一次项
-    double d = 0;//常数项
+    double a = 0;
+    double b = 0;
+    double c = 0;
+    double d = 0;
 }Fit_Params;
 
 namespace upper

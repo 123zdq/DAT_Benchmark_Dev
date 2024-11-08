@@ -5,12 +5,12 @@
 #include <cstdint>
 #include <stddef.h>
 #include <math.h>
-#include <limits>//定义各种变量的储存最大值
+#include <limits>
 #include "Upper_Public.h"
 using namespace std;
 
 
-typedef uint32_t(*SystemTick_Fun)(void);//函数指针，用于接入不同单片机获取时间栈的函数
+typedef uint32_t(*SystemTick_Fun)(void);
 
 typedef enum
 {
@@ -27,11 +27,11 @@ typedef enum class _PID_Mode
 class PIDtimer
 {
 public:
-    static uint8_t getMicroTick_regist(uint32_t(*getTick_fun)(void));//获取当前时间函数接口
-    static SystemTick_Fun Get_SystemTick;   //获取时间的函数
-    double dt = 0;				                //时间微分
-    uint32_t last_time; 	                //记录上次时间
-    uint8_t UpdataTimeStamp(void);          //时间栈更新
+    static uint8_t getMicroTick_regist(uint32_t(*getTick_fun)(void));
+    static SystemTick_Fun Get_SystemTick;   
+    double dt = 0;				            
+    uint32_t last_time; 	                
+    uint8_t UpdataTimeStamp(void);          
 
 };
 
@@ -40,46 +40,45 @@ class PIDmethod : public PIDtimer
 {
 public:
     PIDmethod(){}
-    PIDmethod(Params_Mode mode, double _timeStep = 0);//必须输入参数模式，时间栈选择输入
+    PIDmethod(Params_Mode mode, double _timeStep = 0);
     void PID_Init(Params_Mode mode, double _timeStep = 0);
-    //设置参数
-    //拟合线性函数方法
+
     void Params_Config(Fit_Params _fun_p, Fit_Params _fun_i, Fit_Params _fun_d, double _I_Term_Max, double _Output_Max, double _Output_Min = numeric_limits<double>::max());
     void Params_Config(Fit_Params _fun_p, double _I_Term_Max, double _Output_Max, double _Output_Min = numeric_limits<double>::max());//纯p
     void Params_Config(PID_Mode mode, Fit_Params _fun_p, Fit_Params _fun_id, double _I_Term_Max, double _Output_Max, double _Output_Min = numeric_limits<double>::max());//pi或pd控制
-    //普通参数方法
+
     void Params_Config(double _kp, double _ki, double _kd, double _I_Term_Max, double _Output_Max, double _Output_Min = numeric_limits<double>::max());
     void Params_Config(double _kp, double _I_Term_Max, double _Output_Max, double _Output_Min = numeric_limits<double>::max());//纯p
     void Params_Config(PID_Mode mode, double _kp, double _kid, double _I_Term_Max, double _Output_Max, double _Output_Min = numeric_limits<double>::max());//pi或pd控制
-    //结算
-    double Adjust(double _x);//线性自变量，使用自己算的d项
-    double Adjust(double _x, double extern_d);//线性自变量，使用外部计算的d项
 
-    Fit_Params fun_p = { 0 }, fun_i = { 0 }, fun_d = { 0 };//三次拟合参数
-    double kp = 0, ki = 0, kd = 0;//普通参数
+    double Adjust(double _x);
+    double Adjust(double _x, double extern_d);
+
+    Fit_Params fun_p = { 0 }, fun_i = { 0 }, fun_d = { 0 };
+    double kp = 0, ki = 0, kd = 0;
     double fact_kp = 0, fact_ki = 0, fact_kd = 0;
 
-    double Error_Max = numeric_limits<double>::max();//P项限幅
-    double I_Term_Max = 0;//I项限幅
-    double Output_Max = 0;//输出上限
-    double Output_Min = 0;//输出下限
+    double Error_Max = numeric_limits<double>::max();
+    double I_Term_Max = 0;
+    double Output_Max = 0;
+    double Output_Min = 0;
 
-    double P_Term = 0;//比例项输出
-    double I_Term = 0;//积分项输出
-    double D_Term = 0;//微分项输出
+    double P_Term = 0;
+    double I_Term = 0;
+    double D_Term = 0;
 
-    double I_SeparThresh = 400;   /*!< 积分分离阈值，需为正数。std::abs(error)大于该阈值取消积分作用。*/
+    double I_SeparThresh = 400;   
 
     double target = 0;
     double current = 0;
     double error = 0;
     double out = 0;
 
-    double timeStep = 0;//如果被赋值，则以此为微分时间
+    double timeStep = 0;
 
-    bool d_of_current = true;//是否使用微分先行
+    bool d_of_current = true;
 private:
-    //线性拟合函数系数+自变量
+
     double fit_function(Fit_Params param, double x);
     Params_Mode params_mode = Common;
     double last_current = 0;
@@ -90,7 +89,7 @@ private:
 
 };
 
-SystemTick_Fun PIDtimer::Get_SystemTick = NULL;//静态变量必须实现
+SystemTick_Fun PIDtimer::Get_SystemTick = NULL;
 
 uint8_t PIDtimer::UpdataTimeStamp(void)
 {
@@ -103,7 +102,7 @@ uint8_t PIDtimer::UpdataTimeStamp(void)
         if (last_time == 0)
         {
             last_time = PIDtimer::Get_SystemTick();
-            return 1;//第一步先不跑
+            return 1;
         }
         now_time = PIDtimer::Get_SystemTick();
 
@@ -143,7 +142,7 @@ uint8_t PIDtimer::getMicroTick_regist(uint32_t(*getTick_fun)(void))
         return 0;
 }
 
-/*设置PID控制模式*/
+
 PIDmethod::PIDmethod(Params_Mode mode, double _timeStep)
 {
     params_mode = mode;
@@ -156,7 +155,7 @@ void PIDmethod::PID_Init(Params_Mode mode, double _timeStep)
     timeStep = _timeStep;
 }
 
-/****************************************** PID参数录入 ******************************************/
+
 void PIDmethod::Params_Config(Fit_Params _fun_p, Fit_Params _fun_i, Fit_Params _fun_d, double _I_Term_Max, double _Output_Max, double _Output_Min)
 {
     fun_p = _fun_p;
@@ -227,12 +226,12 @@ void PIDmethod::Params_Config(PID_Mode mode, double _kp, double _kid, double _I_
     Output_Min = _Output_Min;
 }
 
-/**************************************** 拟合三次函数 *********************************************/
+
 double PIDmethod::fit_function(Fit_Params param, double x)
 {
     return param.a * pow(x, 3) + param.b * pow(x, 2) + x * param.c + param.d;
 }
-/****************************************** PID运算 **********************************************/
+
 double PIDmethod::Adjust(double _x)
 {
     if (timeStep > 0)
@@ -242,7 +241,7 @@ double PIDmethod::Adjust(double _x)
     else
     {
         //if (this->UpdataTimeStamp())
-        //    return 0;//如果时间栈出错则不执行pid
+        //    return 0;
         this->dt = this->UpdataTimeStamp();
     }
 
@@ -260,7 +259,7 @@ double PIDmethod::Adjust(double _x)
     }
     else
     {
-        return 0;//参数出错不执行
+        return 0;
     }
 
     error = upper::constrain(target - current, Error_Max);
@@ -315,7 +314,7 @@ double PIDmethod::Adjust(double _x, double extern_d)
     else
     {
         //if (this->UpdataTimeStamp())
-        //    return 0;//如果时间栈出错则不执行pid
+        //    return 0;
         this->dt = this->UpdataTimeStamp();
     }
 
@@ -333,7 +332,7 @@ double PIDmethod::Adjust(double _x, double extern_d)
     }
     else
     {
-        return 0;//参数出错不执行
+        return 0;
     }
 
     error = upper::constrain(target - current, Error_Max);

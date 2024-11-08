@@ -6,54 +6,54 @@
 #include <../../libraries/myLibs/SecondButterworthLPF.h>
 #include <Eigen/Dense>
 
-#define BODY2GIMBAL_D 0.13   //机体中心到三轴云台基座中心的距离
-#define GIMBAL2CAMERA_D 0.04 //云台基座中心到摄像头中心的距离
+#define BODY2GIMBAL_D 0.13   //Distance from the center of the body to the center of the 3-axis gimbal base
+#define GIMBAL2CAMERA_D 0.04 //Distance from the center of the head base to the center of the camera
 
 class TrackingCtrl
 {
 public:
     TrackingCtrl(double _timeStep);
     ~TrackingCtrl();
-    void stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal_state);// 需要更新的包括无人机的状态以及云台的状态
-    void cmdCb(usrPublic::vector4 msg);// 计算对应输出时需要传入图像中的四维输入量
+    void stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal_state);// drone state and gimbal state
+    void cmdCb(usrPublic::vector4 msg);// The four-dimensional inputs in the image need to be passed in to compute the corresponding outputs
     usrPublic::vector4 track2joy = {};
 private:
-    PIDmethod drone_pid[4];// 无人机使用的pid，包括三轴平动以及z轴转动
-    Eigen::Transform<double, 3, Eigen::Affine> transform; // 齐次变换矩阵
+    PIDmethod drone_pid[4];// drone pid
+    Eigen::Transform<double, 3, Eigen::Affine> transform;
     Eigen::Matrix3d rotation;
     usrPublic::Odometry state;
     double state_period; // 控制周期
     double linear_speed[3] = {0};
-    SecondOrderButterworthLPF tracking_f[4];// 跟踪滤波器
+    SecondOrderButterworthLPF tracking_f[4];
 
 };
 
 /**
- * @description: 构造函数，初始化模块
+ * @description: construction func
  * @param {double} _timeStep
  * @return {*}
  */
 TrackingCtrl::TrackingCtrl(double _timeStep): state_period(_timeStep) {
 
-    // 设置平移向量
+    // translation vector
     Eigen::Translation3d translation(BODY2GIMBAL_D, 0, -GIMBAL2CAMERA_D);
-    // 设置旋转矩阵（这里示意旋转矩阵为单位阵）
+    // rotation matrix
     rotation = Eigen::Matrix3d::Identity();
-    // 构建齐次变换阵
+    // transformation matrix
     transform = translation * rotation;
-    // 初始化PID类型
+    // init pid
     for(int i = 0; i < 4 ; i++){
         drone_pid[i].PID_Init(Common, state_period);
         tracking_f[i].init(25,1000 / state_period);
     }
-    // drone_pid[0].Params_Config(25, 0.001, 200, 0., 25, -25);//x轴平动控制
+    // drone_pid[0].Params_Config(25, 0.001, 200, 0., 25, -25);//x move
     // drone_pid[0].d_of_current = false;
-    // drone_pid[1].Params_Config(-15, -0.01, -400, 0., 15, -15);//y轴平动控制
+    // drone_pid[1].Params_Config(-15, -0.01, -400, 0., 15, -15);//y move
     // drone_pid[1].d_of_current = false;
-    drone_pid[0].Params_Config(12, 0.01, -0.025, 2., 12, -12);//x轴平动控制
-    drone_pid[1].Params_Config(-12, -0.01, -0.025, 2., 12, -12);//y轴平动控制
-    drone_pid[2].Params_Config(0.02, 0, -0.001, 0, 0.01, -0.01);//z轴平动控制
-    drone_pid[3].Params_Config(-60.,0.,-4,0,100,-100);//z轴旋转控制
+    drone_pid[0].Params_Config(12, 0.01, -0.025, 2., 12, -12);//x move
+    drone_pid[1].Params_Config(-12, -0.01, -0.025, 2., 12, -12);//y move
+    drone_pid[2].Params_Config(0.02, 0, -0.001, 0, 0.01, -0.01);//z move
+    drone_pid[3].Params_Config(-60.,0.,-4,0,100,-100);//z turn
     
 
 }
@@ -61,7 +61,7 @@ TrackingCtrl::TrackingCtrl(double _timeStep): state_period(_timeStep) {
 TrackingCtrl::~TrackingCtrl() {}
 
 /**
- * @description: 更新tracking的状态量，并且得到工作坐标系与基坐标系之间的变换矩阵
+ * @description: update tracking state
  * @param {Odometry} _state
  * @param {vector3} gimbal_state
  * @return {*}
@@ -71,7 +71,7 @@ void TrackingCtrl::stateCb(usrPublic::Odometry _state, usrPublic::vector3 gimbal
     linear_speed[0] = state.linear.x;
     linear_speed[1] = state.linear.y;
     linear_speed[2] = state.linear.z;
-    // 更新齐次变换矩阵（这里定义了从基坐标系到工作坐标系的所有旋转）
+    // update transformation matrix
     Eigen::Translation3d translation(BODY2GIMBAL_D * cos(state.angle.y) - GIMBAL2CAMERA_D * sin(state.angle.y), 0, -GIMBAL2CAMERA_D * cos(state.angle.y) - BODY2GIMBAL_D * sin(state.angle.y));
     // Eigen::AngleAxisd rotation_bz(state.angle.z, Eigen::Vector3d::UnitZ());
     Eigen::AngleAxisd rotation_by(state.angle.y, Eigen::Vector3d::UnitY());
@@ -86,15 +86,15 @@ void TrackingCtrl::stateCb(usrPublic::Odometry _state, usrPublic::vector3 gimbal
 }
 
 /**
- * @description: 执行tracking控制指令，包括向量映射，pid执行
+ * @description: execute tracking control
  * @param {vector4} msg
  * @return {*}
  */
 void TrackingCtrl::cmdCb(usrPublic::vector4 msg){
-    Eigen::Vector3d v1_vector(tracking_f[0].f(0), tracking_f[1].f(msg.y), tracking_f[2].f(msg.z + 0.25 * cos(msg.w))); // 工作坐标系下的线速度向量
-    // Eigen::Vector3d v1_vector(tracking_f[0].f(0), tracking_f[1].f(msg.y), tracking_f[2].f(msg.z)); // 工作坐标系下的线速度向量
+    Eigen::Vector3d v1_vector(tracking_f[0].f(0), tracking_f[1].f(msg.y), tracking_f[2].f(msg.z + 0.25 * cos(msg.w))); // Linear velocity vector in the working coordinate system
+    // Eigen::Vector3d v1_vector(tracking_f[0].f(0), tracking_f[1].f(msg.y), tracking_f[2].f(msg.z)); // Linear velocity vector in the working coordinate system
     // std::cout<<"v1: \n"<<v1_vector.matrix()<<std::endl;
-    Eigen::Vector3d v0_vector = rotation * v1_vector; // 基坐标系下的线速度向量
+    Eigen::Vector3d v0_vector = rotation * v1_vector; // Linear velocity vector in the working coordinate system
     v0_vector(2) = 0;
     // std::cout<<"v2: \n"<<v0_vector.matrix()<<std::endl;
 

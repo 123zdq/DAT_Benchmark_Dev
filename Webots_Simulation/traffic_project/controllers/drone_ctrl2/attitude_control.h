@@ -24,7 +24,7 @@ class AttitudeControl
 public:
   AttitudeControl();
   ~AttitudeControl();
-  usrPublic::Joy att2ctrl = {}; // 高度控制节点发送到实际电机控制量
+  usrPublic::Joy att2ctrl = {}; // The height control node sends to the actual motor control volume
   void cmdCb(usrPublic::Pose msg);
   void stateCb(usrPublic::Odometry msg);
 private:
@@ -34,7 +34,7 @@ private:
 
 AttitudeControl::AttitudeControl()
 {
-  // 初始化矩阵
+  // init matrix
   Rd_ = Eigen::Matrix3d::Identity();
   fd_ = Eigen::Vector3d::Zero();
 }

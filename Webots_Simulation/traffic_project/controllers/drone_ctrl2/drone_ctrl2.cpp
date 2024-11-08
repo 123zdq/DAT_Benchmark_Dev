@@ -35,7 +35,6 @@
 #include "json_config_handle.h"
 #include <sstream>
 #include "../god_controller/Reward_Generator.h"
-#include "../../libraries/myLibs/dataDisplay.h"
 #include <webots/Display.hpp>
 // #define BOOST_NO_CXX11_SCOPED_ENUMS
 // #include <boost/filesystem.hpp>
@@ -116,11 +115,11 @@ int main(int argc, char **argv)
   // read json config file
   configHandle config("../../config/env_config.json");
 
-  // 获取custom字段的runMode
+  // get custom runMode
   string run_mode = robot->getCustomData();
-  // 获取本机的DEF描述
+  // get discription
   string droneDef = robot->getSelf()->getDef();
-  // 四旋翼电机
+  // four motors
   Motor *motor1 = robot->getMotor("front_right_motor");
   Motor *motor2 = robot->getMotor("front_left_motor");
   Motor *motor3 = robot->getMotor("rear_left_motor");
@@ -133,7 +132,7 @@ int main(int argc, char **argv)
   motor2->setVelocity(0);
   motor3->setVelocity(0);
   motor4->setVelocity(0);
-  // 云台电机
+  // gimbal motors
   Motor *camera_roll_motor = robot->getMotor("camera roll");
   Motor *camera_pitch_motor = robot->getMotor("camera pitch");
   Motor *camera_yaw_motor = robot->getMotor("camera yaw");
@@ -146,14 +145,14 @@ int main(int argc, char **argv)
   // camera_roll_motor->setControlPID(Kroll,Iroll,Droll);
   // camera_pitch_motor->setControlPID(Kpitch,Ipitch,Dpitch);
   // camera_yaw_motor->setControlPID(Kyaw,Iyaw,Dyaw);
-  // 云台电机位置传感
+  // gimbal position sensor
   PositionSensor *camera_roll_sensor = robot->getPositionSensor("camera roll sensor");
   PositionSensor *camera_pitch_sensor = robot->getPositionSensor("camera pitch sensor");
   PositionSensor *camera_yaw_sensor = robot->getPositionSensor("camera yaw sensor");
   camera_roll_sensor->enable(timeStep);
   camera_pitch_sensor->enable(timeStep);
   camera_yaw_sensor->enable(timeStep);
-  // 传感器和外设
+  // sensors
   Camera *camera = robot->getCamera("camera");
   camera->enable(timeStep);
   GPS *gps = robot->getGPS("gps");
@@ -173,7 +172,7 @@ int main(int argc, char **argv)
   receiver->enable(timeStep);
   Display *disp = robot->getDisplay("display");
 
-  // 额外的传感器初始化
+  // lidar init
   Lidar *lidar;
   if (config.get()->lidarEnable)
   {
@@ -182,7 +181,7 @@ int main(int argc, char **argv)
     lidar->enablePointCloud();
   }
 
-  // 自定义类型
+  // custom types
   PositionControl pCtrl;
   AttitudeControl aCtrl;
   JoyControl jCtrl((double)STATE_PERIOD_MS * 0.001);
@@ -199,17 +198,16 @@ int main(int argc, char **argv)
   bool drone_fly = true;
   usrPublic::vector3 gimbal_cmd = {};
   GimbalControl gCtrl((double)STATE_PERIOD_MS * 0.001);
-  float error[6] = {0}; // follow_anything接收参数buff
+  float error[6] = {0}; // follow_anything data buff
   float last_error[4] = {0};
   int check_count[4] = {0};
   bool is_tracking = false;
   TrackingCtrl trackCtrl(timeStep);
-  double action[5] = {0}; // 强化学习action参数buff
+  double action[5] = {0}; // rl action data buff
   double step_count = 0;
   rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.distanceRange, config.get()->rewardConfig.viewScale, config.get()->rewardConfig.viewRange);
   bool is_video_warmUp = false;
   int random_number = -1;
-  dataDisplay<6> dispData(disp);
   double initParams[2] = {1.,0};
 
   // Main loop:
@@ -277,7 +275,7 @@ int main(int argc, char **argv)
       // std::cout<<lidar_number_of_points<<std::endl;
     }
 
-    usrPublic::Joy fly_cmd = {}; // 这里必须初始化为空，因为重新分配内存的时候没有初始化
+    usrPublic::Joy fly_cmd = {}; // must be inited empty
     if (config.get()->simulationMode == string("demo"))
     {
       // 键盘控制
@@ -343,7 +341,7 @@ int main(int argc, char **argv)
         key = keyboard->getKey();
       }
     }
-    // 获取云台目标姿态，和action数据
+    // get target gimbal pose and actions
     if (config.get()->simulationMode == string("train"))
     {
       drone_fly = true;
@@ -367,11 +365,11 @@ int main(int argc, char **argv)
       Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 2);
       gimbal_cmd.y = CLAMP(initParams[0], 0.5, 1.5);
       rewardG.makeReward.initDirection = initParams[1];
-      // 获取action数据
+      // get actions
       Txt_Input("../../cache/" + droneDef + "_Global2Ctrl.txt", action, 5);
       if (t < 0.1)
       {
-        // 处理action参数
+        // figure actions
         fly_cmd.axes[3] = 0;
         fly_cmd.axes[2] = 0;
         fly_cmd.axes[1] = 0;
@@ -380,7 +378,7 @@ int main(int argc, char **argv)
       }
       else
       {
-        // 处理action参数
+        // figure actions
         fly_cmd.axes[3] = action[0];
         fly_cmd.axes[2] = action[1];
         fly_cmd.axes[1] = action[2];
@@ -419,10 +417,10 @@ int main(int argc, char **argv)
         // use ctrl frequency
         if((step_count == 1) || ((step_count - last_step_count) >= countMax))
         {
-          // 创建随机数引擎
-          std::random_device rd;  // 获取随机数种子
-          std::mt19937 gen(rd());  // 使用梅森旋转算法初始化随机数生成器
-          // 创建均匀分布
+          // establish random engine
+          std::random_device rd;  // get seed
+          std::mt19937 gen(rd());  // random generator
+          // create a uniform distribution
           std::uniform_int_distribution<> distrib(0, 5);
           random_number = distrib(gen);
           last_step_count = step_count;
@@ -485,10 +483,10 @@ int main(int argc, char **argv)
 
     if (config.get()->simulationMode == string("demo"))
     {
-      // 获取follow_anything数据
+      // get follow_anything data
       receiver->setChannel(1);
       serialRec(receiver, error, 6);
-      // 处理follow参数
+      // figure follow params
       for (int i = 0; i < 4; i++)
       {
         if (is_tracking == false)
@@ -542,7 +540,7 @@ int main(int argc, char **argv)
       }
       else
       {
-        trackin.w = gimbal_cmd.y; // 视场补偿，当摄像头更接近平视时，跟踪的目标点偏向于图片下方
+        trackin.w = gimbal_cmd.y; // fov compensation
       }
       trackCtrl.stateCb(state, gimbal_angle);
       trackCtrl.cmdCb(trackin);
@@ -576,8 +574,8 @@ int main(int argc, char **argv)
     if (config.get()->simulationMode == string("train") || config.get()->simulationMode == string("video"))
     {
       static bool alreadyDone = false;
-      // 根据追踪车辆情况更新done状态
-      // 根据训练执行步长更新done状态
+      // update done status based on tracked vehicles
+      // update the done state according to the training execution step
       // if(state.done == 0){
       if (config.get()->simulationMode == string("video"))
       {
@@ -659,7 +657,7 @@ int main(int argc, char **argv)
         rewardG.makeReward.crash = false;
       }
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
-      // 如果使用supervisor控制模式，那么直接把无人机移动到目标位置
+      // If using supervisor control mode, then move the drone directly to the target location
       if (config.get()->droneSupervisorCtrl == true && (config.get()->simulationMode != string("video") || config.get()->video.randomAction == true) && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
       {
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
@@ -693,7 +691,7 @@ int main(int argc, char **argv)
         robot->getSelf()->getField("rotation")->setSFRotation(ro_t);
       }
 
-      // 发送state,reward,done
+      // send state,reward,done
       state.t = step_count;
       double state_list[22] = {};
       static double state_list_last[22] = {0};
@@ -801,7 +799,7 @@ int main(int argc, char **argv)
     }
     jCtrl.setInitialized(true);
 
-    // 雷达点云信息和摄像头
+    // Radar point cloud information and camera
     if (config.get()->simulationMode == string("demo"))
     {
       if ((int)(t * 1000) % (STATE_PERIOD_MS * 10) == 0 && is_nan == false)
@@ -862,7 +860,7 @@ int main(int argc, char **argv)
       {
         if (videoCount == 0)
         {
-          // // 使用boost实现跨平台创建目录
+          // // use boost
           // if (!boost::filesystem::is_directory(fn))
           // {
           //   std::cout << "begin create path: " << foldername << std::endl;
@@ -879,8 +877,8 @@ int main(int argc, char **argv)
           // boost::filesystem::remove_all(fn);
           // std::cout << "clear directory: " << foldername << std::endl;
           std::ostringstream oss;
-          oss << std::setw(6) << std::setfill('0') << videoCount; // 设置宽度为6，填充字符为'0'
-          std::string formatted = oss.str();                      // 将输出流转换为字符串
+          oss << std::setw(6) << std::setfill('0') << videoCount; // Set the width to 6 and the fill character to '0'
+          std::string formatted = oss.str();                      // Converting an output stream to a string
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";
@@ -897,8 +895,8 @@ int main(int argc, char **argv)
         else if ((t - last_frame_t) >= (1. / static_cast<double>(config.get()->video.fps)))
         {
           std::ostringstream oss;
-          oss << std::setw(6) << std::setfill('0') << videoCount; // 设置宽度为6，填充字符为'0'
-          std::string formatted = oss.str();                      // 将输出流转换为字符串
+          oss << std::setw(6) << std::setfill('0') << videoCount; // Set the width to 6 and the fill character to '0'
+          std::string formatted = oss.str();                      // Converting an output stream to a string
           string filename = foldername + "/episode" + std::to_string(episode) + "/" + formatted + ".jpeg";
           camera->saveImage(filename, 100);
           string jsonpath = foldername + "/episode" + std::to_string(episode) + "/" + "mark.json";

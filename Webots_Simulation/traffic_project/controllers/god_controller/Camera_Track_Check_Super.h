@@ -182,12 +182,12 @@ inline double camera2real::Get_View_Proportions(Vector3d* follow_location, const
 {
     int sector = 0;
     double line_angle[4];
-    // 计算四条分界线的角度
+    // Calculate the angles of the four dividing lines
     for (int i = 0; i < 4; i++)
     {
         line_angle[i] = atan2(follow_location[i + 1](1) - follow_location[0](1), follow_location[i + 1](0) - follow_location[0](0));
     }
-    // 计算目标的角度
+    // Calculate the angle of the target
     double follow_angle = atan2(target_real_world_location(1) - follow_location[0](1), target_real_world_location(0) - follow_location[0](0));
     double line_angle_max = 0, line_angle_min = 0;
     int max_idx = 0, min_idx = 0;
@@ -235,7 +235,7 @@ inline double camera2real::Get_View_Proportions(Vector3d* follow_location, const
         }
     }
     
-    // 计算要测定比例的两条直线
+    // Calculate the two lines for which the ratio is to be determined
     Vector2d follow_line;
     Vector2d edge_line;
     follow_line(0) = (target_real_world_location(1) - follow_location[0](1)) / (target_real_world_location(0) - follow_location[0](0));
@@ -249,11 +249,11 @@ inline double camera2real::Get_View_Proportions(Vector3d* follow_location, const
         edge_line(0) = (follow_location[sector + 1](1) - follow_location[sector](1)) / (follow_location[sector + 1](0) - follow_location[sector](0));
     }
     edge_line(1) = follow_location[sector](1) - edge_line(0) * follow_location[sector](0);
-    // 计算两线交点
+    // Calculate the point of intersection of the two lines
     Vector2d cross_point;
     cross_point(0) = (follow_line(1) - edge_line(1)) / (edge_line(0) - follow_line(0));
     cross_point(1) = edge_line(0) * (follow_line(1) - edge_line(1)) / (edge_line(0) - follow_line(0)) + edge_line(1);
-    // 计算距离
+    // Calculated Distance
     Vector2d follow, target;
     follow << follow_location[0](0), follow_location[0](1);
     target << target_real_world_location(0), target_real_world_location(1);

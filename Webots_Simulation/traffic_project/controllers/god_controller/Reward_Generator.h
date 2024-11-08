@@ -1,13 +1,3 @@
-/*
- * @Author: lu 2231625449@qq.com
- * @Date: 2024-04-30 16:07:19
- * @LastEditors: lu 2231625449@qq.com
- * @LastEditTime: 2024-09-20 13:43:51
- * @FilePath: /UAV_Follow_Env/Webots_Simulation/traffic_project/controllers/god_controller/Reward_Generator.h
- * @Description:
- *
- * Copyright (c) 2024 by ${git_name_email}, All Rights Reserved.
- */
 #pragma once
 #include <webots/Robot.hpp>
 #include <webots/Supervisor.hpp>
@@ -45,7 +35,7 @@ private:
   Node *land_node;
   Node *camera_slot_node;
 
-  // 摄像头五个点坐标
+  // camera five points
   Vector3d cameraMid;
   Vector3d cameraLH;
   Vector3d cameraLL;
@@ -107,7 +97,7 @@ inline rewardGenerator::rewardGenerator(Supervisor *_supervisor, double _distanc
   viewScale = _viewScale;
   viewRange = _viewRange;
 
-  // // 对于车辆状态识别，先初始化长度为3的队列
+  // For vehicle state recognition, first initialize a queue of length 3
   pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
   pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
   pointContain.emplace(pointContain.begin(), Eigen::Vector3d::Zero());
@@ -219,17 +209,9 @@ inline void rewardGenerator::checkCarDirection(double stop_threshold, double tur
   const double *ro = trackingCar->getField("rotation")->getSFRotation();
   Eigen::Vector3d p(tr[0], tr[1], tr[2]);
   Eigen::Vector4d r(ro[0], ro[1], ro[2], ro[3]);
-  // // 填入新的值
-  // pointContain.emplace(pointContain.begin(), p);
-  // // 丢掉旧的
-  // pointContain.pop_back();
-  // // 获取两次的夹角
-  // double alpha = atan2(pointContain[0](1) - pointContain[1](1), pointContain[0](0) - pointContain[1](0));
-  // double beta = atan2(pointContain[1](1) - pointContain[2](1), pointContain[1](0) - pointContain[2](0));
-  // double err = alpha-beta;
   double err = -(r(3) - lastRotation(3));
   lastRotation = r;
-  // 处理正负周期的问题
+  // Dealing with positive and negative cycles
   if (err > M_PI)
   {
     err = err - 2 * M_PI;
@@ -243,21 +225,21 @@ inline void rewardGenerator::checkCarDirection(double stop_threshold, double tur
   lastTransform = p;
   if (err > abs(turn_threshold))
   {
-    makeReward.carDir = 2; // 左转
+    makeReward.carDir = 2; // left
   }
   else if (err < -abs(turn_threshold))
   {
-    makeReward.carDir = 3; // 右转
+    makeReward.carDir = 3; // right
   }
   else
   {
     if (dist < abs(stop_threshold))
     {
-      makeReward.carDir = 0; // 停车
+      makeReward.carDir = 0; // stop
     }
     else
     {
-      makeReward.carDir = 1; // 直走
+      makeReward.carDir = 1; // straight
     }
   }
 }
@@ -281,7 +263,7 @@ inline void rewardGenerator::setTrackingCar(string _carDef)
  */
 inline double rewardGenerator::getReward(string _trackingObj, string _run_mode, string _reward_mode, string _reward_type, double trackWidth, double trackHeight)
 {
-  // 获取被指定跟踪车辆在世界中的坐标
+  // Get the coordinates of the assigned tracked vehicle in the world.
   const double *T_car_of_land = trackingCar->getPose(land_node);
   double T_car_of_land_temp[16];
   memcpy(T_car_of_land_temp, T_car_of_land, sizeof(T_car_of_land_temp));
@@ -310,14 +292,14 @@ inline double rewardGenerator::getReward(string _trackingObj, string _run_mode, 
     T_car_of_land_temp[3 + i * 4] = V_car_of_land(i);
   }
   memcpy(&makeReward.T_tw, T_car_of_land_temp, sizeof(makeReward.T_tw));
-  // 直接把计算reward的坐标点加入参数中
+  // Directly add the coordinates of the point at which the reward is calculated to the parameter
   makeReward.cameraMidGlobalPos.x = cameraMid(0);
   makeReward.cameraMidGlobalPos.y = cameraMid(1);
   makeReward.cameraMidGlobalPos.z = cameraMid(2);
   makeReward.carMidGlobalPos.x = V_car_of_land(0);
   makeReward.carMidGlobalPos.y = V_car_of_land(1);
   makeReward.carMidGlobalPos.z = V_car_of_land(2);
-  // 得到车辆相对于无人就得坐标和旋转角
+  // Get the coordinates and rotation angle of the vehicle with respect to the unoccupied vehicle.
   static Vector3d last_carDronePos = Vector3d::Zero();
   static double carDroneVel[3] = {0,0,0};
   static double last_carDroneVel[3] = {0,0,0};
@@ -372,7 +354,7 @@ inline double rewardGenerator::getReward(string _trackingObj, string _run_mode, 
     //   // std::cout<<"is_tracking1: "<< reward <<std::endl;
     // }
     // else{
-    //   // 目标tracking的坐标
+    //   // Coordinates of the target tracking
     //   Vector3d locationTar = Camera2real.Location_of_World_Calculate(Camera2real.Location_of_Camera_Calculate(Vector2d(trackWidth, trackHeight), T_land_of_camera_M, makeReward.cameraFov, Vector2d(makeReward.cameraHeight,makeReward.cameraWidth)), T_camera_of_land_M,T_land_of_world_M);
     //   reward = Camera2real.Get_Location_Reward(locationTar, cameraMid, V_car_of_land, distanceRange, distanceScale);
     //   // std::cout<<"is_tracking2: "<< reward <<std::endl;

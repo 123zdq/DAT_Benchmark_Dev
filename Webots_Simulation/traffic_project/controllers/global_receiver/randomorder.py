@@ -3,7 +3,7 @@ import random
 import os
 import sys
 
-# 获取文件根节点
+# get file root
 def read_xml(file_path):
     parser = etree.XMLParser(remove_blank_text=False)
     tree = etree.parse(file_path, parser)
@@ -19,7 +19,7 @@ def modify_xml(root, tag, index_attribute, index_attribute_value, attribute, new
         elem.set(attribute, new_value[count])
         count=count+1
 
-# 从根节点开始遍历元素和属性
+# Traversing elements and attributes from the root node
 def collect_xml(root,tag,attribute):
     count=-1
     attribute_list=[]
@@ -85,7 +85,7 @@ def random_by_os(folder_path, _sys, _configData):
     maxD = str(_configData["max_rou_distance"])
     minD = str(_configData["min_rou_distance"])
     rouN = str(_configData["route_num"])
-    # 使用从系统获取的python路径
+    # Use the python path obtained from the system
     if _sys == "Linux":
         if _configData["fixed_seed"] == True:
             os.system(sys.executable + ' $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --seed=' + str(_configData["random_seed"]) + ' --allow-fringe')
@@ -96,7 +96,7 @@ def random_by_os(folder_path, _sys, _configData):
             os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --seed=' + str(_configData["random_seed"]) + ' --allow-fringe')       
         else:
             os.system(sys.executable + ' %SUMO_HOME%/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance=' + minD + ' --max-distance=' + maxD + ' --end=' + rouN + ' --random' + ' --allow-fringe')               
-    # 使用webots建立的python软链接
+    # Python soft links created with webots
     # os.system('python3.11 $SUMO_HOME/tools/randomTrips.py -n ' + net_path + ' -o ' + trip_path + ' --min-distance ' + minD + ' --max-distance ' + maxD + ' --end ' + rouN + ' --seed ' + randS + ' --random')
     if _sys == "Linux":
         os.system('$SUMO_HOME/bin/duarouter --trip-files ' + trip_path + ' --net-file ' + net_path + ' --output-file ' + rou_path + ' --ignore-errors true')
@@ -105,7 +105,7 @@ def random_by_os(folder_path, _sys, _configData):
 
 
 
-# 插入对车辆速度的描述
+# Insert description of vehicle speed
 def add_speed_constrain(root, config):
     car_type=etree.Element('vType')
     car_type.set('id', 'type1')
@@ -116,9 +116,9 @@ def add_speed_constrain(root, config):
 
     
     root.insert(0, car_type)
-    root.insert(1, etree.Comment('\n '))  # 使用注释来添加换行
+    root.insert(1, etree.Comment('\n '))  # Using comments to add line breaks
     
-    # 查找所有vehicle元素
+    # Find all vehicle elements
     for vehicle in root.findall('.//vehicle'):
         vehicle.set('type', 'type1')
     

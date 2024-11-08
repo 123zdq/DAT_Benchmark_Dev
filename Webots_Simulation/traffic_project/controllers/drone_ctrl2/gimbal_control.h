@@ -21,22 +21,22 @@ class GimbalControl{
 public:
     GimbalControl(double _timeStep);
     ~GimbalControl();
-    void stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal_state);// 更新基本状态
-    void cmdCb(usrPublic::vector3 msg);// 进行控制解算，得到输出
+    void stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal_state);// update basic states
+    void cmdCb(usrPublic::vector3 msg);// control calculation and output
     void updateConstrain(double* p);
     usrPublic::Joy gbl2ctrl = {};
     double theta[3] = {0};
 private:
-    PIDmethod gimbalPid[3];//顺序x-y-z
+    PIDmethod gimbalPid[3];//order x-y-z
     SecondOrderButterworthLPF tarF[3];
-    Eigen::Matrix3d rotation;// 此旋转矩阵表示为云台末端镜头的旋转矩阵
-    Eigen::AngleAxisd rotation_comp;// 由机体倾斜带来的旋转由此矩阵进行补偿
-    void GimbalIk();//此处默认已经更新了参数
+    Eigen::Matrix3d rotation;       // This rotation matrix is expressed as the rotation matrix of the lens at the end of the gimbal
+    Eigen::AngleAxisd rotation_comp;// The rotation caused by the tilting of the body is compensated by the matrix.
+    void GimbalIk();                // The parameters have been updated by default here
     Eigen::MatrixXd angle_constrain = Eigen::MatrixXd::Identity(3, 2);
 };
 
 /**
- * @description: 构造函数
+ * @description: construction func
  * @param {double} _timeStep
  * @return {*}
  */
@@ -49,10 +49,10 @@ GimbalControl::GimbalControl(double _timeStep){
     gimbalPid[1].Params_Config(Kpitch,Ipitch,Dpitch,Ipitchmax,1,-1);
     gimbalPid[2].Params_Config(Kyaw,Iyaw,Dyaw,Iyawmax,1,-1);
     
-    // 设置旋转矩阵（这里示意旋转矩阵为单位阵）
+    // set rotation matrix
     rotation = Eigen::Matrix3d::Identity();
 
-    // 设置三轴角度限幅
+    // set 3 axises constrains
     angle_constrain(0, 0) = -1.7;
     angle_constrain(0, 1) = 1.7;
     angle_constrain(1, 0) = -0.5;
@@ -63,7 +63,7 @@ GimbalControl::GimbalControl(double _timeStep){
 }
 
 /**
- * @description: 更新云台转角限制
+ * @description: update gimbal pose constrains
  * @param: {double*} p
  * @return: {*}
  */
@@ -80,7 +80,7 @@ void GimbalControl::updateConstrain(double* p){
 GimbalControl::~GimbalControl() {}
 
 /**
- * @description: 状态更新函数，计算了补偿机体倾斜的自稳旋转矩阵
+ * @description: state update function
  * @param {Odometry} state
  * @param {vector3} gimbal_state
  * @return {*}
@@ -90,19 +90,19 @@ void GimbalControl::stateCb(usrPublic::Odometry state, usrPublic::vector3 gimbal
     gimbalPid[1].current = gimbal_state.y;
     gimbalPid[2].current = gimbal_state.z;
 
-    // 获取机体的状态并且计算反向旋转矩阵
+    // Get the state of the body and compute the inverse rotation matrix.
     Eigen::AngleAxisd rotation_Ix(-state.angle.x, Eigen::Vector3d::UnitX());
     Eigen::AngleAxisd rotation_Iy(-state.angle.y, Eigen::Vector3d::UnitY());
     rotation_comp = rotation_Ix * rotation_Iy;
 }
 
 /**
- * @description: 控制函数，计算自稳旋转矩阵，对目标姿态进行逆运动学解算，控制量输出
+ * @description: Control function
  * @param {vector3} msg
  * @return {*}
  */
 void GimbalControl::cmdCb(usrPublic::vector3 msg){
-    // 根据目标旋转结合补偿矩阵求小三轴逆解，并且Pid控制
+    // The small triaxial inverse solution is solved based on the target rotation combined with the compensation matrix, and the Pid control
     Eigen::AngleAxisd rotation_z(msg.z, Eigen::Vector3d::UnitZ());
     Eigen::AngleAxisd rotation_y(msg.y, Eigen::Vector3d::UnitY());
     Eigen::AngleAxisd rotation_x(msg.x, Eigen::Vector3d::UnitX());
@@ -119,7 +119,7 @@ void GimbalControl::cmdCb(usrPublic::vector3 msg){
 }
 
 /**
- * @description: 以z-y-x为顺序的小三轴逆解
+ * @description: ik in order z-y-x
  * @return {*}
  */
 void GimbalControl::GimbalIk(){

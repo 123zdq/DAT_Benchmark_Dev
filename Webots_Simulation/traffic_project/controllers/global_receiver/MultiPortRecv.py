@@ -298,7 +298,7 @@ class MultiProcessRecv():
                 data_encode = np.array(img_encode)
                 time.sleep(0.001)
             data = data_encode.tobytes()
-            # 发送数据:
+            # send data:
             self.ProcessSocket_list[idx][0].sendto(data,sendAddress)
         else:
             while os.path.exists(sfilePath):
