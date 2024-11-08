@@ -5,7 +5,7 @@
 [![Website](https://img.shields.io/badge/website-exhibition-blue)](https://vat-benchmark.framer.website/)
 [![Paper](https://img.shields.io/badge/paper-work-blue)]()
 
-![cover1](./readmeCache/cover1.jpg)
+![cover1](./readmeCache/cover1.png)
 ![cover0](./readmeCache/cover0.png)
 
 ## Abstract
