@@ -53,7 +53,7 @@ Algorithm Introduction
     .. raw:: html
 
       <div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-            This project provides <b>3 types of environment implementations, and 5 baseline algorithms</b> for users to design algorithms and compare their performance.
+            This project provides <b>3 types of environment implementations, and 3 baseline algorithms</b> for users to design algorithms and compare their performance.
             For detailed documentation on environment classes, see: <a href="Environment.html">Environment Wrapping</a>; for detailed documentation on algorithm classes, see: <a href="Model.html">Model Construction</a>
       </div>
       </br>
@@ -84,11 +84,11 @@ You can run the following code to quickly start the algorithm:
     # Test using Tracking Success Rate (TSR)
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode TSR
     # New training mode
-    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
     # Resuming training mode
-    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
-Baseline2: :code:`UAV_VAT_Gymnasium` environment +  :code:`DVAT` algorithm
+Baseline2: :code:`UAV_VAT_Gymnasium` environment +  :code:`D-VAT` algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -114,7 +114,7 @@ You can run the following code to quickly start the algorithm:
     # Resume training mode
     python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1
 
-Baseline3(Ours): :code:`Envs` Environment +  :code:`RPPO+CL` Algorithm
+Baseline3(Ours): :code:`Envs` Environment +  :code:`R-VAT` Algorithm
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. raw:: html
@@ -137,7 +137,7 @@ You can run the following code to quickly start the algorithm:
     # Test using Tracking Success Rate (TSR)
     python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # New training mode
-    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # Resume training mode
-    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1
     

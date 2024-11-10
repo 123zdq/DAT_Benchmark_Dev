@@ -347,41 +347,58 @@ Step1 Download Webots and Create Docker Container to Run with GPU
 
         sudo docker stop ****
         sudo docker run --gpus "device=0" --privileged=true -p 5900:5900 -p 7787:7787 -p 6006:6006 -it cyberbotics/webots:latest /bin/bash
-        nvidia-smi
-        exit
-        sudo docker ps -a
-        sudo docker restart ****
-        sudo docker ps
-        sudo docker exec -it **** /bin/bash
 
-Step2 Configure Simulation and Algorithm Conda Environments
+
+Step2 Creating a Virtual Environment and Installing Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * Configure and Install Simulation Environment:
+    * Virtual Environment Creation：
 
     .. code:: bash
 
         conda create -n uav_follow311 python=3.11
         conda activate uav_follow311
-        pip install opencv-python==4.9.0.80
-        pip uninstall numpy
-        pip install numpy==1.21.0
 
-    * Configure and Install Algorithm Environment:
+    * Algorithm Side：
 
     .. code:: bash
-
-        conda create -n uav_follow_alg311 python=3.11
-        conda activate uav_follow_alg311
-        pip install torch==1.13.0+cu117 torchvision==0.14.0+cu117 torchaudio==0.13.0 --extra-index-url https://download.pytorch.org/whl/cu117
+        
+        ## Alg requirements
+        pip install torch==2.2.0 torchvision==0.17.0 torchaudio==2.2.0 --index-url https://download.pytorch.org/whl/cu121
+        pip install numpy==1.25.0
         pip install opencv-python==4.9.0.80
         pip install gym==0.25.1
         pip install setproctitle==1.3.3
         pip install tensorboard
-        pip uninstall numpy
-        pip install numpy==1.21.0
+        pip install tqdm
+        pip install stable-baselines3==2.3.0
+        pip install sb3_contrib==2.3.0
+        pip install gymnasium
+        pip install wandb==0.17.6
+        pip install memory_profiler==0.61.0
+        pip install psutil==6.0.0
+        pip install pandas
+        pip install openpyxl
+        pip install tianshou==1.1.0
 
-    * Add Python Symbolic Links:
+    * Simulator Side:
+
+    .. code:: bash
+        ## Simulator requirements
+        sudo apt-get install libeigen3-dev
+        sudo apt-get install nlohmann-json3-dev
+
+        sudo apt install sumo sumo-tools sumo-doc
+        pip install lxml pyproj shapely webcolors configparser --user
+        pip install transforms3d
+
+        ## config
+        gedit ~/.bashrc
+        # Change dir according to your installation
+        export SUMO_HOME=/usr/share/sumo
+        export WEBOTS_HOME=/usr/local/webots
+
+    * Add Python symbolic Links:
 
     .. code:: bash
 
@@ -391,30 +408,7 @@ Step2 Configure Simulation and Algorithm Conda Environments
         ln -s /root/miniconda3/envs/uav_follow311/bin/python3.11 /usr/bin/python311
         mv /usr/bin/python3.10 /usr/
 
-Step3 Configure SUMO
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-    * Add SUMO Environment Variables
-
-    .. code:: bash
-
-        apt-get install libeigen3-dev
-        apt-get install nlohmann-json3-dev
-        apt install sumo sumo-tools sumo-doc
-
-    * Add SUMO Environment Variables
-
-    .. code:: bash
-
-        vim ~/.bashrc
-
-    * Add the environment path to the last line of :code:`bashrc`: :code:`export SUMO_HOME=/usr/share/sumo`
-
-    .. code:: bash
-
-        source ~/.bashrc
-
-Step4 Configure Project Workspace
+Step3 Configure Project Workspace
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     * Download Project
@@ -424,7 +418,7 @@ Step4 Configure Project Workspace
         ## Clone project
         mkdir /usr/local/Github_Project
         cd /usr/local/Github_Project
-        git clone https://github.com/
+        git clone ${github_link}
 
     * run webots simulation
 
@@ -432,7 +426,7 @@ Step4 Configure Project Workspace
 
         ## Run simulation initialization code, ensure the program completes initialization before proceeding
         conda activate uav_follow311
-        xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast /usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
+        xvfb-run -a webots --stdout --stderr --no-rendering --batch --mode=fast ${map_file}
         ps aux | grep xvfb
         x11vnc -display :99 -auth ***
 

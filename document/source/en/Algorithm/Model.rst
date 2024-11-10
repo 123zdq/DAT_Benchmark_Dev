@@ -104,9 +104,9 @@ Quick-Start
     # Testing with Tracking Success Rate (TSR)
     python ./models/A3CLSTM_E2E/main.py --Mode 0 --Scene "citystreet" --Weather "day" --delay 20 --Test_Param "CityStreet-d" --Test_Mode TSR
     # New training mode
-    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125 --New_Train
     # Resumed training mode
-    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 24 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
+    python ./models/A3CLSTM_E2E/main.py --Mode 1 --workers 35 --Scene "citystreet" --Weather "day" --delay 20 --Freq 125
 
 Program entry point
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -127,7 +127,7 @@ Program entry point
       </br>
 
     * :code:`--Mode(int)=1` : Configure whether the running mode is training mode (:code:`--Mode=1` for training mode, :code:`--Mode=0` for testing mode)
-    * :code:`--workers(int)=24` : The number of parallel training processes in the environment (should be determined based on the actual memory/GPU capacity of the computer)
+    * :code:`--workers(int)=35` : The number of parallel training processes in the environment (should be determined based on the actual memory/GPU capacity of the computer)
     * :code:`--gpu-ids(list)=[-1]` : Used to set the GPU IDs, default is -1, which means no GPU will be used
     * :code:`--Freq(int)=125` : The running frequency of the algorithm side (the environment side runs at 500Hz and is unchangeable), so the default :code:`--Freq(int)=125` means the environment side transmits data back every 4 steps
     * :code:`--delay(int)=20` : Waiting time for Webots map to load (training can only start normally after the Webots map has been fully loaded)
@@ -141,7 +141,7 @@ Program entry point
       </div>
       </br>
 
-    * :code:`--map(str)="citystreet-day.wbt"` : Configure the training/testing environment scene type, choose from :code:`[citystreet-day.wbt,downtown-day.wbt,lake-day.wbt,village-day.wbt,desert-day.wbt,farmland-day.wbt,citystreet-night.wbt,downtown-night.wbt,lake-night.wbt,village-night.wbt,desert-night.wbt,farmland-night.wbt,citystreet-foggy.wbt,downtown-foggy.wbt,lake-foggy.wbt,village-foggy.wbt,desert-foggy.wbt,farmland-foggy.wbt,citystreet-snow.wbt,downtown-snow.wbt,lake-snow.wbt,village-snow.wbt,desert-snow.wbt,farmland-snow.wbt]` 中选择
+    * :code:`--map(str)="citystreet-day.wbt"` : Configure the training/testing environment scene type, choose from :code:`[citystreet-day.wbt,downtown-day.wbt,lake-day.wbt,village-day.wbt,desert-day.wbt,farmland-day.wbt,citystreet-night.wbt,downtown-night.wbt,lake-night.wbt,village-night.wbt,desert-night.wbt,farmland-night.wbt,citystreet-foggy.wbt,downtown-foggy.wbt,lake-foggy.wbt,village-foggy.wbt,desert-foggy.wbt,farmland-foggy.wbt,citystreet-snow.wbt,downtown-snow.wbt,lake-snow.wbt,village-snow.wbt,desert-snow.wbt,farmland-snow.wbt]` 
     
     .. raw:: html
 
@@ -234,9 +234,9 @@ Quick-Start
     # Test using Tracking Success Rate (TSR)
     python ./models/D_VAT/DVAT_main.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # New training mode
-    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # Resume training mode after interruption
-    python ./models/D_VAT/DVAT_main.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/D_VAT/DVAT_main.py -w 35 -m citystreet-day.wbt --train_mode 1
 
 Program Entry
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -250,7 +250,7 @@ Program Entry
       </div>
       </br>
 
-    * :code:`--workers(int)=24` : The number of parallel training environments (this should be decided based on the actual memory/GPU of the computer).
+    * :code:`--workers(int)=35` : The number of parallel training environments (this should be decided based on the actual memory/GPU of the computer).
     * :code:`--train_mode(int)=1` : Configure whether the operation mode is training mode (:code:`--train_mode=1` is training mode, :code:`--train_mode=0` is testing mode).
     * :code:`--port(int)=-1` : Communication port between the environment and algorithm end. By default, :code:`--port=-1` uses a randomly available port. Manual modification is not recommended.
     * :code:`--New_Train(bool)=False` : Whether to start a new training session. The default is :code:`--New_Train=False`, which will load :code:`params.pth` pretrained weights (if available) for training, and the tensorboard curve will also load from the last training session.
@@ -384,9 +384,9 @@ Quick-Start
     # Test with Tracking Success Rate (TSR)
     python ./models/R_VAT/RVAT.py -w 1 -m citystreet-day.wbt --train_mode 0 --Test_Mode TSR
     # New training mode
-    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1 --New_Train
+    python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1 --New_Train
     # Resume training mode
-    python ./models/R_VAT/RVAT.py -w 24 -m citystreet-day.wbt --train_mode 1
+    python ./models/R_VAT/RVAT.py -w 35 -m citystreet-day.wbt --train_mode 1
 
 Program Entry
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -400,7 +400,7 @@ Program Entry
       </div>
       </br>
 
-    * :code:`--workers(int)=24` : The number of parallel environments for training (should be determined by the actual memory/VRAM of the computer).
+    * :code:`--workers(int)=35` : The number of parallel environments for training (should be determined by the actual memory/VRAM of the computer).
     * :code:`--train_mode(int)=1` : Configure whether the mode is training mode ( :code:`--train_mode=1` is training mode, :code:`--train_mode=0` is testing mode).
     * :code:`--port(int)=-1` : Communication port between environment and algorithm, default :code:`--port=-1` will randomly use an available port, manual modification is not recommended.
     * :code:`--New_Train(bool)=False` : Whether to start a completely new training, default is :code:`--New_Train=False`, which loads :code:`params.pth` pre-trained weights (if available) for training, and tensorboard curves will be loaded from the last training session.
@@ -517,7 +517,7 @@ log file
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            The tensorboard-logger file can be found in the folder <code>Alg_Base/DAT_Benchmark/PPO_logs</code>
+            The tensorboard-logger file can be found in the folder <code>Alg_Base/DAT_Benchmark/models/${model_name}_logs</code>
         </div>
         </br>
 
@@ -527,7 +527,7 @@ log file
     .. code:: bash
 
         cd Alg_Base/DAT_Benchmark/
-        tensorboard --logdir PPO_logs
+        tensorboard --logdir models/${model_name}_logs
 
 .. raw:: html
 

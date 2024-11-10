@@ -243,7 +243,7 @@ parser.add_argument(
     default="./models/A3CLSTM_E2E/trained_models/",
     help="folder to save trained models",
 )
-parser.add_argument("-lg", "--log-dir", default="./models/A3CLSTM_E2E/logs/", help="folder to save logs")
+parser.add_argument("-lg", "--log-dir", default="./models/A3CLSTM_E2E/E2E_logs/", help="folder to save logs")
 
 parser.add_argument(
     "-a", "--amsgrad", action="store_true", help="Adam optimizer amsgrad parameter"

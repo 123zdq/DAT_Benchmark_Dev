@@ -96,7 +96,7 @@ Part 1 Interface Details
     * :code:`Action_dim(int)`: Agent action dimension
     * :code:`action_list(list)`: Used to convert discrete action commands into continuous movement commands
 
-      * The storage order of :code:`action_list` is: :code:`[Forward, Backward, Left, Right, CW, CCW]`, representing the movement commands "forward, backward, left, right, clockwise, counterclockwise."
+      * The storage order of :code:`action_list` is: :code:`[Forward, Backward, Left, Right, CCW, CW]`, representing the movement commands "forward, backward, left, right, counterclockwise, clockwise."
 
     * :code:`process_state(function)`: Function for post-processing the images
     * :code:`arg_worker(int)`: System parallelism count

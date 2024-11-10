@@ -550,14 +550,14 @@ python<span class="w"> </span>./models/R_VAT/RPPO.py<span class="w"> </span>-w<s
 <h3>log文件<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
 <blockquote>
 <div><div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-    tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/PPO_logs</code>
+    tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/models/${model_name}_logs</code>
 </div>
 </br><ul class="simple">
 <li><p>在模型训练的过程中，只要参数 <code class="code docutils literal notranslate"><span class="pre">--tensorboard_port(int)!=-1</span></code> ，那么启动程序时会自动启动tensorboard-logger</p></li>
 <li><p>但如果希望手动启动tensorboard，也可以使用以下的命令：</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Alg_Base/DAT_Benchmark/
-tensorboard<span class="w"> </span>--logdir<span class="w"> </span>PPO_logs
+tensorboard<span class="w"> </span>--logdir<span class="w"> </span>models/<span class="si">${</span><span class="nv">model_name</span><span class="si">}</span>_logs
 </pre></div>
 </div>
 </div></blockquote>

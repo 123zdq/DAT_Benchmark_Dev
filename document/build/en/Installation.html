@@ -62,9 +62,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#docker">Docker</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#step1-download-webots-and-create-docker-container-to-run-with-gpu">Step1 Download Webots and Create Docker Container to Run with GPU</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step2-configure-simulation-and-algorithm-conda-environments">Step2 Configure Simulation and Algorithm Conda Environments</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step3-configure-sumo">Step3 Configure SUMO</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step4-configure-project-workspace">Step4 Configure Project Workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">Step2 Creating a Virtual Environment and Installing Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step3-configure-project-workspace">Step3 Configure Project Workspace</a></li>
 </ul>
 </li>
 </ul>
@@ -230,10 +229,10 @@ gedit<span class="w"> </span>~/.bashrc
 </pre></div>
 </div>
 <p>Next, open the webots software, go to <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, and modify the option <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> as shown in the following image:</p>
-<figure class="align-center" id="id3">
+<figure class="align-center" id="id4">
 <a class="reference internal image-reference" href="_images/Python_Command.png"><img alt="Python command配置" src="_images/Python_Command.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Python command config</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+<p><span class="caption-text">Python command config</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -338,20 +337,20 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>First, press <code class="code docutils literal notranslate"><span class="pre">WIN+R</span></code> to bring up the Run window, then type <code class="code docutils literal notranslate"><span class="pre">sysdm.cpl</span></code> to open the System Properties page. Next, select “Advanced” -&gt; “Environment Variables” -&gt; “System variables” -&gt; “New”.</p></li>
 <li><p>Insert <code class="code docutils literal notranslate"><span class="pre">SUMO_HOME</span></code> configured as shown in the following figure:</p>
 <blockquote>
-<div><figure class="align-center" id="id4">
+<div><figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="_images/SUMO_HOME.png"><img alt="SUMO_HOME configuration" src="_images/SUMO_HOME.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">SUMO_HOME Configuration</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+<p><span class="caption-text">SUMO_HOME Configuration</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
 </li>
 <li><p>Insert <code class="code docutils literal notranslate"><span class="pre">WEBOTS_HOME</span></code> and configure it as shown in the figure below:</p>
 <blockquote>
-<div><figure class="align-center" id="id5">
+<div><figure class="align-center" id="id6">
 <a class="reference internal image-reference" href="_images/WEBOTS_HOME.png"><img alt="WEBOTS_HOME configuration" src="_images/WEBOTS_HOME.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">WEBOTS_HOME configuration</span><a class="headerlink" href="#id5" title="Link to this image"></a></p>
+<p><span class="caption-text">WEBOTS_HOME configuration</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -366,10 +365,10 @@ pip<span class="w"> </span>install<span class="w"> </span>transform3d
 <li><p>In Linux systems, the issue is resolved by adding a symbolic link, while in Windows, the running path is directly inserted into webots.</p></li>
 <li><p>Enter the webots software, select <code class="code docutils literal notranslate"><span class="pre">Tools</span></code> -&gt; <code class="code docutils literal notranslate"><span class="pre">Preferences</span></code>, and modify the <code class="code docutils literal notranslate"><span class="pre">Python</span> <span class="pre">command</span></code> option as shown in the figure below:</p></li>
 </ul>
-<figure class="align-center" id="id6">
+<figure class="align-center" id="id7">
 <a class="reference internal image-reference" href="_images/Python_CommandWIN.png"><img alt="Python_CommandWIN configuration" src="_images/Python_CommandWIN.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Python_Command(Windows) configuration</span><a class="headerlink" href="#id6" title="Link to this image"></a></p>
+<p><span class="caption-text">Python_Command(Windows) configuration</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -394,45 +393,47 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/cyber
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>stop<span class="w"> </span>****
 sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="s2">&quot;device=0&quot;</span><span class="w"> </span>--privileged<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-p<span class="w"> </span><span class="m">5900</span>:5900<span class="w"> </span>-p<span class="w"> </span><span class="m">7787</span>:7787<span class="w"> </span>-p<span class="w"> </span><span class="m">6006</span>:6006<span class="w"> </span>-it<span class="w"> </span>cyberbotics/webots:latest<span class="w"> </span>/bin/bash
-nvidia-smi
-<span class="nb">exit</span>
-sudo<span class="w"> </span>docker<span class="w"> </span>ps<span class="w"> </span>-a
-sudo<span class="w"> </span>docker<span class="w"> </span>restart<span class="w"> </span>****
-sudo<span class="w"> </span>docker<span class="w"> </span>ps
-sudo<span class="w"> </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>****<span class="w"> </span>/bin/bash
 </pre></div>
 </div>
 </div></blockquote>
 </section>
-<section id="step2-configure-simulation-and-algorithm-conda-environments">
-<h3>Step2 Configure Simulation and Algorithm Conda Environments<a class="headerlink" href="#step2-configure-simulation-and-algorithm-conda-environments" title="Link to this heading"></a></h3>
+<section id="id3">
+<h3>Step2 Creating a Virtual Environment and Installing Libraries<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>Configure and Install Simulation Environment:</p></li>
+<li><p>Virtual Environment Creation：</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
 conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
-pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="o">==</span><span class="m">4</span>.9.0.80
-pip<span class="w"> </span>uninstall<span class="w"> </span>numpy
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.21.0
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Configure and Install Algorithm Environment:</p></li>
+<li><p>Algorithm Side：</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow_alg311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
-conda<span class="w"> </span>activate<span class="w"> </span>uav_follow_alg311
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.13.0+cu117<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.14.0+cu117<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">0</span>.13.0<span class="w"> </span>--extra-index-url<span class="w"> </span>https://download.pytorch.org/whl/cu117
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Alg requirements</span>
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.17.0<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.25.0
 pip<span class="w"> </span>install<span class="w"> </span>opencv-python<span class="o">==</span><span class="m">4</span>.9.0.80
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">gym</span><span class="o">==</span><span class="m">0</span>.25.1
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">setproctitle</span><span class="o">==</span><span class="m">1</span>.3.3
 pip<span class="w"> </span>install<span class="w"> </span>tensorboard
-pip<span class="w"> </span>uninstall<span class="w"> </span>numpy
-pip<span class="w"> </span>install<span class="w"> </span><span class="nv">numpy</span><span class="o">==</span><span class="m">1</span>.21.0
+pip<span class="w"> </span>install<span class="w"> </span>tqdm
+pip<span class="w"> </span>install<span class="w"> </span>stable-baselines3<span class="o">==</span><span class="m">2</span>.3.0
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">sb3_contrib</span><span class="o">==</span><span class="m">2</span>.3.0
+pip<span class="w"> </span>install<span class="w"> </span>gymnasium
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">wandb</span><span class="o">==</span><span class="m">0</span>.17.6
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">memory_profiler</span><span class="o">==</span><span class="m">0</span>.61.0
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">psutil</span><span class="o">==</span><span class="m">6</span>.0.0
+pip<span class="w"> </span>install<span class="w"> </span>pandas
+pip<span class="w"> </span>install<span class="w"> </span>openpyxl
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tianshou</span><span class="o">==</span><span class="m">1</span>.1.0
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Add Python Symbolic Links:</p></li>
+<li><p>Simulator Side:</p></li>
+</ul>
+<ul class="simple">
+<li><p>Add Python symbolic Links:</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Create symbolic link for algorithm side Python</span>
 ln<span class="w"> </span>-s<span class="w"> </span>/root/miniconda3/envs/uav_follow_alg311/bin/python3.11<span class="w"> </span>/usr/bin/python311
@@ -443,33 +444,8 @@ mv<span class="w"> </span>/usr/bin/python3.10<span class="w"> </span>/usr/
 </div>
 </div></blockquote>
 </section>
-<section id="step3-configure-sumo">
-<h3>Step3 Configure SUMO<a class="headerlink" href="#step3-configure-sumo" title="Link to this heading"></a></h3>
-<blockquote>
-<div><ul class="simple">
-<li><p>Add SUMO Environment Variables</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>libeigen3-dev
-apt-get<span class="w"> </span>install<span class="w"> </span>nlohmann-json3-dev
-apt<span class="w"> </span>install<span class="w"> </span>sumo<span class="w"> </span>sumo-tools<span class="w"> </span>sumo-doc
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Add SUMO Environment Variables</p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vim<span class="w"> </span>~/.bashrc
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>Add the environment path to the last line of <code class="code docutils literal notranslate"><span class="pre">bashrc</span></code>: <code class="code docutils literal notranslate"><span class="pre">export</span> <span class="pre">SUMO_HOME=/usr/share/sumo</span></code></p></li>
-</ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bashrc
-</pre></div>
-</div>
-</div></blockquote>
-</section>
-<section id="step4-configure-project-workspace">
-<h3>Step4 Configure Project Workspace<a class="headerlink" href="#step4-configure-project-workspace" title="Link to this heading"></a></h3>
+<section id="step3-configure-project-workspace">
+<h3>Step3 Configure Project Workspace<a class="headerlink" href="#step3-configure-project-workspace" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Download Project</p></li>
@@ -477,7 +453,7 @@ apt<span class="w"> </span>install<span class="w"> </span>sumo<span class="w"> <
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Clone project</span>
 mkdir<span class="w"> </span>/usr/local/Github_Project
 <span class="nb">cd</span><span class="w"> </span>/usr/local/Github_Project
-git<span class="w"> </span>clone<span class="w"> </span>https://github.com/
+git<span class="w"> </span>clone<span class="w"> </span><span class="si">${</span><span class="nv">github_link</span><span class="si">}</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -485,7 +461,7 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Run simulation initialization code, ensure the program completes initialization before proceeding</span>
 conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
-xvfb-run<span class="w"> </span>-a<span class="w"> </span>webots<span class="w"> </span>--stdout<span class="w"> </span>--stderr<span class="w"> </span>--no-rendering<span class="w"> </span>--batch<span class="w"> </span>--mode<span class="o">=</span>fast<span class="w"> </span>/usr/local/Github_Project/UAV_Follow_Env/Webots_Simulation/traffic_project/worlds/la3clean.wbt
+xvfb-run<span class="w"> </span>-a<span class="w"> </span>webots<span class="w"> </span>--stdout<span class="w"> </span>--stderr<span class="w"> </span>--no-rendering<span class="w"> </span>--batch<span class="w"> </span>--mode<span class="o">=</span>fast<span class="w"> </span><span class="si">${</span><span class="nv">map_file</span><span class="si">}</span>
 ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>xvfb
 x11vnc<span class="w"> </span>-display<span class="w"> </span>:99<span class="w"> </span>-auth<span class="w"> </span>***
 </pre></div>

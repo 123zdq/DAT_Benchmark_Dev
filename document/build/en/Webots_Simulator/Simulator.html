@@ -691,30 +691,30 @@
 <blockquote>
 <div><p>Unified model, large passenger vehicles</p>
 </div></blockquote>
-<figure class="align-center" id="id7">
+<figure class="align-center" id="id8">
 <a class="reference internal image-reference" href="../_images/BUS.png"><img alt="BUS" src="../_images/BUS.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Bus</span><a class="headerlink" href="#id7" title="Link to this image"></a></p>
+<p><span class="caption-text">Bus</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>truck</strong></p>
 <blockquote>
 <div><p>Unified vehicle type, truck without cargo box</p>
 </div></blockquote>
-<figure class="align-center" id="id8">
+<figure class="align-center" id="id9">
 <a class="reference internal image-reference" href="../_images/TRUCK.png"><img alt="TRUCK" src="../_images/TRUCK.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Truck</span><a class="headerlink" href="#id8" title="Link to this image"></a></p>
+<p><span class="caption-text">Truck</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p><strong>trailer</strong></p>
 <blockquote>
 <div><p>Unified model, truck with cargo box</p>
 </div></blockquote>
-<figure class="align-center" id="id9">
+<figure class="align-center" id="id10">
 <a class="reference internal image-reference" href="../_images/TRAILER.png"><img alt="TRAILER" src="../_images/TRAILER.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id9" title="Link to this image"></a></p>
+<p><span class="caption-text">Trailer</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -817,10 +817,10 @@
 <div><ol class="arabic simple">
 <li><p>Create a proto file for Webots following <a class="reference external" href="https://cyberbotics.com/doc/reference/proto#:~:text=Webots%20Reference%20Manual.%20R2023b.%20PROTO.">webots wiki</a> . The attributes that must be exposed to the scene tree include “translation”, “rotation”, and “name”. The description file should be stored in <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/protos</span></code></p></li>
 </ol>
-<figure class="align-center" id="id10">
+<figure class="align-center" id="id11">
 <a class="reference internal image-reference" href="../_images/SceneTreePropertyPack.png"><img alt="场景树属性包" src="../_images/SceneTreePropertyPack.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Scenario Tree Attribute Pack</span><a class="headerlink" href="#id10" title="Link to this image"></a></p>
+<p><span class="caption-text">Scenario Tree Attribute Pack</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple" start="2">
@@ -840,10 +840,10 @@
    IMPORT PROTO
 </p><ol class="arabic" start="4">
 <li><p>Write the name of the proto into the safety check file <code class="code docutils literal notranslate"><span class="pre">UAV_Follow_Env/Webots_Simulation/traffic_project/config/safetyCheck.py</span></code></p>
-<figure class="align-center" id="id11">
+<figure class="align-center" id="id12">
 <a class="reference internal image-reference" href="../_images/SafeCheck.png"><img alt="SafeCheck" src="../_images/SafeCheck.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Security Check</span><a class="headerlink" href="#id11" title="Link to this image"></a></p>
+<p><span class="caption-text">Security Check</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </li>
@@ -874,22 +874,22 @@
 0 &amp; \text{otherwise}.
 \end{cases}\end{split}\]</div>
 <p>Where <span class="math notranslate nohighlight">\(I\)</span> represents the tracking range (the area captured by the camera lens), and <span class="math notranslate nohighlight">\(t\)</span> represents the position of the tracked object within the tracking range (the area captured by the camera lens).</p>
-<figure class="align-center" id="id12">
+<figure class="align-center" id="id13">
 <span id="discrete-reward-diagram-for-tracking-object"></span><a class="reference internal image-reference" href="../_images/Discrete_reward.png"><img alt="Discrete_reward" src="../_images/Discrete_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Discrete Reward Diagram of the Tracking Object</span><a class="headerlink" href="#id12" title="Link to this image"></a></p>
+<p><span class="caption-text">Discrete Reward Diagram of the Tracking Object</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The second type is dense reward, which gives a reward that decreases as the distance increases by evaluating the position of the tracking object relative to the center of the tracking range. The higher the reward, the closer the target is to the center point of the range, and vice versa.</p>
-<figure class="align-center" id="id13">
+<figure class="align-center" id="id14">
 <span id="dense-reward-calculation-formula"></span><span id="figcontr"></span><span id="continuous-reward-diagram-for-tracking-object"></span><a class="reference internal image-reference" href="../_images/Continuous_reward.png"><img alt="Continuous_reward" src="../_images/Continuous_reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Continuous Reward Diagram for Object Tracking</span><a class="headerlink" href="#id13" title="Link to this image"></a></p>
+<p><span class="caption-text">Continuous Reward Diagram for Object Tracking</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>The figure above is a schematic of a tracking object within the camera frame, where the distance from point <span class="math notranslate nohighlight">\(E_{G_{c}}\)</span> to the center point of the frame <span class="math notranslate nohighlight">\(I_{cG}\)</span> is denoted as <span class="math notranslate nohighlight">\(y_{EI}\)</span>, and the distance from the tracking object point <span class="math notranslate nohighlight">\(P_{GC}\)</span> to the center point <span class="math notranslate nohighlight">\(I_{cG}\)</span> is denoted as <span class="math notranslate nohighlight">\(y_{IP}\)</span>. Their ratio is represented as</p>
+<p>The figure above is a schematic of a tracking object within the camera frame, note that</p>
 <div class="math notranslate nohighlight">
-\[x = \frac{y_{IP}}{y_{EI}}\]</div>
+\[x = \frac{\mid p_{vc}- I_{OG}\mid}{\mid E_{G_c}- I_{OG}\mid}\]</div>
 <p>Then, the dense reward can be obtained using the following expression:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}r_{c} = \begin{cases}
@@ -907,10 +907,10 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <h3>Reward Judgment<a class="headerlink" href="#reward-judgment" title="Link to this heading"></a></h3>
 <blockquote>
 <div><p>The acquisition of the above reward function is based on the judgment of the tracked object’s position. In practice, the position of the tracked object in the camera image can be provided through machine vision recognition or manual annotation. However, in simulation training, in order to simplify the calculation and speed up the algorithm, we directly use the coordinates of the tracked object to determine whether it has entered the tracking range.</p>
-<figure class="align-center" id="id14">
-<a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
+<figure class="align-center" id="id15">
+<span id="id6"></span><a class="reference internal image-reference" href="../_images/Reward.png"><img alt="Reward" src="../_images/Reward.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-text">Schematic diagram of reward acquisition, A is the mapping of the camera image to the ground, B is the schematic of pinhole imaging, C is the establishment of the camera coordinate system</span><a class="headerlink" href="#id14" title="Link to this image"></a></p>
+<p><span class="caption-text">Schematic diagram of reward acquisition</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>
@@ -920,20 +920,20 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <div><p>First, the camera focal length in the simulation needs to be obtained, and the expression is calculated as follows:</p>
 <div class="math notranslate nohighlight">
 \[f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}\]</div>
-<p>Where <span class="math notranslate nohighlight">\(W\)</span> represents the width of the camera image (in pixels), and <span class="math notranslate nohighlight">\(FoV\)</span> refers to the field of view of the tracker camera, as shown in Figure B of the reward acquisition illustration.</p>
-<p>Then, we need to project the corners of the camera image onto the spatial plane where the tracked object is located, as shown in Reward Acquisition Diagram a, to judge the object’s coordinates. As shown in Reward Acquisition Diagram c, a camera coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> is established at the camera’s optical center, which allows us to obtain the coordinates of the four corners of the camera image in the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span>.</p>
+<p>Where <span class="math notranslate nohighlight">\(W\)</span> represents the width of the camera image (in pixels), and <span class="math notranslate nohighlight">\(FoV\)</span> refers to the field of view of the tracker camera, as shown in Figure b of the <a class="reference internal" href="#id6"><span class="std std-ref">Schematic diagram of reward acquisition</span></a> (a).</p>
+<p>Then, as shown in the <a class="reference internal" href="#id6"><span class="std std-ref">Schematic diagram of reward acquisition</span></a> (a), we need to project the camera’s corner points onto the spatial plane where the tracked object is located. Next, as shown in the <a class="reference internal" href="#id6"><span class="std std-ref">Schematic diagram of reward acquisition</span></a> (b), determine the coordinates of the tracked object. Finally, by establishing the camera coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> at the optical center of the camera, the coordinates of the four corners of the camera image in the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> can be obtained:</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}\text{LU}\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
-\text{LD}\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
-\text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
-\text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)\end{split}\]</div>
+\[\begin{split}LU\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
+LD\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
+RU\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
+RD\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)\end{split}\]</div>
 <p>By associating with the optical center <span class="math notranslate nohighlight">\(C\)</span> <span class="math notranslate nohighlight">\((0,0,0)\)</span>, we can obtain four linear equations:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\begin{matrix}
-\text{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
-\text{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
-\text{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
-\text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
+l_{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
+l_{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
+l_{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
+l_{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
 \end{matrix}\end{split}\]</div>
 <p>Then get the equation for the ground (horizontal):</p>
 <div class="math notranslate nohighlight">
@@ -941,7 +941,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <p><span class="math notranslate nohighlight">\(\{w\}\)</span> represents the world coordinate system, and <span class="math notranslate nohighlight">\(h\)</span> is the ground height.</p>
 <p>Since the pose of the tracker gimbal is known, it is easy to obtain the transformation relationship from the camera coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span> to the world coordinate system <span class="math notranslate nohighlight">\(\{w\}\)</span>, which is the homogeneous transformation matrix <span class="math notranslate nohighlight">\(T_{ct}\)</span>.</p>
 <p>By transforming the plane equation <span class="math notranslate nohighlight">\(G_{w}\)</span> to the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span>, and solving it together with the four line equations, the four ground intersection points <span class="math notranslate nohighlight">\(LU_{G}, LD_{G}, RU_{G}, RD_{G}\)</span> can be obtained. These four points form the four corner points of the tracking range <span class="math notranslate nohighlight">\(I\)</span>, thus determining the tracking area <span class="math notranslate nohighlight">\(I\)</span>.</p>
-<p>Finally, read the tracking object’s coordinate point <span class="math notranslate nohighlight">\(p_{vG}\)</span> from the simulation environment, and convert it along with the image center point <code class="code docutils literal notranslate"><span class="pre">I_{cG}</span></code> to the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span>, obtaining <span class="math notranslate nohighlight">\(p_{vc}\)</span>. Using the car’s coordinates <span class="math notranslate nohighlight">\(p_{vc}\)</span>, the four intersection points (<code class="code docutils literal notranslate"><span class="pre">LU_G</span></code>, <code class="code docutils literal notranslate"><span class="pre">LD_G</span></code>, <code class="code docutils literal notranslate"><span class="pre">RU_G</span></code>, and <code class="code docutils literal notranslate"><span class="pre">RD_G</span></code>), and the image center <code class="code docutils literal notranslate"><span class="pre">I_{cG}</span></code>, by utilizing the <a class="reference internal" href="#dense-reward-calculation-formula"><span class="std std-ref">Continuous Reward Diagram for Object Tracking</span></a> , the ratio <span class="math notranslate nohighlight">\(x\)</span> can be calculated. When <span class="math notranslate nohighlight">\(0 \leq x \leq 1\)</span>, the object is within the image, indicating successful tracking.</p>
+<p>Finally, read the tracking object’s coordinate point <span class="math notranslate nohighlight">\(p_{vG}\)</span> from the simulation environment, and convert it along with the image center point <code class="code docutils literal notranslate"><span class="pre">I_{OG}</span></code> to the coordinate system <span class="math notranslate nohighlight">\(\{c\}\)</span>, obtaining <span class="math notranslate nohighlight">\(p_{vc}\)</span>. Using the car’s coordinates <span class="math notranslate nohighlight">\(p_{vc}\)</span>, the four intersection points (<code class="code docutils literal notranslate"><span class="pre">LU_G</span></code>, <code class="code docutils literal notranslate"><span class="pre">LD_G</span></code>, <code class="code docutils literal notranslate"><span class="pre">RU_G</span></code>, and <code class="code docutils literal notranslate"><span class="pre">RD_G</span></code>), and the image center <code class="code docutils literal notranslate"><span class="pre">I_{OG}</span></code>, by utilizing the <a class="reference internal" href="#dense-reward-calculation-formula"><span class="std std-ref">Continuous Reward Diagram for Object Tracking</span></a> , the ratio <span class="math notranslate nohighlight">\(x\)</span> can be calculated. When <span class="math notranslate nohighlight">\(0 \leq x \leq 1\)</span>, the object is within the image, indicating successful tracking.</p>
 <p>The calculation method is similar when the ground is not horizontal.</p>
 </div></blockquote>
 </section>
@@ -959,7 +959,7 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 </br></section>
 </section>
 <section id="customized-parameter-interface">
-<span id="id6"></span><h2>Customized Parameter Interface<a class="headerlink" href="#customized-parameter-interface" title="Link to this heading"></a></h2>
+<span id="id7"></span><h2>Customized Parameter Interface<a class="headerlink" href="#customized-parameter-interface" title="Link to this heading"></a></h2>
 <div style="background-color: #e5f3e5; padding: 15px; border-radius: 5px; border: 2px solid #66CD00;">
       This project provides common <b>6 types of sensor data</b>, which can be used for subsequent multi-sensor collaborative task design.
 </div>
@@ -1161,10 +1161,10 @@ In addition, <span class="math notranslate nohighlight">\(I_{clip}\)</span> is t
 <ul class="simple">
 <li><p>Among them, the parameter <code class="code docutils literal notranslate"><span class="pre">carCameraPosOri</span></code> defines the tracker coordinate system and pose angles as follows:</p></li>
 </ul>
-<figure class="align-center" id="id15">
+<figure class="align-center" id="id16">
 <a class="reference internal image-reference" href="../_images/DroneCoordinates.png"><img alt="无人机坐标系" src="../_images/DroneCoordinates.png" style="width: 250px;" /></a>
 <figcaption>
-<p><span class="caption-text">Definition of Drone Coordinate System</span><a class="headerlink" href="#id15" title="Link to this image"></a></p>
+<p><span class="caption-text">Definition of Drone Coordinate System</span><a class="headerlink" href="#id16" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </div></blockquote>

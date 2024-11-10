@@ -52,8 +52,8 @@
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Algorithm Introduction</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#quick-start-running-baseline-algorithms">Quick Start (Running baseline algorithms)</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#baseline1-benchenv-multi-environment-a3clstm-e2e-algorithm">Baseline1: <code class="code docutils literal notranslate"><span class="pre">BenchEnv_Multi</span></code> environment +  <code class="code docutils literal notranslate"><span class="pre">A3CLSTM-E2E</span></code> algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#baseline2-uav-vat-gymnasium-environment-dvat-algorithm">Baseline2: <code class="code docutils literal notranslate"><span class="pre">UAV_VAT_Gymnasium</span></code> environment +  <code class="code docutils literal notranslate"><span class="pre">DVAT</span></code> algorithm</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#baseline3-ours-envs-environment-rppo-cl-algorithm">Baseline3(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> Environment +  <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> Algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline2-uav-vat-gymnasium-environment-d-vat-algorithm">Baseline2: <code class="code docutils literal notranslate"><span class="pre">UAV_VAT_Gymnasium</span></code> environment +  <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> algorithm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#baseline3-ours-envs-environment-r-vat-algorithm">Baseline3(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> Environment +  <code class="code docutils literal notranslate"><span class="pre">R-VAT</span></code> Algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -139,7 +139,7 @@
 <hr style="border: 2px solid #d3d3d3; width: 95%; margin: 10px auto;">
 </br>
 </br><div style="background-color: #FDF5E6; padding: 15px; border-radius: 5px; border: 1px solid #EEC591;">
-      This project provides <b>3 types of environment implementations, and 5 baseline algorithms</b> for users to design algorithms and compare their performance.
+      This project provides <b>3 types of environment implementations, and 3 baseline algorithms</b> for users to design algorithms and compare their performance.
       For detailed documentation on environment classes, see: <a href="Environment.html">Environment Wrapping</a>; for detailed documentation on algorithm classes, see: <a href="Model.html">Model Construction</a>
 </div>
 </br></div></blockquote>
@@ -165,8 +165,8 @@ python<span class="w"> </span>./models/A3CLSTM_E2E/main.py<span class="w"> </spa
 </pre></div>
 </div>
 </section>
-<section id="baseline2-uav-vat-gymnasium-environment-dvat-algorithm">
-<h3>Baseline2: <code class="code docutils literal notranslate"><span class="pre">UAV_VAT_Gymnasium</span></code> environment +  <code class="code docutils literal notranslate"><span class="pre">DVAT</span></code> algorithm<a class="headerlink" href="#baseline2-uav-vat-gymnasium-environment-dvat-algorithm" title="Link to this heading"></a></h3>
+<section id="baseline2-uav-vat-gymnasium-environment-d-vat-algorithm">
+<h3>Baseline2: <code class="code docutils literal notranslate"><span class="pre">UAV_VAT_Gymnasium</span></code> environment +  <code class="code docutils literal notranslate"><span class="pre">D-VAT</span></code> algorithm<a class="headerlink" href="#baseline2-uav-vat-gymnasium-environment-d-vat-algorithm" title="Link to this heading"></a></h3>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
     Environment code can be found at <code>Alg_Base/DAT_Benchmark/models/D_VAT/DVAT_envs.py</code>
     Algorithm code can be found at <code>Alg_Base/DAT_Benchmark/models/D_VAT/</code>
@@ -185,8 +185,8 @@ python<span class="w"> </span>./models/D_VAT/DVAT_main.py<span class="w"> </span
 </pre></div>
 </div>
 </section>
-<section id="baseline3-ours-envs-environment-rppo-cl-algorithm">
-<h3>Baseline3(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> Environment +  <code class="code docutils literal notranslate"><span class="pre">RPPO+CL</span></code> Algorithm<a class="headerlink" href="#baseline3-ours-envs-environment-rppo-cl-algorithm" title="Link to this heading"></a></h3>
+<section id="baseline3-ours-envs-environment-r-vat-algorithm">
+<h3>Baseline3(Ours): <code class="code docutils literal notranslate"><span class="pre">Envs</span></code> Environment +  <code class="code docutils literal notranslate"><span class="pre">R-VAT</span></code> Algorithm<a class="headerlink" href="#baseline3-ours-envs-environment-r-vat-algorithm" title="Link to this heading"></a></h3>
 <div style="background-color: #e5f1fe; padding: 15px; border-radius: 5px; border: 1px solid #1874CD;">
     Environment code can be found at <code>Alg_Base/DAT_Benchmark/envs/envs_parallel.py</code>
     Algorithm code can be found at <code>Alg_Base/DAT_Benchmark/models/R_VAT/</code>

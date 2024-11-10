@@ -516,7 +516,7 @@ log文件
     .. raw:: html
 
         <div style="border-left: 4px solid #d3d3d3; padding-left: 10px; margin-left: 0;">
-            tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/PPO_logs</code>
+            tensorboard-logger文件见文件夹 <code>Alg_Base/DAT_Benchmark/models/${model_name}_logs</code>
         </div>
         </br>
 
@@ -526,7 +526,7 @@ log文件
     .. code:: bash
 
         cd Alg_Base/DAT_Benchmark/
-        tensorboard --logdir PPO_logs
+        tensorboard --logdir models/${model_name}_logs
 
 .. raw:: html
 

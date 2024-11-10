@@ -859,11 +859,11 @@ Reward Function
       Continuous Reward Diagram for Object Tracking
 
 
-   The figure above is a schematic of a tracking object within the camera frame, where the distance from point :math:`E_{G_{c}}` to the center point of the frame :math:`I_{cG}` is denoted as :math:`y_{EI}`, and the distance from the tracking object point :math:`P_{GC}` to the center point :math:`I_{cG}` is denoted as :math:`y_{IP}`. Their ratio is represented as
+   The figure above is a schematic of a tracking object within the camera frame, note that
 
    .. math::
 
-      x = \frac{y_{IP}}{y_{EI}}
+      x = \frac{\mid p_{vc}- I_{OG}\mid}{\mid E_{G_c}- I_{OG}\mid}
 
    Then, the dense reward can be obtained using the following expression:
 
@@ -888,12 +888,14 @@ Reward Judgment
 
    The acquisition of the above reward function is based on the judgment of the tracked object's position. In practice, the position of the tracked object in the camera image can be provided through machine vision recognition or manual annotation. However, in simulation training, in order to simplify the calculation and speed up the algorithm, we directly use the coordinates of the tracked object to determine whether it has entered the tracking range.
 
+   .. _奖励获取示意图:
+
    .. figure:: ../_static/image/Reward.png
       :alt: Reward
       :width: 600px
       :align: center
 
-      Schematic diagram of reward acquisition, A is the mapping of the camera image to the ground, B is the schematic of pinhole imaging, C is the establishment of the camera coordinate system
+      Schematic diagram of reward acquisition
 
 Principle
 ^^^^^^^^^^^^^^^^^^^^
@@ -904,26 +906,26 @@ Principle
 
       f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}
 
-   Where :math:`W` represents the width of the camera image (in pixels), and :math:`FoV` refers to the field of view of the tracker camera, as shown in Figure B of the reward acquisition illustration.
+   Where :math:`W` represents the width of the camera image (in pixels), and :math:`FoV` refers to the field of view of the tracker camera, as shown in Figure b of the :ref:`奖励获取示意图` (a).
 
-   Then, we need to project the corners of the camera image onto the spatial plane where the tracked object is located, as shown in Reward Acquisition Diagram a, to judge the object's coordinates. As shown in Reward Acquisition Diagram c, a camera coordinate system :math:`\{c\}` is established at the camera's optical center, which allows us to obtain the coordinates of the four corners of the camera image in the coordinate system :math:`\{c\}`.
+   Then, as shown in the :ref:`奖励获取示意图` (a), we need to project the camera's corner points onto the spatial plane where the tracked object is located. Next, as shown in the :ref:`奖励获取示意图` (b), determine the coordinates of the tracked object. Finally, by establishing the camera coordinate system :math:`\{c\}` at the optical center of the camera, the coordinates of the four corners of the camera image in the coordinate system :math:`\{c\}` can be obtained:
 
    .. math::
 
-      \text{LU}\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
-      \text{LD}\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
-      \text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
-      \text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
+      LU\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
+      LD\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
+      RU\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
+      RD\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
 
    By associating with the optical center :math:`C` :math:`(0,0,0)`, we can obtain four linear equations:
 
    .. math::
 
       \begin{matrix}
-      \text{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
-      \text{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
-      \text{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
-      \text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
+      l_{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
+      l_{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
+      l_{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
+      l_{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
       \end{matrix}
 
    Then get the equation for the ground (horizontal):
@@ -938,7 +940,7 @@ Principle
 
    By transforming the plane equation :math:`G_{w}` to the coordinate system :math:`\{c\}`, and solving it together with the four line equations, the four ground intersection points :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}` can be obtained. These four points form the four corner points of the tracking range :math:`I`, thus determining the tracking area :math:`I`.
 
-   Finally, read the tracking object's coordinate point :math:`p_{vG}` from the simulation environment, and convert it along with the image center point :code:`I_{cG}` to the coordinate system :math:`\{c\}`, obtaining :math:`p_{vc}`. Using the car's coordinates :math:`p_{vc}`, the four intersection points (:code:`LU_G`, :code:`LD_G`, :code:`RU_G`, and :code:`RD_G`), and the image center :code:`I_{cG}`, by utilizing the :ref:`Dense reward calculation formula` , the ratio :math:`x` can be calculated. When :math:`0 \leq x \leq 1`, the object is within the image, indicating successful tracking.
+   Finally, read the tracking object's coordinate point :math:`p_{vG}` from the simulation environment, and convert it along with the image center point :code:`I_{OG}` to the coordinate system :math:`\{c\}`, obtaining :math:`p_{vc}`. Using the car's coordinates :math:`p_{vc}`, the four intersection points (:code:`LU_G`, :code:`LD_G`, :code:`RU_G`, and :code:`RD_G`), and the image center :code:`I_{OG}`, by utilizing the :ref:`Dense reward calculation formula` , the ratio :math:`x` can be calculated. When :math:`0 \leq x \leq 1`, the object is within the image, indicating successful tracking.
 
    The calculation method is similar when the ground is not horizontal.
 

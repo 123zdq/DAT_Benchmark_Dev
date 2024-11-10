@@ -866,11 +866,11 @@ Legged Robots
       跟踪对象连续奖励示意图
 
 
-   上图是一个跟踪对象处于相机画面中的示意图，记点 :math:`E_{G_{c}}` 到画面中心点 :math:`I_{cG}` 的距离为 :math:`y_{EI}`，跟踪对象点 :math:`P_{GC}` 到中心点 :math:`I_{cG}` 的距离为 :math:`y_{IP}`，记两距离的比例为
+   上图是一个跟踪对象处于相机画面中的示意图，记
 
    .. math::
 
-      x = \frac{y_{IP}}{y_{EI}}
+      x = \frac{\mid p_{vc}- I_{OG}\mid}{\mid E_{G_c}- I_{OG}\mid}
 
    那么，密集奖励可以使用下面的表达式获得：
 
@@ -886,7 +886,7 @@ Legged Robots
 
    .. math::
 
-      \lambda_{clip} = \frac{W_{I_clip}}{W_{I}}
+      \lambda_{clip} = \frac{W_{I_{clip}}}{W}
 
    根据上述定义式， :math:`\lambda_{clip}` 的合理范围为： :math:`[0,1]` ，在实际训练中，建议参数为 :math:`\lambda_{clip}=0.7` 。
 
@@ -895,12 +895,14 @@ Legged Robots
 
    上述奖励函数的获取基于跟踪对象位置的判断。在实际中，跟踪对象在相机图像中的位置，可以通过视觉识别或者人工标注的方法获取。而在仿真训练中，为了简化获取流程，我们直接使用了跟踪对象的坐标判断跟踪对象是否进入跟踪范围。
 
+   .. _奖励获取示意图:
+
    .. figure:: ../_static/image/Reward.png
       :alt: Reward
       :width: 600px 
       :align: center
-      
-      奖励获取示意图，A为相机画面到地面映射的示意图，B为小孔成像示意，C为相机坐标系示意图
+
+      奖励获取示意图
 
 原理
 ^^^^^^^^^^^^^^^^^^^^
@@ -911,26 +913,26 @@ Legged Robots
 
       f = \frac{W}{2\tan\left(\frac{1}{2}FoV\right)}
 
-   其中 :math:`W` 代表相机画面宽度（像素数）， :math:`FoV` 指跟踪器相机视场角，如奖励获取示意图B所示。
+   其中 :math:`W` 代表相机画面宽度（像素数）， :math:`FoV` 指跟踪器相机视场角，如 :ref:`奖励获取示意图` (a) 所示。
 
-   然后，我们需要将相机画面角点投影到跟踪对象所处的空间平面上，如奖励获取示意图A，从而跟踪对象坐标进行判断。如奖励获取示意图c所示，在相机光心建立相机坐标系 :math:`\{c\}`，从而可以获得相机画面4个角点在坐标系 :math:`\{c\}` 下的坐标：
+   然后如 :ref:`奖励获取示意图` (a) 所示，我们需要将相机画面角点投影到跟踪对象所处的空间平面上。接着如 :ref:`奖励获取示意图` (b) 所示对跟踪对象坐标进行判断。最后在相机光心建立相机坐标系 :math:`\{c\}`，就可以获得相机画面4个角点在坐标系 :math:`\{c\}` 下的坐标：
 
    .. math::
 
-      \text{LU}\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
-      \text{LD}\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
-      \text{RU}\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
-      \text{RD}\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
+      LU\left(-f,-\frac{1}{2}W,\frac{1}{2}H\right),\\
+      LD\left(-f,-\frac{1}{2}W,-\frac{1}{2}H\right),\\
+      RU\left(-f,\frac{1}{2}W,\frac{1}{2}H\right),\\
+      RD\left(-f,\frac{1}{2}W,-\frac{1}{2}H\right)
 
    再与光心 :math:`C` :math:`(0,0,0)` 联立可得4个直线方程：
 
    .. math::
 
       \begin{matrix}
-      \text{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
-      \text{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
-      \text{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
-      \text{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
+      l_{LUC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{H}, \\
+      l_{LDC}: \frac{x}{-f} = \frac{2y}{-W} = \frac{2z}{-H}, \\
+      l_{RUC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{H}, \\
+      l_{RDC}: \frac{x}{-f} = \frac{2y}{W} = \frac{2z}{-H}
       \end{matrix}
 
    接着获取地面（水平）的方程为：
@@ -945,7 +947,7 @@ Legged Robots
 
    利用 :math:`T_{ct}` 可以将平面方程 :math:`G_{w}` 转换到坐标系 :math:`\{c\}` 下。如图A所示，联立地面方程与4个直线方程，即可求得相机角点在地面的映射坐标 :math:`LU_{G}, LD_{G}, RU_{G}, RD_{G}`，该4个点组成了跟踪范围 :math:`I` 的4个角点，从而确定跟踪区域 :math:`I`。
 
-   最后从仿真环境中读取跟踪对象的坐标点 :math:`p_{vG}` ，并将其与图像中心点 :code:`I_{cG}` 转换到坐标系 :math:`\{c\}` 下，得到 :math:`p_{vc}`。利用汽车的坐标 :math:`p_{vc}`，四个交叉点（ :code:`LU_G`、:code:`LD_G` 、:code:`RU_G` 和 :code:`RD_G` ）和图像中心 :code:`I_{cG}` ，
+   最后从仿真环境中读取跟踪对象的坐标点 :math:`p_{vG}` ，并将其与图像中心点 :code:`I_{OG}` 转换到坐标系 :math:`\{c\}` 下，得到 :math:`p_{vc}`。利用汽车的坐标 :math:`p_{vc}`，四个交叉点（ :code:`LU_G`、:code:`LD_G` 、:code:`RU_G` 和 :code:`RD_G` ）和图像中心 :code:`I_{OG}` ，
    利用 :ref:`密集奖励计算公式` ,即可求得比例 :math:`x`，当 :math:`0 \leq x \leq 1` 时对象在图像内，成功跟踪。
 
    当地面非水平时计算方法类似。

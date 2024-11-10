@@ -58,7 +58,7 @@ VAT Task
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Real-world Task**: A real-world visual task where the target exhibits high dynamic characteristics. The main challenge is actively controlling the camera to improve visual accuracy.
-* **Existing Methods**: Existing PVT (Passive Visual Tracking) methods are based on the assumption that the target remains within a preset frame, only tracking in the video dimension.
+* **Existing Methods**: Existing PVT (Passive Visual Tracking) methods are based on the assumption that the target remains within a preset frame, only tracking in the video.
 * **VAT Task**: VAT (Visual Active Tracking) simultaneously models visual tracking and control, achieving active camera control to track dynamic targets, making it more realistic.
 
 
@@ -110,7 +110,7 @@ Diverse and Complex Scenarios:
 
     * **Diverse Scenario Settings**: Featuring a total of 24 environments combining 6 scenarios and 4 weather conditions. As shown in Figure :ref:`Schematic diagram of 24 open scenes`
 
-    * **Complex Scenario Elements**: The complexity of the real scene is constructed from 7 aspects, including scene area(:math:`km^{2}`), building density(:math:`km^{-2}`), color richness, road complexity(:math:`km^{-2}`), terrain complexity(:math:`km^{-2}`), tree density(:math:`km^{-2}`), and tunnel density(:math:`km^{-2}`). The scene statistics are shown in Figure (a) above, and the difficult elements are shown in Figure (b) above. Specifically, scene area refers to the area of ​​the open scene, building density is the ratio of the number of buildings to the scene area, and color richness is the number of dominant colors in the scene. These three aspects mainly describe the complexity of the visual background. Road complexity is measured by evaluating the density of complex elements such as turns, intersections, and crosswalks, while terrain complexity is determined by evaluating the density of special terrain features such as hills in the scene. These two aspects mainly describe the complexity of the tracking target's behavior. In addition, tree and tunnel density are calculated as the ratio of the number of trees and tunnels to the scene area, respectively, and are used to measure the level of visual occlusion in the scene.
+    * **Complex Scenario Elements**: The complexity of the real scene is constructed from 7 aspects, including scene area(:math:`km^{2}`), building density(:math:`km^{-2}`), color richness, road density(:math:`km^{-2}`), terrain density(:math:`km^{-2}`), tree density(:math:`km^{-2}`), and tunnel density(:math:`km^{-2}`). The scene statistics are shown in Figure (a) above, and the difficult elements are shown in Figure (b) above. Specifically, the scene area refers to the extent of the scene, building density is the ratio of the number of buildings to the scene area, and color richness is the number of dominant colors in the scene. These three aspects primarily depict the complexity of the visual background. Road density is measured by evaluating the density of complex elements such as turns, intersections, and pedestrian crossings, while terrain density is determined by assessing the density of special terrain features like mountains in the scene. These two aspects primarily depict the complexity of tracking target behavior. Additionally, tree density and tunnel density are calculated as the ratio of the number of trees and tunnels to the scene area, respectively, and are used to measure the level of visual occlusion within the scene.
 
 
 .. _Schematic diagram of 24 open scenes:
@@ -137,6 +137,6 @@ Flexible and Customizable Task Settings:
 
     * **Multi-sensor**: Equipped with 6 common visual and motion sensors, as shown in Figure :ref:`Statistics and simulator component examples of the DAT` (c) above.
 
-    * **Customizable Task Parameters**: AThe task is highly extensible, and the additional task parameters are customized. For diverse task configurations, see: :ref:`customized parameter interface`
+    * **Customizable Task Parameters**: The task is highly extensible, and the additional task parameters are customized. For diverse task configurations, see: :ref:`customized parameter interface`
 
 
