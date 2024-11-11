@@ -392,8 +392,7 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/cyber
 <ul class="simple">
 <li><p>创建docker容器并运行gpu</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>stop<span class="w"> </span>****
-sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="s2">&quot;device=0&quot;</span><span class="w"> </span>--privileged<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-p<span class="w"> </span><span class="m">5900</span>:5900<span class="w"> </span>-p<span class="w"> </span><span class="m">7787</span>:7787<span class="w"> </span>-p<span class="w"> </span><span class="m">6006</span>:6006<span class="w"> </span>-it<span class="w"> </span>cyberbotics/webots:latest<span class="w"> </span>/bin/bash
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="s2">&quot;device=0&quot;</span><span class="w"> </span>--privileged<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-p<span class="w"> </span><span class="m">5900</span>:5900<span class="w"> </span>-p<span class="w"> </span><span class="m">7787</span>:7787<span class="w"> </span>-p<span class="w"> </span><span class="m">6006</span>:6006<span class="w"> </span>-it<span class="w"> </span>cyberbotics/webots:latest<span class="w"> </span>/bin/bash
 </pre></div>
 </div>
 </div></blockquote>

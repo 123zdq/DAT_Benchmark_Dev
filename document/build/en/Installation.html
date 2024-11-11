@@ -391,8 +391,7 @@ git<span class="w"> </span>clone<span class="w"> </span>https://github.com/cyber
 <ul class="simple">
 <li><p>Create Docker Container and Run with GPU</p></li>
 </ul>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>stop<span class="w"> </span>****
-sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="s2">&quot;device=0&quot;</span><span class="w"> </span>--privileged<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-p<span class="w"> </span><span class="m">5900</span>:5900<span class="w"> </span>-p<span class="w"> </span><span class="m">7787</span>:7787<span class="w"> </span>-p<span class="w"> </span><span class="m">6006</span>:6006<span class="w"> </span>-it<span class="w"> </span>cyberbotics/webots:latest<span class="w"> </span>/bin/bash
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span><span class="s2">&quot;device=0&quot;</span><span class="w"> </span>--privileged<span class="o">=</span><span class="nb">true</span><span class="w"> </span>-p<span class="w"> </span><span class="m">5900</span>:5900<span class="w"> </span>-p<span class="w"> </span><span class="m">7787</span>:7787<span class="w"> </span>-p<span class="w"> </span><span class="m">6006</span>:6006<span class="w"> </span>-it<span class="w"> </span>cyberbotics/webots:latest<span class="w"> </span>/bin/bash
 </pre></div>
 </div>
 </div></blockquote>
@@ -401,14 +400,14 @@ sudo<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </
 <h3>Step2 Creating a Virtual Environment and Installing Libraries<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <blockquote>
 <div><ul class="simple">
-<li><p>Virtual Environment Creation：</p></li>
+<li><p>Virtual Environment Creation:</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>uav_follow311<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.11
 conda<span class="w"> </span>activate<span class="w"> </span>uav_follow311
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>Algorithm Side：</p></li>
+<li><p>Algorithm Side:</p></li>
 </ul>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Alg requirements</span>
 pip<span class="w"> </span>install<span class="w"> </span><span class="nv">torch</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span><span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.17.0<span class="w"> </span><span class="nv">torchaudio</span><span class="o">==</span><span class="m">2</span>.2.0<span class="w"> </span>--index-url<span class="w"> </span>https://download.pytorch.org/whl/cu121
@@ -432,6 +431,21 @@ pip<span class="w"> </span>install<span class="w"> </span><span class="nv">tians
 <ul class="simple">
 <li><p>Simulator Side:</p></li>
 </ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">## Simulator requirements</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libeigen3-dev
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>nlohmann-json3-dev
+
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>sumo<span class="w"> </span>sumo-tools<span class="w"> </span>sumo-doc
+pip<span class="w"> </span>install<span class="w"> </span>lxml<span class="w"> </span>pyproj<span class="w"> </span>shapely<span class="w"> </span>webcolors<span class="w"> </span>configparser<span class="w"> </span>--user
+pip<span class="w"> </span>install<span class="w"> </span>transforms3d
+
+<span class="c1">## config</span>
+gedit<span class="w"> </span>~/.bashrc
+<span class="c1"># Change dir according to your installation</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">SUMO_HOME</span><span class="o">=</span>/usr/share/sumo
+<span class="nb">export</span><span class="w"> </span><span class="nv">WEBOTS_HOME</span><span class="o">=</span>/usr/local/webots
+</pre></div>
+</div>
 <ul class="simple">
 <li><p>Add Python symbolic Links:</p></li>
 </ul>

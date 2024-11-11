@@ -345,21 +345,20 @@ Step1 Download Webots and Create Docker Container to Run with GPU
 
     .. code:: bash
 
-        sudo docker stop ****
         sudo docker run --gpus "device=0" --privileged=true -p 5900:5900 -p 7787:7787 -p 6006:6006 -it cyberbotics/webots:latest /bin/bash
 
 
 Step2 Creating a Virtual Environment and Installing Libraries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    * Virtual Environment Creation：
+    * Virtual Environment Creation:
 
     .. code:: bash
 
         conda create -n uav_follow311 python=3.11
         conda activate uav_follow311
 
-    * Algorithm Side：
+    * Algorithm Side:
 
     .. code:: bash
         
@@ -384,6 +383,7 @@ Step2 Creating a Virtual Environment and Installing Libraries
     * Simulator Side:
 
     .. code:: bash
+        
         ## Simulator requirements
         sudo apt-get install libeigen3-dev
         sudo apt-get install nlohmann-json3-dev

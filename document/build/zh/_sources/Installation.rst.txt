@@ -343,7 +343,6 @@ Step1 下载Webots并创建docker容器并运行gpu
 
     .. code:: bash
 
-        sudo docker stop ****
         sudo docker run --gpus "device=0" --privileged=true -p 5900:5900 -p 7787:7787 -p 6006:6006 -it cyberbotics/webots:latest /bin/bash
 
 
