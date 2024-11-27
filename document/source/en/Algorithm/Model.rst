@@ -421,7 +421,7 @@ Program Entry
       </div>
       </br>
 
-    * :code:`--savepath(str)="params.pth"` : Path where the model will be saved.
+    * :code:`--savepath(str)="./models/R_VAT/params.pth"` : Path where the model will be saved.
 
     .. raw:: html
 

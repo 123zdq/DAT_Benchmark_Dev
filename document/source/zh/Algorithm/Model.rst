@@ -420,7 +420,7 @@ Baseline3 R-VAT
       </div>
       </br>
 
-    * :code:`--savepath(str)="params.pth"` : 模型保存的路径
+    * :code:`--savepath(str)="./models/R_VAT/params.pth"` : 模型保存的路径
 
     .. raw:: html
 
