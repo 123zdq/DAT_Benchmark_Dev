@@ -62,7 +62,7 @@ namespace usrPublic{
         vector3 carDroneVel; // 3D velocity of the vehicle center in the UAV coordinate system
         vector3 carDroneAcc; // 3D acceleration of vehicle center in UAV coordinate system
         double crash; // Whether the drone collided with a building
-        double carDir;// Vehicle running direction (0 stop, 1 forward, 2 left turn, 3 right turn)
+        double carDir;// Vehicle running direction (6 stop, 0 forward, 4 left turn, 5 right turn)
         std::string carTypename = std::string("BmwX5Simple");// object type
     }rewardData;
     #pragma pack()

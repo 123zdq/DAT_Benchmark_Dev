@@ -54,12 +54,14 @@ typedef struct _configData_s{
     // };
     // _droneRandomConfig droneRandomConfig;
     struct _outVideo{
+        bool useNewType = false;
         double fps = 30;
         double startTime = 0;
         double totalTime = 5;
         int warmUpSteps = 0;
         bool outputCarDir = true;
         bool randomAction = false;
+        double randomActionProbabilistic = 0;
         double forwardSpeed = 0;
         double backwardSpeed = 0;
         double leftSpeed = 0;
@@ -138,7 +140,8 @@ public:
     nlohmann::json read_json_file(const std::string& file_path);
     void write_json_file(const std::string& file_path, const nlohmann::json& json_obj);;
     void writeJsonIncrement(std::string& _filepath, std::string _mark, int _value);
-    void writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward,double _action);
+    void writeJsonIncrement(std::string& _filepath, std::string _mark, double _reward, double _action);
+    void writeJsonIncrement(std::string& _filepath, std::string _mark, double _action, double _reward, double _done);
 private:
     std::string filepath;//json file path and name
     configData_s configData;//json file parse data
@@ -214,12 +217,14 @@ configHandle::configHandle(std::string _filepath):filepath(_filepath){
     configData.rewardConfig.viewScale = config.at("Reward_Config").at("view_scale");
     configData.rewardConfig.viewRange = config.at("Reward_Config").at("view_range");
 
+    configData.video.useNewType = config.at("Out_Video").at("use_new_type");
     configData.video.fps = config.at("Out_Video").at("fps");
     configData.video.startTime = config.at("Out_Video").at("start_time");
     configData.video.totalTime = config.at("Out_Video").at("total_time");
     configData.video.warmUpSteps = config.at("Out_Video").at("warm_up_steps");
     configData.video.outputCarDir = config.at("Out_Video").at("output_car_dir");
     configData.video.randomAction = config.at("Out_Video").at("random_action");
+    configData.video.randomActionProbabilistic = config.at("Out_Video").at("random_action_probabilistic");
     configData.video.forwardSpeed = config.at("Out_Video").at("forward_speed");
     configData.video.backwardSpeed = config.at("Out_Video").at("backward_speed");
     configData.video.leftSpeed = config.at("Out_Video").at("left_speed");
@@ -299,6 +304,14 @@ void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark,
 {
     json object = read_json_file(_filepath);
     double _value[2] = {_reward,_action};
+    object[_mark] = _value;
+    write_json_file(_filepath, object);
+}
+
+void configHandle::writeJsonIncrement(std::string& _filepath, std::string _mark, double _action, double _reward, double _done)
+{
+    json object = read_json_file(_filepath);
+    double _value[3] = {_action,_reward,_done};
     object[_mark] = _value;
     write_json_file(_filepath, object);
 }

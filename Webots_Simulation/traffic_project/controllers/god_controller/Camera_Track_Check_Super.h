@@ -27,6 +27,7 @@ public:
     double Get_View_Proportions(Vector3d* follow_location, const Vector3d& target_real_world_location);
     double Get_View_Reward(Vector3d* follow_location, const Vector3d& target_real_world_location);
     double Get_View_Reward(Vector3d* follow_location, const Vector3d& target_real_world_location, const double scale);
+    double Get_NewVideo_Reward(const Vector4d carDronePosOri, const double p_max,const double theta_max,const double p_ori);
 };
 
 /**
@@ -277,4 +278,19 @@ inline double camera2real::Get_View_Reward(Vector3d* follow_location, const Vect
 {
     double p = Get_View_Proportions(follow_location,target_real_world_location);
     return hyperbolic_tangent_func(p, scale);
+}
+
+inline double camera2real::Get_NewVideo_Reward(const Vector4d carDronePosOri, const double p_max,const double theta_max,const double p_ori)
+{
+    double tracking_dis = carDronePosOri.block(0,0,2,1).norm();
+    double theta = carDronePosOri(3);
+    double reward = 1-abs(tracking_dis-p_ori)/p_max-abs(theta)/theta_max;
+    if(reward<0)
+    {
+        return 0;
+    }
+    else
+    {
+        return reward;
+    }
 }

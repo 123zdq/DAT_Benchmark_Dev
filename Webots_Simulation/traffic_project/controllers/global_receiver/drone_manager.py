@@ -78,6 +78,8 @@ class droneManager:
         self.multi_state = 0
         # drone camera pitch angle
         self.camera_pitch = 1
+        # is video random action
+        self.isVideoRandomAction = 0
         # establish drone manager threading
         self.loop = threading.Thread(target=self.mainLoop)
         self.videoloop = threading.Thread(target=self.mainLoopForVideo)
@@ -220,8 +222,10 @@ class droneManager:
                 rotateAngle = random.uniform(self.configData["Drone_Random_Config"]["direction_random_min"],self.configData["Drone_Random_Config"]["direction_random_max"])
             else:
                 rotateAngle = random.choice([1,-1]) * random.uniform(abs(self.configData["Drone_Random_Config"]["direction_random_min"]),abs(self.configData["Drone_Random_Config"]["direction_random_max"]))
-                
-        self.updateInitParams(self.camera_pitch, rotateAngle)
+          
+        if self.configData["Out_Video"]["random_action"] == True:
+            self.isVideoRandomAction = 1 if random.random() <= self.configData["Out_Video"]["random_action_probabilistic"] else 0
+        self.updateInitParams(self.camera_pitch, rotateAngle, self.isVideoRandomAction)
         
         if self.configData["Sumo_Params"]["fixed_color"] is True and self.configData["Sumo_Params"]["car_type"] != "motorcycle" and self.configData["Tracking_Object"] == "SUMO_VEHICLE":
             colorList = list(self.configData["Sumo_Params"]["normalize_color"])
@@ -255,11 +259,10 @@ class droneManager:
     param {*} filePath: the path to write files
     return {*}
     '''
-    def updateInitParams(self, cameraPitch, direction):
+    def updateInitParams(self, cameraPitch, direction, isVideoRandomAction):
         with open("../../cache/" + self.droneDef + "_InitParams.txt", "w") as f:
-            f.write(str(cameraPitch) + "\n" + str(direction) + "\n")
-            f.close()
-            
+            f.write(str(cameraPitch) + "\n" + str(direction) + "\n" + str(isVideoRandomAction) + "\n")
+            f.close()   
         
     '''
     description: 1.Drone manager mainLoop, which manage the state machine.
@@ -342,6 +345,7 @@ class droneManager:
                         elif System == "Windows":
                             os.system("del /s /q /f ../../Videos/" + self.trackerDef + str(self.id) + "/episode" + str(episode) + "/*.jpeg")
                     episode = episode + 1
+                    
                     if self.init():
                         # if self.configData["Verbose"] == True:
                         #     self.logger.info("drone finish sumo init")
@@ -362,7 +366,7 @@ class droneManager:
                         is_reset[self.id] = False
                         self.machine_state = 1 # remember to reset
                     else:
-                        if self.configData["Out_Video"]["random_action"] == False:
+                        if self.isVideoRandomAction == 0:
                             self.sumoGod.MoveDroneToCar(self.sumoGod.currentUseCarNode, self.drone, self.sumoGod.transVector, self.sumoGod.rotateAngle, False)
                         if is_step[self.id] == 1:
                             # if self.configData["Verbose"] == True:

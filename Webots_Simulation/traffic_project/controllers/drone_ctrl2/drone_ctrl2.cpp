@@ -208,7 +208,8 @@ int main(int argc, char **argv)
   rewardGenerator rewardG(robot, config.get()->rewardConfig.distanceScale, config.get()->rewardConfig.distanceRange, config.get()->rewardConfig.viewScale, config.get()->rewardConfig.viewRange);
   bool is_video_warmUp = false;
   int random_number = -1;
-  double initParams[2] = {1.,0};
+  double initParams[3] = {1.,0,0};
+  bool realRandomAction = false;
 
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
@@ -362,7 +363,7 @@ int main(int argc, char **argv)
       //     gimbal_cmd.y = 1.;
       //   }
       // }
-      Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 2);
+      Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 3);
       gimbal_cmd.y = CLAMP(initParams[0], 0.5, 1.5);
       rewardG.makeReward.initDirection = initParams[1];
       // get actions
@@ -412,7 +413,7 @@ int main(int argc, char **argv)
       {
         is_video_warmUp = true;
       }
-      if(config.get()->video.randomAction == true && rewardG.carDef != string("ORIGIN"))
+      if(realRandomAction == true && rewardG.carDef != string("ORIGIN"))
       {
         // use ctrl frequency
         if((step_count == 1) || ((step_count - last_step_count) >= countMax))
@@ -471,9 +472,17 @@ int main(int argc, char **argv)
       //     gimbal_cmd.y = 1.;
       //   }
       // }
-      Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 2);
+      Txt_Input("../../cache/" + droneDef + "_InitParams.txt", initParams, 3);
       gimbal_cmd.y = CLAMP(initParams[0], 0.5, 1.5);
       rewardG.makeReward.initDirection = initParams[1];
+      if(initParams[2] == 1)
+      {
+        realRandomAction = true;
+      }
+      else
+      {
+        realRandomAction = false;
+      }
       // video mode self count
       if(rewardG.carDef != string("ORIGIN"))
       {
@@ -658,7 +667,7 @@ int main(int argc, char **argv)
       }
       // std::cout << "cmd_pos:" << jCtrl.cmd_pos_ << std::endl;
       // If using supervisor control mode, then move the drone directly to the target location
-      if (config.get()->droneSupervisorCtrl == true && (config.get()->simulationMode != string("video") || config.get()->video.randomAction == true) && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
+      if (config.get()->droneSupervisorCtrl == true && (config.get()->simulationMode != string("video") || realRandomAction == true) && jCtrl.initialized == true && state.done == 0 && machineState == string("2"))
       {
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
         double cmd_yaw = jCtrl.cmd_yaw_;
@@ -674,7 +683,7 @@ int main(int argc, char **argv)
         robot->getSelf()->getField("translation")->setSFVec3f(tr_t);
         robot->getSelf()->getField("rotation")->setSFRotation(ro_t);
       }
-      else if(config.get()->simulationMode == string("video") && config.get()->video.randomAction == true && step_count>5 && step_count<(config.get()->trainTotalStep-5))
+      else if(config.get()->simulationMode == string("video") && realRandomAction == true && step_count>5 && step_count<(config.get()->trainTotalStep-5))
       {
         const double tr_t[3] = {jCtrl.cmd_pos_(0), jCtrl.cmd_pos_(1), jCtrl.cmd_pos_(2)};
         double cmd_yaw = jCtrl.cmd_yaw_;
@@ -888,7 +897,30 @@ int main(int argc, char **argv)
           }
           else
           {
-            config.writeJsonIncrement(jsonpath, formatted, state.reward, double(random_number));
+            if(config.get()->video.useNewType == false)
+            {
+              if(random_number==-1)
+              {
+                config.writeJsonIncrement(jsonpath, formatted, state.reward, rewardG.makeReward.carDir);
+              }
+              else
+              {
+                config.writeJsonIncrement(jsonpath, formatted, state.reward, double(random_number));
+              }
+            }
+            else
+            {
+              double newReward = rewardG.newVideoReward();
+              
+              if(random_number==-1)
+              {
+                config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir, newReward, state.done);
+              }
+              else
+              {
+                config.writeJsonIncrement(jsonpath, formatted, double(random_number), newReward, state.done);
+              }
+            }
           }
           videoCount++;
         }
@@ -906,7 +938,30 @@ int main(int argc, char **argv)
           }
           else
           {
-            config.writeJsonIncrement(jsonpath, formatted, state.reward, double(random_number));
+            if(config.get()->video.useNewType == false)
+            {
+              if(random_number==-1)
+              {
+                config.writeJsonIncrement(jsonpath, formatted, state.reward, rewardG.makeReward.carDir);
+              }
+              else
+              {
+                config.writeJsonIncrement(jsonpath, formatted, state.reward, double(random_number));
+              }
+            }
+            else
+            {
+              double newReward = rewardG.newVideoReward();
+              
+              if(random_number==-1)
+              {
+                config.writeJsonIncrement(jsonpath, formatted, rewardG.makeReward.carDir, newReward, state.done);
+              }
+              else
+              {
+                config.writeJsonIncrement(jsonpath, formatted, double(random_number), newReward, state.done);
+              }
+            }
           }
           videoCount++;
           last_frame_t = t;
@@ -916,6 +971,9 @@ int main(int argc, char **argv)
     else
     {
     }
+    // std::cout << "p_ori: " << tan(M_PI/2.-rewardG.makeReward.cameraPitch)*rewardG.makeReward.trackerHeight << std::endl;
+    // std::cout << "theta: " << rewardG.makeReward.carDronePosOri.w << std::endl;
+    // std::cout << "p: " << Eigen::Vector2d(rewardG.makeReward.carDronePosOri.x,rewardG.makeReward.carDronePosOri.y).norm() << std::endl;
   };
 
   // Enter here exit cleanup code.

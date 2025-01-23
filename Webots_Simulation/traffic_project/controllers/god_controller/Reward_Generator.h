@@ -22,6 +22,7 @@ public:
   void updateTrackingCar();
   void setTrackingCar(string _carDef);
   double getReward(string _trackingObj, string _run_mode, string _reward_mode, string _reward_type, double trackWidth = -1, double trackHeight = -1);
+  double newVideoReward();
   void checkCarDirection(double stop_threshold, double turn_threshold);
   uint8_t isTrackingCarDisp = 0; 
   usrPublic::rewardData makeReward = {};
@@ -225,21 +226,21 @@ inline void rewardGenerator::checkCarDirection(double stop_threshold, double tur
   lastTransform = p;
   if (err > abs(turn_threshold))
   {
-    makeReward.carDir = 2; // left
+    makeReward.carDir = 4; // left
   }
   else if (err < -abs(turn_threshold))
   {
-    makeReward.carDir = 3; // right
+    makeReward.carDir = 5; // right
   }
   else
   {
     if (dist < abs(stop_threshold))
     {
-      makeReward.carDir = 0; // stop
+      makeReward.carDir = 6; // stop
     }
     else
     {
-      makeReward.carDir = 1; // straight
+      makeReward.carDir = 0; // straight
     }
   }
 }
@@ -411,5 +412,16 @@ inline double rewardGenerator::getReward(string _trackingObj, string _run_mode, 
       }
     }
   }
+  return reward;
+}
+
+/**
+ * @description: get rewards for specific video mode
+ */
+inline double rewardGenerator::newVideoReward()
+{
+  double reward = 0;
+  Vector4d carDronePosOri(makeReward.carDronePosOri.x,makeReward.carDronePosOri.y,makeReward.carDronePosOri.z,makeReward.carDronePosOri.w);
+  reward = Camera2real.Get_NewVideo_Reward(carDronePosOri,9.,0.5*makeReward.cameraFov,tan(M_PI/2.-makeReward.cameraPitch)*makeReward.trackerHeight);
   return reward;
 }
