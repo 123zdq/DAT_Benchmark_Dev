@@ -239,6 +239,7 @@ class droneManager:
     return {*}
     '''
     def reset(self):
+        self.envCut()
         if self.configData["Verbose"] == True:
             print("\nid:   ",self.id,"    reset: rrrrrrrrrrrrrrrr")
         self.resetPlugin()
@@ -422,3 +423,28 @@ class droneManager:
             self.supervisor.getFromDef("tbgl").getField("luminosity").setSFFloat(float(bgLl))
         else:
             pass
+        
+    '''
+    description: change the environment while reset
+    param {*} self
+    return {*}
+    '''
+    def envCut(self):
+        if self.configData["Env_Params"]["tree_cut"] == True or self.configData["Env_Params"]["building_cut"] == True:
+            rootnode=self.supervisor.getRoot()
+            root_children_field=rootnode.getField("children")
+            n=root_children_field.getCount()
+            tempnode = root_children_field.getMFNode(0)
+            idx = 0
+            while tempnode is not None:
+                tempnode=root_children_field.getMFNode(idx)
+                if tempnode is not None:
+                    if tempnode.getTypeName() is not None and "Cypress" in tempnode.getTypeName() and self.configData["Env_Params"]["tree_cut"] == True:
+                        if random.random() <= self.configData["Env_Params"]["tree_cut_probabilistic"]:
+                            tempnode.remove()
+                            idx = idx-1
+                    elif tempnode.getTypeName() is not None and "SimpleBuilding" in tempnode.getTypeName() and self.configData["Env_Params"]["building_cut"] == True:
+                        if random.random() <= self.configData["Env_Params"]["building_cut_probabilistic"]:
+                            tempnode.remove()
+                            idx = idx-1
+                idx = idx+1
