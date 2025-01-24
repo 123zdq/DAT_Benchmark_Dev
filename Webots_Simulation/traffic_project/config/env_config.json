@@ -119,6 +119,10 @@
         "foggy_visibility_range_random": false,
         "foggy_visibility_range_fixed": 400,
         "foggy_visibility_range_max": 1000,
-        "foggy_visibility_range_min": 300
+        "foggy_visibility_range_min": 300,
+        "tree_cut": false,
+        "tree_cut_probabilistic": 0.5,
+        "building_cut": false,
+        "building_cut_probabilistic": 0.5
     }
 }

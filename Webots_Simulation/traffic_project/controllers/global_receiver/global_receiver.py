@@ -57,7 +57,35 @@ if configData["Env_Params"]["backgroundLight_luminosity_random"] == True:
 else:
     bgLl = robot.getFromDef("tbgl").getField("luminosity").getSFFloat() + configData["Env_Params"]["bgLl_incremental"]
 robot.getFromDef("tbgl").getField("luminosity").setSFFloat(float(bgLl))
-    
+
+if configData["Env_Params"]["tree_cut"] == True or configData["Env_Params"]["building_cut"] == True:
+    rootnode=robot.getRoot()
+    root_children_field=rootnode.getField("children")
+    n=root_children_field.getCount()
+    tempnode = root_children_field.getMFNode(0)
+    idx = 0
+    while tempnode is not None:
+        tempnode=root_children_field.getMFNode(idx)
+        if tempnode is not None:
+            # if  tempnode.getField("name") is not None and "cypress tree" in tempnode.getField("name").getSFString() and configData["Env_Params"]["tree_cut"] == True:
+            #     if random.random() <= configData["Env_Params"]["tree_cut_probabilistic"]:
+            #         tempnode.remove()
+            #         idx = idx-1
+            # elif  tempnode.getField("wallType") is not None and configData["Env_Params"]["building_cut"] == True:
+            #     if "building" in tempnode.getField("wallType").getSFString() or "wall" in tempnode.getField("wallType").getSFString():
+            #         if random.random() <= configData["Env_Params"]["building_cut_probabilistic"]:
+            #             tempnode.remove()
+            #             idx = idx-1
+            if tempnode.getTypeName() is not None and "Cypress" in tempnode.getTypeName() and configData["Env_Params"]["tree_cut"] == True:
+                if random.random() <= configData["Env_Params"]["tree_cut_probabilistic"]:
+                    tempnode.remove()
+                    idx = idx-1
+            elif tempnode.getTypeName() is not None and "SimpleBuilding" in tempnode.getTypeName() and configData["Env_Params"]["building_cut"] == True:
+                if random.random() <= configData["Env_Params"]["building_cut_probabilistic"]:
+                        tempnode.remove()
+                        idx = idx-1
+        idx = idx+1
+
     
 # safety check
 if configData["Sumo_Params"]["rou_update"] == False:
