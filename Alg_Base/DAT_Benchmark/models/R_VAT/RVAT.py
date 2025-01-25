@@ -281,6 +281,7 @@ class RVAT:
 
     def run(self, train_mode=1):
         next_state = torch.Tensor(self.envs.reset()).to(self.device)
+        print(next_state.shape)
         next_done = torch.zeros(self.num_envs).to(self.device)
         if train_mode == 1:
             self.model.train()
@@ -326,6 +327,70 @@ class RVAT:
                     test_reward = 0
                 else:
                     test_reward += float(reward[0])
+    def run_Sim2Real(self,video_path:str,anno_path:str):
+        
+        from torchvision import transforms
+        from PIL import Image
+        import matplotlib.pyplot as plt
+        transform = transforms.Compose([
+            transforms.Resize((84, 84)),  # 调整大小
+            transforms.ToTensor(),  # 转换为张量
+        ])
+        
+        next_done = torch.zeros(1).to(self.device)
+        self.model.eval()
+        next_gru_state = torch.zeros(self.num_envs, 256).to(self.device)
+        img_path_list = sorted(os.listdir(video_path))
+        img_total_path_list = [os.path.join(video_path,img_name) for img_name in img_path_list]
+
+        bboxes = []
+        with open(anno_path, "r") as file:
+            for line in file:
+                # 按逗号分割，并转换为 float
+                bbox = list(map(float, line.strip().split(",")))
+                bboxes.append(bbox)
+        real_centerx,real_centery = 640,360
+        frame_idx = 1
+        skip_frame = 1
+        Score = 0
+        Other = 0
+        for idx,image_path in enumerate(img_total_path_list):
+            if frame_idx % skip_frame == 0:
+                image = Image.open(image_path).convert("RGB")
+                # 显示带有 GT 矩形框的图像
+                image_tensor = transform(image)
+                image_tensor = image_tensor.unsqueeze(0).to(self.device)
+                x, y, w, h = bboxes[idx]
+                GT_Centerx,GT_Centery = x+w/2,y+h/2
+                
+                # print(f"Image:{image_path} shape:{image_tensor.shape}")
+                action, next_gru_state = self.model.predict_action(x=image_tensor,gru_state=next_gru_state,done=next_done)
+                if action==0 and GT_Centery<real_centery: # forward
+                    Score += 1
+                elif action==1 and GT_Centery>real_centery: # backward
+                    Score += 1
+                elif action==2 and GT_Centerx<real_centerx: # left
+                    Score += 1
+                elif action==3 and GT_Centerx>real_centerx: # right
+                    Score += 1
+                elif action==4 and GT_Centerx<real_centerx: # CCW
+                    Score += 1
+                elif action==5 and GT_Centerx>real_centerx: # CW
+                    Score += 1
+                elif action == 6:
+                    Score += 1
+                else: # Stop/Wrong
+                    Other += 1
+                # plt.imshow(image)  # 显示图像
+                # plt.axis("off")  # 关闭坐标轴
+                # plt.title(f"Action:{action}", fontsize=14)  # 设置标题
+                # plt.show()
+                frame_idx = 1
+            else:
+                frame_idx += 1
+        return Score/len(img_total_path_list)
+
+
 
 if __name__ == "__main__":
     import argparse
@@ -408,9 +473,17 @@ if __name__ == "__main__":
         default="CR",
         help="Choose Metrics of performence: CR or TSR",
     )
+
+    parse.add_argument(
+        "-S2R",
+        "--Sim2Real",
+        action='store_true',
+        default=False,
+        help="Whether Run under sim2real mode or not",
+    )
     args = parse.parse_args()
 
-    if args.port == -1:
+    if args.port == -1 and not args.Sim2Real:
         import socket
 
         sock = socket.socket()
@@ -477,7 +550,7 @@ if __name__ == "__main__":
     with open("config.json", "w") as file:
         json.dump(data, file, indent=4)
 
-    if args.New_Train and os.path.exists("./models/R_VAT/RVAT_logs/steps.txt"):
+    if args.New_Train and os.path.exists("./models/R_VAT/RVAT_logs/steps.txt") and not args.Sim2Real:
         with open("./models/R_VAT/RVAT_logs/steps.txt", "w") as file:
             file.write("0")
 
@@ -486,45 +559,74 @@ if __name__ == "__main__":
     else:
         Load_Model = True
 
-    import subprocess, time
+    if not args.Sim2Real:
+        import subprocess, time
 
-    # simulator
-    simulator = subprocess.Popen(
-        ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
-        shell=True,
-    )
-    time.sleep(args.delay)
-
-    from envs.envs_parallel import Envs, GE
-
-    agent = RVAT(
-        envs=Envs(
-            num_envs=args.workers,
-            env_list=GE(args.workers, data["Benchmark"]),
-            logs_show=(0 if args.tensorboard_port == -1 else args.workers),
-        ),
-        num_envs=args.workers,
-        num_minibatches=1,
-        num_steps=50,
-        K_epochs=5,
-        entropy_coef=0.01,
-        gamma=0.9,
-        savepath=args.savepath,
-        load=Load_Model,
-        test_Mode = args.Test_Mode
-    )
-
-    if args.tensorboard_port != -1 and args.train_mode == 1:
-        tb = subprocess.Popen(
-            ["tensorboard --logdir ./models/R_VAT/RVAT_logs"],
+        # simulator
+        simulator = subprocess.Popen(
+            ["webots ../../Webots_Simulation/traffic_project/worlds/" + args.map],
             shell=True,
         )
+        time.sleep(args.delay)
 
-    with open("config.json", "r") as file:
-        data = json.load(file)
-    data["Benchmark"]["auto_start"] = False
-    with open("config.json", "w") as file:
-        json.dump(data, file, indent=4)
+        from envs.envs_parallel import Envs, GE
 
-    agent.run(train_mode=args.train_mode)
+        agent = RVAT(
+            envs=Envs(
+                num_envs=args.workers,
+                env_list=GE(args.workers, data["Benchmark"]),
+                logs_show=(0 if args.tensorboard_port == -1 else args.workers),
+            ),
+            num_envs=args.workers,
+            num_minibatches=1,
+            num_steps=50,
+            K_epochs=5,
+            entropy_coef=0.01,
+            gamma=0.9,
+            savepath=args.savepath,
+            load=Load_Model,
+            test_Mode = args.Test_Mode
+        )
+    
+
+        if args.tensorboard_port != -1 and args.train_mode == 1:
+            tb = subprocess.Popen(
+                ["tensorboard --logdir ./models/R_VAT/RVAT_logs"],
+                shell=True,
+            )
+
+        with open("config.json", "r") as file:
+            data = json.load(file)
+        data["Benchmark"]["auto_start"] = False
+        with open("config.json", "w") as file:
+            json.dump(data, file, indent=4)
+    
+    else:
+        def set_seed(seed):
+            import random
+            random.seed(seed)  # Python random seed
+            np.random.seed(seed)  # NumPy random seed
+            torch.manual_seed(seed)  # PyTorch CPU random seed
+            torch.cuda.manual_seed(seed)  # PyTorch GPU random seed（single GPU）
+            torch.cuda.manual_seed_all(seed)  # PyTorch GPU random seed（all GPU）
+
+            # ensure all the calculation can be reproduces
+            torch.backends.cudnn.deterministic = True  
+            torch.backends.cudnn.benchmark = False  
+        TSR_Average = []
+        for random_seed in range(10):
+            # set random seed
+            set_seed(random_seed)
+
+            agent = RVAT(load=Load_Model,
+                        test_Mode = args.Test_Mode,
+                        num_envs=1)
+
+            # agent.run(train_mode=args.train_mode)
+            
+            TSR = agent.run_Sim2Real(video_path="../../../VOT_Dataset/VOT2018_car6/",
+                                    anno_path="../../../VOT_Dataset/car6/groundtruth.txt")
+            TSR_Average.append(TSR)
+            print(f"Random Seed:{random_seed} TSR:{TSR}")
+        print(f"Total TSR: {sum(TSR_Average)/len(TSR_Average)}")
 
