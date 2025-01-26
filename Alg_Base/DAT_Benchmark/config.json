@@ -12,21 +12,21 @@
         "CW_omega": 2,
         "CCW_omega": -2,
         "Control_Frequence": 125,
-        "port_process": 33727,
+        "port_process": 60447,
         "end_reward": false,
         "end_reward_list": [
             -20,
             20
         ],
-        "scene": "citystreet",
+        "scene": "downtown",
         "weather": "day",
-        "auto_start": false,
+        "auto_start": true,
         "Other_State": false,
         "CloudPoint": false,
         "RewardParams": true,
-        "RewardType": "DVAT",
-        "verbose": true,
-        "delay": 20
+        "RewardType": "default",
+        "verbose": false,
+        "delay": 90
     },
     "LunarLander": {
         "Need_render": 1,

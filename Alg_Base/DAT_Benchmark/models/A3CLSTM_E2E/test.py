@@ -101,7 +101,7 @@ def test(args, shared_model, env_conf,read_num_test:bool=True,load_path:str=None
                     reward_total_sum += reward_sum
                     reward_mean = reward_total_sum / num_tests
                     if not read_num_test:
-                        if args.Test_Mode == "AR":
+                        if args.Test_Mode == "CR":
                             reward_list.append(reward_sum)
                             print(f"Episode {len(reward_list)} test accumulated reward:{reward_sum}")
                         elif args.Test_Mode == "TSR":

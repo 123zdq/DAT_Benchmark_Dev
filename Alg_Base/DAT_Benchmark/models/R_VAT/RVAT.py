@@ -327,8 +327,8 @@ class RVAT:
                     test_reward = 0
                 else:
                     test_reward += float(reward[0])
-    def run_Sim2Real(self,video_path:str,anno_path:str):
-        
+    def run_Sim2Real(self,video_path:str,anno_path:str,random_act:bool=False):
+        import random
         from torchvision import transforms
         from PIL import Image
         import matplotlib.pyplot as plt
@@ -364,7 +364,10 @@ class RVAT:
                 GT_Centerx,GT_Centery = x+w/2,y+h/2
                 
                 # print(f"Image:{image_path} shape:{image_tensor.shape}")
-                action, next_gru_state = self.model.predict_action(x=image_tensor,gru_state=next_gru_state,done=next_done)
+                if random_act:
+                    action = random.randint(0, 6)
+                else:
+                    action, next_gru_state = self.model.predict_action(x=image_tensor,gru_state=next_gru_state,done=next_done)
                 if action==0 and GT_Centery<real_centery: # forward
                     Score += 1
                 elif action==1 and GT_Centery>real_centery: # backward
@@ -376,8 +379,6 @@ class RVAT:
                 elif action==4 and GT_Centerx<real_centerx: # CCW
                     Score += 1
                 elif action==5 and GT_Centerx>real_centerx: # CW
-                    Score += 1
-                elif action == 6:
                     Score += 1
                 else: # Stop/Wrong
                     Other += 1
@@ -600,7 +601,9 @@ if __name__ == "__main__":
         data["Benchmark"]["auto_start"] = False
         with open("config.json", "w") as file:
             json.dump(data, file, indent=4)
-    
+
+        agent.run(train_mode=args.train_mode)
+
     else:
         def set_seed(seed):
             import random
@@ -622,11 +625,32 @@ if __name__ == "__main__":
                         test_Mode = args.Test_Mode,
                         num_envs=1)
 
-            # agent.run(train_mode=args.train_mode)
             
-            TSR = agent.run_Sim2Real(video_path="../../../VOT_Dataset/VOT2018_car6/",
-                                    anno_path="../../../VOT_Dataset/car6/groundtruth.txt")
+            
+            TSR = agent.run_Sim2Real(video_path="../../../VOT_Dataset/VOT2018_car9/",
+                                    anno_path="../../../VOT_Dataset/car9/groundtruth.txt",
+                                    random_act=False)
             TSR_Average.append(TSR)
             print(f"Random Seed:{random_seed} TSR:{TSR}")
         print(f"Total TSR: {sum(TSR_Average)/len(TSR_Average)}")
 
+if __name__ == "__main__":
+    import scipy.stats as stats
+
+    # 两组数据
+    # group1 = [0.567,0.557,0.575,0.558,0.580,0.562,0.587,0.545,0.561,0.552]
+    group1 = [0.430,0.415,0.443,0.417,0.439,0.430,0.442,0.416,0.428,0.427]
+    group2 = [0.242,0.756,0.736,0.425,0.756,0.677,0.535,0.747,0.602,0.756]
+
+    # 独立样本 t 检验
+    t_stat, p_value = stats.ttest_ind(group1, group2)
+
+    print(f"T Statistic: {t_stat}")
+    print(f"p Value: {p_value}")
+
+    # 判断是否显著
+    alpha = 0.05
+    if p_value < alpha:
+        print("两组数据存在显著性差异")
+    else:
+        print("两组数据没有显著性差异")

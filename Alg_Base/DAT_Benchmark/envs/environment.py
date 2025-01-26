@@ -247,7 +247,6 @@ class BenchEnv_Multi():
 
         self.logger.info(f'Get Crash of the car: {reward_params[-3]}')
 
-
         if prob is not None:
             
             cardir = int(reward_params[-2])
@@ -259,7 +258,8 @@ class BenchEnv_Multi():
                 dynamics = np.array([0,0,0,0,0,1,0])
             elif cardir == 3:
                 dynamics = np.array([0,0,0,0,1,0,0])
-            
+            else:
+                dynamics = np.array([0,0,0,0,0,0,1])
             prob_np = copy.deepcopy(prob.detach().numpy())
             prob_np = np.ravel(prob_np)
             self.logger.info(f'Output Prob of Policy Network is {prob_np}')
